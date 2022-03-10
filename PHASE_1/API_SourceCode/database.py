@@ -15,10 +15,11 @@ except:
 
 db = client["epicdemic_db"]
 
+
 articles_col = db["Articles"]
 locations_col = db["Locations"]
 reports_col = db["Reports"]
-diseases_col = db["diseases"]
+diseases_col = db["Diseases"]
 
 def overwrite_collection(collection_name):
     file_name = "./dummy_data/" + collection_name.lower() + ".json"
@@ -30,15 +31,20 @@ def overwrite_collection(collection_name):
             file_data = json.load(f)
             requests = []
 
-            for key, value in file_data.items():
-                if "date_of_publication" in value:
-                    value["date_of_publication"] = parse(value["date_of_publication"])
+            # requests.append(file_data[19])
+            for data in file_data:
+                if "date_of_publication" in data:
+                    data["date_of_publication"] = parse(data["date_of_publication"])
+                requests.append(data)            
 
-                requests.append(value)            
-            
+            # print(collection_name)
             db[collection_name].insert_many(requests)
             print(f"Finished overwriting {collection_name}")
         except:
             print(f"Failed to load and overwrite {collection_name}")
 
+
+
+
 overwrite_collection("Articles")
+overwrite_collection("Diseases")

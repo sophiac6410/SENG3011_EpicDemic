@@ -2,7 +2,6 @@
     "_id": 0,
     "name": "unknown",
     "key_words": ["unidentified", "unsolved", "mystery", "unspecified", "undiagnosed"] 
-
 },
 {
     "_id": 1,
@@ -14,7 +13,6 @@
     "name": "anthrax cutaneous",
     "key_words": [],
     "regex": "anthrax.*cutaneous"
-
 }, 
 {
     "_id": 3,
@@ -148,97 +146,97 @@
     "key_words": ["hep b"]
 },
 {
-    "_id": 26,
+    "_id": 27,
     "name": "hepatitis c",
     "key_words": ["hep c", "hep b & c", "hepatitis b & c"]
 },
 {
-    "_id": 27,
+    "_id": 28,
     "name": "hepatitis d",
     "key_words": ["hep d"]
 },
 {
-    "_id": 28,
+    "_id": 29,
     "name": "histoplasmosis",
     "key_words": []
 },
 {
-    "_id": 29,
+    "_id": 30,
     "name": "hiv/aids",
     "key_words": ["hiv", "aids"]
 },
 {
-    "_id": 29,
+    "_id": 31,
     "name": "lassa fever",
     "key_words": []
 },
 {
-    "_id": 30,
+    "_id": 32,
     "name": "malaria",
     "key_words": []
 },
 {
-    "_id": 30,
+    "_id": 33,
     "name": "staphylococcal enterotoxin b",
     "key_words": ["staphylococcal"]
 },
 {
-    "_id": 31,
+    "_id": 34,
     "name": "thypoid fever",
     "key_words": ["typhoid feber"]
 },
 {
-    "_id": 32,
+    "_id": 35,
     "name": "tuberculosis",
     "key_words": []
 },
 {
-    "_id": 33,
+    "_id": 36,
     "name": "tularemia",
     "key_words": []
 },
 {
-    "_id": 34,
+    "_id": 37,
     "name": "vaccinia and cowpox",
     "key_words": ["vaccinia", "cowpox"]
 },
 {
-    "_id": 35,
+    "_id": 38,
     "name": "varicella",
     "key_words": ["Chickenpox"]
 },
 {
-    "_id": 36,
+    "_id": 39,
     "name": "yellow fever",
     "key_words": []
 },
 {
-    "_id": 37,
+    "_id": 40,
     "name": "yersiniosis",
     "key_words": [] 
 },
 {
-    "_id": 38,
+    "_id": 41,
     "name": "zika",
     "key_words": [] 
 },
 {
-    "_id": 39,
+    "_id": 42,
     "name": "leigonares",
     "key_words": ["Legionnaires", "Legionellosis", "Legionella"]
 },
 {
-    "_id": 40,
+    "_id": 43,
     "name": "listeriosis",
     "key_words": []
 },
 {
-    "_id": 41,
+    "_id": 44,
     "name": "monkeypox",
     "key_words": []
 },
 {
-    "_id": 42,
+    "_id": 45,
     "name": "COVID-19",
     "key_words": ["covid"]
 }]
