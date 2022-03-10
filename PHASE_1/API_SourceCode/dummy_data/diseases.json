@@ -1,0 +1,244 @@
+[{
+    "_id": 0,
+    "name": "unknown",
+    "key_words": ["unidentified", "unsolved", "mystery", "unspecified", "undiagnosed"] 
+
+},
+{
+    "_id": 1,
+    "name": "other",
+    "key_words": []
+},
+{
+    "_id": 2,
+    "name": "anthrax cutaneous",
+    "key_words": [],
+    "regex": "anthrax.*cutaneous"
+
+}, 
+{
+    "_id": 3,
+    "name": "anthrax gastrointestinous",
+    "key_words": ["Gastrointestinal"]
+
+},
+{
+    "_id": 4,
+    "name": "anthrax inhalation",
+    "key_words": []
+},
+{
+    "_id": 5,
+    "name": "brucellosis",
+    "key_words": ["brucella melitensis"]
+},
+{
+    "_id": 6,
+    "name": "chikungunya",
+    "key_words": []
+
+},
+{
+    "_id": 7,
+    "name": "cholera",
+    "key_words": []
+},
+{
+    "_id": 8,
+    "name": "cryptococcosis",
+    "key_words": []
+}, 
+{
+    "_id": 9,
+    "name": "crimean-congo haemorrhagic fever",
+    "key_words": ["Crimean-Congo hem. fever"]
+},
+{
+    "_id": 10,
+    "name": "dengue",
+    "key_words": ["Dengue/DHF"]
+}, 
+{
+    "_id": 11,
+    "name": "diphteria",
+    "key_words": ["diphtheria"]
+},
+{
+    "_id": 12,
+    "name": "ebola haemorrhagic fever",
+    "key_words": ["ebola"]
+
+}, 
+{
+    "_id": 13,
+    "name": "ehec (e.coli)",
+    "key_words": ["E. coli EHEC"]
+},
+{
+    "_id": 14,
+    "name": "enterovirus 71 infection",
+    "key_words": ["Enterovirus 71"]
+}, 
+{
+    "_id": 15,
+    "name": "influenza a/h5n1",
+    "key_words": [],
+    "regex": "influenza.*h591"
+},
+{
+    "_id": 16,
+    "name": "influenza a/h7n9",
+    "key_words": [],
+    "regex": "influenza.*h7n9"
+},
+{
+    "_id": 17,
+    "name": "influenza a/h9n2",
+    "key_words": [],
+    "regex": "influenza.*h9n2"
+},
+{
+    "_id": 18,
+    "name": "influenza a/h1n2",
+    "key_words": [],
+    "regex": "influenza.*h1n2"
+},
+{
+    "_id": 19,
+    "name": "influenza a/h3n2",
+    "key_words": [],
+    "regex": "influenza.*h3n2"
+},
+{
+    "_id": 20,
+    "name": "influenza a/h3n5",
+    "key_words": [],
+    "regex": "influenza.*h3n5"
+},
+{
+    "_id": 21,
+    "name": "influenza a/h3n2",
+    "key_words": [],
+    "regex": "influenza.*h3n2"
+},
+{
+    "_id": 22,
+    "name": "influenza a/h2n2",
+    "key_words": [],
+    "regex": "influenza.*h2n2"
+},
+{
+    "_id": 23,
+    "name": "hand, foot and mouth disease",
+    "key_words": ["Hand, foot & mouth disease"]
+},
+{
+    "_id": 24,
+    "name": "hantavirus",
+    "key_words": []
+},
+{
+    "_id": 25,
+    "name": "hepatitis a",
+    "key_words": ["hep a"]
+},
+{
+    "_id": 26,
+    "name": "hepatitis b",
+    "key_words": ["hep b"]
+},
+{
+    "_id": 26,
+    "name": "hepatitis c",
+    "key_words": ["hep c", "hep b & c", "hepatitis b & c"]
+},
+{
+    "_id": 27,
+    "name": "hepatitis d",
+    "key_words": ["hep d"]
+},
+{
+    "_id": 28,
+    "name": "histoplasmosis",
+    "key_words": []
+},
+{
+    "_id": 29,
+    "name": "hiv/aids",
+    "key_words": ["hiv", "aids"]
+},
+{
+    "_id": 29,
+    "name": "lassa fever",
+    "key_words": []
+},
+{
+    "_id": 30,
+    "name": "malaria",
+    "key_words": []
+},
+{
+    "_id": 30,
+    "name": "staphylococcal enterotoxin b",
+    "key_words": ["staphylococcal"]
+},
+{
+    "_id": 31,
+    "name": "thypoid fever",
+    "key_words": ["typhoid feber"]
+},
+{
+    "_id": 32,
+    "name": "tuberculosis",
+    "key_words": []
+},
+{
+    "_id": 33,
+    "name": "tularemia",
+    "key_words": []
+},
+{
+    "_id": 34,
+    "name": "vaccinia and cowpox",
+    "key_words": ["vaccinia", "cowpox"]
+},
+{
+    "_id": 35,
+    "name": "varicella",
+    "key_words": ["Chickenpox"]
+},
+{
+    "_id": 36,
+    "name": "yellow fever",
+    "key_words": []
+},
+{
+    "_id": 37,
+    "name": "yersiniosis",
+    "key_words": [] 
+},
+{
+    "_id": 38,
+    "name": "zika",
+    "key_words": [] 
+},
+{
+    "_id": 39,
+    "name": "leigonares",
+    "key_words": ["Legionnaires", "Legionellosis", "Legionella"]
+},
+{
+    "_id": 40,
+    "name": "listeriosis",
+    "key_words": []
+},
+{
+    "_id": 41,
+    "name": "monkeypox",
+    "key_words": []
+},
+{
+    "_id": 42,
+    "name": "COVID-19",
+    "key_words": ["covid"]
+}]

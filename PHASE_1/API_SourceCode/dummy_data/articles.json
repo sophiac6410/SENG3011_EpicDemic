@@ -2,7 +2,7 @@
     "1": {
         "_id": 1,
         "url": "www.google.com.au",
-        "date_of_publication": "2016-05-18 14:15:51",
+        "date_of_publication": "2016-05-18T14:15:51",
         "headline": "COVID SCARE",
         "main_text": "Covid is on the loose. Be scared lol.",
         "reports": [1, 2]

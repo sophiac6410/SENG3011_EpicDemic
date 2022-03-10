@@ -6,6 +6,7 @@ cluster = MongoClient(
 db = cluster["epicdemic_db"]
 collection = db["diseases"]
 
-post = {"_id": 0, "name": "zika"}
+# Accessing diseases collection
+collection = db["diseases"]
 
 collection.insert_one(post)
