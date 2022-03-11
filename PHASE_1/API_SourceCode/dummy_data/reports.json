@@ -1,0 +1,164 @@
+
+
+[
+    {
+        "_id": 0,
+        "article_id": 0,
+        "diseases": [ 1 ],
+        "confirmed": true, 
+        "cases": 36, 
+        "syndromes": [ ],
+        "event_date": "Wed 26 Jan 2022",
+        "locations": [ 0 ]
+    },
+    {
+        "_id": 1,
+        "article_id": 0,
+        "diseases": [ 1 ],
+        "confirmed": true, 
+        "cases": 1, 
+        "syndromes": [ ],
+        "event_date": "Sun 2 Jan 2022",
+        "locations": [ 1 ]
+    },
+    {
+        "_id": 2,
+        "article_id": 0,
+        "diseases": [ 1 ],
+        "confirmed": true, 
+        "cases": 2, 
+        "syndromes": [ ],
+        "event_date": "Thu 10 Feb 2022",
+        "locations": [ 2 ]
+    },  
+    {
+        "_id": 3,
+        "article_id": 0,
+        "diseases": [ 1 ],
+        "confirmed": false, 
+        "cases": 1, 
+        "syndromes": [ ],
+        "event_date": "Tue 8 Mar 2022",
+        "locations": [ 3 ]
+    },
+    {
+        "_id": 4,
+        "article_id": 1,
+        "diseases": [ 42 ],
+        "confirmed": false, 
+        "cases": 0, 
+        "syndromes": [ ],
+        "event_date": "Mon 7 Mar 2022",
+        "locations": [ ]      
+    },
+    {
+        "_id": 5,
+        "article_id": 1,
+        "diseases": [ 42 ],
+        "confirmed": false, 
+        "cases": 0, 
+        "syndromes": [ ],
+        "event_date": "Mon 8 Mar 2022",
+        "locations": [ ]      
+    }, 
+    {
+        "_id": 6,
+        "article_id": 1,
+        "diseases": [ 42 ],
+        "confirmed": false, 
+        "cases": 0, 
+        "syndromes": [ ],
+        "event_date": "Mon 8 Mar 2022",
+        "locations": [ ]      
+    }, 
+    {
+        "_id": 6,
+        "article_id": 1,
+        "diseases": [ 42 ],
+        "confirmed": false, 
+        "cases": 69000, 
+        "syndromes": [ ],
+        "event_date": "Mon 8 Mar 2022",
+        "locations": [ ]      
+    }, 
+    {
+        "_id": 6,
+        "article_id": 1,
+        "diseases": [ 42 ],
+        "confirmed": false, 
+        "cases": 69000, 
+        "syndromes": [ ],
+        "event_date": "Mon 8 Mar 2022",
+        "locations": [ ]        
+    },
+    {
+        "_id": 7,
+        "article_id": 2,
+        "diseases": [ 2 ],
+        "confirmed": true, 
+        "cases": 8, 
+        "syndromes": [ ],
+        "event_date": "Wed 6 Feb 2019",
+        "locations": [ 4 ]        
+    },
+    {
+        "_id": 8,
+        "article_id": 2,
+        "diseases": [ 2 ],
+        "confirmed": false, 
+        "cases": 0, 
+        "syndromes": [ ],
+        "event_date": "Wed 6 Feb 2019",
+        "locations": [ 4 ]        
+    },
+    {
+        "_id": 9,
+        "article_id": 2,
+        "diseases": [ 2 ],
+        "confirmed": false, 
+        "cases": 0, 
+        "syndromes": [ ],
+        "event_date": "Wed 6 Feb 2019",
+        "locations": [ 4 ]        
+    },
+    {
+        "_id": 10,
+        "article_id": 2,
+        "diseases": [ 2 ],
+        "confirmed": true, 
+        "cases": 55, 
+        "syndromes": [ ],
+        "event_date": "Fri 8 Feb 2019 10:22 AM",
+        "locations": [ 4 ]        
+    },   
+    {
+        "_id": 11,
+        "article_id": 2,
+        "diseases": [ 2 ],
+        "confirmed": true, 
+        "cases": 1400, 
+        "syndromes": [ ],
+        "event_date": "Thu 6 Feb 2019",
+        "locations": [ 4 ]        
+    },   
+    {
+        "_id": 12,
+        "article_id": 2,
+        "diseases": [ 2 ],
+        "confirmed": false, 
+        "cases": 0, 
+        "syndromes": [ ],
+        "event_date": "Thu 7 Feb 2019",
+        "locations": [ 4 ]        
+    },  
+    {
+        "_id": 13,
+        "article_id": 2,
+        "diseases": [ 2 ],
+        "confirmed": true, 
+        "cases": 50000, 
+        "syndromes": [ "common cold" ],
+        "event_date": "Thu 7 Feb 2019 13:35 GMT",
+        "locations": [ 6 ]        
+    }
+]
