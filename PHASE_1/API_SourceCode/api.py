@@ -1,6 +1,6 @@
 from datetime import datetime, time # datetime has format yyyy-mm-ddTHH:mm:ss
 import pytz
-from typing import Optional
+from typing import Optional, List
 
 from fastapi import FastAPI, Query, HTTPException
 
