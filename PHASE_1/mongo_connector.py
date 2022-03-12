@@ -9,4 +9,7 @@ collection = db["diseases"]
 # Accessing diseases collection
 collection = db["diseases"]
 
-collection.insert_one(post)
+# EXAMPLE: HOW TO ADD A DISEASE TO DATABASE
+# post = {"_id": 0, "name": "zika"}
+# collection.insert_one(post)
+
