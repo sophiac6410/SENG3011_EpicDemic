@@ -1,44 +1,44 @@
 [
     {
-        "_id": 0,
+        "location_id": 0,
         "country": "United States",
-        "city": "",
+        "city": null,
         "state": "Iowa"
     },
     {
-        "_id": 1,
+        "location_id": 1,
         "country": "United States",
         "city": "Warren County",
         "state": "Mississippi"
     },  
     {
-        "_id": 2,
+        "location_id": 2,
         "country": "United States",
         "city": "Waukesha County",
         "state": "Wisconsin"
     },  
     {
-        "_id": 3,
+        "location_id": 3,
         "country": "United States",
         "city": "Floyd County",
         "state": "Virginia"
     },  
     {
-        "_id": 4,
+        "location_id": 4,
         "country": "United States",
         "city": "Clark County",
         "state": "Washington state"
     },
     {
-        "_id": 5,
+        "location_id": 5,
         "country": "Philippines",
-        "city": "",
-        "state": ""
+        "city": null,
+        "state": null
     },
     {
-        "_id": 6,
+        "location_id": 6,
         "country": "Madagascar",
-        "city": "",
-        "state": ""
-    },
+        "city": null,
+        "state": null
+    }
 ]
