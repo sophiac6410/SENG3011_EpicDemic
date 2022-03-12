@@ -1,7 +1,9 @@
-from datetime import datetime, time # datetime has format yyyy-mm-ddTHH:mm:ss
+from datetime import datetime, time
+import re
+from pydantic import BaseModel # datetime has format yyyy-mm-ddTHH:mm:ss
 import pytz
 from typing import Optional, List
-
+from database import articles_col, locations_col, reports_col, diseases_col
 from fastapi import FastAPI, Query, HTTPException
 
 app = FastAPI()
@@ -174,5 +176,3 @@ async def get_report_ids(
 	return {
 		"report_ids": report_ids
 	}
-
-	
