@@ -11,6 +11,7 @@ router = APIRouter(
     prefix='/sophia'
 )
 
+############## HEALTH CHECK ###############
 class HealthCheck(BaseModel):
 	healthcheck: str
 
@@ -24,30 +25,6 @@ class HealthCheck(BaseModel):
 def perform_healthcheck():
     return {'healthcheck': 'Everything OK!'}
 
-# @router.get("/test/{key_term}", status_code=status.HTTP_200_OK)
-# async def get_test(
-# 	key_term: str
-# ):
-#     documents = list(articles_col.find(
-# 		{"headline": re.compile(key_term, re.IGNORECASE)}, 
-# 		{"_id": False}))
-
-#     print(documents[0]["date_of_publication"])
-#     print(documents[0]["date_of_publication"] > documents[1]["date_of_publication"])
-    
-#     result = []
-#     for document in documents:
-#         result.append(document["article_id"])
-
-# 	# for document in documents:
-# 	# 	print(document)
-
-#     return {
-# 		"status": 200,
-# 		"data": {
-# 			"article_ids": result
-# 		}
-# 	}
 
 ############## GET ARTICLES BY QUERY ###############
 class ReportIds(BaseModel):
@@ -99,46 +76,39 @@ class ArticleQueryResponse(BaseModel):
 			}
 		}
 
-description_start_date = "Requests articles published after the start_date. Format: 'yyyy-MM-ddTHH:mm:ss'"
-description_end_date = "Requests articles published before the end_date. Format: 'yyyy-MM-ddTHH:mm:ss'"
-description_key_terms = "Requests articles that include the key terms. Key words must be separated by a commas, e.g. 'Anthrax,Zika'"
-description_timezone = "The timezone of the start_date and end_date. Must be in the pytz format."
-description_start_range = "Specifies the position of the article to start from."
-description_end_range = "Specifies the position of the last article to return. If the position is out of range, the API will return up to the last article."
-
-@router.get("/articles", status_code=status.HTTP_200_OK, response_model=ArticleQueryResponse)
+@router.get("/articles", status_code=status.HTTP_200_OK, response_model=ArticleQueryResponse, tags=["articles"])
 async def get_articles_by_query(
 	*, # including this allows parameters to be defined in any order
 	start_date: datetime = Query(
 		..., # no default, is required
-		description=description_start_date,
+		description="Requests articles published after the start_date. Format: 'yyyy-MM-ddTHH:mm:ss'",
 		example="2021-01-01T10:10:10"
 	),
 	end_date: datetime = Query(
 		...,
-		description=description_end_date,
+		description="Requests articles published before the end_date. Format: 'yyyy-MM-ddTHH:mm:ss'",
 		example="2022-01-01T10:10:10"
 	),
 	key_terms: Optional[str] = Query(
 		None, # is optional, default is None
-		description=description_key_terms,
+		description="Requests articles that include the key terms. Key words must be separated by a commas, e.g. 'Anthrax,Zika'",
 		example="Anthrax,Zika"
 	),
 	timezone: Optional[str] = Query(
 		"Australia/Sydney",
-		description=description_timezone,
-		example="US/Central"
+		description="The timezone of the start_date and end_date. Must be in the pytz format.",
+		example="Australia/Sydney"
 	),
 	start_range: Optional[int] = Query(
 		1,
-		description=description_start_range,
-		example="5",
+		description="Specifies the position of the article to start from.",
+		example="1",
 		ge=1
 	),
 	end_range: Optional[int] = Query(
 		10,
-		description=description_end_range,
-		example="50",
+		description="Specifies the position of the last article to return. If the position is out of range, the API will return up to the last article.",
+		example="10",
 		ge=1
 	)
 ):
@@ -184,12 +154,11 @@ async def get_articles_by_query(
 	}
 
 
-
 ############## GET ARTICLES BY IDS ###############
 class ArticleIdResponse(BaseModel):
 	articles: List[Article]
 
-@router.get("/articles/ids", status_code=status.HTTP_200_OK, response_model=ArticleIdResponse)
+@router.get("/articles/ids", status_code=status.HTTP_200_OK, response_model=ArticleIdResponse, tags=["articles"])
 async def get_articles_by_ids(
 	article_ids: str = Query(
 		...,
