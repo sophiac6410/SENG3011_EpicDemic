@@ -35,9 +35,10 @@ def overwrite_collection(collection_name):
             for data in file_data:
                 if "date_of_publication" in data:
                     data["date_of_publication"] = parse(data["date_of_publication"])
+                elif "event_date" in data: 
+                    data["event_date"] = parse(data["event_date"])
                 requests.append(data)            
 
-            # print(collection_name)
             db[collection_name].insert_many(requests)
             print(f"Finished overwriting {collection_name}")
         except:
@@ -46,3 +47,5 @@ def overwrite_collection(collection_name):
 
 # overwrite_collection("Articles")
 # overwrite_collection("Diseases")
+# overwrite_collection("Reports")
+# overwrite_collection("Locations")
