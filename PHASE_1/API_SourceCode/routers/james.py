@@ -98,11 +98,9 @@ async def get_reports_from_query(
         for disease in all_diseases:
             for key_term in key_terms_list:
                 if re.match(rf".*{key_term}.*", disease["name"], re.IGNORECASE):
-                    print(f"{key_term} matched {disease['name']}")
                     matched_diseases[disease["_id"]] = disease["name"]
                     break
                 elif "regex" in disease and re.match(rf"{disease['regex']}", key_term, re.IGNORECASE):
-                    print(f"regex {key_term} matched {disease['regex']}")
                     matched_diseases[disease["_id"]] = disease["name"]
                     break
                 else:
@@ -117,13 +115,11 @@ async def get_reports_from_query(
                         break
 
         matched_disease_ids = list(matched_diseases.keys())
-        print(matched_disease_ids)
 
         key_terms_query = {
             "diseases": {"$in": matched_disease_ids}
         }
         queries.append(key_terms_query)
-
 
 
     report_docs = list(reports_col.find(
@@ -142,24 +138,3 @@ async def get_reports_from_query(
             "reports": report_docs
         }
     }
-
-@router.get("/test/{key_term}")
-async def get_test(
-	key_term: str
-):
-	documents = list(articles_col.find(
-		{"headline": re.compile(key_term, re.IGNORECASE)}))
-
-	result = []
-	for document in documents:
-		result.append(document["article_id"])
-
-	# for document in documents:
-	# 	print(document)
-
-	return {
-		"status": 200,
-		"data": {
-			"article_ids": result
-		}
-	}
