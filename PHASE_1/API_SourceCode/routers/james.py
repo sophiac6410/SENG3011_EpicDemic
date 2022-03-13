@@ -11,24 +11,35 @@ router = APIRouter(
 async def get_reports(
     report_ids: List[int]):
     report_docs = list(reports_col.find(
-        {"report_id":{"$in":report_ids}},
-        {"_id": False}
+        {"_id":{"$in":report_ids}},
     ))
     
     reports = {}
     disease_ids = set()
     
     for doc in report_docs:
-        reports["report_id"] = doc
+        reports[doc["_id"]] = doc
         
         # Get all the disease ids so we can look them all up in one efficient query
         for disease_id in doc["diseases"]:
             disease_ids.add(disease_id)
 
+
     disease_docs = list(diseases_col.find(
-        {"_id":{"$in":disease_ids}}
+        {"_id":{"$in":list(disease_ids)}}        
     ))
 
+    diseases = {}
+    for disease in disease_docs:
+        diseases[disease["_id"]] = disease["name"]
+
+    # Convert the disease ids to actual disease names
+    for report in reports.values():
+        new_diseases = []
+        for disease_id in report["diseases"]:
+            new_diseases.append(diseases[disease_id])
+
+        report["diseases"] = new_diseases
 
     return {
         "status": 200,
@@ -43,8 +54,7 @@ async def get_test(
 	key_term: str
 ):
 	documents = list(articles_col.find(
-		{"headline": re.compile(key_term, re.IGNORECASE)}, 
-		{"_id": False}))
+		{"headline": re.compile(key_term, re.IGNORECASE)}))
 
 	result = []
 	for document in documents:
