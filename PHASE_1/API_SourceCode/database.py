@@ -45,7 +45,7 @@ def overwrite_collection(collection_name):
             print(f"Failed to load and overwrite {collection_name}")
 
 
-overwrite_collection("Articles")
-overwrite_collection("Diseases")
-overwrite_collection("Reports")
-overwrite_collection("Locations")
+# overwrite_collection("Articles")
+# overwrite_collection("Diseases")
+# overwrite_collection("Reports")
+# overwrite_collection("Locations")
