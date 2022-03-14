@@ -1,15 +1,17 @@
 from dateutil.parser import parse
 import json
-from dotenv import load_dotenv
+from dotenv import load_dotenv, dotenv_values
 import os
 from pymongo import MongoClient
 
 try:
-    load_dotenv()
-    client = MongoClient(f'mongodb+srv://{os.environ["USERNAME"]}:{os.environ["PASSWORD"]}@epicdemic.ul8sw.mongodb.net/EpicDemic?retryWrites=true&w=majority')
+    config = dotenv_values(".env")
+    client = MongoClient(f'mongodb+srv://{config.get("USERNAME")}:{config.get("PASSWORD")}@epicdemic.ul8sw.mongodb.net/EpicDemic?retryWrites=true&w=majority')
+    # client = MongoClient('mongodb+srv://EpicDemic:EpicDemic123!@epicdemic.ul8sw.mongodb.net/EpicDemic?retryWrites=true&w=majority')
     print("Connected to database.")
-except:
+except Exception as e:
     print("Unable to connect to database.")
+    print(e.message)
     exit(1)
 
 
