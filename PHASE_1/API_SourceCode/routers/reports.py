@@ -1,6 +1,7 @@
 from dateutil.parser import parse
 from typing import List, Optional
-from fastapi import APIRouter
+from fastapi import APIRouter, status
+from fastapi.responses import JSONResponse
 from database import articles_col, reports_col, diseases_col
 import re
 
@@ -8,10 +9,15 @@ router = APIRouter(
     prefix='/reports'
 )
 
-@router.get("/ids")
+@router.get("/ids", status_code=status.HTTP_200_OK, tags=["reports"])
 async def get_reports_from_id(
-    report_ids: str):
-    report_ids = [int(i) for i in report_ids.split(",")]
+    report_ids: str
+):
+    try:
+        report_ids = [int(i) for i in report_ids.split(",")]
+    except:
+        return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, content={"error": "Report ids must be comma separated integers"})
+
     report_docs = list(reports_col.find(
         {"_id":{"$in":report_ids}},
     ))
@@ -44,14 +50,9 @@ async def get_reports_from_id(
 
         report["diseases"] = new_diseases
 
-    return {
-        "status": 200,
-        "data": {
-            "reports": reports
-        }
-    }
+    return reports
 
-@router.get("/")
+@router.get("/", tags=["reports"])
 async def get_reports_from_query(
     start_date: str,
     end_date: str,
@@ -61,7 +62,12 @@ async def get_reports_from_query(
     start_range: Optional[int] = 1,
     end_range: Optional[int] = 10
 ):
-    # TODO: Handle errors
+    # TODO: More error handling
+    if end_range < start_range:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Invalid start and end range."})
+    if end_date < start_date:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "End date must be after start date."})
+
     start_date = parse(start_date)
     end_date = parse(end_date)
 
