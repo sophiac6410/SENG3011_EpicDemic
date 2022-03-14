@@ -6,8 +6,7 @@ from pymongo import MongoClient
 
 try:
     load_dotenv()
-    # client = MongoClient(f'mongodb+srv://{os.environ["USERNAME"]}:{os.environ["PASSWORD"]}@epicdemic.ul8sw.mongodb.net/EpicDemic?retryWrites=true&w=majority')
-    client = MongoClient(f'mongodb+srv://EpicDemic:EpicDemic123!@epicdemic.ul8sw.mongodb.net/EpicDemic?retryWrites=true&w=majority')
+    client = MongoClient(f'mongodb+srv://{os.environ["USERNAME"]}:{os.environ["PASSWORD"]}@epicdemic.ul8sw.mongodb.net/EpicDemic?retryWrites=true&w=majority')
     print("Connected to database.")
 except:
     print("Unable to connect to database.")
@@ -28,11 +27,9 @@ def overwrite_collection(collection_name):
     with open(file_name) as f:
         try:
             db[collection_name].drop()
-
             file_data = json.load(f)
             requests = []
 
-            # requests.append(file_data[19])
             for data in file_data:
                 if "date_of_publication" in data:
                     data["date_of_publication"] = parse(data["date_of_publication"])
