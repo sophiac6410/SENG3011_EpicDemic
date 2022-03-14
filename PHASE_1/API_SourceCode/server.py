@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import james, sophia
+from routers import articles, james
 import uvicorn
 
 description="""
@@ -35,7 +35,7 @@ app = FastAPI(
 )
 
 app.include_router(james.router)
-app.include_router(sophia.router)
+app.include_router(articles.router)
 
 @app.get('/')
 async def index():
