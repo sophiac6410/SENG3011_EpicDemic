@@ -5,10 +5,10 @@ from database import articles_col, reports_col, diseases_col
 import re
 
 router = APIRouter(
-    prefix='/james'
+    prefix='/reports'
 )
 
-@router.get("/reports/ids")
+@router.get("/ids")
 async def get_reports_from_id(
     report_ids: str):
     report_ids = [int(i) for i in report_ids.split(",")]
@@ -51,7 +51,7 @@ async def get_reports_from_id(
         }
     }
 
-@router.get("/reports/")
+@router.get("/")
 async def get_reports_from_query(
     start_date: str,
     end_date: str,

@@ -42,7 +42,6 @@ def overwrite_collection(collection_name):
         except:
             print(f"Failed to load and overwrite {collection_name}")
 
-
 # overwrite_collection("Articles")
 # overwrite_collection("Diseases")
 # overwrite_collection("Reports")
