@@ -8,13 +8,14 @@ router = APIRouter(
     prefix='/james'
 )
 
-@router.post("/reports/ids")
+@router.get("/reports/ids")
 async def get_reports_from_id(
-    report_ids: List[int]):
+    report_ids: str):
+    report_ids = [int(i) for i in report_ids.split(",")]
     report_docs = list(reports_col.find(
         {"_id":{"$in":report_ids}},
     ))
-    
+
     reports = {}
     disease_ids = set()
     
