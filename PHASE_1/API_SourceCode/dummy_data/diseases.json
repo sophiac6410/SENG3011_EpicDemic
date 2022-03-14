@@ -1,8 +1,4 @@
-[{
-    "_id": 0,
-    "name": "unknown",
-    "key_words": ["unidentified", "unsolved", "mystery", "unspecified", "undiagnosed"] 
-},
+[
 {
     "_id": 1,
     "name": "other",
@@ -239,4 +235,10 @@
     "_id": 45,
     "name": "COVID-19",
     "key_words": ["covid"]
-}]
+},
+{
+    "_id": 46,
+    "name": "unknown",
+    "key_words": ["unidentified", "unsolved", "mystery", "unspecified", "undiagnosed"] 
+}
+]

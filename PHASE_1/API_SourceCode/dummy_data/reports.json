@@ -1,17 +1,7 @@
 [
     {
-        "_id": 0,
-        "article_id": 0,
-        "diseases": [ 1 ],
-        "confirmed": true, 
-        "cases": 36, 
-        "syndromes": [ ],
-        "event_date": "2022-01-26T00:00:00+11:00",
-        "locations": [ 0 ]
-    },
-    {
         "_id": 1,
-        "article_id": 0,
+        "article_id": 4,
         "diseases": [ 1 ],
         "confirmed": true, 
         "cases": 1, 
@@ -21,7 +11,7 @@
     },
     {
         "_id": 2,
-        "article_id": 0,
+        "article_id": 4,
         "diseases": [ 1 ],
         "confirmed": true, 
         "cases": 2, 
@@ -31,7 +21,7 @@
     },  
     {
         "_id": 3,
-        "article_id": 0,
+        "article_id": 4,
         "diseases": [ 1 ],
         "confirmed": false, 
         "cases": 1, 
@@ -148,5 +138,15 @@
         "syndromes": [ "common cold" ],
         "event_date": "2019-02-06T00:00:00+11:00",
         "locations": [ 6 ]        
+    },
+    {
+        "_id": 15,
+        "article_id": 0,
+        "diseases": [ 1 ],
+        "confirmed": true, 
+        "cases": 36, 
+        "syndromes": [ ],
+        "event_date": "2022-01-26T00:00:00+11:00",
+        "locations": [ 7 ]
     }
 ]

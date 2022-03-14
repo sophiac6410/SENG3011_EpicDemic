@@ -118,7 +118,7 @@ articles = {
 
 
 ############## GET ARTICLES BY QUERY ###############
-@app.get("/articles")
+@app.get("/articles", response_model=Article)
 async def get_articles(
 	*, # including this allows parameters to be defined in any order
 	start_date: datetime = Query(
