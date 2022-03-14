@@ -7,9 +7,7 @@ import pytz
 from typing import Optional, List
 import pymongo
 
-router = APIRouter(
-    prefix='/sophia'
-)
+router = APIRouter()
 
 ############## HEALTH CHECK ###############
 class HealthCheck(BaseModel):
@@ -26,7 +24,7 @@ def perform_healthcheck():
     return {'healthcheck': 'Everything OK!'}
 
 
-############## GET ARTICLES BY QUERY ###############
+############### ARTICLE RESPONSE MODELS ##############
 class Article(BaseModel):
 	_id: int
 	url: str
@@ -66,6 +64,11 @@ class ArticleQueryResponse(BaseModel):
 			}
 		}
 
+class ArticleIdResponse(BaseModel):
+	articles: List[Article]
+
+
+############## GET ARTICLES BY QUERY ###############
 @router.get("/articles", status_code=status.HTTP_200_OK, response_model=ArticleQueryResponse, tags=["articles"])
 async def get_articles_by_query(
 	*, # including this allows parameters to be defined in any order
@@ -143,9 +146,6 @@ async def get_articles_by_query(
 
 
 ############## GET ARTICLES BY IDS ###############
-class ArticleIdResponse(BaseModel):
-	articles: List[Article]
-
 @router.get("/articles/ids", status_code=status.HTTP_200_OK, response_model=ArticleIdResponse, tags=["articles"])
 async def get_articles_by_ids(
 	article_ids: str = Query(
