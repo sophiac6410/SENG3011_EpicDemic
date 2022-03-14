@@ -27,7 +27,7 @@ def search(start_date="03/12/2022", end_date="03/14/2022"):
         'query[4][value]': 1
     }
 
-    query = encode_query(form1)
+    query = encode_query(form1)git 
     req = request.Request(PROMED_API, headers=HEADERS, data=query)
     r = request.urlopen(req)
     data = r.read().decode("utf-8")
