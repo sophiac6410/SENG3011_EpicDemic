@@ -27,11 +27,9 @@ def overwrite_collection(collection_name):
     with open(file_name) as f:
         try:
             db[collection_name].drop()
-
             file_data = json.load(f)
             requests = []
 
-            # requests.append(file_data[19])
             for data in file_data:
                 if "date_of_publication" in data:
                     data["date_of_publication"] = parse(data["date_of_publication"])

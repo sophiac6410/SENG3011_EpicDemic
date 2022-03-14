@@ -17,6 +17,106 @@ description_timezone = "The timezone of the start_date and end_date. Must be in 
 description_start_range = "Specifies the position of the article to start from."
 description_end_range = "Specifies the position of the last article to return. If the position is out of range, the API will return up to the last article."
 
+class Report(BaseModel):
+	report_id: int
+	event_date: str
+	locations: list[str]
+	diseases: list[str]
+	syndrome: list[str]
+	cases: int
+	report_type: str
+
+	class Config:
+		schema_extra = {
+			"example": {
+				"report_id": 1,
+				"event_date": "2021-11-08 xx:xx:xx to 2021-11-25 xx:xx:xx",
+				"locations": [
+					{
+						"country": "Estonia",
+						"location": "Kardla, Hiiu"
+					},
+				],
+				"diseases": [
+					"influenza a/h5n1"
+				],
+				"syndromes": [
+				],
+				"cases": 3,
+				"type": "Immediate Notification",
+			}
+        }
+
+reports = {
+	"first": {
+		"report_id": 1,
+		"event_date": "2021-11-08 to 2021-11-25",
+		"locations": [
+			{
+				"country": "Estonia",
+				"location": "Kardla, Hiiu"
+			},
+		],
+		"diseases": [
+			"influenza a/h5n1"
+		],
+		"syndromes": [
+		],
+		"cases": 3,
+		"type": "Immediate Notification",
+	},
+	"second": {
+		"report_id": 1,
+		"event_date": "2021-11-08 to 2021-11-25",
+		"locations": [
+			{
+				"country": "Australia",
+				"location": "Kardla, Hiiu"
+			},
+		],
+		"diseases": [
+			"influenza a/h5n1"
+		],
+		"syndromes": [
+		],
+		"cases": 3,
+		"type": "Immediate Notification",
+	}
+}
+
+class Article(BaseModel):
+	article_id: int
+	url: str
+	date_of_publication: str
+	headline: str
+	main_text: str
+	reports: list[int]
+	
+	class Config:
+		schema_extra = {
+            "example": {
+				"article_id": 8700432,
+				"url": "http://www.promedmail.org/post/8700432",
+				"date_of_publication": "2021-12-23 03:32:10",
+				"headline": "Avian influenza (180): Europe (Estonia) fox, HPAI H5N1, OIE",
+				"main_text": "AVIAN INFLUENZA (180): EUROPE (ESTONIA) FOX, HPAI H5N1, OIE\n***********************************************************\nA ProMED-mail post\n<http://www.promedmail.org>\nProMED-mail is a program of the\nInternational Society for Infectious Diseases\n<http://www.isid.org>\n\nDate: Mon 20 Dec 2021\r\nSource: OIE-WAHIS (World Animal Health Information System) 2021 [edited]\r\n<https://wahis.oie.int/#/report-info?reportId=44804>\r\n\r\n\r\nHighly pathogenic influenza A viruses (inf. with) (non-poultry including wild birds), Estonia\r\n--------------------------------------------------------------------------------\r\nSummary\r\nReport type: immediate notification\r\nStarted: 8 Nov 2021\r\nConfirmed: 25 Nov 2021\r\nEnded: 25 Nov 2021\r\nReported: 17 Dec 2021\r\nReason for notification: unusual host species\r\nCausal agent: Highly pathogenic avian influenza virus\r\nSerotype: H5N1\r\nNature of diagnosis: clinical, laboratory\r\nThis event pertains to the whole country.\r\n\r\nNew outbreaks (1)\r\nTotal outbreaks (6)\r\nOutbreak location 1: Kardla, Hiiu\r\nStarted: 8 Nov 2021\r\nEnded: 25 Nov 2021\r\nEpidemiological unit: not applicable\r\nTotal animals affected:\r\nSpecies / Susceptible / Cases / Deaths / Killed and disposed of / Slaughtered or killed for commercial use / Vaccinated\r\nRed fox (_Vulpes vulpes_): Canidae-Carnivora / - / 1 / 1 / - / - / -\r\n\r\nEpidemiology\r\nSource of the outbreak(s) or origin of infection: contact with wild species.\r\n\r\nDiagnostic test results\r\nLaboratory name and type: Estonian Veterinary and Food Laboratory (VFL) National Laboratory\r\nSpecies / Outbreaks / Test / Test date / Result\r\nRed fox / real-time polymerase chain reaction (real-time PCR) / 1 / [25 Nov 2021] / positive\r\n\r\n[The location of the outbreak can be seen on the interactive map included in the OIE report at the source URL above.]\r\n\r\n--\r\nCommunicated by:\r\nProMED\n\n[From 2014 onwards HPAI H5 clade 2.3.4.4 viruses caused outbreaks across the Eurasian region, affecting both poultry and wild birds, with abundant genetic reassortments yielding subtypes H5N1, H5N2, H5N3, H5N4, H5N5, H5N6, and H5N8. Regarding infection of these viruses in mammals, recently, HPAI H5N8 infections were reported in humans in Russia (see ProMED post 20210221.8204014). Several subtypes of AI viruses (H7N7, H4N5, H4N6, H3N3, and H10N7) have caused epidemics in harbour seals and gray seals, but they do not appear to become established in these carnivore species. Regarding terrestrial carnivores, red foxes have been shown to be susceptible to infection by HPAI H5N1, and there was recent documentation of a spill-over of HPAI H5N8 to wild carnivores. Virus evolution and adaptive mutations must be closely monitored to rapidly identify viruses with increased potential to infect mammals. - Mod.PMB\n\nProMED map:\nKärdla, Hiiumaa, Estonia: <https://promedmail.org/promed-post?place=8700432,68643>]\n\n[See Also:\nAvian influenza (133): Europe (Netherlands) fox HPAI H5N1 20211101.8699389\r\nAvian influenza (117): Europe (Germany) seal, HPAI H5N8 20210924.8698675\r\nAvian influenza (82): Europe (Germany, Estonia) wild bird, HPAI H5N1, OIE 20210614.8446706\r\nAvian influenza, human (02): Russia, H5N8, 1st rep 20210221.8204014\r\nAvian influenza (45): Europe (UK, Croatia) seal, fox, wild bird, HPAI H5N8, OIE 20210317.8252821\r\nAvian influenza (37): Estonia (LV), poultry, HPAI H5N8, OIE 20210222.8206662]\n.................................................crd/pmb/mj/jh",
+				"reports": [1, 2, 3, 4]
+            }
+        }
+
+articles = {
+	"first": {
+		"article_id": 8700432,
+		"url": "http://www.promedmail.org/post/8700432",
+		"date_of_publication": "2021-12-23 03:32:10",
+		"headline": "Avian influenza (180): Europe (Estonia) fox, HPAI H5N1, OIE",
+		"main_text": "AVIAN INFLUENZA (180): EUROPE (ESTONIA) FOX, HPAI H5N1, OIE\n***********************************************************\nA ProMED-mail post\n<http://www.promedmail.org>\nProMED-mail is a program of the\nInternational Society for Infectious Diseases\n<http://www.isid.org>\n\nDate: Mon 20 Dec 2021\r\nSource: OIE-WAHIS (World Animal Health Information System) 2021 [edited]\r\n<https://wahis.oie.int/#/report-info?reportId=44804>\r\n\r\n\r\nHighly pathogenic influenza A viruses (inf. with) (non-poultry including wild birds), Estonia\r\n--------------------------------------------------------------------------------\r\nSummary\r\nReport type: immediate notification\r\nStarted: 8 Nov 2021\r\nConfirmed: 25 Nov 2021\r\nEnded: 25 Nov 2021\r\nReported: 17 Dec 2021\r\nReason for notification: unusual host species\r\nCausal agent: Highly pathogenic avian influenza virus\r\nSerotype: H5N1\r\nNature of diagnosis: clinical, laboratory\r\nThis event pertains to the whole country.\r\n\r\nNew outbreaks (1)\r\nTotal outbreaks (6)\r\nOutbreak location 1: Kardla, Hiiu\r\nStarted: 8 Nov 2021\r\nEnded: 25 Nov 2021\r\nEpidemiological unit: not applicable\r\nTotal animals affected:\r\nSpecies / Susceptible / Cases / Deaths / Killed and disposed of / Slaughtered or killed for commercial use / Vaccinated\r\nRed fox (_Vulpes vulpes_): Canidae-Carnivora / - / 1 / 1 / - / - / -\r\n\r\nEpidemiology\r\nSource of the outbreak(s) or origin of infection: contact with wild species.\r\n\r\nDiagnostic test results\r\nLaboratory name and type: Estonian Veterinary and Food Laboratory (VFL) National Laboratory\r\nSpecies / Outbreaks / Test / Test date / Result\r\nRed fox / real-time polymerase chain reaction (real-time PCR) / 1 / [25 Nov 2021] / positive\r\n\r\n[The location of the outbreak can be seen on the interactive map included in the OIE report at the source URL above.]\r\n\r\n--\r\nCommunicated by:\r\nProMED\n\n[From 2014 onwards HPAI H5 clade 2.3.4.4 viruses caused outbreaks across the Eurasian region, affecting both poultry and wild birds, with abundant genetic reassortments yielding subtypes H5N1, H5N2, H5N3, H5N4, H5N5, H5N6, and H5N8. Regarding infection of these viruses in mammals, recently, HPAI H5N8 infections were reported in humans in Russia (see ProMED post 20210221.8204014). Several subtypes of AI viruses (H7N7, H4N5, H4N6, H3N3, and H10N7) have caused epidemics in harbour seals and gray seals, but they do not appear to become established in these carnivore species. Regarding terrestrial carnivores, red foxes have been shown to be susceptible to infection by HPAI H5N1, and there was recent documentation of a spill-over of HPAI H5N8 to wild carnivores. Virus evolution and adaptive mutations must be closely monitored to rapidly identify viruses with increased potential to infect mammals. - Mod.PMB\n\nProMED map:\nKärdla, Hiiumaa, Estonia: <https://promedmail.org/promed-post?place=8700432,68643>]\n\n[See Also:\nAvian influenza (133): Europe (Netherlands) fox HPAI H5N1 20211101.8699389\r\nAvian influenza (117): Europe (Germany) seal, HPAI H5N8 20210924.8698675\r\nAvian influenza (82): Europe (Germany, Estonia) wild bird, HPAI H5N1, OIE 20210614.8446706\r\nAvian influenza, human (02): Russia, H5N8, 1st rep 20210221.8204014\r\nAvian influenza (45): Europe (UK, Croatia) seal, fox, wild bird, HPAI H5N8, OIE 20210317.8252821\r\nAvian influenza (37): Estonia (LV), poultry, HPAI H5N8, OIE 20210222.8206662]\n.................................................crd/pmb/mj/jh",
+		"reports": [1, 2, 3, 4]
+	}
+}
+
+
+
 ############## GET ARTICLES BY QUERY ###############
 @app.get("/articles")
 async def get_articles(
