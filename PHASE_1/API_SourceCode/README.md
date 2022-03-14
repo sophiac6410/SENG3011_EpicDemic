@@ -8,7 +8,7 @@ pip install "fastapi[all]"
 ## local Deployment
 
 ```bash
-uvicorn api.py:app --reload
+uvicorn api:app --reload
 ```
 
 The API will deploy on:
