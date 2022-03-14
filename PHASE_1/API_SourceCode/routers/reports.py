@@ -52,7 +52,7 @@ async def get_reports_from_id(
 
     return reports
 
-@router.get("/", tags=["reports"])
+@router.get("/", status_code=status.HTTP_200_OK, tags=["reports"])
 async def get_reports_from_query(
     start_date: str,
     end_date: str,
