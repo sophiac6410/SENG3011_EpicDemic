@@ -28,17 +28,17 @@ def perform_healthcheck():
 
 ############## GET ARTICLES BY QUERY ###############
 class ReportIds(BaseModel):
-	report_id: int
+	_id: int
 
 	class Config:
 		schema_extra = {
             "example": {
-                "report_id": 0
+                "_id": 0
             }
         }
 
 class Article(BaseModel):
-	article_id: int
+	_id: int
 	url: str
 	date_of_publication: datetime
 	headline: str
@@ -48,7 +48,7 @@ class Article(BaseModel):
 	class Config:
 		schema_extra = {
             "example": {
-                "article_id": 8701909,
+                "_id": 8701909,
 				"url": "https://promedmail.org/promed-post/?id=8701909",
 				"date_of_publication": "2022-03-10T02:08:51",
 				"headline": "PRO/AH/EDR> Chronic wasting disease - North America (02): (USA) deer",
@@ -67,12 +67,12 @@ class ArticleQueryResponse(BaseModel):
             "example": {
 				"start_range": 1,
 				"end_range": 10,
-				"articles": [{"article_id": 8701909,
+				"articles": [{"_id": 8701909,
 				"url": "https://promedmail.org/promed-post/?id=8701909",
 				"date_of_publication": "2022-03-10T02:08:51",
 				"headline": "PRO/AH/EDR> Chronic wasting disease - North America (02): (USA) deer",
 				"main_text": "The Iowa Department of Natural Resources reports 36 positive chronic wasting disease (CWD) tests from some 5000 deer samples this hunting season.<br/><br/>The DNR's Tyler Harms, who oversees the deer management program, says 2 new counties were added to the list of counties in which CWD has been detected in the wild. Greene County in central Iowa and Fremont County in southwest Iowa brings the total number of counties to 12.",
-				"reports": [{"report_id": 0}]}]
+				"reports": [{"_id": 0}]}]
 			}
 		}
 
@@ -130,17 +130,17 @@ async def get_articles_by_query(
 			"headline": {"$in":[re.compile(x, re.IGNORECASE) for x in terms_list]}
 			}
 		},
-		{"$project": {"diseases": 0, "_id": 0}},
+		{"$project": {"diseases": False}},
 		{"$skip":start_range-1},
 		{"$limit": end_range-start_range+1},
 		{"$sort": {"date_of_publication": -1}},
 		{"$lookup": {
 			"from": "Reports",
-			"localField": "article_id",
+			"localField": "_id",
 			"foreignField": "article_id",
 			"pipeline": [
 				# {"$group": {"_id": None, "reports": {"$push": "$report_id"}}},
-				{"$project": {"_id": 0, "report_id": 1}}
+				{"$project": {"_id": True}}
 			],
 			"as": "reports"
 			}
@@ -168,15 +168,15 @@ async def get_articles_by_ids(
 ):
 	id_list = [int(i) for i in article_ids.split(",")]
 	articles = list(articles_col.aggregate([
-		{"$match": {"article_id": {"$in": id_list}}},
-		{"$project": {"diseases": False, "_id": False}},
+		{"$match": {"_id": {"$in": id_list}}},
+		{"$project": {"diseases": False}},
 		{"$lookup": {
 			"from": "Reports",
-			"localField": "article_id",
+			"localField": "_id",
 			"foreignField": "article_id",
 			"pipeline": [
 				# {"$group": {"_id": None, "reports": {"$push": "$report_id"}}},
-				{"$project": {"_id": 0, "report_id": 1}}
+				{"$project": {"_id": True}}
 			],
 			"as": "reports"
 			}
