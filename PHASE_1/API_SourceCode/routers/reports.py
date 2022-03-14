@@ -1,16 +1,17 @@
 from dateutil.parser import parse
 from typing import List, Optional
-from fastapi import APIRouter
+from fastapi import APIRouter, status
 from database import articles_col, reports_col, diseases_col
 import re
 
 router = APIRouter(
-    prefix='/james'
+    prefix='/reports'
 )
 
-@router.get("/reports/ids")
+@router.get("/ids", status_code=status.HTTP_200_OK, tags=["reports"])
 async def get_reports_from_id(
-    report_ids: str):
+    report_ids: str
+):
     report_ids = [int(i) for i in report_ids.split(",")]
     report_docs = list(reports_col.find(
         {"_id":{"$in":report_ids}},
@@ -45,13 +46,10 @@ async def get_reports_from_id(
         report["diseases"] = new_diseases
 
     return {
-        "status": 200,
-        "data": {
-            "reports": reports
-        }
+        "reports": reports
     }
 
-@router.get("/reports/")
+@router.get("/", tags=["reports"])
 async def get_reports_from_query(
     start_date: str,
     end_date: str,

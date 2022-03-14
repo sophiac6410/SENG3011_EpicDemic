@@ -7,22 +7,9 @@ import pytz
 from typing import Optional, List
 import pymongo
 
-router = APIRouter()
-
-############## HEALTH CHECK ###############
-class HealthCheck(BaseModel):
-	healthcheck: str
-
-	class Config:
-		schema_extra = {
-			"example": {
-				"healthcheck": "Everything OK!"
-			}
-		}
-@router.get('/healthcheck', status_code=status.HTTP_200_OK, response_model=HealthCheck)
-def perform_healthcheck():
-    return {'healthcheck': 'Everything OK!'}
-
+router = APIRouter(
+	prefix="/articles"
+)
 
 ############### ARTICLE RESPONSE MODELS ##############
 class Article(BaseModel):
@@ -69,7 +56,7 @@ class ArticleIdResponse(BaseModel):
 
 
 ############## GET ARTICLES BY QUERY ###############
-@router.get("/articles", status_code=status.HTTP_200_OK, response_model=ArticleQueryResponse, tags=["articles"])
+@router.get("/", status_code=status.HTTP_200_OK, response_model=ArticleQueryResponse, tags=["articles"])
 async def get_articles_by_query(
 	*, # including this allows parameters to be defined in any order
 	start_date: datetime = Query(
@@ -146,7 +133,7 @@ async def get_articles_by_query(
 
 
 ############## GET ARTICLES BY IDS ###############
-@router.get("/articles/ids", status_code=status.HTTP_200_OK, response_model=ArticleIdResponse, tags=["articles"])
+@router.get("/ids", status_code=status.HTTP_200_OK, response_model=ArticleIdResponse, tags=["articles"])
 async def get_articles_by_ids(
 	article_ids: str = Query(
 		...,

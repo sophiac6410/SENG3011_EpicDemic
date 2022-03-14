@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import james, sophia
+from routers import reports, articles, status
 import uvicorn
 
 description="""
@@ -25,6 +25,12 @@ tags_metadata = [
             * key terms
             * location
         """
+    },
+    {
+        "name": "status",
+        "description": """
+        Status checks for the server
+        """
     }
 ]
 app = FastAPI(
@@ -34,8 +40,9 @@ app = FastAPI(
     openapi_tags=tags_metadata
 )
 
-app.include_router(james.router)
-app.include_router(sophia.router)
+app.include_router(reports.router)
+app.include_router(articles.router)
+app.include_router(status.router)
 
 @app.get('/')
 async def index():
