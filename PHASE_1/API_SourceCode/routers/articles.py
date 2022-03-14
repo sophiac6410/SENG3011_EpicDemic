@@ -1,4 +1,5 @@
 from fastapi import APIRouter, FastAPI, Query, HTTPException, status
+from fastapi.responses import JSONResponse
 from database import articles_col, locations_col, reports_col, diseases_col
 import re
 from datetime import datetime, time
@@ -54,9 +55,11 @@ class ArticleQueryResponse(BaseModel):
 class ArticleIdResponse(BaseModel):
 	articles: List[Article]
 
+class Error(BaseModel):
+	error: str
 
 ############## GET ARTICLES BY QUERY ###############
-@router.get("/", status_code=status.HTTP_200_OK, response_model=ArticleQueryResponse, tags=["articles"])
+@router.get("/articles", status_code=status.HTTP_200_OK, response_model=ArticleQueryResponse, tags=["articles"], responses={400: {"model": Error}})
 async def get_articles_by_query(
 	*, # including this allows parameters to be defined in any order
 	start_date: datetime = Query(
@@ -93,11 +96,11 @@ async def get_articles_by_query(
 	)
 ):
 	if timezone not in pytz.all_timezones:
-		raise HTTPException(status_code=400, detail="Timezone is not in the correct format and/or cannot be found.")
+		return JSONResponse(status_code=400, content={"error": "Timezone is not in the correct format and/or cannot be found."})
 	if end_range < start_range:
-		raise HTTPException(status_code=400, detail="Invalid start and end range.")
+		return JSONResponse(status_code=400, content={"error": "Invalid start and end range."})
 	if end_date < start_date:
-		raise HTTPException(status_code=400, detail="End date must be after start date.")
+		return JSONResponse(status_code=400, content={"error": "End date must be after start date."})
 	new_start_date = start_date.replace(tzinfo=pytz.timezone(timezone))
 	new_end_date = end_date.replace(tzinfo=pytz.timezone(timezone))
 	terms_list = [".*"]

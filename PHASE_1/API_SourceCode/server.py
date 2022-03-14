@@ -1,5 +1,9 @@
 from fastapi import FastAPI
+<<<<<<< HEAD
 from routers import reports, articles, status
+=======
+from routers import articles, james
+>>>>>>> 30e8178e0d62d8a7b697f1b1fd40cecd14974e19
 import uvicorn
 
 description="""
