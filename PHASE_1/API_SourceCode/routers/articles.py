@@ -5,7 +5,7 @@ import re
 from datetime import datetime, time
 from pydantic import BaseModel # datetime has format yyyy-mm-ddTHH:mm:ss
 import pytz
-from typing import Optional, List
+from typing import Optional, List, Dict
 import pymongo
 
 router = APIRouter(
@@ -53,7 +53,23 @@ class ArticleQueryResponse(BaseModel):
 		}
 
 class ArticleIdResponse(BaseModel):
-	articles: List[Article]
+	articles: Dict[int, Article]
+
+	class Config:
+		schema_extra = {
+			"example": {
+				"articles": {
+					1: {
+						"_id": 1,
+						"url": "https://promedmail.org/promed-post/?id=8701909",
+						"date_of_publication": "2022-03-10T02:08:51",
+						"headline": "PRO/AH/EDR> Chronic wasting disease - North America (02): (USA) deer",
+						"main_text": "The Iowa Department of Natural Resources reports 36 positive chronic wasting disease (CWD) tests from some 5000 deer samples this hunting season.<br/><br/>The DNR's Tyler Harms, who oversees the deer management program, says 2 new counties were added to the list of counties in which CWD has been detected in the wild. Greene County in central Iowa and Fremont County in southwest Iowa brings the total number of counties to 12.",
+						"reports": [1]
+					}
+				}
+			}
+		}
 
 class Error(BaseModel):
 	error: str
@@ -145,10 +161,11 @@ async def get_articles_by_ids(
 	)
 ):
 	id_list = [int(i) for i in article_ids.split(",")]
-	articles = list(articles_col.aggregate([
+	articles = articles_col.aggregate([
 		{"$match": {"_id": {"$in": id_list}}},
 		{"$project": {"diseases": False}},
-	]))
+	])
+	articles_dict = {}
 	for a in articles:
 		reports = list(reports_col.find(
 			{"article_id": a["_id"]},
@@ -158,6 +175,7 @@ async def get_articles_by_ids(
 		for r in reports:
 			report_list.append(r["_id"])
 		a.update({"reports": report_list})
+		articles_dict.update({a["_id"]: a})
 	return {
-		"articles": articles
+		"articles": articles_dict
 	}
