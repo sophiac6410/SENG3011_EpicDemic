@@ -1,0 +1,40 @@
+[
+    {
+        "_id": 1,
+        "name": "Haemorrhagic Fever"
+    },
+    {
+        "_id": 2,
+        "name": "Acute Flacid Paralysis"
+    },
+    {
+        "_id": 3,
+        "name": "Acute gastroenteritis"
+    },
+    { 
+        "_id": 4,
+        "name": "Acute respiratory syndrome" 
+    },
+    { 
+        "_id": 5,
+        "name": "Influenza-like illness" 
+    },
+    { 
+        "_id": 6,
+        "name": "Acute fever and rash" 
+    },
+    { 
+        "_id": 7,
+        "name": "Fever of unknown Origin" 
+    },
+    { 
+        "_id": 8,
+        "name": "Encephalitis" 
+    },
+    { 
+        "_id": 9,
+        "name": "Meningitis" 
+    }
+]
+
+    
