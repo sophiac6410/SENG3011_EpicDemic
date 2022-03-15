@@ -37,7 +37,7 @@ class Report(BaseModel):
         }
 
 class ReportIdResponse(BaseModel):
-    __root__: Dict[int, Report]
+    reports: Dict[int, Report]
     class Config:
         schema_extra = {
             "example": {
@@ -101,7 +101,9 @@ async def get_reports_by_id(
 
         report["diseases"] = new_diseases
 
-    return reports
+    return {
+        "reports": reports
+    }
 
 @router.get("/", status_code=status.HTTP_200_OK, tags=["reports"])
 async def get_reports_by_query(
