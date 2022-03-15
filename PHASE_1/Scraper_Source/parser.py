@@ -14,6 +14,8 @@ db = cluster["parser_test_db"]
 
 
 def process_data(data):
+    if data == None:
+        return
     article_id = create_article(data)
     syndromes = get_syndromes(article_id)
     create_reports(data, article_id)
@@ -32,7 +34,7 @@ def create_article(data):
         "diseases": get_diseases(data['postinfo']['summary']),
         "url": "https://promedmail.org/promed-post/?id={}".format(data['postinfo']['alert_id'])
     }
-    
+
     article_collection.insert_one(article_data)
     return article_data['_id']
 
@@ -84,8 +86,8 @@ def create_reports(data, article_id):
             "cases": get_cases(report_headline),
             "locations": get_locations(data['markers'][report][1], data['markers'][report][2], data['markers'][report][3]),
         }
-        print(report)
-        print(report_data)
+        # print(report)
+        # print(report_data)
 
 
 def get_cases(report_headline):
