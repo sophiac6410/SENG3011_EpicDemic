@@ -97,7 +97,8 @@ class Error(BaseModel):
     "/ids",
     status_code=status.HTTP_200_OK,
     response_model=ReportIdResponse, 
-    tags=["reports"])
+    tags=["reports"],
+    responses={422: {"model": Error}})
 async def get_reports_by_id(
     report_ids: str = Query(
         ...,
