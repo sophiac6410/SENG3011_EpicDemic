@@ -2,9 +2,13 @@ import json
 from urllib import request, parse
 from bs4 import BeautifulSoup
 import os
+<<<<<<< HEAD
 import time
 from parser import create_article
 from datetime import datetime
+=======
+from parser import process_data
+>>>>>>> 753dd4cdc9f97fa8bbc8cee201704b3c3033b976
 
 PROMED_API = "https://promedmail.org/wp-admin/admin-ajax.php"
 HEADERS = {'User-Agent': 'Mozilla/5.0'}
@@ -13,7 +17,11 @@ HEADERS = {'User-Agent': 'Mozilla/5.0'}
 # get the article ids by dates
 # date format: "mm/dd/yyyy"
 # return list of article id
+<<<<<<< HEAD
 def search(start_date, end_date):
+=======
+def search(start_date="12/12/2021", end_date="01/10/2022"):
+>>>>>>> 753dd4cdc9f97fa8bbc8cee201704b3c3033b976
     ids = []
     form1 = {
         'action': 'get_promed_search_content',
@@ -122,7 +130,7 @@ def update(start_date="03/12/2022", end_date="03/12/2022"):
     for _id in ids:
         data = article_request(_id)
         print(f"    {i}: article{_id}")
-        create_article(data)
+        process_data(data)
         i += 1
 
     pagenums = int((count - 1)/50 + 1)
@@ -133,7 +141,7 @@ def update(start_date="03/12/2022", end_date="03/12/2022"):
             data = article_request(_id)
             print(f"    {i}:article{_id}")
             i += 1
-            create_article(data)
+            process_data(data)
 
 def daily_update():
     date = datetime.today().strftime("%d/%m/%Y")

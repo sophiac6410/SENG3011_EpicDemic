@@ -1,18 +1,74 @@
+from datetime import datetime
 from dateutil.parser import parse
-from typing import List, Optional
+from typing import Dict, List, Optional
 from fastapi import APIRouter, status
+from fastapi.responses import JSONResponse
+from httplib2 import Response
+from pydantic import BaseModel
 from database import articles_col, reports_col, diseases_col
 import re
 
 router = APIRouter(
-    prefix='/reports'
+    prefix='/v1/reports'
 )
 
-@router.get("/ids", status_code=status.HTTP_200_OK, tags=["reports"])
-async def get_reports_from_id(
-    report_ids: str
+class Report(BaseModel):
+    _id: int
+    article_id: int
+    diseases: List[str]
+    confirmed: bool
+    cases: int
+    syndromes: List[str]
+    event_date: datetime
+    locations: List[int]
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "_id": 1,
+                "article_id": 4,
+                "diseases": [ "other" ],
+                "confirmed": True,
+                "cases": 1,
+                "syndromes": [],
+                "event_date": "2022-01-02T00:00:00+11:00",
+                "locations": [ 1 ]
+            }
+        }
+
+class ReportIdResponse(BaseModel):
+    reports: Dict[int, Report]
+    class Config:
+        schema_extra = {
+            "example": {
+                1: Response(
+                    {
+                        "_id": 1,
+                        "article_id": 4,
+                        "diseases": [ "other" ],
+                        "confirmed": True,
+                        "cases": 1,
+                        "syndromes": [],
+                        "event_date": "2022-01-02T00:00:00+11:00",
+                        "locations": [ 1 ]
+                    }
+                )
+            }
+        }
+
+@router.get(
+    "/ids",
+    status_code=status.HTTP_200_OK,
+    response_model=ReportIdResponse, 
+    tags=["reports"])
+async def get_reports_by_id(
+    report_ids: str,
 ):
-    report_ids = [int(i) for i in report_ids.split(",")]
+    try:
+        report_ids = [int(i) for i in report_ids.split(",")]
+    except:
+        return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, content={"error": "Report ids must be comma separated integers"})
+
     report_docs = list(reports_col.find(
         {"_id":{"$in":report_ids}},
     ))
@@ -49,8 +105,8 @@ async def get_reports_from_id(
         "reports": reports
     }
 
-@router.get("/", tags=["reports"])
-async def get_reports_from_query(
+@router.get("/", status_code=status.HTTP_200_OK, tags=["reports"])
+async def get_reports_by_query(
     start_date: str,
     end_date: str,
     article_ids: Optional[List[int]] = None,
@@ -59,7 +115,12 @@ async def get_reports_from_query(
     start_range: Optional[int] = 1,
     end_range: Optional[int] = 10
 ):
-    # TODO: Handle errors
+    # TODO: More error handling
+    if end_range < start_range:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Invalid start and end range."})
+    if end_date < start_date:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "End date must be after start date."})
+
     start_date = parse(start_date)
     end_date = parse(end_date)
 
