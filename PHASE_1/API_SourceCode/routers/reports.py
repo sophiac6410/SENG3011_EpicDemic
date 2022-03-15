@@ -6,7 +6,7 @@ from database import articles_col, reports_col, diseases_col
 import re
 
 router = APIRouter(
-    prefix='/reports'
+    prefix='v1/reports'
 )
 
 @router.get("/ids", status_code=status.HTTP_200_OK, tags=["reports"])
