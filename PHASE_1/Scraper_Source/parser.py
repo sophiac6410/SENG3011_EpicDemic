@@ -126,46 +126,84 @@ def get_locations(loc_string, lat, long):
     location_collection = db["Locations"]
     location_list = []
 
+    # if Worldwide, defaults coordinates to 0
+    if loc_string == 'Worldwide':
+        lat = 0
+        long = 0
+
     db_loc = location_collection.find_one({"latitude": lat, "longitude": long})
 
     if db_loc:
         location_list.append(db_loc["_id"])
+
+    # if no worldwide value is on the database yet
+    elif loc_string == 'Worldwide':
+        location_data = handle_err_location()
+        location_list.append(location_data["_id"])
+
+    # creates a new location
     else:
         location = create_location(loc_string, lat, long)
         location_list.append(location["_id"])
 
+    # print(location_list)
     return location_list
 
 
+def handle_err_location(): 
+    location_collection = db["Locations"]
+    location_data = {
+        "_id":  location_collection.count_documents({}) + 1,
+        "country": "",
+        "city": "",
+        "state": "",
+        "latitude": 0,
+        "longitude": 0,
+        "geonames_id": 0
+    }
+    location_collection.insert_one(location_data)
+
+    return location_data
+
+
 def create_location(loc_string, lat, longitude):
-    # call the geocoder to get the geonames id
-    try:
-        g = geocoder.geonames(loc_string, key='epicdemic')
-        location_collection = db["Locations"]
+    location_collection = db["Locations"]
+    try: 
+        geo_data = geocoder.geonames(loc_string, key='epicdemic')
+
         location_data = {
             "_id":  location_collection.count_documents({}) + 1,
-            "country": g.country,
-            "city": g.address,
-            "state": g.state,
+            "country": geo_data.country,
+            "city": geo_data.address,
+            "state": geo_data.state,
             "latitude": lat,
             "longitude": longitude,
-            "geonames_id": g.geonames_id
+            "geonames_id": geo_data.geonames_id
         }
 
-        # handling edge cases
-        if 'country' in g.class_description:
-            location_data['city'] = None
-            location_data['state'] = None
-
-        if 'state' in g.class_description:
-            location_data['city'] = None
-
-        if 'city' not in g.class_description:
-            location_data['city'] = None
-
+        if 'city' not in geo_data.class_description:
+            location_data['city'] = ""
+        
         location_collection.insert_one(location_data)
+    
+    except: 
+        # print('handling error')
+        try:
+            country_name = loc_string.split(', ')[-1]
+            db_loc = location_collection.find_one({"country": country_name})
 
-    except:
-        print('Issue with geonames API')
-
+            if db_loc:
+                return db_loc 
+            else: 
+                location_data = create_location(country_name, lat, longitude)
+        except: 
+            print('handling err case')
+            # if all comes to fail, default value is Worldwide
+            db_loc = location_collection.find_one({"latitude": 0, 'longitude': 0})
+            
+            if db_loc:
+                return db_loc 
+            else: # if there is no Worldwide attribute yet, creates worldwide
+                return handle_err_location()
+            
     return location_data
