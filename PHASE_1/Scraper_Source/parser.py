@@ -12,6 +12,9 @@ db = cluster["parser_test_db"]
 
 
 def create_article(data):
+    if data == None:
+        return
+    
     article_collection = db["Articles"]
     article_data = {
         "_id": article_collection.count_documents({}) + 1,
@@ -21,7 +24,7 @@ def create_article(data):
         "diseases": get_diseases(data['postinfo']['summary']),
         "url": "https://promedmail.org/promed-post/?id={}".format(data['postinfo']['alert_id'])
     }
-    print(article_data)
+    # print(article_data)
     article_collection.insert_one(article_data)
 
 
