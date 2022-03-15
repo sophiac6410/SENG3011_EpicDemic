@@ -5,7 +5,7 @@ from datetime import datetime
 import pytz
 import re
 import string
-import geocoder 
+import geocoder
 
 cluster = MongoClient(
     "mongodb+srv://EpicDemic:EpicDemic123!@epicdemic.ul8sw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
@@ -18,13 +18,13 @@ def process_data(data):
         return
     article_id = create_article(data)
     syndromes = get_syndromes(article_id)
-    create_reports(data, article_id)
+    create_reports(data, article_id, syndromes)
 
 
 def create_article(data):
     if data == None:
         return
-    
+
     article_collection = db["Articles"]
     article_data = {
         "_id": article_collection.count_documents({}) + 1,
@@ -36,7 +36,8 @@ def create_article(data):
     }
 
     article_collection.insert_one(article_data)
-    return article_data['_id']
+
+    return article_data["_id"]
 
 
 def get_date(dt_string):
@@ -71,7 +72,7 @@ def get_diseases(headline):
     return disease_list
 
 
-def create_reports(data, article_id):
+def create_reports(data, article_id, syndromes):
     report_collection = db["Reports"]
 
     for report in data['contents']:
@@ -81,13 +82,12 @@ def create_reports(data, article_id):
             "article_id": article_id,
             "diseases": get_diseases(report_headline),
             "confirmed": True,
-            "syndromes": get_syndromes(report_headline),
-            "event_date": datetime.now(),
+            "syndromes": syndromes,
+            "event_date": get_event_date(report_headline),
             "cases": get_cases(report_headline),
             "locations": get_locations(data['markers'][report][1], data['markers'][report][2], data['markers'][report][3]),
         }
-        # print(report)
-        # print(report_data)
+        report_collection.insert_one(report_data)
 
 
 def get_cases(report_headline):
@@ -100,16 +100,22 @@ def get_cases(report_headline):
         return 1
 
 
+def get_event_date(headline):
+    date_string = headline.split('<')
+    date_string = date_string[0].rstrip(' ')
+    return datetime.strptime(date_string, "%d %b %Y")
+
+
 def get_syndromes(article_id):
     syndrome_collection = db["Syndromes"]
-    syndromes = syndrome_collection.find()
+    syndromes = syndrome_collection.find({})
     syndrome_list = []
 
     article_collection = db["Articles"]
     article = article_collection.find_one({"_id": article_id})
 
     for syndrome in syndromes:
-        if re.search(syndrome["name"], article["headline"], re.I) or re.search(syndrome["name"], article["main_text"], re.I):
+        if re.search(syndrome['name'], article['headline'], re.I) or re.search(syndrome["name"], article["main_text"], re.I):
             syndrome_list.append(syndrome["name"])
 
     return syndrome_list
@@ -133,7 +139,7 @@ def get_locations(loc_string, lat, long):
 
 def create_location(loc_string, lat, longitude):
     # call the geocoder to get the geonames id
-    try: 
+    try:
         g = geocoder.geonames(loc_string, key='epicdemic')
         location_collection = db["Locations"]
         location_data = {
@@ -142,24 +148,24 @@ def create_location(loc_string, lat, longitude):
             "city": g.address,
             "state": g.state,
             "latitude": lat,
-            "longitude": longitude
+            "longitude": longitude,
+            "geonames_id": g.geonames_id
         }
 
         # handling edge cases
         if 'country' in g.class_description:
-            location_data['city'] = None 
-            location_data['state'] = None 
-        
+            location_data['city'] = None
+            location_data['state'] = None
+
         if 'state' in g.class_description:
             location_data['city'] = None
 
         if 'city' not in g.class_description:
-            location_data['city'] = None 
+            location_data['city'] = None
 
         location_collection.insert_one(location_data)
 
-    except: 
+    except:
         print('Issue with geonames API')
 
-    # print(location_data)
     return location_data

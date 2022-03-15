@@ -40,6 +40,7 @@ def search(start_date, end_date):
     ids = extra_ids(results)  # id in pages 0
     return ids, count
 
+
 def search_page(start_date, end_date, pagenum):
     ids = []
     form2 = {
@@ -63,7 +64,8 @@ def search_page(start_date, end_date, pagenum):
     time.sleep(2)
 
     try:
-        print(f'sending request to pages {pagenum} from {start_date} to {end_date}')
+        print(
+            f'sending request to pages {pagenum} from {start_date} to {end_date}')
         req = request.Request(PROMED_API, headers=HEADERS, data=query)
         r = request.urlopen(req)
         data = r.read().decode("utf-8")
@@ -106,6 +108,8 @@ def encode_query(form):
     return query
 
 # extract ids from get_promed_search_content action
+
+
 def extra_ids(results):
     soup = BeautifulSoup(results, 'lxml')
     elems = soup.find_all("a")
@@ -115,10 +119,12 @@ def extra_ids(results):
         ids.append(_id)
     return ids
 
+
 def update(start_date="03/12/2022", end_date="03/12/2022"):
     ids, count = search(start_date, end_date)
     print(f'==============start collecting {count} article================')
-    print(f'get the data from pages 0 from {start_date} to {end_date}, size: {len(ids)}')
+    print(
+        f'get the data from pages 0 from {start_date} to {end_date}, size: {len(ids)}')
     i = 1
     for _id in ids:
         data = article_request(_id)
@@ -129,20 +135,23 @@ def update(start_date="03/12/2022", end_date="03/12/2022"):
     pagenums = int((count - 1)/50 + 1)
     for pagenum in range(1, pagenums):
         ids = search_page(start_date, end_date, pagenum)
-        print(f'get the data from pages {pagenum} from {start_date} to {end_date}, size: {len(ids)}')
+        print(
+            f'get the data from pages {pagenum} from {start_date} to {end_date}, size: {len(ids)}')
         for _id in ids:
             data = article_request(_id)
             print(f"    {i}:article{_id}")
             i += 1
             process_data(data)
 
+
 def daily_update():
     date = datetime.today().strftime("%d/%m/%Y")
     update(date, date)
 
+
 def main():
-    start_date="03/12/2010"
-    end_date="03/14/2022"
+    start_date = "03/12/2010"
+    end_date = "03/14/2022"
 
     update(start_date, end_date)
 
