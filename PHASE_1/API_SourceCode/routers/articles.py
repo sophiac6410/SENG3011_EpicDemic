@@ -9,7 +9,7 @@ from typing import Optional, List, Dict
 import pymongo
 
 router = APIRouter(
-	prefix="/v1"
+	prefix="/v1/articles"
 )
 
 ############### ARTICLE RESPONSE MODELS ##############
@@ -84,7 +84,7 @@ class Error(BaseModel):
 		}
 
 ############## GET ARTICLES BY QUERY ###############
-@router.get("/articles", status_code=status.HTTP_200_OK, tags=["articles"], response_model=ArticleQueryResponse, responses={400: {"model": Error}})
+@router.get("/", status_code=status.HTTP_200_OK, tags=["articles"], response_model=ArticleQueryResponse, responses={400: {"model": Error}})
 async def get_articles_by_query(
 	*, # including this allows parameters to be defined in any order
 	start_date: str = Query(
@@ -95,12 +95,12 @@ async def get_articles_by_query(
 	end_date: str = Query(
 		...,
 		description="Requests articles published before the end_date. Format: 'yyyy-MM-ddTHH:mm:ss'",
-		example="2022-01-01T10:10:10"
+		example="2023-01-01T10:10:10"
 	),
 	key_terms: Optional[str] = Query(
 		None, # is optional, default is None
 		description="Requests articles that include the key terms. Key words must be separated by a commas, e.g. 'Anthrax,Zika'",
-		example="Anthrax,Zika"
+		example="Corona"
 	),
 	timezone: Optional[str] = Query(
 		"Australia/Sydney",
@@ -122,17 +122,17 @@ async def get_articles_by_query(
 ):
 	date_pattern = "^(19|20)\d\d-(0[1-9]|1[012])-([012]\d|3[01])T([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$"
 	if re.fullmatch(date_pattern, start_date) == None or re.fullmatch(date_pattern, end_date) == None:
-		return JSONResponse(status_code=400, content={"error": "Date must be in the format yyyy-mm-ddTHH:mm:ss"})
+		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Date must be in the format yyyy-mm-ddTHH:mm:ss"})
 	start_date_obj = datetime.fromisoformat(start_date)
 	end_date_obj = datetime.fromisoformat(end_date)
 	print(start_date_obj)
 	print(end_date_obj)
 	if start_date_obj > end_date_obj:
-		return JSONResponse(status_code=400, content={"error": "Start date must be earlier than end date."})
+		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start date must be earlier than end date."})
 	if timezone not in pytz.all_timezones:
-		return JSONResponse(status_code=400, content={"error": "Timezone is not in the correct format and/or cannot be found."})
+		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Timezone is not in the correct format and/or cannot be found."})
 	if end_range < start_range:
-		return JSONResponse(status_code=400, content={"error": "Invalid start and end range."})
+		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start range must be less than end range."})
 	start_date_timezone = start_date_obj.replace(tzinfo=pytz.timezone(timezone))
 	end_date_timezone = end_date_obj.replace(tzinfo=pytz.timezone(timezone))
 	print(start_date_timezone)
@@ -141,7 +141,7 @@ async def get_articles_by_query(
 	if key_terms != None and key_terms != "":
 		terms_list = key_terms.split(',')
 
-	articles = list(articles_col.find(
+	articles = list(articles_col.aggregate([
 		{"$match": {
 			"date_of_publication": {"$gte": start_date_timezone, "$lte": end_date_timezone},
 			"$or": [
@@ -150,11 +150,11 @@ async def get_articles_by_query(
 			]}
 		},
 		{"$project": {"diseases": False}},
-		{"$rename": {"_id": "id"}})
-		.skip(start_range-1)
-		.limit(end_range-start_range+1)
-		.sort("date_of_publication", -1)
-	)
+		{"$project": {"id": "$_id", "url":1, "date_of_publication":1, "headline":1, "main_text":1}},
+		{"$skip": start_range-1},
+		{"$limit": end_range-start_range+1},
+		{"$sort": {"date_of_publication": -1}}
+	]))
 	for a in articles:
 		reports = list(reports_col.find(
 			{"article_id": a["_id"]},
@@ -181,12 +181,16 @@ async def get_articles_by_ids(
 		example="1,2",
 	)
 ):
-	id_list = [int(i) for i in article_ids.split(",")]
-	articles = articles_col.find(
-		{"$match": {"_id": {"$in": id_list}}},
+	try:
+		article_ids = [int(i) for i in article_ids.split(",")]
+	except:
+		return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, content={"error": "Article id's must be comma separated integers"})
+
+	articles = articles_col.aggregate([
+		{"$match": {"_id": {"$in": article_ids}}},
 		{"$project": {"diseases": False}},
-		{"$rename": {"_id": "id"}}
-	)
+		{"$project": {"id":"$_id", "url":1, "date_of_publication":1, "headline":1, "main_text":1}}
+	])
 	articles_dict = {}
 	for a in articles:
 		reports = list(reports_col.find(
