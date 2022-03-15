@@ -5,6 +5,7 @@ from datetime import datetime
 import pytz
 import re
 import string
+import geocoder 
 
 cluster = MongoClient(
     "mongodb+srv://EpicDemic:EpicDemic123!@epicdemic.ul8sw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
@@ -128,16 +129,33 @@ def get_locations(loc_string, lat, long):
 
 def create_location(loc_string, lat, longitude):
     # call the geocoder to get the geonames id
-        # populate json data
-        # insert location into database
-        # append location_list with the location id
+    try: 
+        g = geocoder.geonames(loc_string, key='epicdemic')
+        location_collection = db["Locations"]
         location_data = {
-            "_id":  # geonames id#,
-            "country": ,
-            "city": ,
-            "state": ,
+            "_id":  location_collection.count_documents({}) + 1,
+            "country": g.country,
+            "city": g.address,
+            "state": g.state,
             "latitude": lat,
             "longitude": longitude
         }
 
+        # handling edge cases
+        if 'country' in g.class_description:
+            location_data['city'] = None 
+            location_data['state'] = None 
+        
+        if 'state' in g.class_description:
+            location_data['city'] = None
+
+        if 'city' not in g.class_description:
+            location_data['city'] = None 
+
+        location_collection.insert_one(location_data)
+
+    except: 
+        print('Issue with geonames API')
+
+    # print(location_data)
     return location_data

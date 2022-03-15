@@ -11,7 +11,7 @@ HEADERS = {'User-Agent': 'Mozilla/5.0'}
 # get the article ids by dates
 # date format: "mm/dd/yyyy"
 # return list of article id
-def search(start_date="01/12/2022", end_date="01/12/2022"):
+def search(start_date="12/12/2021", end_date="01/10/2022"):
     ids = []
     form1 = {
         'action': 'get_promed_search_content',
