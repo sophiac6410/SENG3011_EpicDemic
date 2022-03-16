@@ -14,6 +14,7 @@ db = cluster["parser_test_db"]
 
 
 def process_data(data):
+
     if data == None:
         return
     article_id = create_article(data)
@@ -77,17 +78,34 @@ def create_reports(data, article_id, syndromes):
 
     for report in data['contents']:
         report_headline = data['contents'][report][0]
-        report_data = {
-            "_id": report_collection.count_documents({}) + 1,
-            "article_id": article_id,
-            "diseases": get_diseases(report_headline),
-            "confirmed": True,
-            "syndromes": syndromes,
-            "event_date": get_event_date(report_headline),
-            "cases": get_cases(report_headline),
-            "locations": get_locations(data['markers'][report][1], data['markers'][report][2], data['markers'][report][3]),
-        }
-        report_collection.insert_one(report_data)
+        diseases = get_diseases(report_headline)
+        event_date = get_event_date(report_headline)
+        cases = get_cases(report_headline)
+        location = get_location(
+            data['markers'][report][1], data['markers'][report][2], data['markers'][report][3])
+
+        existing_report = report_collection.find_one(
+            {"article_id": article_id, "diseases": diseases, "syndromes": syndromes, "event_date": event_date})
+
+        if existing_report:
+            report_collection.update_one({"_id": existing_report["_id"]}, {
+                                         "$addToSet": {"locations": location}})
+            report_collection.update_one(
+                {"_id": existing_report["_id"]}, {"$inc": {"cases": cases}})
+            print(existing_report)
+
+        else:
+            report_data = {
+                "_id": report_collection.count_documents({}) + 1,
+                "article_id": article_id,
+                "diseases": diseases,
+                "confirmed": True,
+                "syndromes": syndromes,
+                "event_date": event_date,
+                "cases": cases,
+                "locations": [location],
+            }
+            report_collection.insert_one(report_data)
 
 
 def get_cases(report_headline):
@@ -121,20 +139,20 @@ def get_syndromes(article_id):
     return syndrome_list
 
 
-def get_locations(loc_string, lat, long):
+def get_location(loc_string, lat, long):
 
     location_collection = db["Locations"]
-    location_list = []
+    location_id = 0
 
     db_loc = location_collection.find_one({"latitude": lat, "longitude": long})
 
     if db_loc:
-        location_list.append(db_loc["_id"])
+        location_id = db_loc["_id"]
     else:
         location = create_location(loc_string, lat, long)
-        location_list.append(location["_id"])
+        location_id = location["_id"]
 
-    return location_list
+    return location_id
 
 
 def create_location(loc_string, lat, longitude):
@@ -153,15 +171,8 @@ def create_location(loc_string, lat, longitude):
         }
 
         # handling edge cases
-        if 'country' in g.class_description:
-            location_data['city'] = None
-            location_data['state'] = None
-
-        if 'state' in g.class_description:
-            location_data['city'] = None
-
         if 'city' not in g.class_description:
-            location_data['city'] = None
+            location_data['city'] = ""
 
         location_collection.insert_one(location_data)
 
