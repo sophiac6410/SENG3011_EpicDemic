@@ -1,4 +1,4 @@
-from routers import models
+from routers import helper
 from fastapi import APIRouter, FastAPI, Query, HTTPException, status
 from fastapi.responses import JSONResponse
 from database import articles_col, locations_col, reports_col, diseases_col
@@ -8,84 +8,14 @@ from pydantic import BaseModel, Field, HttpUrl # datetime has format yyyy-mm-ddT
 import pytz
 from typing import Optional, List, Dict
 import pymongo
+from models import articleModels
 
 router = APIRouter(
 	prefix="/v1/articles"
 )
 
-############### ARTICLE RESPONSE MODELS ##############
-class Article(BaseModel):
-	id: int = Field(..., description="The unique id of the article")
-	url: HttpUrl = Field(..., description="The url to the article on ProMed")
-	date_of_publication: datetime = Field(..., description="The article's date of publication on ProMed")
-	headline: str = Field(..., description="The article's headline on ProMed")
-	main_text: str = Field(..., description="The article's body of text")
-	reports: List[int] = Field(..., description="The id's of the disease reports contained in the article")
-
-	class Config:
-		schema_extra = {
-            "example": {
-                "id": 1,
-				"url": "https://promedmail.org/promed-post/?id=8701909",
-				"date_of_publication": "2022-03-10T02:08:51",
-				"headline": "PRO/AH/EDR> Chronic wasting disease - North America (02): (USA) deer",
-				"main_text": "The Iowa Department of Natural Resources reports 36 positive chronic wasting disease (CWD) tests from some 5000 deer samples this hunting season.<br/><br/>The DNR's Tyler Harms, who oversees the deer management program, says 2 new counties were added to the list of counties in which CWD has been detected in the wild. Greene County in central Iowa and Fremont County in southwest Iowa brings the total number of counties to 12.",
-				"reports": [1, 2, 3]
-            }
-        }
-
-class ArticleQueryResponse(BaseModel):
-	start_range: int = Field(..., description="The starting position of the articles")
-	end_range: int = Field(..., description="The last position of the articles")
-	articles: List[Article] = Field(..., description="The list of articles")
-
-	class Config:
-		schema_extra = {
-            "example": {
-				"start_range": 1,
-				"end_range": 10,
-				"articles": [{
-					"id": 1,
-					"url": "https://promedmail.org/promed-post/?id=8701909",
-					"date_of_publication": "2022-03-10T02:08:51",
-					"headline": "PRO/AH/EDR> Chronic wasting disease - North America (02): (USA) deer",
-					"main_text": "The Iowa Department of Natural Resources reports 36 positive chronic wasting disease (CWD) tests from some 5000 deer samples this hunting season.<br/><br/>The DNR's Tyler Harms, who oversees the deer management program, says 2 new counties were added to the list of counties in which CWD has been detected in the wild. Greene County in central Iowa and Fremont County in southwest Iowa brings the total number of counties to 12.",
-					"reports": [1, 2, 3]
-				}]
-			}
-		}
-
-class ArticleIdResponse(BaseModel):
-	articles: Dict[int, Article] = Field(..., description="A dictionary of articles with the article id as the key")
-
-	class Config:
-		schema_extra = {
-			"example": {
-				"articles": {
-					1: {
-						"id": 1,
-						"url": "https://promedmail.org/promed-post/?id=8701909",
-						"date_of_publication": "2022-03-10T02:08:51",
-						"headline": "PRO/AH/EDR> Chronic wasting disease - North America (02): (USA) deer",
-						"main_text": "The Iowa Department of Natural Resources reports 36 positive chronic wasting disease (CWD) tests from some 5000 deer samples this hunting season.<br/><br/>The DNR's Tyler Harms, who oversees the deer management program, says 2 new counties were added to the list of counties in which CWD has been detected in the wild. Greene County in central Iowa and Fremont County in southwest Iowa brings the total number of counties to 12.",
-						"reports": [1, 2, 3]
-					}
-				}
-			}
-		}
-
-class Error(BaseModel):
-	error: str = Field(..., description="The error message")
-
-	class Config:
-		schema_extra = {
-			"example": {
-				"error": "Date must be in the format yyyy-mm-ddTHH:mm:ss"
-			}
-		}
-
 ############## GET ARTICLES BY QUERY ###############
-@router.get("/", status_code=status.HTTP_200_OK, tags=["articles"], response_model=models.Response, responses={400: {"model": Error}})
+@router.get("/", status_code=status.HTTP_200_OK, tags=["articles"], response_model=models.articleModels.ArticleQueryResponse, responses={400: {"model": Error}})
 async def get_articles_by_query(
 	*, # including this allows parameters to be defined in any order
 	start_date: str = Query(
@@ -169,7 +99,7 @@ async def get_articles_by_query(
 			report_list.append(r["_id"])
 		a.update({"reports": report_list})
 	
-	return models.response(True, status.HTTP_200_OK, {
+	return helper.response(True, status.HTTP_200_OK, {
 		"start_range": start_range,
 		"end_range": end_range,
 		"articles": articles
@@ -208,4 +138,4 @@ async def get_articles_by_ids(
 		a.update({"reports": report_list})
 		articles_dict.update({a["_id"]: a})
 
-	return models.response(True, status.HTTP_200_OK, {"articles": articles_dict})
+	return helper.response(True, status.HTTP_200_OK, {"articles": articles_dict})

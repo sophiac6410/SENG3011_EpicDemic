@@ -1,43 +1,13 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, BackgroundTasks, Depends
 from routers import reports, articles, status
 import uvicorn
+from API_Documentation import metadata
 
-description="""
-The EpicDemic API allows you to retrieve articles and reports from ProMed (promedmail.org).
-"""
-
-tags_metadata = [
-    {
-        "name": "articles",
-        "description": """
-        Retrieve articles published by ProMed.
-        Articles can be filtered by:   
-            * publish date
-            * key terms
-        """
-    },
-    {
-        "name": "reports",
-        "description": """
-        Retrieve reports in articles.
-        Reports can be filtered by:
-            * event date
-            * key terms
-            * location
-        """
-    },
-    {
-        "name": "status",
-        "description": """
-        Status checks for the server
-        """
-    }
-]
 app = FastAPI(
-    title="SENG3011 EpicDemic",
-    description=description,
-    version="0.0.1",
-    openapi_tags=tags_metadata
+    title=metadata.api_data["title"],
+    description=metadata.api_data["description"],
+    version=metadata.api_data["version"],
+    openapi_tags=metadata.api_data["tags"]
 )
 
 app.include_router(reports.router)
