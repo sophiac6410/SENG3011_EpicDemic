@@ -1,9 +1,10 @@
+from routers import models
 from fastapi import APIRouter, FastAPI, Query, HTTPException, status
 from fastapi.responses import JSONResponse
 from database import articles_col, locations_col, reports_col, diseases_col
 import re
 from datetime import datetime, time
-from pydantic import BaseModel, Field # datetime has format yyyy-mm-ddTHH:mm:ss
+from pydantic import BaseModel, Field, HttpUrl # datetime has format yyyy-mm-ddTHH:mm:ss
 import pytz
 from typing import Optional, List, Dict
 import pymongo
@@ -15,7 +16,7 @@ router = APIRouter(
 ############### ARTICLE RESPONSE MODELS ##############
 class Article(BaseModel):
 	id: int = Field(..., description="The unique id of the article")
-	url: str = Field(..., description="The url to the article on ProMed")
+	url: HttpUrl = Field(..., description="The url to the article on ProMed")
 	date_of_publication: datetime = Field(..., description="The article's date of publication on ProMed")
 	headline: str = Field(..., description="The article's headline on ProMed")
 	main_text: str = Field(..., description="The article's body of text")
@@ -84,7 +85,7 @@ class Error(BaseModel):
 		}
 
 ############## GET ARTICLES BY QUERY ###############
-@router.get("/", status_code=status.HTTP_200_OK, tags=["articles"], response_model=ArticleQueryResponse, responses={400: {"model": Error}})
+@router.get("/", status_code=status.HTTP_200_OK, tags=["articles"], response_model=models.Response, responses={400: {"model": Error}})
 async def get_articles_by_query(
 	*, # including this allows parameters to be defined in any order
 	start_date: str = Query(
@@ -128,11 +129,14 @@ async def get_articles_by_query(
 	print(start_date_obj)
 	print(end_date_obj)
 	if start_date_obj > end_date_obj:
-		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start date must be earlier than end date."})
+		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, 
+			content=models.response(False, status.HTTP_400_BAD_REQUEST, {"error": "Start date must be earlier than end date."}))
 	if timezone not in pytz.all_timezones:
-		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Timezone is not in the correct format and/or cannot be found."})
+		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST,
+			content=models.response(False, status.HTTP_400_BAD_REQUEST, {"error": "Timezone is not in the correct format and/or cannot be found."}))
 	if end_range < start_range:
-		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start range must be less than end range."})
+		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST,
+			content=models.response(False, status.HTTP_400_BAD_REQUEST, {"error": "Start range must be less than end range."}))
 	start_date_timezone = start_date_obj.replace(tzinfo=pytz.timezone(timezone))
 	end_date_timezone = end_date_obj.replace(tzinfo=pytz.timezone(timezone))
 	print(start_date_timezone)
@@ -165,15 +169,15 @@ async def get_articles_by_query(
 			report_list.append(r["_id"])
 		a.update({"reports": report_list})
 	
-	return {
+	return models.response(True, status.HTTP_200_OK, {
 		"start_range": start_range,
 		"end_range": end_range,
 		"articles": articles
-	}
+	})
 
 
 ############## GET ARTICLES BY IDS ###############
-@router.get("/ids", status_code=status.HTTP_200_OK, response_model=ArticleIdResponse, tags=["articles"])
+@router.get("/ids", status_code=status.HTTP_200_OK, response_model=models.Response, tags=["articles"])
 async def get_articles_by_ids(
 	article_ids: str = Query(
 		...,
@@ -184,7 +188,8 @@ async def get_articles_by_ids(
 	try:
 		article_ids = [int(i) for i in article_ids.split(",")]
 	except:
-		return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, content={"error": "Article id's must be comma separated integers"})
+		return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+			content=models.response(False, status.HTTP_422_UNPROCESSABLE_ENTITY, {"error": "Article id's must be comma separated integers"}))
 
 	articles = articles_col.aggregate([
 		{"$match": {"_id": {"$in": article_ids}}},
@@ -202,6 +207,5 @@ async def get_articles_by_ids(
 			report_list.append(r["_id"])
 		a.update({"reports": report_list})
 		articles_dict.update({a["_id"]: a})
-	return {
-		"articles": articles_dict
-	}
+
+	return models.response(True, status.HTTP_200_OK, {"articles": articles_dict})
