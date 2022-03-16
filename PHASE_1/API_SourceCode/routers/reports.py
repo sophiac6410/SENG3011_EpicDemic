@@ -1,10 +1,10 @@
 from datetime import datetime
 from dateutil.parser import parse
 from typing import Dict, List, Optional
-from fastapi import APIRouter, status
+from fastapi import APIRouter, Query, status
 from fastapi.responses import JSONResponse
 from httplib2 import Response
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from database import articles_col, reports_col, diseases_col
 import re
 
@@ -56,13 +56,55 @@ class ReportIdResponse(BaseModel):
             }
         }
 
+class ReportQueryResponse(BaseModel):
+    start_range: int = Field(..., description="The starting position of the reports")
+    end_range: int = Field(..., description="The last position of the reports")
+    reports: List[Report] = Field(..., description="The list of reports")
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "start_range": 1,
+                "end_range": 10,
+                "reports": [{
+                    "id": 3,
+                    "article_id": 3,
+                    "diseases": [
+                        "other"
+                    ],
+                    "confirmed": True,
+                    "syndromes": [],
+                    "event_date": "2022-03-13T00:00:00",
+                    "cases": 2,
+                    "locations": [
+                        3
+                    ]
+                }]
+            }
+        }
+
+class Error(BaseModel):
+	error: str = Field(..., description="The error message")
+
+	class Config:
+		schema_extra = {
+			"example": {
+				"error": "Date must be in the format yyyy-mm-ddTHH:mm:ss"
+			}
+		}
+
 @router.get(
     "/ids",
     status_code=status.HTTP_200_OK,
     response_model=ReportIdResponse, 
-    tags=["reports"])
+    tags=["reports"],
+    responses={422: {"model": Error}})
 async def get_reports_by_id(
-    report_ids: str,
+    report_ids: str = Query(
+        ...,
+        description="The reports' unique id's, separated by commas.",
+        example="1,2",
+    )
 ):
     try:
         report_ids = [int(i) for i in report_ids.split(",")]
@@ -105,24 +147,57 @@ async def get_reports_by_id(
         "reports": reports
     }
 
-@router.get("/", status_code=status.HTTP_200_OK, tags=["reports"])
+@router.get("/", status_code=status.HTTP_200_OK, response_model=ReportQueryResponse, tags=["reports"], responses={400: {"model": Error}})
 async def get_reports_by_query(
-    start_date: str,
-    end_date: str,
-    article_ids: Optional[List[int]] = None,
-    location: Optional[str] = None,
-    key_terms: Optional[str] = None,
-    start_range: Optional[int] = 1,
-    end_range: Optional[int] = 10
+    *, # including this allows parameters to be defined in any order
+    start_date: str = Query(
+    	..., # no default, is required
+    	description="Requests reports published after the start_date. Format: 'yyyy-MM-ddTHH:mm:ss'",
+    	example="2021-01-01T10:10:10"
+    ),
+    end_date: str = Query(
+		...,
+	    description="Requests reports published before the end_date. Format: 'yyyy-MM-ddTHH:mm:ss'",
+	    example="2023-01-01T10:10:10"
+	),
+    article_ids: Optional[List[int]] = Query(
+        ...,
+        description="List of articles reports of interest should belong to.",
+        example="1,2,3"
+    ),
+    location: Optional[str] = Query(
+        ..., # TODO
+        description="TODO",
+        example="TODO"
+    ),
+    key_terms: Optional[str] = Query(
+        ...,
+        description="Requests reports that include the key terms. Key words must be separated by a commas, e.g. 'Anthrax,Zika'",
+        example="virus"
+    ),
+    start_range: Optional[int] = Query(
+        1,
+        description="Specifies the position of the article to start from.",
+        example="1",
+        ge=1
+    ),
+    end_range: Optional[int] = Query(
+        10,
+        description="Specifies the position of the last article to return. If the position is out of range, the API will return up to the last article.",
+        example="10",
+        ge=1
+    )
 ):
-    # TODO: More error handling
-    if end_range < start_range:
-        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Invalid start and end range."})
-    if end_date < start_date:
-        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "End date must be after start date."})
+    date_pattern = "^(19|20)\d\d-(0[1-9]|1[012])-([012]\d|3[01])T([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$"
+    if re.fullmatch(date_pattern, start_date) == None or re.fullmatch(date_pattern, end_date) == None:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Date must be in the format yyyy-mm-ddTHH:mm:ss"})
+    start_date = datetime.fromisoformat(start_date)
+    end_date = datetime.fromisoformat(end_date)
 
-    start_date = parse(start_date)
-    end_date = parse(end_date)
+    if end_range < start_range:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start range must be less than end range."})
+    if end_date < start_date:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start date must be earlier than end date."})
 
     queries = []
 
@@ -181,20 +256,16 @@ async def get_reports_by_query(
         }
         queries.append(key_terms_query)
 
-
     report_docs = list(reports_col.find(
         {
             "$and": queries
         }
     ).skip(start_range - 1).limit(end_range + 1 - start_range))
 
-    print(report_docs)
+    reports = sorted(report_docs, key=lambda d: d["event_date"])
 
     return {
-        "status": 200,
-        "data": {
-            "start_range": start_range,
-            "end_range": end_range,
-            "reports": report_docs
-        }
+        "start_range": start_range,
+        "end_range": end_range,
+        "reports": reports
     }
