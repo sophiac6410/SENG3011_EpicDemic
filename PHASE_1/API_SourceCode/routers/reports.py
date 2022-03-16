@@ -5,6 +5,7 @@ from fastapi import APIRouter, Query, status
 from fastapi.responses import JSONResponse
 from httplib2 import Response
 from pydantic import BaseModel, Field
+import pytz
 from database import articles_col, reports_col, diseases_col, locations_col
 import re
 from geonames import get_location_ids
@@ -235,6 +236,11 @@ async def get_reports_by_query(
         description="Requests reports that include the key terms. Key words must be separated by a commas, e.g. 'Anthrax,Zika'",
         example="virus"
     ),
+	timezone: Optional[str] = Query(
+		"Australia/Sydney",
+		description="The timezone of the start_date and end_date. Must be in the pytz format.",
+		example="Australia/Sydney"
+	),
     start_range: Optional[int] = Query(
         1,
         description="Specifies the position of the article to start from.",
@@ -253,12 +259,14 @@ async def get_reports_by_query(
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Date must be in the format yyyy-mm-ddTHH:mm:ss"})
     start_date = datetime.fromisoformat(start_date)
     end_date = datetime.fromisoformat(end_date)
-
+    if timezone not in pytz.all_timezones:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Timezone is not in the correct format and/or cannot be found."})
     if end_range < start_range:
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start range must be less than end range."})
     if end_date < start_date:
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start date must be earlier than end date."})
-
+    start_date_timezone = start_date.replace(tzinfo=pytz.timezone(timezone))
+    end_date_timezone = end_date.replace(tzinfo=pytz.timezone(timezone))
     queries = []
 
     # Get all the reports which lie within the start and end dates
