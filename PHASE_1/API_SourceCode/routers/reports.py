@@ -265,8 +265,8 @@ async def get_reports_by_query(
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start range must be less than end range."})
     if end_date < start_date:
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start date must be earlier than end date."})
-    start_date_timezone = start_date.replace(tzinfo=pytz.timezone(timezone))
-    end_date_timezone = end_date.replace(tzinfo=pytz.timezone(timezone))
+    start_date = start_date.replace(tzinfo=pytz.timezone(timezone))
+    end_date = end_date.replace(tzinfo=pytz.timezone(timezone))
     queries = []
 
     # Get all the reports which lie within the start and end dates
