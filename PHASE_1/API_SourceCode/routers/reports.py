@@ -5,34 +5,54 @@ from fastapi import APIRouter, Query, status
 from fastapi.responses import JSONResponse
 from httplib2 import Response
 from pydantic import BaseModel, Field
-from database import articles_col, reports_col, diseases_col
+from database import articles_col, reports_col, diseases_col, locations_col
 import re
+from geonames import get_location_ids
 
 router = APIRouter(
     prefix='/v1/reports'
 )
 
+class Location(BaseModel):
+    id: int
+    country: str
+    city: str
+    state: str
+    latitude: float
+    longitude: float
+    geonames_id: int
+
 class Report(BaseModel):
-    _id: int
+    id: int
     article_id: int
     diseases: List[str]
     confirmed: bool
     cases: int
     syndromes: List[str]
     event_date: datetime
-    locations: List[int]
+    locations: List[Location]
 
     class Config:
         schema_extra = {
             "example": {
-                "_id": 1,
+                "id": 1,
                 "article_id": 4,
                 "diseases": [ "other" ],
                 "confirmed": True,
                 "cases": 1,
                 "syndromes": [],
                 "event_date": "2022-01-02T00:00:00+11:00",
-                "locations": [ 1 ]
+                "locations": [ 
+                    {
+                        "id": 13,
+                        "country": "Australia",
+                        "city": "",
+                        "state": "New South Wales",
+                        "latitude": -32.713139,
+                        "longitude": 152.066223,
+                        "geonames_id": 2152652
+                    } 
+                ]
             }
         }
 
@@ -43,14 +63,24 @@ class ReportIdResponse(BaseModel):
             "example": {
                 1: Response(
                     {
-                        "_id": 1,
+                        "id": 1,
                         "article_id": 4,
                         "diseases": [ "other" ],
                         "confirmed": True,
                         "cases": 1,
                         "syndromes": [],
                         "event_date": "2022-01-02T00:00:00+11:00",
-                        "locations": [ 1 ]
+                        "locations": [ 
+                            {
+                                "id": 13,
+                                "country": "Australia",
+                                "city": "",
+                                "state": "New South Wales",
+                                "latitude": -32.713139,
+                                "longitude": 152.066223,
+                                "geonames_id": 2152652
+                            } 
+                        ]
                     }
                 )
             }
@@ -76,8 +106,16 @@ class ReportQueryResponse(BaseModel):
                     "syndromes": [],
                     "event_date": "2022-03-13T00:00:00",
                     "cases": 2,
-                    "locations": [
-                        3
+                    "locations": [ 
+                        {
+                            "id": 13,
+                            "country": "Australia",
+                            "city": "",
+                            "state": "New South Wales",
+                            "latitude": -32.713139,
+                            "longitude": 152.066223,
+                            "geonames_id": 2152652
+                        } 
                     ]
                 }]
             }
@@ -117,31 +155,53 @@ async def get_reports_by_id(
 
     reports = {}
     disease_ids = set()
-    
+    location_ids = set()
+
     for doc in report_docs:
         reports[doc["_id"]] = doc
         
-        # Get all the disease ids so we can look them all up in one efficient query
+        # Get all the disease and location ids so we can look them all up in one efficient query
         for disease_id in doc["diseases"]:
             disease_ids.add(disease_id)
+        for location_id in doc["locations"]:
+            location_ids.add(location_id)
 
     # Look up all the disease in one go
+    # Map disease id to name
     disease_docs = list(diseases_col.find(
         {"_id":{"$in":list(disease_ids)}}        
     ))
-
-    # Map disease id to name
     diseases = {}
     for disease in disease_docs:
         diseases[disease["_id"]] = disease["name"]
 
+    # Look up all the locations in one go
+    # Map location id to location object
+    location_docs = list(locations_col.find(
+        {"_id":{"$in": list(location_ids)}}
+    ))
+    locations = {}
+    for location in location_docs:
+        location["id"] = location["_id"]
+        del location["_id"]
+        locations[location["id"]] = location
+
     # Convert the disease ids to actual disease names
+    # Convert the location ids into location objects
     for report in reports.values():
         new_diseases = []
         for disease_id in report["diseases"]:
             new_diseases.append(diseases[disease_id])
-
         report["diseases"] = new_diseases
+        
+        new_locations = []
+        for location_id in report["locations"]:
+            new_locations.append(locations[location_id])
+        report["locations"] = new_locations
+
+    for report in reports.values():
+        report["id"] = report["_id"]
+        del report["_id"]
 
     return {
         "reports": reports
@@ -161,17 +221,17 @@ async def get_reports_by_query(
 	    example="2023-01-01T10:10:10"
 	),
     article_ids: Optional[List[int]] = Query(
-        ...,
+        None,
         description="List of articles reports of interest should belong to.",
         example="1,2,3"
     ),
     location: Optional[str] = Query(
-        ..., # TODO
-        description="TODO",
-        example="TODO"
+        None,
+        description="A location the report should have occurred in (note that ambiguous search terms might match on multiple locations)",
+        example="Australia"
     ),
     key_terms: Optional[str] = Query(
-        ...,
+        None,
         description="Requests reports that include the key terms. Key words must be separated by a commas, e.g. 'Anthrax,Zika'",
         example="virus"
     ),
@@ -211,6 +271,7 @@ async def get_reports_by_query(
     queries.append(event_date_query)
 
     if article_ids is not None:
+        print("articles")
         article_id_query = {
             "article_id": {
                 "$in": article_ids
@@ -218,8 +279,16 @@ async def get_reports_by_query(
         }
         queries.append(article_id_query)
 
+    locations = {}
     if location is not None:
-        pass
+        response = get_location_ids(location)
+        if response["success"]:
+            locations = response["location_ids"]
+            location_ids = list(locations.keys())
+            location_id_query = {
+                "locations": {"$in": location_ids}
+            }
+            queries.append(location_id_query)
 
     if key_terms is not None:
         key_terms_list = [x.strip() for x in key_terms.split(",")]
@@ -263,6 +332,21 @@ async def get_reports_by_query(
     ).skip(start_range - 1).limit(end_range + 1 - start_range))
 
     reports = sorted(report_docs, key=lambda d: d["event_date"])
+
+    # Replace _id with id and also add the location...
+    for loc in locations.values():
+        loc["id"] = loc["_id"]
+        del loc["_id"]
+
+    for report in reports:
+        report["id"] = report["_id"]
+        del report["_id"]
+
+        location_objs = []
+        for loc_id in report["locations"]:
+            if loc_id in locations:
+                location_objs.append(locations[loc_id])
+        report["locations"] = location_objs                
 
     return {
         "start_range": start_range,
