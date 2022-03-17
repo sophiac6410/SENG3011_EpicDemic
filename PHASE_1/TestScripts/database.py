@@ -6,8 +6,10 @@ from pymongo import MongoClient
 
 try:
     config = dotenv_values(".env")
-    client = MongoClient(f'mongodb+srv://{config.get("USERNAME")}:{config.get("PASSWORD")}@epicdemic.ul8sw.mongodb.net/EpicDemic?retryWrites=true&w=majority')
-    # client = MongoClient('mongodb+srv://EpicDemic:EpicDemic123!@epicdemic.ul8sw.mongodb.net/EpicDemic?retryWrites=true&w=majority')
+    client = MongoClient(
+        f'mongodb+srv://{config.get("USERNAME")}:{config.get("PASSWORD")}@epicdemic.ul8sw.mongodb.net/EpicDemic?retryWrites=true&w=majority')
+    # client = MongoClient(
+    #   'mongodb+srv://EpicDemic:EpicDemic123!@epicdemic.ul8sw.mongodb.net/EpicDemic?retryWrites=true&w=majority')
     print("Connected to database.")
 except Exception as e:
     print("Unable to connect to database.")
@@ -22,6 +24,8 @@ articles_col = db["Articles"]
 locations_col = db["Locations"]
 reports_col = db["Reports"]
 diseases_col = db["Diseases"]
+syndromes_col = db["Syndromes"]
+
 
 def overwrite_collection(collection_name):
     file_name = "./dummy_data/" + collection_name.lower() + ".json"
@@ -34,17 +38,20 @@ def overwrite_collection(collection_name):
 
             for data in file_data:
                 if "date_of_publication" in data:
-                    data["date_of_publication"] = parse(data["date_of_publication"])
-                elif "event_date" in data: 
+                    data["date_of_publication"] = parse(
+                        data["date_of_publication"])
+                elif "event_date" in data:
                     data["event_date"] = parse(data["event_date"])
-                requests.append(data)            
+                requests.append(data)
 
             db[collection_name].insert_many(requests)
             print(f"Finished overwriting {collection_name}")
         except:
             print(f"Failed to load and overwrite {collection_name}")
 
+
 # overwrite_collection("Articles")
 # overwrite_collection("Diseases")
 # overwrite_collection("Reports")
 # overwrite_collection("Locations")
+# overwrite_collection("Syndromes")
