@@ -444,3 +444,188 @@
     Process Time: 0.003751993179321289
     ----------------------------------------
     
+    Timestamp: 1647532880.875627
+    Accessed Time: 2022-03-18 03:01:20.875627
+    Client: 127.0.0.1:62843
+    
+    Request: GET /
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0035898685455322266
+    ----------------------------------------
+    
+    Timestamp: 1647532883.855758
+    Accessed Time: 2022-03-18 03:01:23.855758
+    Client: 127.0.0.1:62843
+    
+    Request: GET /
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0010831356048583984
+    ----------------------------------------
+    
+    Timestamp: 1647532884.814932
+    Accessed Time: 2022-03-18 03:01:24.814932
+    Client: 127.0.0.1:62843
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0015439987182617188
+    ----------------------------------------
+    
+    Timestamp: 1647532885.316585
+    Accessed Time: 2022-03-18 03:01:25.316585
+    Client: 127.0.0.1:62843
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.066802978515625
+    ----------------------------------------
+    
+    Timestamp: 1647532885.384861
+    Accessed Time: 2022-03-18 03:01:25.384861
+    Client: 127.0.0.1:62844
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0002789497375488281
+    ----------------------------------------
+    
+    Timestamp: 1647532885.582742
+    Accessed Time: 2022-03-18 03:01:25.582742
+    Client: 127.0.0.1:62844
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0013949871063232422
+    ----------------------------------------
+    
+    Timestamp: 1647532903.591998
+    Accessed Time: 2022-03-18 03:01:43.591998
+    Client: 127.0.0.1:62848
+    
+    Request: GET /v1/articles/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			key_terms=Corona
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.5269739627838135
+    ----------------------------------------
+    
+    Timestamp: 1647532928.841764
+    Accessed Time: 2022-03-18 03:02:08.841764
+    Client: 127.0.0.1:62853
+    
+    Request: GET /v1/reports/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			article_ids=0
+			location=Australia
+			key_terms=virus
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 1.969965934753418
+    ----------------------------------------
+    
+    Timestamp: 1647532989.304281
+    Accessed Time: 2022-03-18 03:03:09.304281
+    Client: 127.0.0.1:62863
+    
+    Request: GET /v1/reports/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			article_ids=0
+			location=Australia
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.780709981918335
+    ----------------------------------------
+    
+    Timestamp: 1647533054.706572
+    Accessed Time: 2022-03-18 03:04:14.706572
+    Client: 127.0.0.1:62886
+    
+    Request: GET /v1/reports/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			article_ids=0
+			location=Australia
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 1.105813980102539
+    ----------------------------------------
+    
+    Timestamp: 1647533073.237107
+    Accessed Time: 2022-03-18 03:04:33.237107
+    Client: 127.0.0.1:62894
+    
+    Request: GET /v1/reports/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			article_ids=0
+			location=Australia
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7199389934539795
+    ----------------------------------------
+    
+    Timestamp: 1647533082.895658
+    Accessed Time: 2022-03-18 03:04:42.895658
+    Client: 127.0.0.1:62897
+    
+    Request: GET /v1/reports/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			location=Australia
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 1.0661289691925049
+    ----------------------------------------
+    

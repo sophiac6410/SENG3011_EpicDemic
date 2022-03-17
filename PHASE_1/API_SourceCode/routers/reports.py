@@ -162,7 +162,7 @@ async def get_reports_by_query(
             location_ids = list(locations.keys())
             
     # Get a list of all matching disease ids from the keywords
-    matched_disease_ids = []
+    matched_disease_ids = None
     if key_terms is not None:
         key_terms_list = [x.strip() for x in key_terms.split(",")]
         key_terms_regex = "|".join(key_terms_list)
