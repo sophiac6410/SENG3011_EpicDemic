@@ -40,8 +40,6 @@ def create_article(data):
     return article_data["_id"]
 
 # creates datetime object for article issue date
-
-
 def get_date(dt_string):
     return datetime.strptime(dt_string, "%Y-%m-%d %H:%M:%S")
 
@@ -74,8 +72,6 @@ def get_diseases(headline):
     return disease_list
 
 # create a report for each marker in the article
-
-
 def create_reports(data, article_id, syndromes):
     report_collection = db["Reports"]
 
