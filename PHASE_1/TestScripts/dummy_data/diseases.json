@@ -66,7 +66,8 @@
 {
     "_id": 13,
     "name": "ehec (e.coli)",
-    "key_words": ["E. coli EHEC"]
+    "key_words": ["E. coli EHEC"],
+    "regex": ".*EHEC.*"
 },
 {
     "_id": 14,
@@ -77,7 +78,7 @@
     "_id": 15,
     "name": "influenza a/h5n1",
     "key_words": [],
-    "regex": "influenza.*h591"
+    "regex": "influenza.*h5n1"
 },
 {
     "_id": 16,

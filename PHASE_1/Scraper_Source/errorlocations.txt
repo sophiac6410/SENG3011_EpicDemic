@@ -6,3 +6,11 @@ New Brunswick Province, Canada
 -- country found Canada
 Collectivité spéciale de New Caledonia, France
 -- country found France
+British Columbia Province, Canada
+-- new location Canada
+Isiolo District, Eastern Province, Kenya
+-- new location Kenya
+New Brunswick Province, Canada
+-- country found Canada
+Collectivité spéciale de New Caledonia, France
+-- country found France

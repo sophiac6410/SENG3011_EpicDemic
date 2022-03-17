@@ -10,132 +10,18 @@ from util import DATETIME_REGEX, parse_datetime_string, generate_query
 from database import reports_col, diseases_col, locations_col
 import re
 from geonames import get_location_ids
+from models import reportModels, baseModels
 
 router = APIRouter(
     prefix='/v1/reports'
 )
 
-class Location(BaseModel):
-    id: int
-    country: str
-    city: str
-    state: str
-    latitude: float
-    longitude: float
-    geonames_id: int
-
-class Report(BaseModel):
-    id: int
-    article_id: int
-    diseases: List[str]
-    confirmed: bool
-    syndromes: List[str]
-    event_date: datetime
-    locations: List[Location]
-
-    class Config:
-        schema_extra = {
-            "example": {
-                "id": 1,
-                "article_id": 4,
-                "diseases": [ "other" ],
-                "confirmed": True,
-                "cases": 1,
-                "syndromes": [],
-                "event_date": "2022-01-02T00:00:00+11:00",
-                "locations": [ 
-                    {
-                        "id": 13,
-                        "country": "Australia",
-                        "city": "",
-                        "state": "New South Wales",
-                        "latitude": -32.713139,
-                        "longitude": 152.066223,
-                        "geonames_id": 2152652
-                    } 
-                ]
-            }
-        }
-
-class ReportIdResponse(BaseModel):
-    reports: Dict[int, Report]
-    class Config:
-        schema_extra = {
-            "example": {
-                1: Response(
-                    {
-                        "id": 1,
-                        "article_id": 4,
-                        "diseases": [ "other" ],
-                        "confirmed": True,
-                        "syndromes": [],
-                        "event_date": "2022-01-02T00:00:00+11:00",
-                        "locations": [ 
-                            {
-                                "id": 13,
-                                "country": "Australia",
-                                "city": "",
-                                "state": "New South Wales",
-                                "latitude": -32.713139,
-                                "longitude": 152.066223,
-                                "geonames_id": 2152652
-                            } 
-                        ]
-                    }
-                )
-            }
-        }
-
-class ReportQueryResponse(BaseModel):
-    start_range: int = Field(..., description="The starting position of the reports")
-    end_range: int = Field(..., description="The last position of the reports")
-    reports: List[Report] = Field(..., description="The list of reports")
-
-    class Config:
-        schema_extra = {
-            "example": {
-                "start_range": 1,
-                "end_range": 10,
-                "reports": [{
-                    "id": 3,
-                    "article_id": 3,
-                    "diseases": [
-                        "other"
-                    ],
-                    "confirmed": True,
-                    "syndromes": [],
-                    "event_date": "2022-03-13T00:00:00",
-                    "locations": [ 
-                        {
-                            "id": 13,
-                            "country": "Australia",
-                            "city": "",
-                            "state": "New South Wales",
-                            "latitude": -32.713139,
-                            "longitude": 152.066223,
-                            "geonames_id": 2152652
-                        } 
-                    ]
-                }]
-            }
-        }
-
-class Error(BaseModel):
-	error: str = Field(..., description="The error message")
-
-	class Config:
-		schema_extra = {
-			"example": {
-				"error": "Date must be in the format yyyy-mm-ddTHH:mm:ss"
-			}
-		}
-
 @router.get(
     "/ids",
     status_code=status.HTTP_200_OK,
-    response_model=ReportIdResponse, 
+    response_model=reportModels.ReportIdResponse, 
     tags=["reports"],
-    responses={422: {"model": Error}})
+    responses={422: {"model": baseModels.ErrorResponse}})
 async def get_reports_by_id(
     report_ids: str = Query(
         ...,
@@ -146,7 +32,7 @@ async def get_reports_by_id(
     try:
         report_ids = [int(i) for i in report_ids.split(",")]
     except:
-        return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, content={"error": "Report ids must be comma separated integers"})
+        return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, content=baseModels.createResponse(False, 422, {"error": "Report ids must be comma separated integers"}))
 
     report_docs = list(reports_col.find(
         {"_id":{"$in":report_ids}},
@@ -202,11 +88,11 @@ async def get_reports_by_id(
         report["id"] = report["_id"]
         del report["_id"]
 
-    return {
+    return baseModels.createResponse(True, 200, {
         "reports": reports
-    }
+    })
 
-@router.get("/", status_code=status.HTTP_200_OK, response_model=ReportQueryResponse, tags=["reports"], responses={400: {"model": Error}})
+@router.get("/", status_code=status.HTTP_200_OK, response_model=reportModels.ReportQueryResponse, tags=["reports"], responses={400: {"model": baseModels.ErrorResponse}})
 async def get_reports_by_query(
     *, # including this allows parameters to be defined in any order
     start_date: str = Query(
@@ -261,7 +147,7 @@ async def get_reports_by_query(
     end_date = parse_datetime_string(end_date, timezone)
     
     if end_range < start_range:
-        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start range must be less than end range."})
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Start range must be less than end range."}))
     if end_date < start_date:
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start date must be earlier than end date."})
     
@@ -324,8 +210,8 @@ async def get_reports_by_query(
                 location_objs.append(locations[loc_id])
         report["locations"] = location_objs                
 
-    return {
+    return baseModels.createResponse(True, 200, {
         "start_range": start_range,
         "end_range": end_range,
         "reports": reports
-    }
+    })
