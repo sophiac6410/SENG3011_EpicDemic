@@ -6,8 +6,8 @@ from fastapi.responses import JSONResponse
 from httplib2 import Response
 from pydantic import BaseModel, Field
 import pytz
-from util import DATETIME_REGEX
-from database import articles_col, reports_col, diseases_col, locations_col
+from util import DATETIME_REGEX, parse_datetime_string, generate_query
+from database import reports_col, diseases_col, locations_col
 import re
 from geonames import get_location_ids
 
@@ -29,7 +29,6 @@ class Report(BaseModel):
     article_id: int
     diseases: List[str]
     confirmed: bool
-    cases: int
     syndromes: List[str]
     event_date: datetime
     locations: List[Location]
@@ -69,7 +68,6 @@ class ReportIdResponse(BaseModel):
                         "article_id": 4,
                         "diseases": [ "other" ],
                         "confirmed": True,
-                        "cases": 1,
                         "syndromes": [],
                         "event_date": "2022-01-02T00:00:00+11:00",
                         "locations": [ 
@@ -107,7 +105,6 @@ class ReportQueryResponse(BaseModel):
                     "confirmed": True,
                     "syndromes": [],
                     "event_date": "2022-03-13T00:00:00",
-                    "cases": 2,
                     "locations": [ 
                         {
                             "id": 13,
@@ -223,7 +220,7 @@ async def get_reports_by_query(
 	    example="2023-01-01T10:10:10"
 	),
     article_ids: Optional[List[int]] = Query(
-        None,
+        [],
         description="List of articles reports of interest should belong to.",
         example="1,2,3"
     ),
@@ -257,55 +254,29 @@ async def get_reports_by_query(
 ):
     if re.fullmatch(DATETIME_REGEX, start_date) == None or re.fullmatch(DATETIME_REGEX, end_date) == None:
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Date must be in the format yyyy-mm-ddTHH:mm:ss"})
-    
-    start_date = datetime.fromisoformat(start_date)
-    start_date = start_date.replace(tzinfo=pytz.timezone(timezone))
-    
-    end_date = datetime.fromisoformat(end_date)
-    end_date = end_date.replace(tzinfo=pytz.timezone(timezone))
-    
     if timezone not in pytz.all_timezones:
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Timezone is not in the correct format and/or cannot be found."})
+
+    start_date = parse_datetime_string(start_date, timezone)
+    end_date = parse_datetime_string(end_date, timezone)
+    
     if end_range < start_range:
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start range must be less than end range."})
     if end_date < start_date:
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start date must be earlier than end date."})
     
 
-
-    # Initialise a queries list
-    queries = []
-
-    # Get all the reports which lie within the start and end dates
-    event_date_query = {
-        "event_date":{
-            "$gte": start_date,
-            "$lte": end_date,
-        }
-    }
-    queries.append(event_date_query)
-
-
-
-    if article_ids is not None:
-        article_id_query = {
-            "article_id": {
-                "$in": article_ids
-            }
-        }
-        queries.append(article_id_query)
-
+    # First get a list of all the locations objects from their ids
     locations = {}
+    location_ids = None
     if location is not None:
         response = get_location_ids(location)
         if response["success"]:
             locations = response["location_ids"]
             location_ids = list(locations.keys())
-            location_id_query = {
-                "locations": {"$in": location_ids}
-            }
-            queries.append(location_id_query)
-
+            
+    # Get a list of all matching disease ids from the keywords
+    matched_disease_ids = []
     if key_terms is not None:
         key_terms_list = [x.strip() for x in key_terms.split(",")]
         # Key terms is a bit tricky. We will first find all the disease_ids which match
@@ -336,14 +307,11 @@ async def get_reports_by_query(
 
         matched_disease_ids = list(matched_diseases.keys())
 
-        key_terms_query = {
-            "diseases": {"$in": matched_disease_ids}
-        }
-        queries.append(key_terms_query)
+    query = generate_query(start_date, end_date, article_ids, location_ids, matched_disease_ids)
 
     report_docs = list(reports_col.find(
         {
-            "$and": queries
+            "$and": query
         }
     ).skip(start_range - 1).limit(end_range + 1 - start_range))
 

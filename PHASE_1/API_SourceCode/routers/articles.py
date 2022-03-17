@@ -1,7 +1,7 @@
 from fastapi import APIRouter, FastAPI, Query, HTTPException, status
 from fastapi.responses import JSONResponse
-from util import DATETIME_REGEX
-from database import articles_col, locations_col, reports_col, diseases_col
+from util import DATETIME_REGEX, parse_datetime_string
+from database import articles_col, reports_col
 import re
 from datetime import datetime, time
 from pydantic import BaseModel, Field # datetime has format yyyy-mm-ddTHH:mm:ss
@@ -123,18 +123,16 @@ async def get_articles_by_query(
 ):
 	if re.fullmatch(DATETIME_REGEX, start_date) == None or re.fullmatch(DATETIME_REGEX, end_date) == None:
 		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Date must be in the format yyyy-mm-ddTHH:mm:ss"})
-	start_date_obj = datetime.fromisoformat(start_date)
-	end_date_obj = datetime.fromisoformat(end_date)
-	print(start_date_obj)
-	print(end_date_obj)
-	if start_date_obj > end_date_obj:
-		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start date must be earlier than end date."})
 	if timezone not in pytz.all_timezones:
 		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Timezone is not in the correct format and/or cannot be found."})
+	
+	start_date = parse_datetime_string(start_date, timezone)
+	end_date = parse_datetime_string(end_date, timezone)
+
+	if start_date > end_date:
+		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start date must be earlier than end date."})
 	if end_range < start_range:
 		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start range must be less than end range."})
-	start_date_timezone = start_date_obj.replace(tzinfo=pytz.timezone(timezone))
-	end_date_timezone = end_date_obj.replace(tzinfo=pytz.timezone(timezone))
 	
 	terms_list = [".*"]
 	if key_terms != None and key_terms != "":
@@ -142,7 +140,7 @@ async def get_articles_by_query(
 
 	articles = list(articles_col.aggregate([
 		{"$match": {
-			"date_of_publication": {"$gte": start_date_timezone, "$lte": end_date_timezone},
+			"date_of_publication": {"$gte": start_date, "$lte": end_date},
 			"$or": [
 				{"headline": {"$in":[re.compile(x, re.IGNORECASE) for x in terms_list]}},
 				{"main_text": {"$in":[re.compile(x, re.IGNORECASE) for x in terms_list]}}

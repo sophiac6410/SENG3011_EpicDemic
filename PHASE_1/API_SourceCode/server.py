@@ -1,3 +1,4 @@
+from dotenv import dotenv_values
 from fastapi import FastAPI
 from routers import reports, articles, status
 import uvicorn
