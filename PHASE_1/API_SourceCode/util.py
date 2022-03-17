@@ -12,7 +12,7 @@ def parse_datetime_string(date_str, timezone):
     date = datetime.fromisoformat(date_str)
     return date.replace(tzinfo=pytz.timezone(timezone))
 
-def generate_query(start_date, end_date, article_ids, location_ids, disease_ids):
+def generate_query(start_date, end_date, article_ids=None, location_ids=None, disease_ids=None):
     """
     Generates a mongodb query given the parameters
     """
@@ -43,11 +43,12 @@ def generate_query(start_date, end_date, article_ids, location_ids, disease_ids)
         }
         queries.append(location_id_query)
 
-    key_terms_query = {
-        "diseases": {
-            "$in": disease_ids
+    if disease_ids is not None:
+        key_terms_query = {
+            "diseases": {
+                "$in": disease_ids
+            }
         }
-    }
-    queries.append(key_terms_query)
+        queries.append(key_terms_query)
 
     return queries
