@@ -10,7 +10,7 @@ import geocoder
 cluster = MongoClient(
     "mongodb+srv://EpicDemic:EpicDemic123!@epicdemic.ul8sw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 
-db = cluster["parser_test_db"]
+db = cluster["epicdemic_db"]
 
 # processes data from scraper to create articles, reports + locations
 
