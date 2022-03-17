@@ -28,7 +28,7 @@ def test_diseases_ecoli():
 
 # test for disease: influenza 
 def test_disease_h5n1():
-    headline = 'Avian influenza (67): Europe (France) poultry, HPAI H5N1, spread, control'
+    headline = 'Avian influenza (40): Americas (USA) wild bird, HPAI H5N1'
     assert get_diseases(headline) == [ 15 ]
 
 # test for disease: hepatitis 
@@ -70,11 +70,6 @@ def test_disease_ebolafever():
 def test_disease_avian2():
     headline = 'Avian influenza (18): H7N9 & H9N2 reassortment, zoonotic potential'
     assert get_diseases(headline) == [ 16, 17 ]
-
-# test for ehec (e.coli)
-def test_disease_ehec():
-    headline = 'E.coli (EHEC) - South Korea (Seoul)'
-    assert get_diseases(headline) == [ 13 ]
 
 # test for cryptococcosis
 def test_disease_crypto():
@@ -165,3 +160,21 @@ def test_loc_worldwide():
     assert db_loc['city'] == ""
     assert db_loc['country'] == ""
     assert db_loc['geonames_id'] == 0
+
+# test for weird location string
+def test_loc_complexstring():
+    loc_str = 'Canary Islands [Spain]'
+    loc_lat = '28.000000'
+    loc_long = '-15.500000'
+
+    db = get_db()
+    location_collection = db["Locations"]
+    loc = get_locations(loc_str, loc_lat, loc_long)
+    db_loc = location_collection.find_one({"_id": loc[0]})
+
+    assert db_loc != None 
+    assert db_loc['country'] == "Spain"
+
+
+
+test_disease_h5n1()

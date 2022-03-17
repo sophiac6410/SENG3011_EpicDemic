@@ -16,7 +16,6 @@ db = cluster["epicdemic_db"]
 
 
 def process_data(data):
-    print(data)
     if data == None:
         return
     article_id = create_article(data)
