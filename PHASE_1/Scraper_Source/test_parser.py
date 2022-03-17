@@ -175,6 +175,3 @@ def test_loc_complexstring():
     assert db_loc != None 
     assert db_loc['country'] == "Spain"
 
-
-
-test_disease_h5n1()
