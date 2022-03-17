@@ -25,7 +25,7 @@ class ErrorResponse(Response):
             "example": {
                 "team_name": "EpicDemic",
                 "version": "0.0.1",
-                "accessed_time": "2022-03-10T02:08:51",
+                "accessed_time": "2022-03-10 02:08:51",
                 "data_source": "promedmail.org",
                 "ok": False,
                 "code": 400,
