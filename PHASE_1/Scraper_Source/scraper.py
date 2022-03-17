@@ -150,8 +150,8 @@ def daily_update():
 
 
 def main():
-    start_date = "03/02/2020"
-    end_date = "03/13/2020"
+    start_date = "01/01/2000"
+    end_date = "03/16/2022"
 
     update(start_date, end_date)
 
