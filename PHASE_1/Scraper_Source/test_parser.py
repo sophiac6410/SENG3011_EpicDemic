@@ -128,20 +128,3 @@ def test_loc_worldwide():
     assert db_loc['city'] == ""
     assert db_loc['country'] == ""
     assert db_loc['geonames_id'] == 0
-
-# testing for edgecase: invalid location; default is Worldwide
-def test_loc_invalid():
-    loc_str = 'Location'
-    loc_lat = '-50.0'
-    loc_long = '0'
-
-    db = get_db()
-    location_collection = db["Locations"]
-    loc = get_locations(loc_str, loc_lat, loc_long)
-    db_loc = location_collection.find_one({"_id": loc[0]})
-
-    assert db_loc != None 
-    assert db_loc['state'] == ""
-    assert db_loc['city'] == ""
-    assert db_loc['country'] == ""
-    assert db_loc['geonames_id'] == 0  

@@ -186,7 +186,15 @@ def handle_err_location():
 def create_location(loc_string, lat, longitude):
     location_collection = db["Locations"]
     try:
-        geo_data = geocoder.geonames(loc_string, key='epicdemic')
+        geo_data = {}
+        if not loc_string.isEmpty():
+            geo_data = geocoder.geonames(loc_string, key='epicdemic')
+
+        # case: latitude and longitude are empty
+        if lat.isEmpty() or longitude.isEmpty():
+            g = geocoder.geonames(geo_data.geonames_id, method='details', key='epicdemic')
+            lat = g.lat
+            longitude = g.lng
 
         location_data = {
             "_id":  location_collection.count_documents({}) + 1,
