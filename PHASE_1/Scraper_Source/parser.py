@@ -74,15 +74,17 @@ def get_diseases(headline):
     if disease_list == []:
         unknown = disease_collection.find_one({"name": "unknown"})
         if re.search("unknown", headline, re.I):
-            disease_list.append(unknown['id'])
+            disease_list.append(unknown['_id'])
             return disease_list
         for word in unknown['key_words']:
             if re.search(word, headline, re.I):
-                disease_list.append(unknown['id'])
+                disease_list.append(unknown['_id'])
                 return disease_list
         other = disease_collection.find_one({"name": "other"})
         disease_list.append(other['_id'])
 
+    # remove duplicate ids
+    disease_list = list(set(disease_list))
     return disease_list
 
 # create a report for each marker in the article
