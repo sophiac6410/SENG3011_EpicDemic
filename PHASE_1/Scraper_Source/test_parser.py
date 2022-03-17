@@ -56,6 +56,43 @@ def test_disease_handfootmouth():
     headline = 'Hand, foot & mouth disease update: Philippines (CZ)'
     assert get_diseases(headline) == [ 23 ]
 
+# test for disease anthrax cutaneous
+def test_disease_anthraxcutaneous():
+    headline = 'Anthrax, human - Turkey: (E. Anatolia) cutaneous cases 2008-2014'
+    assert get_diseases(headline) == [ 2 ]
+
+# test for ebola haemorrhagic fever
+def test_disease_ebolafever():
+    headline = 'Ebola haemorrhagic fever - Congo Rep.'
+    assert get_diseases(headline) == [ 12 ]
+
+# test for avian influenza - different keywords present 
+def test_disease_avian2():
+    headline = 'Avian influenza (18): H7N9 & H9N2 reassortment, zoonotic potential'
+    assert get_diseases(headline) == [ 16, 17 ]
+
+# test for ehec (e.coli)
+def test_disease_ehec():
+    headline = 'E.coli (EHEC) - South Korea (Seoul)'
+    assert get_diseases(headline) == [ 13 ]
+
+# test for cryptococcosis
+def test_disease_crypto():
+    headline = 'Cryptococcosis, human, animal - Canada (BC)'
+    assert get_diseases(headline) == [ 8 ]
+
+# test for unknown
+def test_disease_unknown2():
+    headline = 'Undiagnosed hemorrhagic fever - South Sudan: (BG) RFI'
+    assert get_diseases(headline) == [ 46 ]
+
+# test for multiple diseases
+def test_disease_multiple():
+    headline = 'Dengue, chikungunya, Zika viruses - Americas: Brazil (RJ) co-circulation'
+    result = get_diseases(headline)
+    result.sort()
+    assert result == [ 6, 10, 41 ]
+
 
 ### LOCATION TESTING ###
 
