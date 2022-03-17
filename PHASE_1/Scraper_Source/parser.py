@@ -16,7 +16,6 @@ db = cluster["parser_test_db"]
 
 
 def process_data(data):
-    print(data)
     if data == None:
         return
     article_id = create_article(data)
@@ -54,6 +53,7 @@ def get_date(dt_string):
 
 
 def get_diseases(headline):
+
     disease_collection = db["Diseases"]
 
     # get list of all diseases in dtabase except 'other' or 'unknown'
@@ -78,7 +78,8 @@ def get_diseases(headline):
         if re.search("unknown", headline, re.I):
             disease_list.append(unknown['_id'])
             return disease_list
-        for word in unknown['key_words']:
+
+        for word in unknown["key_words"]:
             if re.search(word, headline, re.I):
                 disease_list.append(unknown['_id'])
                 return disease_list
@@ -189,7 +190,6 @@ def create_location(loc_string, lat, longitude):
     location_collection = db["Locations"]
     try:
         geo_data = geocoder.geonames(loc_string, key='epicdemic')
-
         location_data = {
             "_id":  location_collection.count_documents({}) + 1,
             "country": geo_data.country,
@@ -199,7 +199,6 @@ def create_location(loc_string, lat, longitude):
             "longitude": longitude,
             "geonames_id": geo_data.geonames_id
         }
-
         if 'city' not in geo_data.class_description:
             location_data['city'] = ""
 
@@ -210,26 +209,33 @@ def create_location(loc_string, lat, longitude):
         try:
             f.write(f"{loc_string}\n")
             print(f'-- unable to find exact location {loc_string}----\n')
-
-            country_name = loc_string.split(', ')[-1]
-            db_loc = location_collection.find_one({"country": country_name})
-
-            if db_loc:
-                f.write(f"-- country found {db_loc['country']}\n")
-                return db_loc
+            if ("," in loc_string):
+                country_name = loc_string.split(', ')[-1]
+                db_loc = location_collection.find_one(
+                    {"country": country_name})
+                if db_loc:
+                    f.write(f"-- country found {db_loc['country']}\n")
+                    f.close()
+                    return db_loc
+                else:
+                    location_data = create_location(
+                        country_name, lat, longitude)
+                    f.write(f"-- new location {location_data['country']}\n")
+                    f.close()
+                    return location_data
             else:
-                location_data = create_location(country_name, lat, longitude)
-                f.write(f"-- new location {location_data['country']}\n")
+                return handle_err_location()
         except:
+            print("ello")
             # if all comes to fail, default value is Worldwide
             db_loc = location_collection.find_one(
                 {"latitude": 0, 'longitude': 0})
             f.write("-- unknown: worldwide location\n")
+            f.close()
             if db_loc:
                 return db_loc
             else:  # if there is no Worldwide attribute yet, creates worldwide
                 return handle_err_location()
-        f.close()
 
     return location_data
 
