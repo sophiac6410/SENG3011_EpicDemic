@@ -1,3 +1,8 @@
+
+# Pytest output file
+# Run pytest inside Scraper_Source directory
+# test file is: test_parser.py
+
 ============================= test session starts ==============================
 platform darwin -- Python 3.10.2, pytest-7.1.0, pluggy-1.0.0
 rootdir: /Users/rovielynespiritu/Desktop/se3011/proj/PHASE_1/Scraper_Source
