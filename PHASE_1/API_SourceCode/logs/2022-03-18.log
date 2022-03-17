@@ -101,3 +101,126 @@
     Process Time: 1.9219000339508057
     ----------------------------------------
     
+    Timestamp: 1647528495.800932
+    Accessed Time: 2022-03-18 01:48:15.800932
+    Client: 127.0.0.1:61638
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0004329681396484375
+    ----------------------------------------
+    
+    Timestamp: 1647528496.412101
+    Accessed Time: 2022-03-18 01:48:16.412101
+    Client: 127.0.0.1:61638
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.06509089469909668
+    ----------------------------------------
+    
+    Timestamp: 1647528503.466575
+    Accessed Time: 2022-03-18 01:48:23.466575
+    Client: 127.0.0.1:61642
+    
+    Request: GET /v1/reports/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			article_ids=1,2,3
+			location=Australia
+			key_terms=virus
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 422
+    Process Time: 0.006431102752685547
+    ----------------------------------------
+    
+    Timestamp: 1647528524.745411
+    Accessed Time: 2022-03-18 01:48:44.745411
+    Client: 127.0.0.1:61647
+    
+    Request: GET /v1/reports/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			article_ids=0
+			location=Australia
+			key_terms=virus
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 1.7808051109313965
+    ----------------------------------------
+    
+    Timestamp: 1647528542.622468
+    Accessed Time: 2022-03-18 01:49:02.622468
+    Client: 127.0.0.1:61653
+    
+    Request: GET /v1/reports/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			article_ids=0
+			location=Australia
+			key_terms=virus
+			timezone=Australia/
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 400
+    Process Time: 0.0007419586181640625
+    ----------------------------------------
+    
+    Timestamp: 1647528664.601023
+    Accessed Time: 2022-03-18 01:51:04.601023
+    Client: 127.0.0.1:61690
+    
+    Request: GET /v1/reports/ids
+    Request Query Param: 
+			report_ids=1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.06600213050842285
+    ----------------------------------------
+    
+    Timestamp: 1647528671.158058
+    Accessed Time: 2022-03-18 01:51:11.158058
+    Client: 127.0.0.1:61693
+    
+    Request: GET /v1/reports/ids
+    Request Query Param: 
+			report_ids=a
+    Request Path Param: None
+   
+    Response Code: 422
+    Process Time: 0.0005841255187988281
+    ----------------------------------------
+    
+    Timestamp: 1647528776.977199
+    Accessed Time: 2022-03-18 01:52:56.977199
+    Client: 127.0.0.1:61709
+    
+    Request: GET /v1/articles/ids
+    Request Query Param: 
+			article_ids=a
+    Request Path Param: None
+   
+    Response Code: 422
+    Process Time: 0.002471923828125
+    ----------------------------------------
+    

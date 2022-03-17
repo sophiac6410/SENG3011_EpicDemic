@@ -106,7 +106,7 @@ async def get_reports_by_query(
 	    example="2023-01-01T10:10:10"
 	),
     article_ids: Optional[List[int]] = Query(
-        [],
+        None,
         description="List of articles reports of interest should belong to.",
         example="1,2,3"
     ),
