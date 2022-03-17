@@ -13,8 +13,6 @@ cluster = MongoClient(
 db = cluster["epicdemic_db"]
 
 # processes data from scraper to create articles, reports + locations
-
-
 def process_data(data):
     if data == None:
         return
@@ -23,8 +21,6 @@ def process_data(data):
     create_reports(data, article_id, syndromes)
 
 # populates article data and inserts into database
-
-
 def create_article(data):
     if data == None:
         return
@@ -91,8 +87,6 @@ def get_diseases(headline):
     return disease_list
 
 # create a report for each marker in the article
-
-
 def create_reports(data, article_id, syndromes):
     report_collection = db["Reports"]
 
@@ -110,8 +104,6 @@ def create_reports(data, article_id, syndromes):
         report_collection.insert_one(report_data)
 
 # use report details to scrape event date
-
-
 def get_event_date(headline):
     date_string = headline.split('<')
     date_string = date_string[0].rstrip(' ')
@@ -135,8 +127,6 @@ def get_syndromes(article_id):
     return syndrome_list
 
 # get location from database or create new location using geonames
-
-
 def get_locations(loc_string, lat, long):
 
     location_collection = db["Locations"]
@@ -240,7 +230,5 @@ def create_location(loc_string, lat, longitude):
     return location_data
 
 # test helper:
-
-
 def get_db():
     return db
