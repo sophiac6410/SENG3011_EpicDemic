@@ -8,11 +8,10 @@ pip install "fastapi[all]"
 ## local Deployment
 
 ```bash
-uvicorn api:app --reload
+python3 server.py
 ```
 
 The API will deploy on:
-
 
 [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
