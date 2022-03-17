@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import os
 import time
 from parser import create_article
-from datetime import datetime
+from datetime import datetime, timedelta
 from parser import process_data
 
 PROMED_API = "https://promedmail.org/wp-admin/admin-ajax.php"
@@ -13,7 +13,7 @@ HEADERS = {'User-Agent': 'Mozilla/5.0'}
 
 # get the article ids by dates
 # date format: "mm/dd/yyyy"
-# return list of article id
+# return list of articles' id published between start_date and end_date
 def search(start_date, end_date):
     ids = []
     form1 = {
@@ -40,7 +40,8 @@ def search(start_date, end_date):
     ids = extra_ids(results)  # id in pages 0
     return ids, count
 
-
+# Pagination breakdown
+# return list of articles' id published between start_date and end_date on the page
 def search_page(start_date, end_date, pagenum):
     ids = []
     form2 = {
@@ -79,8 +80,6 @@ def search_page(start_date, end_date, pagenum):
     return ids
 
 # get the json article data by id
-
-
 def article_request(article_id):
     form = {
         'action': "get_latest_post_data",
@@ -101,15 +100,14 @@ def article_request(article_id):
 
     return json.loads(data)
 
-
+#encode the data form
 def encode_query(form):
     query_string = parse.urlencode(form)
     query = query_string.encode("ascii")
     return query
 
-# extract ids from get_promed_search_content action
 
-
+# extract articles' ids from response data
 def extra_ids(results):
     soup = BeautifulSoup(results, 'lxml')
     elems = soup.find_all("a")
@@ -119,10 +117,10 @@ def extra_ids(results):
         ids.append(_id)
     return ids
 
-
+#scrape and process articles published between start_date and end_date
 def update(start_date="03/12/2022", end_date="03/12/2022"):
     ids, count = search(start_date, end_date)
-    print(f'==============start collecting {count} article================')
+    print(f'==================start collecting {count} article=====================')
     print(
         f'get the data from pages 0 from {start_date} to {end_date}, size: {len(ids)}')
     i = 1
@@ -143,17 +141,21 @@ def update(start_date="03/12/2022", end_date="03/12/2022"):
             i += 1
             process_data(data)
 
-
+#daily update function on previous day
 def daily_update():
-    date = datetime.today().strftime("%d/%m/%Y")
-    update(date, date)
+    yesterday = datetime.today() - timedelta(days=1)
+    yesterday = yesterday.strftime("%d/%m/%Y")
+    update(yesterday, yesterday)
 
-
-def main():
+#inital scraping
+def start_up():
     start_date = "01/01/2000"
     end_date = "03/16/2022"
 
     update(start_date, end_date)
+
+def main():
+    start_up()
 
 
 if __name__ == "__main__":
