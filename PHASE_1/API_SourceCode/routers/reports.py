@@ -279,33 +279,25 @@ async def get_reports_by_query(
     matched_disease_ids = []
     if key_terms is not None:
         key_terms_list = [x.strip() for x in key_terms.split(",")]
-        # Key terms is a bit tricky. We will first find all the disease_ids which match
-        # these keywords. Because the disease database is small, this should be quick
+        key_terms_regex = "|".join(key_terms_list)
 
-        # Matching disease id to disease name (only for diseases which matched a key term)
-        matched_diseases = {}
+        matched_diseases = list(diseases_col.find({
+            "$or": [
+                {"name": {
+                    "$regex": key_terms_regex,
+                    "$options": "i"
+                }},
+                {"regex": {
+                    "$regex": key_terms_regex,
+                    "$options": "i"
+                }},
+                {"key_words": {
+                    "$in": key_terms_list
+                }}
+            ]
+        }))
 
-        all_diseases = list(diseases_col.find())
-        for disease in all_diseases:
-            for key_term in key_terms_list:
-                if re.match(rf".*{key_term}.*", disease["name"], re.IGNORECASE):
-                    matched_diseases[disease["_id"]] = disease["name"]
-                    break
-                elif "regex" in disease and re.match(rf"{disease['regex']}", key_term, re.IGNORECASE):
-                    matched_diseases[disease["_id"]] = disease["name"]
-                    break
-                else:
-                    # Check if this is in the key words list
-                    matched = False
-                    for key_word in disease["key_words"]:
-                        if re.match(rf".*{key_term}.*", key_word, re.IGNORECASE):
-                            matched_diseases[disease["_id"]] = disease["name"]
-                            matched = True
-                            break
-                    if matched:
-                        break
-
-        matched_disease_ids = list(matched_diseases.keys())
+        matched_disease_ids = [x["_id"] for x in matched_diseases]
 
     query = generate_query(start_date, end_date, article_ids, location_ids, matched_disease_ids)
 
