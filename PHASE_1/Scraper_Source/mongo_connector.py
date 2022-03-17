@@ -17,15 +17,9 @@ articles.delete_many({})
 reports.delete_many({})
 locations.delete_many({})
 
-g = geocoder.geonames('Sydney', key='epicdemic')
-print(g.address + g.state + g.country + g.class_description)
-print(g.geonames_id)
-if ('city' not in g.class_description):
-    print("how bizzare")
 
-g2 = geocoder.geonames('New South Wales, Australia', key='epicdemic')
-print(g2.address + g2.state + g2.country + ", " + g2.class_description)
-print(g2.geonames_id)
+g2 = geocoder.geonames('Trinidad & Tobago', key='epicdemic')
+print(g2)
 
 if ('city' not in g2.class_description):
     print("how bizzare")
