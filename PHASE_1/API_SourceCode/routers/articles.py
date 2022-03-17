@@ -1,5 +1,6 @@
 from fastapi import APIRouter, FastAPI, Query, HTTPException, status
 from fastapi.responses import JSONResponse
+from util import DATETIME_REGEX
 from database import articles_col, locations_col, reports_col, diseases_col
 import re
 from datetime import datetime, time
@@ -120,8 +121,7 @@ async def get_articles_by_query(
 		ge=1
 	)
 ):
-	date_pattern = "^(19|20)\d\d-(0[1-9]|1[012])-([012]\d|3[01])T([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$"
-	if re.fullmatch(date_pattern, start_date) == None or re.fullmatch(date_pattern, end_date) == None:
+	if re.fullmatch(DATETIME_REGEX, start_date) == None or re.fullmatch(DATETIME_REGEX, end_date) == None:
 		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Date must be in the format yyyy-mm-ddTHH:mm:ss"})
 	start_date_obj = datetime.fromisoformat(start_date)
 	end_date_obj = datetime.fromisoformat(end_date)
@@ -135,8 +135,7 @@ async def get_articles_by_query(
 		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start range must be less than end range."})
 	start_date_timezone = start_date_obj.replace(tzinfo=pytz.timezone(timezone))
 	end_date_timezone = end_date_obj.replace(tzinfo=pytz.timezone(timezone))
-	print(start_date_timezone)
-	print(end_date_timezone)
+	
 	terms_list = [".*"]
 	if key_terms != None and key_terms != "":
 		terms_list = key_terms.split(',')

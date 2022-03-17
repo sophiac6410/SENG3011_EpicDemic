@@ -6,6 +6,7 @@ from fastapi.responses import JSONResponse
 from httplib2 import Response
 from pydantic import BaseModel, Field
 import pytz
+from util import DATETIME_REGEX
 from database import articles_col, reports_col, diseases_col, locations_col
 import re
 from geonames import get_location_ids
@@ -254,19 +255,25 @@ async def get_reports_by_query(
         ge=1
     )
 ):
-    date_pattern = "^(19|20)\d\d-(0[1-9]|1[012])-([012]\d|3[01])T([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$"
-    if re.fullmatch(date_pattern, start_date) == None or re.fullmatch(date_pattern, end_date) == None:
+    if re.fullmatch(DATETIME_REGEX, start_date) == None or re.fullmatch(DATETIME_REGEX, end_date) == None:
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Date must be in the format yyyy-mm-ddTHH:mm:ss"})
+    
     start_date = datetime.fromisoformat(start_date)
+    start_date = start_date.replace(tzinfo=pytz.timezone(timezone))
+    
     end_date = datetime.fromisoformat(end_date)
+    end_date = end_date.replace(tzinfo=pytz.timezone(timezone))
+    
     if timezone not in pytz.all_timezones:
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Timezone is not in the correct format and/or cannot be found."})
     if end_range < start_range:
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start range must be less than end range."})
     if end_date < start_date:
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start date must be earlier than end date."})
-    start_date = start_date.replace(tzinfo=pytz.timezone(timezone))
-    end_date = end_date.replace(tzinfo=pytz.timezone(timezone))
+    
+
+
+    # Initialise a queries list
     queries = []
 
     # Get all the reports which lie within the start and end dates
@@ -278,8 +285,9 @@ async def get_reports_by_query(
     }
     queries.append(event_date_query)
 
+
+
     if article_ids is not None:
-        print("articles")
         article_id_query = {
             "article_id": {
                 "$in": article_ids
