@@ -1,0 +1,82 @@
+
+    Timestamp: 1647479975.53373
+    Accessed Time: 2022-03-17 12:19:35.533730
+    Client: 127.0.0.1:58420
+    
+    Request: GET /v1/articles/ids
+    Request Query Param: 
+		article_ids=1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 17.577336072921753
+    ----------------------------------------
+    
+    Timestamp: 1647479991.77283
+    Accessed Time: 2022-03-17 12:19:51.772830
+    Client: 127.0.0.1:58421
+    
+    Request: GET /v1/articles/ids
+    Request Query Param: 
+		article_ids=1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 1.3390588760375977
+    ----------------------------------------
+    
+    Timestamp: 1647480083.90495
+    Accessed Time: 2022-03-17 12:21:23.904950
+    Client: 127.0.0.1:58520
+    
+    Request: GET /v1/articles/ids
+    Request Query Param: 
+		article_ids=1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.8207330703735352
+    ----------------------------------------
+    
+    Timestamp: 1647480095.001202
+    Accessed Time: 2022-03-17 12:21:35.001202
+    Client: 127.0.0.1:58590
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0005998611450195312
+    ----------------------------------------
+    
+    Timestamp: 1647480095.71759
+    Accessed Time: 2022-03-17 12:21:35.717590
+    Client: 127.0.0.1:58590
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.05367398262023926
+    ----------------------------------------
+    
+    Timestamp: 1647480102.366661
+    Accessed Time: 2022-03-17 12:21:42.366661
+    Client: 127.0.0.1:58591
+    
+    Request: GET /v1/articles/
+    Request Query Param: 
+		start_date=2021-01-01T10:10:10
+		end_date=2023-01-01T10:10:10
+		key_terms=Corona
+		timezone=Australia/Sydney
+		start_range=1
+		end_range=10
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.37185001373291016
+    ----------------------------------------
+    

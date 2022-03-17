@@ -1,6 +1,10 @@
-from fastapi import FastAPI
+from os import access
+from fastapi import FastAPI, Request
 from routers import reports, articles, status
 import uvicorn
+import time
+from datetime import datetime
+import os
 
 description="""
 The EpicDemic API allows you to retrieve articles and reports from ProMed (promedmail.org).
@@ -33,12 +37,54 @@ tags_metadata = [
         """
     }
 ]
+
 app = FastAPI(
     title="SENG3011 EpicDemic",
     description=description,
     version="0.0.1",
     openapi_tags=tags_metadata
 )
+
+
+@app.middleware("http")
+async def add_process_time_header(request: Request, call_next):
+    start_time = datetime.now()
+    response = await call_next(request)
+    process_time = datetime.timestamp(datetime.now()) - datetime.timestamp(start_time)
+    log = """
+    Timestamp: {}
+    Accessed Time: {}
+    Client: {}:{}
+    """.format(datetime.timestamp(start_time), start_time, request.client.host, request.client.port)
+
+    query_params = ""
+    for key, value in request.query_params.items():
+        query_params += ('\n\t\t\t' + key + '=' + value)
+    if query_params == "": query_params = None
+    path_params = ""
+    for key, value in request.path_params.items():
+        path_params += ('\n\t\t\t' + key + '=' + value)
+    if path_params == "": path_params = None
+
+    log += """
+    Request: {} {}
+    Request Query Param: {}
+    Request Path Param: {}
+   
+    Response Code: {}
+    Process Time: {}
+    ----------------------------------------
+    """.format(request.method, request.url.path, query_params, path_params, response.status_code, process_time)
+    
+    
+    if not os.path.exists('logs'):
+        os.makedirs('logs')
+    log_file = open("logs/{}.log".format(start_time.date()), "a")
+    log_file.write(log)
+    log_file.close()
+
+    return response
+
 
 app.include_router(reports.router)
 app.include_router(articles.router)
