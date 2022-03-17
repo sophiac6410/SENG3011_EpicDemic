@@ -1,13 +1,15 @@
+from django.db import router
 from dotenv import dotenv_values
 from os import access
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
-from routers import reports, articles, status
+from routers import reports, articles
 import uvicorn
 import time
 from datetime import datetime
 import os
 import metadata
+from models import statusModels, baseModels
 
 app = FastAPI(
     title=metadata.api["title"],
@@ -58,12 +60,10 @@ async def add_process_time_header(request: Request, call_next):
 
 app.include_router(reports.router)
 app.include_router(articles.router)
-app.include_router(status.router)
 
-@app.get('/')
+@app.get('/', status_code=status.HTTP_200_OK, response_model=statusModels.HealthCheckResponse, tags=["status"])
 async def index():
-    return "At index inside server.py"
-
+    return baseModels.createResponse(True, 200, {'healthcheck': 'Everything OK!'})
 
 if __name__ == "__main__":
 	uvicorn.run(app)
