@@ -16,7 +16,6 @@ def test_query_start_end_date():
         }
     }
 
-
 def test_query_start_end_date_article_ids():
     start_date = datetime.fromisoformat("2021-01-01T10:10:10")
     end_date = datetime.fromisoformat("2023-01-01T10:10:10")
@@ -94,3 +93,5 @@ def test_query_start_end_date_article_ids_location_ids_disease_ids():
             "$in": [9, 10, 11]
         }
     }
+
+
