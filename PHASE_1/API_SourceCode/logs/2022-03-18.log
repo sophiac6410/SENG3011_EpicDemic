@@ -224,3 +224,21 @@
     Process Time: 0.002471923828125
     ----------------------------------------
     
+    Timestamp: 1647528987.395474
+    Accessed Time: 2022-03-18 01:56:27.395474
+    Client: 127.0.0.1:61876
+    
+    Request: GET /v1/articles/
+    Request Query Param: 
+			start_date=2025-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			key_terms=Corona
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 400
+    Process Time: 0.08026695251464844
+    ----------------------------------------
+    
