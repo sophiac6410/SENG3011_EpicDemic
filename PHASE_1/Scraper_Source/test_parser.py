@@ -28,7 +28,7 @@ def test_diseases_ecoli():
 
 # test for disease: influenza 
 def test_disease_h5n1():
-    headline = 'Avian influenza (67): Europe (France) poultry, HPAI H5N1, spread, control'
+    headline = 'Avian influenza (40): Americas (USA) wild bird, HPAI H5N1'
     assert get_diseases(headline) == [ 15 ]
 
 # test for disease: hepatitis 
@@ -55,6 +55,38 @@ def test_disease_covid():
 def test_disease_handfootmouth():
     headline = 'Hand, foot & mouth disease update: Philippines (CZ)'
     assert get_diseases(headline) == [ 23 ]
+
+# test for disease anthrax cutaneous
+def test_disease_anthraxcutaneous():
+    headline = 'Anthrax, human - Turkey: (E. Anatolia) cutaneous cases 2008-2014'
+    assert get_diseases(headline) == [ 2 ]
+
+# test for ebola haemorrhagic fever
+def test_disease_ebolafever():
+    headline = 'Ebola haemorrhagic fever - Congo Rep.'
+    assert get_diseases(headline) == [ 12 ]
+
+# test for avian influenza - different keywords present 
+def test_disease_avian2():
+    headline = 'Avian influenza (18): H7N9 & H9N2 reassortment, zoonotic potential'
+    assert get_diseases(headline) == [ 16, 17 ]
+
+# test for cryptococcosis
+def test_disease_crypto():
+    headline = 'Cryptococcosis, human, animal - Canada (BC)'
+    assert get_diseases(headline) == [ 8 ]
+
+# test for unknown
+def test_disease_unknown2():
+    headline = 'Undiagnosed hemorrhagic fever - South Sudan: (BG) RFI'
+    assert get_diseases(headline) == [ 46 ]
+
+# test for multiple diseases
+def test_disease_multiple():
+    headline = 'Dengue, chikungunya, Zika viruses - Americas: Brazil (RJ) co-circulation'
+    result = get_diseases(headline)
+    result.sort()
+    assert result == [ 6, 10, 41 ]
 
 
 ### LOCATION TESTING ###
@@ -128,3 +160,18 @@ def test_loc_worldwide():
     assert db_loc['city'] == ""
     assert db_loc['country'] == ""
     assert db_loc['geonames_id'] == 0
+
+# test for weird location string
+def test_loc_complexstring():
+    loc_str = 'Canary Islands [Spain]'
+    loc_lat = '28.000000'
+    loc_long = '-15.500000'
+
+    db = get_db()
+    location_collection = db["Locations"]
+    loc = get_locations(loc_str, loc_lat, loc_long)
+    db_loc = location_collection.find_one({"_id": loc[0]})
+
+    assert db_loc != None 
+    assert db_loc['country'] == "Spain"
+

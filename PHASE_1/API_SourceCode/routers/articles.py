@@ -1,90 +1,19 @@
-from fastapi import APIRouter, FastAPI, Query, HTTPException, status
+from fastapi import APIRouter, Query, status
 from fastapi.responses import JSONResponse
-from database import articles_col, locations_col, reports_col, diseases_col
+from util import DATETIME_REGEX, parse_datetime_string
+from database import articles_col, reports_col
 import re
-from datetime import datetime, time
-from pydantic import BaseModel, Field # datetime has format yyyy-mm-ddTHH:mm:ss
+from datetime import datetime
 import pytz
-from typing import Optional, List, Dict
-import pymongo
+from typing import Optional
+from models import articleModels, baseModels
 
 router = APIRouter(
 	prefix="/v1/articles"
 )
 
-############### ARTICLE RESPONSE MODELS ##############
-class Article(BaseModel):
-	id: int = Field(..., description="The unique id of the article")
-	url: str = Field(..., description="The url to the article on ProMed")
-	date_of_publication: datetime = Field(..., description="The article's date of publication on ProMed")
-	headline: str = Field(..., description="The article's headline on ProMed")
-	main_text: str = Field(..., description="The article's body of text")
-	reports: List[int] = Field(..., description="The id's of the disease reports contained in the article")
-
-	class Config:
-		schema_extra = {
-            "example": {
-                "id": 1,
-				"url": "https://promedmail.org/promed-post/?id=8701909",
-				"date_of_publication": "2022-03-10T02:08:51",
-				"headline": "PRO/AH/EDR> Chronic wasting disease - North America (02): (USA) deer",
-				"main_text": "The Iowa Department of Natural Resources reports 36 positive chronic wasting disease (CWD) tests from some 5000 deer samples this hunting season.<br/><br/>The DNR's Tyler Harms, who oversees the deer management program, says 2 new counties were added to the list of counties in which CWD has been detected in the wild. Greene County in central Iowa and Fremont County in southwest Iowa brings the total number of counties to 12.",
-				"reports": [1, 2, 3]
-            }
-        }
-
-class ArticleQueryResponse(BaseModel):
-	start_range: int = Field(..., description="The starting position of the articles")
-	end_range: int = Field(..., description="The last position of the articles")
-	articles: List[Article] = Field(..., description="The list of articles")
-
-	class Config:
-		schema_extra = {
-            "example": {
-				"start_range": 1,
-				"end_range": 10,
-				"articles": [{
-					"id": 1,
-					"url": "https://promedmail.org/promed-post/?id=8701909",
-					"date_of_publication": "2022-03-10T02:08:51",
-					"headline": "PRO/AH/EDR> Chronic wasting disease - North America (02): (USA) deer",
-					"main_text": "The Iowa Department of Natural Resources reports 36 positive chronic wasting disease (CWD) tests from some 5000 deer samples this hunting season.<br/><br/>The DNR's Tyler Harms, who oversees the deer management program, says 2 new counties were added to the list of counties in which CWD has been detected in the wild. Greene County in central Iowa and Fremont County in southwest Iowa brings the total number of counties to 12.",
-					"reports": [1, 2, 3]
-				}]
-			}
-		}
-
-class ArticleIdResponse(BaseModel):
-	articles: Dict[int, Article] = Field(..., description="A dictionary of articles with the article id as the key")
-
-	class Config:
-		schema_extra = {
-			"example": {
-				"articles": {
-					1: {
-						"id": 1,
-						"url": "https://promedmail.org/promed-post/?id=8701909",
-						"date_of_publication": "2022-03-10T02:08:51",
-						"headline": "PRO/AH/EDR> Chronic wasting disease - North America (02): (USA) deer",
-						"main_text": "The Iowa Department of Natural Resources reports 36 positive chronic wasting disease (CWD) tests from some 5000 deer samples this hunting season.<br/><br/>The DNR's Tyler Harms, who oversees the deer management program, says 2 new counties were added to the list of counties in which CWD has been detected in the wild. Greene County in central Iowa and Fremont County in southwest Iowa brings the total number of counties to 12.",
-						"reports": [1, 2, 3]
-					}
-				}
-			}
-		}
-
-class Error(BaseModel):
-	error: str = Field(..., description="The error message")
-
-	class Config:
-		schema_extra = {
-			"example": {
-				"error": "Date must be in the format yyyy-mm-ddTHH:mm:ss"
-			}
-		}
-
 ############## GET ARTICLES BY QUERY ###############
-@router.get("/", status_code=status.HTTP_200_OK, tags=["articles"], response_model=ArticleQueryResponse, responses={400: {"model": Error}})
+@router.get("/", status_code=status.HTTP_200_OK, tags=["articles"], response_model=articleModels.ArticleQueryResponse, responses={400: {"model": baseModels.ErrorResponse}})
 async def get_articles_by_query(
 	*, # including this allows parameters to be defined in any order
 	start_date: str = Query(
@@ -120,30 +49,26 @@ async def get_articles_by_query(
 		ge=1
 	)
 ):
-	date_pattern = "^(19|20)\d\d-(0[1-9]|1[012])-([012]\d|3[01])T([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$"
-	if re.fullmatch(date_pattern, start_date) == None or re.fullmatch(date_pattern, end_date) == None:
+	if re.fullmatch(DATETIME_REGEX, start_date) == None or re.fullmatch(DATETIME_REGEX, end_date) == None:
 		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Date must be in the format yyyy-mm-ddTHH:mm:ss"})
-	start_date_obj = datetime.fromisoformat(start_date)
-	end_date_obj = datetime.fromisoformat(end_date)
-	print(start_date_obj)
-	print(end_date_obj)
-	if start_date_obj > end_date_obj:
-		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start date must be earlier than end date."})
 	if timezone not in pytz.all_timezones:
 		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Timezone is not in the correct format and/or cannot be found."})
+	
+	start_date = parse_datetime_string(start_date, timezone)
+	end_date = parse_datetime_string(end_date, timezone)
+
+	if start_date > end_date:
+		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start date must be earlier than end date."})
 	if end_range < start_range:
 		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start range must be less than end range."})
-	start_date_timezone = start_date_obj.replace(tzinfo=pytz.timezone(timezone))
-	end_date_timezone = end_date_obj.replace(tzinfo=pytz.timezone(timezone))
-	print(start_date_timezone)
-	print(end_date_timezone)
+	
 	terms_list = [".*"]
 	if key_terms != None and key_terms != "":
 		terms_list = key_terms.split(',')
 
 	articles = list(articles_col.aggregate([
 		{"$match": {
-			"date_of_publication": {"$gte": start_date_timezone, "$lte": end_date_timezone},
+			"date_of_publication": {"$gte": start_date, "$lte": end_date},
 			"$or": [
 				{"headline": {"$in":[re.compile(x, re.IGNORECASE) for x in terms_list]}},
 				{"main_text": {"$in":[re.compile(x, re.IGNORECASE) for x in terms_list]}}
@@ -165,15 +90,15 @@ async def get_articles_by_query(
 			report_list.append(r["_id"])
 		a.update({"reports": report_list})
 	
-	return {
-		"start_range": start_range,
-		"end_range": end_range,
-		"articles": articles
-	}
+	return baseModels.createResponse(True, 200, {
+			"start_range": start_range,
+			"end_range": end_range,
+			"articles": articles
+		})
 
 
 ############## GET ARTICLES BY IDS ###############
-@router.get("/ids", status_code=status.HTTP_200_OK, response_model=ArticleIdResponse, tags=["articles"])
+@router.get("/ids", status_code=status.HTTP_200_OK, response_model=articleModels.ArticleIdResponse, tags=["articles"], responses={422: {"model": baseModels.ErrorResponse}})
 async def get_articles_by_ids(
 	article_ids: str = Query(
 		...,
@@ -184,7 +109,7 @@ async def get_articles_by_ids(
 	try:
 		article_ids = [int(i) for i in article_ids.split(",")]
 	except:
-		return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, content={"error": "Article id's must be comma separated integers"})
+		return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, content=baseModels.createResponse(False, 422, {"error": "Article id's must be comma separated integers"}))
 
 	articles = articles_col.aggregate([
 		{"$match": {"_id": {"$in": article_ids}}},
@@ -202,6 +127,7 @@ async def get_articles_by_ids(
 			report_list.append(r["_id"])
 		a.update({"reports": report_list})
 		articles_dict.update({a["_id"]: a})
-	return {
+
+	return baseModels.createResponse(True, 200, {
 		"articles": articles_dict
-	}
+	})

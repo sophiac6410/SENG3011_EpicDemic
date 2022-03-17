@@ -11,3 +11,14 @@ Team Members:
 Report:
 * Design Details
 * Management Information
+
+## Deliverable 2
+API Implementation
+* Scraping
+* Database
+* API endpoints
+
+API Documentation
+* Swagger
+
+API Testing
