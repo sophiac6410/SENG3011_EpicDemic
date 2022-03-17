@@ -1,5 +1,6 @@
 from os import access
 from fastapi import FastAPI, Request
+from fastapi.exceptions import RequestValidationError
 from routers import reports, articles, status
 import uvicorn
 import time
@@ -13,7 +14,6 @@ app = FastAPI(
     version=metadata.api["version"],
     openapi_tags=metadata.tags
 )
-
 
 @app.middleware("http")
 async def add_process_time_header(request: Request, call_next):

@@ -428,3 +428,115 @@
     Process Time: 0.025333881378173828
     ----------------------------------------
     
+    Timestamp: 1647501962.330579
+    Accessed Time: 2022-03-17 18:26:02.330579
+    Client: 127.0.0.1:49518
+    
+    Request: GET /
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0013179779052734375
+    ----------------------------------------
+    
+    Timestamp: 1647501965.708573
+    Accessed Time: 2022-03-17 18:26:05.708573
+    Client: 127.0.0.1:49518
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0005929470062255859
+    ----------------------------------------
+    
+    Timestamp: 1647501965.931748
+    Accessed Time: 2022-03-17 18:26:05.931748
+    Client: 127.0.0.1:49518
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.04681515693664551
+    ----------------------------------------
+    
+    Timestamp: 1647501973.526713
+    Accessed Time: 2022-03-17 18:26:13.526713
+    Client: 127.0.0.1:49519
+    
+    Request: GET /redoc
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0003361701965332031
+    ----------------------------------------
+    
+    Timestamp: 1647501973.723733
+    Accessed Time: 2022-03-17 18:26:13.723733
+    Client: 127.0.0.1:49519
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0011639595031738281
+    ----------------------------------------
+    
+    Timestamp: 1647502132.952348
+    Accessed Time: 2022-03-17 18:28:52.952348
+    Client: 127.0.0.1:49598
+    
+    Request: GET /v1/articles/ids
+    Request Query Param: 
+			article_ids=1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.19768190383911133
+    ----------------------------------------
+    
+    Timestamp: 1647502141.07375
+    Accessed Time: 2022-03-17 18:29:01.073750
+    Client: 127.0.0.1:49599
+    
+    Request: GET /v1/articles/ids
+    Request Query Param: 
+			article_ids=1,4
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.06222200393676758
+    ----------------------------------------
+    
+    Timestamp: 1647502284.077638
+    Accessed Time: 2022-03-17 18:31:24.077638
+    Client: 127.0.0.1:49649
+    
+    Request: GET /v1/articles/ids
+    Request Query Param: 
+			article_ids=hj
+    Request Path Param: None
+   
+    Response Code: 422
+    Process Time: 0.0010411739349365234
+    ----------------------------------------
+    
+    Timestamp: 1647502325.812444
+    Accessed Time: 2022-03-17 18:32:05.812444
+    Client: 127.0.0.1:49650
+    
+    Request: GET /v1/articles/ids
+    Request Query Param: 
+			k=
+    Request Path Param: None
+   
+    Response Code: 422
+    Process Time: 0.007667064666748047
+    ----------------------------------------
+    
