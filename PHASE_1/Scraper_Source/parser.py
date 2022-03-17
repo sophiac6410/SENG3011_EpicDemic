@@ -13,6 +13,8 @@ cluster = MongoClient(
 db = cluster["parser_test_db"]
 
 # processes data from scraper to create articles, reports + locations
+
+
 def process_data(data):
     print(data)
     if data == None:
@@ -204,7 +206,7 @@ def create_location(loc_string, lat, longitude):
         location_collection.insert_one(location_data)
 
     except:
-        f = open("errorlocations2.txt", "a")
+        f = open("errorlocations.txt", "a")
         try:
             f.write(f"{loc_string}\n")
             print(f'-- unable to find exact location {loc_string}----\n')
@@ -232,5 +234,7 @@ def create_location(loc_string, lat, longitude):
     return location_data
 
 # test helper:
+
+
 def get_db():
     return db
