@@ -1,0 +1,8 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.2, pytest-7.1.0, pluggy-1.0.0
+rootdir: /Users/rovielynespiritu/Desktop/se3011/proj/PHASE_1/Scraper_Source
+collected 21 items
+
+test_parser.py .....................                                     [100%]
+
+============================== 21 passed in 0.66s ==============================
