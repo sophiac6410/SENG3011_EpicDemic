@@ -12,8 +12,8 @@ cluster = MongoClient(
 
 db = cluster["parser_test_db"]
 
-
 def process_data(data):
+    print(data)
     if data == None:
         return
     article_id = create_article(data)
@@ -60,7 +60,7 @@ def get_diseases(headline):
             disease_list.append(disease['_id'])
 
     if disease_list == []:
-        if re.search("unknown", headline, re.I):
+        if re.search("unknown", headline, flags=re.IGNORECASE):
             unknown = disease_collection.find_one({"name": "unknown"})
             for word in unknown['key_words']:
                 if re.search(word, headline, re.I):
@@ -69,6 +69,9 @@ def get_diseases(headline):
             other = disease_collection.find_one({"name": "other"})
             if other:
                 disease_list.append(other['_id'])
+
+    # removes duplicates
+    disease_list = list(set(disease_list))
     return disease_list
 
 
@@ -207,3 +210,7 @@ def create_location(loc_string, lat, longitude):
                 return handle_err_location()
             
     return location_data
+
+# test helper:
+def get_db():
+    return db
