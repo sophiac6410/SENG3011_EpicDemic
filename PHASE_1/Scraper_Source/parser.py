@@ -13,8 +13,6 @@ cluster = MongoClient(
 db = cluster["parser_test_db"]
 
 # processes data from scraper to create articles, reports + locations
-
-
 def process_data(data):
     if data == None:
         return
@@ -23,8 +21,6 @@ def process_data(data):
     create_reports(data, article_id, syndromes)
 
 # populates article data and inserts into database
-
-
 def create_article(data):
     if data == None:
         return
@@ -50,8 +46,6 @@ def get_date(dt_string):
     return datetime.strptime(dt_string, "%Y-%m-%d %H:%M:%S")
 
 # matches an article headline to the disease based on key words + regex
-
-
 def get_diseases(headline):
     disease_collection = db["Diseases"]
     diseases = disease_collection.find(
@@ -99,16 +93,12 @@ def create_reports(data, article_id, syndromes):
         report_collection.insert_one(report_data)
 
 # use report details to scrape event date
-
-
 def get_event_date(headline):
     date_string = headline.split('<')
     date_string = date_string[0].rstrip(' ')
     return datetime.strptime(date_string, "%d %b %Y")
 
 # get syndromes for an article by matching against the main_text
-
-
 def get_syndromes(article_id):
     syndrome_collection = db["Syndromes"]
     syndromes = syndrome_collection.find({})
@@ -124,8 +114,6 @@ def get_syndromes(article_id):
     return syndrome_list
 
 # get location from database or create new location using geonames
-
-
 def get_locations(loc_string, lat, long):
 
     location_collection = db["Locations"]
@@ -155,8 +143,6 @@ def get_locations(loc_string, lat, long):
     return location_list
 
 # if geonames unable to find location - store as unkown (worldwide reports)
-
-
 def handle_err_location():
     location_collection = db["Locations"]
     location_data = {
@@ -173,8 +159,6 @@ def handle_err_location():
     return location_data
 
 # create the location object using geonames and location data
-
-
 def create_location(loc_string, lat, longitude):
     location_collection = db["Locations"]
     try:
