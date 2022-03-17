@@ -2,7 +2,7 @@ from datetime import datetime
 
 import pytz
 
-DATETIME_REGEX = "^(19|20)\d\d-(0[1-9]|1[012])-([012]\d|3[01])T([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$"
+DATETIME_REGEX = r"^(19|20)[0-9]{2}-(0[1-9]|1[012])-([012][0-9]|3[01])T([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$"
 
 def parse_datetime_string(date_str, timezone):
     """
