@@ -12,6 +12,8 @@ cluster = MongoClient(
 
 db = cluster["parser_test_db"]
 
+# processes data from scraper to create articles, reports + locations
+
 
 def process_data(data):
     if data == None:
@@ -19,6 +21,8 @@ def process_data(data):
     article_id = create_article(data)
     syndromes = get_syndromes(article_id)
     create_reports(data, article_id, syndromes)
+
+# populates article data and inserts into database
 
 
 def create_article(data):
@@ -39,9 +43,13 @@ def create_article(data):
 
     return article_data["_id"]
 
+# creates datetime object for article issue date
+
 
 def get_date(dt_string):
     return datetime.strptime(dt_string, "%Y-%m-%d %H:%M:%S")
+
+# matches an article headline to the disease based on key words + regex
 
 
 def get_diseases(headline):
@@ -71,6 +79,8 @@ def get_diseases(headline):
                 disease_list.append(other['_id'])
     return disease_list
 
+# create a report for each marker in the article
+
 
 def create_reports(data, article_id, syndromes):
     report_collection = db["Reports"]
@@ -84,26 +94,19 @@ def create_reports(data, article_id, syndromes):
             "confirmed": True,
             "syndromes": syndromes,
             "event_date": get_event_date(report_headline),
-            "cases": get_cases(report_headline),
             "locations": get_locations(data['markers'][report][1], data['markers'][report][2], data['markers'][report][3]),
         }
         report_collection.insert_one(report_data)
 
-
-def get_cases(report_headline):
-    cases = re.search("\([0-9]+\)", report_headline, re.I)
-    if cases:
-        match = cases.group(0)
-        match = match.lstrip('(').rstrip(')').lstrip('0')
-        return int(match)
-    else:
-        return 1
+# use report details to scrape event date
 
 
 def get_event_date(headline):
     date_string = headline.split('<')
     date_string = date_string[0].rstrip(' ')
     return datetime.strptime(date_string, "%d %b %Y")
+
+# get syndromes for an article by matching against the main_text
 
 
 def get_syndromes(article_id):
@@ -119,6 +122,8 @@ def get_syndromes(article_id):
             syndrome_list.append(syndrome["name"])
 
     return syndrome_list
+
+# get location from database or create new location using geonames
 
 
 def get_locations(loc_string, lat, long):
@@ -149,8 +154,10 @@ def get_locations(loc_string, lat, long):
     # print(location_list)
     return location_list
 
+# if geonames unable to find location - store as unkown (worldwide reports)
 
-def handle_err_location(): 
+
+def handle_err_location():
     location_collection = db["Locations"]
     location_data = {
         "_id":  location_collection.count_documents({}) + 1,
@@ -165,10 +172,12 @@ def handle_err_location():
 
     return location_data
 
+# create the location object using geonames and location data
+
 
 def create_location(loc_string, lat, longitude):
     location_collection = db["Locations"]
-    try: 
+    try:
         geo_data = geocoder.geonames(loc_string, key='epicdemic')
 
         location_data = {
@@ -183,27 +192,33 @@ def create_location(loc_string, lat, longitude):
 
         if 'city' not in geo_data.class_description:
             location_data['city'] = ""
-        
+
         location_collection.insert_one(location_data)
-    
-    except: 
-        # print('handling error')
+
+    except:
+        f = open("errorlocations.txt", "a")
         try:
+            f.write(f"{loc_string}\n")
+            print(f'-- unable to find exact location {loc_string}----\n')
+
             country_name = loc_string.split(', ')[-1]
             db_loc = location_collection.find_one({"country": country_name})
 
             if db_loc:
-                return db_loc 
-            else: 
+                f.write(f"-- country found {db_loc['country']}\n")
+                return db_loc
+            else:
                 location_data = create_location(country_name, lat, longitude)
-        except: 
-            print('handling err case')
+                f.write(f"-- new location {location_data['country']}\n")
+        except:
             # if all comes to fail, default value is Worldwide
-            db_loc = location_collection.find_one({"latitude": 0, 'longitude': 0})
-            
+            db_loc = location_collection.find_one(
+                {"latitude": 0, 'longitude': 0})
+            f.write("-- unknown: worldwide location\n")
             if db_loc:
-                return db_loc 
-            else: # if there is no Worldwide attribute yet, creates worldwide
+                return db_loc
+            else:  # if there is no Worldwide attribute yet, creates worldwide
                 return handle_err_location()
-            
+        f.close()
+
     return location_data
