@@ -107,7 +107,10 @@ def create_reports(data, article_id, syndromes):
             "event_date": get_event_date(report_headline),
             "locations": get_locations(data['markers'][report][1], data['markers'][report][2], data['markers'][report][3]),
         }
-        report_collection.insert_one(report_data)
+        try:
+            report_collection.insert_one(report_data)
+        except:
+            print("database error")
 
 # use report details to scrape event date
 

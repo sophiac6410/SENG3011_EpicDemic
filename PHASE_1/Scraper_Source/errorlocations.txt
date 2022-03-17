@@ -6,3 +6,107 @@ New Brunswick Province, Canada
 -- country found Canada
 Collectivité spéciale de New Caledonia, France
 -- country found France
+Isiolo District, Eastern Province, Kenya
+-- new location Kenya
+New Brunswick Province, Canada
+-- country found Canada
+Riau Province, Indonesia
+-- new location Indonesia
+Collectivité spéciale de New Caledonia, France
+-- country found France
+British Columbia Province, Canada
+-- country found Canada
+Nova Scotia Province, Canada
+-- country found Canada
+Nova Scotia Province, Canada
+-- country found Canada
+Arad County, Romania
+-- country found Romania
+Ontario Province, Canada
+-- country found Canada
+Pingtung County, Taiwan
+-- country found Taiwan
+British Columbia Province, Canada
+-- country found Canada
+Isiolo District, Eastern Province, Kenya
+-- new location Kenya
+Riau Province, Indonesia
+-- new location Indonesia
+British Columbia Province, Canada
+-- country found Canada
+Newfoundland and Labrador Province, Canada
+-- country found Canada
+Nova Scotia Province, Canada
+-- country found Canada
+Saskatchewan Province, Canada
+-- country found Canada
+Nova Scotia Province, Canada
+-- country found Canada
+Ontario Province, Canada
+-- country found Canada
+Pingtung County, Taiwan
+-- country found Taiwan
+Alberta Province, Canada
+-- country found Canada
+Saskatchewan Province, Canada
+-- country found Canada
+Mai Po Nature Reserve, New Territories, Hong Kong
+-- country found Hong Kong
+Buxar District, Bihar, India
+-- country found India
+New Forest National Park, Hampshire, UK
+-- new location United Kingdom
+Ontario Province, Canada
+-- country found Canada
+Delcevo, Delčevo, Macedonia (FYROM)
+-- new location North Macedonia
+Région d'outre-mer de French Guiana, France
+-- country found France
+Saskatchewan Province, Canada
+-- country found Canada
+Newfoundland and Labrador Province, Canada
+-- country found Canada
+Solway Firth,  Scotland, United Kingdom
+-- country found United Kingdom
+West Bank, Palestinian Territory
+-- new location Palestine
+Saint Martin [France/Netherlands]
+-- unknown
+Alberta Province, Canada
+-- country found Canada
+Alberta Province, Canada
+-- country found Canada
+Trinidad & Tobago
+-- unknown
+Saskatchewan Province, Canada
+-- country found Canada
+Puntarenas Province, Costa Rica
+-- new location Costa Rica
+Pazardzhik, Pazardzhit, Bulgaria
+-- country found Bulgaria
+Nabeul Governorate‎, Tunisia
+-- country found Tunisia
+Ovorkhangai Province, Mongolia
+-- country found Mongolia
+Jalal-Abad Region, Kyrgyzstan
+-- country found Kyrgyzstan
+Ontario Province, Canada
+-- country found Canada
+Taiwan 907
+-- unknown
+Yanpu Township, Pingtung County, Taiwan 907
+-- new location 
+Jalal-Abad Region, Kyrgyzstan
+-- country found Kyrgyzstan
+Chichaoua, Marrakech-Tensift-Al Haouz, Morocco
+-- country found Morocco
+Kericho District, Rift Valley, Kenya
+-- country found Kenya
+Pazardzhik, Pazardzhit, Bulgaria
+-- country found Bulgaria
+Alberta Province, Canada
+-- country found Canada
+Abidjan, Lagunes Region, Ivory Coast
+-- country found Ivory Coast
+Abidjan, Lagunes Region, Ivory Coast
+-- country found Ivory Coast
