@@ -23,4 +23,11 @@ API Documentation
 * Our API is hosted on http://3.83.251.108:8080/docs
 
 API Testing
+* TestScripts folder (explained in testing report)
+* Note parser pytests within Scraper_Source Folder
 
+Report:
+* Design Details (Updates)
+  - API Design (Updates)
+* Management Report (Updates)
+* Testing Report (New)
