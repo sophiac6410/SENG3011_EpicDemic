@@ -20,5 +20,7 @@ API Implementation
 
 API Documentation
 * Swagger
+* Our API is hosted on http://3.83.251.108:8080/docs
 
 API Testing
+
