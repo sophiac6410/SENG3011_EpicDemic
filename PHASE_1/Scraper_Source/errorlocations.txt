@@ -110,3 +110,815 @@ Abidjan, Lagunes Region, Ivory Coast
 -- country found Ivory Coast
 Abidjan, Lagunes Region, Ivory Coast
 -- country found Ivory Coast
+Setagaya Ward, Tokyo, Japan
+-- country found Japan
+Kiambu District, Central, Kenya
+-- country found Kenya
+Benghazi District, Libya
+-- country found Libya
+Uthai Thani, Uthai Thani Province, Thailand
+-- country found Thailand
+Palmerston North Hospital,  New Zealand
+-- new location New Zealand
+Saskatchewan Province, Canada
+-- country found Canada
+Oddar Meanchey Province, Cambodia
+-- country found Cambodia
+Alberta Province, Canada
+-- country found Canada
+British Columbia Province, Canada
+-- country found Canada
+Antigua & Barbuda
+-- unknown
+Région d'outre-mer de Mayotte, France
+-- country found France
+New Brunswick Province, Canada
+-- country found Canada
+British Columbia Province, Canada
+-- country found Canada
+West Pokot County, Rift Valley, Kenya
+-- country found Kenya
+Garissa, North-Eastern, Kenya
+-- country found Kenya
+Collectivité spéciale de New Caledonia, France
+-- country found France
+Saskatchewan Province, Canada
+-- country found Canada
+Maritsa Municipality, Plovdiv, Bulgaria
+-- country found Bulgaria
+Alberta Province, Canada
+-- country found Canada
+New Brunswick Province, Canada
+-- country found Canada
+Manitoba Province, Canada
+-- country found Canada
+Albay Province, Bicol Region, Philippines
+-- country found Philippines
+Roi Et, Roi Et Province, Thailand
+-- country found Thailand
+Alberta Province, Canada
+-- country found Canada
+Ontario Province, Canada
+-- country found Canada
+New Brunswick Province, Canada
+-- country found Canada
+Lubuskie Province, Poland
+-- country found Poland
+Nova Scotia Province, Canada
+-- country found Canada
+Newfoundland and Labrador Province, Canada
+-- country found Canada
+Ontario Province, Canada
+-- country found Canada
+Alberta Province, Canada
+-- country found Canada
+Albay Province, Bicol Region, Philippines
+-- country found Philippines
+Haidian District, Beijing, China
+-- country found China
+Keur Massene, Mauritania
+-- country found Mauritania
+Isiolo, Eastern Province, Kenya
+-- country found Kenya
+Garissa, North-Eastern, Kenya
+-- country found Kenya
+Al Jahrah Governorate, Kuwait
+-- country found Kuwait
+Alberta Province, Canada
+-- country found Canada
+Alberta Province, Canada
+-- country found Canada
+Alberta Province, Canada
+-- country found Canada
+British Columbia Province, Canada
+-- country found Canada
+Rovaniemi, Lapponia, Finland
+-- country found Finland
+Mikkeli, Eastern Finland, Finland
+-- country found Finland
+British Columbia Province, Canada
+-- country found Canada
+Ontario Province, Canada
+-- country found Canada
+Gyeonggi Province, South Korea
+-- country found South Korea
+Gelderland Province, Netherlands
+-- country found Netherlands
+Région d'outre-mer de French Guiana, France
+-- country found France
+Arabian Peninsula, AE.10, United Arab Emirates
+-- country found United Arab Emirates
+Abu Arish, Jizan Province, Saudi Arabia
+-- country found Saudi Arabia
+Alberta Province, Canada
+-- country found Canada
+New Brunswick Province, Canada
+-- country found Canada
+Sankuru, Congo [DRC]
+-- new location DR Congo
+Similipal National Park, Dist. Mayurbhanj, Bhanjpur, Baripada, Odisha 757002, India
+-- country found India
+Ontario Province, Canada
+-- country found Canada
+Trà Vinh Province, Vietnam
+-- country found Vietnam
+Shymkent, Ongtüstik Qazaqstan, Kazakhstan
+-- country found Kazakhstan
+Région d'outre-mer de French Guiana, France
+-- country found France
+Gyeonggi Province, South Korea
+-- country found South Korea
+Yokohama Port, Kanagawa, Japan
+-- country found Japan
+Limburg Province, Netherlands
+-- country found Netherlands
+Limburg Province, Netherlands
+-- country found Netherlands
+British Columbia Province, Canada
+-- country found Canada
+Nakhon Ratchasima Province, Thailand
+-- country found Thailand
+Saskatchewan Province, Canada
+-- country found Canada
+Kandhamal, Orissa, India
+-- country found India
+British Columbia Province, Canada
+-- country found Canada
+Sao Tome & Principe
+-- unknown
+Collectivité d'outre-mer de Saint Pierre and Miquelon, France
+-- country found France
+Prachuap Khiri Khan Province, Thailand
+-- country found Thailand
+Saint Eustatius, Netherlands Antilles
+-- new location 
+St. Kitts & Nevis
+-- unknown
+Antigua & Barbuda
+-- unknown
+Trinidad & Tobago
+-- unknown
+Mpumalanga Region, South Africa
+-- country found South Africa
+Bethlehem, West Bank, Palestinian Territory
+-- new location Palestine
+Ontario Province, Canada
+-- country found Canada
+Ontario Province, Canada
+-- country found Canada
+Bomet, Rift Valley, Kenya
+-- country found Kenya
+ Trà Vinh City, Trà Vinh Province, Vietnam
+-- country found Vietnam
+Bomet, Rift Valley, Kenya
+-- country found Kenya
+New Brunswick Province, Canada
+-- country found Canada
+Teso, Coast, Kenya
+-- country found Kenya
+Bomet, Rift Valley, Kenya
+-- country found Kenya
+Al Qassim Province, Saudi Arabia
+-- country found Saudi Arabia
+Saskatchewan Province, Canada
+-- country found Canada
+Buhakiv, Vinnyts'ka, Ukraine
+-- country found Ukraine
+Lubuskie Province, Poland
+-- country found Poland
+Pehuajó, Buenos Aires Province, Argentina
+-- country found Argentina
+Nova Scotia Province, Canada
+-- country found Canada
+Saskatchewan Province, Canada
+-- country found Canada
+Alberta Province, Canada
+-- country found Canada
+New Brunswick Province, Canada
+-- country found Canada
+Collectivité spéciale de New Caledonia, France
+-- country found France
+British Columbia Province, Canada
+-- country found Canada
+Newfoundland and Labrador Province, Canada
+-- country found Canada
+Nova Scotia Province, Canada
+-- country found Canada
+Saskatchewan Province, Canada
+-- country found Canada
+Arad County, Romania
+-- country found Romania
+Baringo County,  Rift Valley Province, Kenya
+-- country found Kenya
+Ontario Province, Canada
+-- country found Canada
+Trinidad & Tobago
+-- unknown
+Saskatchewan Province, Canada
+-- country found Canada
+Ontario Province, Canada
+-- country found Canada
+Alberta Province, Canada
+-- country found Canada
+Taiz Governorate, Yemen
+-- country found Yemen
+British Columbia Province, Canada
+-- country found Canada
+British Columbia Province, Canada
+-- country found Canada
+Kagoshima City, Kagoshima, Japan
+-- country found Japan
+Région d'outre-mer de French Guiana, France
+-- country found France
+Lubuskie Province, Poland
+-- country found Poland
+New Brunswick Province, Canada
+-- country found Canada
+Nova Scotia Province, Canada
+-- country found Canada
+Nakuru County, Kenya
+-- country found Kenya
+Ontario Province, Canada
+-- country found Canada
+Garissa, North-Eastern, Kenya
+-- country found Kenya
+Al Qassim Province, Saudi Arabia
+-- country found Saudi Arabia
+Manitoba Province, Canada
+-- country found Canada
+Manitoba Province, Canada
+-- country found Canada
+South Hamgyeong Province, North Korea
+-- country found North Korea
+British Columbia Province, Canada
+-- country found Canada
+Gyeonggi Province, South Korea
+-- country found South Korea
+Manitoba Province, Canada
+-- country found Canada
+Nakuru County, Kenya
+-- country found Kenya
+Manitoba Province, Canada
+-- country found Canada
+Saskatchewan Province, Canada
+-- country found Canada
+Saskatchewan Province, Canada
+-- country found Canada
+Koulikoro, Bamako, Mali
+-- country found Mali
+Ontario Province, Canada
+-- country found Canada
+Astana, Astana Qalasy, Kazakhstan
+-- country found Kazakhstan
+Région d'outre-mer de Mayotte, France
+-- country found France
+Phongsali Province, Laos
+-- country found Laos
+Mongla, Republic of the Union of Myanmar
+-- new location Myanmar
+Brest Region, Belarus
+-- country found Belarus
+British Columbia Province, Canada
+-- country found Canada
+Cura&ccedil;ao [Netherlands]
+-- unknown
+New Brunswick Province, Canada
+-- country found Canada
+Ontario Province, Canada
+-- country found Canada
+Goma, Nord-Kivu, Congo - Kinshasa
+-- new location DR Congo
+Alberta Province, Canada
+-- country found Canada
+Manitoba Province, Canada
+-- country found Canada
+Drenthe Province, Netherlands
+-- country found Netherlands
+Alberta Province, Canada
+-- country found Canada
+Alberta Province, Canada
+-- country found Canada
+Ontario Province, Canada
+-- country found Canada
+Manitoba Province, Canada
+-- country found Canada
+New Brunswick Province, Canada
+-- country found Canada
+Najran Province, Saudi Arabia
+-- country found Saudi Arabia
+Baringo County,  Rift Valley Province, Kenya
+-- country found Kenya
+Parc National de Taï, Dix-Huit Montagnes, Ivory Coast
+-- country found Ivory Coast
+Région d'outre-mer de Mayotte, France
+-- country found France
+Ontario Province, Canada
+-- country found Canada
+Alberta Province, Canada
+-- country found Canada
+Bhaktapur District, Nepal
+-- country found Nepal
+British Columbia Province, Canada
+-- country found Canada
+Valles Del Tuy, Ocumare del Tuy, Venezuela
+-- country found Venezuela
+Alberta Province, Canada
+-- country found Canada
+Channel Islands National Marine Sanctuary, Santa Barbara California, United States
+-- country found United States
+Saskatchewan Province, Canada
+-- country found Canada
+Al Qassim Province, Saudi Arabia
+-- country found Saudi Arabia
+Trinidad & Tobago
+-- unknown
+Alberta Province, Canada
+-- country found Canada
+Puri, Orissa, India
+-- country found India
+Manitoba Province, Canada
+-- country found Canada
+Hordaland County, Norway
+-- country found Norway
+North Waziristan Agency, Federally Administered Tribal Areas, Pakistan
+-- country found Pakistan
+Ramat Magshemim, Northern District, Israel
+-- country found Israel
+Ili Kazakh Autonomous Prefecture, Xinjiang Uygur Autonomous Region, China
+-- country found China
+Région d'outre-mer de Mayotte, France
+-- country found France
+Chagang Province, North Korea
+-- country found North Korea
+New Brunswick Province, Canada
+-- country found Canada
+Région d'outre-mer de Mayotte, France
+-- country found France
+Alberta Province, Canada
+-- country found Canada
+Nakuru County, Kenya
+-- country found Kenya
+Ontario Province, Canada
+-- country found Canada
+Bhaktapur District, Nepal
+-- country found Nepal
+Misratah District, Libya
+-- country found Libya
+Saskatchewan Province, Canada
+-- country found Canada
+Bhaktapur District, Nepal
+-- country found Nepal
+Trinidad & Tobago
+-- unknown
+Région d'outre-mer de French Guiana, France
+-- country found France
+Brihanmumbai Municipal Corporation, Mumbai, Maharashtra, India
+-- country found India
+Saskatchewan Province, Canada
+-- country found Canada
+Région d'outre-mer de Mayotte, France
+-- country found France
+Région d'outre-mer de Mayotte, France
+-- country found France
+Benghazi District, Libya
+-- country found Libya
+Perla, Kerala, India
+-- country found India
+British Columbia Province, Canada
+-- country found Canada
+Nakuru County, Kenya
+-- country found Kenya
+Bwabwata National Park, Namibia
+-- country found Namibia
+Ontario Province, Canada
+-- country found Canada
+Nakuru County, Kenya
+-- country found Kenya
+British Columbia Province, Canada
+-- country found Canada
+Région d'outre-mer de Mayotte, France
+-- country found France
+New Brunswick Province, Canada
+-- country found Canada
+Région d'outre-mer de Mayotte, France
+-- country found France
+Ontario Province, Canada
+-- country found Canada
+Keonjhar, Orissa, India
+-- country found India
+Estado de San Luis Potosí, Mexico
+-- country found Mexico
+Région d'outre-mer de Mayotte, France
+-- country found France
+Hordaland County, Norway
+-- country found Norway
+Saskatchewan Province, Canada
+-- country found Canada
+Manitoba Province, Canada
+-- country found Canada
+Ontario Province, Canada
+-- country found Canada
+Moncton High School, NB, Canada
+-- country found Canada
+Région d'outre-mer de Mayotte, France
+-- country found France
+Sepahijala Zoo, Tripura, India
+-- country found India
+Alberta Province, Canada
+-- country found Canada
+Région d'outre-mer de Mayotte, France
+-- country found France
+Najran Province, Saudi Arabia
+-- country found Saudi Arabia
+Al Qassim Province, Saudi Arabia
+-- country found Saudi Arabia
+Ontario Province, Canada
+-- country found Canada
+Mansehra, North West Frontier Province, Pakistan
+-- country found Pakistan
+Région d'outre-mer de Mayotte, France
+-- country found France
+Alberta Province, Canada
+-- country found Canada
+Région d'outre-mer de Mayotte, France
+-- country found France
+Anseong-si, Gyeonggi Province, South Korea
+-- country found South Korea
+Kruger National Park, Limpopo, South Africa
+-- country found South Africa
+Pazardzhik, Pazardzhit, Bulgaria
+-- country found Bulgaria
+Skopje, Macedonia (FYROM)
+-- new location North Macedonia
+British Columbia Province, Canada
+-- country found Canada
+Kalahandi, Orissa, India
+-- country found India
+Alberta Province, Canada
+-- country found Canada
+Similipal National Park, Asanabani, Odisha, India
+-- country found India
+Wonju-si, Gangwon Province, South Korea
+-- country found South Korea
+New Brunswick Province, Canada
+-- country found Canada
+Najran Province, Saudi Arabia
+-- country found Saudi Arabia
+Basildon & Thurrock General Hospitals NHS Trust, England, United Kingdom
+-- country found United Kingdom
+Kalunguta, North-Kivu, Democratic Republic of the Congo
+-- new location DR Congo
+Bwabwata National Park, Namibia
+-- country found Namibia
+Mana Pools National Park, Zimbabwe
+-- country found Zimbabwe
+Gbudue, South Sudan
+-- country found South Sudan
+Harrah's Cherokee Casino & Hotel, Cherokee, NC 28719, USA
+-- new location None
+Jinshan District, Shanghai, China
+-- country found China
+Saskatchewan Province, Canada
+-- country found Canada
+British Columbia Province, Canada
+-- country found Canada
+South Hamgyeong Province, North Korea
+-- country found North Korea
+British Columbia Province, Canada
+-- country found Canada
+Manitoba Province, Canada
+-- country found Canada
+Nakuru County, Kenya
+-- country found Kenya
+Manitoba Province, Canada
+-- country found Canada
+Saskatchewan Province, Canada
+-- country found Canada
+Saskatchewan Province, Canada
+-- country found Canada
+Koulikoro, Bamako, Mali
+-- country found Mali
+Astana, Astana Qalasy, Kazakhstan
+-- country found Kazakhstan
+Région d'outre-mer de Mayotte, France
+-- country found France
+Phongsali Province, Laos
+-- country found Laos
+Brest Region, Belarus
+-- country found Belarus
+British Columbia Province, Canada
+-- country found Canada
+Cura&ccedil;ao [Netherlands]
+-- unknown
+New Brunswick Province, Canada
+-- country found Canada
+Ontario Province, Canada
+-- country found Canada
+Alberta Province, Canada
+-- country found Canada
+Manitoba Province, Canada
+-- country found Canada
+Drenthe Province, Netherlands
+-- country found Netherlands
+Alberta Province, Canada
+-- country found Canada
+Alberta Province, Canada
+-- country found Canada
+Ontario Province, Canada
+-- country found Canada
+Manitoba Province, Canada
+-- country found Canada
+New Brunswick Province, Canada
+-- country found Canada
+Najran Province, Saudi Arabia
+-- country found Saudi Arabia
+Baringo County,  Rift Valley Province, Kenya
+-- country found Kenya
+Parc National de Taï, Dix-Huit Montagnes, Ivory Coast
+-- country found Ivory Coast
+Alberta Province, Canada
+-- country found Canada
+Région d'outre-mer de Mayotte, France
+-- country found France
+Ontario Province, Canada
+-- country found Canada
+Alberta Province, Canada
+-- country found Canada
+Bhaktapur District, Nepal
+-- country found Nepal
+British Columbia Province, Canada
+-- country found Canada
+Valles Del Tuy, Ocumare del Tuy, Venezuela
+-- country found Venezuela
+Alberta Province, Canada
+-- country found Canada
+Channel Islands National Marine Sanctuary, Santa Barbara California, United States
+-- country found United States
+Saskatchewan Province, Canada
+-- country found Canada
+Al Qassim Province, Saudi Arabia
+-- country found Saudi Arabia
+Trinidad & Tobago
+-- unknown
+Alberta Province, Canada
+-- country found Canada
+Puri, Orissa, India
+-- country found India
+Manitoba Province, Canada
+-- country found Canada
+Hordaland County, Norway
+-- country found Norway
+North Waziristan Agency, Federally Administered Tribal Areas, Pakistan
+-- country found Pakistan
+Ramat Magshemim, Northern District, Israel
+-- country found Israel
+Région d'outre-mer de Mayotte, France
+-- country found France
+Chagang Province, North Korea
+-- country found North Korea
+New Brunswick Province, Canada
+-- country found Canada
+Région d'outre-mer de Mayotte, France
+-- country found France
+Alberta Province, Canada
+-- country found Canada
+Nakuru County, Kenya
+-- country found Kenya
+Ontario Province, Canada
+-- country found Canada
+Bhaktapur District, Nepal
+-- country found Nepal
+Misratah District, Libya
+-- country found Libya
+Saskatchewan Province, Canada
+-- country found Canada
+Bhaktapur District, Nepal
+-- country found Nepal
+Trinidad & Tobago
+-- unknown
+Région d'outre-mer de French Guiana, France
+-- country found France
+Brihanmumbai Municipal Corporation, Mumbai, Maharashtra, India
+-- country found India
+Saskatchewan Province, Canada
+-- country found Canada
+Région d'outre-mer de Mayotte, France
+-- country found France
+Région d'outre-mer de Mayotte, France
+-- country found France
+Benghazi District, Libya
+-- country found Libya
+Perla, Kerala, India
+-- country found India
+British Columbia Province, Canada
+-- country found Canada
+Nakuru County, Kenya
+-- country found Kenya
+Bwabwata National Park, Namibia
+-- country found Namibia
+Ontario Province, Canada
+-- country found Canada
+Nakuru County, Kenya
+-- country found Kenya
+British Columbia Province, Canada
+-- country found Canada
+Région d'outre-mer de Mayotte, France
+-- country found France
+New Brunswick Province, Canada
+-- country found Canada
+Région d'outre-mer de Mayotte, France
+-- country found France
+Ontario Province, Canada
+-- country found Canada
+Keonjhar, Orissa, India
+-- country found India
+Région d'outre-mer de Mayotte, France
+-- country found France
+Hordaland County, Norway
+-- country found Norway
+Saskatchewan Province, Canada
+-- country found Canada
+Manitoba Province, Canada
+-- country found Canada
+Ontario Province, Canada
+-- country found Canada
+Moncton High School, NB, Canada
+-- country found Canada
+Région d'outre-mer de Mayotte, France
+-- country found France
+Sepahijala Zoo, Tripura, India
+-- country found India
+Arabian Peninsula, AE.10, United Arab Emirates
+-- country found United Arab Emirates
+Alberta Province, Canada
+-- country found Canada
+Région d'outre-mer de Mayotte, France
+-- country found France
+Najran Province, Saudi Arabia
+-- country found Saudi Arabia
+Al Qassim Province, Saudi Arabia
+-- country found Saudi Arabia
+Ontario Province, Canada
+-- country found Canada
+British Columbia Province, Canada
+-- country found Canada
+Alberta Province, Canada
+-- country found Canada
+Saskatchewan Province, Canada
+-- country found Canada
+Al Qassim Province, Saudi Arabia
+-- country found Saudi Arabia
+Luotian County, Huanggang, Hubei Province, China
+-- country found China
+Ontario Province, Canada
+-- country found Canada
+Skid Row, Los Angeles, CA, USA
+-- new location None
+Tchien District, Grand Gedeh, Liberia
+-- country found Liberia
+Sekong Province, Laos
+-- country found Laos
+Manitoba Province, Canada
+-- country found Canada
+Najran Province, Saudi Arabia
+-- country found Saudi Arabia
+Alberta Province, Canada
+-- country found Canada
+Ontario Province, Canada
+-- country found Canada
+Ontario Province, Canada
+-- country found Canada
+Aiyrtau 150000, Kazakhstan
+-- country found Kazakhstan
+Alberta Province, Canada
+-- country found Canada
+Ituri, Orientale, DR Congo
+-- country found DR Congo
+Pingtung County, Taiwan
+-- country found Taiwan
+Cahul District, Moldova
+-- country found Moldova
+Hemenway Park, 401 Ville Dr, Boulder City, NV 89005, USA
+-- new location None
+Manhiça District, Maputo Province, Mozambique
+-- country found Mozambique
+Saskatchewan Province, Canada
+-- country found Canada
+Région d'outre-mer de Martinique, France
+-- country found France
+Nakuru County, Kenya
+-- country found Kenya
+Alberta Province, Canada
+-- country found Canada
+Dibër County, Albania
+-- country found Albania
+Bihor County, Romania
+-- country found Romania
+Kericho District, Rift Valley, Kenya
+-- country found Kenya
+Prymorsk, Zaporizhia Oblast, Ukraine
+-- country found Ukraine
+Kericho District, Rift Valley, Kenya
+-- country found Kenya
+Ontario Province, Canada
+-- country found Canada
+Qadisiyyah Governorate, Iraq
+-- country found Iraq
+Nova Scotia Province, Canada
+-- country found Canada
+Tselīnograd Aūdany, Aqmola, Kazakhstan
+-- country found Kazakhstan
+Liaozhong County, Shenyang, Liaoning Province, China
+-- country found China
+New Brunswick Province, Canada
+-- country found Canada
+Bilokrynytsia, Bilokrynytsya, Ternopil's'ka oblast, Ukraine, 47013
+-- new location France
+Najran, Najran Province, Saudi Arabia
+-- country found Saudi Arabia
+New Brunswick Province, Canada
+-- country found Canada
+Ontario Province, Canada
+-- country found Canada
+Steung Treng Province, Cambodia
+-- country found Cambodia
+Nova Scotia Province, Canada
+-- country found Canada
+Pingtung County, Taiwan
+-- country found Taiwan
+Para State, Brazil
+-- country found Brazil
+Alberta Province, Canada
+-- country found Canada
+British Columbia Province, Canada
+-- country found Canada
+Tetovo, Tetovo, Macedonia (FYROM)
+-- new location North Macedonia
+Baringo County,  Rift Valley Province, Kenya
+-- country found Kenya
+British Columbia Province, Canada
+-- country found Canada
+Alberta Province, Canada
+-- country found Canada
+Alberta Province, Canada
+-- country found Canada
+Alberta Province, Canada
+-- country found Canada
+Trinidad & Tobago
+-- unknown
+Trinidad & Tobago
+-- unknown
+Alberta Province, Canada
+-- country found Canada
+Sauvo, Finland Proper, Finland
+-- country found Finland
+Alberta Province, Canada
+-- country found Canada
+Fort Nepean, Victoria, Australia
+-- country found Australia
+Bwabwata National Park, Namibia
+-- country found Namibia
+Ontario Province, Canada
+-- country found Canada
+Linxia, Linxia Hui Autonomous Prefecture, Gansu Province, China
+-- country found China
+Limerick Regional Hospital, County Limerick, Ireland
+-- country found Ireland
+Al Murqub District, Libya
+-- country found Libya
+Morley, AB T0L 1N0, Canada
+-- country found Canada
+Morley, AB T0L 1N0, Canada
+-- country found Canada
+Alberta Province, Canada
+-- country found Canada
+Alberta Province, Canada
+-- country found Canada
+Pargas, Finland Proper, Finland
+-- country found Finland
+British Columbia Province, Canada
+-- country found Canada
+British Columbia Province, Canada
+-- country found Canada
+Dormaa, Brong-Ahafo, Ghana
+-- country found Ghana
+Lahore Zoo, Lahore District, Pakistan
+-- country found Pakistan
+Sattari, Goa, India
+-- country found India
+Laikipia District, Rift Valley, Kenya
+-- country found Kenya
+Saskatchewan Province, Canada
+-- country found Canada
+Alberta Province, Canada
+-- country found Canada
+Nova Scotia Province, Canada
+-- country found Canada
+Joint Base Myer-Henderson Hall, Fort Myer, Virginia, United States
+-- country found United States
+Villeneuve-d'Ascq, Nord-Pas-de-Calais, France
+-- country found France
+Dormaa, Brong-Ahafo, Ghana
+-- country found Ghana
+210 Racetrack Rd, Washington, PA 15301, USA
+-- new location None

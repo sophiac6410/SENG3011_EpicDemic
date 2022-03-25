@@ -96,6 +96,7 @@ def article_request(article_id):
         f.write(f"{article_id}\n")
         f.close()
         print(f'---missing{article_id}----')
+        time.sleep(20)
         return
 
     return json.loads(data)
@@ -136,8 +137,8 @@ def update(start_date="03/12/2022", end_date="03/12/2022"):
         print(
             f'get the data from pages {pagenum} from {start_date} to {end_date}, size: {len(ids)}')
         for _id in ids:
-            data = article_request(_id)
             print(f"    {i}:article{_id}")
+            data = article_request(_id)
             i += 1
             process_data(data)
 
@@ -149,9 +150,10 @@ def daily_update():
 
 #inital scraping
 def start_up():
-    start_date = "01/01/2000"
-    end_date = "03/16/2022"
-
+    #date: mm/dd/YYYY
+    start_date = "12/31/2016"
+    end_date = "11/18/2018"
+    #01/01/2017
     update(start_date, end_date)
 
 def main():

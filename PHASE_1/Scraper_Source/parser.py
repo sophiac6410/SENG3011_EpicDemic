@@ -26,7 +26,7 @@ def process_data(data):
 
 
 def create_article(data):
-    if data == None:
+    if data == None or data['postinfo'] == None:
         return
 
     article_collection = db["Articles"]
