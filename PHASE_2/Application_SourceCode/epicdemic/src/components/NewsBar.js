@@ -39,17 +39,24 @@ class NewsBar extends React.Component {
             autoPlay={false}
             arrows={false}
             shouldResetAutoplay={false}
-            itemClass="location-card"
+            itemClass="news-card"
             centerMode={true}
+            className="news-carousel"
           >
+            <div className="news-container">
               <NewsCard></NewsCard>
+              <div className="news-container-col">
+                <NewsCard></NewsCard>
+                <NewsCard></NewsCard>
+              </div>
+            </div>
+            <div className="news-container">
               <NewsCard></NewsCard>
-              <NewsCard></NewsCard>
-              <NewsCard></NewsCard>
-              <NewsCard></NewsCard>
-              <NewsCard></NewsCard>
-              <NewsCard></NewsCard>
-              <NewsCard></NewsCard>
+              <div className="news-container-col">
+                <NewsCard></NewsCard>
+                <NewsCard></NewsCard>
+              </div>
+            </div>
           </Carousel>
         </div>
       </Row>
