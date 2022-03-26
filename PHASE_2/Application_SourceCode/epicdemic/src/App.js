@@ -5,7 +5,7 @@ function App() {
     return(
         <div className="APP">
             <NavbarComp></NavbarComp>
-            <div className='content p-3'>
+            <div>
                 <Home></Home>
             </div>
         </div>
