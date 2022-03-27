@@ -1,8 +1,9 @@
 import React from "react";
 import NewsCard from "./NewsCard";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+import { Carousel } from 'react-responsive-carousel';
 import "../styles/Home.css"
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import "react-multi-carousel/lib/styles.css";
 import { Row } from "react-bootstrap";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -34,14 +35,9 @@ class NewsBar extends React.Component {
         <div className="sub-title mb-2">GLOBAL NEWS</div>
         <div className="news-carousel">
           <Carousel 
+            swipeable={true}
+            showStatus={false}
             responsive={responsive} 
-            containerClass="news-carousel"
-            autoPlay={false}
-            arrows={false}
-            shouldResetAutoplay={false}
-            itemClass="news-card"
-            centerMode={true}
-            className="news-carousel"
           >
             <div className="news-container">
               <NewsCard></NewsCard>
