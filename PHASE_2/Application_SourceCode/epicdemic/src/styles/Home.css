@@ -29,3 +29,23 @@
     max-width: 500px;
 }
 
+.searchfield-container {
+    border-radius: 25px;
+    background: #F9F9F9;
+    width: max-content;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-icon {
+    padding-right: 5px;
+}
+
+.search-bar-text {
+    color: white;
+    font-size: 1.2em;
+    padding: 3px;
+}
