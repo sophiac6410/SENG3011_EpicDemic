@@ -25,6 +25,12 @@
 .bg-grey {
     background-color: #EEEEEE;
 }
+.bg-blue {
+    background-color: #A9CBFF;
+}
 .text-grey {
     color: #515151;
+}
+.text-white {
+    color: white;
 }

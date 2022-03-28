@@ -20,7 +20,7 @@ class AirBox extends React.Component {
 class AirUpdateBar extends React.Component {
   render() {
     return(
-      <Col className="mt-2 ms-4 me-3 mb-3">
+      <Col className="mt-2 ms-4 mb-3">
         <Row className="bg-grey">
           <Col>
             <Row>
