@@ -25,13 +25,22 @@ const responsive = {
   }
 };
 
-class AirBox extends React.Component {
-  render() {
+function UpdateBox(props) {
+  if(props.color == "blue") {
     return(
       <Row className="bg-blue m-2 me-4 mb-4 p-3">
         <Col>
-          <Row className="align-self-center justify-content-center sub-title"  style={{"font-size": "35px", "color": "white", "font-weight": "bold"}}>481M</Row>
-          <Row className="align-self-center justify-content-center text-white"  style={{"font-size": "20px", "color": "white", "font-weight": "bold"}}>total cases</Row>
+          <Row className="align-self-center justify-content-center"  style={{"font-size": "35px", "color": "white", "font-weight": "bold"}}>{props.number}</Row>
+          <Row className="align-self-center justify-content-center text-white"  style={{"font-size": "20px", "color": "white", "font-weight": "bold"}}>{props.text}</Row>
+        </Col>
+      </Row>
+    )
+  }else if(props.color == "white"){
+    return(
+      <Row className="bg-lightblue m-2 me-4 mb-4 p-3">
+        <Col>
+          <Row className="align-self-center justify-content-center"  style={{"font-size": "35px", "color": "#726FE7", "font-weight": "bold"}}>{props.number}</Row>
+          <Row className="align-self-center justify-content-center" style={{"font-size": "20px", "color": "#726FE7", "font-weight": "bold"}}>{props.text}</Row>
         </Col>
       </Row>
     )
@@ -51,7 +60,7 @@ class GlobalUpdate extends React.Component{
 
   render() {
     return(
-      <Col className="bg-lightpurple pt-4 pb-4">
+      <Col className="bg-lightpurple pt-4 pb-4 mt-3">
         <Row className="pe-5">
           <Col md={9}>
             <div className="sub-title mb-2">GLOBAL COVID UPDATES</div>
@@ -91,9 +100,9 @@ class GlobalUpdate extends React.Component{
             centerMode={true}
           >
             <Col className="mt-3">
-              <AirBox></AirBox>
-              <AirBox></AirBox>
-              <AirBox></AirBox>
+              <UpdateBox number="481M" text="total cases" color="blue"></UpdateBox>
+              <UpdateBox number="6.11M" text="deaths" color="white"></UpdateBox>
+              <UpdateBox number="1.7M" text="daily cases" color="blue"></UpdateBox>
             </Col>
             <div>
               <img src={covidMap} width="950px" height="425px" className="p-3"></img>

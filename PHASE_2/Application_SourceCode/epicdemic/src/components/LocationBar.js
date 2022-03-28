@@ -25,32 +25,30 @@ const responsive = {
     }
   };
 
-class LocationBar extends React.Component {
-  render() {
-    return(
-      <Row className="mt-2">
-        <div className="sub-title mb-2">YOUR SAVED LOCATIONS</div>
-        <div className="location-carousel">
-          <Carousel 
-            responsive={responsive} 
-            containerClass="location-carousel"
-            autoPlay={false}
-            arrows={false}
-            shouldResetAutoplay={false}
-            itemClass="location-card"
-            centerMode={true}
-          >
-              <LocationCard></LocationCard>
-              <LocationCard></LocationCard>
-              <LocationCard></LocationCard>
-              <LocationCard></LocationCard>
-              <LocationCard></LocationCard>
-              <LocationCard></LocationCard>
-          </Carousel>
-        </div>
-      </Row>
-    )
-  }
+function LocationBar() {
+  return(
+    <Row className="mt-2">
+      <div className="sub-title mb-2">YOUR SAVED LOCATIONS</div>
+      <div className="location-carousel">
+        <Carousel 
+          responsive={responsive} 
+          containerClass="location-carousel"
+          autoPlay={false}
+          arrows={false}
+          shouldResetAutoplay={false}
+          itemClass="location-card"
+          centerMode={true}
+        >
+            <LocationCard></LocationCard>
+            <LocationCard></LocationCard>
+            <LocationCard></LocationCard>
+            <LocationCard></LocationCard>
+            <LocationCard></LocationCard>
+            <LocationCard></LocationCard>
+        </Carousel>
+      </div>
+    </Row>
+  )
 }
 
 export default LocationBar
