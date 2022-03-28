@@ -63,17 +63,17 @@ function GlobalUpdate(){
             </Col>
             <Col>
               <Switch
-                  checked={checked}
-                  onChange={setChecked(!checked)}
-                  onColor="#86d3ff"
-                  onHandleColor="#2693e6"
-                  handleDiameter={30}
-                  uncheckedIcon={false}
-                  checkedIcon={false}
-                  height={20}
-                  width={48}
-                  className="react-switch align-self-center"
-                  id="material-switch"
+                checked={checked}
+                onChange={setChecked(!checked)}
+                onColor="#86d3ff"
+                onHandleColor="#2693e6"
+                handleDiameter={30}
+                uncheckedIcon={false}
+                checkedIcon={false}
+                height={20}
+                width={48}
+                className="react-switch align-self-center"
+                id="material-switch"
                 />
             </Col>
             <Col>
