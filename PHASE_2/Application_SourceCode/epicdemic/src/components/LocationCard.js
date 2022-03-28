@@ -8,7 +8,7 @@ import React from "react";
 class LocationCard extends React.Component {
   render() {
     return (
-      <Card className="m-4">
+      <Card className="m-3">
         <Card.Body>
           <Card.Title>Philipines</Card.Title>
           <Card.Subtitle className="pt-1 text-muted">Overall Advice:</Card.Subtitle>
@@ -25,7 +25,7 @@ class LocationCard extends React.Component {
           </Row>
           <Card.Subtitle className="pt-2 text-muted">Travel Status:</Card.Subtitle>
           <Row className="align-items-center pt-1 justify-content-start">
-            <Col md={3} className="align-items-center justify-content-center">
+            <Col md={3} className="justify-content-center">
               <Row className="justify-content-center">
                 <img src={midDot} width="15px" height="15px">
                 </img>
