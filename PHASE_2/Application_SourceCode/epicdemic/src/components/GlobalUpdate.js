@@ -65,7 +65,7 @@ function GlobalUpdate(){
             <Col>
               <Switch
                 checked={checked}
-                onChange={(checked) => setChecked(checked)}
+                onChange={() => setChecked(!checked)}
                 onColor="#86d3ff"
                 onHandleColor="#2693e6"
                 handleDiameter={30}
