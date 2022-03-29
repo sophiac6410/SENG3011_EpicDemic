@@ -14,7 +14,7 @@ function Home() {
         <NewsBar></NewsBar>
         <LocationBar></LocationBar>
         <Row className="mt-3 p-1 ps-3">
-          <div className="sub-title">Latest travel updates on your current and saved locations</div>
+          <div className="sub-title mb-2">Latest travel updates on your current and saved locations</div>
           <Row>
             <UpdateBar></UpdateBar>
             <AirUpdateBar></AirUpdateBar>
