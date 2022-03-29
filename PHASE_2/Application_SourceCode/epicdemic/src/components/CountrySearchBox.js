@@ -8,45 +8,52 @@ import SearchIcon from '@mui/icons-material/Search';
 
 export default function CountrySelect({fieldLabel}) {
   return (
-    <Autocomplete
-      id="country-select-demo"
-      sx={{ width: 300 }}
-      options={countries}
-      autoHighlight
-      getOptionLabel={(option) => option.label}
-      renderOption={(props, option) => (
-        <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-          <img
-            loading="lazy"
-            width="20"
-            src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-            srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-            alt=""
+    <div style={{ display: "flex", alignItems: "center", flexDirection: "row" }}>
+      <div className='search-icon'>
+        <SearchIcon fontSize='medium'></SearchIcon>
+      </div>
+      <Autocomplete
+        id="country-select-demo"
+        sx={{ width: 300 }}
+        options={countries}
+        autoHighlight
+        getOptionLabel={(option) => option.label}
+        renderOption={(props, option) => (
+          <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+            <img
+              loading="lazy"
+              width="20"
+              src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+              srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+              alt=""
+            />
+            {option.label} ({option.code}) +{option.phone}
+          </Box>
+        )}
+        renderInput={(params) => (
+          <TextField
+            id="standard-basic" 
+            variant="standard"
+            {...params}
+            label={fieldLabel}
+            inputProps={{
+              ...params.inputProps,
+              autoComplete: 'new-password', // disable autocomplete and autofill
+            }}
+            // if this is removed, auto-fill works
+            // InputProps={{
+            //   ...params.inputProps,
+            //   autoComplete: 'new-password', // disable autocomplete and autofill
+            //   startAdornment: (
+            //     <InputAdornment position="start">
+            //       <SearchIcon />
+            //     </InputAdornment>
+            //   ),
+            // }}
           />
-          {option.label} ({option.code}) +{option.phone}
-        </Box>
-      )}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label={fieldLabel}
-          inputProps={{
-            ...params.inputProps,
-            autoComplete: 'new-password', // disable autocomplete and autofill
-          }}
-          // if this is removed, auto-fill works
-          InputProps={{
-            ...params.inputProps,
-            autoComplete: 'new-password', // disable autocomplete and autofill
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-      )}
-    />
+        )}
+      />
+    </div>
   );
 }
 

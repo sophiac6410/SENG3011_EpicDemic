@@ -1,7 +1,6 @@
 import {InputGroup, FormControl, Row, Col } from "react-bootstrap";
 import CountrySelect from "./CountrySearchBox";
 import "react-multi-carousel/lib/styles.css";
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import arrow from '../static/arrow.svg'
 
 function Search() {
@@ -15,7 +14,7 @@ function Search() {
             </div>
           </div>
           <div className="search-col">
-            <img src={arrow} alt="arrow" width="100px" height="40px"></img>
+            <img src={arrow} alt="arrow" width="100px" height="50px"></img>
           </div>
           <div className="search-col">
             <div className="search-bar-text">Destination:</div>
@@ -23,6 +22,9 @@ function Search() {
               <CountrySelect fieldLabel={"Choose a country"}></CountrySelect>
             </div>
           </div>
+        </div>
+        <div className="search-text">
+          <a>I don't know where to go?</a>
         </div>
     </Row>
     )
