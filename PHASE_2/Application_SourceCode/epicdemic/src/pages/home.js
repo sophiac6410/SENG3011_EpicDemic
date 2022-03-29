@@ -5,16 +5,17 @@ import LocationBar from "../components/LocationBar";
 import NewsBar from "../components/NewsBar";
 import Search from "../components/Search";
 import UpdateBar from "../components/UpdateBar";
-
+import NewsBar2 from "../components/NewsBar2";
 
 function Home() {
   return (
       <Container style={{"background-color": "#3F3CB0"}}>
         <Search></Search>
+        {/* <NewsBar2></NewsBar2> */}
         <NewsBar></NewsBar>
         <LocationBar></LocationBar>
         <Row className="mt-3 p-1 ps-3">
-          <div className="sub-title mb-2">Latest travel updates on your current and saved locations</div>
+          <div className="sub-title">Latest travel updates on your current and saved locations</div>
           <Row>
             <UpdateBar></UpdateBar>
             <AirUpdateBar></AirUpdateBar>

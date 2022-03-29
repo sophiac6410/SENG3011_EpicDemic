@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 
 export default function NewsCard() {
   return (
-    <Card sx={{ display: 'flex' }} className="m-2">
+    <Card sx={{ display: 'flex', height: '97%' }} className="m-2" >
       <CardContent>
         <Typography sx={{ fontSize: 14, mb: 1.5 }} color="text.secondary" align="center">
           38 minutes ago

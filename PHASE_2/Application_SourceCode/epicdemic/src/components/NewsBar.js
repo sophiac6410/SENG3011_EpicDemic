@@ -1,12 +1,14 @@
 import React from "react";
 import NewsCard from "./NewsCard";
-import { Carousel } from 'react-responsive-carousel';
+// import { Carousel } from 'react-responsive-carousel';
 import "../styles/Home.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "react-multi-carousel/lib/styles.css";
 import { Row } from "react-bootstrap";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Carousel from "react-multi-carousel";
+import NewsCardSmall from "./NewsCardSmall"
 
 const responsive = {
     superLargeDesktop: {
@@ -39,7 +41,11 @@ class NewsBar extends React.Component {
             showStatus={false}
             responsive={responsive} 
           >
-            <div className="news-container">
+            <NewsCard></NewsCard>
+            <NewsCardSmall></NewsCardSmall>
+            <NewsCard></NewsCard>
+            <NewsCardSmall></NewsCardSmall>
+            {/* <div className="news-container">
               <NewsCard></NewsCard>
               <div className="news-container-col">
                 <NewsCard></NewsCard>
@@ -52,7 +58,7 @@ class NewsBar extends React.Component {
                 <NewsCard></NewsCard>
                 <NewsCard></NewsCard>
               </div>
-            </div>
+            </div> */}
           </Carousel>
         </div>
       </Row>
