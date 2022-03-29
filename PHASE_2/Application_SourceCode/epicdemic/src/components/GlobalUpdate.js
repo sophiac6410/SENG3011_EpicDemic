@@ -1,29 +1,10 @@
 import React, { useState } from "react";
 import Switch from "react-switch";
-import { Row, Form, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import '../styles/Home.css'
 import Carousel from "react-multi-carousel";
 import covidMap from "../static/covidMap.png"
 
-const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
-    items: 5
-  },
-  desktop: {
-    breakpoint: { max: 2000, min: 1024 },
-    items: 1,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1
-  }
-};
 
 function UpdateBox(props) {
   if(props.color == "blue") {
@@ -50,6 +31,26 @@ function UpdateBox(props) {
 function GlobalUpdate(){
   const [checked, setChecked] = useState(false);
 
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5
+    },
+    desktop: {
+      breakpoint: { max: 2000, min: 1024 },
+      items: 1,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
+
   return(
     <Col className="bg-lightpurple pt-4 pb-4 mt-3">
       <Row className="pe-5">
@@ -64,7 +65,7 @@ function GlobalUpdate(){
             <Col>
               <Switch
                 checked={checked}
-                onChange={setChecked(!checked)}
+                onChange={(checked) => setChecked(checked)}
                 onColor="#86d3ff"
                 onHandleColor="#2693e6"
                 handleDiameter={30}
