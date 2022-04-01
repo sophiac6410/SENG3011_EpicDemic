@@ -8,8 +8,8 @@ import { Button, Row, Col } from "react-bootstrap";
 const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5
+      breakpoint: { max: 4000, min: 1024 },
+      items: 3,
     },
     desktop: {
       breakpoint: { max: 2000, min: 1024 },
@@ -50,7 +50,7 @@ function LocationBar() {
           </Carousel>
         </div>
         <Row md={3} className="justify-content-center m-3">
-          <Button size="lg" className="align-self-center locationBar-button">See all latest updates</Button>
+          <Button size="lg" className="align-self-center">See all latest updates</Button>
         </Row>
       </Col>
     </Row>

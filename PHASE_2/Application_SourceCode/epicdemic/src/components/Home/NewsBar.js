@@ -14,8 +14,8 @@ import globe from '../../static/globe.svg'
 const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5
+      breakpoint: { max: 4000, min: 2000 },
+      items: 3
     },
     desktop: {
       breakpoint: { max: 2000, min: 1024 },

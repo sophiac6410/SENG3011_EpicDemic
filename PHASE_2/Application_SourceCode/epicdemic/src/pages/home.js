@@ -20,7 +20,7 @@ function Home() {
         <NewsBar></NewsBar>
         <LocationBar></LocationBar>
         <Row className="mt-5 mb-5 p-1 ps-3 align-items-center justify-content-center">
-          <Col md={4} className="text-center justify-content-center p-2">
+          <Col md={4} className="text-center justify-content-center pe-5">
             <Image width="250px" height="250px" classname="text-center" src={bigLoading}></Image>
           </Col>
           {/* <AirUpdateBar></AirUpdateBar> */}
