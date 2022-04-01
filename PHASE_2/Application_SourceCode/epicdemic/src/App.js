@@ -1,6 +1,12 @@
 
 import NavbarComp from './components/Navbar'
 import Home from './pages/home'
+import Overview from './pages/Overview'
+import Travel from './pages/Travel'
+import Destination from './pages/Destination'
+import Covid from './pages/Covid'
+import Book from './pages/Book'
+
 import {
     BrowserRouter as Router,
     Routes,
@@ -16,6 +22,14 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home></Home>}>
+            </Route>
+            <Route path="destination">
+              <Route path=":destination" element={<Destination></Destination>}>
+                <Route index element={<Overview></Overview>}></Route>
+                <Route path="travel" element={<Travel></Travel>}></Route>
+                <Route path="covid" element={<Covid></Covid>}></Route>
+                <Route path="book" element={<Book></Book>}></Route>
+              </Route>
             </Route>
           </Routes>
         </BrowserRouter>
