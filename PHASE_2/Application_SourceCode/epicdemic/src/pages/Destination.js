@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap"
-import { Outlet } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 import TinySearch from "../components/TinySearch"
 import '../styles/Destination.css'
 import Button from '@mui/material/Button';
@@ -28,6 +28,12 @@ const ColorButton = styled(Button)({
   },
 });
 
+const linkStyle = {
+  margin: "1rem",
+  textDecoration: "none",
+  color: 'blue'
+};
+
 function Destination() {
   return(
     <Container>
@@ -42,16 +48,28 @@ function Destination() {
             <Col>
               <Row style={{"justify-content": "space-between"}} className="ps-3 pe-3">
                 <Col className="text-center">
-                  <ColorButton variant="outlined">Overview</ColorButton>
+                  <Link to="" style={linkStyle}>
+                    <ColorButton variant="outlined">Overview
+                    </ColorButton>
+                  </Link>
                 </Col>
                 <Col className="text-center">
-                  <ColorButton variant="outlined">Travel</ColorButton>
+                  <Link to="travel" style={linkStyle}>
+                    <ColorButton variant="outlined">Travel
+                    </ColorButton>
+                  </Link>
                 </Col>
                 <Col className="text-center">
-                  <ColorButton variant="outlined">Diseases</ColorButton>
+                   <Link to="covid" style={linkStyle}>
+                    <ColorButton variant="outlined">Travel
+                    </ColorButton>
+                  </Link>
                 </Col>
                 <Col className="text-center"> 
-                  <ColorButton variant="outlined">Book</ColorButton>
+                  <Link to="Book" style={linkStyle}>
+                    <ColorButton variant="outlined">Book
+                    </ColorButton>
+                  </Link>
                 </Col>
               </Row>
             </Col>
