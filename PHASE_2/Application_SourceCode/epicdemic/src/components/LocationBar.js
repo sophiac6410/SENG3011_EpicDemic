@@ -50,7 +50,7 @@ function LocationBar() {
           </Carousel>
         </div>
         <Row md={3} className="justify-content-center m-3">
-          <Button size="lg" className="align-self-center locationBar-button">See all latest updates</Button>
+          <Button size="lg" className="align-self-center">See all latest updates</Button>
         </Row>
       </Col>
     </Row>

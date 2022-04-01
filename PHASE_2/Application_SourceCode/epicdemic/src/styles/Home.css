@@ -26,6 +26,7 @@
     background-color: #1B4965;
     border-radius: 20px;
 }
+
 .bg-lightpurple {
     background-color: #726FE7;
 }
@@ -54,4 +55,15 @@
     align-items: center; 
     justify-content: center; 
     display: flex;
-} 
+}
+
+.btn-primary {
+    color: #fff !important;
+    background-color: #1B4965 !important;
+    border-color: #1B4965 !important; /*set the color you want here*/
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary .btn-primary:active:focus {
+    color: #fff !important;
+    background-color: #A9CBFF !important;
+    border-color: #A9CBFF !important; /*set the color you want here*/
+}
