@@ -8,11 +8,11 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function NewsCardSmall() {
+export default function NewsCardSmall({col1, col2}) {
   return (
     <div className="news-container-col">
-      <NewsCard></NewsCard>
-      <NewsCard></NewsCard>
+      <NewsCard col={col1}></NewsCard>
+      <NewsCard col={col2}></NewsCard>
     </div>
   );
 }

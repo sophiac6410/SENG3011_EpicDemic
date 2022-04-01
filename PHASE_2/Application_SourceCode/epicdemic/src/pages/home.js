@@ -10,8 +10,11 @@ import bigLoading from "../static/bigLoading.svg"
 function Home() {
   return (
       <Container style={{"background-color": "white"}}>
-        <Search></Search>
-        {/* <NewsBar2></NewsBar2> */}
+        <Row>
+          <div id="header">
+            <Search></Search>
+          </div>
+        </Row>
         <NewsBar></NewsBar>
         <LocationBar></LocationBar>
         <Row className="mt-5 mb-5 p-1 ps-3 align-items-center justify-content-center">

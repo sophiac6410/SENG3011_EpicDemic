@@ -6,9 +6,9 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function NewsCard() {
+export default function NewsCard({col}) {
   return (
-    <Card sx={{ display: 'flex', height: '97%' }} className="m-2" >
+    <Card sx={{ display: 'flex', height: '97%', backgroundColor: col }} className="m-2" >
       <CardContent>
         <Typography sx={{ fontSize: 14, mb: 1.5 }} color="text.secondary" align="center">
           38 minutes ago
