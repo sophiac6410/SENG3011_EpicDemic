@@ -1,7 +1,7 @@
 import React from "react";
 import NewsCard from "./NewsCard";
 // import { Carousel } from 'react-responsive-carousel';
-import "../styles/Home.css"
+import "../../styles/Home.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "react-multi-carousel/lib/styles.css";
 import { Row } from "react-bootstrap";
@@ -9,6 +9,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Carousel from "react-multi-carousel";
 import NewsCardSmall from "./NewsCardSmall"
+import globe from '../../static/globe.svg'
 
 const responsive = {
     superLargeDesktop: {
@@ -30,38 +31,38 @@ const responsive = {
     }
   };
 
+const colours = [ '#7EB2FF', '#ADD8E6', '#0F83A0' ]
+
 class NewsBar extends React.Component {
   render() {
     return(
-      <Row className="mt-2">
-        <div className="sub-title mb-2">GLOBAL NEWS</div>
-        <div className="news-carousel">
-          <Carousel 
-            swipeable={true}
-            showStatus={false}
-            responsive={responsive} 
-          >
-            <NewsCard></NewsCard>
-            <NewsCardSmall></NewsCardSmall>
-            <NewsCard></NewsCard>
-            <NewsCardSmall></NewsCardSmall>
-            {/* <div className="news-container">
-              <NewsCard></NewsCard>
+      <div style={{ padding: '30px', marginBottom: '30px' }}>
+        <Row className="mt-2">
+          <div className="sub-title mb-2" style={{ color: '#045d5d' }}>
+            <img className="me-3 ms-3" src={globe} width="35px" height="35px" alt="global page"></img>
+            GLOBAL NEWS
+          </div>
+          <div className="news-carousel">
+            <Carousel 
+              swipeable={true}
+              showStatus={false}
+              responsive={responsive} 
+            >
+              <NewsCard col={colours[0]}></NewsCard>
               <div className="news-container-col">
-                <NewsCard></NewsCard>
-                <NewsCard></NewsCard>
+                <NewsCard col={colours[1]}></NewsCard>
+                <NewsCard col={colours[2]}></NewsCard>
               </div>
-            </div>
-            <div className="news-container">
-              <NewsCard></NewsCard>
+              <NewsCard col={colours[0]}></NewsCard>
               <div className="news-container-col">
-                <NewsCard></NewsCard>
-                <NewsCard></NewsCard>
+                <NewsCard col={colours[1]}></NewsCard>
+                <NewsCard col={colours[2]}></NewsCard>
               </div>
-            </div> */}
-          </Carousel>
-        </div>
-      </Row>
+            </Carousel>
+          </div>
+        </Row>
+      </div>
+
     )
   }
 }

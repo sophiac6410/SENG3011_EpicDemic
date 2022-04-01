@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import Switch from "react-switch";
 import { Row, Col, Image } from "react-bootstrap";
-import '../styles/Home.css'
+import '../../styles/Home.css'
 import Carousel from "react-multi-carousel";
-import covidMap from "../static/covidMap.png"
+import covidMap from "../../static/covidMap.png"
+import CovidTabs from "./CovidTabs";
+import countrybreakdown from "../../static/countrybreakdown.png"
 
 
 function UpdateBox(props) {
@@ -88,7 +90,15 @@ function GlobalUpdate(){
             <img src={covidMap} width="900px" height="350px"></img>
           </Col>
         </Row>
-      {/* </Row> */}
+
+        <Row className="justify-content-center align-items-center" style={{ padding: '30px' }}>
+          <Col xs={6}>
+            <CovidTabs></CovidTabs>
+          </Col>
+          <Col>
+            <img src={countrybreakdown}></img>
+          </Col>
+        </Row>  
     </Col>
   )
 }

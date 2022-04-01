@@ -1,16 +1,22 @@
 import {Container, Col, Row, Image} from "react-bootstrap";
-import GlobalUpdate from "../components/GlobalUpdate";
-import LocationBar from "../components/LocationBar";
-import NewsBar from "../components/NewsBar";
-import Search from "../components/Search";
-import UpdateBar from "../components/UpdateBar";
+import AirUpdateBar from "../components/Home/AirUpdateBar";
+import GlobalUpdate from "../components/Home/GlobalUpdate";
+import LocationBar from "../components/Home/LocationBar";
+import NewsBar from "../components/Home/NewsBar";
+import Search from "../components/Home/Search";
+import UpdateBar from "../components/Home/UpdateBar";
 import bigLoading from "../static/bigLoading.svg"
+import DiseaseRadar from "../components/Home/DiseaseRadar";
+import DiseaseReportBar from "../components/Home/DiseaseReportBar";
 
 function Home() {
   return (
       <Container style={{"background-color": "white"}}>
-        <Search></Search>
-        {/* <NewsBar2></NewsBar2> */}
+        <Row>
+          <div id="header">
+            <Search></Search>
+          </div>
+        </Row>
         <NewsBar></NewsBar>
         <LocationBar></LocationBar>
         <Row className="mt-5 mb-5 p-1 ps-3 align-items-center justify-content-center">
@@ -21,6 +27,8 @@ function Home() {
           <UpdateBar></UpdateBar>
         </Row>
         <GlobalUpdate></GlobalUpdate>
+        <DiseaseRadar></DiseaseRadar>
+        <DiseaseReportBar></DiseaseReportBar>
       </Container>
   );
 }

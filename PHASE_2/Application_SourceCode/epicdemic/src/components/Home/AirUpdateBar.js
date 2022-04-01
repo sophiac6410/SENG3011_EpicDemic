@@ -1,6 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap"
 import React from "react"
-import '../styles/Home.css'
+import '../../styles/Home.css'
 
 function AirBox() {
   return(

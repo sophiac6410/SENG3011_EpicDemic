@@ -1,6 +1,6 @@
 import { Card, Col, Row } from "react-bootstrap";
-import midCaution from "../static/mid-caution.svg"
-import midDot from "../static/mid-dot.svg"
+import midCaution from "../../static/mid-caution.svg"
+import midDot from "../../static/mid-dot.svg"
 
 import React from "react";
 
