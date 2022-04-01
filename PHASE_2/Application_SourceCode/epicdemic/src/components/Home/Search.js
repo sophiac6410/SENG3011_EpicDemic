@@ -1,7 +1,7 @@
 import {InputGroup, FormControl, Row, Col } from "react-bootstrap";
 import CountrySelect from "./CountrySearchBox";
 import "react-multi-carousel/lib/styles.css";
-import arrow from '../static/arrow.svg'
+import arrow from '../../static/arrow.svg'
 
 function Search() {
     return(

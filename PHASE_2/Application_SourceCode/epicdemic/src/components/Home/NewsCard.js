@@ -15,13 +15,13 @@ export default function NewsCard({col}) {
         </Typography>
         <Typography component="div" align="center" sx={{ mb: 1.5 }}>
           <text style={{"font-size": "18px", "font-weight": "bold"}}>
-            A plane carrying 132 passengers has crashed in southern China. Local media is reporting there are no signs of survivors.
+            Travel restrictions easing in Japan - Now open to its neighbouring countries! 
           </text>
         </Typography>
         <Typography variant="body2" sx={{ fontSize: 14, mb: 1.5 }} color="text.secondary" align="center">
           Source: Google
         </Typography>
-        <Button size="small">
+        <Button size="small" variant="text">
           <Typography sx={{ fontSize: 12, mb: 1.5 }} align="center">
             Read more
           </Typography>

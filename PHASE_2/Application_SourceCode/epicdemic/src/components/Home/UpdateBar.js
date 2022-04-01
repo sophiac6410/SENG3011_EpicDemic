@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Card, Container } from "react-bootstrap";
-import info from "../static/info.svg"
-import "../styles/Home.css"
+import info from "../../static/info.svg"
+import "../../styles/Home.css"
 
 
 function RestrictBox(){

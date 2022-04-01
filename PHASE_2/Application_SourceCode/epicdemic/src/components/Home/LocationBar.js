@@ -2,7 +2,7 @@ import React from "react";
 import LocationCard from "./LocationCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import "../styles/Home.css"
+import "../../styles/Home.css"
 import { Button, Row, Col } from "react-bootstrap";
 
 const responsive = {

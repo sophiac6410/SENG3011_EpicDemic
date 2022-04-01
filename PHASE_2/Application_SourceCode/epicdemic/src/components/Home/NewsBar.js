@@ -1,7 +1,7 @@
 import React from "react";
 import NewsCard from "./NewsCard";
 // import { Carousel } from 'react-responsive-carousel';
-import "../styles/Home.css"
+import "../../styles/Home.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "react-multi-carousel/lib/styles.css";
 import { Row } from "react-bootstrap";
@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Carousel from "react-multi-carousel";
 import NewsCardSmall from "./NewsCardSmall"
-import globe from '../static/globe.svg'
+import globe from '../../static/globe.svg'
 
 const responsive = {
     superLargeDesktop: {
@@ -49,23 +49,15 @@ class NewsBar extends React.Component {
               responsive={responsive} 
             >
               <NewsCard col={colours[0]}></NewsCard>
-              <NewsCardSmall col1={colours[1]} col2={colours[2]}></NewsCardSmall>
-              <NewsCard col={colours[0]}></NewsCard>
-              <NewsCardSmall col1={colours[1]} col2={colours[2]}></NewsCardSmall>
-              {/* <div className="news-container">
-                <NewsCard></NewsCard>
-                <div className="news-container-col">
-                  <NewsCard></NewsCard>
-                  <NewsCard></NewsCard>
-                </div>
+              <div className="news-container-col">
+                <NewsCard col={colours[1]}></NewsCard>
+                <NewsCard col={colours[2]}></NewsCard>
               </div>
-              <div className="news-container">
-                <NewsCard></NewsCard>
-                <div className="news-container-col">
-                  <NewsCard></NewsCard>
-                  <NewsCard></NewsCard>
-                </div>
-              </div> */}
+              <NewsCard col={colours[0]}></NewsCard>
+              <div className="news-container-col">
+                <NewsCard col={colours[1]}></NewsCard>
+                <NewsCard col={colours[2]}></NewsCard>
+              </div>
             </Carousel>
           </div>
         </Row>

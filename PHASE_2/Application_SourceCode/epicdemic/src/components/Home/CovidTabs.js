@@ -5,8 +5,8 @@ import TabsListUnstyled from '@mui/base/TabsListUnstyled';
 import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
 import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
-import new_cases from "../static/new_cases.jpg"
-import '../styles/Home.css'
+import new_cases from "../../static/new_cases.jpg"
+import '../../styles/Home.css'
 
 
 const blue = {
