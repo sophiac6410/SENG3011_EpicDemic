@@ -4,7 +4,7 @@ import '../styles/Home.css'
 
 function AirBox() {
   return(
-    <Row className="bg-white m-1 mb-2 pt-2 pb-2" style={{"border-radius": "10px"}}>
+    <Row className="bg-mblue m-1 mb-2 pt-2 pb-2" style={{"border-radius": "10px"}}>
       <Col md={3} className="align-self-center">
         <div className="ps-3 text-grey" style={{"font-size": "23px"}}>Philipines</div>
       </Col>
@@ -17,11 +17,11 @@ function AirBox() {
 
 function AirUpdateBar() {
   return(
-    <Col className="mt-2 ms-4 mb-3">
-      <Row className="bg-grey">
+    <Col className="ms-4 mb-3">
+      <Row className="bg-white">
         <Col>
           <Row>
-            <div className="h3-title pt-2 pb-1 ms-3">Airline Updates</div>
+            <div className="h3-title pb-1 ms-3 mb-3">Latest Global Travel Updates</div>
           </Row>
           <AirBox></AirBox>
           <AirBox></AirBox>

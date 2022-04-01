@@ -8,7 +8,7 @@ import '../styles/App.css'
 
 function NavbarComp() {
   return (
-    <Navbar bg="darkpurple" variant="dark">
+    <Navbar bg="darkteal" variant="dark">
       <Container>
         <Navbar.Brand href="/">
           EPICDEMIC ADVENTURE  

@@ -1,6 +1,12 @@
 .location-carousel{
-    background-color: #A9CBFF;
+    background-color: #0F83A0;
     align-items: center;
+}
+.locationBar-title{
+    font-size: 25px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
 }
 .sub-title{
     font-size: 25px;
@@ -52,15 +58,22 @@
     padding-left: 2%;
 }
 .h3-title{
-    font-size: 22px;
-    color: #3F3CB0;
+    font-size: 25px;
+    color:#1B4965;
     font-weight: bold;
 }
-.bg-darkpurple {
-    background-color: #3F3CB0;
+.bg-darkteal {
+    background-color: #0F83A0;
+}
+.locationBar-button {
+    background-color: #1B4965;
+    border-radius: 20px;
 }
 .bg-lightpurple {
     background-color: #726FE7;
+}
+.bg-mblue{
+    background-color: #7EB2FF;
 }
 .bg-white {
     background-color: white;
@@ -102,3 +115,8 @@
     justify-content: end;
     padding-top: 15px;
 }
+.flex-center { 
+    align-items: center; 
+    justify-content: center; 
+    display: flex;
+} 
