@@ -1,5 +1,4 @@
 import {Container, Col, Row, Image} from "react-bootstrap";
-import AirUpdateBar from "../components/AirUpdateBar";
 import GlobalUpdate from "../components/GlobalUpdate";
 import LocationBar from "../components/LocationBar";
 import NewsBar from "../components/NewsBar";
