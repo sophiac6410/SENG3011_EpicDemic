@@ -1,0 +1,17 @@
+.bg-lightblue{
+  background-color: #E9F0FB;
+}
+.search-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+.search-container{
+  border-radius: 20px;
+  /* background: white; */
+  background-color: white;
+}
+.bg-white {
+  background-color: white;
+}
