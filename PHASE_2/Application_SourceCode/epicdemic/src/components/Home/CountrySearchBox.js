@@ -27,7 +27,7 @@ export default function CountrySelect({fieldLabel}) {
               srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
               alt=""
             />
-            {option.label} ({option.code}) +{option.phone}
+            {option.label} ({option.code})
           </Box>
         )}
         renderInput={(params) => (
@@ -40,16 +40,6 @@ export default function CountrySelect({fieldLabel}) {
               ...params.inputProps,
               autoComplete: 'new-password', // disable autocomplete and autofill
             }}
-            // if this is removed, auto-fill works
-            // InputProps={{
-            //   ...params.inputProps,
-            //   autoComplete: 'new-password', // disable autocomplete and autofill
-            //   startAdornment: (
-            //     <InputAdornment position="start">
-            //       <SearchIcon />
-            //     </InputAdornment>
-            //   ),
-            // }}
           />
         )}
       />

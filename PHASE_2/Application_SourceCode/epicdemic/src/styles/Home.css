@@ -39,7 +39,8 @@
     border-radius: 25px;
     background: #F9F9F9;
     width: max-content;
-    padding: 20px;
+    padding: 10px;
+    padding-top: 5px;
     display: flex;
     flex-direction: row;
     align-items: center;

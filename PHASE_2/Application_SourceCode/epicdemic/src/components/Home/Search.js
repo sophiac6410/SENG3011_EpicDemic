@@ -10,16 +10,18 @@ function Search() {
           <div className="search-col">
             <div className="search-bar-text">Departure:</div>
             <div className="searchfield-container">
-              <CountrySelect fieldLabel={"Choose a country"}></CountrySelect>
+              <CountrySelect fieldLabel={""}></CountrySelect>
             </div>
           </div>
           <div className="search-col">
-            <img src={arrow} alt="arrow" width="100px" height="50px"></img>
+            <div style={{ paddingTop: '25px' }}>
+              <img src={arrow} alt="arrow" width="70px" height="30px"></img>
+            </div>
           </div>
           <div className="search-col">
             <div className="search-bar-text">Arrival:</div>
             <div className="searchfield-container">
-              <CountrySelect fieldLabel={"Choose a country"}></CountrySelect>
+              <CountrySelect fieldLabel={""}></CountrySelect>
             </div>
           </div>
         </div>
