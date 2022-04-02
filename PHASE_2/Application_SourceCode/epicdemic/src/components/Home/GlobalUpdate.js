@@ -91,14 +91,14 @@ function GlobalUpdate(){
           </Col>
         </Row>
 
-        <Row className="justify-content-center align-items-center" style={{ padding: '30px' }}>
+        {/* <Row className="justify-content-center align-items-center" style={{ padding: '30px' }}>
           <Col xs={6}>
             <CovidTabs></CovidTabs>
           </Col>
           <Col>
             <img src={countrybreakdown}></img>
           </Col>
-        </Row>  
+        </Row>   */}
     </Col>
   )
 }
