@@ -15,3 +15,60 @@
 .bg-white {
   background-color: white;
 }
+.title{
+  color: #1B4965;
+  font-size: 45px;
+  font-weight: bold;
+}
+.title-h2{
+  color: #1B4965;
+  font-size: 33px;
+  font-weight: bold;
+}
+
+.title-h3{
+  color: #1B4965;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.title-h4{
+  color: #1B4965;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.larger-body{
+  color: #1B4965;
+  font-size: 22px;
+}
+
+.body-text{
+  color: #1B4965;
+  font-size: 20px;
+}
+
+.source-text{
+  color: #1B4965;
+  font-size: 18px;
+  font-style: italic;
+}
+
+.medium-teal{
+  color: #0F83A0;
+}
+
+.orange {
+  color: #FECD6F;
+}
+
+.end {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+#tealBorder{
+  border-color: #0F83A0 !important;
+  padding-left: 50px;
+}

@@ -7,6 +7,7 @@ import { styled } from '@mui/material/styles';
 import midCaution from "../static/mid-caution.svg"
 import midDot from "../static/mid-dot.svg"
 import heart from "../static/solidHeart.png"
+import info from "../static/info.svg"
 
 
 
@@ -39,11 +40,21 @@ function Destination() {
     <Container>
       <Row>
         <Col>
-          <TinySearch className="bg-lightblue"></TinySearch>
-          <Row className="p-4">
+          {/* <TinySearch className="bg-lightblue"></TinySearch> */}
+          <Row className="justify-content-end align-items-center mt-2 me-5">
+            <Col md={1} className="text-center pt-2">
+              <img src={info} width="62px" height="62px"></img>
+              <div style={{"font-size": "15px", "color": "#0F83A0"}}>Notifications</div>
+            </Col>
+            <Col md={1} className="text-center pt-1 ps-6 mt-3">
+              <img src={heart} width="34px" height="34px"></img>
+              <div className="mt-3" style={{"font-size": "15px", "color": "#0F83A0"}}>Saved</div>
+            </Col>
+          </Row>
+          <Row className="pt-4 pb-4 align-items-center">
             <Col md={4}>
-              <h2>PHILIPPINES</h2>
-              <div>No new changes since 25/03/22 </div>
+              <div className="title">PHILIPPINES</div>
+              <div className="larger-body">No new changes since 25/03/22 </div>
             </Col>
             <Col>
               <Row style={{"justify-content": "space-between"}} className="ps-3 pe-3">
@@ -61,7 +72,7 @@ function Destination() {
                 </Col>
                 <Col className="text-center">
                    <Link to="covid" style={linkStyle}>
-                    <ColorButton variant="outlined">Travel
+                    <ColorButton variant="outlined">Diseases
                     </ColorButton>
                   </Link>
                 </Col>
@@ -74,7 +85,7 @@ function Destination() {
               </Row>
             </Col>
           </Row>
-          <Row className="p-4 align-items-end">
+          {/* <Row className="p-4 align-items-end">
             <Col md={4}>
               <div style={{"font-size": "20px", "color": "#515151"}}>Overall Advice</div>
               <Row className="align-items-center pt-1 justify-content-start mt-3">
@@ -107,7 +118,7 @@ function Destination() {
               <img src={heart} width="50px" height="50px"></img>
               <div style={{"font-size": "20px", "color": "#0F83A0"}}>Saved</div>
             </Col>
-          </Row>
+          </Row> */}
         </Col>
         <Outlet></Outlet>
       </Row>
