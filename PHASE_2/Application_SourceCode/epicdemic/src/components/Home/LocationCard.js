@@ -1,13 +1,18 @@
 import { Card, Col, Row } from "react-bootstrap";
 import midCaution from "../../static/mid-caution.svg"
 import midDot from "../../static/mid-dot.svg"
-
+import { useNavigate, } from 'react-router-dom';
 import React from "react";
 
   
 function LocationCard() {
+  let navigate = useNavigate(); 
+  const routeChange = () =>{  
+    navigate('/destination');
+  }
+
   return (
-    <Card className="m-3">
+    <Card className="m-3" onClick={ routeChange }>
       <Card.Body>
         <Card.Title>Philipines</Card.Title>
         <Card.Subtitle className="pt-1 text-muted">Overall Advice:</Card.Subtitle>

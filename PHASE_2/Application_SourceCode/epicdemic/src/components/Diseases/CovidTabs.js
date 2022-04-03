@@ -66,20 +66,20 @@ const TabPanel = styled(TabPanelUnstyled)`
 `;
 
 const TabsList = styled(TabsListUnstyled)`
-  min-width: 320px;
+  max-width: 200px;
   background-color: #D8E7FF;
   border-radius: 8px;
   margin-bottom: 16px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   align-content: space-between;
 `;
 
 export default function CovidTabs() {
 
   return (
-    <div style={{ backgroundColor: '#7EB2FF' }} className="covidtabs">
+    <div style={{ backgroundColor: '#62B6CB' }} className="covidtabs">
       <div style={{ width: '300px' }}>
         <TabsUnstyled defaultValue={0}>
           <TabsList>
@@ -88,11 +88,11 @@ export default function CovidTabs() {
           </TabsList>
           <TabPanel value={0}>
             <div className='sub-title'>Daily Cases</div>
-            <img src={new_cases} style={{ width: "500px" }}></img>
+            <img src={new_cases} style={{ width: "900px" }}></img>
           </TabPanel>
           <TabPanel value={1}>
             <div className='sub-title'>Deaths</div>
-              <img src={new_cases} style={{ width: "500px" }}></img>
+              <img src={new_cases} style={{ width: "900px" }}></img>
           </TabPanel>
         </TabsUnstyled>
       </div>
