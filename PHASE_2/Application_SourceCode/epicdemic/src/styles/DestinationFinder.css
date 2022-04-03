@@ -1,0 +1,42 @@
+.plane-background{
+    height: 60vh;
+    position:relative;
+    z-index: 10;
+    padding: 0;
+}
+
+.filter-destination{
+    height: 60vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(112, 196, 232, 0.8);
+}
+
+.latest-updates{
+    overflow-y: scroll;
+    width: 70vw;
+    height: 70vh;
+    background-color: white;
+}
+
+.info-row{
+    text-align: center;
+    align-items: center;
+    margin: 0.5vw;
+    background-color: #EEF5FF;
+    border-radius: 15px;
+    font-family: 'Open Sans';
+}
+
+.book-button{
+    color: white !important;
+    background-color: #70C4E8 !important;
+    border-color: #70c4e8 !important;
+    border-radius: 25px;
+    padding: 10px 30px !important;
+}
