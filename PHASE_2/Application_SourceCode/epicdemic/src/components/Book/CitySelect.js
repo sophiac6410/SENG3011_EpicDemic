@@ -3,11 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import "react-multi-carousel/lib/styles.css";
-import InputAdornment from '@mui/material/InputAdornment';
-import SearchIcon from '@mui/icons-material/Search';
 import { Col, Row } from 'react-bootstrap';
-import PlaneLanding from '../../static/planeLanding.svg';
-import PlaneTakeOff from '../../static/planeTakeOff.svg';
 
 export function CitySelectPhilippines({fieldLabel}) {
   return (

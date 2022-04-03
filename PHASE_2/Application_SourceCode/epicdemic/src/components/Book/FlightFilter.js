@@ -1,13 +1,6 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import { Col, Container, Row, Image } from "react-bootstrap"
 import "../../styles/Destination.css"
 import "../../styles/Book.css"
-import qantas from "../../static/qantas.svg"
 import SliderTime from './SliderTime';
 import SliderPrice from './SliderPrice';
 import CheckboxAirline from './CheckboxAirline';
@@ -35,7 +28,7 @@ function FlightFilter() {
         }}></img>Take Off</h2>
         <SliderTime></SliderTime>
         <div style={{
-          margin: '15px 0px'
+          margin: '30px 0px'
         }}></div>
         <h2 style={{
           fontSize: '12pt'
@@ -45,7 +38,7 @@ function FlightFilter() {
         <SliderTime></SliderTime>
       </div>
       <div style={{
-        margin: '30px 0px'
+        margin: '50px 0px'
       }}>
         <h1 style={{
           fontSize: '14pt'
@@ -53,7 +46,7 @@ function FlightFilter() {
         <CheckboxAirline></CheckboxAirline>
       </div>
       <div style={{
-        margin: '30px 0px'
+        margin: '50px 0px'
       }}>
         <h1 style={{
           fontSize: '14pt'

@@ -55,7 +55,7 @@ export default function FlightTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0} style={{
-        height: '550px',
+        height: '600px',
         overflow: 'scroll'
       }}>
         <div >
@@ -71,7 +71,7 @@ export default function FlightTabs() {
         </div>
       </TabPanel>
       <TabPanel value={value} index={1} style={{
-        height: '550px',
+        height: '600px',
         overflow: 'scroll'
       }}>
       <FlightDeal></FlightDeal>

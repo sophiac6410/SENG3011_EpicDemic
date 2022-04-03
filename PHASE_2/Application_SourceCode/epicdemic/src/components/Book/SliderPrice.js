@@ -1,23 +1,13 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
+import { StyledSlider } from './StyledSlider';
 
 function valuetext(value) {
   return `$${value}`;
 }
 
-const minDistance = 100;
+const minDistance = 1500;
 
-const marks = [
-  {
-    value: 0,
-    label: '$0'
-  },
-  {
-    value: 10000,
-    label: '$10,000'
-  }
-]
 
 function SliderPrice() {
   const [value, setValue] = React.useState([0, 10000]);
@@ -36,15 +26,15 @@ function SliderPrice() {
 
   return (
     <Box sx={{ width: 260 }}>
-      <Slider
+      <StyledSlider
         size='small'
         aria-label="Time Range"
         value={value}
         onChange={handleChange}
         getAriaValueText={valuetext}
-        valueLabelDisplay="auto"
+        valueLabelDisplay="on"
+        valueLabelFormat={value => <div>{valuetext(value)}</div>}
         step={100}
-        marks={marks}
         min={0}
         max={10000}
         disableSwap
