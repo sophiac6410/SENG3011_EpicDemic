@@ -17,12 +17,16 @@ const safetySource = "The safety and security ratings determined by GeoSure GeoS
 const covidSource = <p>Health advice is continually changing as we learn more about COVID-19 and new variants are discovered. Rules and restrictions to prevent outbreaks can change quickly. It’s important to regularly check the rules in the destinations you’re travelling to and transiting through, as well as the requirements at the Australian border. These may differ between state and territory jurisdictions.
 <br /> <br />Read the Australian Government’s global health advisory and step-by-step guide to travel during COVID-19 for more information.</p>
 
-const SafetyScore = function SafetyScore() {
+
+const safetyDes = 
+  {title: "MEDICAL", text: "Likelihood of illness or disease, assessment of water and air quality, and access to reliable medical care", score: "34"}
+
+const SafetyScore = function SafetyScore(props) {
   return(
     <Row className="ps-5 mt-4 align-items-center">
       <Col>
-        <div className="title-h4 medium-teal">MEDICAL</div>
-        <div className="body-text mt-2">Likelihood of illness or disease, assessment of water and air quality, and access to reliable medical care</div>
+        <div className="title-h4 medium-teal">{props.title}</div>
+        <div className="body-text mt-2">{props.text}</div>
       </Col>
       <Col md={1}>
         <div style={{backgroundColor: "#FECD6F", color: "white", borderRadius: "20px"}} className="text-center title-h4">34</div>
@@ -103,12 +107,12 @@ function Overview() {
           <Row><div className="body-text">OVERALL SAFETY RATING</div></Row>
         </Col>
       </Row>
+      <SafetyScore props={safetyDes}></SafetyScore>
+      {/* <SafetyScore></SafetyScore>
       <SafetyScore></SafetyScore>
       <SafetyScore></SafetyScore>
       <SafetyScore></SafetyScore>
-      <SafetyScore></SafetyScore>
-      <SafetyScore></SafetyScore>
-      <SafetyScore></SafetyScore>
+      <SafetyScore></SafetyScore> */}
       <div className="source-text mt-5 mb-5">{safetySource}</div>
       <div className="title-h3 mb-4 mt-5 pt-4">COVID-19 Statistics</div>
       <Row className="mb-5 justify-content-start">
