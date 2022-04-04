@@ -14,7 +14,7 @@ export default function NewsCard({col, fontC}) {
           38 minutes ago
         </Typography>
         <Typography component="div" align="center" sx={{ mb: 1.5 }} color={fontC} className="mt-4">
-          <text style={{"font-size": "18px", "font-weight": "bold"}}>
+          <text style={{"font-size": "22px", "font-weight": "bold"}}>
             Travel restrictions easing in Japan - Now open to its neighbouring countries! 
           </text>
         </Typography>

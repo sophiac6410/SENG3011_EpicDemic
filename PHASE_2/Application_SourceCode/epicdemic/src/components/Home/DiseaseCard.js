@@ -6,15 +6,15 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function DiseaseCard({col}) {
+export default function DiseaseCard() {
   return (
-    <Card sx={{ display: 'flex', height: '97%', backgroundColor: col, padding: '10px' }} className="m-2" >
+    <Card className="m-2" >
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Published 29th March 2022
         </Typography>
         <Typography component="div" align="left" sx={{ mb: 1 }}>
-          <text style={{"font-size": "18px", "font-weight": "bold"}}>
+          <text style={{"font-size": "22px", "font-weight": "bold"}}>
             Bacterial black spot, mango - Ghana 
           </text>
         </Typography>

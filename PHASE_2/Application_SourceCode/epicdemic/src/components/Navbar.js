@@ -11,7 +11,7 @@ function NavbarComp() {
     <Navbar bg="darkteal" variant="dark">
       <Container>
         <Navbar.Brand href="/">
-          EPICDEMIC ADVENTURE  
+          EPICDEMIC  
           <img src={logo} alt="logo" width="60px" height="40px"></img>
         </Navbar.Brand>
         <div className="d-flex justify-content-end pe-1">

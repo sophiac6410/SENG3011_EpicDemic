@@ -4,7 +4,6 @@ import { Row, Col, Image } from "react-bootstrap";
 import '../../styles/Home.css'
 import Carousel from "react-multi-carousel";
 import covidMap from "../../static/covidMap.png"
-import CovidTabs from "./CovidTabs";
 import countrybreakdown from "../../static/countrybreakdown.png"
 
 
