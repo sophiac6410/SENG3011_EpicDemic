@@ -32,6 +32,8 @@ const responsive = {
   };
 
 const colours = [ '#0F83A0', '#E2F2FC', '#70C4E8' ]
+const fontColours = [ 'white', '#0F83A0', 'white' ]
+
 
 class NewsBar extends React.Component {
   render() {
@@ -48,15 +50,15 @@ class NewsBar extends React.Component {
               showStatus={false}
               responsive={responsive} 
             >
-              <NewsCard col={colours[0]}></NewsCard>
+              <NewsCard col={colours[0]} fontC={fontColours[0]}></NewsCard>
               <div className="news-container-col">
-                <NewsCard col={colours[1]}></NewsCard>
-                <NewsCard col={colours[2]}></NewsCard>
+                <NewsCard col={colours[1]} fontC={fontColours[1]}></NewsCard>
+                <NewsCard col={colours[2]} fontC={fontColours[2]}></NewsCard>
               </div>
-              <NewsCard col={colours[0]}></NewsCard>
+              <NewsCard col={colours[0]} fontC={fontColours[0]}></NewsCard>
               <div className="news-container-col">
-                <NewsCard col={colours[1]}></NewsCard>
-                <NewsCard col={colours[2]}></NewsCard>
+                <NewsCard col={colours[1]} fontC={fontColours[1]}></NewsCard>
+                <NewsCard col={colours[2]} fontC={fontColours[2]}></NewsCard>
               </div>
             </Carousel>
           </div>
