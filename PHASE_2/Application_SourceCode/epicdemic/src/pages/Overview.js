@@ -18,22 +18,43 @@ const covidSource = <p>Health advice is continually changing as we learn more ab
 <br /> <br />Read the Australian Government’s global health advisory and step-by-step guide to travel during COVID-19 for more information.</p>
 
 
-const safetyDes = 
-  {title: "MEDICAL", text: "Likelihood of illness or disease, assessment of water and air quality, and access to reliable medical care", score: "34"}
+const safetyDis = [
+  {title: "MEDICAL", text: "Likelihood of illness or disease, assessment of water and air quality, and access to reliable medical care", score: 34},
+  {title: "WOMEN", text: "Likelihood of inappropriate behavior against females", score: 0},
+  {title: "PHYSICAL HARM", text: "Likelihood of injury due to harmful intent", score: 36},
+  {title: "THEFT", text: "Likelihood of theft", score: 36},
+  {title: "POLITICAL FREEDOM", text: "Potential for infringement of political rights or political unrest", score: 50},
+  {title: "LGBTQ", text: "Likelihood of harm or discrimination against LGBTQ persons or groups and level of caution required at location", score: 39}
+]
 
-const SafetyScore = function SafetyScore(props) {
-  return(
-    <Row className="ps-5 mt-4 align-items-center">
-      <Col>
-        <div className="title-h4 medium-teal">{props.title}</div>
-        <div className="body-text mt-2">{props.text}</div>
-      </Col>
-      <Col md={1}>
-        <div style={{backgroundColor: "#FECD6F", color: "white", borderRadius: "20px"}} className="text-center title-h4">34</div>
-      </Col>
-    </Row>
-  )
-}
+const SafetyBoard = safetyDis.map(function(props) {
+  if(props.score != 0) {
+    return (
+      <Row className="ps-5 mt-4 align-items-center">
+        <Col>
+          <div className="title-h4 medium-teal">{props.title}</div>
+          <div className="body-text mt-2">{props.text}</div>
+        </Col>
+        <Col md={1}>
+          <div style={{backgroundColor: "#FECD6F", color: "white", borderRadius: "20px"}} className="text-center title-h4">{props.score}</div>
+        </Col>
+      </Row>
+    )
+  }else{
+    return(
+      <Row className="ps-5 mt-4 align-items-center">
+        <Col>
+          <div className="title-h4 medium-teal">{props.title}</div>
+          <div className="body-text mt-2">{props.text}</div>
+        </Col>
+        <Col md={1}>
+          <div style={{backgroundColor: "#1CC02C", color: "white", borderRadius: "20px"}} className="text-center title-h4">{props.score}</div>
+        </Col>
+      </Row>
+    )
+  }
+
+});
 
 function Overview() {
   return(
@@ -107,12 +128,14 @@ function Overview() {
           <Row><div className="body-text">OVERALL SAFETY RATING</div></Row>
         </Col>
       </Row>
-      <SafetyScore props={safetyDes}></SafetyScore>
+      {/* <SafetyScore safetyDes></SafetyScore>
       {/* <SafetyScore></SafetyScore>
       <SafetyScore></SafetyScore>
       <SafetyScore></SafetyScore>
       <SafetyScore></SafetyScore>
       <SafetyScore></SafetyScore> */}
+      {/* <SafetyBoard></SafetyBoard> */}
+      <ul>{SafetyBoard}</ul>
       <div className="source-text mt-5 mb-5">{safetySource}</div>
       <div className="title-h3 mb-4 mt-5 pt-4">COVID-19 Statistics</div>
       <Row className="mb-5 justify-content-start">
