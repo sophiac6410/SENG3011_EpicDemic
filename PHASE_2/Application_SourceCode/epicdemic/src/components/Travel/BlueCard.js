@@ -6,22 +6,24 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import '../../styles/Destination.css'
 
-const text = "International travellers are not required to quarantine upon arrival. However, the CDC recommends that travellers stay home and self-quarantine for 7 days after arrival. Travellers should take a test again 3-5 days after arrival; if a test is not available or results are delayed, travellers are recommended to stay home and self-quarantine for a total of 10 days after travelling"
-function BlueCard() {
+function BlueCard(props) {
+  console.log(props)
   return(
-    <Card style={{backgroundColor: "#EBF3FF", borderRadius: "20px"}} className="p-4">
-    <CardContent>
-      <Typography variant="h6">
-      QUARANTINE RULES
-      </Typography>
-      <Typography sx={{ mb: 1.5 }}>
-      Last updated 23/02/22
-      </Typography>
-      <div className='body-text'>
-        {text}
-      </div>
-    </CardContent>
-  </Card>
+    // <Col md={6}>
+      <Card style={{backgroundColor: "#EBF3FF", borderRadius: "20px"}} sx={{ display: 'flex', height: '97%' }} className="p-4 m-2" >
+      <CardContent>
+        <Typography variant="h6" style={{fontWeight:"bold", fontSize: "22px"}}>
+        {props.check.title}
+        </Typography>
+        <Typography sx={{ mb: 1.5 }}>
+        {props.check.date}
+        </Typography>
+        <div className='body-text'>
+          {props.check.text}
+        </div>
+        </CardContent>
+      </Card>
+    // </Col>
   )
 }
 

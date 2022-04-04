@@ -87,7 +87,7 @@
     background-color: #A9CBFF;
 }
 .bg-lightblue {
-    background-color: #EBF3FF;
+    background-color: #E2F2FC;
 }
 .text-grey {
     color: #515151;
@@ -150,6 +150,6 @@
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary .btn-primary:active:focus {
     color: #fff !important;
-    background-color: #A9CBFF !important;
-    border-color: #A9CBFF !important; /*set the color you want here*/
+    background-color: #226b81 !important;
+    border-color: #1B4965 !important; /*set the color you want here*/
 }

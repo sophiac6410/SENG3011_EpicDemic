@@ -11,7 +11,7 @@ import countrybreakdown from "../../static/countrybreakdown.png"
 function UpdateBox(props) {
   if(props.color == "blue") {
     return(
-      <Row className="bg-blue m-2 me-4 mb-4 p-1">
+      <Row className="bg-mblue m-2 me-4 mb-4 p-3">
         <Col>
           <Row className="align-self-center justify-content-center"  style={{"font-size": "30px", "color": "white", "font-weight": "bold"}}>{props.number}</Row>
           <Row className="align-self-center justify-content-center text-white"  style={{"font-size": "15px", "color": "white", "font-weight": "bold"}}>{props.text}</Row>
@@ -20,10 +20,10 @@ function UpdateBox(props) {
     )
   }else if(props.color == "white"){
     return(
-      <Row className="bg-lightblue m-2 me-4 mb-4 p-1">
+      <Row className="bg-lightblue m-2 me-4 mb-4 p-3">
         <Col>
-          <Row className="align-self-center justify-content-center"  style={{"font-size": "30px", "color": "#726FE7", "font-weight": "bold"}}>{props.number}</Row>
-          <Row className="align-self-center justify-content-center" style={{"font-size": "15px", "color": "#726FE7", "font-weight": "bold"}}>{props.text}</Row>
+          <Row className="align-self-center justify-content-center"  style={{"font-size": "30px", "color": "#0F83A0", "font-weight": "bold"}}>{props.number}</Row>
+          <Row className="align-self-center justify-content-center" style={{"font-size": "15px", "color": "#0F83A0", "font-weight": "bold"}}>{props.text}</Row>
         </Col>
       </Row>
     )
@@ -54,7 +54,7 @@ function GlobalUpdate(){
   };
 
   return(
-    <Col className="pt-4 pb-4 mt-3">
+    <Col className="pt-4 pb-4">
       {/* <Row className="pe-5 justify-content-center"> */}
         <Row className="h3-title mb-2 justify-content-center">GLOBAL COVID UPDATES</Row>
         <Row className="bg-darkteal justify-content-end pb-4 pt-4 pe-4">
@@ -80,14 +80,14 @@ function GlobalUpdate(){
             <Row className="align-self-center justify-content-start" style={{"font-size": "20px", "color": "white", "font-weight": "bold"}}>Vaccines</Row>
           </Col>
         </Row>
-        <Row className="bg-darkteal justify-content-center align-items-center">
+        <Row className="bg-darkteal justify-content-center align-items-center pb-5">
           <Col md={3} className="align-self-center ms-4">
             <UpdateBox number="481M" text="total cases" color="blue"></UpdateBox>
             <UpdateBox number="6.11M" text="deaths" color="white"></UpdateBox>
             <UpdateBox number="1.7M" text="daily cases" color="blue"></UpdateBox>
           </Col>
           <Col className="text-center pb-4">
-            <img src={covidMap} width="900px" height="350px"></img>
+            <img src={covidMap} width="900px" height="450px"></img>
           </Col>
         </Row>
 
