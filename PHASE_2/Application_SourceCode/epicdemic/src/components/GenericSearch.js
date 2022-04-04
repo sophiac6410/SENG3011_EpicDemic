@@ -8,14 +8,13 @@ import SearchIcon from '@mui/icons-material/Search';
 const GenericSearch = ({ fieldLabel, options }) => {
     return (
         <div style={{borderRadius: "25px"}}>
-
             <div className="searchfield-container">
                 <div style={{ display: "flex", alignItems: "center", flexDirection: "row" }}>
                     <div className='search-icon'>
                         <SearchIcon fontSize='medium'></SearchIcon>
                     </div>
                     <Autocomplete
-                        sx={{ width: 200 }}
+                        sx={{ width: 400 }}
                         options={options}
                         autoHighlight
                         getOptionLabel={(option) => option.label}
