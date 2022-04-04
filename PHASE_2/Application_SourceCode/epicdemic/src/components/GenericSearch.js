@@ -14,7 +14,7 @@ const GenericSearch = ({ fieldLabel, options }) => {
                         <SearchIcon fontSize='medium'></SearchIcon>
                     </div>
                     <Autocomplete
-                        sx={{ width: 400 }}
+                        sx={{ width: "20vw" }}
                         options={options}
                         autoHighlight
                         getOptionLabel={(option) => option.label}
