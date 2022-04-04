@@ -7,6 +7,8 @@ import Destination from './pages/Destination'
 import Covid from './pages/Covid'
 import Book from './pages/Book'
 import DestinationFinder from './pages/DestinationFinder';
+import SavedLocations from './pages/SavedLocations';
+
 import {
     BrowserRouter as Router,
     Routes,
@@ -30,6 +32,7 @@ function App() {
                 <Route path="book" element={<Book></Book>}></Route>
               </Route>
             <Route path="/finder" element={<DestinationFinder/>}/>
+            <Route path="/saved" element={<SavedLocations/>}/>
           </Routes>
         </BrowserRouter>
       </>

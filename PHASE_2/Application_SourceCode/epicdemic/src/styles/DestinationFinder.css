@@ -43,6 +43,25 @@
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
 }
 
+.saved-locations{
+    overflow-y: scroll;
+    width: 85vw;
+    height: 40vh;
+    background-color: white;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+    margin-top: 2vh;
+    margin-bottom: 10vh;
+}
+
+.update-saved-locations{
+    overflow-y: scroll;
+    width: 50vw;
+    height: 50vh;
+    margin-top: 2vh;
+    margin-bottom: 10vh;
+    padding: 0 0 0 0;
+}
+
 .info-row-2,
 .info-row{
     text-align: center;
@@ -92,7 +111,16 @@
     width: 3vw;
 }
 
+.bell-image{
+    width: 2vw;
+}
+
 .recommend-dest-button{
     border-radius: 25px;
     padding: 15px 15px;
+}
+
+.dest-search-button{
+    border-radius: 25px;
+    padding: 15px 30px;
 }
