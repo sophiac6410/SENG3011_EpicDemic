@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import HappyFamily from "../static/happyfamily.svg";
 import BluePlus from "../static/blueplus.svg";
@@ -10,8 +11,10 @@ import GenericSearchText from "../components/GenericSearchText";
 
 
 const SavedLocations = () => {
+    let navigate = useNavigate(); 
+
     return (
-        <Container fluid style={{"overflow-x": "hidden", "paddingLeft": 0, "paddingRight": 0, "marginLeft": 0, "marginRight": 0, "backgroundColor": "#EEF5FF"}}>
+        <Container fluid style={{"overflowX": "hidden", "paddingLeft": 0, "paddingRight": 0, "marginLeft": 0, "marginRight": 0, "backgroundColor": "#EEF5FF"}}>
             <Row style={{"backgroundColor": "rgba(27, 73, 101, 0.7)"}}>
                 <Col>
                     <Image style={{"width": "50vw"}} src={HappyFamily}/>
@@ -66,7 +69,11 @@ const SavedLocations = () => {
             </Row>
             <Row position="relative" style={{"marginLeft": 0, "marginRight": 0, "marginTop": "10vh", "paddingBottom": "15vh", "paddingLeft": 0, "paddingRight": 0}}>
                 <Col style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
-                    <Button className="dest-search-button">
+                    <Button className="dest-search-button"
+                        onClick={() => {
+                            navigate('/finder')
+                        }}
+                    >
                         Destination search
                     </Button>
                 </Col>
