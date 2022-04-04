@@ -1,17 +1,10 @@
 .btn-flight {
-    border-radius: 25px;
     border: none;
-    padding: 15px;
     margin: 20px auto;
     margin-bottom: 50px;
     display: flex;
-    background-color: #1B4965;
-    color: white;
 }
 
-.btn-flight:hover {
-    background-color: #0F83A0;
-}
 .btn-filter {
     padding: 10px 20px;
 }
@@ -32,8 +25,6 @@
 }
 
 .flight-container {
-    background-color: #E9F0FB;
-    border-radius: 15px;
     display: flex;
     padding: 5px;
     margin: 10px 0px;
@@ -70,16 +61,11 @@
 }
 
 .btn-flight-link {
-    background-color: #70C4E8;
-    border: none;
-    border-radius: 25px;
-    color: white;
     font-size: 10pt;
     font-weight: semi-bold;
     width: auto;
     padding: 8px 15px;
 }
 .btn-flight-link:hover {
-    background-color: #0F83A0;
+    color: white;
 }
-

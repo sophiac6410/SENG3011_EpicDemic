@@ -6,7 +6,7 @@ import qantas from "../../static/qantas.svg"
 
 function FlightDeal() {
   return (
-    <div class="flight-container text-center">
+    <div class="border-radius-small bg-light-blue flight-container text-center">
       <Image src={qantas} width='60px' height='70px' style={{
       margin: '10px'
       }}></Image>
@@ -42,7 +42,7 @@ function FlightDeal() {
       </Col> */}
       <div class="flight-flex">
         <div class="font-bold-large">AU$386</div>
-        <button class="btn-flight-link">View Flight</button>
+        <button class="btn-base btn-light btn-flight-link">View Flight</button>
       </div>
     </div>
   )
