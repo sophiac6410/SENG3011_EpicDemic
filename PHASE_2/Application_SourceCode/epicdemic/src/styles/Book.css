@@ -1,0 +1,85 @@
+.btn-flight {
+    border-radius: 25px;
+    border: none;
+    padding: 15px;
+    margin: 20px auto;
+    margin-bottom: 50px;
+    display: flex;
+    background-color: #1B4965;
+    color: white;
+}
+
+.btn-flight:hover {
+    background-color: #0F83A0;
+}
+.btn-filter {
+    padding: 10px 20px;
+}
+
+.flight-tab {
+    font-size: 20px;
+    padding: 10px 60px;
+    cursor: pointer;
+    opacity: 0.6;
+    background: white;
+    border: 0;
+    outline: 0;
+}
+
+.flight-tab:active {
+    border-bottom: 2px solid black;
+    opacity: 1;
+}
+
+.flight-container {
+    background-color: #E9F0FB;
+    border-radius: 15px;
+    display: flex;
+    padding: 5px;
+    margin: 10px 0px;
+}
+.flight-flex {
+    flex: 1;
+    padding: 15px 0px;
+}
+.flight-time-container {
+    margin: 0px 15px;
+}
+.flight-time {
+    margin-top: 5px;
+}
+.width-fit {
+    width: auto;
+}
+.font-bold-large {
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.font-small {
+    font-size: 10pt;
+}
+
+.font-meta-large {
+    font-size: 14pt;
+    font-weight: semi-bold;
+    margin: 4px;
+}
+.text-center {
+    text-align: center;
+}
+
+.btn-flight-link {
+    background-color: #70C4E8;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 10pt;
+    font-weight: semi-bold;
+    width: auto;
+    padding: 8px 15px;
+}
+.btn-flight-link:hover {
+    background-color: #0F83A0;
+}
+
