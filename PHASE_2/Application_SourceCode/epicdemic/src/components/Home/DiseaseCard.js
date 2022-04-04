@@ -6,9 +6,9 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function DiseaseCard({col}) {
+export default function DiseaseCard() {
   return (
-    <Card sx={{ display: 'flex', height: '97%', backgroundColor: col, padding: '10px' }} className="m-2" >
+    <Card className="m-2" >
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Published 29th March 2022

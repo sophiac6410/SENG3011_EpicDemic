@@ -13,8 +13,8 @@ import DiseaseCard from "./DiseaseCard";
 const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5
+      breakpoint: { max: 4000, min: 2000 },
+      items: 3
     },
     desktop: {
       breakpoint: { max: 2000, min: 1024 },
@@ -32,7 +32,8 @@ const responsive = {
 
 const COLOR = 'white'
 
-export default function DiseaseReportBar() {
+class DiseaseReportBar extends React.Component {
+  render() {
     return(
       <div style={{ padding: '30px', marginBottom: '30px', backgroundColor: '#E9F0FB' }}>
         <Row className="mt-2" style={{ backgroundColor: '#E9F0FB' }}>
@@ -45,6 +46,7 @@ export default function DiseaseReportBar() {
               showStatus={false}
               responsive={responsive} 
             >
+              
               <div className="news-container-col">
                 <DiseaseCard></DiseaseCard>
                 <DiseaseCard></DiseaseCard>
@@ -67,5 +69,7 @@ export default function DiseaseReportBar() {
       </div>
 
     )
+  }
 }
 
+export default DiseaseReportBar
