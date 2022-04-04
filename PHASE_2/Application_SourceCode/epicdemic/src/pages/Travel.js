@@ -122,7 +122,7 @@ function Travel() {
             {EnterBoard}
           </Row>
           <Row><div className="title-h3 mt-5">While you’re there</div></Row>
-          <ul>{arriveBoard}</ul>
+          <div>{arriveBoard}</div>
         </div>
       </Col>
     </Container>
