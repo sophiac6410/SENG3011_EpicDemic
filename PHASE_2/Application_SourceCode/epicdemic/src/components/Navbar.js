@@ -15,6 +15,7 @@ function NavbarComp() {
           <img src={logo} alt="logo" width="60px" height="40px"></img>
         </Navbar.Brand>
         <div className="d-flex justify-content-end pe-1">
+          {/* <img className="me-3 ms-3" src={earth} width="35px" height="35px" alt="global page"></img> */}
           <img className="me-3 ms-3" src={heart} width="35px" height="35px" alt="collection page"></img>
           <img className="me-3 ms-3" src={profile} width="40px" height="40px" alt="profile page"></img>
         </div>

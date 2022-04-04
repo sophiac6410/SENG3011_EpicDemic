@@ -1,13 +1,10 @@
 import { Container, Row, Col } from "react-bootstrap"
 import { Link, Outlet } from "react-router-dom"
-import TinySearch from "../components/TinySearch"
 import '../styles/Destination.css'
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
-import midCaution from "../static/mid-caution.svg"
-import midDot from "../static/mid-dot.svg"
 import heart from "../static/solidHeart.png"
-import info from "../static/info.svg"
+import info from "../static/bell.svg"
 
 
 

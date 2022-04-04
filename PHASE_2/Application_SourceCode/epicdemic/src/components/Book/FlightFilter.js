@@ -53,7 +53,7 @@ function FlightFilter() {
         }}>Price Range</h1>
         <SliderPrice></SliderPrice>
       </div>
-      <button class="btn-flight btn-filter">Filter</button>
+      <button class="btn-base btn-light  btn-flight btn-filter">Filter</button>
     </div>
   )
 }

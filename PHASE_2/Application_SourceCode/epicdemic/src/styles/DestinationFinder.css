@@ -7,7 +7,7 @@
 
 .balloon-background{
     width: 30vw;
-    /* height:40%; */
+    padding: 0;
 }
 
 .world-map{
@@ -27,6 +27,9 @@
 }
 
 .popular-travel{
+    width: 65vw;
+    height: 78vh;
+    margin-right: 1vw;
     overflow-y: scroll;
     background-color: white;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
@@ -40,6 +43,7 @@
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
 }
 
+.info-row-2,
 .info-row{
     text-align: center;
     align-items: center;
@@ -53,7 +57,7 @@
     font-size: small;
 }
 
-.header-info-row{
+.header-info-row, .header-info-row-2{
     text-align: center;
     align-items: center;
     margin: 0.5vw;
@@ -86,4 +90,9 @@
 
 .heart-image{
     width: 3vw;
+}
+
+.recommend-dest-button{
+    border-radius: 25px;
+    padding: 15px 15px;
 }
