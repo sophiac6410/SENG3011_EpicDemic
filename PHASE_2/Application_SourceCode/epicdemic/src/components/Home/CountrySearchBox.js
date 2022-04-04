@@ -8,7 +8,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 export default function CountrySelect({isFrom}) {
   return (
-    <div style={{ display: "flex", alignItems: "center", flexDirection: "row", padding: '10px', paddingTop: '0px' }}>
+    <div style={{ display: "flex", alignItems: "center", flexDirection: "row", padding: '10px' }}>
 
       <Autocomplete
         id="country-select-demo"

@@ -6,7 +6,7 @@ import Travel from './pages/Travel'
 import Destination from './pages/Destination'
 import Covid from './pages/Covid'
 import Book from './pages/Book'
-
+import DestinationFinder from './pages/DestinationFinder';
 import {
     BrowserRouter as Router,
     Routes,
@@ -17,7 +17,7 @@ import {
 
 function App() {
     return(
-      <div>
+      <>
         <NavbarComp></NavbarComp>
         <BrowserRouter>
           <Routes>
@@ -29,9 +29,10 @@ function App() {
                 <Route path="covid" element={<Covid></Covid>}></Route>
                 <Route path="book" element={<Book></Book>}></Route>
               </Route>
+            <Route path="finder" element={<DestinationFinder/>}/>
           </Routes>
         </BrowserRouter>
-      </div>
+      </>
     )
 }
 

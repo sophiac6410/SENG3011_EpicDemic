@@ -1,0 +1,89 @@
+.plane-background{
+    height: 50vh;
+    position:relative;
+    z-index: 10;
+    padding: 0;
+}
+
+.balloon-background{
+    width: 30vw;
+    /* height:40%; */
+}
+
+.world-map{
+    width: 70vw;
+}
+
+.filter-destination{
+    height: 50vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(112, 196, 232, 0.8);
+}
+
+.popular-travel{
+    overflow-y: scroll;
+    background-color: white;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+.latest-updates{
+    overflow-y: scroll;
+    width: 90vw;
+    height: 70vh;
+    background-color: white;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+.info-row{
+    text-align: center;
+    align-items: center;
+    margin: 0.5vw;
+    background-color: #EEF5FF;
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-family: sans-serif;
+    color: #565656;
+    font-size: small;
+}
+
+.header-info-row{
+    text-align: center;
+    align-items: center;
+    margin: 0.5vw;
+    background-color: #70C4E8;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: sans-serif;
+    color: white;
+    font-size: large;
+}
+
+.map-section{
+    justify-content: center;
+    margin: 15vh 10vw 0 10vw;
+}
+
+.map-legend{
+    justify-content: center;
+    margin: 0vh 20vw 0 20vw;
+}
+
+.book-button{
+    color: white !important;
+    background-color: #70C4E8 !important;
+    border-color: #70c4e8 !important;
+    border-radius: 25px;
+    padding: 10px 30px !important;
+}
+
+.heart-image{
+    width: 3vw;
+}

@@ -48,8 +48,7 @@
 }
 
 .search-icon {
-    padding-right: 5px;
-    padding-top: 5px;
+    padding-top: 25px;
 }
 
 .search-bar-text {
@@ -75,7 +74,7 @@
     background-color: #726FE7;
 }
 .bg-mblue{
-    background-color: #7EB2FF;
+    background-color: #70C4E8;
 }
 .bg-white {
     background-color: white;
@@ -106,7 +105,7 @@
 .search-row {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 }
 
@@ -129,6 +128,7 @@
     align-items: center; 
     justify-content: center; 
     display: flex;
+    flex-direction: column;
 }
 
 .covidtabs {

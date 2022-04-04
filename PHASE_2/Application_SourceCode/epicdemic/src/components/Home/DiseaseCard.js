@@ -14,7 +14,7 @@ export default function DiseaseCard() {
           Published 29th March 2022
         </Typography>
         <Typography component="div" align="left" sx={{ mb: 1 }}>
-          <text style={{"font-size": "18px", "font-weight": "bold"}}>
+          <text style={{"font-size": "22px", "font-weight": "bold"}}>
             Bacterial black spot, mango - Ghana 
           </text>
         </Typography>

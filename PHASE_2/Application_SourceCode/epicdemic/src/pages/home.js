@@ -14,6 +14,7 @@ function Home() {
       <Container style={{"background-color": "white"}}>
         <Row>
           <div id="header">
+            <h1> Travel safely with Epicdemic! </h1>
             <Search></Search>
           </div>
         </Row>
