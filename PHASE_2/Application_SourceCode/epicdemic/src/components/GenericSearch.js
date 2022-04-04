@@ -8,6 +8,7 @@ import SearchIcon from '@mui/icons-material/Search';
 const GenericSearch = ({ fieldLabel, options }) => {
     return (
         <div style={{borderRadius: "25px"}}>
+
             <div className="searchfield-container">
                 <div style={{ display: "flex", alignItems: "center", flexDirection: "row" }}>
                     <div className='search-icon'>
@@ -40,11 +41,12 @@ const GenericSearch = ({ fieldLabel, options }) => {
                                     autoComplete: 'new-password'
                                 }}
                             />
-                        )}
-                    />
+                            )}
+                            />
                 </div>
             </div>
-        </div>
+
+            </div>
     )
 }
 
