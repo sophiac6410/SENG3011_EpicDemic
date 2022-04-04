@@ -29,7 +29,7 @@ function App() {
                 <Route path="covid" element={<Covid></Covid>}></Route>
                 <Route path="book" element={<Book></Book>}></Route>
               </Route>
-            <Route path="finder" element={<DestinationFinder/>}/>
+            <Route path="/finder" element={<DestinationFinder/>}/>
           </Routes>
         </BrowserRouter>
       </>

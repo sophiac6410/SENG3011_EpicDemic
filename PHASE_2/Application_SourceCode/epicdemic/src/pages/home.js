@@ -8,13 +8,19 @@ import UpdateBar from "../components/Home/UpdateBar";
 import bigLoading from "../static/bigLoading.svg"
 import DiseaseRadar from "../components/Home/DiseaseRadar";
 import DiseaseReportBar from "../components/Home/DiseaseReportBar";
+import Typography from '@mui/material/Typography'
 
 function Home() {
   return (
       <Container style={{"background-color": "white"}}>
         <Row>
           <div id="header">
-            <h1> Travel safely with Epicdemic! </h1>
+            <Typography variant="h3" component="h2" sx={ { color: '#1B4965' }}>
+              Travel safely with Epicdemic!
+            </Typography>
+            <Typography variant="subtitle1" component="h2"  sx={ { paddingBottom: '20px' }}>
+              Start searching to find your perfect destination...
+            </Typography>
             <Search></Search>
           </div>
         </Row>

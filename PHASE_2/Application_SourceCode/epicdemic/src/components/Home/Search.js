@@ -6,12 +6,17 @@ import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { useNavigate, } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
 
 function Search() {
 
   let navigate = useNavigate(); 
   const routeChange = () =>{  
     navigate('/destination');
+  }
+
+  const goDestination = () =>{  
+    navigate('/finder');
   }
 
     return(
@@ -46,7 +51,10 @@ function Search() {
         </div>
 
         <div className="search-text">
-          <a>I don't know where to go?</a>
+          <Link href="#" onClick={goDestination} color="inherit">
+            I don't know where to go?
+          </Link>
+          {/* <a>I don't know where to go?</a> */}
         </div>
     </div>
     )
