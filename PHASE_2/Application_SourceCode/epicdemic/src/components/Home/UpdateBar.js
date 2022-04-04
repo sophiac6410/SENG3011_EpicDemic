@@ -9,7 +9,7 @@ function RestrictBox(){
 		<Row className="justify-content-start bg-mblue mt-2 mb-3 pt-2 pb-2" style={{"border-radius": "10px"}}>
 			<Col md={2} className="align-self-center">
 				<Row className="justify-content-end">
-					<img src={info} width="35px" height="35px"></img>
+					<img src={info} width="50px" height="50px"></img>
 				</Row>
 			</Col>
 			<Col>
