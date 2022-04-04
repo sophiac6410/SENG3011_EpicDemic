@@ -8,7 +8,7 @@ import React from "react";
 function LocationCard() {
   let navigate = useNavigate(); 
   const routeChange = () =>{  
-    navigate('/destination');
+    navigate('/destination/PHILIPPINES');
   }
 
   return (

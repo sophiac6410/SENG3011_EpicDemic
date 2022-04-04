@@ -23,7 +23,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home></Home>}>
             </Route>
-              <Route path="/destination" element={<Destination></Destination>}>
+              <Route path="/destination/:country" element={<Destination></Destination>}>
                 <Route index element={<Overview></Overview>}></Route>
                 <Route path="travel" element={<Travel></Travel>}></Route>
                 <Route path="covid" element={<Covid></Covid>}></Route>

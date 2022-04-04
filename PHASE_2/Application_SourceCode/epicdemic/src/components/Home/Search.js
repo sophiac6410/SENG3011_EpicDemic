@@ -12,7 +12,7 @@ function Search() {
 
   let navigate = useNavigate(); 
   const routeChange = () =>{  
-    navigate('/destination');
+    navigate('/destination/PHILIPPINES');
   }
 
   const goDestination = () =>{  
