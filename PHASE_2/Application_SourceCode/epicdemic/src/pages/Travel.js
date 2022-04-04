@@ -2,12 +2,6 @@ import { Col, Container, Row } from "react-bootstrap"
 import midDot from "../static/mid-dot.svg"
 import '../styles/Destination.css'
 import BlueCard from "../components/Travel/BlueCard";
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 
 const validCheck = <p>
   Before you book your travel, check if you meet Australia’s definition of fully vaccinated for international travel purposes. To meet Australia’s vaccination requirements and be considered a ‘fully vaccinated’ traveller for the purpose of Australia’s border arrangements, you need to provide evidence that you either: 

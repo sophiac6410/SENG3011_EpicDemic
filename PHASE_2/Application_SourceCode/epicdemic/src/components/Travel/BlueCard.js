@@ -5,7 +5,6 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import '../../styles/Destination.css'
-import { Col } from 'react-bootstrap';
 
 function BlueCard(props) {
   console.log(props)
