@@ -86,25 +86,27 @@
 .border-radius-small {
     border-radius: 20px;
 }
-.btn-dark {
-    border-radius: 50px;
-    text-align: center;
-    color: white;
+.btn-base {
     border: none;
+    border-radius: 30px;
+    text-align: center;
+    padding: 15px 25px;
+}
+.btn-dark {
+    color: white;
     background-color: #1B4965;
 }
 .btn-light {
-    border-radius: 50px;
-    text-align: center;
     color: white;
-    border: none;
     background-color: #70C4E8;
 }
 .btn-dark:hover {
-    background-color: #25658e;
+    background-color: #29729f;
+    color: white;
 }
 .btn-light:hover {
-    background-color: #4fbceb;
+    background-color: #2cb1eb;
+    color: white;
 }
 .navbar-brand {
     font-size: 25px;

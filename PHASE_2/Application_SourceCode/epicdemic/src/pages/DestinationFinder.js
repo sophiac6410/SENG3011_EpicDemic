@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Image } from "react-bootstrap";
+import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import PlaneBackground from "../static/plane.png";
 import WorldMap from "../static/hexworldmap.svg";
 import "../styles/DestinationFinder.css";
 import GenericSearch from "../components/GenericSearch";
 import InfoRow from "../components/DestinationFinder/InfoRow";
+import InfoRow2 from "../components/DestinationFinder/InfoRow2";
 import HeaderInfoRow from "../components/DestinationFinder/HeaderInfoRow";
+import HeaderInfoRow2 from "../components/DestinationFinder/HeaderInfoRow2";
 import HexTeal from "../static/hexteal.svg";
 import HexMedTeal from "../static/hexmedteal.svg";
 import HexWhite from "../static/hexwhite.svg";
@@ -13,13 +15,16 @@ import BalloonBackground from "../static/balloontravel.jpg"
 
 const DestinationFinder = () => {
     const [infoRows, setInfoRows] = useState([]);
+    const [popularDestinations, setPopularDestinations] = useState([]);
+
     useEffect(() => {
         setInfoRows([...infoRowData]);
+        setPopularDestinations([...popularDestinationsData]);
     }, []);
 
     return (
-        <Container fluid style={{ "margin": 0, "padding": 0, "backgroundColor": "#E2F2FC"}}>
-            <Row position="relative" style={{"margin": 0, "padding": 0}}>
+        <Container fluid style={{ "--bs-gutter-x": 0, "margin": 0, "padding": 0, "backgroundColor": "#E2F2FC"}}>
+            <Row position="relative" style={{"--bs-gutter-x": 0, "padding": 0}}>
                 <Image className="plane-background" src={PlaneBackground}/>
                 <Container fluid className="filter-destination">
                     <Row>
@@ -71,31 +76,38 @@ const DestinationFinder = () => {
                 </Col>
             </Row>
             <Row position="relative" style={{"margin": 0, "marginTop": "15vh", "padding": 0}}>
-                <Container fluid>
-                    <Row>
-                        <Col>
+                <Container fluid style={{"margin": 0, padding: 0}}>
+                    <Row style={{"margin": 0, padding: 0}}>
+                        <Col style={{"margin": 0}}>
                             <Image className="balloon-background" src={BalloonBackground}/>
                         </Col>
                         <Col>
-                            {/* <Row> */}
-                                {/* <b style={{"font": "Nunito", "fontSize": 30 }}>MOST POPULAR TRAVEL DESTINATIONS</b> */}
+                            <Row>
+                                <b style={{"font": "Nunito", "fontSize": 30 }}>MOST POPULAR TRAVEL DESTINATIONS</b>
                                 <Container fluid className="popular-travel">
-                                    {infoRows.map((infoRow, idx) => {
+                                    <HeaderInfoRow2/>
+                                    {popularDestinations.map((popDest, idx) => {
                                         return (
-                                            <InfoRow
+                                            <InfoRow2
                                             key={idx}
-                                            country={infoRow.country}
-                                            updateDesc={infoRow.latestUpdate}
-                                            lastUpdated={infoRow.lastUpdated}
-                                            travelStatus={infoRow.travelStatus}
+                                            country={popDest.country}
+                                            arrivals={popDest.arrivals}
+                                            travelStatus={popDest.travelStatus}
                                             />
                                             )
                                         })}
                                 </Container>
-                            {/* </Row> */}
+                            </Row>
                         </Col>
                     </Row>
                 </Container>
+            </Row>
+            <Row position="relative" style={{"marginLeft": 0, "marginRight": 0, "marginTop": "15vh", "paddingBottom": "25vh", "paddingLeft": 0, "paddingRight": 0}}>
+                <Col style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
+                    <Button className="recommend-dest-button">
+                        Recommend me a destination
+                    </Button>
+                </Col>
             </Row>
         </Container>
     );
@@ -189,4 +201,23 @@ const infoRowData = [
         travelStatus: 'Closed',
         saved: true      
     }
+]
+
+const popularDestinationsData = [
+    { 'country': 'France', 'arrivals': 89400000, 'travelStatus': 'Open with Restrictions' },
+    { 'country': 'Spain', 'arrivals': 8370000, 'travelStatus': 'Open with Restrictions' },
+    { 'country': 'United States', 'arrivals': 79300000, 'travelStatus': 'Open with Restrictions' },
+    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
+    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
+    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
+    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
+    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
+    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
+    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
+    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
+    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
+    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
+    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
+    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
+    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
 ]
