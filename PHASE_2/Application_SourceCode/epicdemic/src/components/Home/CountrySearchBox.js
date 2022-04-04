@@ -6,16 +6,14 @@ import "react-multi-carousel/lib/styles.css";
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 
-export default function CountrySelect({fieldLabel}) {
+export default function CountrySelect({isFrom}) {
   return (
-    <div style={{ display: "flex", alignItems: "center", flexDirection: "row" }}>
-      <div className='search-icon'>
-        <SearchIcon fontSize='medium'></SearchIcon>
-      </div>
+    <div style={{ display: "flex", alignItems: "center", flexDirection: "row", padding: '10px', paddingTop: '0px' }}>
+
       <Autocomplete
         id="country-select-demo"
         sx={{ width: 300 }}
-        options={countries}
+        options={ isFrom ? aus : countries }
         autoHighlight
         getOptionLabel={(option) => option.label}
         renderOption={(props, option) => (
@@ -35,7 +33,6 @@ export default function CountrySelect({fieldLabel}) {
             id="standard-basic" 
             variant="standard"
             {...params}
-            label={fieldLabel}
             inputProps={{
               ...params.inputProps,
               autoComplete: 'new-password', // disable autocomplete and autofill
@@ -471,4 +468,12 @@ const countries = [
   { code: 'ZA', label: 'South Africa', phone: '27' },
   { code: 'ZM', label: 'Zambia', phone: '260' },
   { code: 'ZW', label: 'Zimbabwe', phone: '263' },
+];
+
+const aus = [
+  {
+    code: 'AU',
+    label: 'Australia',
+    phone: '61',
+  },
 ];
