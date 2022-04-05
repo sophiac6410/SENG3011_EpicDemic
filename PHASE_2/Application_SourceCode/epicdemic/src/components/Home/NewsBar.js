@@ -38,9 +38,9 @@ const fontColours = [ 'white', '#0F83A0', 'white' ]
 class NewsBar extends React.Component {
   render() {
     return(
-      <div style={{ padding: '30px', marginBottom: '30px' }}>
-        <Row className="mt-2">
-          <div className="sub-title mb-2" style={{ color: '#045d5d' }}>
+      <div style={{marginBottom: '30px' }} className="mt-4">
+        <Row className="mt-2 justify-content-center">
+          <div className="sub-title mb-2 text-center me-5" style={{ color: '#045d5d' }}>
             <img className="me-3 ms-3" src={globe} width="35px" height="35px" alt="global page"></img>
             GLOBAL NEWS
           </div>

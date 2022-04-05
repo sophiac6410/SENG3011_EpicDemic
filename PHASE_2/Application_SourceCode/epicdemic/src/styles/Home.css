@@ -3,17 +3,17 @@
     align-items: center;
 }
 .locationBar-title{
-    font-size: 25px;
+    font-size: 30px;
     color: white;
     font-weight: bold;
     text-align: center;
 }
 .sub-title{
-    font-size: 25px;
+    font-size: 30px;
     color: white;
     font-weight: bold;
     padding-top: 1%;
-    padding-left: 3%;
+    /* padding-left: 3%; */
 }
 
 .news-carousel {
@@ -58,7 +58,7 @@
     padding-left: 2%;
 }
 .h3-title{
-    font-size: 25px;
+    font-size: 30px;
     color:#1B4965;
     font-weight: bold;
 }
