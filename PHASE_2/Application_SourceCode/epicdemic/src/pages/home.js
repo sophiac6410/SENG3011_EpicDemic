@@ -35,7 +35,7 @@ function Home() {
         </Row>
         <GlobalUpdate></GlobalUpdate>
         <DiseaseRadar></DiseaseRadar>
-        <DiseaseReportBar></DiseaseReportBar>
+        <DiseaseReportBar parent={0}></DiseaseReportBar>
       </Container>
   );
 }
