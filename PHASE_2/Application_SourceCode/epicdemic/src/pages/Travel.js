@@ -1,7 +1,10 @@
 import { Col, Container, Row } from "react-bootstrap"
 import midDot from "../static/mid-dot.svg"
 import '../styles/Destination.css'
+import '../styles/DestinationFinder.css'
 import BlueCard from "../components/Travel/BlueCard";
+import InfoRow3 from "../components/DestinationFinder/InfoRow3";
+import HeaderInfoRow3 from "../components/DestinationFinder/HeaderInfoRow3";
 
 const validCheck = <p>
   Before you book your travel, check if you meet Australia’s definition of fully vaccinated for international travel purposes. To meet Australia’s vaccination requirements and be considered a ‘fully vaccinated’ traveller for the purpose of Australia’s border arrangements, you need to provide evidence that you either: 
@@ -118,9 +121,42 @@ function Travel() {
           <Row><div className="title-h3 mt-5">While you’re there</div></Row>
           <div>{arriveBoard}</div>
         </div>
+        <Row style={{"marginTop": "10vh", "marginBottom": "50vh"}}>
+          <div className="title-h2 mb-3">Recommended Cities</div>
+          <Container fluid className="recommended-cities">
+            <HeaderInfoRow3/>
+            {recCities.map((rec, idx) => {
+              return (
+                <InfoRow3
+                key={idx}
+                city={rec.city}
+                safetyRating={rec.safetyRating}
+                diseaseRisk={rec.diseaseRisk}
+                travelStatus={rec.travelStatus}
+                lockdown={rec.lockdown}
+                />
+                )
+              })}
+          </Container>
+        </Row>
       </Col>
     </Container>
   )
 }
 
 export default Travel
+
+const recCities = [
+  { 'city': 'Manilla', 'safetyRating': 'Low to medium levels of threat', 'diseaseRisk': 'Medium', 'travelStatus': 'Open with restrictions', 'lockdown': 'No'},
+  { 'city': 'Manilla', 'safetyRating': 'Low to medium levels of threat', 'diseaseRisk': 'Medium', 'travelStatus': 'Open with restrictions', 'lockdown': 'No'},
+  { 'city': 'Manilla', 'safetyRating': 'Low to medium levels of threat', 'diseaseRisk': 'Medium', 'travelStatus': 'Open with restrictions', 'lockdown': 'No'},
+  { 'city': 'Manilla', 'safetyRating': 'Low to medium levels of threat', 'diseaseRisk': 'Medium', 'travelStatus': 'Open with restrictions', 'lockdown': 'No'},
+  { 'city': 'Manilla', 'safetyRating': 'Low to medium levels of threat', 'diseaseRisk': 'Medium', 'travelStatus': 'Open with restrictions', 'lockdown': 'No'},
+  { 'city': 'Manilla', 'safetyRating': 'Low to medium levels of threat', 'diseaseRisk': 'Medium', 'travelStatus': 'Open with restrictions', 'lockdown': 'No'},
+  { 'city': 'Manilla', 'safetyRating': 'Low to medium levels of threat', 'diseaseRisk': 'Medium', 'travelStatus': 'Open with restrictions', 'lockdown': 'No'},
+  { 'city': 'Manilla', 'safetyRating': 'Low to medium levels of threat', 'diseaseRisk': 'Medium', 'travelStatus': 'Open with restrictions', 'lockdown': 'No'},
+  { 'city': 'Manilla', 'safetyRating': 'Low to medium levels of threat', 'diseaseRisk': 'Medium', 'travelStatus': 'Open with restrictions', 'lockdown': 'No'},
+  { 'city': 'Manilla', 'safetyRating': 'Low to medium levels of threat', 'diseaseRisk': 'Medium', 'travelStatus': 'Open with restrictions', 'lockdown': 'No'},
+  { 'city': 'Manilla', 'safetyRating': 'Low to medium levels of threat', 'diseaseRisk': 'Medium', 'travelStatus': 'Open with restrictions', 'lockdown': 'No'},
+  { 'city': 'Manilla', 'safetyRating': 'Low to medium levels of threat', 'diseaseRisk': 'Medium', 'travelStatus': 'Open with restrictions', 'lockdown': 'No'},
+]

@@ -8,13 +8,13 @@ import React from "react";
 function LocationCard() {
   let navigate = useNavigate(); 
   const routeChange = () =>{  
-    navigate('/destination');
+    navigate('/destination/PHILIPPINES');
   }
 
   return (
     <Card className="m-3" onClick={ routeChange }>
       <Card.Body>
-        <Card.Title>Philipines</Card.Title>
+        <Card.Title style={{fontSize: "23px", fontWeight: "bold"}}>Philipines</Card.Title>
         <Card.Subtitle className="pt-1 text-muted">Overall Advice:</Card.Subtitle>
         <Row className="align-items-center pt-1 justify-content-start">
           <Col md={3}>
@@ -24,7 +24,7 @@ function LocationCard() {
             </Row>
           </Col>
           <Col className="pt-1">
-            <text style={{"font-size": "20px", "font-weight": "bold"}}>Exercise Caution</text>
+            <text style={{"font-size": "20px"}}>Exercise Caution</text>
           </Col>
         </Row>
         <Card.Subtitle className="pt-2 text-muted">Travel Status:</Card.Subtitle>
@@ -36,7 +36,7 @@ function LocationCard() {
             </Row>
           </Col>
           <Col className="pt-1">
-            <text style={{"font-size": "20px", "font-weight": "bold"}}>Open with Restrictions</text>
+            <text style={{"font-size": "20px"}}>Open with Restrictions</text>
           </Col>
         </Row>
       </Card.Body>

@@ -27,7 +27,7 @@ const responsive = {
 
 function LocationBar() {
   return(
-    <Row>
+    <Row className="ms-1 me-1">
       <Col className="mt-2 bg-darkteal">
         <div className="locationBar-title mt-3">YOUR SAVED LOCATIONS</div>
         <div className="location-carousel">
@@ -35,7 +35,7 @@ function LocationBar() {
             responsive={responsive} 
             // containerClass="location-carousel"
             autoPlay={false}
-            arrows={false}
+            arrows={true}
             shouldResetAutoplay={false}
             itemClass="location-card"
             centerMode={true}

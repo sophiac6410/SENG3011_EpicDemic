@@ -72,3 +72,11 @@
   border-color: #0F83A0 !important;
   padding-left: 50px;
 }
+
+.recommended-cities{
+  overflow-y: scroll;
+  width: 90vw;
+  height: 70vh;
+  background-color: white;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+}

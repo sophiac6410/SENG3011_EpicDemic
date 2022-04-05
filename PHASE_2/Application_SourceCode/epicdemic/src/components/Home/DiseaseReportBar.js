@@ -36,7 +36,7 @@ export default function DiseaseReportBar(parent) {
     return(
       <div style={{ padding: '30px', marginBottom: '30px', backgroundColor: '#E9F0FB' }}>
         <Row className="mt-2" style={{ backgroundColor: '#E9F0FB' }}>
-          <div className="sub-title mb-2" style={{ color: '#045d5d' }}>
+          <div className="sub-title mb-2 text-center" style={{ color: '#045d5d' }}>
             DISEASE REPORTS
           </div> 
           <div className="news-carousel" style={{ backgroundColor: '#E9F0FB' }}>

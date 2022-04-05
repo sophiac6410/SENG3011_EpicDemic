@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, } from 'react-router-dom';
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import PlaneBackground from "../static/plane.png";
 import WorldMap from "../static/hexworldmap.svg";
@@ -16,6 +17,8 @@ import BalloonBackground from "../static/balloontravel.jpg"
 const DestinationFinder = () => {
     const [infoRows, setInfoRows] = useState([]);
     const [popularDestinations, setPopularDestinations] = useState([]);
+
+    let navigate = useNavigate(); 
 
     useEffect(() => {
         setInfoRows([...infoRowData]);
@@ -104,7 +107,11 @@ const DestinationFinder = () => {
             </Row>
             <Row position="relative" style={{"marginLeft": 0, "marginRight": 0, "marginTop": "15vh", "paddingBottom": "25vh", "paddingLeft": 0, "paddingRight": 0}}>
                 <Col style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
-                    <Button className="recommend-dest-button">
+                    <Button className="recommend-dest-button"
+                        onClick={() => {
+                            navigate('/saved');
+                        }}
+                    >
                         Recommend me a destination
                     </Button>
                 </Col>
