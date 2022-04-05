@@ -27,7 +27,7 @@ const responsive = {
 
 function LocationBar() {
   return(
-    <Row>
+    <Row className="ms-1 me-1">
       <Col className="mt-2 bg-darkteal" style={{padding: '20px 50px'}}>
         <div className="locationBar-title mt-3">YOUR SAVED LOCATIONS</div>
         <div className="location-carousel">

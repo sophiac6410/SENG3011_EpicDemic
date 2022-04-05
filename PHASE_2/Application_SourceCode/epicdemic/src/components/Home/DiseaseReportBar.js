@@ -30,16 +30,15 @@ const responsive = {
     }
   };
 
-const COLOR = 'white'
+const COLOR = 'white';
 
-class DiseaseReportBar extends React.Component {
-  render() {
+export default function DiseaseReportBar(parent) {
     return(
       <div style={{ padding: '30px', marginBottom: '30px', backgroundColor: '#E9F0FB' }}>
         <Row className="mt-2" style={{ backgroundColor: '#E9F0FB' }}>
           <div className="sub-title mb-2 text-center" style={{ color: '#515151' }}>
             DISEASE REPORTS
-          </div>
+          </div> 
           <div className="news-carousel" style={{ backgroundColor: '#E9F0FB' }}>
             <Carousel 
               swipeable={true}
@@ -68,8 +67,7 @@ class DiseaseReportBar extends React.Component {
         </Row>
       </div>
 
-    )
-  }
+  );
 }
 
-export default DiseaseReportBar
+

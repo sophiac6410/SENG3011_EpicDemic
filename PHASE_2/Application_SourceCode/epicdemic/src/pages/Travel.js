@@ -121,8 +121,8 @@ function Travel() {
           <Row><div className="title-h3 mt-5">While you’re there</div></Row>
           <div>{arriveBoard}</div>
         </div>
-        <Row style={{"marginTop": "20vh", "marginBottom": "50vh"}}>
-          <b style={{"font": "Nunito", "fontSize": 30, "marginBottom": "5vh"}}>Recommended Cities</b>
+        <Row style={{"marginTop": "10vh", "marginBottom": "50vh"}}>
+          <div className="title-h2 mb-3">Recommended Cities</div>
           <Container fluid className="recommended-cities">
             <HeaderInfoRow3/>
             {recCities.map((rec, idx) => {

@@ -39,8 +39,8 @@ class NewsBar extends React.Component {
   render() {
     return(
       <div style={{ padding: '30px', marginBottom: '30px' }}>
-        <Row className="mt-2">
-          <div className="sub-title mb-2 text-center" style={{ color: '#515151' }}>
+        <Row className="mt-2 justify-content-center">
+          <div className="sub-title mb-2 text-center me-5" style={{ color: '#515151' }}>
             <img className="me-3 ms-3" src={globe} width="30px" height="30px" alt="global page"></img>
             GLOBAL NEWS
           </div>

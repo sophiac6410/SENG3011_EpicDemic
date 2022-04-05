@@ -22,7 +22,7 @@ function Search() {
     return(
       <div className="border-radius-small bg-medium-teal" style={{padding: '50px'}}>
         <div className="search-row">
-          <div className="search-col">
+          <div className="search-col ps-4">
             <div className="search-bar-text">From:</div>
             <div className="border-radius-large searchfield-container">
               <CountrySelect isFrom={true}></CountrySelect>

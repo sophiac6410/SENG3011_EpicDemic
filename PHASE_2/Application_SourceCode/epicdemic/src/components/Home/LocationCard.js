@@ -14,7 +14,7 @@ function LocationCard() {
   return (
     <Card className="m-2" style={{borderRadius: '10px', width: 'auto'}} onClick={ routeChange }>
       <Card.Body style={{padding: '20px 30px'}}>
-        <Card.Title style={{fontWeight: 'bold'}}>Philippines</Card.Title>
+        <Card.Title style={{fontSize: "23px", fontWeight: 'bold'}}>Philippines</Card.Title>
         <Card.Subtitle className="pt-1 text-muted">Overall Advice:</Card.Subtitle>
         <Row className="align-items-center pt-1 justify-content-start"  style={{marginBottom: '10px'}}>
           <Col md={3}>
