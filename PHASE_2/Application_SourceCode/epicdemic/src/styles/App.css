@@ -68,6 +68,9 @@
     font-size: 20px;
     line-height: 27px;
 }
+.color-dark-grey {
+    color: #515151;
+}
 .color-green {
     color: #1CC02C;
 }

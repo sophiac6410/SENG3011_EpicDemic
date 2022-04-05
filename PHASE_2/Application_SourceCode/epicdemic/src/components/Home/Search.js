@@ -20,11 +20,11 @@ function Search() {
   }
 
     return(
-      <div style={{"background-color": "#0F83A0", padding: '20px', borderRadius: '25px'}}>
+      <div className="border-radius-small bg-medium-teal" style={{padding: '50px'}}>
         <div className="search-row">
           <div className="search-col">
             <div className="search-bar-text">From:</div>
-            <div className="searchfield-container">
+            <div className="border-radius-large searchfield-container">
               <CountrySelect isFrom={true}></CountrySelect>
             </div>
           </div>
@@ -35,7 +35,7 @@ function Search() {
           </div>
           <div className="search-col">
             <div className="search-bar-text">Destination:</div>
-            <div className="searchfield-container">
+            <div className="border-radius-large searchfield-container">
               <CountrySelect isFrom={false}></CountrySelect>
             </div>
           </div>
@@ -50,7 +50,7 @@ function Search() {
 
         </div>
 
-        <div className="search-text">
+        <div className="search-text" style={{textDecoration: 'underline'}}>
           <Link href="#" onClick={goDestination} color="inherit">
             I don't know where to go?
           </Link>

@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 
 export default function DiseaseCard() {
   return (
-    <Card className="m-2" >
+    <Card className="m-2" style={{borderRadius: '10px', padding: '20px'}} >
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Published 29th March 2022

@@ -28,14 +28,14 @@ const responsive = {
 function LocationBar() {
   return(
     <Row>
-      <Col className="mt-2 bg-darkteal">
+      <Col className="mt-2 bg-darkteal" style={{padding: '20px 50px'}}>
         <div className="locationBar-title mt-3">YOUR SAVED LOCATIONS</div>
         <div className="location-carousel">
           <Carousel 
             responsive={responsive} 
             // containerClass="location-carousel"
             autoPlay={false}
-            arrows={false}
+            arrows={true}
             shouldResetAutoplay={false}
             itemClass="location-card"
             centerMode={true}
@@ -49,8 +49,8 @@ function LocationBar() {
               <LocationCard></LocationCard>
           </Carousel>
         </div>
-        <Row md={3} className="justify-content-center m-3">
-          <Button size="lg" className="align-self-center">See all latest updates</Button>
+        <Row md={5} className="justify-content-center m-3">
+          <button className="btn-base btn-dark align-self-center">See all latest updates</button>
         </Row>
       </Col>
     </Row>
