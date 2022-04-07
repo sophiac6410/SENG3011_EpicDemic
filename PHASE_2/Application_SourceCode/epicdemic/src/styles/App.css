@@ -1,3 +1,4 @@
+/* BACKGROUND COLORS */
 .bg-medium-teal {
     background-color: #0F83A0;
 }
@@ -19,55 +20,8 @@
 .bg-dark-grey {
     background-color: #515151;
 }
-.heading1 {
-    /* font-family: 'Nunito'; */
-    font-style: normal;
-    font-weight: 800;
-    font-size: 40px;
-    line-height: 55px;
-}
-.heading2 {
-    /* font-family: 'Nunito'; */
-    font-style: normal;
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 44px;
-}
-.heading3 {
-    /* font-family: 'Nunito'; */
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 33px;
-}
-.body-heading {
-    /* font-family: 'Open Sans'; */
-    font-style: normal;
-    font-weight: 700;
-    font-size: 21px;
-    line-height: 29px;
-}
-.body-text {
-    /* font-family: 'Open Sans'; */
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 25px;
-}
-.body-important {
-    /* font-family: 'Open Sans'; */
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 27px;
-}
-.body-caption {
-    /* font-family: 'Nunito'; */
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 27px;
-}
+
+/* COLORS */
 .color-dark-grey {
     color: #515151;
 }
@@ -83,12 +37,86 @@
 .color-red {
     color: #DA4848;
 }
+.color-medium-teal {
+    color: #0F83A0;
+}
+.color-light-teal {
+    color: #62B6CB;
+}
+.color-medium-blue {
+    color: #70C4E8;
+}
+.color-dark-teal {
+    color: #1B4965;
+}
+.color-light-grey {
+    color: #EEF0F2;
+}
+.color-light-blue {
+    color: #E2F2FC;
+}
+
+/* FONT STYLES */
+.heading1 {
+    font-family: Nunito, serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 55px;
+}
+.heading2 {
+    font-family: Nunito, serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 44px;
+}
+.heading3 {
+    font-family: Nunito, serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+}
+.body-heading {
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 29px;
+}
+.body-text {
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 25px;
+}
+.body-important {
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+}
+.body-caption {
+    font-family: Nunito, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+}
+
+/* BORDER RADIUSES */
 .border-radius-large {
     border-radius: 50px;
 }
 .border-radius-small {
     border-radius: 20px;
 }
+
+/* BUTTONS */
+/* Include btn-base class for all buttons */
 .btn-base {
     border: none;
     border-radius: 30px;
@@ -111,6 +139,8 @@
     background-color: #2cb1eb;
     color: white;
 }
+
+/* NAV BAR */
 .navbar-brand {
     font-size: 25px;
     font-weight: bold;

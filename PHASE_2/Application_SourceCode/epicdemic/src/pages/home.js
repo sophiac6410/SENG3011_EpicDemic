@@ -15,9 +15,9 @@ function Home() {
       <Container style={{"background-color": "white"}}>
         <Row>
           <div id="header">
-            <Typography variant="h3" component="h2" sx={ { color: '#1B4965' }}>
+            <h1 class="heading1" style={ { color: '#1B4965' }}>
               Travel safely with Epicdemic!
-            </Typography>
+            </h1>
             <Typography variant="subtitle1" component="h2"  sx={ { paddingBottom: '20px' }}>
               Start searching to find your perfect destination...
             </Typography>
