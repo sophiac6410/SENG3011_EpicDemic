@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { useNavigate, } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 
 function Search() {
 
@@ -23,18 +24,20 @@ function Search() {
       <div className="border-radius-small bg-medium-teal" style={{padding: '50px'}}>
         <div className="search-row">
           <div className="search-col ps-4">
-            <div className="search-bar-text">From:</div>
+            <span className="body-caption" style={{color: 'white', margin: '0px 30px'}}>From</span>
             <div className="border-radius-large searchfield-container">
               <CountrySelect isFrom={true}></CountrySelect>
             </div>
           </div>
           <div className="search-col">
             <div style={{ paddingTop: '25px' }}>
-              <img src={arrow} alt="arrow" width="70px" height="30px"></img>
+              <IconButton>
+                <SwapHorizIcon fontSize="large" sx={{ color: 'white' }}></SwapHorizIcon>
+              </IconButton>
             </div>
           </div>
           <div className="search-col">
-            <div className="search-bar-text">Destination:</div>
+            <div className="body-caption" style={{color: 'white', margin: '0px 30px'}}>Destination</div>
             <div className="border-radius-large searchfield-container">
               <CountrySelect isFrom={false}></CountrySelect>
             </div>
@@ -43,18 +46,15 @@ function Search() {
             <IconButton 
               aria-label="search"
               onClick={ routeChange }>
-              <SearchIcon fontSize="large" />
+              <SearchIcon fontSize="large" sx={{color: 'white'}}/>
             </IconButton>
           </div>
-
-
         </div>
 
         <div className="search-text" style={{textDecoration: 'underline'}}>
-          <Link href="#" onClick={goDestination} color="inherit">
+          <Link href="#" onClick={goDestination} color='inherit'>
             I don't know where to go?
           </Link>
-          {/* <a>I don't know where to go?</a> */}
         </div>
     </div>
     )

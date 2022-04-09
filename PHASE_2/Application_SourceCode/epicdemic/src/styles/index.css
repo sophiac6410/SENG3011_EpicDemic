@@ -1,12 +1,21 @@
 @font-face {
-  font-family: 'Nunito';
+  font-family: 'Nunito', sans-serif;
+  font-style: normal;
   src: local('Nunito'), url(../fonts/nunito/Nunito-Regular.ttf) format('truetype');
 }
+
+@font-face {
+  font-family: 'Open Sans', sans-serif;
+  font-style: normal;
+  src: local('Open Sans'), url(../fonts/openSans/Open_Sans/static/OpenSans/OpenSans-Regular.ttf) format('truetype');
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
 body {
   margin: 0;
-  font-family: Nunito, 'Open Sans', sans-serif;
+  font-family: Nunito, 'Open Sans';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
