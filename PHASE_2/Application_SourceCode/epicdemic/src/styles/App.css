@@ -1,3 +1,10 @@
+/* @font-face {
+    font-family: 'Nunito';
+    src: local('Nunito'), url(../fonts/nunito/Nunito-Regular.ttf) format('truetype');
+} */
+@import url('https://fonts.googleapis.com/css2?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 /* BACKGROUND COLORS */
 .bg-medium-teal {
     background-color: #0F83A0;

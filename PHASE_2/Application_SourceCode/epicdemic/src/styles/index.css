@@ -1,12 +1,12 @@
 @font-face {
   font-family: 'Nunito';
-  src: local('Nunito'), url(../fonts/nunito/Nunito-Regular.ttf) format('truetype');
+  src: local('Nunito'), url(./../fonts/nunito/Nunito-Regular.ttf) format('truetype');
 }
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 body {
   margin: 0;
-  font-family: Nunito, 'Open Sans', sans-serif;
+  font-family: Nunito;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

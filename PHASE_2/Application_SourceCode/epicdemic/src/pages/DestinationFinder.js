@@ -86,7 +86,7 @@ const DestinationFinder = () => {
                         </Col>
                         <Col>
                             <Row>
-                                <b style={{"font": "Nunito", "fontSize": 30 }}>MOST POPULAR TRAVEL DESTINATIONS</b>
+                                <b style={{"fontFamily": "Nunito", "fontSize": 30 }}>MOST POPULAR TRAVEL DESTINATIONS</b>
                                 <Container fluid className="popular-travel">
                                     <HeaderInfoRow2/>
                                     {popularDestinations.map((popDest, idx) => {
