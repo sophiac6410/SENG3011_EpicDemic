@@ -4,7 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import planeLanding from '../../static/planeLanding.svg';
 import planeTakeOff from '../../static/planeTakeOff.svg';
 import '../../styles/Destination.css'
-import '../../styles/Home.css'
+// import '../../styles/Home.css'
 import * as React from 'react';
 import TextField from '@material-ui/core/TextField';
 

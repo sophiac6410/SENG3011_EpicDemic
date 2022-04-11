@@ -4,7 +4,7 @@ import profile from '../static/profile.svg'
 import heart from '../static/heart.svg'
 import earth from '../static/earth.svg'
 
-import '../styles/App.css'
+// import '../App.css'
 
 function NavbarComp() {
   return (

@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import heart from "../static/solidHeart.png"
 import info from "../static/bell.svg"
+import Typography from '@mui/material/Typography'
 
 
 
@@ -50,7 +51,7 @@ function Destination() {
           </Row>
           <Row className="pt-4 pb-4 align-items-center">
             <Col md={4}>
-              <div className="title">PHILIPPINES</div>
+              <Typography variant="heading1" className="color-dark-teal">PHILLIPENES</Typography>
               <div className="larger-body">No new changes since 25/03/22 </div>
             </Col>
             <Col>

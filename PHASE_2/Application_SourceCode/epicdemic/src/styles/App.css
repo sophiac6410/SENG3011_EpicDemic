@@ -1,9 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+
+
 /* @font-face {
     font-family: 'Nunito';
-    src: local('Nunito'), url(../fonts/nunito/Nunito-Regular.ttf) format('truetype');
-} */
-@import url('https://fonts.googleapis.com/css2?family=Nunito');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+    font-style: normal;
+    font-display: swap;
+    /* font-weight: 400; */
+    /* src: local('Nunito'), local('Nunito-Regular'), url('./fonts/nunito/Nunito-Regular.ttf') format('ttf'); */
+*/
 
 /* BACKGROUND COLORS */
 .bg-medium-teal {
@@ -43,6 +49,9 @@
 }
 .color-red {
     color: #DA4848;
+}
+.color-white {
+    color: white;
 }
 .color-medium-teal {
     color: #0F83A0;

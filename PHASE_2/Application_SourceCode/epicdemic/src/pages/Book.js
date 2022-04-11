@@ -2,7 +2,7 @@ import '../styles/Destination.css'
 import FlightSearch from "../components/Book/FlightSearch"
 import FlightTabs from "../components/Book/FlightTabs"
 import '../styles/Book.css'
-import '../styles/App.css'
+// import '../App.css'
 import FlightFilter from "../components/Book/FlightFilter"
 import * as React from 'react';
 

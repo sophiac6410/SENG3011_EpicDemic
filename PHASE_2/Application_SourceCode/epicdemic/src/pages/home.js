@@ -12,13 +12,14 @@ import Typography from '@mui/material/Typography'
 
 function Home() {
   return (
-      <Container style={{"background-color": "white"}}>
+      <Container fluid="sm" style={{"background-color": "white"}}>
         <Row>
           <div id="header">
-            <h1 class="heading1" style={ { color: '#1B4965' }}>
+            {/* <h1 class="heading1" style={ { color: '#1B4965' }}>
               Travel safely with Epicdemic!
-            </h1>
-            <Typography variant="subtitle1" component="h2"  sx={ { paddingBottom: '20px' }}>
+            </h1> */}
+            <Typography variant="title" className="color-dark-teal">Travel safely with Epicdemic!</Typography>
+            <Typography variant="bodyCaption" sx={ { paddingBottom: '20px' }}>
               Start searching to find your perfect destination...
             </Typography>
             <Search></Search>

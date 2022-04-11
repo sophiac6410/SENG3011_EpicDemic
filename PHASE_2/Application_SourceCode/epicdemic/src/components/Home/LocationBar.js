@@ -4,6 +4,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "../../styles/Home.css"
 import { Button, Row, Col } from "react-bootstrap";
+import Typography from '@mui/material/Typography'
 
 const responsive = {
     superLargeDesktop: {
@@ -27,9 +28,11 @@ const responsive = {
 
 function LocationBar() {
   return(
-    <Row className="ms-1 me-1">
+    <Row className="ms-1 me-1 pt-5">
       <Col className="mt-2 bg-darkteal" style={{padding: '20px 50px'}}>
-        <div className="locationBar-title mt-3">YOUR SAVED LOCATIONS</div>
+        <div className="text-center">
+          <Typography variant="heading1" className="color-white">YOUR SAVED LOCATIONS</Typography>
+        </div>
         <div className="location-carousel">
           <Carousel 
             responsive={responsive} 

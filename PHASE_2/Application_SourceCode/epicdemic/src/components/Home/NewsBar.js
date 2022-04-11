@@ -8,8 +8,9 @@ import { Row } from "react-bootstrap";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Carousel from "react-multi-carousel";
-import NewsCardSmall from "./NewsCardSmall"
 import globe from '../../static/globe.svg'
+import Typography from '@mui/material/Typography'
+
 
 const responsive = {
     superLargeDesktop: {
@@ -40,9 +41,9 @@ class NewsBar extends React.Component {
     return(
       <div style={{ padding: '30px', marginBottom: '30px' }}>
         <Row className="mt-2 justify-content-center">
-          <div className="sub-title mb-2 text-center me-5" style={{ color: '#515151' }}>
-            <img className="me-3 ms-3" src={globe} width="30px" height="30px" alt="global page"></img>
-            GLOBAL NEWS
+          <div className="mb-2 text-center me-5" style={{ color: '#515151' }}>
+            <img className="me-3 ms-3 mb-3" src={globe} width="30px" height="30px" alt="global page"></img>
+            <Typography variant="heading1" className="color-dark-teal">GLOBAL NEWS</Typography>
           </div>
           <div className="news-carousel">
             <Carousel 
