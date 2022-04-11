@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Button, Image } from "react-bootstrap";
 import "../../styles/DestinationFinder.css";
-import InfoIcon from "../../static/infoteal.svg";
+import InfoIcon from '@mui/icons-material/Info';
+import { LightButton } from "../../styles/Global";
 
 const InfoRow2 = ({country, arrivals, travelStatus}) => {
     return (
@@ -14,10 +15,10 @@ const InfoRow2 = ({country, arrivals, travelStatus}) => {
             </Col>
             <Col xs={4}>
                 {travelStatus}
-                <Image style={{marginLeft: 10}} src={InfoIcon}/>
+                <InfoIcon fontSize="small" className="color-medium-blue" sx={{ml: 1}}/>
             </Col>
             <Col xs={2}>
-                <Button className="book-button">Book</Button>
+                <LightButton>Book</LightButton>
             </Col>
         </Row>
     );
