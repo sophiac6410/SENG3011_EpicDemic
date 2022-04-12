@@ -26,7 +26,7 @@ function Home() {
                 </Typography>
               </div>
               <Col className="mt-1 mb-5">
-                <button className="btn-base btn-dark bg-dark-teal align-self-center me-3 pe-4 ps-4">
+                <button className="btn-base btn-dark bg-dark-teal align-self-center me-3 pe-5 ps-5">
                   <Typography variant="bodyImportant">Find a destination</Typography>
                 </button>
                 <button className="btn-base bg-light-blue align-self-center ms-3 pe-5 ps-5">
