@@ -9,22 +9,23 @@ import bigLoading from "../static/bigLoading.svg"
 import DiseaseRadar from "../components/Home/DiseaseRadar";
 import DiseaseReportBar from "../components/Home/DiseaseReportBar";
 import Typography from '@mui/material/Typography'
+import NavbarComp from '../components/Home/NavBar'
 
 function Home() {
   return (
-      <Container fluid="sm" style={{"background-color": "white"}}>
-        <Row>
-          <div id="header">
-            {/* <h1 class="heading1" style={ { color: '#1B4965' }}>
-              Travel safely with Epicdemic!
-            </h1> */}
-            <Typography variant="title" className="color-dark-teal">Travel safely with Epicdemic!</Typography>
-            <Typography variant="bodyCaption" sx={ { paddingBottom: '20px' }}>
-              Start searching to find your perfect destination...
-            </Typography>
-            <Search></Search>
-          </div>
-        </Row>
+      <div style={{"background-color": "white"}}>
+        <div className="bg-sky">
+          <NavbarComp></NavbarComp>
+          <Row>
+            <div id="header">
+              <Typography variant="title" className="color-dark-teal">Travel safely with Epicdemic!</Typography>
+              <Typography variant="bodyCaption" sx={ { paddingBottom: '20px' }}>
+                Start searching to find your perfect destination...
+              </Typography>
+              <Search></Search>
+            </div>
+          </Row>
+        </div>
         <NewsBar></NewsBar>
         <LocationBar></LocationBar>
         <Row className="mt-5 mb-5 p-1 ps-3 align-items-center justify-content-center">
@@ -37,7 +38,7 @@ function Home() {
         <GlobalUpdate></GlobalUpdate>
         <DiseaseRadar></DiseaseRadar>
         <DiseaseReportBar parent={0}></DiseaseReportBar>
-      </Container>
+      </div>
   );
 }
 

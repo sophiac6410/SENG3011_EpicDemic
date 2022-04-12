@@ -97,7 +97,7 @@ const theme = createTheme({
 function App() {
     return(
       <ThemeProvider theme={theme}>
-        <NavbarComp></NavbarComp>
+        {/* <NavbarComp></NavbarComp> */}
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home></Home>}>

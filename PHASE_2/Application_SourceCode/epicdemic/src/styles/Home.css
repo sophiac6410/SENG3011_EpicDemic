@@ -91,7 +91,9 @@
 .text-white {
     color: white;
 }
-
+.bg-sky{
+ background-image: url(./../static/sky.png);
+}
 .search-col {
     display: flex;
     flex-direction: column;
@@ -120,17 +122,12 @@
 } 
 
 #header {
-    background-image: url('../static/header.png');
     width: 100%;
     height: 600px;
     align-items: center; 
     justify-content: center; 
     display: flex;
     flex-direction: column;
-}
-#header:after {
-    background-color: #0F83A0;
-    opacity: 30%;
 }
 
 .covidtabs {
