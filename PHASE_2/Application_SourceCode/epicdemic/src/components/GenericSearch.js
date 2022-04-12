@@ -7,9 +7,8 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const GenericSearch = ({ fieldLabel, options }) => {
     return (
-        <div style={{borderRadius: "25px"}}>
-
-            <div className="searchfield-container" style={{borderRadius: "25px"}}>
+        <div>
+            <div className="searchfield-container border-radius-large">
                 <div style={{ display: "flex", alignItems: "center", flexDirection: "row" }}>
                     <div className='search-icon'>
                         <SearchIcon fontSize='medium'></SearchIcon>

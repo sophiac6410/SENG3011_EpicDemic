@@ -7,6 +7,7 @@ import wRed from "../static/warningRed.svg"
 import wYellow from "../static/warningYellow.svg"
 import NewsBar from "../components/Travel/NewsBar"
 import '../styles/Destination.css'
+import Typography from '@mui/material/Typography'
 
 
 
@@ -30,11 +31,15 @@ const SafetyBoard = safetyDis.map(function(props) {
     return (
       <Row className="ps-5 mt-4 align-items-center">
         <Col>
-          <div className="title-h4 medium-teal">{props.title}</div>
-          <div className="body-text mt-2">{props.text}</div>
+          <Typography variant="bodyImportant" className="medium-teal">{props.title}</Typography>
+          <div>
+            <Typography variant="bodyText">{props.text}</Typography>
+          </div>
         </Col>
         <Col md={1}>
-          <div style={{backgroundColor: "#FECD6F", color: "white", borderRadius: "20px"}} className="text-center title-h4">{props.score}</div>
+          <div style={{backgroundColor: "#FFC700", color: "white", borderRadius: "20px"}} className="text-center title-h4">
+            <Typography variant="bodyCaption">{props.score}</Typography>
+          </div>        
         </Col>
       </Row>
     )
@@ -42,11 +47,15 @@ const SafetyBoard = safetyDis.map(function(props) {
     return(
       <Row className="ps-5 mt-4 align-items-center">
         <Col>
-          <div className="title-h4 medium-teal">{props.title}</div>
-          <div className="body-text mt-2">{props.text}</div>
+          <Typography variant="bodyImportant" className="medium-teal">{props.title}</Typography>
+          <div>
+            <Typography variant="bodyText">{props.text}</Typography>
+          </div>
         </Col>
         <Col md={1}>
-          <div style={{backgroundColor: "#1CC02C", color: "white", borderRadius: "20px"}} className="text-center title-h4">{props.score}</div>
+          <div style={{backgroundColor: "#1CC02C", color: "white", borderRadius: "20px"}} className="text-center title-h4">
+            <Typography variant="bodyCaption">{props.score}</Typography>
+          </div>
         </Col>
       </Row>
     )
@@ -63,14 +72,16 @@ function Overview() {
         </Col>
         <Col md={6}>
           <Row className="justify-content-center align-items-center mt-5">
-            <div style={{backgroundColor: "#FECD6F", borderRadius: "20px", fontSize: "23px"}} className="pt-4 pb-4 pe-2 ps-2 text-center">OVERALL ADVICE: EXERCISE CAUTION</div>
+            <div style={{backgroundColor: "#FECD6F", borderRadius: "20px", fontSize: "23px"}} className="pt-4 pb-4 pe-2 ps-2 text-center">
+              <Typography variant="heading3" className="color-dark-teal">OVERALL ADVICE: EXERCISE CAUTION</Typography>
+            </div>
           </Row>
           <Row>
-            <div className="body-text mb-5 mt-5">{intro}</div>
+            <Typography variant="bodyText" className="color-dark-teal pt-4 pb-4">{intro}</Typography>
           </Row>
           <Row className="align-items-center pt-1 justify-content-start mt-3 ps-1">
             <Col md={5}>
-              <div className="larger-body">TRAVEL STATUS</div>
+              <Typography variant="bodyCaption" className="color-dark-teal pt-4 pb-4">TRAVEL STATUS</Typography>
             </Col>
             <Col md={1}>
               <Row className="justify-content-center">
@@ -79,12 +90,12 @@ function Overview() {
               </Row>
             </Col>
             <Col className="pt-1">
-              <text className="body-text">Open With Restrictions</text>
+            <Typography variant="bodyImportant" className="color-dark-teal pt-4 pb-4">Open With Restrictions</Typography>
             </Col>
           </Row>
           <Row className="align-items-center pt-1 justify-content-start mt-4 ps-1">
             <Col md={5}>
-              <div className="larger-body">SAFETY</div>
+            <Typography variant="bodyCaption" className="color-dark-teal pt-4 pb-4">SAFETY</Typography>
             </Col>
             <Col md={1}>
               <Row className="justify-content-center">
@@ -93,12 +104,12 @@ function Overview() {
               </Row>
             </Col>
             <Col className="pt-1 text-start">
-              <text className="body-text">Low to medium levels of threat</text>
+              <Typography variant="bodyImportant" className="color-dark-teal pt-4 pb-4">Low to medium levels of threat</Typography>
             </Col>
           </Row>
           <Row className="align-items-center pt-1 justify-content-start mt-4 ps-1">
             <Col md={5}>
-              <div className="larger-body">DISEASE RISK</div>
+            <Typography variant="bodyCaption" className="color-dark-teal pt-4 pb-4">DISEASE RISK</Typography>
             </Col>
             <Col md={1}>
               <Row className="justify-content-center">
@@ -107,18 +118,18 @@ function Overview() {
               </Row>
             </Col>
             <Col className="pt-1">
-              <text className="body-text">High</text>
+              <Typography variant="bodyImportant" className="color-dark-teal pt-4 pb-4">High</Typography>
             </Col>
           </Row>
         </Col>
       </Row>
-      <Row style={{"justify-content": "space-between"}} className="mt-5 mb-5 justify-content-center align-items-center">
+      <Row style={{"justify-content": "space-between"}} className="mt-5 mb-5 pt-4 justify-content-center align-items-center">
         <Col>
-          <div className="title-h3 mt-5">Safety</div>
+          <Typography variant="heading2" className="color-dark-teal">Safety</Typography>
           <div className="mt-4 ps-2" style={{flexDirection: "row", display: "flex"}}>
               <img src={wYellow} width="30px" height="30px" style={{flexDirection: "column"}} >
               </img>
-              <div style={{flexDirection: "column"}} className="larger-body ps-3">Low to medium levels of threat</div>
+              <Typography variant="bodyImportant" className="color-dark-teal ms-3">Low to medium levels of threat</Typography>
           </div>
         </Col>
         <Col md={3} className="text-center pt-3 pb-3" style={{backgroundColor: "#FECD6F", borderRadius: "20px"}}>

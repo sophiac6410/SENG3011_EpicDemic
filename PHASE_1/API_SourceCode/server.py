@@ -60,6 +60,7 @@ async def add_process_time_header(request: Request, call_next):
 
 app.include_router(reports.router)
 app.include_router(articles.router)
+app.include_router(users.router)
 
 @app.get('/', status_code=status.HTTP_200_OK, response_model=statusModels.HealthCheckResponse, tags=["status"])
 async def index():

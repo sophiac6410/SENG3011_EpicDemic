@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Button, Image } from "react-bootstrap";
 import "../../styles/DestinationFinder.css";
-import HeartBlank from "../../static/heartblank.svg";
-import HeartFilled from "../../static/heartfilled.svg";
-import { useNavigate, } from 'react-router-dom';
+import Checkbox from '@mui/material/Checkbox';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
+import { LightButton } from "../../styles/Global";
 
 const InfoRow = ({country, updateDesc, lastUpdated, travelStatus, saved}) => {
-    let navigate = useNavigate(); 
+    const [isSaved, setSaved] = React.useState(saved);
     return (
         <Row className="info-row"
             onClick={() => {
@@ -25,15 +26,10 @@ const InfoRow = ({country, updateDesc, lastUpdated, travelStatus, saved}) => {
                 {travelStatus}
             </Col>
             <Col xs={1}>
-                {saved === true ? <Image className="heart-image" src={HeartFilled}/> : <Image className="heart-image" src={HeartBlank}/>}
+                <Checkbox checked={isSaved} icon={<FavoriteBorder />} checkedIcon={<Favorite />} onClick={(event)=> {setSaved(event.target.checked)}} />
             </Col>
             <Col xs={2}>
-                <Button className="book-button"
-                    onClick={() => {
-                        navigate('/destination/PHILIPPINES/book');
-                    }}>
-                    Book
-                </Button>
+                <LightButton>Book</LightButton>
             </Col>
         </Row>
     );

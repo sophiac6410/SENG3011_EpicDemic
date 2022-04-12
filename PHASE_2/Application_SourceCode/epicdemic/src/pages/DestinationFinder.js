@@ -13,6 +13,7 @@ import HexTeal from "../static/hexteal.svg";
 import HexMedTeal from "../static/hexmedteal.svg";
 import HexWhite from "../static/hexwhite.svg";
 import BalloonBackground from "../static/balloontravel.jpg"
+import { DarkButton } from "../styles/Global";
 
 const DestinationFinder = () => {
     const [infoRows, setInfoRows] = useState([]);
@@ -86,7 +87,7 @@ const DestinationFinder = () => {
                         </Col>
                         <Col>
                             <Row>
-                                <b style={{"font": "Nunito", "fontSize": 30 }}>MOST POPULAR TRAVEL DESTINATIONS</b>
+                                <b style={{"fontFamily": "Nunito", "fontSize": 30 }}>MOST POPULAR TRAVEL DESTINATIONS</b>
                                 <Container fluid className="popular-travel">
                                     <HeaderInfoRow2/>
                                     {popularDestinations.map((popDest, idx) => {
@@ -107,13 +108,13 @@ const DestinationFinder = () => {
             </Row>
             <Row position="relative" style={{"marginLeft": 0, "marginRight": 0, "marginTop": "15vh", "paddingBottom": "25vh", "paddingLeft": 0, "paddingRight": 0}}>
                 <Col style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
-                    <Button className="recommend-dest-button"
+                    <DarkButton
                         onClick={() => {
                             navigate('/saved');
                         }}
                     >
                         Recommend me a destination
-                    </Button>
+                    </DarkButton>
                 </Col>
             </Row>
         </Container>

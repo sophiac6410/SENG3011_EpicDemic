@@ -1,10 +1,17 @@
 import { Container, Row, Col } from "react-bootstrap"
-import { Link, Outlet } from "react-router-dom"
+import { NavLink, Outlet } from "react-router-dom"
 import '../styles/Destination.css'
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import heart from "../static/solidHeart.png"
 import info from "../static/bell.svg"
+import { NoEncryption } from "@mui/icons-material";
+import Checkbox from '@mui/material/Checkbox';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import Typography from '@mui/material/Typography'
 
 
 
@@ -19,10 +26,12 @@ const ColorButton = styled(Button)({
   '&:hover': {
     backgroundColor: "#62B6CB",
     color: "white",
+    border: 'none'
   },
   '&:active': {
     backgroundColor: "#62B6CB",
     color: "white",
+    border: 'none'
   },
 });
 
@@ -40,44 +49,43 @@ function Destination() {
           {/* <TinySearch className="bg-lightblue"></TinySearch> */}
           <Row className="justify-content-end align-items-center mt-2 me-5">
             <Col md={1} className="text-center pt-2">
-              <img src={info} width="62px" height="62px"></img>
+              <Checkbox icon={<NotificationsNoneIcon fontSize="large"/>} checkedIcon={<NotificationsActiveIcon fontSize="large" className="color-medium-teal"/>} onClick={(event)=> {setSaved(event.target.checked)}} />
               <div style={{"font-size": "15px", "color": "#0F83A0"}}>Notifications</div>
             </Col>
-            <Col md={1} className="text-center pt-1 ps-6 mt-3">
-              <img src={heart} width="34px" height="34px"></img>
-              <div className="mt-3" style={{"font-size": "15px", "color": "#0F83A0"}}>Saved</div>
+            <Col md={1} className="text-center pt-2">
+              <Checkbox icon={<FavoriteBorder fontSize="large"/>} checkedIcon={<Favorite fontSize="large" className="color-medium-teal"/>} onClick={(event)=> {setSaved(event.target.checked)}} />
+              <div style={{"font-size": "15px", "color": "#0F83A0"}}>Saved</div>
             </Col>
           </Row>
           <Row className="pt-4 pb-4 align-items-center">
             <Col md={4}>
-              <div className="title">PHILIPPINES</div>
+              <Typography variant="heading1" className="color-dark-teal">PHILLIPENES</Typography>
               <div className="larger-body">No new changes since 25/03/22 </div>
             </Col>
             <Col>
               <Row style={{"justify-content": "space-between"}} className="ps-3 pe-3">
                 <Col className="text-center">
-                  <Link to="" style={linkStyle}>
-                    <ColorButton variant="outlined">Overview
-                    </ColorButton>
-                  </Link>
+                  <NavLink to="" style={linkStyle}>
+                    <ColorButton component={NavLink} to="" variant="outlined">Overview</ColorButton>
+                  </NavLink>
                 </Col>
                 <Col className="text-center">
-                  <Link to="travel" style={linkStyle}>
+                  <NavLink to="travel" style={linkStyle}>
                     <ColorButton variant="outlined">Travel
                     </ColorButton>
-                  </Link>
+                  </NavLink>
                 </Col>
                 <Col className="text-center">
-                   <Link to="covid" style={linkStyle}>
+                   <NavLink to="covid" style={linkStyle}>
                     <ColorButton variant="outlined">Diseases
                     </ColorButton>
-                  </Link>
+                  </NavLink>
                 </Col>
                 <Col className="text-center"> 
-                  <Link to="Book" style={linkStyle}>
+                  <NavLink to="Book" style={linkStyle}>
                     <ColorButton variant="outlined">Book
                     </ColorButton>
-                  </Link>
+                  </NavLink>
                 </Col>
               </Row>
             </Col>

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import Switch from "react-switch";
 import { Row, Col, Image } from "react-bootstrap";
-import '../../styles/Home.css'
-import Carousel from "react-multi-carousel";
+// import '../../styles/Home.css'
 import covidMap from "../../static/covidMap.png"
-import countrybreakdown from "../../static/countrybreakdown.png"
+import Typography from '@mui/material/Typography'
 
 
 function UpdateBox(props) {
@@ -53,9 +52,11 @@ function GlobalUpdate(){
   };
 
   return(
-    <Col className="pt-4 pb-4">
+    <Col className="pt-3 pb-4">
       {/* <Row className="pe-5 justify-content-center"> */}
-        <Row className="h3-title mb-2 justify-content-center">GLOBAL COVID UPDATES</Row>
+        <div className="text-center">
+          <Typography variant="heading1" className="color-dark-teal">GLOBAL COVID UPDATES</Typography>
+        </div>
         <Row className="bg-darkteal justify-content-end pb-4 pt-4 pe-4">
           <Col md={1}>
             <Row className="align-self-center justify-content-end pe-3" style={{"font-size": "20px", "color": "white", "font-weight": "bold"}}>Cases</Row>
