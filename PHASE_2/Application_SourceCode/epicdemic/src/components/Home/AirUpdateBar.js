@@ -1,6 +1,7 @@
 import { Col, Container, Row } from "react-bootstrap"
 import React from "react"
-import '../../styles/Home.css'
+// import '../../styles/Home.css'
+import Typography from '@mui/material/Typography'
 
 function AirBox() {
   return(
@@ -21,7 +22,7 @@ function AirUpdateBar() {
       <Row className="bg-white">
         <Col>
           <Row>
-            <div className="h3-title pb-1 ms-3 mb-3">Latest Global Travel Updates</div>
+            <Typography variant="heading1" className="color-dark-teal">GLOBAL COVID UPDATES</Typography>
           </Row>
           <AirBox></AirBox>
           <AirBox></AirBox>

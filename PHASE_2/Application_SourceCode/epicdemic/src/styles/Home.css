@@ -56,10 +56,8 @@
     padding: 3px;
     padding-left: 2%;
 }
-.h3-title{
-    font-size: 30px;
-    color:#1B4965;
-    font-weight: bold;
+.bg-medium-teal {
+    background-color: #0F83A0;
 }
 .bg-darkteal {
     background-color: #0F83A0;

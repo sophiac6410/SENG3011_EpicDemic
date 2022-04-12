@@ -1,13 +1,12 @@
-import {InputGroup, FormControl, Row, Col } from "react-bootstrap";
 import CountrySelect from "./CountrySearchBox";
 import "react-multi-carousel/lib/styles.css";
 import arrow from '../../static/arrow.svg'
 import SearchIcon from '@mui/icons-material/Search';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { useNavigate, } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
+import "./../../styles/App.css"
 
 function Search() {
 

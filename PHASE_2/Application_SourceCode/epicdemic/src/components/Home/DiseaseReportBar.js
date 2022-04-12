@@ -1,7 +1,7 @@
 import React from "react";
 import NewsCard from "./NewsCard";
 // import { Carousel } from 'react-responsive-carousel';
-import "../../styles/Home.css"
+// import "../../styles/Home.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "react-multi-carousel/lib/styles.css";
 import { Row } from "react-bootstrap";
@@ -9,6 +9,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Carousel from "react-multi-carousel";
 import DiseaseCard from "./DiseaseCard";
+import Typography from '@mui/material/Typography'
 
 const responsive = {
     superLargeDesktop: {
@@ -36,9 +37,9 @@ export default function DiseaseReportBar(parent) {
     return(
       <div style={{ padding: '30px', marginBottom: '30px', backgroundColor: '#E9F0FB' }}>
         <Row className="mt-2" style={{ backgroundColor: '#E9F0FB' }}>
-          <div className="sub-title mb-2 text-center" style={{ color: '#515151' }}>
-            DISEASE REPORTS
-          </div> 
+          <div className="text-center">
+            <Typography variant="heading1" className="color-dark-teal">DISEASE REPORT</Typography>
+          </div>
           <div className="news-carousel" style={{ backgroundColor: '#E9F0FB' }}>
             <Carousel 
               swipeable={true}

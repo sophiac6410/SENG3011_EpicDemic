@@ -12,31 +12,32 @@ import Typography from '@mui/material/Typography'
 
 function Home() {
   return (
-    <Container style={{"background-color": "white"}}>
-      <Row>
-        <div id="header">
-          <h1 style={ { color: '#1B4965' }}>
-            Travel safely with Epicdemic!
-          </h1>
-          <h5 style={ { paddingBottom: '20px' }}>
-            Start searching to find your perfect destination...
-          </h5>
-          <Search></Search>
-        </div>
-      </Row>
-      <NewsBar></NewsBar>
-      <LocationBar></LocationBar>
-      <Row className="mt-5 mb-5 p-1 ps-3 align-items-center justify-content-center">
-        <Col md={4} className="text-center justify-content-center pe-5">
-          <Image width="250px" height="250px" className="text-center" src={bigLoading}></Image>
-        </Col>
-        {/* <AirUpdateBar></AirUpdateBar> */}
-        <UpdateBar></UpdateBar>
-      </Row>
-      <GlobalUpdate></GlobalUpdate>
-      <DiseaseRadar></DiseaseRadar>
-      <DiseaseReportBar parent={0}></DiseaseReportBar>
-    </Container>
+      <Container fluid="sm" style={{"background-color": "white"}}>
+        <Row>
+          <div id="header">
+            {/* <h1 class="heading1" style={ { color: '#1B4965' }}>
+              Travel safely with Epicdemic!
+            </h1> */}
+            <Typography variant="title" className="color-dark-teal">Travel safely with Epicdemic!</Typography>
+            <Typography variant="bodyCaption" sx={ { paddingBottom: '20px' }}>
+              Start searching to find your perfect destination...
+            </Typography>
+            <Search></Search>
+          </div>
+        </Row>
+        <NewsBar></NewsBar>
+        <LocationBar></LocationBar>
+        <Row className="mt-5 mb-5 p-1 ps-3 align-items-center justify-content-center">
+          <Col md={4} className="text-center justify-content-center pe-5">
+            <Image width="250px" height="250px" classname="text-center" src={bigLoading}></Image>
+          </Col>
+          {/* <AirUpdateBar></AirUpdateBar> */}
+          <UpdateBar></UpdateBar>
+        </Row>
+        <GlobalUpdate></GlobalUpdate>
+        <DiseaseRadar></DiseaseRadar>
+        <DiseaseReportBar parent={0}></DiseaseReportBar>
+      </Container>
   );
 }
 

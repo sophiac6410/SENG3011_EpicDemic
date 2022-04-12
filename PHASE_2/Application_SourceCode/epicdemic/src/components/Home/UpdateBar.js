@@ -1,7 +1,8 @@
 import React from "react";
 import { Row, Col, Card, Container } from "react-bootstrap";
 import info from "../../static/info.svg"
-import "../../styles/Home.css"
+// import "../../styles/Home.css"
+import Typography from '@mui/material/Typography'
 
 
 function RestrictBox(){
@@ -27,8 +28,8 @@ function RestrictBox(){
 
 function UpdateBar() {
 	return(
-		<Col md={7}>
-			<div className="h3-title pb-1 ms-3 mb-3">Latest Global Travel Updates</div>
+		<Col md={7} className="pt-4">
+			<Typography variant="heading1" className="color-dark-teal">LATEST GLOBAL TRAVEL UPDATES</Typography>
 			<RestrictBox></RestrictBox>
 			<RestrictBox></RestrictBox>
 			<RestrictBox></RestrictBox>

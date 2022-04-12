@@ -11,7 +11,9 @@ import Book from './pages/Book'
 import DestinationFinder from './pages/DestinationFinder';
 import SavedLocations from './pages/SavedLocations';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import './styles/index.css'
+import Nunito from "./fonts/nunito/Nunito-Regular.ttf"
+import "./styles/App.css"
+
 import {
     BrowserRouter as Router,
     Routes,
@@ -20,32 +22,84 @@ import {
     BrowserRouter
   } from "react-router-dom";
 
-// import Nunito from './fonts/nunito/Nunito-Regular.ttf';
-// import { StylesProvider } from '@material-ui/core'
-
 const theme = createTheme({
+  spacing: [0, 2, 3, 5, 8],
   typography: {
-    fontFamily: [
-      'Nunito',
-    ].join(','),
+    fontFamily: ['Nunito', 'serif', 'open Sanc'].join(','),
+    title: {
+      fontFamily: "Nunito, serif",
+      fontWeight: "700",
+      fontSize: "48px",
+      lineHeight: "55px"
+    },
+    heading1: {
+      marginTop: "50px",
+      marginBottom: "30px",
+      fontFamily: "Nunito, serif",
+      fontWeight: "700",
+      fontSize: "31px",
+      lineHeight: "55px",
+      marginTop: "50px",
+      marginBottom: "30px",
+    },
+    heading2: {
+      fontWeight: "700",
+      fontSize: "32px",
+      lineHeight: "44px"
+    },
+    heading3: {
+      fontWeight: "700",
+      fontSize: "24px",
+      lineHeight: "33px"
+    },
+    bodyHeading: {
+      fontFamily: "Open Sans, sans-serif",
+      fontStyle: "normal",
+      fontWeight: 700,
+      fontSize: "21px",
+      lineHeight: "29px"
+    },
+    bodyText: {
+      fontFamily: "Open Sans, sans-serif",
+      fontStyle: "normal",
+      fontWeight: 400,
+      fontSize: "16px",
+      lineHeight: "25px"
+    },
+    bodyImportant: {
+      fontFamily: "Open Sans, sans-serif",
+      fontStyle: "normal",
+      fontWeight: 700,
+      fontSize: "18px",
+      lineHeight: "27px"
+    },
+    bodyCaption: {
+      fontFamily: "Nunito, sans-serif",
+      fontStyle: "normal",
+      fontWeight: 400,
+      fontSize: "20px",
+      lineHeight: "27px"
+    },
   },
-  // components: {
-  //   MuiCssBaseline: {
-  //     styleOverrides:`
-  //       @font-face {
-  //         font-family: 'Nunito, serif';
-  //         src: local('Nunito'), url(${Nunito}) format('truetype');
-  //       }
-  //     `,
-  //   },
-  // },
-});
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+        @font-face {
+          font-family: 'Nunito';
+          font-style: normal;
+          font-display: swap;
+          font-weight: 400;
+          src: local('Nunito'), local('Nunito-Regular'), url(${Nunito}) format('ttf');
+        }
+        `,
+    },
+  },
+})
 
 function App() {
-  const [auth, setAuth] = React.useState(false);
-  return(
-    <ThemeProvider theme={theme}>
-        <NavbarComp auth={auth}></NavbarComp>
+    return(
+      <ThemeProvider theme={theme}>
+        <NavbarComp></NavbarComp>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home></Home>}></Route>
@@ -61,8 +115,8 @@ function App() {
             <Route path="/saved" element={<SavedLocations/>}/>
           </Routes>
         </BrowserRouter>
-    </ThemeProvider>
-  )
+      </ThemeProvider>
+    )
 }
 
 export default App

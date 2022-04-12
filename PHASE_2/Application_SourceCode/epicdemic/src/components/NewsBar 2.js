@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import Carousel from "react-multi-carousel";
 import NewsCardSmall from "./NewsCardSmall"
 
+
 const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -34,7 +35,7 @@ class NewsBar extends React.Component {
   render() {
     return(
       <Row className="mt-2">
-        <div className="sub-title mb-2">GLOBAL NEWS</div>
+        <Typography variant="heading1" className="color-dark-teal">GLOBAL NEWS</Typography>
         <div className="news-carousel">
           <Carousel 
             swipeable={true}

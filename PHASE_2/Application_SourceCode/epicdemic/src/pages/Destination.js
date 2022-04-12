@@ -11,6 +11,9 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import Typography from '@mui/material/Typography'
+
+
 
 const ColorButton = styled(Button)({
   fontSize: 20,
@@ -56,7 +59,7 @@ function Destination() {
           </Row>
           <Row className="pt-4 pb-4 align-items-center">
             <Col md={4}>
-              <div className="title">PHILIPPINES</div>
+              <Typography variant="heading1" className="color-dark-teal">PHILLIPENES</Typography>
               <div className="larger-body">No new changes since 25/03/22 </div>
             </Col>
             <Col>
