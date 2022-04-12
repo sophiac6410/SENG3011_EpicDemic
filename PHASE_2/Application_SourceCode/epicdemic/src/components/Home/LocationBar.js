@@ -3,7 +3,7 @@ import LocationCard from "./LocationCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "../../styles/Home.css"
-import { Button, Row, Col } from "react-bootstrap";
+import {Row, Col } from "react-bootstrap";
 import Typography from '@mui/material/Typography'
 
 const responsive = {

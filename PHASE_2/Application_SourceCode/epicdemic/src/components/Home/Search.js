@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import { useNavigate, } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import "./../../styles/App.css"
+import Typography from '@mui/material/Typography'
 
 function Search() {
 
@@ -17,24 +18,23 @@ function Search() {
   const goDestination = () =>{  
     navigate('/finder');
   }
-
     return(
-      <div className="border-radius-small bg-medium-teal" style={{padding: '50px'}}>
+      <div className="border-radius-small bg-off-white ps-5 pe-5 pt-4 pb-4 mt-5 mb-5">
         <div className="search-row">
           <div className="search-col ps-4">
-            <div className="search-bar-text">From:</div>
-            <div className="border-radius-large searchfield-container">
+            <Typography variant="bodyImportant" className="color-sky-blue ps-2">FROM</Typography>
+            <div className="border-radius-large searchfield-container bg-sky-blue dark">
               <CountrySelect isFrom={true}></CountrySelect>
             </div>
           </div>
           <div className="search-col">
-            <div style={{ paddingTop: '25px' }}>
+            <div style={{ paddingTop: '25px' }} className="color-medium-blue">
               <img src={arrow} alt="arrow" width="70px" height="30px"></img>
             </div>
           </div>
           <div className="search-col">
-            <div className="search-bar-text">Destination:</div>
-            <div className="border-radius-large searchfield-container">
+            <Typography variant="bodyImportant" className="color-sky-blue ps-2">TO</Typography>
+            <div className="border-radius-large searchfield-container bg-sky-blue">
               <CountrySelect isFrom={false}></CountrySelect>
             </div>
           </div>
@@ -42,18 +42,9 @@ function Search() {
             <IconButton 
               aria-label="search"
               onClick={ routeChange }>
-              <SearchIcon fontSize="large" />
+              <SearchIcon sx={{ color: "#70C4E8"}} fontSize="large" />
             </IconButton>
           </div>
-
-
-        </div>
-
-        <div className="search-text" style={{textDecoration: 'underline'}}>
-          <Link href="#" onClick={goDestination} color="inherit">
-            I don't know where to go?
-          </Link>
-          {/* <a>I don't know where to go?</a> */}
         </div>
     </div>
     )

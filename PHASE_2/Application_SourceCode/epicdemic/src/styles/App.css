@@ -33,6 +33,15 @@
 .bg-dark-grey {
     background-color: #515151;
 }
+.bg-white{
+    background-color: white;
+}
+.bg-off-white{
+    background-color: #E9F5F9;
+}
+.bg-sky-blue{
+    background-color: #7CC9E9;
+}
 
 /* COLORS */
 .color-dark-grey {
@@ -70,6 +79,9 @@
 }
 .color-light-blue {
     color: #E2F2FC;
+}
+.color-sky-blue{
+    color: #7CC9E9;
 }
 
 /* FONT STYLES */
