@@ -94,6 +94,7 @@ const GlobalUpdate = () => {
         </Col>
         <Col className="text-center pb-4">
           <MapContainer
+            className="leaflet-container1"
             center={[35, 15]} 
             zoom={2}
             zoomControl={false}
