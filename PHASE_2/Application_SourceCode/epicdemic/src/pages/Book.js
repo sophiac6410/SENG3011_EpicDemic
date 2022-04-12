@@ -5,6 +5,7 @@ import '../styles/Book.css'
 // import '../App.css'
 import FlightFilter from "../components/Book/FlightFilter"
 import * as React from 'react';
+import { DarkButton } from "../styles/Global.js"
 
 function handleClick() {
   const flightSection = document.getElementById('flight-title');
@@ -16,7 +17,8 @@ function Book() {
     <div>
       <h1 class="title-h2">Book</h1>
       <FlightSearch></FlightSearch>
-      <button id='book-search' class='btn-base btn-dark btn-flight' onClick={handleClick}>Find My Flight</button>
+      <DarkButton sx={{display: 'flex', marginX: 'auto', mb: 7, mt: 3}}>Find My Flight</DarkButton>
+      {/* <button id='book-search' class='btn-base btn-dark btn-flight' onClick={handleClick}>Find My Flight</button> */}
       <hr size="3" width="100%" color="grey"></hr>
       <h1 id="flight-title" class='title-h3'>Flights</h1>
       <div style={{

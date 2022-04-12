@@ -9,6 +9,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Carousel from "react-multi-carousel";
 import globe from '../../static/globe.svg'
+import LanguageIcon from '@mui/icons-material/Language';
 import Typography from '@mui/material/Typography'
 
 
@@ -42,7 +43,7 @@ class NewsBar extends React.Component {
       <div style={{ padding: '30px', marginBottom: '30px' }}>
         <Row className="mt-2 justify-content-center">
           <div className="mb-2 text-center me-5" style={{ color: '#515151' }}>
-            <img className="me-3 ms-3 mb-3" src={globe} width="30px" height="30px" alt="global page"></img>
+            <LanguageIcon fontSize="large" className="color-medium-blue"  sx={{marginBottom: '10px', marginRight: '5px'}}/>
             <Typography variant="heading1" className="color-dark-teal">GLOBAL NEWS</Typography>
           </div>
           <div className="news-carousel">

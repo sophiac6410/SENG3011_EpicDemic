@@ -1,6 +1,9 @@
-
+import React from 'react'
 import NavbarComp from './components/Navbar'
+import Footer from './components/Footer'
 import Home from './pages/home'
+import Register from './pages/Register'
+import Login from './pages/Login'
 import Overview from './pages/Overview'
 import Travel from './pages/Travel'
 import Destination from './pages/Destination'
@@ -99,18 +102,20 @@ function App() {
         {/* <NavbarComp></NavbarComp> */}
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home></Home>}>
+            <Route path="/" element={<Home></Home>}></Route>
+            <Route path="/login" element={<Login></Login>}></Route>
+            <Route path="/register" element={<Register></Register>}></Route>
+            <Route path="/destination/:country" element={<Destination></Destination>}>
+              <Route index element={<Overview></Overview>}></Route>
+              <Route path="travel" element={<Travel></Travel>}></Route>
+              <Route path="covid" element={<Covid></Covid>}></Route>
+              <Route path="book" element={<Book></Book>}></Route>
             </Route>
-              <Route path="/destination/:country" element={<Destination></Destination>}>
-                <Route index element={<Overview></Overview>}></Route>
-                <Route path="travel" element={<Travel></Travel>}></Route>
-                <Route path="covid" element={<Covid></Covid>}></Route>
-                <Route path="book" element={<Book></Book>}></Route>
-              </Route>
             <Route path="/finder" element={<DestinationFinder/>}/>
             <Route path="/saved" element={<SavedLocations/>}/>
           </Routes>
         </BrowserRouter>
+        <Footer></Footer>
       </ThemeProvider>
     )
 }

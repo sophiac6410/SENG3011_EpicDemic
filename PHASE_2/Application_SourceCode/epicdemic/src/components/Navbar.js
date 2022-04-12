@@ -1,23 +1,39 @@
 import { Navbar, Container } from "react-bootstrap";
-import logo from '../static/logo.svg'
-import profile from '../static/profile.svg'
-import heart from '../static/heart.svg'
-import earth from '../static/earth.svg'
+import IconButton from '@mui/material/IconButton';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
+import '../styles/App.css'
+import Button from '@mui/material/Button';
+import PropTypes from 'prop-types';
 
-// import '../App.css'
-
-function NavbarComp() {
+function NavbarComp(props) {
+  NavbarComp.propTypes = { auth: PropTypes.bool }
   return (
     <Navbar bg="darkteal" variant="dark">
       <Container>
         <Navbar.Brand href="/">
           EPICDEMIC  
-          <img src={logo} alt="logo" width="60px" height="40px"></img>
+          <FlightTakeoffIcon sx={{color: 'white', margin: 1}}/>
         </Navbar.Brand>
         <div className="d-flex justify-content-end pe-1">
-          {/* <img className="me-3 ms-3" src={earth} width="35px" height="35px" alt="global page"></img> */}
-          <img className="me-3 ms-3" src={heart} width="35px" height="35px" alt="collection page"></img>
-          <img className="me-3 ms-3" src={profile} width="40px" height="40px" alt="profile page"></img>
+          {props.auth 
+          ? (
+            <nav>
+              <IconButton aria-label="saved-locations">
+                <FavoriteIcon fontSize="large" sx={{color: 'white'}}/>
+              </IconButton>
+              <IconButton aria-label="profile">
+                <AccountCircleIcon fontSize="large" sx={{color: 'white'}}/>
+              </IconButton>
+            </nav>
+          )
+          : (
+            <nav>
+              <Button href="/login" variant="text" sx={{color:'white'}} >Login</Button>
+              <Button href="/register" variant="text" sx={{color:'white'}}>Register</Button>
+            </nav>
+          )}
         </div>
       </Container>
     </Navbar>
