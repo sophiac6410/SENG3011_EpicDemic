@@ -98,7 +98,7 @@ function Overview() {
           </Row>
           <Row className="align-items-center pt-1 justify-content-start mt-4 ps-1">
             <Col md={5}>
-              <div className="larger-body">DISEASE RISH</div>
+              <div className="larger-body">DISEASE RISK</div>
             </Col>
             <Col md={1}>
               <Row className="justify-content-center">

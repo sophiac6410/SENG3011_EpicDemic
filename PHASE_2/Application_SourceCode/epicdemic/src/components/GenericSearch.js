@@ -9,7 +9,7 @@ const GenericSearch = ({ fieldLabel, options }) => {
     return (
         <div style={{borderRadius: "25px"}}>
 
-            <div className="searchfield-container">
+            <div className="searchfield-container" style={{borderRadius: "25px"}}>
                 <div style={{ display: "flex", alignItems: "center", flexDirection: "row" }}>
                     <div className='search-icon'>
                         <SearchIcon fontSize='medium'></SearchIcon>

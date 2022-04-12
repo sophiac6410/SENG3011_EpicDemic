@@ -4,6 +4,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "../../styles/Home.css"
 import { Button, Row, Col } from "react-bootstrap";
+import { useNavigate, } from 'react-router-dom';
 
 const responsive = {
     superLargeDesktop: {
@@ -26,6 +27,8 @@ const responsive = {
   };
 
 function LocationBar() {
+  let navigate = useNavigate(); 
+
   return(
     <Row className="ms-1 me-1">
       <Col className="mt-2 bg-darkteal" style={{padding: '20px 50px'}}>
@@ -50,7 +53,10 @@ function LocationBar() {
           </Carousel>
         </div>
         <Row md={5} className="justify-content-center m-3">
-          <button className="btn-base btn-dark align-self-center">See all latest updates</button>
+          <button className="btn-base btn-dark align-self-center"
+            onClick={() => {
+              navigate('/saved');
+            }}>See all latest updates</button>
         </Row>
       </Col>
     </Row>
