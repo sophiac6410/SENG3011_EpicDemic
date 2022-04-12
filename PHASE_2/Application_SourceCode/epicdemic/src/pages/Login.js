@@ -1,10 +1,24 @@
-import React from 'react'
-import { Container } from 'react-bootstrap'
+import React from 'react';
+import { useNavigate } from 'react-router'
+import LoginForm from '../components/LoginForm'
 
-function Login() {
+function Login () {
+  const navigate = useNavigate()
+
   return (
-    <h1>Login</h1>
-  )
+    <>
+    <LoginForm submit={async (request) => {
+      // CHANGE API 
+      const response = await fetch('http://localhost:5005/admin/auth/login', request)
+      const data = await response.json()
+      if (response.status === 400) {
+        alert(data.error)
+      } else {
+        localStorage.setItem('token', data.token)
+        navigate('/')
+      }
+    }}></LoginForm>
+  </>);
 }
 
-export default Login
+export default Login;
