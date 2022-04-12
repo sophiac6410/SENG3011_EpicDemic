@@ -88,11 +88,11 @@ const GlobalUpdate = () => {
       </Row>
       <Row className="bg-darkteal justify-content-center align-items-center pb-5">
         <Col md={3} className="align-self-center ms-4">
-          <UpdateBox number={stats.totalCases} text="total cases" color="blue"></UpdateBox>
-          <UpdateBox number={stats.deaths} text="deaths" color="white"></UpdateBox>
-          <UpdateBox number={stats.dailyCases} text="daily cases" color="blue"></UpdateBox>
+          <UpdateBox number={stats.totalCases} text="total cases" color="blue"/>
+          <UpdateBox number={stats.deaths} text="deaths" color="white"/>
+          <UpdateBox number={stats.dailyCases} text="daily cases" color="blue"/>
         </Col>
-        <Col style={{"height": "50vh"}}>
+        <Col className="text-center pb-4">
           <MapContainer
             center={[35, 15]} 
             zoom={2}
