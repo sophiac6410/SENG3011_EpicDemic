@@ -9,7 +9,10 @@ import { LightButton } from "../../styles/Global";
 const InfoRow = ({country, updateDesc, lastUpdated, travelStatus, saved}) => {
     const [isSaved, setSaved] = React.useState(saved);
     return (
-        <Row className="info-row">
+        <Row className="info-row"
+            onClick={() => {
+                navigate('/destination/PHILIPPINES');
+            }}>
             <Col xs={1}>
                 <b>{country}</b>
             </Col>

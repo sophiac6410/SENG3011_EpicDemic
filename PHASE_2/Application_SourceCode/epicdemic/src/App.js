@@ -24,7 +24,6 @@ import {
   } from "react-router-dom";
 
 const theme = createTheme({
-  spacing: [0, 2, 3, 5, 8],
   typography: {
     fontFamily: ['Nunito', 'serif', 'open Sanc'].join(','),
     title: {
@@ -100,7 +99,7 @@ const theme = createTheme({
 function App() {
     return(
       <ThemeProvider theme={theme}>
-        <NavbarComp></NavbarComp>
+        {/* <NavbarComp></NavbarComp> */}
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home></Home>}></Route>

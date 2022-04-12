@@ -3,18 +3,44 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import "react-multi-carousel/lib/styles.css";
+import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 
+const useStyles = makeStyles((theme) => ({
+  inputRoot: {
+    "&.MuiInput-underline:before": {
+      borderBottom: "2px solid #7CC9E9"
+    },
+    "&.MuiInput-underline:hover:before": {
+      borderBottom: "2px solid white"
+    },
+    "&.MuiInput-underline:after": {
+      borderBottom: "2px solid #7CC9E9"
+    },
+    color: "white",
+    backgroundColor: "#7CC9E9",
+    fontFamily: "Open Sans, sans-serif",
+    fontStyle: "normal",
+    fontWeight: 700,
+    fontSize: "20px",
+  }
+}));
+
+
 export default function CountrySelect({isFrom}) {
+  const classes = useStyles();
+
   return (
     <div style={{ display: "flex", alignItems: "center", flexDirection: "row", padding: '10px' }}>
 
       <Autocomplete
         id="country-select-demo"
+        classes={classes}
         sx={{ width: 300 }}
         options={ isFrom ? aus : countries }
         autoHighlight
+        underlineShow={false}
         getOptionLabel={(option) => option.label}
         renderOption={(props, option) => (
           <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
@@ -36,6 +62,7 @@ export default function CountrySelect({isFrom}) {
             inputProps={{
               ...params.inputProps,
               autoComplete: 'new-password', // disable autocomplete and autofill
+              disableUnderline: true,
             }}
           />
         )}
