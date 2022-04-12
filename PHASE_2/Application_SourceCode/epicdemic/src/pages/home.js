@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography'
 
 function Home() {
   return (
-      <Container fluid="sm" style={{"background-color": "white"}}>
+      <Container style={{"background-color": "white"}}>
         <Row>
           <div id="header">
             {/* <h1 class="heading1" style={ { color: '#1B4965' }}>

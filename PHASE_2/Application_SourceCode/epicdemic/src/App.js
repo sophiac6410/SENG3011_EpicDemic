@@ -1,5 +1,6 @@
 import React from 'react'
 import NavbarComp from './components/Navbar'
+import Footer from './components/Footer'
 import Home from './pages/home'
 import Register from './pages/Register'
 import Login from './pages/Login'
@@ -115,6 +116,7 @@ function App() {
             <Route path="/saved" element={<SavedLocations/>}/>
           </Routes>
         </BrowserRouter>
+        <Footer></Footer>
       </ThemeProvider>
     )
 }
