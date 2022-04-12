@@ -31,5 +31,11 @@ tags = [
         "description": """
         Status checks for the server
         """
+    },
+    {
+        "name": "users",
+        "description": """
+        Users on EpicDemic. Includes registering, logging in, and saving location, notifications, and trips for users
+        """
     }
 ]
