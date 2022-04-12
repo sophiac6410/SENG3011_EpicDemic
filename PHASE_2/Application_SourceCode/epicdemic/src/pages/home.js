@@ -26,10 +26,10 @@ function Home() {
                 </Typography>
               </div>
               <Col className="mt-1 mb-5">
-                <button className="btn-base btn-dark bg-dark-teal align-self-center me-3 pe-5 ps-5">
+                <button className="btn-base btn-dark bg-dark-teal align-self-center me-5 pe-5 ps-5">
                   <Typography variant="bodyImportant">Find a destination</Typography>
                 </button>
-                <button className="btn-base bg-light-blue align-self-center ms-3 pe-5 ps-5">
+                <button className="btn-base bg-light-blue align-self-center ms-4 pe-5 ps-5">
                   <Typography variant="bodyImportant" className="color-dark-teal">Plan my trip</Typography>
                 </button>
               </Col>

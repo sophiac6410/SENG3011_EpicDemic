@@ -23,8 +23,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Open Sans, sans-serif",
     fontStyle: "normal",
     fontWeight: 700,
-    fontSize: "18px",
-    lineHeight: "27px"
+    fontSize: "20px",
   }
 }));
 
