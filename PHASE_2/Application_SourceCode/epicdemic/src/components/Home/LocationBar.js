@@ -5,6 +5,7 @@ import "react-multi-carousel/lib/styles.css";
 import "../../styles/Home.css"
 import {Row, Col } from "react-bootstrap";
 import Typography from '@mui/material/Typography'
+import { useNavigate } from 'react-router'
 
 const responsive = {
     superLargeDesktop: {
