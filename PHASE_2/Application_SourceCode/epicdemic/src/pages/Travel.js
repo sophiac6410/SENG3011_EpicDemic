@@ -6,7 +6,7 @@ import BlueCard from "../components/Travel/BlueCard";
 import InfoRow3 from "../components/DestinationFinder/InfoRow3";
 import HeaderInfoRow3 from "../components/DestinationFinder/HeaderInfoRow3";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const validCheck = <p>
   Before you book your travel, check if you meet Australia’s definition of fully vaccinated for international travel purposes. To meet Australia’s vaccination requirements and be considered a ‘fully vaccinated’ traveller for the purpose of Australia’s border arrangements, you need to provide evidence that you either: 
@@ -90,7 +90,7 @@ const arriveBoard = ArrivalCheck.map(function(check) {
 });
 
 function Travel() {
-  const [data, setData] = useState();
+  const [data, setData] = useState(null);
   const { code } = useParams();
 
   useEffect(() => {
@@ -100,6 +100,12 @@ function Travel() {
       // TODO: MORE
     })
   }, [code])
+
+  if (data === null) {
+    return (
+      <div/>
+    )
+  }
 
   return(
     <Container className="mt-4">

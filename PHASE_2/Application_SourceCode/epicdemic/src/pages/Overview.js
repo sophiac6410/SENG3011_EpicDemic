@@ -69,23 +69,46 @@ const SafetyBoard = safetyDis.map(function(props) {
 });
 
 function Overview() {
-  const [dest, setDest] = useState(null);
+  const [data, setData] = useState(null);
   const { code } = useParams();
 
   useEffect(() => {
     if (code === null) return;
-    // TODO: Get country from code
-    const country = "PHILLIPINES";
-    setDest({
-      code: code,
-      country: country
-    })
+    
+    async function fetchData() {
+      
+      const covid = await fetch(`https://disease.sh/v3/covid-19/countries/${code}?strict=true`).then(res => res.json())
+      var newData = {
+        code: code,
+        country: covid.country,
+        cases: covid.cases,
+        todayCases: covid.todayCases,
+        population: covid.population
+      }
+
+      // TODO: use our own percentage vaccination stat
+      const vaccine = await fetch(`https://disease.sh/v3/covid-19/vaccine/coverage/countries/${code}?lastdays=all&fullData=false`).then(res => res.json())
+      var total = vaccine.timeline[Object.keys(vaccine.timeline).pop()] / 2;
+
+      newData["vaccinationPercentage"] = total * 100 / newData.population;
+      
+      console.log(newData);
+      setData(newData);
+    }
+
+    fetchData();
   }, [code])
   
   const getCentre = () => {
     // TODO: This should take in a country, look up it's coordinates
     // and centre on it
     return [35, 15];
+  }
+
+  if (data == null) {
+    return (
+      <div/>
+    )
   }
 
   return(
@@ -185,7 +208,7 @@ function Overview() {
           <div className="title-h3 medium-teal">CONDITION</div>
           <div className="end">
             <CircularProgressbarWithChildren
-              value={75}
+              value={Math.round(data.vaccinationPercentage)}
               styles={buildStyles({            
                 strokeLinecap: 'butt',    
                 pathColor: '#0F83A0'
@@ -195,13 +218,13 @@ function Overview() {
                 className="title-h2 medium-teal"
                 style={{ textAlign: "center"}}
               >
-                <text>75.2%</text>
+                <text>{data.vaccinationPercentage.toFixed(1)}%</text>
                 <br/>
                 <text>vaccinated</text>
               </div>
             </CircularProgressbarWithChildren>            
           </div>
-          <div className="title medium-teal">112</div>
+          <div className="title medium-teal">{data.todayCases}</div>
           <div className="title-h2 medium-teal mb-5">CASES TODAY</div>
         </Col>
         <Col md={6}>

@@ -12,26 +12,28 @@ import L from 'leaflet';
 
 const GlobalUpdate = () => {
   const [checked, setChecked] = useState(false);
-  const [stats, setStats] = useState({
-    "totalCases": 0,
-    "deaths": 0,
-    "dailyCases": 0
-  });
+  const [stats, setStats] = useState(null);
   const [cases, setCases] = useState([]);
 
   useEffect(() => {
     // On initial load, get all the relevant stats and cases
-    fetch('https://disease.sh/v3/covid-19/all')
-      .then(response => response.json())
-      .then(data => {
-        setStats({
-          totalCases: data.cases,
-          deaths: data.deaths,
-          dailyCases: data.todayCases
-        })
-      })
+    async function fetchData() {
+      const covid = await fetch(`https://disease.sh/v3/covid-19/all`).then(res => res.json())
+      var newData = {
+        cases: covid.cases,
+        deaths: covid.deaths,
+        todayCases: covid.todayCases
+      }
 
-    setCases([...markerElements]);
+      const vaccine = await fetch('https://disease.sh/v3/covid-19/vaccine/coverage?lastdays=all&fullData=false').then(res => res.json())
+      var total = vaccine[Object.keys(vaccine).pop()]
+      newData["doses"] = total;
+      
+      console.log("here " + newData);
+      setStats(newData)
+      setCases([...markerElements]);
+    }
+    fetchData()
   }, []);
 
   const responsive = {
@@ -59,6 +61,12 @@ const GlobalUpdate = () => {
     else if (size < 300) return mediumMarkerIcon
     else if (size < 1000) return largeMarkerIcon
     else return hugeMarkerIcon
+  }
+
+  if (stats === null) {
+    return (
+      <div/>
+    )
   }
 
   return(
@@ -91,9 +99,18 @@ const GlobalUpdate = () => {
       </Row>
       <Row className="bg-darkteal justify-content-center align-items-center pb-5">
         <Col md={3} className="align-self-center ms-4">
-          <UpdateBox number={stats.totalCases} text="total cases" color="blue"/>
-          <UpdateBox number={stats.deaths} text="deaths" color="white"/>
-          <UpdateBox number={stats.dailyCases} text="daily cases" color="blue"/>
+          {checked ?
+            <>
+              <UpdateBox number={convertToBillions(stats.doses)} text="doses administered" color="blue"/>
+              <UpdateBox number={stats.deaths} text="deaths" color="white"/>
+              <UpdateBox number={stats.todayCases} text="daily cases" color="blue"/>
+            </>
+            :
+            <>           
+              <UpdateBox number={convertToMillions(stats.cases)} text="total cases" color="blue"/>
+              <UpdateBox number={convertToMillions(stats.deaths)} text="deaths" color="white"/>
+              <UpdateBox number={convertToMillions(stats.todayCases)} text="daily cases" color="blue"/>
+            </>}
         </Col>
         <Col className="text-center pb-4">
           <MapContainer
@@ -126,13 +143,20 @@ const GlobalUpdate = () => {
 
 export default GlobalUpdate
 
+const convertToMillions = (num) => {
+  return (Math.round(num * 10 / 1000000) / 10) + 'M';
+}
+
+const convertToBillions = (num) => {
+  return (Math.round(num * 10 / 1000000000) / 10) + 'B';
+}
+
 const UpdateBox = (props) => {
-  let convertedNum = (Math.round(props.number * 10 / 1000000) / 10) + 'M';
   if(props.color == "blue") {
     return(
       <Row className="bg-mblue m-2 me-4 mb-4 p-3">
         <Col>
-          <Row className="align-self-center justify-content-center"  style={{"font-size": "30px", "color": "white", "font-weight": "bold"}}>{convertedNum}</Row>
+          <Row className="align-self-center justify-content-center"  style={{"font-size": "30px", "color": "white", "font-weight": "bold"}}>{props.number}</Row>
           <Row className="align-self-center justify-content-center text-white"  style={{"font-size": "15px", "color": "white", "font-weight": "bold"}}>{props.text}</Row>
         </Col>
       </Row>
@@ -141,7 +165,7 @@ const UpdateBox = (props) => {
     return(
       <Row className="bg-lightblue m-2 me-4 mb-4 p-3">
         <Col>
-          <Row className="align-self-center justify-content-center"  style={{"font-size": "30px", "color": "#0F83A0", "font-weight": "bold"}}>{convertedNum}</Row>
+          <Row className="align-self-center justify-content-center"  style={{"font-size": "30px", "color": "#0F83A0", "font-weight": "bold"}}>{props.number}</Row>
           <Row className="align-self-center justify-content-center" style={{"font-size": "15px", "color": "#0F83A0", "font-weight": "bold"}}>{props.text}</Row>
         </Col>
       </Row>
