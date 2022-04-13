@@ -21,7 +21,7 @@ function Notification (props) {
             float: 'left',
             fontSize: 20,
             zIndex: 2, 
-            left: '53%',
+            left: '45%',
           }}
         />
         <Typography
@@ -31,7 +31,7 @@ function Notification (props) {
             zIndex: 3,
             position: 'relative',
             float: 'left',
-            left: '32%',
+            left: '24%',
             bottom: '3px'
           }}
         >
@@ -42,11 +42,11 @@ function Notification (props) {
     <NotificationsIcon
       sx={{
         color: "white",
-        fontSize: 35,
+        fontSize: 30,
         display:'block',
         mx: 'auto',
         position: 'relative',
-        right: '20%'
+        right: '30%'
       }}
     />
     </div>
@@ -56,23 +56,23 @@ function NavbarComp(props) {
   NavbarComp.propTypes = {updateNum: PropTypes.number};
   return (
     <Navbar variant="dark">
-      <Container style={{margin: '2% auto'}}>
+      <Container style={{margin: '2% 10% 0%'}}>
         <Navbar.Brand href="/">
-          <Typography variant="heading1">EPICDEMIC</Typography>
+          <Typography variant="heading3">EPICDEMIC</Typography>
         </Navbar.Brand>
         <div className="d-flex justify-content-end">
           <Nav>
             <Nav.Link href="/saved" name="saved" className="mx-3">
               <Notification updateNum={ props.updateNum }/>
-              <Typography variant="bodyText" sx={{color: "white"}}>Updates</Typography>
+              <Typography variant="caption" sx={{color: "white"}}>Updates</Typography>
             </Nav.Link>
             <Nav.Link href="/saved" name="saved" className="mx-3">
-              <FavoriteIcon sx={{ color: "white", fontSize: 35, display:'block', mx: 'auto'}}></FavoriteIcon>
-              <Typography variant="bodyText" sx={{color: "white"}}>Saved Trips</Typography>
+              <FavoriteIcon sx={{ color: "white", fontSize: 30, display:'block', mx: 'auto'}}></FavoriteIcon>
+              <Typography variant="caption" sx={{color: "white"}}>Saved Trips</Typography>
             </Nav.Link>
             <Nav.Link href="/saved" name="saved" className="mx-3">
-              <AccountCircleIcon sx={{ color: "white", fontSize: 35, display:'block', mx: 'auto'}}></AccountCircleIcon>
-              <Typography variant="bodyText" sx={{color: "white"}}>Profile</Typography>
+              <AccountCircleIcon sx={{ color: "white", fontSize: 30, display:'block', mx: 'auto'}}></AccountCircleIcon>
+              <Typography variant="caption" sx={{color: "white"}}>Profile</Typography>
             </Nav.Link>
           </Nav>
         </div>

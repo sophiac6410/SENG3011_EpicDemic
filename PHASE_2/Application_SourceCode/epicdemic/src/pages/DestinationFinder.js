@@ -13,7 +13,7 @@ import HexTeal from "../static/hexteal.svg";
 import HexMedTeal from "../static/hexmedteal.svg";
 import HexWhite from "../static/hexwhite.svg";
 import BalloonBackground from "../static/balloontravel.jpg"
-import { DarkButton } from "../styles/Global";
+import { DarkButton } from "../styles/Button";
 
 const DestinationFinder = () => {
     const [infoRows, setInfoRows] = useState([]);
