@@ -33,24 +33,25 @@ const responsive = {
     }
   };
 
-const colours = [ '#0F83A0', '#E2F2FC', '#70C4E8' ]
+const colours = [ '#0F83A0', 'white', '#70C4E8' ]
 const fontColours = [ 'white', '#0F83A0', 'white' ]
 
 
 class NewsBar extends React.Component {
   render() {
     return(
-      <div style={{ padding: '30px', marginBottom: '30px' }}>
+      <div style={{ padding: '5% 9%', marginBottom: '4%' }}>
         <Row className="mt-2 justify-content-center">
-          <div className="mb-2 text-center me-5" style={{ color: '#515151' }}>
-            <LanguageIcon fontSize="large" className="color-medium-blue"  sx={{marginBottom: '10px', marginRight: '5px'}}/>
+          <div className="mb-3 text-center me-5" style={{ color: '#515151' }}>
+            <LanguageIcon fontSize="large" className="color-medium-blue"  sx={{marginBottom: '1%', marginRight: '0.5%'}}/>
             <Typography variant="heading1" className="color-dark-teal">GLOBAL NEWS</Typography>
           </div>
-          <div className="news-carousel">
+          <div className="news-carousel bg-off-white">
             <Carousel 
               swipeable={true}
               showStatus={false}
-              responsive={responsive} 
+              responsive={responsive}
+              className="bg-off-white"
             >
               <NewsCard col={colours[0]} fontC={fontColours[0]}></NewsCard>
               <div className="news-container-col">

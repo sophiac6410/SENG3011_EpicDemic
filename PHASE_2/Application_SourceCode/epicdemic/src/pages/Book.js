@@ -5,7 +5,7 @@ import '../styles/Book.css'
 // import '../App.css'
 import FlightFilter from "../components/Book/FlightFilter"
 import * as React from 'react';
-import { DarkButton } from "../styles/Global.js"
+import { DarkButton } from "../styles/Button.js"
 
 function handleClick() {
   const flightSection = document.getElementById('flight-title');

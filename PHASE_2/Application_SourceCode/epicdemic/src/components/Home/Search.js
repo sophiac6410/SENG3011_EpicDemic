@@ -26,7 +26,7 @@ function Search() {
     navigate('/finder');
   }
     return(
-      <div className="border-radius-med bg-off-white px-10 mt-5 mb-5" style={{width: "80%", padding: '3% 2% 5%'}}>
+      <div className="border-radius-med bg-off-white mt-5 mb-5" style={{width: "70%", paddingTop: '2%', paddingBottom: '4%'}}>
         <div className="search-row">
           <div className="search-col ps-4">
             <Typography variant="bodyImportant" className="color-sky-blue ps-2 mb-2">FROM</Typography>
@@ -36,7 +36,7 @@ function Search() {
           </div>
           <div className="search-col ms-4 me-4">
             <div style={{ paddingTop: '25px', marginLeft: '25%' }}>
-              <img src={arrow} alt="arrow" width="60%" height="60%"></img>
+              <img src={arrow} alt="arrow" width="55%" height="55%"></img>
             </div>
           </div>
           <div className="search-col">
@@ -45,11 +45,11 @@ function Search() {
               <CountrySelect isFrom={false} handleInput={(e, v) => setDest(v)}></CountrySelect>
             </div>
           </div>
-          <div className="search-icon ms-5">
+          <div>
             <IconButton 
               aria-label="search"
               onClick={ routeChange }>
-              <SearchIcon sx={{ color: "#70C4E8", fontSize: "60px"}}/>
+              <SearchIcon sx={{ color: "#70C4E8", fontSize: 40, mt: 4, ml: 2}}/>
             </IconButton>
           </div>
         </div>

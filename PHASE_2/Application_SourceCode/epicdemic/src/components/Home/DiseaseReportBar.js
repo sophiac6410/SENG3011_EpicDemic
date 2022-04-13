@@ -35,10 +35,10 @@ const COLOR = 'white';
 
 export default function DiseaseReportBar(parent) {
     return(
-      <div style={{ padding: '30px', marginBottom: '30px', backgroundColor: '#E9F0FB' }}>
+      <div style={{ padding: '3% 10% 10%', backgroundColor: '#E9F0FB' }}>
         <Row className="mt-2" style={{ backgroundColor: '#E9F0FB' }}>
           <div className="text-center">
-            <Typography variant="heading1" className="color-dark-teal">DISEASE REPORT</Typography>
+            <Typography variant="heading1" className="color-dark-teal">RECENT DISEASE REPORT</Typography>
           </div>
           <div className="news-carousel" style={{ backgroundColor: '#E9F0FB' }}>
             <Carousel 
@@ -46,7 +46,6 @@ export default function DiseaseReportBar(parent) {
               showStatus={false}
               responsive={responsive} 
             >
-              
               <div className="news-container-col">
                 <DiseaseCard></DiseaseCard>
                 <DiseaseCard></DiseaseCard>

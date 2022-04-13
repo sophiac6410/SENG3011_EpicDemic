@@ -13,15 +13,16 @@ const brSmall = '30px';
 
 const BaseButton = styled(Button)({
   borderRadius: brSmall,
-  padding: '15px 25px',
+  padding: '10px 20px',
   fontFamily: 'Nunito',
+  fontVariant: 'bodyImportant',
 });
 
 export const DarkButton = styled(BaseButton)({
   backgroundColor: darkTeal,
   color: 'white',
   '&:hover': {
-    backgroundColor: mediumTeal,
+    backgroundColor: darkGrey,
   },
 });
 

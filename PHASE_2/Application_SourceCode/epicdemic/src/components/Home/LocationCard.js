@@ -1,9 +1,9 @@
 import { Card, Col, Row } from "react-bootstrap";
-import midCaution from "../../static/mid-caution.svg"
-import midDot from "../../static/mid-dot.svg"
+import SimCardAlertIcon from '@mui/icons-material/SimCardAlert';
+import CircleIcon from '@mui/icons-material/Circle';
 import { useNavigate, } from 'react-router-dom';
 import React from "react";
-
+import { Typography } from "@mui/material";
   
 function LocationCard() {
   let navigate = useNavigate(); 
@@ -12,35 +12,31 @@ function LocationCard() {
   }
 
   return (
-    <Card className="m-2" style={{borderRadius: '10px', width: 'auto'}} onClick={ routeChange }>
+    <Card className="m-2 border-radius-small" style={{width: 'auto'}} onClick={ routeChange }>
       <Card.Body style={{padding: '20px 30px'}}>
-        <Card.Title style={{fontSize: "23px", fontWeight: 'bold'}}>Philippines</Card.Title>
-        <Card.Subtitle className="pt-1 text-muted">Overall Advice:</Card.Subtitle>
-        <Row className="align-items-center pt-1 justify-content-start"  style={{marginBottom: '10px'}}>
-          <Col md={3}>
-            <Row className="justify-content-center">
-            <img src={midCaution} width="35px" height="35px">
-            </img>
-            </Row>
-          </Col>
-          <Col className="pt-1">
-            <text style={{"font-size": "16px", "font-weight": "bold"}}>Exercise Caution</text>
+        <Card.Title>
+          <Typography variant="heading3">Philippines</Typography>
+        </Card.Title>
+        <Card.Subtitle className="pt-1 text-muted">
+          <Typography variant="bodyText">Overall Advice</Typography>
+        </Card.Subtitle>
+        <Row className="align-items-center pt-1 justify-content-start" style={{marginBottom: '10px'}}>
+          <Col>
+            <SimCardAlertIcon className="color-yellow" sx={{ fontSize: 30, mx: 1 }}></SimCardAlertIcon>
+            <Typography variant="bodyImportant">Exercise Caution</Typography>
           </Col>
         </Row>
-        <Card.Subtitle className="pt-2 text-muted">Travel Status:</Card.Subtitle>
+        <Card.Subtitle className="pt-2 text-muted">
+          <Typography variant="bodyText">Travel Status</Typography>
+        </Card.Subtitle>
         <Row className="align-items-center pt-1 justify-content-start">
-          <Col md={3} className="justify-content-center">
-            <Row className="justify-content-center">
-              <img src={midDot} width="15px" height="15px">
-              </img>
-            </Row>
-          </Col>
-          <Col className="pt-1">
-            <text style={{"font-size": "16px", "font-weight": "bold"}}>Open with Restrictions</text>
+          <Col>
+            <CircleIcon className="color-yellow" sx={{ fontSize: 15, mx: 2 }}></CircleIcon>
+            <Typography variant="bodyImportant">Open with Restrictions</Typography>
           </Col>
         </Row>
-        <Row>
-          <text style={{"font-size": "12px", "text-align": "end", marginTop: '15px'}}>Last Update: 23rd March 2022</text>
+        <Row className="pt-2 text-muted">
+          <Typography variant="caption" sx={{pt: 2}}>Last Update: 23rd March 2022</Typography>
         </Row>
       </Card.Body>
     </Card>
