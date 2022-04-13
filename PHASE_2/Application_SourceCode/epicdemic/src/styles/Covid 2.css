@@ -1,0 +1,46 @@
+
+
+.flex-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1
+}
+
+.image-holder {
+  flex: 3
+}
+
+
+.teal {
+  background-color: #62B6CB;
+  color: aliceblue;
+
+}
+
+.lightblue {
+  background-color: #E2F2FC;
+  color: #62B6CB;
+}
+
+.box {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+  padding-bottom: 60px;
+}
+
+.tab-bg {
+  background-color: snow;
+  padding: 0px;
+  height: 400px;
+}
