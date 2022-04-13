@@ -66,5 +66,5 @@ app.include_router(users.router)
 async def index():
     return baseModels.createResponse(True, 200, {'healthcheck': 'Everything OK!'})
 
-# if __name__ == "__main__":
-# 	uvicorn.run(app)
+if __name__ == "__main__":
+	uvicorn.run(app)

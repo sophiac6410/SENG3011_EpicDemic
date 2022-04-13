@@ -1,0 +1,49 @@
+
+    Timestamp: 1649855902.205912
+    Accessed Time: 2022-04-13 23:18:22.205912
+    Client: 127.0.0.1:56128
+    
+    Request: GET /
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0016829967498779297
+    ----------------------------------------
+    
+    Timestamp: 1649855902.320563
+    Accessed Time: 2022-04-13 23:18:22.320563
+    Client: 127.0.0.1:56128
+    
+    Request: GET /favicon.ico
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0004029273986816406
+    ----------------------------------------
+    
+    Timestamp: 1649855906.366952
+    Accessed Time: 2022-04-13 23:18:26.366952
+    Client: 127.0.0.1:56128
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0008261203765869141
+    ----------------------------------------
+    
+    Timestamp: 1649855906.744999
+    Accessed Time: 2022-04-13 23:18:26.744999
+    Client: 127.0.0.1:56128
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.029549121856689453
+    ----------------------------------------
+    

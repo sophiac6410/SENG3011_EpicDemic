@@ -23,33 +23,22 @@ class Token(BaseModel):
 class TokenData(BaseModel):
     username: Optional[str] = None
 
-class UserInDB(User):
-    hashed_password: str
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
-def verify_password(plain_password, hashed_password):
-    return pwd_context.verify(plain_password, hashed_password)
+# def verify_password(plain_password, hashed_password):
+#     return pwd_context.verify(plain_password, hashed_password)
 
-def get_password_hash(password):
-    return pwd_context.hash(password)
+# def get_password_hash(password):
+#     return pwd_context.hash(password)
 
-def get_user(username: str):
-    user = list(users_col.find({ "email" : "dave" }))
-    if user.count == 1:
-        return user[0]
-    else:
-        return False
+def get_user(email: str):
+    return users_col.find_one({ "email" : email })
 
 def authenticate_user(email: str, password: str):
-    user = get_user(email)
-    if not user:
-        return False
-    if not verify_password(password, user.hashed_password):
-        return False
-    return user
+    return (users_col.find_one({"email": email, "password": password}))
 
 def create_access_token(email: str):
     expires_delta = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
@@ -62,7 +51,7 @@ def create_access_token(email: str):
     encodedJwt = jwt.encode(toEncode, SECRET_KEY, algorithm=ALGORITHM)
     return encodedJwt
 
-async def get_current_user(token: str = Depends(oauth2_scheme)):
+async def get_current_user(token: str):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",

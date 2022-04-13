@@ -1,0 +1,169 @@
+
+    Timestamp: 1649860092.506062
+    Accessed Time: 2022-04-14 00:28:12.506062
+    Client: 127.0.0.1:56685
+    
+    Request: GET /
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.001962900161743164
+    ----------------------------------------
+    
+    Timestamp: 1649860096.082065
+    Accessed Time: 2022-04-14 00:28:16.082065
+    Client: 127.0.0.1:56685
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.025189876556396484
+    ----------------------------------------
+    
+    Timestamp: 1649860096.411699
+    Accessed Time: 2022-04-14 00:28:16.411699
+    Client: 127.0.0.1:56685
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.026144981384277344
+    ----------------------------------------
+    
+    Timestamp: 1649860237.751291
+    Accessed Time: 2022-04-14 00:30:37.751291
+    Client: 127.0.0.1:56722
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0006420612335205078
+    ----------------------------------------
+    
+    Timestamp: 1649860237.91278
+    Accessed Time: 2022-04-14 00:30:37.912780
+    Client: 127.0.0.1:56722
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.053544044494628906
+    ----------------------------------------
+    
+    Timestamp: 1649860359.399532
+    Accessed Time: 2022-04-14 00:32:39.399532
+    Client: 127.0.0.1:56767
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0005249977111816406
+    ----------------------------------------
+    
+    Timestamp: 1649860359.634084
+    Accessed Time: 2022-04-14 00:32:39.634084
+    Client: 127.0.0.1:56767
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.03977799415588379
+    ----------------------------------------
+    
+    Timestamp: 1649861210.054893
+    Accessed Time: 2022-04-14 00:46:50.054893
+    Client: 127.0.0.1:56940
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0006239414215087891
+    ----------------------------------------
+    
+    Timestamp: 1649861210.364244
+    Accessed Time: 2022-04-14 00:46:50.364244
+    Client: 127.0.0.1:56940
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.03242897987365723
+    ----------------------------------------
+    
+    Timestamp: 1649861226.417142
+    Accessed Time: 2022-04-14 00:47:06.417142
+    Client: 127.0.0.1:56941
+    
+    Request: POST /v1/users/register
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.14751005172729492
+    ----------------------------------------
+    
+    Timestamp: 1649861307.632015
+    Accessed Time: 2022-04-14 00:48:27.632015
+    Client: 127.0.0.1:56947
+    
+    Request: POST /v1/users/login
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 401
+    Process Time: 0.015568971633911133
+    ----------------------------------------
+    
+    Timestamp: 1649861326.275288
+    Accessed Time: 2022-04-14 00:48:46.275288
+    Client: 127.0.0.1:56948
+    
+    Request: POST /v1/users/login
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 401
+    Process Time: 0.01614093780517578
+    ----------------------------------------
+    
+    Timestamp: 1649861332.640552
+    Accessed Time: 2022-04-14 00:48:52.640552
+    Client: 127.0.0.1:56950
+    
+    Request: POST /v1/users/login
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.017485857009887695
+    ----------------------------------------
+    
+    Timestamp: 1649861354.777014
+    Accessed Time: 2022-04-14 00:49:14.777014
+    Client: 127.0.0.1:56951
+    
+    Request: POST /v1/users/register
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 400
+    Process Time: 0.020863056182861328
+    ----------------------------------------
+    
