@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap"
-import { NavLink, Outlet } from "react-router-dom"
+import { NavLink, Outlet, useParams, useLocation } from "react-router-dom"
 import '../styles/Destination.css'
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -12,8 +12,8 @@ import Favorite from '@mui/icons-material/Favorite';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import Typography from '@mui/material/Typography'
-
-
+import React, { useState, useEffect } from "react";
+import Footer from "../components/Footer"
 
 const ColorButton = styled(Button)({
   fontSize: 20,
@@ -42,11 +42,28 @@ const linkStyle = {
 };
 
 function Destination() {
+  const [dest, setDest] = useState(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state === null) return;
+    // Get the country and code
+    setDest({
+      country: location.state.country,
+      code: location.state.code
+    })
+  }, [location.key])
+
+  if (dest === null) {
+    return (
+      <Footer/>
+    )
+  }
+
   return(
     <Container>
       <Row>
         <Col>
-          {/* <TinySearch className="bg-lightblue"></TinySearch> */}
           <Row className="justify-content-end align-items-center mt-2 me-5">
             <Col md={1} className="text-center pt-2">
               <Checkbox icon={<NotificationsNoneIcon fontSize="large"/>} checkedIcon={<NotificationsActiveIcon fontSize="large" className="color-medium-teal"/>} onClick={(event)=> {setSaved(event.target.checked)}} />
@@ -59,7 +76,7 @@ function Destination() {
           </Row>
           <Row className="pt-4 pb-4 align-items-center">
             <Col md={4}>
-              <Typography variant="heading1" className="color-dark-teal">PHILLIPENES</Typography>
+              <Typography variant="heading1" className="color-dark-teal">{dest.country}</Typography>
               <div className="larger-body">No new changes since 25/03/22 </div>
             </Col>
             <Col>

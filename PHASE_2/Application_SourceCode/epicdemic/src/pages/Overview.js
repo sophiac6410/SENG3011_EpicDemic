@@ -1,21 +1,26 @@
 import { Container, Row, Col } from "react-bootstrap"
-import map from "../static/phiMap.png"
+import { NavLink, Outlet, useParams, useLocation } from "react-router-dom"
 import vChart from "../static/phiVacine.svg"
 import covidMAP from "../static/phiCovidMap.png"
+import map from "../static/phiMap.png"
 import midDot from "../static/mid-dot.svg"
 import wRed from "../static/warningRed.svg"
 import wYellow from "../static/warningYellow.svg"
 import NewsBar from "../components/Travel/NewsBar"
 import '../styles/Destination.css'
 import Typography from '@mui/material/Typography'
-
-
+import { MapContainer, TileLayer, Marker } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css';
+import '../styles/Overview.css'
+import markerIcon from '../static/markerIcon2.svg';
+import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar'
+import 'react-circular-progressbar/dist/styles.css';
+import React, { useState, useEffect } from "react";
 
 const intro = "Philippines, island country of Southeast Asia in the western Pacific Ocean. It is an archipelago consisting of more than 7,000 islands and islets lying about 500 miles (800 km) off the coast of Vietnam. Manila is the capital, but nearby Quezon City is the country’s most-populous city."
 const safetySource = "The safety and security ratings determined by GeoSure GeoSafeScores which analyzes crime, health and economic data, official travel alerts, local reporting and a variety of other sources.  Scores go from 1 (not likely) to 100 (very likely)."
 const covidSource = <p>Health advice is continually changing as we learn more about COVID-19 and new variants are discovered. Rules and restrictions to prevent outbreaks can change quickly. It’s important to regularly check the rules in the destinations you’re travelling to and transiting through, as well as the requirements at the Australian border. These may differ between state and territory jurisdictions.
 <br /> <br />Read the Australian Government’s global health advisory and step-by-step guide to travel during COVID-19 for more information.</p>
-
 
 const safetyDis = [
   {title: "MEDICAL", text: "Likelihood of illness or disease, assessment of water and air quality, and access to reliable medical care", score: 34},
@@ -64,11 +69,46 @@ const SafetyBoard = safetyDis.map(function(props) {
 });
 
 function Overview() {
+  const [dest, setDest] = useState(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state === null) return;
+    // Get the country and code
+    setDest({
+      country: location.state.country,
+      code: location.state.code
+    })
+  }, [location.key])
+  
+  const getCentre = () => {
+    // TODO: This should take in a country, look up it's coordinates
+    // and centre on it
+    return [35, 15];
+  }
+
+  
+
   return(
     <Container>
       <Row className="justify-content-center">
         <Col md={5}>
-          <img src={map}></img>
+          <MapContainer
+            style={{ width: 450, height: 450}}
+            center={getCentre()} 
+            zoom={5}
+            zoomControl={false}
+            minZoom={5}
+            maxBounds={bounds}
+            maxBoundsViscosity={0.7}
+          >
+            <TileLayer
+              subdomains='abcd'
+              accessToken={jawgAccess}
+              attribution='<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url='https://{s}.tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token={accessToken}'
+            />
+          </MapContainer>
         </Col>
         <Col md={6}>
           <Row className="justify-content-center align-items-center mt-5">
@@ -137,13 +177,6 @@ function Overview() {
           <Row><div className="body-text">OVERALL SAFETY RATING</div></Row>
         </Col>
       </Row>
-      {/* <SafetyScore safetyDes></SafetyScore>
-      {/* <SafetyScore></SafetyScore>
-      <SafetyScore></SafetyScore>
-      <SafetyScore></SafetyScore>
-      <SafetyScore></SafetyScore>
-      <SafetyScore></SafetyScore> */}
-      {/* <SafetyBoard></SafetyBoard> */}
       <ul>{SafetyBoard}</ul>
       <div className="source-text mt-5 mb-5">{safetySource}</div>
       <div className="title-h3 mb-4 mt-5 pt-4">COVID-19 Statistics</div>
@@ -152,13 +185,49 @@ function Overview() {
           <div className="title-h2 medium-teal mt-5">DECLINING</div>
           <div className="title-h3 medium-teal">CONDITION</div>
           <div className="end">
-            <img className="pe-5 me-5 mb-5" src={vChart}></img>
+            <CircularProgressbarWithChildren
+              value={75}
+              styles={buildStyles({            
+                strokeLinecap: 'butt',    
+                pathColor: '#0F83A0'
+              })}
+              >
+              <div 
+                className="title-h2 medium-teal"
+                style={{ textAlign: "center"}}
+              >
+                <text>75.2%</text>
+                <br/>
+                <text>vaccinated</text>
+              </div>
+            </CircularProgressbarWithChildren>            
           </div>
           <div className="title medium-teal">112</div>
           <div className="title-h2 medium-teal mb-5">CASES TODAY</div>
         </Col>
         <Col md={6}>
-          <img src={covidMAP} height="700px" width="700px"></img>
+          <MapContainer
+            className="leaflet-container2"
+            style={{ width: 700, height: 700}}
+            center={getCentre()} 
+            zoom={5}
+            zoomControl={false}
+            minZoom={5}
+            maxBounds={bounds}
+            maxBoundsViscosity={0.7}
+          >
+            <TileLayer
+              attribution='Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ'
+              url='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'
+            />
+            {markerElements.map((elem) => 
+              <Marker 
+                id={elem.id}
+                position={[elem.latitude, elem.longitude]}
+                icon={hugeMarkerIcon}
+              />
+            )}
+          </MapContainer>
         </Col>
       </Row>
       <div className="source-text mb-5">{covidSource}</div>
@@ -168,3 +237,20 @@ function Overview() {
 }
 
 export default Overview
+
+const bounds = [
+  [100, -180],
+  [-100, 180],
+]
+
+const jawgAccess = "YOUjn99aXN03O3VlgCA2zMByVd0j9i1wkTyQdMHmIPUoWZbUyqprbroD4TpOdYMl"
+
+const markerElements = [
+  {id: 1, latitude: 35, longitude: 15, cases: 300},
+  {id: 2, latitude: 40, longitude: 10, cases: 200},
+]
+
+let hugeMarkerIcon = L.icon({
+  iconUrl: markerIcon,
+  iconSize: [64, 64],
+})

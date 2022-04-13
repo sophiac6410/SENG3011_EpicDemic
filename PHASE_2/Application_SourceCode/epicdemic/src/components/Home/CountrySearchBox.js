@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function CountrySelect({isFrom}) {
+export default function CountrySelect({isFrom, handleInput}) {
   const classes = useStyles();
 
   return (
@@ -40,6 +40,7 @@ export default function CountrySelect({isFrom}) {
         options={ isFrom ? aus : countries }
         autoHighlight
         underlineShow={false}
+        onChange={handleInput}
         getOptionLabel={(option) => option.label}
         renderOption={(props, option) => (
           <Box component="li" sx={{ '& > img': { mr: 1, flexShrink: 0 } }} {...props}>
