@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import RegisterForm from '../components/RegisterForm'
 import { BigTitle } from '../components/Form'
-import { API_URL } from '../config.json'
+import API_URL from '../config.json'
 
 function Register () {
   const navigate = useNavigate()
