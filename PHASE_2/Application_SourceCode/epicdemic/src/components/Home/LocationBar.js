@@ -6,6 +6,7 @@ import "../../styles/Home.css"
 import {Row, Col } from "react-bootstrap";
 import Typography from '@mui/material/Typography'
 import { useNavigate } from 'react-router'
+import { DarkButton } from "../../styles/Button";
 
 const responsive = {
     superLargeDesktop: {
@@ -31,8 +32,8 @@ function LocationBar() {
   let navigate = useNavigate(); 
 
   return(
-    <Row className="ms-1 me-1 pt-5">
-      <Col className="mt-2 bg-darkteal" style={{padding: '20px 50px'}}>
+    <Row className="ms-1 me-1 pt-4 bg-light-teal">
+      <Col className="mt-2" style={{ paddingLeft: '9%', paddingRight: '9%', marginBottom: '3%'}}>
         <div className="text-center">
           <Typography variant="heading1" className="color-white">YOUR SAVED LOCATIONS</Typography>
         </div>
@@ -45,6 +46,8 @@ function LocationBar() {
             shouldResetAutoplay={false}
             itemClass="location-card"
             centerMode={true}
+            className="bg-light-teal"
+
           >
               <LocationCard></LocationCard>
               <LocationCard></LocationCard>
@@ -55,11 +58,13 @@ function LocationBar() {
               <LocationCard></LocationCard>
           </Carousel>
         </div>
-        <Row md={5} className="justify-content-center m-3">
-          <button className="btn-base btn-dark align-self-center"
+        <Row md={5} className="justify-content-center mt-5 mb-3">
+          <DarkButton className="align-self-center"
             onClick={() => {
               navigate('/saved');
-            }}>See all latest updates</button>
+            }}>
+              <Typography variant="bodyImportant">See all latest updates</Typography>
+          </DarkButton>
         </Row>
       </Col>
     </Row>

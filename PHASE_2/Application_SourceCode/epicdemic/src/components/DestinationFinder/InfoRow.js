@@ -4,7 +4,7 @@ import "../../styles/DestinationFinder.css";
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
-import { LightButton } from "../../styles/Global";
+import { LightButton } from "../../styles/Button";
 
 const InfoRow = ({country, updateDesc, lastUpdated, travelStatus, saved}) => {
     const [isSaved, setSaved] = React.useState(saved);

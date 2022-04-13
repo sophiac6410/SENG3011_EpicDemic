@@ -37,7 +37,7 @@
     background-color: white;
 }
 .bg-off-white{
-    background-color: #E9F5F9;
+    background-color: #F4FBFF;
 }
 .bg-sky-blue{
     background-color: #7CC9E9;
@@ -138,6 +138,9 @@
 /* BORDER RADIUSES */
 .border-radius-large {
     border-radius: 50px;
+}
+.border-radius-med {
+    border-radius: 30px;
 }
 .border-radius-small {
     border-radius: 10px;

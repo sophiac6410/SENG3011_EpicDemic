@@ -25,59 +25,66 @@ import {
 
 const theme = createTheme({
   typography: {
-    fontFamily: ['Nunito', 'serif', 'open Sanc'].join(','),
+    fontFamily: ['Nunito', 'serif', 'Open Sans'].join(','),
+    button: {
+      textTransform: "none",
+      fontFamily: 'Nunito, serif'
+    },
     title: {
       fontFamily: "Nunito, serif",
-      fontWeight: "700",
-      fontSize: "48px",
-      lineHeight: "55px"
+      fontWeight: 700,
+      fontSize: "2.1em",
+      lineHeight: 1
     },
     heading1: {
-      marginTop: "50px",
-      marginBottom: "30px",
       fontFamily: "Nunito, serif",
-      fontWeight: "700",
-      fontSize: "31px",
-      lineHeight: "55px",
-      marginTop: "50px",
-      marginBottom: "30px",
+      fontWeight: 400,
+      fontSize: "1.7em",
+      lineHeight: 3,
     },
     heading2: {
-      fontWeight: "700",
-      fontSize: "32px",
-      lineHeight: "44px"
+      fontWeight: 700,
+      fontSize: "1.4em",
+      lineHeight: 1.6
     },
     heading3: {
-      fontWeight: "700",
-      fontSize: "24px",
-      lineHeight: "33px"
+      fontWeight: 700,
+      fontSize: "1.1em",
+      lineHeight: 1.5
     },
     bodyHeading: {
       fontFamily: "Open Sans, sans-serif",
       fontStyle: "normal",
       fontWeight: 700,
-      fontSize: "21px",
-      lineHeight: "29px"
+      fontSize: "1.1em",
+      lineHeight: 2
     },
     bodyText: {
       fontFamily: "Open Sans, sans-serif",
       fontStyle: "normal",
       fontWeight: 400,
-      fontSize: "16px",
-      lineHeight: "25px"
+      fontSize: '0.9em',
+      lineHeight: 1.5,
     },
     bodyImportant: {
       fontFamily: "Open Sans, sans-serif",
       fontStyle: "normal",
       fontWeight: 700,
-      fontSize: "18px",
-      lineHeight: "27px"
+      fontSize: "1em",
+      lineHeight: 1.8
     },
-    bodyCaption: {
+    caption: {
       fontFamily: "Nunito, sans-serif",
       fontStyle: "normal",
       fontWeight: 400,
-      fontSize: "20px",
+      fontSize: '0.8em',
+      lineHeight: 1
+    },
+    bodySmall: {
+      fontFamily: "Nunito, sans-serif",
+      fontStyle: "normal",
+      fontWeight: 400,
+      fontSize: '0.5em',
       lineHeight: "27px"
     },
   },

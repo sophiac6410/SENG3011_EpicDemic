@@ -1,5 +1,4 @@
 .location-carousel{
-    background-color: #0F83A0;
     align-items: center;
 }
 .locationBar-title{
@@ -17,7 +16,7 @@
 }
 
 .news-carousel {
-    background-color: white;
+    background-color: #F4FBFF;
     align-items: center;
 }
 
@@ -54,18 +53,18 @@
     padding: 3px;
     padding-left: 2%;
 }
-.bg-medium-teal {
+/* .bg-medium-teal {
     background-color: #0F83A0;
 }
 .bg-darkteal {
     background-color: #0F83A0;
-}
+} */
 .locationBar-button {
     background-color: #1B4965;
     border-radius: 20px;
 }
 
-.bg-lightpurple {
+/* .bg-lightpurple {
     background-color: #726FE7;
 }
 .bg-mblue{
@@ -79,8 +78,8 @@
 }
 .bg-blue {
     background-color: #A9CBFF;
-}
-.bg-lightblue {
+} */
+/* .bg-lightblue {
     background-color: #E2F2FC;
 }
 .text-grey {
@@ -88,10 +87,10 @@
 }
 .text-white {
     color: white;
-}
+} */
 .bg-sky{
- background-image: url(./../static/sky.png);
- background-size: cover;
+    background-image: url(./../static/sky.png);
+    background-size: 100%;
 }
 .search-col {
     display: flex;
@@ -122,7 +121,6 @@
 
 #header {
     width: 100%;
-    height: 600px;
     align-items: center; 
     justify-content: center; 
     display: flex;
