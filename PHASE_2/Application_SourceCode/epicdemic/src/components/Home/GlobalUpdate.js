@@ -57,7 +57,7 @@ const GlobalUpdate = () => {
   const mediumTeal = '#0F83A0';
   const mediumBlue = '#70C4E8';
   const lightTeal = '#62B6CB';
-  
+
   const getMarkerIcon = (size) => {
     if (size < 100) return smallMarkerIcon
     else if (size < 300) return mediumMarkerIcon
@@ -66,7 +66,7 @@ const GlobalUpdate = () => {
   }
 
   return(
-    <Col className="pt-3 pb-4">
+    <Col className="pt-3 pb-4 mx-5">
       <div className="text-center">
         <Typography variant="heading1" className="color-dark-teal">WORLDWIDE COVID</Typography>
       </div>
@@ -97,13 +97,13 @@ const GlobalUpdate = () => {
           </Row>
         </Col>
       </Row>
-      <Row className="bg-darkteal justify-content-center align-items-center pb-5">
-        <Col md={3} className="align-self-center ms-4">
+      <Row className="bg-darkteal justify-content-center align-items-center pb-5 m-auto">
+        <Col md={2} className="align-self-center ms-4">
           <UpdateBox number={stats.totalCases} text="total cases" bgColor={mediumBlue} fontC='white'/>
           <UpdateBox number={stats.deaths} text="deaths" bgColor="white" fontC={mediumTeal}/>
           <UpdateBox number={stats.dailyCases} text="daily cases" bgColor={mediumBlue} fontC='white'/>
         </Col>
-        <Col className="text-center pb-4">
+        <Col className="align-self-center pb-4">
           <MapContainer
             className="leaflet-container1"
             center={[35, 25]} 
