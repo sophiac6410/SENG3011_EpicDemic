@@ -56,18 +56,18 @@
     padding: 3px;
     padding-left: 2%;
 }
-.bg-medium-teal {
+/* .bg-medium-teal {
     background-color: #0F83A0;
 }
 .bg-darkteal {
     background-color: #0F83A0;
-}
+} */
 .locationBar-button {
     background-color: #1B4965;
     border-radius: 20px;
 }
 
-.bg-lightpurple {
+/* .bg-lightpurple {
     background-color: #726FE7;
 }
 .bg-mblue{
@@ -81,8 +81,8 @@
 }
 .bg-blue {
     background-color: #A9CBFF;
-}
-.bg-lightblue {
+} */
+/* .bg-lightblue {
     background-color: #E2F2FC;
 }
 .text-grey {
@@ -90,7 +90,7 @@
 }
 .text-white {
     color: white;
-}
+} */
 .bg-sky{
  background-image: url(./../static/sky.png);
 }

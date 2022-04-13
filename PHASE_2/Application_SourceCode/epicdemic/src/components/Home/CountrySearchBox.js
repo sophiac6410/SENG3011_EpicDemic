@@ -33,7 +33,6 @@ export default function CountrySelect({isFrom}) {
 
   return (
     <div style={{ display: "flex", alignItems: "center", flexDirection: "row", padding: '10px' }}>
-
       <Autocomplete
         id="country-select-demo"
         classes={classes}
@@ -57,6 +56,8 @@ export default function CountrySelect({isFrom}) {
         renderInput={(params) => (
           <TextField
             id="standard-basic" 
+            value={isFrom && 'Australia'}
+            placeholder={isFrom ? '' : 'Search a travel destination...'}
             variant="standard"
             {...params}
             inputProps={{

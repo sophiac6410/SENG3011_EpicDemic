@@ -21,21 +21,21 @@ function Search() {
     navigate('/finder');
   }
     return(
-      <div className="border-radius-small bg-off-white ps-5 pe-5 pt-4 pb-5 mt-5 mb-5" style={{width: "80%"}}>
+      <div className="border-radius-med bg-off-white px-10 mt-5 mb-5" style={{width: "80%", padding: '3% 2% 5%'}}>
         <div className="search-row">
           <div className="search-col ps-4">
-            <Typography variant="bodyImportant" className="color-sky-blue ps-2 mb-2">FROM</Typography>
-            <div className="border-radius-large searchfield-container  ps-5 pe-5">
+            <Typography variant="bodyImportant" className="color-medium-blue ps-2 mb-2">FROM</Typography>
+            <div className="border-radius-med searchfield-container  ps-5 pe-5">
               <CountrySelect isFrom={true}></CountrySelect>
             </div>
           </div>
           <div className="search-col ms-4 me-4">
-            <div style={{ paddingTop: '25px' }} className="color-medium-blue">
-              <img src={arrow} alt="arrow" width="90px" height="50px"></img>
+            <div style={{ paddingTop: '25px', marginLeft: '25%' }}>
+              <img src={arrow} alt="arrow" width="60%" height="60%"></img>
             </div>
           </div>
           <div className="search-col">
-            <Typography variant="bodyImportant" className="color-sky-blue ps-2 mb-2">TO</Typography>
+            <Typography variant="bodyImportant" className="color-medium-blue ps-2 mb-2">TO</Typography>
             <div className="border-radius-large searchfield-container ps-5 pe-5">
               <CountrySelect isFrom={false}></CountrySelect>
             </div>

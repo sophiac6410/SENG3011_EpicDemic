@@ -26,18 +26,22 @@ import {
 const theme = createTheme({
   typography: {
     fontFamily: ['Nunito', 'serif', 'open Sanc'].join(','),
+    button: {
+      textTransform: "none",
+      fontFamily: 'Nunito, serif'
+    },
     title: {
       fontFamily: "Nunito, serif",
-      fontWeight: "700",
-      fontSize: "48px",
+      fontWeight: 700,
+      fontSize: "2.5em",
       lineHeight: "55px"
     },
     heading1: {
       marginTop: "50px",
       marginBottom: "30px",
       fontFamily: "Nunito, serif",
-      fontWeight: "700",
-      fontSize: "31px",
+      fontWeight: 700,
+      fontSize: "1.4em",
       lineHeight: "55px",
       marginTop: "50px",
       marginBottom: "30px",
@@ -70,14 +74,21 @@ const theme = createTheme({
       fontFamily: "Open Sans, sans-serif",
       fontStyle: "normal",
       fontWeight: 700,
-      fontSize: "18px",
-      lineHeight: "27px"
+      fontSize: "1.1em",
+      lineHeight: 1.8
     },
     bodyCaption: {
       fontFamily: "Nunito, sans-serif",
       fontStyle: "normal",
       fontWeight: 400,
       fontSize: "20px",
+      lineHeight: "27px"
+    },
+    bodySmall: {
+      fontFamily: "Nunito, sans-serif",
+      fontStyle: "normal",
+      fontWeight: 400,
+      fontSize: '0.7em',
       lineHeight: "27px"
     },
   },
