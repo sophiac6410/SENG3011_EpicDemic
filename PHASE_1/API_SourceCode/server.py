@@ -3,7 +3,7 @@ from dotenv import dotenv_values
 from os import access
 from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
-from routers import reports, articles
+from routers import reports, articles, users
 import uvicorn
 import time
 from datetime import datetime

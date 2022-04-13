@@ -1,6 +1,6 @@
 from datetime import datetime
 from email.mime import base
-from pydantic import BaseModel, Field # datetime has format yyyy-mm-ddTHH:mm:ss
+from pydantic import BaseModel, Field
 from typing import List, Dict
 from models import baseModels
 
