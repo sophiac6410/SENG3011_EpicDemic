@@ -9,12 +9,22 @@ import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import "./../../styles/App.css"
 import Typography from '@mui/material/Typography'
 import { Row } from "react-bootstrap";
+import React, { useState } from "react";
 
 function Search() {
+  const [dest, setDest] = useState(null);
 
   let navigate = useNavigate(); 
-  const routeChange = () =>{  
-    navigate('/destination/PHILIPPINES');
+  const routeChange = () =>{
+    if (dest === null) return;
+    
+    console.log("route changing to " + dest.label + " " + dest.code);
+    navigate(`/destination/${dest.label}`, {
+      state: {
+        country: dest.label,
+        code: dest.code
+      }
+    });
   }
 
   const goDestination = () =>{  
@@ -26,7 +36,7 @@ function Search() {
           <div className="search-col ps-4">
             <Typography variant="bodyImportant" className="color-sky-blue ps-2 mb-2">FROM</Typography>
             <div className="border-radius-large searchfield-container  ps-5 pe-5">
-              <CountrySelect isFrom={true}></CountrySelect>
+              <CountrySelect isFrom={true} handleInput={() => {}}></CountrySelect>
             </div>
           </div>
           <div className="search-col ms-4 me-4">
@@ -37,7 +47,7 @@ function Search() {
           <div className="search-col">
             <Typography variant="bodyImportant" className="color-sky-blue ps-2 mb-2">TO</Typography>
             <div className="border-radius-large searchfield-container ps-5 pe-5">
-              <CountrySelect isFrom={false}></CountrySelect>
+              <CountrySelect isFrom={false} handleInput={(e, v) => setDest(v)}></CountrySelect>
             </div>
           </div>
           <div className="search-icon ms-5">
