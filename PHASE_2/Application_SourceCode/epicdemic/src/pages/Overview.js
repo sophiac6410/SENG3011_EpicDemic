@@ -1,4 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap"
+import { NavLink, Outlet, useParams, useLocation } from "react-router-dom"
 import vChart from "../static/phiVacine.svg"
 import covidMAP from "../static/phiCovidMap.png"
 import map from "../static/phiMap.png"
@@ -14,6 +15,7 @@ import '../styles/Overview.css'
 import markerIcon from '../static/markerIcon2.svg';
 import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css';
+import React, { useState, useEffect } from "react";
 
 const intro = "Philippines, island country of Southeast Asia in the western Pacific Ocean. It is an archipelago consisting of more than 7,000 islands and islets lying about 500 miles (800 km) off the coast of Vietnam. Manila is the capital, but nearby Quezon City is the country’s most-populous city."
 const safetySource = "The safety and security ratings determined by GeoSure GeoSafeScores which analyzes crime, health and economic data, official travel alerts, local reporting and a variety of other sources.  Scores go from 1 (not likely) to 100 (very likely)."
@@ -67,11 +69,25 @@ const SafetyBoard = safetyDis.map(function(props) {
 });
 
 function Overview() {
+  const [dest, setDest] = useState(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state === null) return;
+    // Get the country and code
+    setDest({
+      country: location.state.country,
+      code: location.state.code
+    })
+  }, [location.key])
+  
   const getCentre = () => {
     // TODO: This should take in a country, look up it's coordinates
     // and centre on it
     return [35, 15];
   }
+
+  
 
   return(
     <Container>
@@ -161,13 +177,6 @@ function Overview() {
           <Row><div className="body-text">OVERALL SAFETY RATING</div></Row>
         </Col>
       </Row>
-      {/* <SafetyScore safetyDes></SafetyScore>
-      {/* <SafetyScore></SafetyScore>
-      <SafetyScore></SafetyScore>
-      <SafetyScore></SafetyScore>
-      <SafetyScore></SafetyScore>
-      <SafetyScore></SafetyScore> */}
-      {/* <SafetyBoard></SafetyBoard> */}
       <ul>{SafetyBoard}</ul>
       <div className="source-text mt-5 mb-5">{safetySource}</div>
       <div className="title-h3 mb-4 mt-5 pt-4">COVID-19 Statistics</div>
