@@ -18,7 +18,7 @@ function Home() {
         <div className="bg-sky">
           <NavbarComp></NavbarComp>
           <Row>
-            <div id="header">
+            <div id="header" className="mt-5">
               <Typography variant="title" className="color-white mt-5">Travel safely with Epicdemic!</Typography>
               <div className="text-center m-5">
                 <Typography variant="bodyText" className="color-white" sx={ { paddingBottom: '20px' }}>

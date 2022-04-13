@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, } from 'react-router-dom';
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
-import PlaneBackground from "../static/plane.png";
 import WorldMap from "../static/hexworldmap.svg";
 import "../styles/DestinationFinder.css";
 import GenericSearch from "../components/GenericSearch";
@@ -14,6 +13,9 @@ import HexMedTeal from "../static/hexmedteal.svg";
 import HexWhite from "../static/hexwhite.svg";
 import BalloonBackground from "../static/balloontravel.jpg"
 import { DarkButton } from "../styles/Global";
+import NavbarComp from "../components/Home/NavBar";
+import Typography from '@mui/material/Typography'
+
 
 const DestinationFinder = () => {
     const [infoRows, setInfoRows] = useState([]);
@@ -27,23 +29,24 @@ const DestinationFinder = () => {
     }, []);
 
     return (
-        <Container fluid style={{ "--bs-gutter-x": 0, "margin": 0, "padding": 0, "backgroundColor": "#E2F2FC"}}>
-            <Row position="relative" style={{"--bs-gutter-x": 0, "padding": 0}}>
-                <Image className="plane-background" src={PlaneBackground}/>
-                <Container fluid className="filter-destination">
-                    <Row>
-                        <Col style={{marginLeft: "3vw", marginRight: "3vw"}}>
-                            <GenericSearch fieldLabel={"Region"} options={regionOptions}/>
-                        </Col>
-                        <Col style={{marginLeft: "3vw", marginRight: "3vw"}}>
-                            <GenericSearch fieldLabel={"Advice Level"} options={adviceLevelOptions}/>
-                        </Col>
-                        <Col style={{marginLeft: "3vw", marginRight: "3vw"}}>
-                            <GenericSearch fieldLabel={"Travel Status"} options={travelStatusOptions}/>
-                        </Col>
-                    </Row>
-                </Container>
-            </Row>
+        <div>
+            <div className="bg-plane">
+                <NavbarComp></NavbarComp>
+                <div className="text-center mb-5" style={{marginTop: "300px"}}>
+                    <Typography variant="title" className="color-white mt-5">FIND A DESTINATION BY...</Typography>
+                </div>
+                <Row style={{marginTop: "60px", paddingBottom: "100px"}} className="justify-content-center">
+                    <Col className="pe-5 ps-5">
+                        <GenericSearch fieldLabel={"Region"} options={regionOptions}/>
+                    </Col>
+                    <Col className="pe-5 ps-5">
+                        <GenericSearch fieldLabel={"Advice Level"} options={adviceLevelOptions}/>
+                    </Col>
+                    <Col className="pe-5 ps-5">
+                        <GenericSearch fieldLabel={"Travel Status"} options={travelStatusOptions}/>
+                    </Col>
+                </Row>
+            </div>
             <Row style={{"margin": 0, "padding": 0, "marginTop": "10vh"}}>
                 <Container fluid className="latest-updates">
                     <HeaderInfoRow/>
@@ -117,7 +120,7 @@ const DestinationFinder = () => {
                     </DarkButton>
                 </Col>
             </Row>
-        </Container>
+        </div>
     );
 };
 

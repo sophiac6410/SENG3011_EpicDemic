@@ -25,7 +25,7 @@ function Search() {
         <div className="search-row">
           <div className="search-col ps-4">
             <Typography variant="bodyImportant" className="color-sky-blue ps-2 mb-2">FROM</Typography>
-            <div className="border-radius-large searchfield-container  ps-5 pe-5">
+            <div className="border-radius-large searchfield-container bg-sky-blue ps-5 pe-5">
               <CountrySelect isFrom={true}></CountrySelect>
             </div>
           </div>
@@ -36,7 +36,7 @@ function Search() {
           </div>
           <div className="search-col">
             <Typography variant="bodyImportant" className="color-sky-blue ps-2 mb-2">TO</Typography>
-            <div className="border-radius-large searchfield-container ps-5 pe-5">
+            <div className="border-radius-large searchfield-container ps-5 pe-5 bg-sky-blue">
               <CountrySelect isFrom={false}></CountrySelect>
             </div>
           </div>

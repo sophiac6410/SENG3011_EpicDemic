@@ -36,8 +36,6 @@
 }
 
 .searchfield-container {
-    background: #7CC9E9;
-    width: max-content;
     padding-left: 10px;
     padding: 5px;
     display: flex;
@@ -93,6 +91,7 @@
 }
 .bg-sky{
  background-image: url(./../static/sky.png);
+ background-size: cover;
 }
 .search-col {
     display: flex;

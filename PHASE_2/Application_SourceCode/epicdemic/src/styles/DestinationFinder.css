@@ -5,6 +5,11 @@
     padding: 0;
 }
 
+.bg-plane{
+    background-image: url(./../static/plane.png);
+    background-size: cover;
+}
+
 .balloon-background{
     width: 30vw;
     padding: 0;
@@ -15,7 +20,7 @@
 }
 
 .filter-destination{
-    height: 50vh;
+    /* height: 50vh;
     width: 100vw;
     position: absolute;
     z-index: 100;
@@ -23,7 +28,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgba(112, 196, 232, 0.8);
+    background-color: rgba(112, 196, 232, 0.8); */
 }
 
 .popular-travel{
