@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router'
 import LoginForm from '../components/LoginForm'
-import { API_URL } from '../config.json'
+import API_URL from '../config.json'
 
 function Login () {
   const navigate = useNavigate()
