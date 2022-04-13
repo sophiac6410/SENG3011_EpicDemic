@@ -139,6 +139,9 @@
 .border-radius-large {
     border-radius: 50px;
 }
+.border-radius-med {
+    border-radius: 30px;
+}
 .border-radius-small {
     border-radius: 10px;
 }
