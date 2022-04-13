@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap"
-import { NavLink, Outlet } from "react-router-dom"
+import { NavLink, Outlet, useParams, useLocation } from "react-router-dom"
 import '../styles/Destination.css'
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -14,6 +14,8 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import Typography from '@mui/material/Typography'
 import NavbarComp from "../components/Navbar";
 
+import React, { useState, useEffect } from "react";
+import Footer from "../components/Footer"
 
 const ColorButton = styled(Button)({
   fontSize: 20,
@@ -42,6 +44,24 @@ const linkStyle = {
 };
 
 function Destination() {
+  const [dest, setDest] = useState(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state === null) return;
+    // Get the country and code
+    setDest({
+      country: location.state.country,
+      code: location.state.code
+    })
+  }, [location.key])
+
+  if (dest === null) {
+    return (
+      <Footer/>
+    )
+  }
+
   return(
     <div>
       <NavbarComp></NavbarComp>

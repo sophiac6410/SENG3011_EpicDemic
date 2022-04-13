@@ -1,0 +1,6 @@
+.leaflet-container1 {
+    height: 450px;
+    width: 1000px;
+    filter: sepia(100%) hue-rotate(180deg) saturate(500%);
+    background-color: rgba(0, 0, 0, 0) !important;
+}
