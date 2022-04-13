@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router'
 import LoginForm from '../components/LoginForm'
+import { API_URL } from '../config.json'
 
 function Login () {
   const navigate = useNavigate()
@@ -9,13 +10,13 @@ function Login () {
     <>
     <LoginForm submit={async (request) => {
       // CHANGE API 
-      const response = await fetch('http://localhost:5005/admin/auth/login', request)
+      const response = await fetch(`${API_URL}/users/login`, request)
       const data = await response.json()
       if (response.status === 400) {
         alert(data.error)
       } else {
         localStorage.setItem('token', data.token)
-        navigate('/')
+        navigate('/home')
       }
     }}></LoginForm>
   </>);
