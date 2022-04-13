@@ -21,12 +21,15 @@ const GlobalUpdate = () => {
 
   useEffect(() => {
     // On initial load, get all the relevant stats and cases
-
-    setStats({
-      "totalCases": 481000000,
-      "deaths": 6110000,
-      "dailyCases": 1700000 
-    });
+    fetch('https://disease.sh/v3/covid-19/all')
+      .then(response => response.json())
+      .then(data => {
+        setStats({
+          totalCases: data.cases,
+          deaths: data.deaths,
+          dailyCases: data.todayCases
+        })
+      })
 
     setCases([...markerElements]);
   }, []);
