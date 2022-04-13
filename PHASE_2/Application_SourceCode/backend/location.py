@@ -88,22 +88,14 @@ def amadeus_safety(city):
     if city not in test_data:
         return -1
 
-    # print(' -- accessing amadeus --')
-    amadeus = Client(
-        client_id='mGjZ7901nb0kV25dnkj2WZy1tEtLqVbp',
-        client_secret='zzyRaxseNwed0V0D'
-    )
 
-    f = open('safety_test.json')
+    f = open('safetydata.json')
     data = json.load(f)
-    data = data[city]
+    index=test_data.index(city)
+    data = data[index]
 
-    
-    try:
-        response = amadeus.safety.safety_rated_locations.by_square.get(north=data['north'], south=data['south'], east=data['east'], west=data['west'])
-        return response.data[0]['safetyScores']['overall']
-    except ResponseError as error:
-        raise error
+    print(data['safetyScores']['overall'])
+    return data['safetyScores']['overall']
     
 
 
@@ -120,11 +112,12 @@ def insert_locations(country_id, index):
         response = requests.request("GET", url, headers=headers)
         data = response.json()
         if data: print('- rapidapi: data collected')
-
+        print(data['name'])
         # GeoCode for longitude and latitude 
         geo_data = geocoder.geonames(data['name'], key='epicdemic')
         coord = geo_data.latlng
-        if coord: print('- geocode api: collected')
+        if coord: print(f'- geocode api: collected -- {coord}')
+        
 
         # Amadeus dataset
         f = open('travel.json')
@@ -141,6 +134,7 @@ def insert_locations(country_id, index):
         'longitude': coord[1],
         'latitude': coord[0],
         'region': data['continent']['name'],
+        'entry_description': amadeus_data[index]['areaAccessRestriction']['entry']['text'] if index != -1 else '',
         'disease_risk': disease_parser(amadeus_data[index]['diseaseInfection']['level']) if index != -1 else '',
         # 'travel_status': covid_controls(country_id),
         'travel_status': -1,
@@ -159,17 +153,18 @@ try:
     index = 0
     db = cluster['parser_test_db']
     location_collection = db["Locations"]
-
-    '''
+    
     # this is for sample data
     for country in sample_list:
         print(f'-- inserting {country} --')
         try: 
-
-            data = insert_locations(country, index)
-            # print(data)
-            # location_collection.insert_one( data )
-            index += 1
+            if db.Locations.count_documents( { "_id": country } ) == 0:
+                data = insert_locations(country, index)
+                # print(data)
+                location_collection.insert_one( data )
+                index += 1
+            else:
+                print('already in locations db')
         except Exception as e:
             raise e 
     
@@ -184,7 +179,8 @@ try:
                 location_collection.insert_one(insert_locations(country, -1))
         except Exception as e:
             raise e 
-    
+    '''
+
         
 
 except Exception as e:
