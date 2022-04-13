@@ -19,12 +19,7 @@ function Search() {
     if (dest === null) return;
     
     console.log("route changing to " + dest.label + " " + dest.code);
-    navigate(`/destination/${dest.label}`, {
-      state: {
-        country: dest.label,
-        code: dest.code
-      }
-    });
+    navigate(`/destination/${dest.code}`);
   }
 
   const goDestination = () =>{  

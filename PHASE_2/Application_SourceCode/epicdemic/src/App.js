@@ -105,7 +105,7 @@ function App() {
             <Route path="/" element={<Home></Home>}></Route>
             <Route path="/login" element={<Login></Login>}></Route>
             <Route path="/register" element={<Register></Register>}></Route>
-            <Route path="/destination/:country" element={<Destination></Destination>}>
+            <Route path="/destination/:code" element={<Destination></Destination>}>
               <Route index element={<Overview></Overview>}></Route>
               <Route path="travel" element={<Travel></Travel>}></Route>
               <Route path="covid" element={<Covid></Covid>}></Route>

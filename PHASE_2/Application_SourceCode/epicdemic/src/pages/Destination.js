@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap"
-import { NavLink, Outlet, useParams, useLocation } from "react-router-dom"
+import { NavLink, Outlet, useParams } from "react-router-dom"
 import '../styles/Destination.css'
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -45,16 +45,20 @@ const linkStyle = {
 
 function Destination() {
   const [dest, setDest] = useState(null);
-  const location = useLocation();
+  const { code } = useParams();
 
   useEffect(() => {
-    if (location.state === null) return;
+    if (code === null) return;
     // Get the country and code
+    // TODO: Dummy data (Need to call an endpoint)
+    const country = "PHILLIPINES"; // For now
     setDest({
-      country: location.state.country,
-      code: location.state.code
-    })
-  }, [location.key])
+      code: code,
+      country: country
+    });
+    
+    console.log("use effect destination.js code is " + code);
+  }, [code])
 
   if (dest === null) {
     return (

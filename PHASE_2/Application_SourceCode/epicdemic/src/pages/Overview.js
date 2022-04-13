@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap"
-import { NavLink, Outlet, useParams, useLocation } from "react-router-dom"
+import { NavLink, Outlet, useParams } from "react-router-dom"
 import vChart from "../static/phiVacine.svg"
 import covidMAP from "../static/phiCovidMap.png"
 import map from "../static/phiMap.png"
@@ -70,24 +70,23 @@ const SafetyBoard = safetyDis.map(function(props) {
 
 function Overview() {
   const [dest, setDest] = useState(null);
-  const location = useLocation();
+  const { code } = useParams();
 
   useEffect(() => {
-    if (location.state === null) return;
-    // Get the country and code
+    if (code === null) return;
+    // TODO: Get country from code
+    const country = "PHILLIPINES";
     setDest({
-      country: location.state.country,
-      code: location.state.code
+      code: code,
+      country: country
     })
-  }, [location.key])
+  }, [code])
   
   const getCentre = () => {
     // TODO: This should take in a country, look up it's coordinates
     // and centre on it
     return [35, 15];
   }
-
-  
 
   return(
     <Container>
