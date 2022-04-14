@@ -1,7 +1,8 @@
 from datetime import datetime
+from email.header import Header
 from lib2to3.pgen2 import token
 from dateutil.parser import parse
-from fastapi import APIRouter, status
+from fastapi import APIRouter, status, Header
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 from datetime import datetime, timedelta
@@ -43,3 +44,26 @@ async def register(user: RegisterUser):
             "saved_trips": []
         })
     return baseModels.createResponse(True, 200, {"token": auth.create_access_token(user.email)})
+
+# @router.get("/saved", status_code=status.HTTP_200_OK, tags=["users"], response_model=userModels.SavedResponse, responses={401: {"model": baseModels.ErrorResponse}})
+# async def getSaved(Authorization: str = Header(None)):
+#     user = auth.get_current_user(Authorization)
+#     saved = {
+#         "saved_locations": user["saved_locations"],
+#         "saved_trips": user["saved_trips"]
+#     }
+#     return baseModels.createResponse(True, 200, {"saved": saved})
+
+# @router.put("/saved", status_code=status.HTTP_200_OK, tags=["users"], response_model=userModels.SavedResponse, responses={401: {"model": baseModels.ErrorResponse}})
+# async def putSaved (
+#     Authorization: str = Header(None)
+#     location: str = Field(None, description="The ISO-2 code of the location that is being saved", example="PH")
+#     trip: int = Field(None, description="The id of the trip that is being saved")
+#     ):
+#     user = auth.get_current_user(Authorization)
+#     saved = {
+#         "saved_locations": user["saved_locations"],
+#         "saved_trips": user["saved_trips"]
+#     }
+#     return baseModels.createResponse(True, 200, {"saved": saved})
+# )

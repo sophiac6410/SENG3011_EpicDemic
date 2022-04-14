@@ -1,5 +1,5 @@
 import React from 'react'
-import NavbarComp from './components/Navbar'
+import NavbarComp from './components/NavBar'
 import Footer from './components/Footer'
 import Home from './pages/home'
 import Register from './pages/Register'
@@ -14,6 +14,7 @@ import SavedLocations from './pages/SavedLocations';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Nunito from "./fonts/nunito/Nunito-Regular.ttf"
 import "./styles/App.css"
+import { Context, initialValue } from './context';
 
 import {
     BrowserRouter as Router,
@@ -28,7 +29,8 @@ const theme = createTheme({
     fontFamily: ['Nunito', 'serif', 'Open Sans'].join(','),
     button: {
       textTransform: "none",
-      fontFamily: 'Nunito, serif'
+      fontFamily: 'Nunito, serif',
+      variant: 'bodyImportant'
     },
     title: {
       fontFamily: "Nunito, serif",
@@ -104,25 +106,34 @@ const theme = createTheme({
 })
 
 function App() {
+    const [loggedIn, setLoggedIn] = React.useState(localStorage.getItem('token') !== null);
+    const getters = {
+      loggedIn,
+    };
+    const setters = {
+      setLoggedIn,
+    }
     return(
       <ThemeProvider theme={theme}>
-        {/* <NavbarComp></NavbarComp> */}
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home></Home>}></Route>
-            <Route path="/login" element={<Login></Login>}></Route>
-            <Route path="/register" element={<Register></Register>}></Route>
-            <Route path="/destination/:code" element={<Destination></Destination>}>
-              <Route index element={<Overview></Overview>}></Route>
-              <Route path="travel" element={<Travel></Travel>}></Route>
-              <Route path="covid" element={<Covid></Covid>}></Route>
-              <Route path="book" element={<Book></Book>}></Route>
-            </Route>
-            <Route path="/finder" element={<DestinationFinder/>}/>
-            <Route path="/saved" element={<SavedLocations/>}/>
-          </Routes>
-        </BrowserRouter>
-        <Footer></Footer>
+        <Context.Provider value={{ getters, setters, }}>
+          {/* <NavbarComp></NavbarComp> */}
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home></Home>}></Route>
+              <Route path="/login" element={<Login></Login>}></Route>
+              <Route path="/register" element={<Register></Register>}></Route>
+              <Route path="/destination/:code" element={<Destination></Destination>}>
+                <Route index element={<Overview></Overview>}></Route>
+                <Route path="travel" element={<Travel></Travel>}></Route>
+                <Route path="covid" element={<Covid></Covid>}></Route>
+                <Route path="book" element={<Book></Book>}></Route>
+              </Route>
+              <Route path="/finder" element={<DestinationFinder/>}/>
+              <Route path="/saved" element={<SavedLocations/>}/>
+            </Routes>
+          </BrowserRouter>
+          <Footer></Footer>
+        </Context.Provider>
       </ThemeProvider>
     )
 }

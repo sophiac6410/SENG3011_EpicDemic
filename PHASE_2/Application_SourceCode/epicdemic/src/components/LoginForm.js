@@ -18,17 +18,7 @@ function LoginForm ({ submit }) {
       alert('Please enter all fields');
       return;
     }
-    const request = {
-      method: 'POST',
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-    }
-    submit(request)
+    submit(email, password);
   }
 
   return (

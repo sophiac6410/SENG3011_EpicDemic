@@ -16,6 +16,7 @@ import markerIcon from '../static/markerIcon2.svg';
 import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css';
 import React, { useState, useEffect } from "react";
+import NavbarComp from "../components/NavBar"
 
 const intro = "Philippines, island country of Southeast Asia in the western Pacific Ocean. It is an archipelago consisting of more than 7,000 islands and islets lying about 500 miles (800 km) off the coast of Vietnam. Manila is the capital, but nearby Quezon City is the country’s most-populous city."
 const safetySource = "The safety and security ratings determined by GeoSure GeoSafeScores which analyzes crime, health and economic data, official travel alerts, local reporting and a variety of other sources.  Scores go from 1 (not likely) to 100 (very likely)."
@@ -34,6 +35,8 @@ const safetyDis = [
 const SafetyBoard = safetyDis.map(function(props) {
   if(props.score != 0) {
     return (
+      <>
+      <NavbarComp bg={true}></NavbarComp>
       <Row className="ps-5 mt-4 align-items-center">
         <Col>
           <Typography variant="bodyImportant" className="medium-teal">{props.title}</Typography>
@@ -47,6 +50,7 @@ const SafetyBoard = safetyDis.map(function(props) {
           </div>        
         </Col>
       </Row>
+      </>
     )
   }else{
     return(

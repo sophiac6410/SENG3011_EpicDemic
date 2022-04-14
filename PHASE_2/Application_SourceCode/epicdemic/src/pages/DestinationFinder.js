@@ -13,7 +13,7 @@ import HexMedTeal from "../static/hexmedteal.svg";
 import HexWhite from "../static/hexwhite.svg";
 import BalloonBackground from "../static/balloontravel.jpg"
 import { DarkButton } from "../styles/Button";
-import NavbarComp from "../components/Home/NavBar";
+import NavbarComp from "../components/NavBar";
 import Typography from '@mui/material/Typography'
 
 
@@ -31,7 +31,7 @@ const DestinationFinder = () => {
     return (
         <div>
             <div className="bg-plane">
-                <NavbarComp></NavbarComp>
+                <NavbarComp bg={false}/>
                 <div className="text-center mb-5" style={{marginTop: "300px"}}>
                     <Typography variant="title" className="color-white mt-5">FIND A DESTINATION BY...</Typography>
                 </div>

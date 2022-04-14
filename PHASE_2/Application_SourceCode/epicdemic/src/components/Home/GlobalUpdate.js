@@ -137,7 +137,7 @@ const GlobalUpdate = () => {
             </>
           }
         </Col>
-        <Col className="align-self-center pb-4">
+        <Col className="flex-end pb-4">
           <MapContainer
             className="leaflet-container1"
             center={[35, 25]} 

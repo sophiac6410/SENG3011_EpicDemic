@@ -14,10 +14,10 @@ export const BigTitle = styled.h1`
 export const Box = styled.div`
     margin: 0 auto;
     background: #62B6CB;
-    border-radius: 10pt;
+    border-radius: 10px;
     min-width: 260px;
-    max-width: 65%;
-    @media (max-width: 600px) {
+    max-width: 50%;
+    @media (max-width: 900px) {
         max-width: 80%;
     }
     margin-bottom: 200px;
@@ -53,8 +53,8 @@ export const Footer = styled.div`
 `;
 
 export const Field = styled.input`
-    border-radius: 20px;
-    width: 80%;
+    border-radius: 30px;
+    width: 70%;
     padding: 15px 20px;
     display: block;
     margin: 10px auto;

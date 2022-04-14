@@ -5,10 +5,7 @@ import "../../styles/Home.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "react-multi-carousel/lib/styles.css";
 import { Row } from "react-bootstrap";
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
 import Carousel from "react-multi-carousel";
-import globe from '../../static/globe.svg'
 import LanguageIcon from '@mui/icons-material/Language';
 import Typography from '@mui/material/Typography'
 

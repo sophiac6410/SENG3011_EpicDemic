@@ -15,7 +15,7 @@ const BaseButton = styled(Button)({
   borderRadius: brSmall,
   padding: '10px 20px',
   fontFamily: 'Nunito',
-  fontVariant: 'bodyImportant',
+  variant: 'bodyImportant',
 });
 
 export const DarkButton = styled(BaseButton)({

@@ -7,6 +7,7 @@ import InfoRow3 from "../components/DestinationFinder/InfoRow3";
 import HeaderInfoRow3 from "../components/DestinationFinder/HeaderInfoRow3";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import NavbarComp from "../components/NavBar";
 
 const validCheck = <p>
   Before you book your travel, check if you meet Australia’s definition of fully vaccinated for international travel purposes. To meet Australia’s vaccination requirements and be considered a ‘fully vaccinated’ traveller for the purpose of Australia’s border arrangements, you need to provide evidence that you either: 
@@ -109,6 +110,7 @@ function Travel() {
 
   return(
     <Container className="mt-4">
+      <NavbarComp bg={true}/>
       <Col>
         <Row>
           <div className="larger-body">

@@ -6,6 +6,7 @@ import '../styles/Book.css'
 import FlightFilter from "../components/Book/FlightFilter"
 import * as React from 'react';
 import { DarkButton } from "../styles/Button.js"
+import NavbarComp from '../components/NavBar'
 
 function handleClick() {
   const flightSection = document.getElementById('flight-title');
@@ -15,6 +16,7 @@ function handleClick() {
 function Book() {
   return(
     <div>
+      <NavbarComp bg={true}/>
       <h1 class="title-h2">Book</h1>
       <FlightSearch></FlightSearch>
       <DarkButton sx={{display: 'flex', marginX: 'auto', mb: 7, mt: 3}}>Find My Flight</DarkButton>

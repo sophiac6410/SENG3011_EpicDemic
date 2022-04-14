@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import CovidStat from "../static/philStats.png"
 import CovidTabs from "../components/Diseases/CovidTabs";
 import DiseaseReportBar from "../components/Home/DiseaseReportBar";
+import NavbarComp from "../components/NavBar";
 
 function Covid() {
   const [disease, setDisease] = React.useState('Covid-19');
@@ -21,6 +22,7 @@ function Covid() {
 
   return(
     <Container>
+      <NavbarComp bg={true}></NavbarComp>
       <Row className="title-h2 mt-5">
           <Col>
             <Box sx={{ minWidth: 300 }}>

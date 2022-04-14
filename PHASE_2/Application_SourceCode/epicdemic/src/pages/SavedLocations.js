@@ -8,14 +8,14 @@ import InfoRow5 from "../components/DestinationFinder/InfoRow5";
 import HeaderInfoRow4 from "../components/DestinationFinder/HeaderInfoRow4";
 import "../styles/DestinationFinder.css";
 import GenericSearchText from "../components/GenericSearchText";
-import NavbarComp from '../components/Navbar';
+import NavbarComp from '../components/NavBar';
 
 const SavedLocations = () => {
     let navigate = useNavigate(); 
 
     return (
         <Container fluid style={{"overflowX": "hidden", "paddingLeft": 0, "paddingRight": 0, "marginLeft": 0, "marginRight": 0, "backgroundColor": "#EEF5FF"}}>
-            <NavbarComp></NavbarComp>
+            <NavbarComp bg={true}></NavbarComp>
             <Row style={{"backgroundColor": "rgba(27, 73, 101, 0.7)"}}>
                 <Col>
                     <Image style={{"width": "50vw"}} src={HappyFamily}/>
