@@ -36,7 +36,6 @@ const SafetyBoard = safetyDis.map(function(props) {
   if(props.score != 0) {
     return (
       <>
-      <NavbarComp bg={true}></NavbarComp>
       <Row className="ps-5 mt-4 align-items-center">
         <Col>
           <Typography variant="bodyImportant" className="medium-teal">{props.title}</Typography>

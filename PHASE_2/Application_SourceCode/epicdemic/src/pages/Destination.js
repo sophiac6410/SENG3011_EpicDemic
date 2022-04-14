@@ -13,6 +13,7 @@ import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import Typography from '@mui/material/Typography'
 import NavbarComp from "../components/NavBar";
+import API_URL from "../config.json"
 
 import React, { useState, useEffect } from "react";
 import Footer from "../components/Footer"
@@ -45,6 +46,7 @@ const linkStyle = {
 
 function Destination() {
   const [dest, setDest] = useState(null);
+  const [saved, setSaved] = useState(false);
   const { code } = useParams();
 
   useEffect(() => {
@@ -66,6 +68,31 @@ function Destination() {
     )
   }
 
+  const saveApiCall = async (meth) => {
+    try {
+      const response = await fetch(`${API_URL.API_URL}/v1/users/location/${code}`, {
+        method: meth,
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: localStorage.getItem('token')
+        }
+      });
+      const data = await response.json();
+      if (!data.ok) {
+        console.log(data);
+        alert(data.data.error);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const handleClickSave = (event) => {
+    setSaved(event.target.checked);
+    const meth = 'PUT'
+    saveApiCall(meth);
+  }
+
   return(
     <div>
       <NavbarComp bg={true}/>
@@ -75,11 +102,11 @@ function Destination() {
             {/* <TinySearch className="bg-lightblue"></TinySearch> */}
             <Row className="justify-content-end align-items-center mt-2 me-5">
               <Col md={1} className="text-center pt-2">
-                <Checkbox icon={<NotificationsNoneIcon fontSize="large"/>} checkedIcon={<NotificationsActiveIcon fontSize="large" className="color-medium-teal"/>} onClick={(event)=> {setSaved(event.target.checked)}} />
+                <Checkbox icon={<NotificationsNoneIcon fontSize="large"/>} checkedIcon={<NotificationsActiveIcon fontSize="large" className="color-medium-teal"/>} />
                 <div style={{"font-size": "15px", "color": "#0F83A0"}}>Notifications</div>
               </Col>
               <Col md={1} className="text-center pt-2">
-                <Checkbox icon={<FavoriteBorder fontSize="large"/>} checkedIcon={<Favorite fontSize="large" className="color-medium-teal"/>} onClick={(event)=> {setSaved(event.target.checked)}} />
+                <Checkbox icon={<FavoriteBorder fontSize="large"/>} checkedIcon={<Favorite fontSize="large" className="color-medium-teal"/>} onClick={handleClickSave} />
                 <div style={{"font-size": "15px", "color": "#0F83A0"}}>Saved</div>
               </Col>
             </Row>
@@ -116,40 +143,6 @@ function Destination() {
                 </Row>
               </Col>
             </Row>
-            {/* <Row className="p-4 align-items-end">
-              <Col md={4}>
-                <div style={{"font-size": "20px", "color": "#515151"}}>Overall Advice</div>
-                <Row className="align-items-center pt-1 justify-content-start mt-3">
-                  <Col md={3}>
-                    <Row className="justify-content-center">
-                    <img src={midCaution} width="40px" height="40px">
-                    </img>
-                    </Row>
-                  </Col>
-                  <Col className="pt-1">
-                    <text style={{"font-size": "20px", "color": "#FFA800"}}>Exercise Caution</text>
-                  </Col>
-              </Row>
-              </Col>
-              <Col md={4}>
-                <div style={{"font-size": "20px", "color": "#515151"}}>Travel Status</div>
-                <Row className="align-items-center pt-1 justify-content-start mt-3">
-                  <Col md={3} className="justify-content-center">
-                    <Row className="justify-content-center">
-                      <img src={midDot} width="25px" height="25px">
-                      </img>
-                    </Row>
-                  </Col>
-                  <Col className="pt-1">
-                    <text style={{"font-size": "20px", "color": "#FFA800"}}>Open with Restrictions</text>
-                  </Col>
-                </Row>
-              </Col>
-              <Col md={4} className="text-center pt-1">
-                <img src={heart} width="50px" height="50px"></img>
-                <div style={{"font-size": "20px", "color": "#0F83A0"}}>Saved</div>
-              </Col>
-            </Row> */}
           </Col>
           <Outlet></Outlet>
         </Row>

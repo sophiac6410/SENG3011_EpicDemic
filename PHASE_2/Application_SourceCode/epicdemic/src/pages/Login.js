@@ -25,7 +25,7 @@ function Login () {
         });
         const data = await response.json()
         if (response.status === 400) {
-          alert(data.error)
+          alert(data.data.error)
         } else {
           localStorage.setItem('token', data.data.token)
           setters.setLoggedIn(true);
