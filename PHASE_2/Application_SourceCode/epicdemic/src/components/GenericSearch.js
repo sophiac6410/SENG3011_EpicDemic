@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
       fontFamily: "Open Sans, sans-serif",
       fontStyle: "normal",
       fontWeight: 500,
-      fontSize: "15px",
+      fontSize: "1em",
       marginBottom: "6px",
     //   width: "90%"
     }
@@ -34,7 +34,7 @@ const GenericSearch = ({ fieldLabel, options }) => {
                     <SearchIcon fontSize='medium'></SearchIcon>
                 </div>
                 <Autocomplete
-                    sx={{ width: 300 }}
+                    sx={{ width: 200 }}
                     classes={classes}
                     options={options}
                     autoHighlight

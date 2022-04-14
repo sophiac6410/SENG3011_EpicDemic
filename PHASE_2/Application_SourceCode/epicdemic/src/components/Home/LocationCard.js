@@ -23,7 +23,7 @@ function LocationCard() {
         <Row className="align-items-center pt-1 justify-content-start" style={{marginBottom: '10px'}}>
           <Col>
             <SimCardAlertIcon className="color-yellow" sx={{ fontSize: 30, mx: 1 }}></SimCardAlertIcon>
-            <Typography variant="bodyImportant">Exercise Caution</Typography>
+            <Typography variant="bodyImportant" sx={{display: 'inline'}}>Exercise Caution</Typography>
           </Col>
         </Row>
         <Card.Subtitle className="pt-2 text-muted">
@@ -32,7 +32,7 @@ function LocationCard() {
         <Row className="align-items-center pt-1 justify-content-start">
           <Col>
             <CircleIcon className="color-yellow" sx={{ fontSize: 15, mx: 2 }}></CircleIcon>
-            <Typography variant="bodyImportant">Open with Restrictions</Typography>
+            <Typography variant="bodyImportant" sx={{display: 'inline'}}>Open with Restrictions</Typography>
           </Col>
         </Row>
         <Row className="pt-2 text-muted">

@@ -27,67 +27,77 @@ import {
 const theme = createTheme({
   typography: {
     fontFamily: ['Nunito', 'serif', 'Open Sans'].join(','),
-    button: {
-      textTransform: "none",
-      fontFamily: 'Nunito, serif',
-      variant: 'bodyImportant'
-    },
     title: {
       fontFamily: "Nunito, serif",
       fontWeight: 700,
-      fontSize: "2.1em",
-      lineHeight: 1
+      fontSize: "2em",
+      lineHeight: 1,
+      display: 'block',
     },
     heading1: {
       fontFamily: "Nunito, serif",
       fontWeight: 400,
       fontSize: "1.7em",
       lineHeight: 3,
+      display: 'block',
     },
     heading2: {
       fontWeight: 700,
-      fontSize: "1.4em",
-      lineHeight: 1.6
+      fontSize: "1.2em",
+      lineHeight: 1.6,
+      display: 'block',
     },
     heading3: {
       fontWeight: 700,
       fontSize: "1.1em",
-      lineHeight: 1.5
+      lineHeight: 1.5,
+      display: 'block',
     },
     bodyHeading: {
       fontFamily: "Open Sans, sans-serif",
       fontStyle: "normal",
       fontWeight: 700,
-      fontSize: "1.1em",
-      lineHeight: 2
+      fontSize: "1em",
+      lineHeight: 2,
+      display: 'block',
     },
     bodyText: {
       fontFamily: "Open Sans, sans-serif",
       fontStyle: "normal",
       fontWeight: 400,
-      fontSize: '0.9em',
+      fontSize: '0.8em',
       lineHeight: 1.5,
+      display: 'block',
+      textAlign: 'justify'
     },
     bodyImportant: {
       fontFamily: "Open Sans, sans-serif",
       fontStyle: "normal",
       fontWeight: 700,
-      fontSize: "1em",
-      lineHeight: 1.8
+      fontSize: "0.9em",
+      lineHeight: 1.8,
+      display: 'block',
     },
     caption: {
       fontFamily: "Nunito, sans-serif",
       fontStyle: "normal",
       fontWeight: 400,
       fontSize: '0.8em',
-      lineHeight: 1
+      lineHeight: 1.5,
+      display: 'block',
     },
     bodySmall: {
       fontFamily: "Nunito, sans-serif",
       fontStyle: "normal",
       fontWeight: 400,
       fontSize: '0.5em',
-      lineHeight: "27px"
+      lineHeight: "27px",
+      display: 'block',
+    },
+    button: {
+      textTransform: "none",
+      fontFamily: 'Nunito, serif',
+      variant: 'bodyImportant'
     },
   },
   components: {

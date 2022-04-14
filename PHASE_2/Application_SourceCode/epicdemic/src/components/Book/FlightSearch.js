@@ -1,8 +1,8 @@
 import {InputGroup, FormControl, Row, Col, Image } from "react-bootstrap";
 import {CitySelectPhilippines, CitySelectSydney} from "./CitySelect";
 import "react-multi-carousel/lib/styles.css";
-import planeLanding from '../../static/planeLanding.svg';
-import planeTakeOff from '../../static/planeTakeOff.svg';
+import FlightLandIcon from '@mui/icons-material/FlightLand';
+import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import '../../styles/Destination.css'
 // import '../../styles/Home.css'
 import * as React from 'react';
@@ -12,13 +12,13 @@ function FlightSearch() {
   return(
     <Row style={{display: 'flex'}}>
       <Col md={1} style={{width: 'auto'}}>
-        <Image src={planeTakeOff} alt="" width="30px" height="30px" style={{margin: '20px'}}></Image>
+        <FlightTakeoffIcon className="color-dark-teal mt-3" fontSize="large"/>
       </Col>
       <Col md={2} className="bg-white search-container p-1 ps-2 pe-3" style={{flex: 1}}>
         <CitySelectSydney fieldLabel={"From"}></CitySelectSydney>
       </Col>
       <Col md={1} style={{width: 'auto'}}>
-        <Image src={planeLanding} alt="" width="30px" height="30px" style={{margin: '20px'}}></Image>
+        <FlightLandIcon className="color-dark-teal mt-3" fontSize="large" />
       </Col>
       <Col md={2} className="bg-white search-container p-1 ps-2 pe-3" style={{flex: 1}}>
         <CitySelectPhilippines fieldLabel={"Destination"}></CitySelectPhilippines>

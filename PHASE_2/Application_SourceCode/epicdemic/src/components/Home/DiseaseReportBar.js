@@ -33,7 +33,7 @@ const responsive = {
 
 const COLOR = 'white';
 
-export default function DiseaseReportBar(parent) {
+export default function DiseaseReportBar() {
     return(
       <div style={{ padding: '3% 10% 10%', backgroundColor: '#E9F0FB' }}>
         <Row className="mt-2" style={{ backgroundColor: '#E9F0FB' }}>

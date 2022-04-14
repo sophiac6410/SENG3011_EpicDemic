@@ -41,3 +41,20 @@ export const WhiteButton = styled(BaseButton)({
     backgroundColor: lightGrey,
   },
 });
+
+export const DestinationTabs = styled(BaseButton) ({
+  variant: "outlined",
+  color: mediumBlue,
+  border: '3px solid',
+  fontWeight: "bold",
+  '&:hover': {
+    backgroundColor: mediumBlue,
+    color: "white",
+    border: 'none'
+  },
+  '&:active': {
+    backgroundColor: mediumBlue,
+    color: "white",
+    border: 'none'
+  },
+})

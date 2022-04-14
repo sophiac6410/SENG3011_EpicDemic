@@ -1,42 +1,22 @@
 import { Container, Row, Col } from "react-bootstrap"
 import { NavLink, Outlet, useParams } from "react-router-dom"
 import '../styles/Destination.css'
-import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
-import heart from "../static/solidHeart.png"
-import info from "../static/bell.svg"
-import { NoEncryption } from "@mui/icons-material";
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 import Typography from '@mui/material/Typography'
 import NavbarComp from "../components/NavBar";
 import API_URL from "../config.json"
-
+import { DestinationTabs } from "../styles/Button";
+import { useNavigate, } from 'react-router-dom';
 import React, { useState, useEffect } from "react";
-import Footer from "../components/Footer"
+import Footer from "../components/Footer";
+import { CircleNotifications, CircleNotificationsOutlined } from "@mui/icons-material";
 
-const ColorButton = styled(Button)({
-  fontSize: 20,
-  padding: "10px 25px",
-  color: "#62B6CB",
-  border: '3px solid',
-  fontWeight: "bold",
-  "border-radius": "30px",
-  textTransform: 'none',
-  '&:hover': {
-    backgroundColor: "#62B6CB",
-    color: "white",
-    border: 'none'
-  },
-  '&:active': {
-    backgroundColor: "#62B6CB",
-    color: "white",
-    border: 'none'
-  },
-});
 
 const linkStyle = {
   margin: "1rem",
@@ -48,12 +28,13 @@ function Destination() {
   const [dest, setDest] = useState(null);
   const [saved, setSaved] = useState(false);
   const { code } = useParams();
+  let navigate = useNavigate(); 
 
   useEffect(() => {
     if (code === null) return;
     // Get the country and code
     // TODO: Dummy data (Need to call an endpoint)
-    const country = "PHILLIPINES"; // For now
+    const country = "PHILIPPINES"; // For now
     setDest({
       code: code,
       country: country
@@ -96,57 +77,44 @@ function Destination() {
   return(
     <div>
       <NavbarComp bg={true}/>
-      <Container>
-        <Row>
+      {/* <TinySearch className="bg-lightblue"></TinySearch> */}
+      <div className="d-flex justify-content-end align-items-center flex-end mt-3 mx-5">
+        <div className="text-center m-3">
+          <Checkbox sx={{display:'block', mx: 'auto'}} icon={<AddCircleOutlineOutlinedIcon fontSize="large" className="color-medium-teal"/>} checkedIcon={<AddCircleOutlinedIcon fontSize="large" className="color-medium-teal"/>} onClick={handleClickSave} />
+          <Typography variant="caption">Add To Trip</Typography>
+        </div>
+        <div className="text-center m-3">
+          <Checkbox sx={{display:'block', mx: 'auto'}} icon={<NotificationsNoneIcon fontSize="large" className="color-medium-teal"/>} checkedIcon={<NotificationsActiveIcon fontSize="large" className="color-medium-teal"/>} />
+          <Typography variant="caption">Notifications</Typography>
+        </div>
+        <div className="text-center m-3">
+          <Checkbox sx={{display:'block', mx: 'auto'}} icon={<FavoriteBorder fontSize="large" className="color-medium-teal"/>} checkedIcon={<Favorite fontSize="large" className="color-medium-teal"/>} onClick={handleClickSave} />
+          <Typography variant="caption">Saved</Typography>
+        </div>
+      </div>
+      <Container style={{margin: '0% 15%', width: 'auto'}}>
+        <div className="pt-4 pb-4 d-flex">
           <Col>
-            {/* <TinySearch className="bg-lightblue"></TinySearch> */}
-            <Row className="justify-content-end align-items-center mt-2 me-5">
-              <Col md={1} className="text-center pt-2">
-                <Checkbox icon={<NotificationsNoneIcon fontSize="large"/>} checkedIcon={<NotificationsActiveIcon fontSize="large" className="color-medium-teal"/>} />
-                <div style={{"font-size": "15px", "color": "#0F83A0"}}>Notifications</div>
-              </Col>
-              <Col md={1} className="text-center pt-2">
-                <Checkbox icon={<FavoriteBorder fontSize="large"/>} checkedIcon={<Favorite fontSize="large" className="color-medium-teal"/>} onClick={handleClickSave} />
-                <div style={{"font-size": "15px", "color": "#0F83A0"}}>Saved</div>
-              </Col>
-            </Row>
-            <Row className="pt-4 pb-4 align-items-center">
-              <Col md={4}>
-                <Typography variant="heading1" className="color-dark-teal">PHILLIPENES</Typography>
-                <div className="larger-body">No new changes since 25/03/22 </div>
-              </Col>
-              <Col>
-                <Row style={{"justify-content": "space-between"}} className="ps-3 pe-3">
-                  <Col className="text-center">
-                    <NavLink to="" style={linkStyle}>
-                      <ColorButton component={NavLink} to="" variant="outlined">Overview</ColorButton>
-                    </NavLink>
-                  </Col>
-                  <Col className="text-center">
-                    <NavLink to="travel" style={linkStyle}>
-                      <ColorButton variant="outlined">Travel
-                      </ColorButton>
-                    </NavLink>
-                  </Col>
-                  <Col className="text-center">
-                    <NavLink to="covid" style={linkStyle}>
-                      <ColorButton variant="outlined">Diseases
-                      </ColorButton>
-                    </NavLink>
-                  </Col>
-                  <Col className="text-center"> 
-                    <NavLink to="Book" style={linkStyle}>
-                      <ColorButton variant="outlined">Book
-                      </ColorButton>
-                    </NavLink>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
+            <Typography variant="title" className="color-dark-teal">{dest.country}</Typography>
+            <Typography variant="bodyText">Last updated on 25/03/22 </Typography>
           </Col>
-          <Outlet></Outlet>
-        </Row>
+          <div class="d-flex justify-content-end flex-end">
+            <NavLink to="" style={linkStyle}>
+              <DestinationTabs>Overview</DestinationTabs>
+            </NavLink>
+            <NavLink to="travel" style={linkStyle}>
+              <DestinationTabs>Travel</DestinationTabs>
+            </NavLink>
+            <NavLink to="covid" style={linkStyle}>
+              <DestinationTabs>Diseases</DestinationTabs>
+            </NavLink>
+            <NavLink to="Book" style={linkStyle}>
+              <DestinationTabs>Book</DestinationTabs>
+            </NavLink>
+          </div>
+        </div>
       </Container>
+      <Outlet></Outlet>
     </div>
   )
 }

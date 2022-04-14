@@ -21,9 +21,9 @@ function Covid() {
   };
 
   return(
-    <Container>
-      <NavbarComp bg={true}></NavbarComp>
-      <Row className="title-h2 mt-5">
+    <>
+    <Container style={{margin: '0% 15%', width: 'auto'}}>
+      <Row className="mt-5">
           <Col>
             <Box sx={{ minWidth: 300 }}>
             <FormControl sx={{ minWidth: 300 }}>
@@ -33,9 +33,9 @@ function Covid() {
                 onChange={handleChange}
                 label="."
               >
-                <MenuItem value={'Covid-19'}> <div className="title-h3">Covid19</div> </MenuItem>
-                <MenuItem value={'Dengue'}> <div className="title-h3">Dengue</div> </MenuItem>
-                <MenuItem value={'HIV/AIDS'}> <div className="title-h3">HIV/AIDS</div> </MenuItem>
+                <MenuItem value={'Covid-19'}><Typography variant="heading2">Covid19</Typography></MenuItem>
+                <MenuItem value={'Dengue'}><Typography variant="heading2">Dengue</Typography></MenuItem>
+                <MenuItem value={'HIV/AIDS'}><Typography variant="heading2">HIV/AIDS</Typography></MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -47,7 +47,7 @@ function Covid() {
       </Row>
 
       <Row style={{ maxWidth: 600, paddingTop: '40px' }}>
-      <div className="title-h3"> Statistics </div>
+      <Typography variant="heading2"> Statistics</Typography>
       </Row>
       <Row>
         <div className="stat">
@@ -117,12 +117,11 @@ function Covid() {
               </Typography>
             </div>
           </div>
-
         </div>
-
       </Row>
-      <DiseaseReportBar parent={1}></DiseaseReportBar>
     </Container>
+    <DiseaseReportBar></DiseaseReportBar>
+    </>
   )
 }
 

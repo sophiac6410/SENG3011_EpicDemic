@@ -5,6 +5,7 @@ import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import { LightButton } from "../../styles/Button";
+import { Typography } from "@mui/material";
 
 const InfoRow = ({country, updateDesc, lastUpdated, travelStatus, saved}) => {
     const [isSaved, setSaved] = React.useState(saved);
@@ -13,22 +14,22 @@ const InfoRow = ({country, updateDesc, lastUpdated, travelStatus, saved}) => {
             onClick={() => {
                 navigate('/destination/PHILIPPINES');
             }}>
-            <Col xs={1}>
-                <b>{country}</b>
+            <Col xs={1} style={{textAlignLast: 'left'}}>
+                <Typography variant="bodyHeading">{country}</Typography>
             </Col>
-            <Col xs={4}>
-                {updateDesc}
+            <Col xs={4} style={{padding: '0% 2%'}}>
+                <Typography variant="bodyText">{updateDesc}</Typography>
             </Col>
-            <Col xs={2}>
-                {lastUpdated.toLocaleDateString()}
+            <Col xs={2} style={{textAlignLast: 'center'}}>
+                <Typography variant="bodyText">{lastUpdated.toLocaleDateString()}</Typography>
             </Col>
-            <Col xs={2}>
-                {travelStatus}
+            <Col xs={2} style={{textAlignLast: 'center'}}>
+                <Typography variant="bodyText">{travelStatus}</Typography>
             </Col>
-            <Col xs={1}>
+            <Col xs={1} style={{textAlignLast: 'center'}}>
                 <Checkbox checked={isSaved} icon={<FavoriteBorder />} checkedIcon={<Favorite />} onClick={(event)=> {setSaved(event.target.checked)}} />
             </Col>
-            <Col xs={2}>
+            <Col xs={1}>
                 <LightButton>Book</LightButton>
             </Col>
         </Row>
