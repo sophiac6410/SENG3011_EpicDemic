@@ -81,11 +81,11 @@ function Destination() {
       <div className="d-flex justify-content-start align-items-center flex-start mt-3 mx-5">
         <div className="text-center m-3">
           <Checkbox sx={{display:'block', mx: 'auto'}} icon={<FavoriteBorder fontSize="large" className="color-medium-teal"/>} checkedIcon={<Favorite fontSize="large" className="color-medium-teal"/>} onClick={handleClickSave} />
-          <Typography variant="caption">Saved</Typography>
+          <Typography variant="caption">Save</Typography>
         </div>
         <div className="text-center m-3">
           <Checkbox sx={{display:'block', mx: 'auto'}} icon={<NotificationsNoneIcon fontSize="large" className="color-medium-teal"/>} checkedIcon={<NotificationsActiveIcon fontSize="large" className="color-medium-teal"/>} />
-          <Typography variant="caption">Notifications</Typography>
+          <Typography variant="caption">Notify Me</Typography>
         </div>
         <div className="text-center m-3">
           <Checkbox sx={{display:'block', mx: 'auto'}} icon={<AddCircleOutlineOutlinedIcon fontSize="large" className="color-medium-teal"/>} checkedIcon={<AddCircleOutlinedIcon fontSize="large" className="color-medium-teal"/>} onClick={handleClickSave} />
