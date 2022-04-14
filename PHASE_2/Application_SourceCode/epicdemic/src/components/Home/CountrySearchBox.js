@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Open Sans, sans-serif",
     fontStyle: "normal",
     fontWeight: 700,
-    fontSize: "20px",
+    fontSize: "1em",
   }
 }));
 
@@ -32,19 +32,18 @@ export default function CountrySelect({isFrom, handleInput}) {
   const classes = useStyles();
 
   return (
-    <div style={{ display: "flex", alignItems: "center", flexDirection: "row", padding: '10px' }}>
-
+    <div style={{ display: "flex", alignItems: "center", flexDirection: "row", padding: '2%' }}>
       <Autocomplete
         id="country-select-demo"
         classes={classes}
-        sx={{ width: 300 }}
+        sx={{ width: 250 }}
         options={ isFrom ? aus : countries }
         autoHighlight
         underlineShow={false}
         onChange={handleInput}
         getOptionLabel={(option) => option.label}
         renderOption={(props, option) => (
-          <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+          <Box component="li" sx={{ '& > img': { mr: 1, flexShrink: 0 } }} {...props}>
             <img
               loading="lazy"
               width="20"
@@ -58,6 +57,8 @@ export default function CountrySelect({isFrom, handleInput}) {
         renderInput={(params) => (
           <TextField
             id="standard-basic" 
+            defaultValue={isFrom && 'Australia'}
+            placeholder={isFrom ? '' : 'Search a travel destination...'}
             variant="standard"
             {...params}
             inputProps={{

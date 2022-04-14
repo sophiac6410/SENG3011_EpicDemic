@@ -20,6 +20,7 @@ try:
     #vaccination
     #testing
     #documentation
+    print('connected to amadeus')
     response = amadeus.duty_of_care.diseases.covid19_area_report.get(countryCode="CN")
     print(response.data)
 except ResponseError as error:

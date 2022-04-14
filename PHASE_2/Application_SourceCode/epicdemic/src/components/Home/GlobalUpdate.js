@@ -12,23 +12,28 @@ import L from 'leaflet';
 
 const GlobalUpdate = () => {
   const [checked, setChecked] = useState(false);
-  const [stats, setStats] = useState({
-    "totalCases": 0,
-    "deaths": 0,
-    "dailyCases": 0
-  });
+  const [stats, setStats] = useState(null);
   const [cases, setCases] = useState([]);
 
   useEffect(() => {
     // On initial load, get all the relevant stats and cases
+    async function fetchData() {
+      const covid = await fetch(`https://disease.sh/v3/covid-19/all`).then(res => res.json())
+      var newData = {
+        cases: covid.cases,
+        deaths: covid.deaths,
+        todayCases: covid.todayCases
+      }
 
-    setStats({
-      "totalCases": 481000000,
-      "deaths": 6110000,
-      "dailyCases": 1700000 
-    });
-
-    setCases([...markerElements]);
+      const vaccine = await fetch('https://disease.sh/v3/covid-19/vaccine/coverage?lastdays=all&fullData=false').then(res => res.json())
+      var total = vaccine[Object.keys(vaccine).pop()]
+      newData["doses"] = total;
+      
+      console.log("here " + newData);
+      setStats(newData)
+      setCases([...markerElements]);
+    }
+    fetchData()
   }, []);
 
   const responsive = {
@@ -51,6 +56,10 @@ const GlobalUpdate = () => {
     }
   };
 
+  const mediumTeal = '#0F83A0';
+  const mediumBlue = '#70C4E8';
+  const lightTeal = '#62B6CB';
+
   const getMarkerIcon = (size) => {
     if (size < 100) return smallMarkerIcon
     else if (size < 300) return mediumMarkerIcon
@@ -58,21 +67,29 @@ const GlobalUpdate = () => {
     else return hugeMarkerIcon
   }
 
+  if (stats === null) {
+    return (
+      <div/>
+    )
+  }
+
   return(
-    <Col className="pt-3 pb-4">
+    <Col className="pt-3 pb-4 mx-5">
       <div className="text-center">
-        <Typography variant="heading1" className="color-dark-teal">GLOBAL COVID UPDATES</Typography>
+        <Typography variant="heading1" className="color-dark-teal">WORLDWIDE COVID</Typography>
       </div>
       <Row className="bg-darkteal justify-content-end pb-4 pt-4 pe-4">
         <Col md={1}>
-          <Row className="align-self-center justify-content-end pe-3" style={{"font-size": "20px", "color": "white", "font-weight": "bold"}}>Cases</Row>
+          <Row className="align-self-center justify-content-end">
+            <Typography variant="bodyHeading" sx={{textAlign: 'right'}}>Cases</Typography>
+          </Row>
         </Col>
         <Col md={1} className="text-center">
           <Switch
             checked={checked}
             onChange={() => setChecked(!checked)}
-            onColor="#86d3ff"
-            onHandleColor="#2693e6"
+            onColor={lightTeal}
+            onHandleColor={mediumTeal}
             handleDiameter={30}
             uncheckedIcon={false}
             checkedIcon={false}
@@ -83,16 +100,44 @@ const GlobalUpdate = () => {
             />
         </Col>
         <Col md={1}>
-          <Row className="align-self-center justify-content-start" style={{"font-size": "20px", "color": "white", "font-weight": "bold"}}>Vaccines</Row>
+          <Row className="align-self-center justify-content-start">
+            <Typography variant="bodyHeading">Vaccines</Typography>
+          </Row>
         </Col>
       </Row>
+{/* <<<<<<< HEAD
       <Row className="bg-darkteal justify-content-center align-items-center pb-5">
         <Col md={3} className="align-self-center ms-4">
-          <UpdateBox number={stats.totalCases} text="total cases" color="blue"/>
-          <UpdateBox number={stats.deaths} text="deaths" color="white"/>
-          <UpdateBox number={stats.dailyCases} text="daily cases" color="blue"/>
+          {checked ?
+            <>
+              <UpdateBox number={convertToBillions(stats.doses)} text="doses administered" color="blue"/>
+              <UpdateBox number={stats.deaths} text="deaths" color="white"/>
+              <UpdateBox number={stats.todayCases} text="daily cases" color="blue"/>
+            </>
+            :
+            <>           
+              <UpdateBox number={convertToMillions(stats.cases)} text="total cases" color="blue"/>
+              <UpdateBox number={convertToMillions(stats.deaths)} text="deaths" color="white"/>
+              <UpdateBox number={convertToMillions(stats.todayCases)} text="daily cases" color="blue"/>
+            </>} */}
+
+      <Row className="bg-darkteal justify-content-center align-items-center pb-5 m-auto">
+        <Col md={2} className="align-self-center ms-4">
+          {checked ?
+            <>
+              <UpdateBox number={convertToBillions(stats.doses)} text="doses administered" bgColor={mediumBlue} fontC='white'/>
+              <UpdateBox number={0} text="fully vaccinated" color="white" bgColor="white" fontC={mediumTeal}/>
+              <UpdateBox number={0} text="received booster" bgColor={mediumBlue} fontC='white'/>
+            </>
+            :
+            <>           
+              <UpdateBox number={convertToMillions(stats.cases)} text="total cases" bgColor={mediumBlue} fontC='white'/>
+              <UpdateBox number={convertToMillions(stats.deaths)} text="deaths" bgColor={mediumBlue} fontC='white'/>
+              <UpdateBox number={convertToMillions(stats.todayCases)} text="daily cases" bgColor={mediumBlue} fontC='white'/>
+            </>
+          }
         </Col>
-        <Col className="text-center pb-4">
+        <Col className="align-self-center pb-4">
           <MapContainer
             className="leaflet-container1"
             center={[35, 25]} 
@@ -123,27 +168,27 @@ const GlobalUpdate = () => {
 
 export default GlobalUpdate
 
-const UpdateBox = (props) => {
-  let convertedNum = (Math.round(props.number * 10 / 1000000) / 10) + 'M';
-  if(props.color == "blue") {
-    return(
-      <Row className="bg-mblue m-2 me-4 mb-4 p-3">
-        <Col>
-          <Row className="align-self-center justify-content-center"  style={{"font-size": "30px", "color": "white", "font-weight": "bold"}}>{convertedNum}</Row>
-          <Row className="align-self-center justify-content-center text-white"  style={{"font-size": "15px", "color": "white", "font-weight": "bold"}}>{props.text}</Row>
-        </Col>
-      </Row>
-    )
-  }else if(props.color == "white"){
-    return(
-      <Row className="bg-lightblue m-2 me-4 mb-4 p-3">
-        <Col>
-          <Row className="align-self-center justify-content-center"  style={{"font-size": "30px", "color": "#0F83A0", "font-weight": "bold"}}>{convertedNum}</Row>
-          <Row className="align-self-center justify-content-center" style={{"font-size": "15px", "color": "#0F83A0", "font-weight": "bold"}}>{props.text}</Row>
-        </Col>
-      </Row>
-    )
-  }
+const convertToMillions = (num) => {
+  return (Math.round(num * 10 / 1000000) / 10) + 'M';
+}
+
+const convertToBillions = (num) => {
+  return (Math.round(num * 10 / 1000000000) / 10) + 'B';
+}
+
+function UpdateBox(props) {
+  return(
+    <Row className="m-2 me-4 mb-4 py-3 border-radius-small" style={{backgroundColor: props.bgColor, boxShadow: '0px 1px 5px #CCCCCC'}}>
+      <Col>
+        <Row className="align-self-center justify-content-center">
+          <Typography variant="heading2" sx={{display: 'block', color: props.fontC, textAlign: 'center'}}>{props.number}</Typography>
+        </Row>
+        <Row className="align-self-center justify-content-center">
+          <Typography variant="bodyImportant" sx={{display: 'block', color: props.fontC, textAlign: 'center'}}>{props.text}</Typography>
+        </Row>
+      </Col>
+    </Row>
+  )
 }
 
 const bounds = [

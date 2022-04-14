@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Button, Image } from "react-bootstrap";
 import "../../styles/DestinationFinder.css";
 import InfoIcon from '@mui/icons-material/Info';
-import { LightButton } from "../../styles/Global";
+import { LightButton } from "../../styles/Button";
 
 const InfoRow2 = ({country, arrivals, travelStatus}) => {
     return (
