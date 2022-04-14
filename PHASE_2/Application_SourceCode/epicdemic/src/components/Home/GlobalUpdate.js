@@ -31,7 +31,29 @@ const GlobalUpdate = () => {
       
       console.log("here " + newData);
       setStats(newData)
-      setCases([...markerElements]);
+
+      const covidcases = await fetch('http://localhost:8000/v1/locations/covidcases', {
+        mode: 'cors',
+        headesr: {
+          'Content-Type': 'application/json'
+        }
+      }).then(res => res.json())
+
+      const markerElements = [];
+      for (var i in covidcases.data.cases_per_country) {
+        const casedata = covidcases.data.cases_per_country[i];
+
+        markerElements.push({
+          id: i,
+          longitude: parseFloat(casedata.longitude),
+          latitude: parseFloat(casedata.latitude),
+          cases: casedata.cases
+        });
+      }
+      
+      console.log("global update map");
+      console.log(markerElements);
+      setCases(markerElements);
     }
     fetchData()
   }, []);
@@ -61,9 +83,9 @@ const GlobalUpdate = () => {
   const lightTeal = '#62B6CB';
 
   const getMarkerIcon = (size) => {
-    if (size < 100) return smallMarkerIcon
-    else if (size < 300) return mediumMarkerIcon
-    else if (size < 1000) return largeMarkerIcon
+    if (size < 100000) return smallMarkerIcon
+    else if (size < 300000) return mediumMarkerIcon
+    else if (size < 10000000) return largeMarkerIcon
     else return hugeMarkerIcon
   }
 
@@ -194,24 +216,6 @@ function UpdateBox(props) {
 const bounds = [
   [100, -180],
   [-100, 180],
-]
-
-const markerElements = [
-  {id: 1, latitude: 51.505, longitude: -0.09, cases: 28},
-  {id: 2, latitude: 43.5, longitude: -11, cases: 58},
-  {id: 3, latitude: 22.5, longitude: -18, cases: 125},
-  {id: 4, latitude: 40.5, longitude: -90, cases: 234},
-  {id: 5, latitude: -25.5, longitude: 125, cases: 54},
-  {id: 6, latitude: -43.5, longitude: 77, cases: 18},
-  {id: 7, latitude: 33.5, longitude: 33, cases: 343},
-  {id: 8, latitude: 25.5, longitude: 130, cases: 1222},
-  {id: 9, latitude: -17.5, longitude: 22, cases: 5555},
-  {id: 10, latitude: 58, longitude: 45, cases: 24},
-  {id: 11, latitude: 33, longitude: 58, cases: 152},
-  {id: 12, latitude: 20, longitude: 90, cases: 555},
-  {id: 13, latitude: 30, longitude: 65, cases: 28},
-  {id: 14, latitude: 40, longitude: 75, cases: 333},
-  {id: 15, latitude: 35, longitude: 80, cases: 152},
 ]
 
 let smallMarkerIcon = L.icon({
