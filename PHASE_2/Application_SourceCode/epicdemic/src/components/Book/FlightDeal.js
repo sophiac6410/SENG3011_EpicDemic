@@ -4,6 +4,7 @@ import "../../styles/Destination.css"
 import "../../styles/Book.css"
 import qantas from "../../static/qantas.svg"
 import { Typography } from '@mui/material';
+import { LightButton } from '../../styles/Button';
 
 function FlightDeal() {
   return (
@@ -27,10 +28,10 @@ function FlightDeal() {
       <div class="flight-flex">
         <Typography variant="bodyText" sx={{textAlign: 'center'}}>30 hrs</Typography>
         <div>
-          {/* <span><img src={`https://flagcdn.com/w20/au.png`}></img></span> */}
+          <span><img src={`https://flagcdn.com/w20/au.png`}></img></span>
           <Typography variant="caption" sx={{display: 'inline'}}> Sydney </Typography>
           <Typography variant="caption" sx={{display: 'inline'}}> - </Typography>
-          {/* <span><img src={`https://flagcdn.com/w20/ph.png`}></img></span> */}
+          <span><img src={`https://flagcdn.com/w20/ph.png`}></img></span>
           <Typography variant="caption" sx={{display: 'inline'}}> Manila </Typography>
         </div>
       </div>
@@ -43,7 +44,7 @@ function FlightDeal() {
       </Col> */}
       <div class="flight-flex">
         <Typography variant="heading3">AU$386</Typography>
-        <button class="btn-base btn-light btn-flight-link">View Flight</button>
+        <LightButton sx={{padding: '3% 7%'}}>View Flight</LightButton>
       </div>
     </div>
   )
