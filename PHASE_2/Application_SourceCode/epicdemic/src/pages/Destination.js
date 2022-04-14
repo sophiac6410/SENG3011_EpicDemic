@@ -33,14 +33,17 @@ function Destination() {
   useEffect(() => {
     if (code === null) return;
     // Get the country and code
-    // TODO: Dummy data (Need to call an endpoint)
-    const country = "PHILIPPINES"; // For now
-    setDest({
-      code: code,
-      country: country
-    });
+    async function fetchData() {
+      const locationData = await fetch(`http://localhost:8000/v1/locations/id?location_id=${code}`).then(res => res.json())
     
-    console.log("use effect destination.js code is " + code);
+      setDest({
+        code: code,
+        country: locationData.data.country,
+        // longitude: locationData.data.longitude,
+        // latitude: locationData.data.latitude
+      })
+    }
+    fetchData();
   }, [code])
 
   if (dest === null) {

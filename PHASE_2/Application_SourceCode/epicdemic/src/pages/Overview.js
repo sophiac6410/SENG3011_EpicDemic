@@ -69,6 +69,7 @@ const SafetyBoard = safetyDis.map(function(props) {
 
 function Overview() {
   const [data, setData] = useState(null);
+  const [dest, setDest] = useState(null);
   const { code } = useParams();
 
   useEffect(() => {
@@ -92,6 +93,20 @@ function Overview() {
       newData["vaccinationPercentage"] = total * 100 / newData.population;
 
       setData(newData);
+
+      const locationData = await fetch(`http://localhost:8000/v1/locations/id?location_id=${code}`).then(res => res.json())
+      
+      console.log(locationData);
+      setDest({
+        code: code,
+        country: locationData.data.country,
+        longitude: parseFloat(locationData.data.longitude),
+        latitude: parseFloat(locationData.data.latitude),
+        safetyScore: parseInt(locationData.data.safety_score),
+        travelStatus: parseInt(locationData.data.travel_status),
+        adviceLevel: parseInt(locationData.data.advice_level),
+        diseaseRisk: parseInt(locationData.data.disease_risk)
+      })
     }
 
     fetchData();
@@ -100,10 +115,10 @@ function Overview() {
   const getCentre = () => {
     // TODO: This should take in a country, look up it's coordinates
     // and centre on it
-    return [35, 15];
+    return [dest.latitude, dest.longitude];
   }
 
-  if (data == null) {
+  if (data == null || dest == null) {
     return (
       <div/>
     )
@@ -186,7 +201,7 @@ function Overview() {
           </div>
         </Col>
         <Col md={3} className="text-center pt-3 pb-3 bg-yellow border-radius-med">
-          <Row><Typography variant="heading2">44</Typography></Row>
+          <Row><Typography variant="heading2">{dest.safetyScore}</Typography></Row>
           <Row><Typography variant="bodyText" sx={{textAlign: 'center'}}>OVERALL SAFETY RATING</Typography></Row>
         </Col>
       </Row>
@@ -233,13 +248,11 @@ function Overview() {
               attribution='Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ'
               url='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'
             />
-            {markerElements.map((elem) => 
-              <Marker 
-                id={elem.id}
-                position={[elem.latitude, elem.longitude]}
-                icon={hugeMarkerIcon}
-              />
-            )}
+            <Marker 
+              id={1}
+              position={getCentre()}
+              icon={hugeMarkerIcon}
+            />
           </MapContainer>
         </Col>
       </Row>
