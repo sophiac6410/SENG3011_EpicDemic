@@ -70,33 +70,33 @@ export default function FullWidthTabs() {
         </Tabs>
       </AppBar>
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <div className="body-text">
+          <Typography variant="bodyText">
             Coronavirus disease (COVID-19) is an infectious disease caused by the SARS-CoV-2 virus.
             Most people who fall sick with COVID-19 will experience mild to moderate symptoms and recover without special treatment. However, some will become seriously ill and require medical attention.
-          </div>
+          </Typography>
           <br/>
-          <div className="body-text">
+          <Typography variant="bodyText">
             How it spreads:
-          </div>
-          <div className="body-text">
+          </Typography>
+          <Typography variant="bodyText">
             The virus can spread from an infected person’s mouth or nose in small liquid particles when they cough, sneeze, speak, sing or breathe. These particles range from larger respiratory droplets to smaller aerosols.
-          </div>
+          </Typography>
           <br />
-          <div className="body-text">
+          <Typography variant="bodyText">
             You can be infected by breathing in the virus if you are near someone who has COVID-19, or by touching a contaminated surface and then your eyes, nose or mouth. The virus spreads more easily indoors and in crowded settings.
-          </div>
+          </Typography>
         </TabPanel>
 
         <TabPanel value={value} index={1} dir={theme.direction}>
         <ul>
-          <li> <div className="body-text"> Cough </div> </li>
-          <li> <div className="body-text"> Runny Nose </div> </li>
-          <li> <div className="body-text"> High Fever </div> </li>
-          <li> <div className="body-text"> Loss sense of smell and taste </div> </li>
+          <li><Typography variant="bodyText"> Cough </Typography> </li>
+          <li><Typography variant="bodyText"> Runny Nose </Typography> </li>
+          <li> <Typography variant="bodyText"> High Fever </Typography> </li>
+          <li> <Typography variant="bodyText"> Loss sense of smell and taste </Typography> </li>
         </ul>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <div className="body-text"> If you are positive with COVID-19, you must isolate at home for 7 days after a positive PCR/RAT test. </div> 
+          <Typography variant="bodyText"> If you are positive with COVID-19, you must isolate at home for 7 days after a positive PCR/RAT test. </Typography> 
         </TabPanel>
     </div>
   );

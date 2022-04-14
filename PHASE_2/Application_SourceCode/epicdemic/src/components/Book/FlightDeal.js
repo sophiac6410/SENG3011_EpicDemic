@@ -3,46 +3,48 @@ import { Col, Container, Row, Image} from "react-bootstrap"
 import "../../styles/Destination.css"
 import "../../styles/Book.css"
 import qantas from "../../static/qantas.svg"
+import { Typography } from '@mui/material';
+import { LightButton } from '../../styles/Button';
 
 function FlightDeal() {
   return (
-    <div class="border-radius-small bg-light-blue flight-container text-center">
-      <Image src={qantas} width='60px' height='70px' style={{
+    <div class="border-radius-small bg-white flight-container text-center" style={{boxShadow: '3px 3px 3px 3px #cccccc'}}>
+      <Image src={qantas} width='40px' height='50px' style={{
       margin: '10px'
       }}></Image>
       <div class="flight-flex" style={{
         display: 'flex'
       }}>
         <div class="flight-time-container">
-          <div class="font-bold-large flight-time">10:20</div>
-          <div class="font-small">Tue, 5 Apr</div>
+          <Typography variant="heading3">10:20</Typography>
+          <Typography variant="caption">Tue, 5 Apr</Typography>
         </div>
-        <div class="font-bold-large flight-time">-</div>
+        <Typography variant="heading3">-</Typography>
         <div class="flight-time-container">
-          <div class="font-bold-large flight-time">14:00</div>
-          <div class="font-small">Wed, 6 Apr</div>
+          <Typography variant="heading3">14:00</Typography>
+          <Typography variant="caption">Wed, 6 Apr</Typography>
         </div>
       </div>
       <div class="flight-flex">
-        <div class="font-meta-large">30 hrs</div>
-        <div class="font-small">
+        <Typography variant="bodyText" sx={{textAlign: 'center'}}>30 hrs</Typography>
+        <div>
           <span><img src={`https://flagcdn.com/w20/au.png`}></img></span>
-          <span> Sydney </span>
-          <span> - </span>
+          <Typography variant="caption" sx={{display: 'inline'}}> Sydney </Typography>
+          <Typography variant="caption" sx={{display: 'inline'}}> - </Typography>
           <span><img src={`https://flagcdn.com/w20/ph.png`}></img></span>
-          <span> Manila </span>
+          <Typography variant="caption" sx={{display: 'inline'}}> Manila </Typography>
         </div>
       </div>
       <div class="flight-flex">
-        <div class="font-meta-large">1 stop</div>
-        <div class="font-small">8hrs in Singapore (DHO)</div>
+        <Typography variant="bodyText" sx={{textAlign: 'center'}}>1 stop</Typography>
+        <Typography variant="caption" sx={{display: 'inline'}}>8hrs in Singapore (DHO)</Typography>
       </div>
       {/* <Col>
         <Box>Best deal</Box>
       </Col> */}
       <div class="flight-flex">
-        <div class="font-bold-large">AU$386</div>
-        <button class="btn-base btn-light btn-flight-link">View Flight</button>
+        <Typography variant="heading3">AU$386</Typography>
+        <LightButton sx={{padding: '3% 7%'}}>View Flight</LightButton>
       </div>
     </div>
   )

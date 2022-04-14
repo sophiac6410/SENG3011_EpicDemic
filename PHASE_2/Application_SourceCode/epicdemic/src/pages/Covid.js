@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import CovidStat from "../static/philStats.png"
 import CovidTabs from "../components/Diseases/CovidTabs";
 import DiseaseReportBar from "../components/Home/DiseaseReportBar";
-import NavbarComp from "../components/Navbar";
+import NavbarComp from "../components/NavBar";
 
 function Covid() {
   const [disease, setDisease] = useState('Covid-19');
@@ -69,8 +69,9 @@ function Covid() {
   }
 
   return(
-    <Container>
-      <Row className="title-h2 mt-5">
+    <>
+    <Container style={{margin: '0% 15%', width: 'auto'}}>
+      <Row className="mt-5">
           <Col>
             <Box sx={{ minWidth: 300 }}>
             <FormControl sx={{ minWidth: 300 }}>
@@ -80,9 +81,9 @@ function Covid() {
                 onChange={handleChange}
                 label="."
               >
-                <MenuItem value={'Covid-19'}> <div className="title-h3">Covid19</div></MenuItem>
-                <MenuItem value={'Dengue'}> <div className="title-h3">Dengue</div> </MenuItem>
-                <MenuItem value={'HIV/AIDS'}> <div className="title-h3">HIV/AIDS</div> </MenuItem>
+                <MenuItem value={'Covid-19'}><Typography variant="heading2">Covid19</Typography></MenuItem>
+                <MenuItem value={'Dengue'}><Typography variant="heading2">Dengue</Typography></MenuItem>
+                <MenuItem value={'HIV/AIDS'}><Typography variant="heading2">HIV/AIDS</Typography></MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -94,7 +95,7 @@ function Covid() {
       </Row>
 
       <Row style={{ maxWidth: 600, paddingTop: '40px' }}>
-      <div className="title-h3"> Statistics </div>
+      <Typography variant="heading1"> Statistics</Typography>
       </Row>
       <Row>
         <div className="stat">
@@ -104,37 +105,36 @@ function Covid() {
           </div>
 
           <div className="flex-stats">
-            <div className="teal box">
-              <Typography variant="h7" component="h2">
+            <div className="teal box border-radius-med">
+              <Typography variant="title">
                 11.1 B
               </Typography>
-              <Typography variant="subtitle2" component="h2">
+              <Typography variant="bodyImportant">
                 doses administered
               </Typography>
             </div>
-            <div className="lightblue box">
-              <Typography variant="h7" component="h2">
+            <div className="lightblue box border-radius-med">
+              <Typography variant="title">
                 57.8 %
               </Typography>
-              <Typography variant="subtitle2" component="h2">
+              <Typography variant="bodyImportant">
                 fully vaccinated
               </Typography>
             </div>
-            <div className="teal box">
-              <Typography variant="h7" component="h2">
+            <div className="teal box border-radius-med">
+              <Typography variant="title">
                 20.5 % 
               </Typography>
-              <Typography variant="subtitle2" component="h2">
+              <Typography variant="bodyImportant">
                 received booster
               </Typography>
             </div>
           </div>
-
         </div>
-
       </Row>
-      <DiseaseReportBar parent={1}></DiseaseReportBar>
     </Container>
+    <DiseaseReportBar></DiseaseReportBar>
+    </>
   )
 }
 

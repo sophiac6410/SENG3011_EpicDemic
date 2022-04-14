@@ -6,34 +6,39 @@ import HeartFilled from "../../static/heartfilled.svg";
 import Bell from "../../static/belllight.svg";
 import BellSilent from "../../static/bellsilent.svg";
 import { useNavigate, } from 'react-router-dom';
+import { Typography } from "@mui/material";
+import { LightButton } from "../../styles/Button";
+import NotificationsOffIcon from '@mui/icons-material/NotificationsOff';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 
 const InfoRow4 = ({country, updateDesc, lastUpdated, travelStatus, saved}) => {
     let navigate = useNavigate(); 
     return (
-        <Row className="info-row">                    
+        <Row className="info-row bg-white">                    
             {/* onClick={() => {
                 navigate('/destination/PHILIPPINES');
             }}> */}
             <Col xs={1}>
-                <b>{country}</b>
+                <Typography variant="bodyHeading">{country}</Typography>
             </Col>
-            <Col xs={4}>
-                {updateDesc}
+            <Col xs={4} style={{padding: '0% 2%'}}>
+                <Typography variant="bodyText">{updateDesc}</Typography>
             </Col>
-            <Col xs={2}>
-                {lastUpdated.toLocaleDateString()}
+            <Col xs={2} style={{textAlignLast: 'center'}}>
+                <Typography variant="bodyText">{lastUpdated.toLocaleDateString()}</Typography>
             </Col>
-            <Col xs={2}>
-                {travelStatus}
+            <Col xs={2} style={{textAlignLast: 'center'}}>
+                <Typography variant="bodyText">{travelStatus}</Typography>
             </Col>
             <Col xs={1}>
-                {saved === true ? <Image className="bell-image" src={Bell}/> : <Image className="bell-image" src={BellSilent}/>}
+                {saved === true ? <NotificationsActiveIcon className="color-medium-blue" fontSize="large"/> : <NotificationsOffIcon className="color-medium-blue" fontSize="large"/>}
             </Col>
-            <Col xs={2}>
-                <Button className="book-button"
+            <Col xs={1}>
+                <LightButton
                     onClick={() => {
                         navigate('/destination/PHILIPPINES/book');
-                    }}>Book</Button>
+                    }}>Book
+                </LightButton>
             </Col>
         </Row>
     );

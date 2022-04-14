@@ -1,27 +1,28 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import "../../styles/DestinationFinder.css";
+import { Typography } from "@mui/material";
 
 const HeaderInfoRow4 = () => {
     return (
         <Row className="header-info-row">
             <Col xs={1}>
-                COUNTRY
+                <Typography variant="bodyHeading">COUNTRY</Typography>
             </Col>
             <Col xs={4}>
-                LATEST UPDATE
+                <Typography variant="bodyHeading">LATEST UPDATE</Typography>
             </Col>
             <Col xs={2}>
-                LAST UPDATE
+                <Typography variant="bodyHeading">LAST UPDATE</Typography>
             </Col>
             <Col xs={2}>
-                TRAVEL STATUS
+                <Typography variant="bodyHeading">TRAVEL STATUS</Typography>
             </Col>
             <Col xs={1}>
-                NOTIFY
+                <Typography variant="bodyHeading">NOTIFY</Typography>
             </Col>
-            <Col xs={2}>
-                FLIGHTS
+            <Col xs={1}>
+                <Typography variant="bodyHeading">FLIGHTS</Typography>
             </Col>
         </Row>
     );

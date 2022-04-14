@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     fontStyle: "normal",
     fontWeight: 700,
     fontSize: "1em",
-  }
+  },
 }));
 
 
@@ -60,6 +60,7 @@ export default function CountrySelect({isFrom, handleInput}) {
             defaultValue={isFrom && 'Australia'}
             placeholder={isFrom ? '' : 'Search a travel destination...'}
             variant="standard"
+            size="large"
             {...params}
             inputProps={{
               ...params.inputProps,

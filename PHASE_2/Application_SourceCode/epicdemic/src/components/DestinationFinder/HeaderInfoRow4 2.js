@@ -20,7 +20,7 @@ const HeaderInfoRow4 = () => {
             <Col xs={1}>
                 NOTIFY
             </Col>
-            <Col xs={2}>
+            <Col xs={1}>
                 FLIGHTS
             </Col>
         </Row>

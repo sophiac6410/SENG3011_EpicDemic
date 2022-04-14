@@ -12,9 +12,9 @@ import HexTeal from "../static/hexteal.svg";
 import HexMedTeal from "../static/hexmedteal.svg";
 import HexWhite from "../static/hexwhite.svg";
 import BalloonBackground from "../static/balloontravel.jpg"
-import { DarkButton } from "../styles/Button";
-import NavbarComp from "../components/Navbar";
-import Typography from '@mui/material/Typography'
+import { DarkButton, WhiteButton } from "../styles/Button";
+import NavbarComp from "../components/NavBar";
+import Typography from '@mui/material/Typography';
 
 
 const DestinationFinder = () => {
@@ -29,13 +29,13 @@ const DestinationFinder = () => {
     }, []);
 
     return (
-        <div>
+        <div className="bg-off-white">
             <div className="bg-plane">
                 <NavbarComp bg={false}/>
                 <div className="text-center mb-5" style={{marginTop: "300px"}}>
                     <Typography variant="title" className="color-white mt-5">FIND A DESTINATION BY...</Typography>
                 </div>
-                <Row style={{marginTop: "60px", paddingBottom: "100px"}} className="justify-content-center">
+                <Row style={{margin: "3% 5% 1%"}} className="justify-content-center">
                     <Col className="pe-5 ps-5">
                         <GenericSearch fieldLabel={"Region"} options={regionOptions}/>
                     </Col>
@@ -46,10 +46,15 @@ const DestinationFinder = () => {
                         <GenericSearch fieldLabel={"Travel Status"} options={travelStatusOptions}/>
                     </Col>
                 </Row>
+                <div style={{paddingBottom: '5%'}}>
+                    <WhiteButton sx={{display: 'block', margin: 'auto', marginTop: '3%'}}>Search</WhiteButton>
+                </div>  
             </div>
-            <Row style={{"margin": 0, "padding": 0, "marginTop": "10vh"}}>
-                <Container fluid className="latest-updates">
-                    <HeaderInfoRow/>
+            
+            <Row style={{"margin": "5%", "padding": '1%', "marginTop": "10vh"}}>
+                {/* <Container fluid className="latest-updates"> */}
+                <HeaderInfoRow/>
+                <Container style={{height: '80vh', overflowY: 'scroll'}}>
                     {infoRows.map((infoRow, idx) => {
                         return (
                             <InfoRow
@@ -62,10 +67,11 @@ const DestinationFinder = () => {
                             />
                             )
                         })}
-                </Container>
+                    </Container>
+                {/* </Container> */}
             </Row>
             <Row className="map-section">
-                <b style={{"marginLeft": "15vw", "font": "Nunito", "fontSize": 30}}>TRAVEL REGULATIONS MAP</b>
+                <Typography variant="heading1">TRAVEL REGULATIONS MAP</Typography>
                 <Image className="world-map" src={WorldMap}/>
             </Row>
             <Row className="map-legend">
@@ -82,43 +88,38 @@ const DestinationFinder = () => {
                     Open
                 </Col>
             </Row>
-            <Row position="relative" style={{"margin": 0, "marginTop": "15vh", "padding": 0}}>
-                <Container fluid style={{"margin": 0, padding: 0}}>
-                    <Row style={{"margin": 0, padding: 0}}>
-                        <Col style={{"margin": 0}}>
+            <Row style={{marginTop: "15vh"}}>
+                <Container fluid style={{margin: '8% 0%'}}>
+                    <Row>
+                        <Col md={4}>
                             <Image className="balloon-background" src={BalloonBackground}/>
                         </Col>
-                        <Col>
-                            <Row>
-                                <b style={{"fontFamily": "Nunito", "fontSize": 30 }}>MOST POPULAR TRAVEL DESTINATIONS</b>
-                                <Container fluid className="popular-travel">
-                                    <HeaderInfoRow2/>
-                                    {popularDestinations.map((popDest, idx) => {
-                                        return (
-                                            <InfoRow2
-                                            key={idx}
-                                            country={popDest.country}
-                                            arrivals={popDest.arrivals}
-                                            travelStatus={popDest.travelStatus}
-                                            />
-                                            )
-                                        })}
-                                </Container>
-                            </Row>
+                        <Col md={7} style={{marginTop: 0}}>
+                            <Typography variant="heading1">MOST POPULAR TRAVEL DESTINATIONS</Typography>
+                            <HeaderInfoRow2/>
+                            <Container style={{height: '55vh', overflowY: 'scroll', marginBottom: '3%'}}>
+                            {popularDestinations.map((popDest, idx) => {
+                                return (
+                                    <InfoRow2
+                                    key={idx}
+                                    country={popDest.country}
+                                    arrivals={popDest.arrivals}
+                                    travelStatus={popDest.travelStatus}
+                                    />
+                                    )
+                                })}
+                            </Container>
+                            <DarkButton
+                                sx={{display: 'block', margin: 'auto'}}
+                                onClick={() => {
+                                    navigate('/saved');
+                                }}
+                            >
+                                Recommend me a destination
+                            </DarkButton>
                         </Col>
                     </Row>
                 </Container>
-            </Row>
-            <Row position="relative" style={{"marginLeft": 0, "marginRight": 0, "marginTop": "15vh", "paddingBottom": "25vh", "paddingLeft": 0, "paddingRight": 0}}>
-                <Col style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
-                    <DarkButton
-                        onClick={() => {
-                            navigate('/saved');
-                        }}
-                    >
-                        Recommend me a destination
-                    </DarkButton>
-                </Col>
             </Row>
         </div>
     );
