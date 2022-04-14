@@ -335,3 +335,15 @@
     Process Time: 5.836353778839111
     ----------------------------------------
     
+    Timestamp: 1649957357.257828
+    Accessed Time: 2022-04-15 03:29:17.257828
+    Client: 127.0.0.1:56975
+    
+    Request: GET /v1/locations/covidcases
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 1.3396708965301514
+    ----------------------------------------
+    
