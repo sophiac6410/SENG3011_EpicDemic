@@ -23,6 +23,23 @@ import {
 import Planner from './pages/Planner'
 
 const theme = createTheme({
+  palette: {
+    teal: {
+      main: '#0F83A0',
+    },
+  },
+  // components: {
+  //   MuiDesktopDatePicker: {
+  //     styleOverrides:{
+  //       root: {
+  //         color: "#0F83A0",
+  //         svg: {
+  //           color: "#0F83A0",
+  //         }
+  //       }
+  //     }
+  //   }
+  // },
   typography: {
     fontFamily: ['Nunito', 'serif', 'Open Sans'].join(','),
     button: {

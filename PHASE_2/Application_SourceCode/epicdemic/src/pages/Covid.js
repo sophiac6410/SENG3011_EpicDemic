@@ -32,7 +32,7 @@ function Covid() {
                 onChange={handleChange}
                 label="."
               >
-                <MenuItem value={'Covid-19'}> <div className="title-h3">Covid19</div> </MenuItem>
+                <MenuItem value={'Covid-19'}> <div className="title-h3">Covid19</div></MenuItem>
                 <MenuItem value={'Dengue'}> <div className="title-h3">Dengue</div> </MenuItem>
                 <MenuItem value={'HIV/AIDS'}> <div className="title-h3">HIV/AIDS</div> </MenuItem>
               </Select>
