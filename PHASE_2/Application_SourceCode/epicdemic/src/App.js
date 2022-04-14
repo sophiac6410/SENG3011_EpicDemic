@@ -1,5 +1,4 @@
 import React from 'react'
-import NavbarComp from './components/NavBar'
 import Footer from './components/Footer'
 import Home from './pages/home'
 import Register from './pages/Register'

@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import CovidStat from "../static/philStats.png"
 import CovidTabs from "../components/Diseases/CovidTabs";
 import DiseaseReportBar from "../components/Home/DiseaseReportBar";
-import NavbarComp from "../components/NavBar";
+import NavbarComp from "../components/Navbar";
 
 function Covid() {
   const [disease, setDisease] = React.useState('Covid-19');

@@ -13,7 +13,7 @@ import HexMedTeal from "../static/hexmedteal.svg";
 import HexWhite from "../static/hexwhite.svg";
 import BalloonBackground from "../static/balloontravel.jpg"
 import { DarkButton } from "../styles/Button";
-import NavbarComp from "../components/NavBar";
+import NavbarComp from "../components/Navbar";
 import Typography from '@mui/material/Typography'
 
 

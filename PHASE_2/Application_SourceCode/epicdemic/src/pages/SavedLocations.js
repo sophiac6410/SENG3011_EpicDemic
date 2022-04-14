@@ -8,7 +8,7 @@ import InfoRow5 from "../components/DestinationFinder/InfoRow5";
 import HeaderInfoRow4 from "../components/DestinationFinder/HeaderInfoRow4";
 import "../styles/DestinationFinder.css";
 import GenericSearchText from "../components/GenericSearchText";
-import NavbarComp from '../components/NavBar';
+import NavbarComp from '../components/Navbar';
 
 const SavedLocations = () => {
     let navigate = useNavigate(); 

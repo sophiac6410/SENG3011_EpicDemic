@@ -57,7 +57,7 @@ function NavbarComp(props) {
   const bgColor = props.bg ? '#0F83A0' : 'none';
   const { getters } = useContext(Context);
   return (
-      <Navbar variant="dark" style={{zIndex: 2, width: '100vw', background: bgColor}}>
+      <Navbar className='justify-content-center' variant="dark" style={{zIndex: 2, width: '100vw', background: bgColor}}>
         <Container style={{margin: '1% 10% 0%'}}>
           <Navbar.Brand href="/">
             <Typography variant="heading3">EPICDEMIC</Typography>

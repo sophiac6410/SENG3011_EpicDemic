@@ -12,7 +12,7 @@ import Favorite from '@mui/icons-material/Favorite';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import Typography from '@mui/material/Typography'
-import NavbarComp from "../components/NavBar";
+import NavbarComp from "../components/Navbar";
 
 import React, { useState, useEffect } from "react";
 import Footer from "../components/Footer"
