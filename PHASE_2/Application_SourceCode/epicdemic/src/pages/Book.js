@@ -16,7 +16,6 @@ function handleClick() {
 function Book() {
   return(
     <div>
-      <NavbarComp bg={true}/>
       <h1 class="title-h2">Book</h1>
       <FlightSearch></FlightSearch>
       <DarkButton sx={{display: 'flex', marginX: 'auto', mb: 7, mt: 3}}>Find My Flight</DarkButton>

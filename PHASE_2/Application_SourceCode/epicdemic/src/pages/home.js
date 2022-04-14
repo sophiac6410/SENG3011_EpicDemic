@@ -29,25 +29,25 @@ function Home() {
       <div style={{backgroundColor: '#F4FBFF'}}>
         <div className="bg-sky" style={{height: '100vh'}}>
             <NavbarComp bg={false}></NavbarComp>
-          <div>
-            <div id="header">
-              <Typography variant="title" className="color-white mt-5">Travel safely with Epicdemic</Typography>
-              <div className="text-center" style={{margin: '3% 15%'}}>
-                <Typography variant="bodyImportant" className="color-white">
-                  {intro}
-                </Typography>
+            <div>
+              <div id="header">
+                <Typography variant="title" className="color-white mt-5">Travel safely with Epicdemic</Typography>
+                <div className="text-center" style={{margin: '3% 15%'}}>
+                  <Typography variant="bodyImportant" className="color-white">
+                    {intro}
+                  </Typography>
+                </div>
+                <div className="mt-1 mb-5 d-flex">
+                  <DarkButton onClick={goDestination} className="align-self-center me-5 pe-5 ps-5">  
+                    <Typography variant="bodyImportant">Find a destination</Typography>
+                  </DarkButton>
+                  <WhiteButton onClick={goPlaner} className="align-self-center ms-4 pe-5 ps-5">
+                    <Typography variant="bodyImportant">Plan my trip</Typography>
+                  </WhiteButton>
+                </div>
+                <Search></Search>
               </div>
-              <div className="mt-1 mb-5 d-flex">
-                <DarkButton onClick={goDestination} className="align-self-center me-5 pe-5 ps-5">  
-                  <Typography variant="bodyImportant">Find a destination</Typography>
-                </DarkButton>
-                <WhiteButton onClick={goPlaner} className="align-self-center ms-4 pe-5 ps-5">
-                  <Typography variant="bodyImportant">Plan my trip</Typography>
-                </WhiteButton>
-              </div>
-              <Search></Search>
             </div>
-          </div>
         </div>
         <NewsBar></NewsBar>
         <LocationBar></LocationBar>

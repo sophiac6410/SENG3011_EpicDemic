@@ -34,7 +34,7 @@ const theme = createTheme({
       fontFamily: "Nunito, serif",
       fontWeight: 700,
       fontSize: "2.1em",
-      lineHeight: 1
+      lineHeight: 1,
     },
     heading1: {
       fontFamily: "Nunito, serif",
