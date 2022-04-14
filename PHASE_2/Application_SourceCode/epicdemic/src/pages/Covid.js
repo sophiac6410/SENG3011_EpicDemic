@@ -22,7 +22,6 @@ function Covid() {
 
   return(
     <Container>
-      <NavbarComp bg={true}></NavbarComp>
       <Row className="title-h2 mt-5">
           <Col>
             <Box sx={{ minWidth: 300 }}>

@@ -110,7 +110,6 @@ function Travel() {
 
   return(
     <Container className="mt-4">
-      <NavbarComp bg={true}/>
       <Col>
         <Row>
           <div className="larger-body">
