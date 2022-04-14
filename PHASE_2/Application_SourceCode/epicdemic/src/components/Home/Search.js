@@ -26,7 +26,7 @@ function Search() {
     navigate('/finder');
   }
     return(
-      <div className="border-radius-med bg-off-white mt-5 mb-5" style={{width: "70%", paddingTop: '2%', paddingBottom: '4%'}}>
+      <div className="border-radius-large bg-off-white mt-5 mb-5" style={{width: "70%", paddingTop: '2%', paddingBottom: '4%'}}>
         <div className="search-row">
           <div className="search-col ps-4">
             <Typography variant="bodyImportant" className="color-sky-blue ps-2 mb-2">FROM</Typography>

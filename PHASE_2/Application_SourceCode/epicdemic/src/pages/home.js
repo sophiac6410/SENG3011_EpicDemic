@@ -9,7 +9,7 @@ import bigLoading from "../static/bigLoading.svg"
 import DiseaseRadar from "../components/Home/DiseaseRadar";
 import DiseaseReportBar from "../components/Home/DiseaseReportBar";
 import Typography from '@mui/material/Typography'
-import NavbarComp from '../components/Navbar'
+import NavbarComp from '../components/NavBar'
 import { DarkButton, WhiteButton } from "../styles/Button";
 import { fabClasses } from "@mui/material";
 import { useNavigate, } from 'react-router-dom';

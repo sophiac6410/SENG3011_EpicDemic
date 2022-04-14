@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import CovidStat from "../static/philStats.png"
 import CovidTabs from "../components/Diseases/CovidTabs";
 import DiseaseReportBar from "../components/Home/DiseaseReportBar";
-import NavbarComp from "../components/Navbar";
+import NavbarComp from "../components/NavBar";
 
 function Covid() {
   const [disease, setDisease] = useState('Covid-19');
@@ -95,7 +95,7 @@ function Covid() {
       </Row>
 
       <Row style={{ maxWidth: 600, paddingTop: '40px' }}>
-      <Typography variant="heading2"> Statistics</Typography>
+      <Typography variant="heading1"> Statistics</Typography>
       </Row>
       <Row>
         <div className="stat">
@@ -105,27 +105,27 @@ function Covid() {
           </div>
 
           <div className="flex-stats">
-            <div className="teal box">
-              <Typography variant="h7" component="h2">
+            <div className="teal box border-radius-med">
+              <Typography variant="title">
                 11.1 B
               </Typography>
-              <Typography variant="subtitle2" component="h2">
+              <Typography variant="bodyImportant">
                 doses administered
               </Typography>
             </div>
-            <div className="lightblue box">
-              <Typography variant="h7" component="h2">
+            <div className="lightblue box border-radius-med">
+              <Typography variant="title">
                 57.8 %
               </Typography>
-              <Typography variant="subtitle2" component="h2">
+              <Typography variant="bodyImportant">
                 fully vaccinated
               </Typography>
             </div>
-            <div className="teal box">
-              <Typography variant="h7" component="h2">
+            <div className="teal box border-radius-med">
+              <Typography variant="title">
                 20.5 % 
               </Typography>
-              <Typography variant="subtitle2" component="h2">
+              <Typography variant="bodyImportant">
                 received booster
               </Typography>
             </div>
