@@ -1,5 +1,4 @@
 import React from 'react'
-import NavbarComp from './components/NavBar'
 import Footer from './components/Footer'
 import Home from './pages/home'
 import Register from './pages/Register'
@@ -17,14 +16,30 @@ import "./styles/App.css"
 import { Context, initialValue } from './context';
 
 import {
-    BrowserRouter as Router,
     Routes,
     Route,
-    Link,
     BrowserRouter
   } from "react-router-dom";
+import Planner from './pages/Planner'
 
 const theme = createTheme({
+  palette: {
+    teal: {
+      main: '#0F83A0',
+    },
+  },
+  // components: {
+  //   MuiDesktopDatePicker: {
+  //     styleOverrides:{
+  //       root: {
+  //         color: "#0F83A0",
+  //         svg: {
+  //           color: "#0F83A0",
+  //         }
+  //       }
+  //     }
+  //   }
+  // },
   typography: {
     fontFamily: ['Nunito', 'serif', 'Open Sans'].join(','),
     title: {
@@ -140,6 +155,7 @@ function App() {
               </Route>
               <Route path="/finder" element={<DestinationFinder/>}/>
               <Route path="/saved" element={<SavedLocations/>}/>
+              <Route path="/planner" element={<Planner/>}/>
             </Routes>
           </BrowserRouter>
           <Footer></Footer>

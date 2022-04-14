@@ -4,7 +4,7 @@ import RegisterForm from '../components/RegisterForm'
 import { BigTitle } from '../components/Form'
 import API_URL from '../config.json'
 import { Context, useContext } from '../context';
-import NavbarComp from '../components/NavBar';
+import NavbarComp from '../components/Navbar';
 
 function Register () {
   const navigate = useNavigate()

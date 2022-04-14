@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router'
 import LoginForm from '../components/LoginForm'
-import NavbarComp from '../components/NavBar';
+import NavbarComp from '../components/Navbar';
 import API_URL from '../config.json'
 import { Context, useContext } from '../context';
 

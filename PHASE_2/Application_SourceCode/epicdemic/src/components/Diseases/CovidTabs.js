@@ -6,8 +6,8 @@ import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
 import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
 import new_cases from "../../static/new_cases.jpg"
-// import '../../styles/Home.css'
-
+import { LineChart, Line, XAxis, YAxis } from 'recharts';
+import "../../styles/Home.css"
 
 const blue = {
   50: '#F0F7FF',
@@ -76,8 +76,7 @@ const TabsList = styled(TabsListUnstyled)`
   align-content: space-between;
 `;
 
-export default function CovidTabs() {
-
+export default function CovidTabs({casesChartData}) {
   return (
     <div style={{ backgroundColor: '#62B6CB' }} className="covidtabs">
       <div style={{ width: '300px' }}>
@@ -87,8 +86,13 @@ export default function CovidTabs() {
             <Tab>Deaths</Tab>
           </TabsList>
           <TabPanel value={0}>
-            <div className='sub-title'>Daily Cases</div>
-            <img src={new_cases} style={{ width: "900px" }}></img>
+            <div className='sub-title'>Cases</div>
+            <LineChart width={900} height={450} data={casesChartData}>
+              <Line type="monotone" dataKey="data" stroke="#8884d8"/>
+              <XAxis dataKey="name" tickCount={casesChartData.length}/>
+              <YAxis tickFormatter={DataFormatter}/>
+            </LineChart>
+            {/* <img src={new_cases} style={{ width: "900px" }}></img> */}
           </TabPanel>
           <TabPanel value={1}>
             <div className='sub-title'>Deaths</div>
@@ -100,4 +104,17 @@ export default function CovidTabs() {
 
 
   );
+}
+
+// https://stackoverflow.com/questions/52320447/recharts-set-y-axis-value-base-of-number-displayed
+const DataFormatter = (number) => {
+  if(number > 1000000000){
+    return (number/1000000000).toString() + 'B';
+  }else if(number > 1000000){
+    return (number/1000000).toString() + 'M';
+  }else if(number > 1000){
+    return (number/1000).toString() + 'K';
+  }else{
+    return number.toString();
+  }
 }

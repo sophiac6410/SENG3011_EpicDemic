@@ -90,8 +90,7 @@ function Overview() {
       var total = vaccine.timeline[Object.keys(vaccine.timeline).pop()] / 2;
 
       newData["vaccinationPercentage"] = total * 100 / newData.population;
-      
-      console.log(newData);
+
       setData(newData);
     }
 
