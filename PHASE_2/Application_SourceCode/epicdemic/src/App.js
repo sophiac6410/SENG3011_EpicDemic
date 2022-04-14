@@ -16,12 +16,11 @@ import "./styles/App.css"
 import { Context, initialValue } from './context';
 
 import {
-    BrowserRouter as Router,
     Routes,
     Route,
-    Link,
     BrowserRouter
   } from "react-router-dom";
+import Planner from './pages/Planner'
 
 const theme = createTheme({
   typography: {
@@ -129,6 +128,7 @@ function App() {
               </Route>
               <Route path="/finder" element={<DestinationFinder/>}/>
               <Route path="/saved" element={<SavedLocations/>}/>
+              <Route path="/planner" element={<Planner/>}/>
             </Routes>
           </BrowserRouter>
           <Footer></Footer>

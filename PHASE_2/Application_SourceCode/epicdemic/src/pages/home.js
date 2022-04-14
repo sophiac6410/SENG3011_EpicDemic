@@ -20,6 +20,11 @@ function Home() {
   const goDestination = () =>{  
     navigate('/finder');
   }
+
+  const goPlaner = () => {
+    navigate('/planner');
+  }
+
   return (
       <div style={{backgroundColor: '#F4FBFF'}}>
         <div className="bg-sky" style={{height: '100vh'}}>
@@ -36,7 +41,7 @@ function Home() {
                 <DarkButton onClick={goDestination} className="align-self-center me-5 pe-5 ps-5">  
                   <Typography variant="bodyImportant">Find a destination</Typography>
                 </DarkButton>
-                <WhiteButton onClick={goDestination} className="align-self-center ms-4 pe-5 ps-5">
+                <WhiteButton onClick={goPlaner} className="align-self-center ms-4 pe-5 ps-5">
                   <Typography variant="bodyImportant">Plan my trip</Typography>
                 </WhiteButton>
               </div>
