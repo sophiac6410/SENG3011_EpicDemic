@@ -160,7 +160,42 @@ class LocationAreaRestriction(BaseModel):
 	date: str | None = None
 	restrictionType: str | None = None
 
+class LocationAttractions(BaseModel):
+	entry_status: str = Field(..., description="The description of the entry status", 
+                    example="Allowed")
+	last_updated: str = Field(..., description="The date the rule was last updated", 
+                    example="2022-04-07")
 
+class LocationEvents(BaseModel):
+	entry_status: str = Field(..., description="The description of the entry status", 
+                    example="Allowed")
+	last_updated: str = Field(..., description="The date the rule was last updated", 
+                    example="2022-04-07")
+
+class LocationEntry(BaseModel):
+	entry_status: str = Field(..., description="The description of the entry status", 
+                    example="Allowed")
+	info: str = Field(..., description="More information of what establishments are open", 
+                    example="Cultural events such as theatre, cinema and concerts are also allowed")
+	last_updated: str = Field(..., description="The date the rule was last updated", 
+                    example="2022-04-07")
+
+class LocationShopping(BaseModel):
+	entry_status: str = Field(..., description="The description of the entry status", 
+                    example="Allowed")
+	last_updated: str = Field(..., description="The date the rule was last updated", 
+                    example="2022-04-07")
+
+class LocationVaccine(BaseModel):
+	entry_status: str = Field(..., description="The description of the entry status", 
+                    example="Allowed")
+	info: str = Field(..., description="More information of the vaccines", 
+                    example="Fully vaccinated people who have received both doses of a two-series ")
+	last_updated: str = Field(..., description="The date the rule was last updated", 
+                    example="2022-04-07")
+	source: str = Field(..., description="More information of what establishments are open", 
+                    example="https://www.covidpasscertificate.com/covid-vaccines-for-travel-to-euro")
+	
 
 class LocationCovidQuery(BaseModel):
 	cases_per_country: List[LocationCovid] = Field(..., description="The list of dict containing countries coordinates and their cases")
@@ -173,6 +208,11 @@ class LocationTravelOverview(BaseModel):
 	area_policy: LocationAreaPolicy
 	tracing: LocationTracing
 	area_restriction: List[LocationAreaRestriction]
+	attractions_info: LocationAttractions
+	entry_info: LocationEntry
+	event_info: LocationEvents
+	shopping_info: LocationShopping
+	vaccine_info: LocationVaccine
 
 class LocationResponse(baseModels.Response):
 	data: Location

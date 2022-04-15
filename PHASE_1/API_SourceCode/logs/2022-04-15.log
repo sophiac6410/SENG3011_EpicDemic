@@ -469,3 +469,16 @@
     Process Time: 0.01703500747680664
     ----------------------------------------
     
+    Timestamp: 1650005496.955714
+    Accessed Time: 2022-04-15 16:51:36.955714
+    Client: 127.0.0.1:58717
+    
+    Request: GET /v1/locations/id/travel
+    Request Query Param: 
+			location_id=FR
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.09346699714660645
+    ----------------------------------------
+    

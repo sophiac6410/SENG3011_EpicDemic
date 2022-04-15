@@ -106,7 +106,12 @@ async def get_travel_overview(
 				'isRequired': data['tracing']['isRequired'],
 				'androidLink': data['tracing']['androidUrl'][0],
 				'iosLink': data['tracing']['iosUrl'][0]
-			}
+			},
+			'attractions_info': data['attractions_info'],
+			'entry_info': data['entry_info'],
+			'event_info': data['event_info'],
+			'shopping_info': data['shopping_info'],
+			'vaccine_info': data['vaccine_info']
 		})
 
 
