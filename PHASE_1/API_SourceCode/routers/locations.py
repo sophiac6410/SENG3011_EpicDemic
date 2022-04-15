@@ -59,15 +59,15 @@ async def get_covid_cases():
 
 
 ############## GET SAEFTY SCORE OF A COUNTRY ###############
-@router.get("/id/safety", status_code=status.HTTP_200_OK, response_model=locationModels.LocationSafetyResponse)
+@router.get("/{id}/safety", status_code=status.HTTP_200_OK, response_model=locationModels.LocationSafetyResponse)
 async def get_location_by_id(
-	location_id: str = Query(
+	id: str = Path(
 		...,
 		description="The country's unique ISO code",
 		example="PH",
 	)
 ):
-    data = list(safety_col.find({'location_id': location_id}))
+    data = list(safety_col.find({'location_id': id}))
     data = data[0]
 
     return baseModels.createResponse(True, 200, {
@@ -82,15 +82,15 @@ async def get_location_by_id(
 
 
 ############## GET TRAVEL OVERVIEW OF THE COUNTRY ###############
-@router.get("/id/travel", status_code=status.HTTP_200_OK, response_model=locationModels.LocationTravelOverviewResponse)
+@router.get("/{id}/travel", status_code=status.HTTP_200_OK, response_model=locationModels.LocationTravelOverviewResponse)
 async def get_travel_overview(
-	location_id: str = Query(
+	id: str = Path(
 		...,
 		description="The country's unique ISO code",
-		example="FR",
+		example="PH",
 	)
 ):
-	data = list(travel_col.find({'_id': location_id}))[0]
+	data = list(travel_col.find({'_id':id}))[0]
 	area_list = []
 	print('--area restriction--')
 	for a in data['area_restrction'][0]:
