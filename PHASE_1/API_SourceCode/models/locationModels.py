@@ -38,6 +38,21 @@ class LocationCovid(BaseModel):
 	cases: int = Field(..., description="The total number of covid cases in the country",
                     example=300000000)
 
+class LocationSafetyScores(BaseModel):
+	lqbtq: int = Field(..., description="The likelihood of discrimination against the LBTQ+ community from 0 (Least) to 100 (Most likely)", 
+                    example=23)
+	medical: int = Field(..., description="The likelihood of illness or disease, assessment of water and air quality, and access to reliable medical care 0 (least likely) - 100 (most likely)", 
+                    example=23)
+	women: int = Field(..., description="Likelihood of inappropriate behavior against females 0 (least likely) - 100 (most likely)", 
+                    example=23)
+	theft: int = Field(..., description="The likelihood of theft 0 (least likely) - 100 (most likely)", 
+                    example=23)
+	physical_harm: int = Field(..., description="The likelihood of injury due to harmful intent 0 (least likely) - 100 (most likely)", 
+                    example=23)
+	political_freedom: int = Field(..., description="Potential for infringement of political rights or political unrest 0 (least likely) - 100 (most likely)", 
+                    example=23)
+	last_updated: str = Field(..., description="The date the scores are last updated",
+                    example="2022-04-14")
 
 class LocationCovidQuery(BaseModel):
 	cases_per_country: List[LocationCovid] = Field(..., description="The list of dict containing countries coordinates and their cases")
@@ -47,3 +62,6 @@ class LocationResponse(baseModels.Response):
 
 class LocationCovidResponse(baseModels.Response):
 	data: LocationCovidQuery
+
+class LocationSafetyResponse(baseModels.Response):
+	data: LocationSafetyScores

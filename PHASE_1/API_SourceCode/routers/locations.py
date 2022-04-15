@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Query, status
 from fastapi.responses import JSONResponse
 from util import DATETIME_REGEX, parse_datetime_string
-from database import locations_col, diseaseLocations_col
+from database import locations_col, diseaseLocations_col, safety_col
 import re
 from datetime import datetime
 import pytz
@@ -53,4 +53,29 @@ async def get_covid_cases():
 	return baseModels.createResponse(True, 200, {
 		"cases_per_country": cases_per_country
 	})
+
+
+############## GET SAEFTY SCORE OF A COUNTRY ###############
+@router.get("/id/safety", status_code=status.HTTP_200_OK, response_model=locationModels.LocationSafetyResponse)
+async def get_location_by_id(
+	location_id: str = Query(
+		...,
+		description="The country's unique ISO code",
+		example="PH",
+	)
+):
+    data = list(safety_col.find({'location_id': location_id}))
+    data = data[0]
+
+    return baseModels.createResponse(True, 200, {
+		'lqbtq': data['lgbtq'],
+		'medical': data['medical'],
+		'theft': data['theft'],
+		'physical_harm': data['physicalHarm'],
+		'political_freedom': data['politicalFreedom'],
+		'women': data['women'],
+		'last_updated': data['updated']
+	})
+
+
 

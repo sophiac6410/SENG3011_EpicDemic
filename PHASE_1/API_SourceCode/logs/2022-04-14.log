@@ -371,3 +371,90 @@
     Process Time: 0.08152198791503906
     ----------------------------------------
     
+    Timestamp: 1649911767.43132
+    Accessed Time: 2022-04-14 14:49:27.431320
+    Client: 127.0.0.1:50726
+    
+    Request: GET /
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.007753133773803711
+    ----------------------------------------
+    
+    Timestamp: 1649911771.22023
+    Accessed Time: 2022-04-14 14:49:31.220230
+    Client: 127.0.0.1:50726
+    
+    Request: GET /DOCS
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0007338523864746094
+    ----------------------------------------
+    
+    Timestamp: 1649911775.723222
+    Accessed Time: 2022-04-14 14:49:35.723222
+    Client: 127.0.0.1:50726
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0007228851318359375
+    ----------------------------------------
+    
+    Timestamp: 1649911775.830891
+    Accessed Time: 2022-04-14 14:49:35.830891
+    Client: 127.0.0.1:50726
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.03411507606506348
+    ----------------------------------------
+    
+    Timestamp: 1649911889.006144
+    Accessed Time: 2022-04-14 14:51:29.006144
+    Client: 127.0.0.1:50758
+    
+    Request: GET /v1/locations/id/safety
+    Request Query Param: 
+			location_id=FR
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.30955004692077637
+    ----------------------------------------
+    
+    Timestamp: 1649911906.500239
+    Accessed Time: 2022-04-14 14:51:46.500239
+    Client: 127.0.0.1:50762
+    
+    Request: GET /v1/locations/id/safety
+    Request Query Param: 
+			location_id=BE
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0836951732635498
+    ----------------------------------------
+    
+    Timestamp: 1649911921.069045
+    Accessed Time: 2022-04-14 14:52:01.069045
+    Client: 127.0.0.1:50763
+    
+    Request: GET /v1/locations/id
+    Request Query Param: 
+			location_id=BE
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.09121084213256836
+    ----------------------------------------
+    
