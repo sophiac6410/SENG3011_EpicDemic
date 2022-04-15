@@ -16,7 +16,7 @@ import { useNavigate, } from 'react-router-dom';
 import React, { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import { CircleNotifications, CircleNotificationsOutlined } from "@mui/icons-material";
-
+import { saveDestination, getDestination, getUserSaved } from "../apiCalls";
 
 const linkStyle = {
   margin: "1rem",
@@ -33,18 +33,21 @@ function Destination() {
   useEffect(() => {
     if (code === null) return;
     // Get the country and code
-    async function fetchData() {
-      const locationData = await fetch(`http://localhost:8000/v1/locations/id?location_id=${code}`).then(res => res.json())
-    
+    async function fetchData () {
+      const data = await getDestination(code);
       setDest({
         code: code,
-        country: locationData.data.country,
+        country: data.country
         // longitude: locationData.data.longitude,
         // latitude: locationData.data.latitude
       })
+      const data2 = await getUserSaved();
+      console.log(data2.saved_locations);
+      console.log(data2.saved_locations.includes(code));
+      setSaved(data2.saved_locations.includes(code));
     }
-    fetchData();
-  }, [code])
+    fetchData(code);
+  }, [code]);
 
   if (dest === null) {
     return (
@@ -52,29 +55,15 @@ function Destination() {
     )
   }
 
-  const saveApiCall = async (meth) => {
-    try {
-      const response = await fetch(`${API_URL.API_URL}/v1/users/location/${code}`, {
-        method: meth,
-        headers: {
-          'Content-type': 'application/json',
-          Authorization: localStorage.getItem('token')
-        }
-      });
-      const data = await response.json();
-      if (!data.ok) {
-        console.log(data);
-        alert(data.data.error);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
   const handleClickSave = (event) => {
+    let method;
+    if (saved) {
+      method = 'DELETE';
+    } else {
+      method = 'PUT';
+    }
     setSaved(event.target.checked);
-    const meth = 'PUT'
-    saveApiCall(meth);
+    saveDestination(method, code);
   }
 
   return(
@@ -83,7 +72,7 @@ function Destination() {
       {/* <TinySearch className="bg-lightblue"></TinySearch> */}
       <div className="d-flex justify-content-start align-items-center flex-start mt-3 mx-5">
         <div className="text-center m-3">
-          <Checkbox sx={{display:'block', mx: 'auto'}} icon={<FavoriteBorder fontSize="large" className="color-medium-teal"/>} checkedIcon={<Favorite fontSize="large" className="color-medium-teal"/>} onClick={handleClickSave} />
+          <Checkbox sx={{display:'block', mx: 'auto'}} checked={saved} icon={<FavoriteBorder fontSize="large" className="color-medium-teal"/>} checkedIcon={<Favorite fontSize="large" className="color-medium-teal"/>} onClick={handleClickSave} />
           <Typography variant="caption">Save</Typography>
         </div>
         <div className="text-center m-3">

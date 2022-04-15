@@ -19,6 +19,7 @@ import React, { useState, useEffect } from "react";
 import CircleIcon from '@mui/icons-material/Circle';
 import WarningIcon from '@mui/icons-material/Warning';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import { colorScore } from "../styles/Theme"
 
 const intro = "Philippines, island country of Southeast Asia in the western Pacific Ocean. It is an archipelago consisting of more than 7,000 islands and islets lying about 500 miles (800 km) off the coast of Vietnam. Manila is the capital, but nearby Quezon City is the country’s most-populous city."
 const safetySource = "The safety and security ratings determined by GeoSure GeoSafeScores which analyzes crime, health and economic data, official travel alerts, local reporting and a variety of other sources.  Scores go from 1 (not likely) to 100 (very likely)."
@@ -33,20 +34,6 @@ const safetyDis = [
   {title: "POLITICAL FREEDOM", text: "Potential for infringement of political rights or political unrest", score: 50},
   {title: "LGBTQ", text: "Likelihood of harm or discrimination against LGBTQ persons or groups and level of caution required at location", score: 39}
 ]
-
-const colorScore = (score) => {
-  if (score >= 0 && score <= 20) {
-    return "#1CC02C"
-  } else if (score <= 40) {
-    return "#FFC700"
-  } else if (score <= 60) {
-    return "#FFA800"
-  } else if (score <= 80) {
-    return "#ED6400"
-  } else if (score <= 100) {
-    return "#DA4848"
-  }
-}
 
 const SafetyBoard = safetyDis.map(function(props) {
     const bgColor = colorScore(props.score);

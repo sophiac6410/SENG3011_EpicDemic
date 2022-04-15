@@ -2,20 +2,32 @@ import { Card, Col, Row } from "react-bootstrap";
 import SimCardAlertIcon from '@mui/icons-material/SimCardAlert';
 import CircleIcon from '@mui/icons-material/Circle';
 import { useNavigate, } from 'react-router-dom';
-import React from "react";
+import React, { useEffect } from "react";
 import { Typography } from "@mui/material";
+import {colorScore} from "../../styles/Theme";
+import { getDestination } from "../../apiCalls";
   
-function LocationCard() {
+function LocationCard({id}) {
   let navigate = useNavigate(); 
   const routeChange = () =>{  
-    navigate('/destination/PHILIPPINES');
+    navigate(`/destination/${id}`);
   }
+
+  const [country, setCountry] = React.useState('');
+
+  useEffect(() => {
+    async function fetchData () {
+      const data = await getDestination(id);
+      setCountry(data.country);
+    }
+    fetchData();
+  }, []);
 
   return (
     <Card className="m-2 border-radius-small" style={{width: 'auto'}} onClick={ routeChange }>
       <Card.Body style={{padding: '20px 30px'}}>
         <Card.Title>
-          <Typography variant="heading3">Philippines</Typography>
+          <Typography variant="heading3">{country}</Typography>
         </Card.Title>
         <Card.Subtitle className="pt-1 text-muted">
           <Typography variant="bodyText">Overall Advice</Typography>

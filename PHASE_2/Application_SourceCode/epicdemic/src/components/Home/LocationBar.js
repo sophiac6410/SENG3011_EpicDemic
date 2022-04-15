@@ -7,6 +7,8 @@ import {Row, Col } from "react-bootstrap";
 import Typography from '@mui/material/Typography'
 import { useNavigate } from 'react-router'
 import { DarkButton } from "../../styles/Button";
+import { Context, useContext } from '../../context';
+import PropTypes from 'prop-types';
 
 const responsive = {
     superLargeDesktop: {
@@ -28,15 +30,28 @@ const responsive = {
     }
   };
 
-function LocationBar() {
-  let navigate = useNavigate(); 
-
-  return(
-    <Row className="ms-1 me-1 pt-4 bg-light-teal">
-      <Col className="mt-2" style={{ paddingLeft: '9%', paddingRight: '9%', marginBottom: '3%'}}>
+function getBar (loggedIn, locations) {
+  if (loggedIn) {
+    if (locations.length === 0) {
+      return (
+        <>
         <div className="text-center">
-          <Typography variant="heading1" className="color-white">YOUR SAVED LOCATIONS</Typography>
+          <Typography variant="heading3" className="color-dark-grey">You have no saved locations</Typography>
+          <Typography variant="heading3" className="color-dark-grey">Save locations to receive important updates on travel!</Typography>
         </div>
+        <Row md={5} className="justify-content-center mt-5 mb-3">
+          <DarkButton className="align-self-center"
+            onClick={() => {
+              navigate('/finder');
+            }}>
+            <Typography variant="bodyImportant">Search Destinations</Typography>
+          </DarkButton>
+        </Row>
+        </>
+      )
+    } else {
+      return (
+        <>
         <div className="location-carousel">
           <Carousel 
             responsive={responsive} 
@@ -47,15 +62,13 @@ function LocationBar() {
             itemClass="location-card"
             centerMode={true}
             className="bg-light-teal"
-
           >
-              <LocationCard></LocationCard>
-              <LocationCard></LocationCard>
-              <LocationCard></LocationCard>
-              <LocationCard></LocationCard>
-              <LocationCard></LocationCard>
-              <LocationCard></LocationCard>
-              <LocationCard></LocationCard>
+            {locations !== undefined
+              ? locations.map((loc, index) => {
+                  return <LocationCard key={index} id={loc}/>
+                })
+              : <></>
+            }
           </Carousel>
         </div>
         <Row md={5} className="justify-content-center mt-5 mb-3">
@@ -66,6 +79,31 @@ function LocationBar() {
               <Typography variant="bodyImportant">See all latest updates</Typography>
           </DarkButton>
         </Row>
+        </>
+      )
+    }
+  } else {
+    return (
+      <div className="text-center">
+      <Typography variant="heading3" className="color-dark-grey m-5">Login in to save locations and receive important updates on travel!</Typography>
+      </div>
+    )
+  }
+}
+
+function LocationBar(props) {
+  LocationBar.propTypes = { locations: PropTypes.array }
+  console.log(props.locations);
+  let navigate = useNavigate(); 
+  const { getters } = useContext(Context);
+  const Bar = getBar(getters.loggedIn, props.locations);
+  return(
+    <Row className="ms-1 me-1 pt-4 bg-light-teal">
+      <Col className="mt-2" style={{ paddingLeft: '9%', paddingRight: '9%', marginBottom: '3%'}}>
+        <div className="text-center">
+          <Typography variant="heading1" className="color-white">YOUR SAVED LOCATIONS</Typography>
+        </div>
+        {Bar}
       </Col>
     </Row>
   )
