@@ -48,13 +48,13 @@ async def register(user: RegisterUser):
     return baseModels.createResponse(True, 200, {"token": auth.create_access_token(user.email)})
 
 @router.get("/saved", status_code=status.HTTP_200_OK, tags=["users"], response_model=userModels.SavedResponse, responses={401: {"model": baseModels.ErrorResponse}})
-async def get_saved_locations_and_trips(Authorization: str = Header(None, example=token_example)):
+async def get_saved_locations_and_trips(Authorization: str = Header(..., example=token_example)):
     user = auth.get_current_user(Authorization)
     saved = {
         "saved_locations": user["saved_locations"],
         "saved_trips": user["saved_trips"]
     }
-    return baseModels.createResponse(True, 200, {"saved": saved})
+    return baseModels.createResponse(True, 200, saved)
 
 @router.put("/location/{ISO_Code}", status_code=status.HTTP_200_OK, tags=["users"], response_model=baseModels.Response, responses={401: {"model": baseModels.ErrorResponse}})
 async def add_saved_location (

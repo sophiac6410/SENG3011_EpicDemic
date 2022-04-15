@@ -11,8 +11,9 @@ import GenericSearchText from "../components/GenericSearchText";
 import NavbarComp from '../components/NavBar';
 import { Typography } from '@mui/material';
 
+
 const SavedLocations = () => {
-    let navigate = useNavigate(); 
+    let navigate = useNavigate();
 
     return (
         <Container fluid style={{"overflowX": "hidden", "paddingLeft": 0, "paddingRight": 0, "marginLeft": 0, "marginRight": 0, "backgroundColor": "#EEF5FF"}}>
