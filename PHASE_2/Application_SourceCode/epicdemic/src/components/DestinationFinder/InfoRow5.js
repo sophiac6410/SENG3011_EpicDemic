@@ -2,21 +2,22 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Button, Image } from "react-bootstrap";
 import "../../styles/DestinationFinder.css";
 import BlueDot from "../../static/bluedot.svg"
+import { Typography } from "@mui/material";
 
 const InfoRow5 = ({country, desc, dateTime}) => {
     return (
-        <Row className="info-row">
+        <Row className="info-row bg-white" style={{margin: '2% 0%'}}>
             <Col xs={1}>
                 <Image src={BlueDot}/>
             </Col>
-            <Col xs={1}>
-                <b>{country}</b>
+            <Col xs={2}>
+                <Typography variant="bodyHeading">{country}</Typography>
             </Col>
-            <Col xs={8}>
-                {desc}
+            <Col xs={7}>
+                <Typography variant="bodyText">{desc}</Typography>
             </Col>
             <Col xs={1}>
-                {dateTime.toLocaleDateString()}
+                <Typography variant="bodyText">{dateTime.toLocaleDateString()}</Typography>
             </Col>
         </Row>
     );

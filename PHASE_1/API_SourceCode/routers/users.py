@@ -2,7 +2,7 @@ from datetime import datetime
 from email.header import Header
 from lib2to3.pgen2 import token
 from dateutil.parser import parse
-from fastapi import APIRouter, status, Header
+from fastapi import APIRouter, status, Header, Query, Path
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 from datetime import datetime, timedelta
@@ -15,9 +15,11 @@ router = APIRouter(
     prefix='/v1/users'
 )
 
+token_example = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huLmRvZUBlbWFpbC5jb20iLCJleHAiOjE2NDk5OTc4NTJ9.bkGLfoU3AUHUNf46ctdFsoHlC7mYfFE1Rl6P97Xt8Uc"
+
 class User(BaseModel):
-    email: str = Field(..., description="The user's email", example="example@email.com")
-    password: str = Field(..., description="The user's password", example="password")
+    email: str = Field(..., description="The user's email", example="john.doe@email.com")
+    password: str = Field(..., description="The user's password", example="john")
 
 class RegisterUser(User):
     name: str = Field(..., description="The user's name", example="John Doe")
@@ -45,25 +47,36 @@ async def register(user: RegisterUser):
         })
     return baseModels.createResponse(True, 200, {"token": auth.create_access_token(user.email)})
 
-# @router.get("/saved", status_code=status.HTTP_200_OK, tags=["users"], response_model=userModels.SavedResponse, responses={401: {"model": baseModels.ErrorResponse}})
-# async def getSaved(Authorization: str = Header(None)):
-#     user = auth.get_current_user(Authorization)
-#     saved = {
-#         "saved_locations": user["saved_locations"],
-#         "saved_trips": user["saved_trips"]
-#     }
-#     return baseModels.createResponse(True, 200, {"saved": saved})
+@router.get("/saved", status_code=status.HTTP_200_OK, tags=["users"], response_model=userModels.SavedResponse, responses={401: {"model": baseModels.ErrorResponse}})
+async def get_saved_locations_and_trips(Authorization: str = Header(None, example=token_example)):
+    user = auth.get_current_user(Authorization)
+    saved = {
+        "saved_locations": user["saved_locations"],
+        "saved_trips": user["saved_trips"]
+    }
+    return baseModels.createResponse(True, 200, {"saved": saved})
 
-# @router.put("/saved", status_code=status.HTTP_200_OK, tags=["users"], response_model=userModels.SavedResponse, responses={401: {"model": baseModels.ErrorResponse}})
-# async def putSaved (
-#     Authorization: str = Header(None)
-#     location: str = Field(None, description="The ISO-2 code of the location that is being saved", example="PH")
-#     trip: int = Field(None, description="The id of the trip that is being saved")
-#     ):
-#     user = auth.get_current_user(Authorization)
-#     saved = {
-#         "saved_locations": user["saved_locations"],
-#         "saved_trips": user["saved_trips"]
-#     }
-#     return baseModels.createResponse(True, 200, {"saved": saved})
-# )
+@router.put("/location/{ISO_Code}", status_code=status.HTTP_200_OK, tags=["users"], response_model=baseModels.Response, responses={401: {"model": baseModels.ErrorResponse}})
+async def add_saved_location (
+    Authorization: str = Header(..., example=token_example),
+    ISO_Code: str = Path(..., description="The ISO code of the location that is being saved", example="PH"),
+    ):
+    user = auth.get_current_user(Authorization)
+    users_col.update_one(
+        {"email": user['email']},
+        {"$push": {"saved_locations": ISO_Code}}
+    )
+    return baseModels.createResponse(True, 200, {})
+
+@router.delete("/location/{ISO_Code}", status_code=status.HTTP_200_OK, tags=["users"], response_model=baseModels.Response, responses={401: {"model": baseModels.ErrorResponse}})
+async def delete_saved_location (
+    Authorization: str = Header(..., example=token_example),
+    ISO_Code: str = Path(..., description="The ISO code of the location that is being saved", example="PH"),
+    ):
+    user = auth.get_current_user(Authorization)
+    users_col.update_one(
+        {"email": user['email']},
+        {"$pull": {"saved_locations": ISO_Code}}
+    )
+    return baseModels.createResponse(True, 200, {})
+

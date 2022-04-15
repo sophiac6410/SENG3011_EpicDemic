@@ -10,19 +10,19 @@ export default function NewsCard({col, fontC}) {
   return (
     <Card sx={{height: '97%', backgroundColor: col, alignItems: "center", borderRadius: '20px' }} className="m-2" >
       <CardContent sx={{position: 'relative', py: 3, px: 3, top: '20%'}}>
-        <Typography variant="bodyText" sx={{display: 'block', pb: 2, color: fontC }} align="center">
+        <Typography variant="bodyText" sx={{ pb: 2, color: fontC }} align="center">
           38 minutes ago
         </Typography>
-        <Typography variant="bodyHeading" sx={{display: 'block'}} style={{fontFamily: 'Open Sans', marginBottom: 1.5, color: fontC, fontWeight: 'bold'}} align="center">
+        <Typography variant="bodyHeading" style={{marginBottom: 1.5, color: fontC}} align="center">
           {/* <text style={{"font-size": "22px", "font-weight": "bold"}}> */}
             Travel restrictions easing in Japan - Now open to its neighbouring countries! 
           {/* </text> */}
         </Typography>
-        <Typography variant="bodyText" sx={{display: 'block', mb: 1.5 }} color={fontC} align="center" className="mt-4">
+        <Typography variant="bodyText" sx={{mb: 1.5 }} color={fontC} align="center" className="mt-4">
           Source: Google
         </Typography>
         {/* <Button size="small" variant="text" align="center"> */}
-          <Typography variant="bodyText" sx={{ display: 'block', mb: 1.5, textDecoration: 'underline', cursor: 'pointer' }} align="center" color={fontC}>
+          <Typography variant="bodyText" sx={{mb: 1.5, textDecoration: 'underline', cursor: 'pointer' }} align="center" color={fontC}>
             Read more
           </Typography>
         {/* </Button> */}

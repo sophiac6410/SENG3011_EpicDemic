@@ -41,7 +41,7 @@ class NewsBar extends React.Component {
         <Row className="mt-2 justify-content-center">
           <div className="mb-3 text-center me-5" style={{ color: '#515151' }}>
             <LanguageIcon fontSize="large" className="color-medium-blue"  sx={{marginBottom: '1%', marginRight: '0.5%'}}/>
-            <Typography variant="heading1" className="color-dark-teal">GLOBAL NEWS</Typography>
+            <Typography variant="heading1" className="color-dark-teal" style={{display: 'inline'}}>GLOBAL NEWS</Typography>
           </div>
           <div className="news-carousel bg-off-white">
             <Carousel 

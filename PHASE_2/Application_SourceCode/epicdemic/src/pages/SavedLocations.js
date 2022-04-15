@@ -8,7 +8,8 @@ import InfoRow5 from "../components/DestinationFinder/InfoRow5";
 import HeaderInfoRow4 from "../components/DestinationFinder/HeaderInfoRow4";
 import "../styles/DestinationFinder.css";
 import GenericSearchText from "../components/GenericSearchText";
-import NavbarComp from '../components/Navbar';
+import NavbarComp from '../components/NavBar';
+import { Typography } from '@mui/material';
 
 const SavedLocations = () => {
     let navigate = useNavigate(); 
@@ -22,21 +23,23 @@ const SavedLocations = () => {
                 </Col>
                 <Col style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
                     <Row style={{"color": "white", "display": "flex", "flexDirection": "column", "justifyContent": "center", "alignItems": "center"}}>
-                        <b style={{"fontSize": "4vh"}}>SAVED LOCATIONS AND UPDATES</b>
-                        <p>Manage and view your saved locations as well as see all notifications</p>
+                        <Typography variant="title">SAVED LOCATIONS AND UPDATES</Typography>
+                        <Typography variant="heading3">Manage and view your saved locations as well as see all notifications</Typography>
                     </Row>
                 </Col>
             </Row>
             <Row style={{"marginTop": "10vh", "marginLeft": "5vw", "marginRight": "5vw"}}>
                 <Col style={{"marginBottom": "1vh"}}>
-                    <b style={{"marginLeft": "2vw", "font": "Nunito", "fontSize": "3vh" }}>Your saved locations</b>
-                    <Image style={{"marginLeft": "2vw", "marginBottom": "1vh"}}src={BluePlus}/>
+                    <Typography variant="heading2" style={{display: 'inline'}}>Your saved locations</Typography>
+                    <Image height="60%" style={{"marginLeft": "2vw", "marginBottom": "1vh"}}src={BluePlus}/>
                 </Col>
-                <GenericSearchText
-                    fieldLabel="Search a saved location..."
-                />
-                <Container fluid className="saved-locations">
-                    <HeaderInfoRow4/>
+                <Col>
+                    <GenericSearchText
+                        fieldLabel="Search a saved location..."
+                    />
+                </Col>
+                <HeaderInfoRow4/>
+                <Container style={{overflowY: 'scroll', height: '60vh', marginBottom: '3%'}}>
                     {infoRowData.map((infoRow, idx) => {
                         return (
                             <InfoRow4
@@ -47,14 +50,14 @@ const SavedLocations = () => {
                             travelStatus={infoRow.travelStatus}
                             saved={infoRow.saved}
                             />
-                            )
-                        })}
+                        )
+                    })}
                 </Container>
             </Row>
-            <Row style={{"backgroundColor": "#0F83A0"}}>
-                <Col style={{"marginTop": "5vh", "paddingLeft": 0, "paddingRight": 0, "marginLeft": "25vw", "marginRight": "25vw"}}>
-                    <b style={{"marginLeft": "1vw", "marginBottom": "2vh", "font": "Nunito", "fontSize": "3vh", "color": "white" }}>Latest updates on your current and saved locations</b>
-                    <Container fluid className="update-saved-locations">
+            <Row style={{backgroundColor: '#0F83A0'}}>
+                <Col style={{"marginTop": "5vh", marginBottom: '8vh', "paddingLeft": 0, "paddingRight": 0, "marginLeft": "25vw", "marginRight": "25vw"}}>
+                    <Typography variant="heading2" className="color-white" sx={{textAlign: 'center'}}>Latest updates on your current and saved locations</Typography>
+                    <Container fluid style={{overflowY: 'scroll', height: '60vh'}}>
                         {updatesRowData.map((row, idx) => {
                             return (
                                 <InfoRow5

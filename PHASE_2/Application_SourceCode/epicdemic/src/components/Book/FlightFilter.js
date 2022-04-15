@@ -4,56 +4,44 @@ import "../../styles/Book.css"
 import SliderTime from './SliderTime';
 import SliderPrice from './SliderPrice';
 import CheckboxAirline from './CheckboxAirline';
-import planeLanding from '../../static/planeLanding.svg';
-import planeTakeOff from '../../static/planeTakeOff.svg';
-
+import { LightButton } from "../../styles/Button";
+import { Typography } from '@mui/material';
+import FlightLandIcon from '@mui/icons-material/FlightLand';
+import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 
 function FlightFilter() {
   return (
     <div style={{
-      margin: '10px 20px',
-      marginRight: '40px'
+      marginRight: '3%',
+      marginBottom: '5%'
     }}>
       <div style={{
-        margin: '30px 0px'
+        margin: '3% 0px'
       }}>
-        <h1 style={{
-          fontSize: '14pt',
-          margin: '15px 0px'
-        }}>Time</h1>
-        <h2 style={{
-          fontSize: '12pt'
-        }}><img src={planeTakeOff} width='18px' style={{
-          marginRight: '10px'
-        }}></img>Take Off</h2>
+        <Typography variant="bodyText">Time</Typography>
+        <FlightTakeoffIcon className="color-dark-teal m-2" fontSize="small" sx={{display:'inline'}}/>
+        <Typography variant="bodyText" sx={{display:'inline'}}>Take Off</Typography>
         <SliderTime></SliderTime>
         <div style={{
           margin: '30px 0px'
         }}></div>
-        <h2 style={{
-          fontSize: '12pt'
-        }}><img src={planeLanding} width='18px' style={{
-          marginRight: '10px'
-        }}></img>Landing</h2>
+        <FlightLandIcon className="color-dark-teal m-2" fontSize="small" sx={{display:'inline'}}/>
+        <Typography variant="bodyText" sx={{display:'inline'}}>Landing</Typography>
         <SliderTime></SliderTime>
       </div>
       <div style={{
         margin: '50px 0px'
       }}>
-        <h1 style={{
-          fontSize: '14pt'
-        }}>Airline</h1>
+        <Typography variant="bodyText">Airline</Typography>
         <CheckboxAirline></CheckboxAirline>
       </div>
       <div style={{
         margin: '50px 0px'
       }}>
-        <h1 style={{
-          fontSize: '14pt'
-        }}>Price Range</h1>
+        <Typography variant="bodyText">Price Range</Typography>
         <SliderPrice></SliderPrice>
       </div>
-      <button class="btn-base btn-light  btn-flight btn-filter">Filter</button>
+      <LightButton sx={{marginLeft: '30%'}}>Filter</LightButton>
     </div>
   )
 }

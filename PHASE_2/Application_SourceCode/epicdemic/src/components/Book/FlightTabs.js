@@ -47,7 +47,7 @@ export default function FlightTabs() {
   };
 
   return (
-    <Box sx={{ width: '100%', margin: '10px 20px' }}>
+    <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="flight-tabs" centered>
           <Tab label="Departing Flights" {...a11yProps(0)} />

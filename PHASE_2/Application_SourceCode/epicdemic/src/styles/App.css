@@ -42,6 +42,21 @@
 .bg-sky-blue{
     background-color: #7CC9E9;
 }
+.bg-yellow {
+    background-color: #FFC700;
+}
+.bg-orange {
+    background-color: #FFA800;
+}
+.bg-dark-orange {
+    background-color: #ED6400;
+}
+.bg-green {
+    background-color: #1CC02C;
+}
+.bg-red {
+    background-color: #DA4848;
+}
 
 /* COLORS */
 .color-dark-grey {
@@ -55,6 +70,9 @@
 }
 .color-orange {
     color: #FFA800;
+}
+.color-dark-orange {
+    color: #ED6400;
 }
 .color-red {
     color: #DA4848;
@@ -138,6 +156,9 @@
 /* BORDER RADIUSES */
 .border-radius-large {
     border-radius: 50px;
+}
+.border-radius-med {
+    border-radius: 30px;
 }
 .border-radius-small {
     border-radius: 10px;

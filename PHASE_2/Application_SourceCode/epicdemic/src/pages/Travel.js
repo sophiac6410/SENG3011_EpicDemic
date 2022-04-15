@@ -7,7 +7,9 @@ import InfoRow3 from "../components/DestinationFinder/InfoRow3";
 import HeaderInfoRow3 from "../components/DestinationFinder/HeaderInfoRow3";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import NavbarComp from "../components/Navbar";
+import NavbarComp from "../components/NavBar";
+import { Typography } from "@mui/material";
+import CircleIcon from '@mui/icons-material/Circle';
 
 const validCheck = <p>
   Before you book your travel, check if you meet Australia’s definition of fully vaccinated for international travel purposes. To meet Australia’s vaccination requirements and be considered a ‘fully vaccinated’ traveller for the purpose of Australia’s border arrangements, you need to provide evidence that you either: 
@@ -109,43 +111,39 @@ function Travel() {
   }
 
   return(
-    <Container className="mt-4">
-      <NavbarComp bg={true}/>
+    <Container className="mt-4" style={{margin: '0% 15%', width: 'auto'}}>
       <Col>
         <Row>
-          <div className="larger-body">
+          <Typography variant="bodyHeading" className="color-dark-teal">
             TRAVEL STATUS
-          </div>
+          </Typography>
         </Row>
-        <Row className="align-items-center pt-1 justify-content-start mt-3">
+        <Row className="align-items-center pt-1 justify-content-start mt-3 mb-3">
           <Col md={1} className="justify-content-center">
-            <Row className="justify-content-center">
-              <img src={midDot} width="25px" height="25px">
-              </img>
-            </Row>
+            <CircleIcon className="color-orange"/>
           </Col>
           <Col className="pt-1">
-            <text style={{"font-size": "22px", "color": "#FFA800"}}>Open with Restrictions</text>
+            <Typography variant="bodyImportant" className="color-orange">Open with Restrictions</Typography>
           </Col>
         </Row>
-        <Row className="title-h2 mt-5"><div>Visiting the Phillippines</div></Row>
-        <div class="square border-start border-3 mt-5 mb-5" id="tealBorder">
-          <Row><div className="title-h3 mb-5">Before you travel</div></Row>
-          <Row><div className="title-h4 mb-2">Check if you are considered a vaccinated traveller</div></Row>
-          <Row><div className="body-text mb-2">{validCheck}</div></Row>
-          <Row><div className="title-h4 mt-3">Ensure you can provide proof</div></Row>
-          <Row><div className="body-text">{proofCheck}</div></Row>
-          <Row><div className="title-h3 mt-5">Entering the region</div></Row>
-          <Row className="mt-4">
+        <Typography variant="heading1" className="color-dark-teal">Visiting the Phillippines</Typography>
+        <div class="square border-start border-3 mt-3 mb-5" id="tealBorder">
+          <Typography variant="heading2" className="color-dark-teal mb-3">Before you travel</Typography>
+          <Typography variant="heading3" className="color-dark-teal mb-1">Check if you are considered a vaccinated traveller</Typography>
+          <Typography variant="bodyText" className="color-dark-teal mb-1">{validCheck}</Typography>
+          <Typography variant="heading3" className="color-dark-teal mb-1">Ensure you can provide proof</Typography>
+          <Typography variant="bodyText" className="color-dark-teal mb-5">{proofCheck}</Typography>
+          <Typography variant="heading2" className="color-dark-teal mb-3">Entering the region</Typography>
+          <Row className="mt-4 mb-5">
             {EnterBoard}
           </Row>
-          <Row><div className="title-h3 mt-5">While you’re there</div></Row>
+          <Typography variant="heading2" className="color-dark-teal mb-3">While you’re there</Typography>
           <div>{arriveBoard}</div>
         </div>
-        <Row style={{"marginTop": "10vh", "marginBottom": "50vh"}}>
-          <div className="title-h2 mb-3">Recommended Cities</div>
-          <Container fluid className="recommended-cities">
-            <HeaderInfoRow3/>
+        <Row style={{"marginTop": "10vh", "marginBottom": "20vh"}}>
+          <Typography variant="heading2" className="color-dark-teal mb-3">Recommended Cities</Typography>
+          <HeaderInfoRow3/>
+          <Container fluid style={{overflowY: 'scroll', height: '60vh'}}>
             {recCities.map((rec, idx) => {
               return (
                 <InfoRow3

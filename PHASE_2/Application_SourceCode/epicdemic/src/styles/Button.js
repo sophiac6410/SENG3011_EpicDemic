@@ -10,6 +10,8 @@ const lightGrey = '#EEF0F2';
 const lightBlue = '#E2F2FC';
 const darkGrey = '#515151';
 const brSmall = '30px';
+const white = '#ffff';
+
 
 const BaseButton = styled(Button)({
   borderRadius: brSmall,
@@ -39,5 +41,31 @@ export const WhiteButton = styled(BaseButton)({
   color: darkTeal,
   '&:hover': {
     backgroundColor: lightGrey,
+  },
+});
+
+export const DestinationTabs = styled(BaseButton) ({
+  variant: "outlined",
+  color: mediumBlue,
+  border: '3px solid',
+  fontWeight: "bold",
+  '&:hover': {
+    backgroundColor: mediumBlue,
+    color: "white",
+    border: 'none'
+  },
+  '&:active': {
+    backgroundColor: mediumBlue,
+    color: "white",
+    border: 'none'
+  },
+})
+export const TealBotton = styled(BaseButton)({
+  backgroundColor: mediumTeal,
+  paddingLeft: "30px",
+  paddingRight: "30px",
+  color: white,
+  '&:hover': {
+    backgroundColor: darkTeal,
   },
 });

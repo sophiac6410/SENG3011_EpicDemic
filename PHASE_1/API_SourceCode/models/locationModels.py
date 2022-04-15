@@ -54,14 +54,135 @@ class LocationSafetyScores(BaseModel):
 	last_updated: str = Field(..., description="The date the scores are last updated",
                     example="2022-04-14")
 
+class LocationTravelOverview(BaseModel):
+	_id: str = Field(..., description="The unique ISO code of the country", 
+                    example='FR')
+	country: str = Field(..., description="The name of the country", 
+                    example='France')
+	declaration: dict = Field(..., description="The travel declaration of the country", 
+                    example={
+						"date": "2022-04-07",
+						"text" : "<p><strong>Other document</strong><br>Travellers who don&#39;t comply ...",
+						"documentRequired": "Yes"
+					})
+	declaration: dict = Field(..., description="The travel declaration of the country", 
+                    example={
+						"date": "2022-04-07",
+						"text" : "<p><strong>Other document</strong><br>Travellers who don&#39;t comply ...",
+						"documentRequired": "Yes"
+					})
+	declaration: dict = Field(..., description="The travel declaration of the country", 
+                    example={
+						"date": "2022-04-07",
+						"text" : "<p><strong>Other document</strong><br>Travellers who don&#39;t comply ...",
+						"documentRequired": "Yes"
+					})
+	declaration: dict = Field(..., description="The travel declaration of the country", 
+                    example={
+						"date": "2022-04-07",
+						"text" : "<p><strong>Other document</strong><br>Travellers who don&#39;t comply ...",
+						"documentRequired": "Yes"
+					})
+
+class LocationDeclaration(BaseModel):
+	date: str = Field(..., description="The date the declaration was created", 
+                    example="2022-04-07")
+	text: str = Field(..., description="The description of the declaration", 
+                    example="Those who do not comply will get deported")
+	documentRequired: str  = Field(..., description="If documents are required in travel entry", 
+                    example="No") 
+	travelDocumentation: str | None = None
+
+class LocationTesting(BaseModel):
+	when: str = Field(..., description="When the test should be conducted", 
+                    example="Before travel")
+	requirement: str = Field(..., description="Mandatory or not", 
+                    example="Mandatory")
+	text: str = Field(..., description="The description of the declaration", 
+                    example="Test has to be PCR")
+	rules: str = Field(..., description="The link to the official website containing all specific rules", 
+                    example="No")
+	date: str = Field(..., description="The date the rule was created", 
+                    example="2022-04-07")
+	isRequired: str = Field(..., description="if testing is required", 
+                    example="No")
+
+class LocationQuarantine(BaseModel):
+	duration: int = Field(..., description="Length (days) of the quarantine", 
+                    example=10)
+	eligiblePerson: str = Field(..., description="Who are required to travel", 
+                    example="Some travellers")
+	text: str = Field(..., description="The description of the declaration", 
+                    example="Test has to be PCR")
+	rules: str = Field(..., description="The link to the official website containing all specific rules", 
+                    example="No")
+	date: str = Field(..., description="The date the rule was created", 
+                    example="2022-04-07")
+	quarantineType: str = Field(..., description="the type of quarantine, self or not", 
+                    example="self")
+
+class LocationMask(BaseModel):
+	text: str = Field(..., description="The description of the declaration", 
+                    example="Test has to be PCR")
+	date: str = Field(..., description="The date the rule was created", 
+                    example="2022-04-07")
+	isRequired: str = Field(..., description="if mask is mandatory", 
+                    example="No")
+
+class LocationAreaPolicy(BaseModel):
+	status: str = Field(..., description="Length (days) of the quarantine", 
+                    example="Opening")
+	text: str = Field(..., description="The description of the declaration", 
+                    example="Test has to be PCR")
+	referenceLink: str = Field(..., description="The link to the official website containing all specific rules", 
+                    example="https://www.gouvernement.fr/en/coronavirus-covid-19")
+	date: str = Field(..., description="The date the rule was created", 
+                    example="2022-04-07")
+	startDate: str = Field(..., description="The date the rule began", 
+                    example="2022-04-07")
+	endDate: str = Field(..., description="The date the rule is set to end/change", 
+                    example="na")
+
+class LocationTracing(BaseModel):
+	isRequired: str = Field(..., description="if mask is mandatory", 
+                    example="No")
+	text: str = Field(..., description="The description of the declaration", 
+                    example="Test has to be PCR")
+	androidLink: str = Field(..., description="The link to the official website containing all specific rules", 
+                    example="https://www.gouvernement.fr/en/coronavirus-covid-19")
+	iosLink: str = Field(..., description="The link to the official website containing all specific rules", 
+                    example="https://www.gouvernement.fr/en/coronavirus-covid-19")
+	date: str = Field(..., description="The date the rule was created", 
+                    example="2022-04-07")
+
+class LocationAreaRestriction(BaseModel):
+	text: str | None = None
+	date: str | None = None
+	restrictionType: str | None = None
+
+
+
 class LocationCovidQuery(BaseModel):
 	cases_per_country: List[LocationCovid] = Field(..., description="The list of dict containing countries coordinates and their cases")
 
+class LocationTravelOverview(BaseModel):
+	declaration: LocationDeclaration
+	testing: LocationTesting
+	quarantine: LocationQuarantine
+	mask: LocationMask
+	area_policy: LocationAreaPolicy
+	tracing: LocationTracing
+	area_restriction: List[LocationAreaRestriction]
+
 class LocationResponse(baseModels.Response):
 	data: Location
+
 
 class LocationCovidResponse(baseModels.Response):
 	data: LocationCovidQuery
 
 class LocationSafetyResponse(baseModels.Response):
 	data: LocationSafetyScores
+
+class LocationTravelOverviewResponse(baseModels.Response):
+	data: LocationTravelOverview
