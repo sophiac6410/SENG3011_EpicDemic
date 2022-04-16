@@ -8,10 +8,11 @@ import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import TripCard from "../components/Planner/TripCard";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 function Trip() {
   return(
-    <div className="bg-off-white">
+    <div className="bg-off-white" style={{paddingBottom: "200px"}}>
       <NavbarComp bg={true}></NavbarComp>
       <Container>
         <IconButton>
@@ -50,6 +51,12 @@ function Trip() {
           <TripCard></TripCard>
           <TripCard></TripCard>
           <TripCard></TripCard>
+        </div>
+        <div className="mt-5 flex-row d-flex justify-content-center align-items-center">
+          <IconButton>
+            <AddCircleIcon color="teal" fontSize="large"></AddCircleIcon>
+          </IconButton>
+          <Typography variant="bodyText" className="color-medium-teal">Add City</Typography>
         </div>
       </Container>
     </div>
