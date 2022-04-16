@@ -11,6 +11,7 @@ import TextField from '@mui/material/TextField';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { DesktopDateRangePicker } from '@mui/x-date-pickers-pro/DesktopDateRangePicker';
 import { TealBotton } from '../../styles/Button';
 import { Row, Col } from 'react-bootstrap';
 import PublicIcon from '@mui/icons-material/Public';
@@ -75,7 +76,7 @@ const formStyle = {
   boxShadow: "1px 3px #888888",
   border: (theme) => `1px solid ${theme.palette.divider}`,
   '& hr': {
-    mx: 4,
+    mx: 2,
   },
   '& svg': {
     m: 1.5,
@@ -83,7 +84,8 @@ const formStyle = {
 };
 
 function StepOne({isOpen, onClose, onNext}) {
-  const [value, setValue] = React.useState(null);
+  const [startDate, setStartDate] = React.useState(null);
+  const [endDate, setEndDate] = React.useState(null);
   const teal = "#0F83A0";
 
   return(
@@ -104,10 +106,11 @@ function StepOne({isOpen, onClose, onNext}) {
           <Divider orientation="vertical" flexItem  variant="middle" flex />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
+              label="start from"
               InputAdornmentProps={{ position: 'start' , color: "#0F83A0"}}
-              value={value}
+              value={startDate}
               onChange={(newValue) => {
-                setValue(newValue);
+                setStartDate(newValue);
               }}
               style={{dateInput:{borderWidth: 0} }}
               inputFormat="dd/MM/yyyy"
@@ -118,10 +121,37 @@ function StepOne({isOpen, onClose, onNext}) {
                   {...params} 
                   sx={{
                     svg:{color: teal},
+                    marginBottom: '10px'
                     // input: {color},
                     // label: {color}
                   }}
-                  inputProps={{...params.inputProps, placeholder: "When are you going"}}/>
+                  inputProps={{...params.inputProps, placeholder: "Start date"}}/>
+              }
+            />
+          </LocalizationProvider>
+          <Divider orientation="vertical" flexItem  variant="middle" flex />
+          <LocalizationProvider dateAdapter={AdapterDateFns} sx={ {paddingBottom: "20px"}}>
+            <DesktopDatePicker
+              label="end at"
+              InputAdornmentProps={{ position: 'start' , color: "#0F83A0"}}
+              value={endDate}
+              onChange={(newValue) => {
+                setEndDate(newValue);
+              }}
+              style={{dateInput:{borderWidth: 0} }}
+              inputFormat="dd/MM/yyyy"
+              renderInput={(params) => 
+                <TextField
+                  color="teal"
+                  variant="standard"
+                  {...params} 
+                  sx={{
+                    svg:{color: teal},
+                    marginBottom: '10px'
+                    // input: {color},
+                    // label: {color}
+                  }}
+                  inputProps={{...params.inputProps, placeholder: "End Date"}}/>
               }
             />
           </LocalizationProvider>
