@@ -10,8 +10,8 @@ function BucketCard() {
       <div className="bg-light-grey d-flex flex-column p-3 text-start">
         <Typography variant="bodyImportant" className="color-medium-teal ms-2">Skip-the-line tickets to the Prado Museum</Typography>
         <div className="d-flex flex-row justify-content-between mt-1">
-          <Button>BOOK</Button>
-          <Button>REMOVE</Button>
+          <Button color="darkTeal">BOOK</Button>
+          <Button color="darkTeal">REMOVE</Button>
         </div>
       </div>
     </div>

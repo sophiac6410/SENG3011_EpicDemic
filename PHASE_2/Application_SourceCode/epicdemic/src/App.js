@@ -30,7 +30,7 @@ const theme = createTheme({
     },
     darkTeal: {
       main: '#1B4965'
-    }
+    },
   },
   // components: {
   //   MuiDesktopDatePicker: {
