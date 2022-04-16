@@ -6,7 +6,7 @@ import '../styles/Book.css'
 import FlightFilter from "../components/Book/FlightFilter"
 import * as React from 'react';
 import { DarkButton } from "../styles/Button.js"
-import NavbarComp from '../components/NavBar.js'
+// import NavbarComp from '../components/Navbar'
 import { Typography } from '@mui/material'
 
 function handleClick() {
