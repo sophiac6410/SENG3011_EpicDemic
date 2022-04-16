@@ -7,6 +7,7 @@ import DateRangeIcon from '@mui/icons-material/DateRange';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import TripCard from "../components/Planner/TripCard";
 
 function Trip() {
   return(
@@ -44,7 +45,12 @@ function Trip() {
             </Col>
           </Row>
         </Row>
-        <Typography variant="heading1" style={{marginTop: "80px"}}>Destinations</Typography>
+        <Typography variant="heading1" style={{marginTop: "80px", marginLeft: "70px"}}>Destinations</Typography>
+        <div className='justify-content-center' style={{display: "flex", flexDirection: "column"}}>
+          <TripCard></TripCard>
+          <TripCard></TripCard>
+          <TripCard></TripCard>
+        </div>
       </Container>
     </div>
   )

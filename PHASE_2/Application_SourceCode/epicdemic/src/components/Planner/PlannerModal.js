@@ -11,9 +11,8 @@ import TextField from '@mui/material/TextField';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import { DesktopDateRangePicker } from '@mui/x-date-pickers-pro/DesktopDateRangePicker';
 import { TealBotton } from '../../styles/Button';
-import { Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import PublicIcon from '@mui/icons-material/Public';
 import EmojiFlagsIcon from '@mui/icons-material/EmojiFlags';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
@@ -21,7 +20,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import LocalActivityIcon from '@mui/icons-material/LocalActivity';
 
 const style = {
