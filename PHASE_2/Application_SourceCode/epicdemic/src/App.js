@@ -21,6 +21,7 @@ import {
     BrowserRouter
   } from "react-router-dom";
 import Planner from './pages/Planner'
+import Trip from './pages/Trip'
 
 const theme = createTheme({
   palette: {
@@ -156,6 +157,7 @@ function App() {
               <Route path="/finder" element={<DestinationFinder/>}/>
               <Route path="/saved" element={<SavedLocations/>}/>
               <Route path="/planner" element={<Planner/>}/>
+              <Route path="/trip/:id" element={<Trip></Trip>}/>
             </Routes>
           </BrowserRouter>
           <Footer></Footer>
