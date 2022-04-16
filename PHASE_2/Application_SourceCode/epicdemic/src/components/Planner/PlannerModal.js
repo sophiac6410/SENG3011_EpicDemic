@@ -285,4 +285,4 @@ function StepTwo({onClose}) {
   )
 }
 
-export {StepOne, StepTwo}
+export {StepOne, StepTwo, formStyle}

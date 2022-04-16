@@ -3,8 +3,9 @@ import NavbarComp from "../components/NavBar"
 import "./../styles/Planner.css"
 import Typography from '@mui/material/Typography'
 import { WhiteButton } from "../styles/Button"
-import { Container } from "react-bootstrap"
+import { Container, Row } from "react-bootstrap"
 import {StepOne, StepTwo} from '../components/Planner/PlannerModal'
+import SavedCard from '../components/Planner/SavedCard'
 
 function Planner() {
   const [stepOne, setStepOne] = React.useState(false);
@@ -36,8 +37,13 @@ function Planner() {
           {/* <StepTwo isOpen={stepTwo} onClose={closeStepTwo} onSave={saveTrip}></StepTwo> */}
         </div>
       </div>
-      <Container className="pt-5">
+      <Container className="pt-5 pb-5">
         <Typography variant="heading2" className="color-dark-teal">Your saved trips</Typography>
+        <div className='justify-content-center' style={{display: "flex", flexDirection: "column"}}>
+          <SavedCard></SavedCard>
+          <SavedCard></SavedCard>
+          <SavedCard></SavedCard>
+        </div>
       </Container>
     </div>
   )
