@@ -28,6 +28,9 @@ const theme = createTheme({
     teal: {
       main: '#0F83A0',
     },
+    darkTeal: {
+      main: '#1B4965'
+    }
   },
   // components: {
   //   MuiDesktopDatePicker: {
@@ -84,7 +87,7 @@ const theme = createTheme({
       fontSize: '0.8em',
       lineHeight: 1.5,
       display: 'block',
-      textAlign: 'justify'
+      textAlign: 'center'
     },
     bodyImportant: {
       fontFamily: "Open Sans, sans-serif",
