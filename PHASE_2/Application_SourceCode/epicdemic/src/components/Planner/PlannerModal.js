@@ -21,6 +21,7 @@ import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import LocalActivityIcon from '@mui/icons-material/LocalActivity';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const style = {
   position: 'absolute',
@@ -191,8 +192,9 @@ function StepTwo({onClose}) {
     setStepThree(true)
   }
 
-  const addTrip = () => {
-    setStepThree(false)
+  let navigate = useNavigate()
+  const saveTrip = () => {
+    navigate('/trip/1')
   }
   
   return(
@@ -271,7 +273,7 @@ function StepTwo({onClose}) {
                   <TealBotton onClick={handleClose}>Cancle</TealBotton>
                 </Col>
                 <Col md={6}>
-                  <TealBotton>Save and view trip</TealBotton>
+                  <TealBotton onClick={saveTrip}>Save and view trip</TealBotton>
                 </Col>
               </Box> 
             ) : (
