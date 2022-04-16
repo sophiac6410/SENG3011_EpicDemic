@@ -29,7 +29,7 @@ function SliderTime() {
   };
 
   return (
-    <Box sx={{ width: 260 }}>
+    <Box sx={{ width: 200 }}>
       <StyledSlider
         size="small"
         aria-label="Time Range"

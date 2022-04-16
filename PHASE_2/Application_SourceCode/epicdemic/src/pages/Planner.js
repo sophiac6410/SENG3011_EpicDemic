@@ -1,5 +1,5 @@
 import React from 'react'
-import NavbarComp from "../components/Navbar"
+import NavbarComp from "../components/NavBar"
 import "./../styles/Planner.css"
 import Typography from '@mui/material/Typography'
 import { WhiteButton } from "../styles/Button"

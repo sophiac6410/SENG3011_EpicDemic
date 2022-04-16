@@ -6,8 +6,9 @@ import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
 import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
 import new_cases from "../../static/new_cases.jpg"
-// import '../../styles/Home.css'
-
+import { LineChart, Line, XAxis, YAxis } from 'recharts';
+import "../../styles/Home.css"
+import { Typography } from '@mui/material';
 
 const blue = {
   50: '#F0F7FF',
@@ -33,7 +34,7 @@ const Tab = styled(TabUnstyled)`
   padding: 12px 16px;
   margin: 6px 6px;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
 
@@ -43,7 +44,7 @@ const Tab = styled(TabUnstyled)`
 
   &:focus {
     color: #fff;
-    border-radius: 3px;
+    border-radius: 10px;
     outline: 2px solid ${blue[200]};
     outline-offset: 2px;
   }
@@ -68,7 +69,7 @@ const TabPanel = styled(TabPanelUnstyled)`
 const TabsList = styled(TabsListUnstyled)`
   max-width: 200px;
   background-color: #D8E7FF;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 16px;
   display: flex;
   align-items: center;
@@ -76,23 +77,27 @@ const TabsList = styled(TabsListUnstyled)`
   align-content: space-between;
 `;
 
-export default function CovidTabs() {
-
+export default function CovidTabs({casesChartData}) {
   return (
-    <div style={{ backgroundColor: '#62B6CB' }} className="covidtabs">
+    <div className="covidtabs bg-off-white">
       <div style={{ width: '300px' }}>
         <TabsUnstyled defaultValue={0}>
           <TabsList>
-            <Tab>Cases</Tab>
-            <Tab>Deaths</Tab>
+            <Tab><Typography variant="bodyHeading">Cases</Typography></Tab>
+            <Tab><Typography variant="bodyHeading">Deaths</Typography></Tab>
           </TabsList>
           <TabPanel value={0}>
-            <div className='sub-title'>Daily Cases</div>
-            <img src={new_cases} style={{ width: "900px" }}></img>
+            <Typography variant="title" className="color-dark-grey">Cases</Typography>
+            <LineChart width={650} height={450} data={casesChartData}>
+              <Line type="monotone" dataKey="data" stroke="#8884d8"/>
+              <XAxis dataKey="name" tickCount={casesChartData.length}/>
+              <YAxis tickFormatter={DataFormatter}/>
+            </LineChart>
+            {/* <img src={new_cases} style={{ width: "900px" }}></img> */}
           </TabPanel>
           <TabPanel value={1}>
-            <div className='sub-title'>Deaths</div>
-              <img src={new_cases} style={{ width: "900px" }}></img>
+            <Typography variant="title" className="color-dark-grey">Deaths</Typography>
+              <img src={new_cases} style={{ width: "650px" }}></img>
           </TabPanel>
         </TabsUnstyled>
       </div>
@@ -100,4 +105,17 @@ export default function CovidTabs() {
 
 
   );
+}
+
+// https://stackoverflow.com/questions/52320447/recharts-set-y-axis-value-base-of-number-displayed
+const DataFormatter = (number) => {
+  if(number > 1000000000){
+    return (number/1000000000).toString() + 'B';
+  }else if(number > 1000000){
+    return (number/1000000).toString() + 'M';
+  }else if(number > 1000){
+    return (number/1000).toString() + 'K';
+  }else{
+    return number.toString();
+  }
 }

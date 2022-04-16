@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router'
 import LoginForm from '../components/LoginForm'
-import NavbarComp from '../components/Navbar';
+import NavbarComp from '../components/NavBar';
 import API_URL from '../config.json'
 import { Context, useContext } from '../context';
 
@@ -25,7 +25,7 @@ function Login () {
         });
         const data = await response.json()
         if (response.status === 400) {
-          alert(data.error)
+          alert(data.data.error)
         } else {
           localStorage.setItem('token', data.data.token)
           setters.setLoggedIn(true);

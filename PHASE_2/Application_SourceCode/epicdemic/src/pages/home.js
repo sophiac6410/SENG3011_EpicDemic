@@ -1,3 +1,4 @@
+import React from 'react';
 import {Container, Col, Row, Image} from "react-bootstrap";
 import AirUpdateBar from "../components/Home/AirUpdateBar";
 import GlobalUpdate from "../components/Home/GlobalUpdate";
@@ -9,10 +10,13 @@ import bigLoading from "../static/bigLoading.svg"
 import DiseaseRadar from "../components/Home/DiseaseRadar";
 import DiseaseReportBar from "../components/Home/DiseaseReportBar";
 import Typography from '@mui/material/Typography'
-import NavbarComp from '../components/Navbar'
+import NavbarComp from '../components/NavBar'
 import { DarkButton, WhiteButton } from "../styles/Button";
 import { fabClasses } from "@mui/material";
 import { useNavigate, } from 'react-router-dom';
+import { useEffect } from "react";
+import { getUserSaved } from "../apiCalls";
+
 
 const intro = "Epicdemic collates and analyses a diverse range of government, airline, COVID and tourism data to provide you with the confidence you need to book your next trip. Not sure where to go? Use our destination finder and trip planner to view our personalised recommendations.  Turn on notifications to keep informed of the latest updates."
 function Home() {
@@ -25,8 +29,18 @@ function Home() {
     navigate('/planner');
   }
 
+  const [savedLocations, setSavedLocations] = React.useState([]);
+  useEffect (() => {
+    async function callApi () {
+      const data = await getUserSaved();
+      console.log(data);
+      setSavedLocations(data.saved_locations);
+    }
+    callApi();
+  }, []);
+
   return (
-      <div style={{backgroundColor: '#F4FBFF'}}>
+      <div className="bg-off-white">
         <div className="bg-sky" style={{height: '100vh'}}>
             <NavbarComp bg={false}></NavbarComp>
             <div>
@@ -50,7 +64,7 @@ function Home() {
             </div>
         </div>
         <NewsBar></NewsBar>
-        <LocationBar></LocationBar>
+        <LocationBar locations={savedLocations}></LocationBar>
         <Row className="mt-5 mb-5 p-1 ps-3 align-items-center justify-content-center">
           <UpdateBar></UpdateBar>
         </Row>

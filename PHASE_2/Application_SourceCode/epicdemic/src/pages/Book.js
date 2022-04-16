@@ -6,7 +6,8 @@ import '../styles/Book.css'
 import FlightFilter from "../components/Book/FlightFilter"
 import * as React from 'react';
 import { DarkButton } from "../styles/Button.js"
-import NavbarComp from '../components/Navbar'
+import NavbarComp from '../components/NavBar.js'
+import { Typography } from '@mui/material'
 
 function handleClick() {
   const flightSection = document.getElementById('flight-title');
@@ -15,13 +16,13 @@ function handleClick() {
 
 function Book() {
   return(
-    <div>
-      <h1 class="title-h2">Book</h1>
+    <div className="mt-5" style={{margin: '0% 15%', width: 'auto'}}>
+      <Typography variant="heading2">Book</Typography>
       <FlightSearch></FlightSearch>
       <DarkButton sx={{display: 'flex', marginX: 'auto', mb: 7, mt: 3}}>Find My Flight</DarkButton>
       {/* <button id='book-search' class='btn-base btn-dark btn-flight' onClick={handleClick}>Find My Flight</button> */}
       <hr size="3" width="100%" color="grey"></hr>
-      <h1 id="flight-title" class='title-h3'>Flights</h1>
+      <Typography variant="heading2" sx={{display: 'block', margin: '2% 0%'}}>Flights</Typography>
       <div style={{
         display: 'flex',
       }}>

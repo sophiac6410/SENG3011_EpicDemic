@@ -10,17 +10,15 @@ function BlueCard(props) {
   console.log(props)
   return(
     // <Col md={6}>
-      <Card style={{backgroundColor: "#EBF3FF", borderRadius: "20px"}} sx={{ display: 'flex', height: '97%' }} className="p-4 m-2" >
+      <Card style={{backgroundColor: "#EBF3FF", borderRadius: "30px"}} sx={{ display: 'flex', height: '97%' }} className="p-4 m-2" >
       <CardContent>
-        <Typography variant="h6" style={{fontWeight:"bold", fontSize: "22px"}}>
-        {props.check.title}
-        </Typography>
-        <Typography sx={{ mb: 1.5 }}>
+        <Typography variant="bodyHeading">{props.check.title}</Typography>
+        <Typography variant="caption" sx={{ mb: 1.5 }}>
         {props.check.date}
         </Typography>
-        <div className='body-text'>
+        <Typography variant="bodyText">
           {props.check.text}
-        </div>
+        </Typography>
         </CardContent>
       </Card>
     // </Col>
