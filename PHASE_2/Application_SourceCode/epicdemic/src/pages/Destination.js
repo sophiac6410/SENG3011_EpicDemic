@@ -70,7 +70,7 @@ function Destination() {
     <div>
       <NavbarComp bg={true}/>
       {/* <TinySearch className="bg-lightblue"></TinySearch> */}
-      <div className="d-flex justify-content-start align-items-center flex-start mt-3 mx-5">
+      <div className="d-flex justify-content-start align-items-center flex-end mt-3 mx-5">
         <div className="text-center m-3">
           <Checkbox sx={{display:'block', mx: 'auto'}} checked={saved} icon={<FavoriteBorder fontSize="large" className="color-medium-teal"/>} checkedIcon={<Favorite fontSize="large" className="color-medium-teal"/>} onClick={handleClickSave} />
           <Typography variant="caption">Save</Typography>
@@ -86,9 +86,11 @@ function Destination() {
       </div>
       <Container style={{margin: '0% 15%', width: 'auto'}}>
         <div className="pt-4 pb-4 d-flex">
-          <Col>
-            <Typography variant="title" className="color-dark-teal">{dest.country}</Typography>
-            <Typography variant="bodyText">Last updated on 25/03/22 </Typography>
+          <Col className="align-self-center">
+            <div className="text-start">
+              <Typography variant="title" className="color-dark-teal">{dest.country}</Typography>
+              <Typography variant="bodyText" style={{textAlign: "start"}}>Last updated on 25/03/22 </Typography>
+            </div>
           </Col>
           <div class="d-flex justify-content-end flex-end">
             <NavLink to="" style={linkStyle}>

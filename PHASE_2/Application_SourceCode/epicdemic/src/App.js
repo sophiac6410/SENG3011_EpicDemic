@@ -87,7 +87,7 @@ const theme = createTheme({
       fontSize: '0.8em',
       lineHeight: 1.5,
       display: 'block',
-      textAlign: 'center'
+      // textAlign: 'start'
     },
     bodyImportant: {
       fontFamily: "Open Sans, sans-serif",
