@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Query, status, Path
 from fastapi.responses import JSONResponse
 from util import DATETIME_REGEX, parse_datetime_string
-from database import locations_col, diseaseLocations_col, safety_col, travel_col
+from database import locations_col, diseaseLocations_col, updates_col, safety_col, travel_col
 import re
 from datetime import datetime
 import pytz
@@ -13,6 +13,33 @@ router = APIRouter(
 )
 
 ############## GET LOCATION BY IDS ###############
+@router.get("/", status_code=status.HTTP_200_OK, response_model=locationModels.LocationAllResponse)
+async def get_all_locations():
+	data = list(locations_col.find({}, {
+		"id": "$_id",
+		"country" : "$country",
+		"capital" : "$capital",
+		"geonames_id" : "$geonames_id",
+		"longitude": "$longitude",
+		"latitude": "$latitude",
+		"region": "$region",
+		"entry_description": "$entry_description",
+		"disease_risk": "$disease_risk",
+		"travel_status": "$travel_status",
+		"safety_score": "$safety_score",
+		"advice_level": "$advice_level",
+	}).sort("country", 1))
+	for d in data:
+		updates = list(updates_col.find({"location_id": d.get("_id")}).sort("date", -1))
+		if (len(updates) == 0):
+			d.update({"last_update": datetime.now()})
+		else:
+			d.update({"last_update": updates[0].get("date")})
+	
+	return baseModels.createResponse(True, 200, data)
+
+
+############## GET LOCATION BY IDS ###############
 @router.get("/{id}", status_code=status.HTTP_200_OK, response_model=locationModels.LocationResponse)
 async def get_location_by_id(
 	id: str = Path(
@@ -21,12 +48,29 @@ async def get_location_by_id(
 		example="PH",
 	)
 ):
-	data = list(locations_col.find({'_id': id}))
+	data = list(locations_col.find({'_id': id}, {
+		"id": "$_id",
+		"country" : "$country",
+		"capital" : "$capital",
+		"geonames_id" : "$geonames_id",
+		"longitude": "$longitude",
+		"latitude": "$latitude",
+		"region": "$region",
+		"entry_description": "$entry_description",
+		"disease_risk": "$disease_risk",
+		"travel_status": "$travel_status",
+		"safety_score": "$safety_score",
+		"advice_level": "$advice_level",
+	}))
 	if (len(data) == 0):
 		return JSONResponse(status_code=status.HTTP_204_NO_CONTENT, content={"error": "No data for country"})
 	else:
 		data = data[0]
-	
+		updates = list(updates_col.find({"location_id": id}).sort("date", -1))
+		if (len(updates) == 0):
+			data.update({"last_update": datetime.now()})
+		else:
+			data.update({"last_update": updates[0].get("date")})
 	return baseModels.createResponse(True, 200, data)
 
 

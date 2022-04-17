@@ -2,7 +2,7 @@ from dotenv import dotenv_values
 from os import access
 from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
-from routers import locations, reports, articles, users
+from routers import locations, reports, articles, users, updates
 import uvicorn
 import time
 from datetime import datetime
@@ -51,7 +51,6 @@ async def add_process_time_header(request: Request, call_next):
     for key, value in request.path_params.items():
         path_params += ('\n\t\t\t' + key + '=' + value)
     if path_params == "": path_params = None
-
     log += """
     Request: {} {}
     Request Query Param: {}
@@ -76,6 +75,7 @@ app.include_router(reports.router)
 app.include_router(articles.router)
 app.include_router(users.router)
 app.include_router(locations.router)
+app.include_router(updates.router)
 
 @app.get('/', status_code=status.HTTP_200_OK, response_model=statusModels.HealthCheckResponse, tags=["status"])
 async def index():

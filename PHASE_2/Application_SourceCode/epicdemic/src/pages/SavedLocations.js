@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import HappyFamily from "../static/happyfamily.svg";
@@ -10,9 +10,32 @@ import "../styles/DestinationFinder.css";
 import GenericSearchText from "../components/GenericSearchText";
 import NavbarComp from '../components/NavBar';
 import { Typography } from '@mui/material';
-
+import { getUserSaved, getDestination, getUpdates } from "../apiCalls"
+import SavedTables from "../components/SavedLocations/SavedTables"
 
 const SavedLocations = () => {
+    const [savedLocations, setSavedLocations] = React.useState([]);
+    const [updates, setUpdates] = React.useState([]);
+    const [locationDetails, setLocationDetails] = React.useState([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            const dataSaved = await getUserSaved();
+            setSavedLocations(dataSaved.saved_locations);
+            const dataUpdates = await getUpdates(dataSaved.saved_locations.join(","), "", null, null);
+            setUpdates(dataUpdates.updates);
+            let locArray = [];
+            for (let index = 0; index < dataSaved.saved_locations.length; index++) {
+                const loc = dataSaved.saved_locations[index];
+                const dataDest = await getDestination(loc);
+                locArray.push(dataDest);
+            }
+            setLocationDetails(locArray);
+  
+        }
+        fetchData();
+    }, []);
+
     let navigate = useNavigate();
 
     return (
@@ -32,46 +55,22 @@ const SavedLocations = () => {
             <Row style={{"marginTop": "10vh", "marginLeft": "5vw", "marginRight": "5vw"}}>
                 <Col style={{"marginBottom": "1vh"}}>
                     <Typography variant="heading2" style={{display: 'inline'}}>Your saved locations</Typography>
-                    <Image height="60%" style={{"marginLeft": "2vw", "marginBottom": "1vh"}}src={BluePlus}/>
+                    <Image height="60%" style={{"marginLeft": "2vw", "marginBottom": "1vh", cursor: 'pointer'}} src={BluePlus} onClick={() => {
+                            navigate('/finder')
+                        }}/>
                 </Col>
+                {savedLocations !== [] &&
                 <Col>
                     <GenericSearchText
-                        fieldLabel="Search a saved location..."
+                    fieldLabel="Search a saved location..."
                     />
                 </Col>
-                <HeaderInfoRow4/>
-                <Container style={{overflowY: 'scroll', height: '60vh', marginBottom: '3%'}}>
-                    {infoRowData.map((infoRow, idx) => {
-                        return (
-                            <InfoRow4
-                            key={idx}
-                            country={infoRow.country}
-                            updateDesc={infoRow.latestUpdate}
-                            lastUpdated={infoRow.lastUpdated}
-                            travelStatus={infoRow.travelStatus}
-                            saved={infoRow.saved}
-                            />
-                        )
-                    })}
-                </Container>
+                }
             </Row>
-            <Row style={{backgroundColor: '#0F83A0'}}>
-                <Col style={{"marginTop": "5vh", marginBottom: '8vh', "paddingLeft": 0, "paddingRight": 0, "marginLeft": "25vw", "marginRight": "25vw"}}>
-                    <Typography variant="heading2" className="color-white" sx={{textAlign: 'center'}}>Latest updates on your current and saved locations</Typography>
-                    <Container fluid style={{overflowY: 'scroll', height: '60vh'}}>
-                        {updatesRowData.map((row, idx) => {
-                            return (
-                                <InfoRow5
-                                    key={idx}
-                                    country={row.country}
-                                    desc={row.desc}
-                                    dateTime={row.dateTime}
-                                />
-                                )
-                            })}
-                    </Container>
-                </Col>
-            </Row>
+            {savedLocations === []
+            ? <Typography variant="heading3" className="color-dark-grey">You have no saved locations</Typography>
+            : <SavedTables locations={locationDetails} updates={updates} />
+            }
             <Row position="relative" style={{"marginLeft": 0, "marginRight": 0, "marginTop": "10vh", "paddingBottom": "15vh", "paddingLeft": 0, "paddingRight": 0}}>
                 <Col style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
                     <Button className="dest-search-button"
@@ -79,7 +78,7 @@ const SavedLocations = () => {
                             navigate('/finder')
                         }}
                     >
-                        Destination search
+                        Find a Destination
                     </Button>
                 </Col>
             </Row>
@@ -88,89 +87,3 @@ const SavedLocations = () => {
 }
 
 export default SavedLocations;
-
-
-const infoRowData = [
-    { 
-        country: 'France', 
-        latestUpdate: 'Unvaccinated travelers can now travel to France provided that they have compelling reasons or pressing grounds',
-        lastUpdated: new Date(2022, 3, 31),
-        travelStatus: 'Open with Restrictions',
-        saved: false      
-    },
-    { 
-        country: 'Phillipines', 
-        latestUpdate: 'Fully vaccinated nationals of non-visa required countries under Executive Order No. 408 (s.1960) as amended, shall be allowed to enter the Philippines',
-        lastUpdated: new Date(2022, 3, 22),
-        travelStatus: 'Open with Restrictions',
-        saved: true      
-    },
-    { 
-        country: 'Ukraine', 
-        latestUpdate: 'The Russian invasion of Ukraine is ongoing. The security situation continues to be volatile and is deteriorating rapidly. Infrastructure and military...',
-        lastUpdated: new Date(2022, 3, 20),
-        travelStatus: 'Open with Restrictions',
-        saved: true      
-    },
-    { 
-        country: 'China', 
-        latestUpdate: 'Pre-departure requirements for travel to china from Australia have changed. In addition to meeting visa requirements, there are health testing requirements',
-        lastUpdated: new Date(2022, 3, 15),
-        travelStatus: 'Closed',
-        saved: false      
-    },
-    { 
-        country: 'China', 
-        latestUpdate: 'Pre-departure requirements for travel to china from Australia have changed. In addition to meeting visa requirements, there are health testing requirements',
-        lastUpdated: new Date(2022, 3, 15),
-        travelStatus: 'Closed',
-        saved: true      
-    },
-    { 
-        country: 'China', 
-        latestUpdate: 'Pre-departure requirements for travel to china from Australia have changed. In addition to meeting visa requirements, there are health testing requirements',
-        lastUpdated: new Date(2022, 3, 15),
-        travelStatus: 'Closed',
-        saved: true      
-    },
-    { 
-        country: 'China', 
-        latestUpdate: 'Pre-departure requirements for travel to china from Australia have changed. In addition to meeting visa requirements, there are health testing requirements',
-        lastUpdated: new Date(2022, 3, 15),
-        travelStatus: 'Closed',
-        saved: true      
-    },
-    { 
-        country: 'China', 
-        latestUpdate: 'Pre-departure requirements for travel to china from Australia have changed. In addition to meeting visa requirements, there are health testing requirements',
-        lastUpdated: new Date(2022, 3, 15),
-        travelStatus: 'Closed',
-        saved: true      
-    },
-    { 
-        country: 'China', 
-        latestUpdate: 'Pre-departure requirements for travel to china from Australia have changed. In addition to meeting visa requirements, there are health testing requirements',
-        lastUpdated: new Date(2022, 3, 15),
-        travelStatus: 'Closed',
-        saved: true      
-    }
-]
-
-const updatesRowData = [
-    { 'country': 'Australia', 'desc': 'Qantas set to bring back six new overseas routes as international borders gear up to reopen', 'dateTime': new Date(2022, 3, 22, 5, 9)},
-    { 'country': 'Australia', 'desc': 'Qantas set to bring back six new overseas routes as international borders gear up to reopen', 'dateTime': new Date(2022, 3, 22, 5, 9)},
-    { 'country': 'Australia', 'desc': 'Qantas set to bring back six new overseas routes as international borders gear up to reopen', 'dateTime': new Date(2022, 3, 22, 5, 9)},
-    { 'country': 'Australia', 'desc': 'Qantas set to bring back six new overseas routes as international borders gear up to reopen', 'dateTime': new Date(2022, 3, 22, 5, 9)},
-    { 'country': 'Australia', 'desc': 'Qantas set to bring back six new overseas routes as international borders gear up to reopen', 'dateTime': new Date(2022, 3, 22, 5, 9)},
-    { 'country': 'Australia', 'desc': 'Qantas set to bring back six new overseas routes as international borders gear up to reopen', 'dateTime': new Date(2022, 3, 22, 5, 9)},
-    { 'country': 'Australia', 'desc': 'Qantas set to bring back six new overseas routes as international borders gear up to reopen', 'dateTime': new Date(2022, 3, 22, 5, 9)},
-    { 'country': 'Australia', 'desc': 'Qantas set to bring back six new overseas routes as international borders gear up to reopen', 'dateTime': new Date(2022, 3, 22, 5, 9)},
-    { 'country': 'Australia', 'desc': 'Qantas set to bring back six new overseas routes as international borders gear up to reopen', 'dateTime': new Date(2022, 3, 22, 5, 9)},
-    { 'country': 'Australia', 'desc': 'Qantas set to bring back six new overseas routes as international borders gear up to reopen', 'dateTime': new Date(2022, 3, 22, 5, 9)},
-    { 'country': 'Australia', 'desc': 'Qantas set to bring back six new overseas routes as international borders gear up to reopen', 'dateTime': new Date(2022, 3, 22, 5, 9)},
-    { 'country': 'Australia', 'desc': 'Qantas set to bring back six new overseas routes as international borders gear up to reopen', 'dateTime': new Date(2022, 3, 22, 5, 9)},
-    { 'country': 'Australia', 'desc': 'Qantas set to bring back six new overseas routes as international borders gear up to reopen', 'dateTime': new Date(2022, 3, 22, 5, 9)},
-    { 'country': 'Australia', 'desc': 'Qantas set to bring back six new overseas routes as international borders gear up to reopen', 'dateTime': new Date(2022, 3, 22, 5, 9)},
-    { 'country': 'Australia', 'desc': 'Qantas set to bring back six new overseas routes as international borders gear up to reopen', 'dateTime': new Date(2022, 3, 22, 5, 9)},
-    { 'country': 'Australia', 'desc': 'Qantas set to bring back six new overseas routes as international borders gear up to reopen', 'dateTime': new Date(2022, 3, 22, 5, 9)},
-]

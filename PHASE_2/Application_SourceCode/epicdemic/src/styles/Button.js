@@ -52,7 +52,9 @@ export const DestinationTabs = styled(BaseButton) ({
   '&:hover': {
     backgroundColor: mediumBlue,
     color: "white",
-    border: 'none'
+    border: '3px solid',
+    variant: "outlined",
+    fontWeight: "bold",
   },
   '&:active': {
     backgroundColor: mediumBlue,

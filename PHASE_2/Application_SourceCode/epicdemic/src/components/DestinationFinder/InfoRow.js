@@ -6,14 +6,16 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import { LightButton } from "../../styles/Button";
 import { Typography } from "@mui/material";
-import "../../styles/DestinationFinder.css"
+import "../../styles/DestinationFinder.css";
+import { useNavigate, } from 'react-router-dom';
 
-const InfoRow = ({country, updateDesc, lastUpdated, travelStatus, saved}) => {
+const InfoRow = ({country, updateDesc, lastUpdated, travelStatus, saved, code}) => {
     const [isSaved, setSaved] = React.useState(saved);
+    let navigate = useNavigate(); 
     return (
-        <Row className="info-row"
+        <Row className="info-row" style={{cursor: 'pointer'}}
             onClick={() => {
-                navigate('/destination/PHILIPPINES');
+                navigate(`/destination/${code}`);
             }}>
             <Col xs={1} style={{textAlignLast: 'left'}}>
                 <Typography variant="bodyHeading">{country}</Typography>

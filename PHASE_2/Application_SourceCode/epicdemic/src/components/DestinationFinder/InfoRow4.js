@@ -11,13 +11,13 @@ import { LightButton } from "../../styles/Button";
 import NotificationsOffIcon from '@mui/icons-material/NotificationsOff';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 
-const InfoRow4 = ({country, updateDesc, lastUpdated, travelStatus, saved}) => {
+const InfoRow4 = ({country, updateDesc, lastUpdated, travelStatus, saved, code}) => {
     let navigate = useNavigate(); 
     return (
-        <Row className="info-row bg-white">                    
-            {/* onClick={() => {
-                navigate('/destination/PHILIPPINES');
-            }}> */}
+        <Row className="info-row bg-white" style={{cursor: 'pointer'}}       
+            onClick={() => {
+                navigate(`/destination/${code}`);
+            }}>
             <Col xs={1}>
                 <Typography variant="bodyHeading">{country}</Typography>
             </Col>
@@ -25,7 +25,7 @@ const InfoRow4 = ({country, updateDesc, lastUpdated, travelStatus, saved}) => {
                 <Typography variant="bodyText">{updateDesc}</Typography>
             </Col>
             <Col xs={2} style={{textAlignLast: 'center'}}>
-                <Typography variant="bodyText">{lastUpdated.toLocaleDateString()}</Typography>
+                <Typography variant="bodyText">{lastUpdated.toDateString()}</Typography>
             </Col>
             <Col xs={2} style={{textAlignLast: 'center'}}>
                 <Typography variant="bodyText">{travelStatus}</Typography>

@@ -4,6 +4,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import CircleIcon from '@mui/icons-material/Circle';
+import FlightIcon from '@mui/icons-material/Flight';
 import { Typography } from "@mui/material";
 import PropTypes from 'prop-types';
 import { Context, useContext } from '../context';
@@ -70,12 +71,16 @@ function NavbarComp(props) {
                   <Notification updateNum={ props.updateNum }/>
                   <Typography variant="caption" sx={{color: "white"}}>Updates</Typography>
                 </Nav.Link>
-                <Nav.Link href="/saved" name="saved" className="mx-3">
-                  <FavoriteIcon sx={{ color: "white", fontSize: 30, display:'block', mx: 'auto'}}></FavoriteIcon>
+                <Nav.Link href="/saved" name="saved-locations" className="mx-3">
+                  <FavoriteIcon sx={{ color: "white", fontSize: 30, display:'block', mx: 'auto'}} />
+                  <Typography variant="caption" sx={{color: "white"}}>Saved Locations</Typography>
+                </Nav.Link>
+                <Nav.Link href="/trips" name="saved-trips" className="mx-3">
+                  <FlightIcon sx={{ color: "white", fontSize: 30, display:'block', mx: 'auto'}} />
                   <Typography variant="caption" sx={{color: "white"}}>Saved Trips</Typography>
                 </Nav.Link>
                 <Nav.Link href="/" name="profile" className="mx-3">
-                  <AccountCircleIcon sx={{ color: "white", fontSize: 30, display:'block', mx: 'auto'}}></AccountCircleIcon>
+                  <AccountCircleIcon sx={{ color: "white", fontSize: 30, display:'block', mx: 'auto'}} />
                   <Typography variant="caption" sx={{color: "white"}}>Profile</Typography>
                 </Nav.Link>
               </Nav>
