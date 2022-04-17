@@ -76,3 +76,17 @@
     Process Time: 0.014687061309814453
     ----------------------------------------
     
+    Timestamp: 1650188456.797051
+    Accessed Time: 2022-04-17 19:40:56.797051
+    Client: 127.0.0.1:52238
+    
+    Request: GET /v1/locations/id
+    Request Query Param: 
+			location_id=EE
+    Request Path Param: 
+			id=id
+   
+    Response Code: 204
+    Process Time: 0.026111125946044922
+    ----------------------------------------
+    
