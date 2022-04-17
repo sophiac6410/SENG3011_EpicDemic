@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import HappyFamily from "../static/happyfamily.svg";
@@ -10,10 +10,23 @@ import "../styles/DestinationFinder.css";
 import GenericSearchText from "../components/GenericSearchText";
 import NavbarComp from '../components/NavBar';
 import { Typography } from '@mui/material';
-
+import { getUserSaved, getDestination } from "../apiCalls"
 
 const SavedLocations = () => {
+    const [savedLocations, setSavedLocations] = React.useState([]);
+    useEffect(() => {
+        async function fetchData() {
+            const data = await getUserSaved();
+            setSavedLocations(data.saved_locations);
+        }
+        fetchData();
+    }, []);
+
     let navigate = useNavigate();
+
+    async function fetchDest(iso) {
+        return await getDestination(iso);
+    }
 
     return (
         <Container fluid style={{"overflowX": "hidden", "paddingLeft": 0, "paddingRight": 0, "marginLeft": 0, "marginRight": 0, "backgroundColor": "#EEF5FF"}}>
@@ -41,15 +54,16 @@ const SavedLocations = () => {
                 </Col>
                 <HeaderInfoRow4/>
                 <Container style={{overflowY: 'scroll', height: '60vh', marginBottom: '3%'}}>
-                    {infoRowData.map((infoRow, idx) => {
+                    {savedLocations.map((loc, idx) => {
+                        const data = fetchDest(loc)
                         return (
                             <InfoRow4
                             key={idx}
-                            country={infoRow.country}
-                            updateDesc={infoRow.latestUpdate}
-                            lastUpdated={infoRow.lastUpdated}
-                            travelStatus={infoRow.travelStatus}
-                            saved={infoRow.saved}
+                            country={data.country}
+                            updateDesc={data.latestUpdate}
+                            lastUpdated={data.lastUpdated}
+                            travelStatus={data.travelStatus}
+                            saved={true}
                             />
                         )
                     })}

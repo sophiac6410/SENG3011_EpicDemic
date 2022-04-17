@@ -1,0 +1,336 @@
+
+    Timestamp: 1650163436.7566
+    Accessed Time: 2022-04-17 12:43:56.756600
+    Client: 127.0.0.1:62507
+    
+    Request: GET /
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0071561336517333984
+    ----------------------------------------
+    
+    Timestamp: 1650163443.508205
+    Accessed Time: 2022-04-17 12:44:03.508205
+    Client: 127.0.0.1:62508
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.00039505958557128906
+    ----------------------------------------
+    
+    Timestamp: 1650163452.388889
+    Accessed Time: 2022-04-17 12:44:12.388889
+    Client: 127.0.0.1:62514
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0004279613494873047
+    ----------------------------------------
+    
+    Timestamp: 1650163483.537019
+    Accessed Time: 2022-04-17 12:44:43.537019
+    Client: 127.0.0.1:62598
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0005409717559814453
+    ----------------------------------------
+    
+    Timestamp: 1650163573.310628
+    Accessed Time: 2022-04-17 12:46:13.310628
+    Client: 127.0.0.1:62618
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0005900859832763672
+    ----------------------------------------
+    
+    Timestamp: 1650163862.71281
+    Accessed Time: 2022-04-17 12:51:02.712810
+    Client: 127.0.0.1:62700
+    
+    Request: GET /
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0017609596252441406
+    ----------------------------------------
+    
+    Timestamp: 1650163867.525011
+    Accessed Time: 2022-04-17 12:51:07.525011
+    Client: 127.0.0.1:62700
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.00043892860412597656
+    ----------------------------------------
+    
+    Timestamp: 1650163914.056406
+    Accessed Time: 2022-04-17 12:51:54.056406
+    Client: 127.0.0.1:62723
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0006558895111083984
+    ----------------------------------------
+    
+    Timestamp: 1650164285.402776
+    Accessed Time: 2022-04-17 12:58:05.402776
+    Client: 127.0.0.1:62766
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0004749298095703125
+    ----------------------------------------
+    
+    Timestamp: 1650164718.008336
+    Accessed Time: 2022-04-17 13:05:18.008336
+    Client: 127.0.0.1:62854
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0005090236663818359
+    ----------------------------------------
+    
+    Timestamp: 1650165113.751335
+    Accessed Time: 2022-04-17 13:11:53.751335
+    Client: 127.0.0.1:62984
+    
+    Request: GET /redoc
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0007681846618652344
+    ----------------------------------------
+    
+    Timestamp: 1650165248.714514
+    Accessed Time: 2022-04-17 13:14:08.714514
+    Client: 127.0.0.1:63034
+    
+    Request: GET /redoc
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.00733494758605957
+    ----------------------------------------
+    
+    Timestamp: 1650165411.399321
+    Accessed Time: 2022-04-17 13:16:51.399321
+    Client: 127.0.0.1:63083
+    
+    Request: GET /
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0014100074768066406
+    ----------------------------------------
+    
+    Timestamp: 1650165838.396248
+    Accessed Time: 2022-04-17 13:23:58.396248
+    Client: 127.0.0.1:63180
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0005548000335693359
+    ----------------------------------------
+    
+    Timestamp: 1650165848.520756
+    Accessed Time: 2022-04-17 13:24:08.520756
+    Client: 127.0.0.1:63196
+    
+    Request: GET /v1/updates/
+    Request Query Param: 
+			location=AT
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.14097905158996582
+    ----------------------------------------
+    
+    Timestamp: 1650165869.622272
+    Accessed Time: 2022-04-17 13:24:29.622272
+    Client: 127.0.0.1:63197
+    
+    Request: GET /v1/updates/
+    Request Query Param: 
+			location=AT
+			category=mask
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.016963958740234375
+    ----------------------------------------
+    
+    Timestamp: 1650165874.365115
+    Accessed Time: 2022-04-17 13:24:34.365115
+    Client: 127.0.0.1:63197
+    
+    Request: GET /v1/updates/
+    Request Query Param: 
+			location=AT
+			category=mask,Others
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.018586158752441406
+    ----------------------------------------
+    
+    Timestamp: 1650165889.393157
+    Accessed Time: 2022-04-17 13:24:49.393157
+    Client: 127.0.0.1:63200
+    
+    Request: GET /v1/updates/
+    Request Query Param: 
+			location=AT,BG
+			category=mask,Others
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.021780014038085938
+    ----------------------------------------
+    
+    Timestamp: 1650165905.923276
+    Accessed Time: 2022-04-17 13:25:05.923276
+    Client: 127.0.0.1:63201
+    
+    Request: GET /v1/updates/
+    Request Query Param: 
+			location=AT,BG
+			category=mask,tracing
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.018021106719970703
+    ----------------------------------------
+    
+    Timestamp: 1650165926.682707
+    Accessed Time: 2022-04-17 13:25:26.682707
+    Client: 127.0.0.1:63203
+    
+    Request: GET /v1/updates/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.04325604438781738
+    ----------------------------------------
+    
+    Timestamp: 1650166032.49179
+    Accessed Time: 2022-04-17 13:27:12.491790
+    Client: 127.0.0.1:63223
+    
+    Request: GET /v1/updates/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.17500686645507812
+    ----------------------------------------
+    
+    Timestamp: 1650166493.904978
+    Accessed Time: 2022-04-17 13:34:53.904978
+    Client: 127.0.0.1:63742
+    
+    Request: GET /v1/updates/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.16171503067016602
+    ----------------------------------------
+    
+    Timestamp: 1650166516.881389
+    Accessed Time: 2022-04-17 13:35:16.881389
+    Client: 127.0.0.1:63761
+    
+    Request: GET /v1/updates/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.14679598808288574
+    ----------------------------------------
+    
+    Timestamp: 1650166566.530032
+    Accessed Time: 2022-04-17 13:36:06.530032
+    Client: 127.0.0.1:63782
+    
+    Request: GET /v1/updates/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.14928317070007324
+    ----------------------------------------
+    
+    Timestamp: 1650166577.059686
+    Accessed Time: 2022-04-17 13:36:17.059686
+    Client: 127.0.0.1:63783
+    
+    Request: GET /v1/updates/location=AT
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0005199909210205078
+    ----------------------------------------
+    
+    Timestamp: 1650166582.976059
+    Accessed Time: 2022-04-17 13:36:22.976059
+    Client: 127.0.0.1:63787
+    
+    Request: GET /v1/updates/
+    Request Query Param: 
+			location=AT
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.022318124771118164
+    ----------------------------------------
+    
+    Timestamp: 1650166598.985822
+    Accessed Time: 2022-04-17 13:36:38.985822
+    Client: 127.0.0.1:63790
+    
+    Request: GET /v1/updates/
+    Request Query Param: 
+			category=mask
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.023417949676513672
+    ----------------------------------------
+    

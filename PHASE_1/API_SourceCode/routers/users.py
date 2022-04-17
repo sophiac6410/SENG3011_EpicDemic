@@ -1,12 +1,6 @@
-from datetime import datetime
-from email.header import Header
-from lib2to3.pgen2 import token
-from dateutil.parser import parse
-from fastapi import APIRouter, status, Header, Query, Path
+from fastapi import APIRouter, status, Header, Path
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
-from datetime import datetime, timedelta
-from typing import Optional
 from database import users_col
 from models import userModels, baseModels
 import auth

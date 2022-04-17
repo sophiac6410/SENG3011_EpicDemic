@@ -37,5 +37,11 @@ tags = [
         "description": """
         Users on EpicDemic. Includes registering, logging in, and saving location, notifications, and trips for users
         """
+    },
+    {
+        "name": "updates",
+        "description": """
+        The recent updates for each destination, including on travel restrictions and diseases
+        """
     }
 ]
