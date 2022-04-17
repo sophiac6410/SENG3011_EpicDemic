@@ -1,0 +1,14 @@
+
+    Timestamp: 1650183289.457377
+    Accessed Time: 2022-04-17 18:14:49.457377
+    Client: 127.0.0.1:50448
+    
+    Request: GET /v1/locations/FI
+    Request Query Param: None
+    Request Path Param: 
+			id=FI
+   
+    Response Code: 200
+    Process Time: 0.03310704231262207
+    ----------------------------------------
+    
