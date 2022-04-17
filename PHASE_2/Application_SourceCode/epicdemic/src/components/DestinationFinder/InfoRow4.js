@@ -25,7 +25,7 @@ const InfoRow4 = ({country, updateDesc, lastUpdated, travelStatus, saved}) => {
                 <Typography variant="bodyText">{updateDesc}</Typography>
             </Col>
             <Col xs={2} style={{textAlignLast: 'center'}}>
-                <Typography variant="bodyText">{lastUpdated.toLocaleDateString()}</Typography>
+                <Typography variant="bodyText">{lastUpdated.toDateString()}</Typography>
             </Col>
             <Col xs={2} style={{textAlignLast: 'center'}}>
                 <Typography variant="bodyText">{travelStatus}</Typography>

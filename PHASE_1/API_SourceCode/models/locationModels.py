@@ -1,6 +1,7 @@
 from models import baseModels
 from pydantic import BaseModel, Field # datetime has format yyyy-mm-ddTHH:mm:ss
 from typing import List
+from datetime import datetime
 
 class Location(BaseModel):
 	_id: str = Field(..., description="The unique ISO code of the country", 
@@ -17,8 +18,8 @@ class Location(BaseModel):
                     example=3017382)
 	region: str = Field(..., description="The continent of the country",
                     example="Europe")
-	# entry_description: str = Field(..., description="The summary of the country entry rules",
-    #                 example="Must be adminestered with a booster shot")
+	entry_description: str = Field(..., description="The summary of the country entry rules",
+                    example="Must be adminestered with a booster shot")
 	disease_risk: int = Field(..., description="The integer between 0 and 4, correlating low (0) to high (4) disease risk in a location.",
                     example=2)
 	safety_score: int = Field(..., description="The overall safety rating of a country: 0 (Safest) - 100 (Dangerous)",
@@ -27,6 +28,7 @@ class Location(BaseModel):
                     example=2)
 	advice_level: int = Field(..., description="Calculated by the percentage of disease_risk, safety_score + travel_status. 0 (Safest) - 4 (Do not travel)",
                     example=3)
+	last_update: datetime = Field(..., description="The date of the last update on the location's travel requirements", example="2022-04-02")
 
 class LocationCovid(BaseModel):
 	country: str = Field(..., description="The name of the country", 

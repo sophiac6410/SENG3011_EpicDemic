@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Query, status, Path
 from fastapi.responses import JSONResponse
 from util import DATETIME_REGEX, parse_datetime_string
-from database import locations_col, diseaseLocations_col
+from database import locations_col, diseaseLocations_col, updates_col
 import re
 from datetime import datetime
 import pytz
@@ -26,7 +26,12 @@ async def get_location_by_id(
 		return JSONResponse(status_code=status.HTTP_204_NO_CONTENT, content={"error": "No data for country"})
 	else:
 		data = data[0]
-	
+		updates = list(updates_col.find({"location_id": id}).sort("date", -1))
+		if (len(updates) == 0):
+			data.update({"last_update": datetime.now()})
+		else:
+			data.update({"last_update": updates[0].get("date")})
+		print(data)
 	return baseModels.createResponse(True, 200, data)
 
 
