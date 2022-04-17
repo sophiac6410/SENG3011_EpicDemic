@@ -21,11 +21,15 @@ import {
     BrowserRouter
   } from "react-router-dom";
 import Planner from './pages/Planner'
+import Trip from './pages/Trip'
 
 const theme = createTheme({
   palette: {
     teal: {
       main: '#0F83A0',
+    },
+    darkTeal: {
+      main: '#1B4965'
     },
   },
   // components: {
@@ -83,7 +87,7 @@ const theme = createTheme({
       fontSize: '0.8em',
       lineHeight: 1.5,
       display: 'block',
-      textAlign: 'justify'
+      // textAlign: 'start'
     },
     bodyImportant: {
       fontFamily: "Open Sans, sans-serif",
@@ -156,6 +160,7 @@ function App() {
               <Route path="/finder" element={<DestinationFinder/>}/>
               <Route path="/saved" element={<SavedLocations/>}/>
               <Route path="/planner" element={<Planner/>}/>
+              <Route path="/trip/:id" element={<Trip></Trip>}/>
             </Routes>
           </BrowserRouter>
           <Footer></Footer>

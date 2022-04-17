@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Query, status, Path
 from fastapi.responses import JSONResponse
 from util import DATETIME_REGEX, parse_datetime_string
-from database import locations_col, diseaseLocations_col, updates_col
+from database import locations_col, diseaseLocations_col, updates_col, safety_col, travel_col
 import re
 from datetime import datetime
 import pytz
@@ -31,7 +31,6 @@ async def get_location_by_id(
 			data.update({"last_update": datetime.now()})
 		else:
 			data.update({"last_update": updates[0].get("date")})
-		print(data)
 	return baseModels.createResponse(True, 200, data)
 
 
@@ -61,4 +60,71 @@ async def get_covid_cases():
 	return baseModels.createResponse(True, 200, {
 		"cases_per_country": cases_per_country
 	})
+
+
+############## GET SAEFTY SCORE OF A COUNTRY ###############
+@router.get("/{id}/safety", status_code=status.HTTP_200_OK, response_model=locationModels.LocationSafetyResponse)
+async def get_location_by_id(
+	id: str = Path(
+		...,
+		description="The country's unique ISO code",
+		example="PH",
+	)
+):
+    data = list(safety_col.find({'location_id': id}))
+    data = data[0]
+
+    return baseModels.createResponse(True, 200, {
+		'lqbtq': data['lgbtq'],
+		'medical': data['medical'],
+		'theft': data['theft'],
+		'physical_harm': data['physicalHarm'],
+		'political_freedom': data['politicalFreedom'],
+		'women': data['women'],
+		'last_updated': data['updated']
+	})
+
+
+############## GET TRAVEL OVERVIEW OF THE COUNTRY ###############
+@router.get("/{id}/travel", status_code=status.HTTP_200_OK, response_model=locationModels.LocationTravelOverviewResponse)
+async def get_travel_overview(
+	id: str = Path(
+		...,
+		description="The country's unique ISO code",
+		example="PH",
+	)
+):
+	data = list(travel_col.find({'_id':id}))[0]
+	area_list = []
+	print('--area restriction--')
+	for a in data['area_restrction'][0]:
+		area_list.append(a)
+
+	return baseModels.createResponse(True, 200, {
+			'declaration': data['declaration'],
+			'quarantine': data['quarantine'],
+			'area_restriction': area_list,
+			'testing': data['testing'],
+			'mask': data['mask'],
+			'area_policy': data['area_policy'],
+			'tracing': {
+				'date': data['tracing']['date'],
+				'text': data['tracing']['text'],
+				'isRequired': data['tracing']['isRequired'],
+				'androidLink': data['tracing']['androidUrl'][0],
+				'iosLink': data['tracing']['iosUrl'][0]
+			},
+			'attractions_info': data['attractions_info'],
+			'entry_info': data['entry_info'],
+			'event_info': data['event_info'],
+			'shopping_info': data['shopping_info'],
+			'vaccine_info': data['vaccine_info']
+		})
+
+
+
+
+
+
+
 

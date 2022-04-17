@@ -1,0 +1,2 @@
+-- inserting AF --
+'Cursor' object has no attribute 'count'

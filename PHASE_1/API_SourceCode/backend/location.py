@@ -1,3 +1,4 @@
+from random import sample
 from pymongo import MongoClient
 import requests
 import geocoder
@@ -59,23 +60,7 @@ def advice_level(disease, safety, entry):
     num=round((num*100)/25)
     return num
 
-# CovidControls 
 
-def covid_controls(country_id):
-    apiKey = 'GbHl378d8f4L1y1MdQB0HoCpGj8mzBCwjMbSnshBFWFymm7LNClDzQ0e69ZUzioyb95U4W5RdYbY'
-    url = f"https://prod.greatescape.co/api/travel/countries/{country_id}/corona"
-    header = {
-        'authorization': f'Bearer {apiKey}',
-    }
-
-    try:
-        x = requests.get(url, headers=header)
-        covidc_data = x.json()
-        lockdown_num=entry_level(covidc_data['lockdownInfo']['touristEntry'])
-        # print(covidc_data['lockdownInfo']['touristInfo'])
-        return lockdown_num
-    except Exception as e: 
-        raise e 
 
 
 
@@ -100,6 +85,7 @@ def amadeus_safety(city):
 
 
 def insert_locations(country_id, index):
+
     url = f"https://countries-cities.p.rapidapi.com/location/country/{country_id}"
 
     headers = {
@@ -112,19 +98,18 @@ def insert_locations(country_id, index):
         response = requests.request("GET", url, headers=headers)
         data = response.json()
         if data: print('- rapidapi: data collected')
-        print(data['name'])
         # GeoCode for longitude and latitude 
         geo_data = geocoder.geonames(data['name'], key='epicdemic')
         coord = geo_data.latlng
         if coord: print(f'- geocode api: collected -- {coord}')
-        
-
-        # Amadeus dataset
-        f = open('travel.json')
-        amadeus_data = json.load(f)
-        f.close()
     except Exception as e:
         raise e
+
+
+    f = open('travel.json')
+    amadeus_data = json.load(f)
+    f.close()
+
 
     body = {
         '_id': country_id,
@@ -136,12 +121,18 @@ def insert_locations(country_id, index):
         'region': data['continent']['name'],
         'entry_description': amadeus_data[index]['areaAccessRestriction']['entry']['text'] if index != -1 else '',
         'disease_risk': disease_parser(amadeus_data[index]['diseaseInfection']['level']) if index != -1 else '',
-        # 'travel_status': covid_controls(country_id),
-        'travel_status': -1,
+        'travel_status': entry_level(covid_controls(country_id)['tourist_entry']),
         'safety_score': amadeus_safety(data['capital']['name']) if index != -1 else '',
     }
     body['advice_level'] = advice_level(body['disease_risk'], body['safety_score'], body['travel_status']) if index != -1 else ''
     return body
+
+
+def covid_controls(country_id):
+    f = open('covidcontrols.json')
+    data = json.load(f)
+    f.close()
+    return data[country_id]
 
 
 
@@ -154,7 +145,8 @@ try:
     db = cluster['parser_test_db']
     location_collection = db["Locations"]
     
-    # this is for sample data
+    # inserting into database
+    '''
     for country in sample_list:
         print(f'-- inserting {country} --')
         try: 
@@ -168,20 +160,32 @@ try:
         except Exception as e:
             raise e 
     
+
+    for id in sample_list:
+        if id != 'BE':
+            new_data=covid_controls(id)
+            form = {
+                'vaccine_info': new_data['vaccine_info'],
+                'entry_info': new_data['entry_info'],
+                'event_info': new_data['event_info'],
+                'shopping_info': new_data['shopping_info'],
+                'attractions_info': new_data['attractions_info']
+            }
+            db.Travel.update_one( { "_id": id } , { "$set" : form })
     '''
 
-    # this is to populate location db with all countries 
-    for country in COUNTRY_CODES:
-        print(f'-- inserting {country} --')
+    for id in sample_list:
+        data = list(location_collection.find({'_id': id}))[0]
+        f={
+            'disease_risk': data['disease_risk'],
+            'safety_score': data['safety_score'],
+            'travel_status': entry_level(covid_controls(id)['tourist_entry']),
+            'advice_level': advice_level(data['disease_risk'], data['safety_score'], data['travel_status']),
+        }
 
-        try:
-            if db.Locations.count_documents( { "_id": country } ) == 0:
-                location_collection.insert_one(insert_locations(country, -1))
-        except Exception as e:
-            raise e 
-    '''
+        db.Locations.update_one( { "_id": id } , { "$set" : f })
+    
 
-        
 
 except Exception as e:
     print(e)
