@@ -10,6 +10,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import FlightIcon from '@mui/icons-material/Flight';
 import BucketCard from "./BucketCard";
 import Carousel from "react-multi-carousel";
+import { ActivityModal } from "./PlannerModal";
 
 const cardStyle = {
   marginTop: "25px",
@@ -92,10 +93,7 @@ function TripCard() {
           <AddCircleIcon color="teal"></AddCircleIcon>
         </IconButton>
         <Typography variant='caption' className='color-medium-teal me-3'>Add dates</Typography>
-        <IconButton>
-          <LocalActivityIcon sx={{marginRight: "5px"}} color='teal'></LocalActivityIcon>
-        </IconButton>
-        <Typography variant='caption' className='color-medium-teal me-3'>View activities</Typography>
+        <ActivityModal fromTrip={true}></ActivityModal>
         <IconButton sx={{paddingRight: "5px"}}>
           <FlightIcon sx={{marginRight: "5px"}} color='teal'></FlightIcon>
         </IconButton>
