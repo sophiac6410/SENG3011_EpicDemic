@@ -250,6 +250,125 @@ function StepTwo({onClose}) {
                     </IconButton>
                     <Typography variant='caption' className='color-medium-teal'>Add to Trip</Typography>
                   </div> */}
+                  {/* <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
+                    <IconButton>
+                      <LocalActivityIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></LocalActivityIcon>
+                    </IconButton>
+                    <Typography variant='caption' className='color-medium-teal'>View activities</Typography>
+                  </div> */}
+                  <ActivityCard></ActivityCard>
+                </div>
+              ) : (
+                <div style={{display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center", marginBottom: "80px"}} className="mt-2">
+                  <IconButton onClick={randomGenerator}>
+                    <ChangeCircleIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></ChangeCircleIcon>
+                  </IconButton>
+                  <Typography variant='bodyImportant' className='color-medium-teal mt-2'>Choose for you</Typography>
+                </div>
+              )
+            }
+          </div>
+            {stepThree ? (
+              <Box sx={{display: "flex", flexDirection: "row", marginTop: "10px"}} className="text-center">
+                <Col md={6}>
+                  <TealBotton onClick={handleClose}>Cancle</TealBotton>
+                </Col>
+                <Col md={6}>
+                  <TealBotton onClick={saveTrip}>Save and view trip</TealBotton>
+                </Col>
+              </Box> 
+            ) : (
+              <div></div>
+            )}
+        </Box>
+      </Modal>
+    </React.Fragment>
+  )
+}
+
+
+function ActivityCard() {
+  const [isOpen, setOpen] = React.useState(null);
+  const handleOpen = () => {
+    setOpen(true);
+    setStepThree(false)
+  };
+  const handleClose = () => {
+    // setOpen(false);
+    // setStepThree(false)
+    onClose()
+  };
+  const handleBack = () => {
+    setOpen(false);
+    setStepThree(false)
+  }
+  const [stepThree, setStepThree] = React.useState(false)
+
+  const randomGenerator = () => {
+    setStepThree(true)
+  }
+
+  let navigate = useNavigate()
+  const saveTrip = () => {
+    navigate('/trip/1')
+  }
+
+  return(
+    <React.Fragment>
+      <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
+        <IconButton onClick={handleOpen}>
+          <LocalActivityIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></LocalActivityIcon>
+        </IconButton>
+        <Typography variant='caption' className='color-medium-teal'>View activities</Typography>
+      </div>
+      <Modal
+        open={isOpen}
+      >
+        <Box sx={styleTwo}>
+          <div style={{display: "flex", justifyContent: "start", flexDirection: "row", alignItems: "center", paddingBottom: "20px"}}>
+            <IconButton onClick={handleBack}>
+              <ArrowBackIosIcon color='teal' sx={{marginTop: "10px", marginRight: "5px"}} fontSize="small"></ArrowBackIosIcon>
+            </IconButton>
+            {/* <Typography variant='body' className='color-medium-teal mt-2'>Back</Typography> */}
+          </div>
+          <Typography variant="heading2" className='color-dark-teal text-center'>
+            Things to do
+          </Typography>
+          <Box autoComplete='off' sx={formStyle}>
+            <PublicIcon  sx={{marginTop: "10px", marginRight: "5px"}} color="teal"></PublicIcon>
+            <FormControl color='teal' variant="standard" sx={{ width: '20'}}>
+              <Input color='teal' placeholder='Europe' value="Europe"/>
+            </FormControl>
+            <Divider orientation="vertical" flexItem  variant="middle" flex />
+            <EmojiFlagsIcon  sx={{marginTop: "10px", marginRight: "5px"}} color="teal"></EmojiFlagsIcon>
+            <FormControl color='teal' variant="standard" sx={{ width: '20'}}>
+              <Input color='teal' placeholder='Any Country'/>
+            </FormControl>
+            <Divider orientation="vertical" flexItem  variant="middle" flex />
+            <LocationCityIcon  sx={{marginTop: "10px", marginRight: "5px"}} color='teal'></LocationCityIcon>
+            <FormControl variant="standard" sx={{ width: '20'}} color="teal">
+              <Input color='teal' placeholder='City'/>
+            </FormControl>
+            <IconButton onClick={randomGenerator}>
+              <SearchIcon x={{marginTop: "10px", marginRight: "5px"}} color='teal'></SearchIcon>
+            </IconButton>
+          </Box>
+          <div style={{display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center"}} className="mt-2">
+            {
+              stepThree ? (
+                <div style={{display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center", paddingBottom: "20px"}}>
+                  <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
+                    <IconButton onClick={handleClose}>
+                      <ChangeCircleIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></ChangeCircleIcon>
+                    </IconButton>
+                    <Typography variant='caption' className='color-medium-teal'>Choose for you</Typography>
+                  </div>
+                  {/* <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
+                    <IconButton onClick={handleClose}>
+                      <AddCircleIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></AddCircleIcon>
+                    </IconButton>
+                    <Typography variant='caption' className='color-medium-teal'>Add to Trip</Typography>
+                  </div> */}
                   <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
                     <IconButton>
                       <LocalActivityIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></LocalActivityIcon>
@@ -285,4 +404,4 @@ function StepTwo({onClose}) {
   )
 }
 
-export {StepOne, StepTwo, formStyle}
+export {StepOne, StepTwo, ActivityCard}
