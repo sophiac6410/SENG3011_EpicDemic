@@ -69,19 +69,19 @@ function Overview() {
         code: code,
         country: covid.country,
         cases: covid.cases,
-        todayCases: covid.todayCases,
+        todayCases: covid.cases - covid.recovered - covid.deaths,
         population: covid.population
       }
 
       // TODO: use our own percentage vaccination stat
       const vaccine = await fetch(`https://disease.sh/v3/covid-19/vaccine/coverage/countries/${code}?lastdays=all&fullData=false`).then(res => res.json())
-      var total = vaccine.timeline[Object.keys(vaccine.timeline).pop()] / 2;
+      var total = vaccine.timeline[Object.keys(vaccine.timeline).pop()] / 3;
 
       newData["vaccinationPercentage"] = total * 100 / newData.population;
 
       setData(newData);
 
-      const locationData = await fetch(`http://localhost:8000/v1/locations/id?location_id=${code}`).then(res => res.json())
+      const locationData = await fetch(`http://localhost:8000/v1/locations/${code}`).then(res => res.json())
       
       console.log(locationData);
       setDest({
