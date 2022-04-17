@@ -37,10 +37,9 @@ function Destination() {
       const data = await getDestination(code);
       setDest({
         code: code,
-        country: data.country
-        // longitude: locationData.data.longitude,
-        // latitude: locationData.data.latitude
-      })
+        country: data.country,
+        lastUpdate: (new Date(data.last_update)).toLocaleDateString()
+      });
       const data2 = await getUserSaved();
       console.log(data2.saved_locations);
       console.log(data2.saved_locations.includes(code));
@@ -70,7 +69,7 @@ function Destination() {
     <div>
       <NavbarComp bg={true}/>
       {/* <TinySearch className="bg-lightblue"></TinySearch> */}
-      <Container style={{margin: '0% 5%', width: 'auto'}}>
+      <Container style={{margin: '0% 8%', width: 'auto'}}>
         <div className="d-flex justify-content-start align-items-center mt-3">
           <div className="text-center m-3">
             <Checkbox sx={{display:'block', mx: 'auto'}} checked={saved} icon={<FavoriteBorder fontSize="large" className="color-medium-teal"/>} checkedIcon={<Favorite fontSize="large" className="color-medium-teal"/>} onClick={handleClickSave} />
@@ -91,7 +90,7 @@ function Destination() {
           <Col className="align-self-center">
             <div className="text-start">
               <Typography variant="title" className="color-dark-teal">{dest.country}</Typography>
-              <Typography variant="bodyText" style={{textAlign: "start"}}>Last updated on 25/03/22 </Typography>
+              <Typography variant="bodyText" style={{textAlign: "start"}}>Last updated on {dest.lastUpdate} </Typography>
             </div>
           </Col>
           <div class="d-flex justify-content-end flex-end">
