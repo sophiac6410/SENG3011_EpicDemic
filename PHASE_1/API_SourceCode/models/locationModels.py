@@ -91,7 +91,7 @@ class LocationDeclaration(BaseModel):
                     example="Those who do not comply will get deported")
 	documentRequired: str  = Field(..., description="If documents are required in travel entry", 
                     example="No") 
-	travelDocumentation: str | None = None
+	travelDocumentation: str or None = None
 
 class LocationTesting(BaseModel):
 	when: str = Field(..., description="When the test should be conducted", 
@@ -156,9 +156,9 @@ class LocationTracing(BaseModel):
                     example="2022-04-07")
 
 class LocationAreaRestriction(BaseModel):
-	text: str | None = None
-	date: str | None = None
-	restrictionType: str | None = None
+	text: str or None = None
+	date: str or None = None
+	restrictionType: str or None = None
 
 class LocationAttractions(BaseModel):
 	entry_status: str = Field(..., description="The description of the entry status", 

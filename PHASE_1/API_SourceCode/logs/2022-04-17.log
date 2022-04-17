@@ -1,0 +1,78 @@
+
+    Timestamp: 1650181966.447347
+    Accessed Time: 2022-04-17 17:52:46.447347
+    Client: 127.0.0.1:50965
+    
+    Request: GET /v1/users/saved
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.13709115982055664
+    ----------------------------------------
+    
+    Timestamp: 1650181966.594592
+    Accessed Time: 2022-04-17 17:52:46.594592
+    Client: 127.0.0.1:50965
+    
+    Request: GET /v1/locations/covidcases
+    Request Query Param: None
+    Request Path Param: 
+			id=covidcases
+   
+    Response Code: 204
+    Process Time: 0.016850948333740234
+    ----------------------------------------
+    
+    Timestamp: 1650181966.716607
+    Accessed Time: 2022-04-17 17:52:46.716607
+    Client: 127.0.0.1:50968
+    
+    Request: GET /v1/locations/AT
+    Request Query Param: None
+    Request Path Param: 
+			id=AT
+   
+    Response Code: 200
+    Process Time: 0.014299869537353516
+    ----------------------------------------
+    
+    Timestamp: 1650181989.83623
+    Accessed Time: 2022-04-17 17:53:09.836230
+    Client: 127.0.0.1:50972
+    
+    Request: GET /v1/locations/EE
+    Request Query Param: None
+    Request Path Param: 
+			id=EE
+   
+    Response Code: 200
+    Process Time: 0.017845869064331055
+    ----------------------------------------
+    
+    Timestamp: 1650181989.889073
+    Accessed Time: 2022-04-17 17:53:09.889073
+    Client: 127.0.0.1:50972
+    
+    Request: GET /v1/users/saved
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.018027067184448242
+    ----------------------------------------
+    
+    Timestamp: 1650181991.800581
+    Accessed Time: 2022-04-17 17:53:11.800581
+    Client: 127.0.0.1:50972
+    
+    Request: GET /v1/locations/id
+    Request Query Param: 
+			location_id=EE
+    Request Path Param: 
+			id=id
+   
+    Response Code: 204
+    Process Time: 0.014687061309814453
+    ----------------------------------------
+    
