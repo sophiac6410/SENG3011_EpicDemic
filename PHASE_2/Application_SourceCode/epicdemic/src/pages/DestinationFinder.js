@@ -15,18 +15,34 @@ import BalloonBackground from "../static/balloontravel.jpg"
 import { DarkButton, WhiteButton } from "../styles/Button";
 import NavbarComp from "../components/NavBar";
 import Typography from '@mui/material/Typography';
+import { getAllLocations, getUserSaved } from "../apiCalls";
 
 
 const DestinationFinder = () => {
-    const [infoRows, setInfoRows] = useState([]);
+    // const [infoRows, setInfoRows] = useState([]);
+    const [destinations, setDestinations] = useState([]);
     const [popularDestinations, setPopularDestinations] = useState([]);
+    const [savedLocations, setSavedLocations] = useState([]);
 
     let navigate = useNavigate(); 
 
     useEffect(() => {
-        setInfoRows([...infoRowData]);
+        async function fetchData () {
+            const data = await getAllLocations();
+            console.log(data);
+            setDestinations(data);
+            data = await getUserSaved();
+            setSavedLocations(data.saved_locations);
+        }
+        // setInfoRows([...infoRowData]);
+        fetchData();
         setPopularDestinations([...popularDestinationsData]);
     }, []);
+
+    const getDate = (date) => {
+		const dateObj = new Date(date);
+		return dateObj;
+	}
 
     return (
         <div className="bg-off-white">
@@ -55,15 +71,16 @@ const DestinationFinder = () => {
                 {/* <Container fluid className="latest-updates"> */}
                 <HeaderInfoRow/>
                 <Container style={{height: '80vh', overflowY: 'scroll'}}>
-                    {infoRows.map((infoRow, idx) => {
+                    {destinations.map((dest, idx) => {
                         return (
                             <InfoRow
                             key={idx}
-                            country={infoRow.country}
-                            updateDesc={infoRow.latestUpdate}
-                            lastUpdated={infoRow.lastUpdated}
-                            travelStatus={infoRow.travelStatus}
-                            saved={infoRow.saved}
+                            code={dest.id}
+                            country={dest.country}
+                            updateDesc={dest.entry_description}
+                            lastUpdated={getDate(dest.last_update)}
+                            travelStatus={dest.travel_status}
+                            saved={savedLocations.includes(dest.id)}
                             />
                             )
                         })}

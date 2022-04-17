@@ -10,7 +10,7 @@ const HeaderInfoRow4 = () => {
                 <Typography variant="bodyHeading">COUNTRY</Typography>
             </Col>
             <Col xs={4}>
-                <Typography variant="bodyHeading">LATEST UPDATE</Typography>
+                <Typography variant="bodyHeading">ENTRY REQUIREMENTS</Typography>
             </Col>
             <Col xs={2}>
                 <Typography variant="bodyHeading">LAST UPDATE</Typography>

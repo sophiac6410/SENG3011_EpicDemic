@@ -78,3 +78,18 @@ export const getUpdates = async (locations, categories, start, end) => {
         console.log(e);
     }
 }
+
+export const getAllLocations = async () => {
+    try {
+        const response = await fetch(`${API_URL.API_URL}/v1/locations/`);
+        const data = await response.json();
+        console.log(data);
+        if (!data.ok) {
+            alert(data.data.error);
+        } else {
+            return data.data;
+        }
+    } catch (e) {
+      console.log(e);
+    }
+}

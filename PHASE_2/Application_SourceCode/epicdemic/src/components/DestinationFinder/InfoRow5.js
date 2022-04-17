@@ -3,10 +3,16 @@ import { Row, Col, Button, Image } from "react-bootstrap";
 import "../../styles/DestinationFinder.css";
 import BlueDot from "../../static/bluedot.svg"
 import { Typography } from "@mui/material";
+import { useNavigate, } from 'react-router-dom';
 
-const InfoRow5 = ({country, desc, dateTime}) => {
+const InfoRow5 = ({country, desc, dateTime, code}) => {
+    let navigate = useNavigate(); 
     return (
-        <Row className="info-row bg-white" style={{margin: '2% 0%'}}>
+        <Row className="info-row bg-white" style={{margin: '2% 0%', cursor: 'pointer'}}
+            onClick={() => {
+                navigate(`/destination/${code}`);
+            }}
+        >
             <Col xs={2}>
                 <Typography variant="bodyHeading">{country}</Typography>
             </Col>

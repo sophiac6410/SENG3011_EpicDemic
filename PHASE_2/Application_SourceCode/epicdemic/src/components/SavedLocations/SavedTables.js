@@ -27,6 +27,7 @@ function SavedTables (props) {
           return (
             <InfoRow4
             key={idx}
+            code={loc.id}
             country={loc.country}
             updateDesc={loc.entry_description}
             lastUpdated={getDate(loc.last_update)}
@@ -45,6 +46,7 @@ function SavedTables (props) {
             return (
               <InfoRow5
                 key={idx}
+                code={update.location_id}
                 country={update.country}
                 desc={update.text}
                 dateTime={getDate(update.date)}

@@ -4,7 +4,7 @@ from typing import List
 from datetime import datetime
 
 class Location(BaseModel):
-	_id: str = Field(..., description="The unique ISO code of the country", 
+	id: str = Field(..., description="The unique ISO code of the country", 
                     example='FR')
 	country: str = Field(..., description="The name of the country", 
                     example='France')
@@ -228,3 +228,6 @@ class LocationSafetyResponse(baseModels.Response):
 
 class LocationTravelOverviewResponse(baseModels.Response):
 	data: LocationTravelOverview
+
+class LocationAllResponse(baseModels.Response):
+	data: List[Location]
