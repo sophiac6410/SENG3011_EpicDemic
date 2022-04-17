@@ -22,6 +22,10 @@ import IconButton from '@mui/material/IconButton';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import LocalActivityIcon from '@mui/icons-material/LocalActivity';
 import { Navigate, useNavigate } from 'react-router-dom';
+import ActivityCard from './ActivityCard';
+import Carousel from "react-multi-carousel";
+import CloseIcon from '@mui/icons-material/Close';
+
 
 const style = {
   position: 'absolute',
@@ -57,6 +61,23 @@ const styleTwo = {
   paddingBottom: "80px",
 };
 
+const styleThree = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: "1000px",
+  hight: "1000px",
+  bgcolor: 'background.paper',
+  borderRadius: "20px",
+  boxShadow: 24,
+  p: 4,
+  backgroundColor: "#EEF0F2",
+  display: "flex",
+  flexDirection: "column",
+  paddingBottom: "80px",
+};
+
 const formStyle = {
   marginTop: "25px",
   display: "flex",
@@ -80,6 +101,26 @@ const formStyle = {
   '& svg': {
     m: 1.5,
   },
+};
+
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 1024 },
+    items: 1,
+  },
+  desktop: {
+    breakpoint: { max: 2000, min: 1024 },
+    items: 1,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 1,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
 };
 
 function StepOne({isOpen, onClose, onNext}) {
@@ -250,12 +291,13 @@ function StepTwo({onClose}) {
                     </IconButton>
                     <Typography variant='caption' className='color-medium-teal'>Add to Trip</Typography>
                   </div> */}
-                  <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
+                  {/* <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
                     <IconButton>
                       <LocalActivityIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></LocalActivityIcon>
                     </IconButton>
                     <Typography variant='caption' className='color-medium-teal'>View activities</Typography>
-                  </div>
+                  </div> */}
+                  <ActivityModal></ActivityModal>
                 </div>
               ) : (
                 <div style={{display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center", marginBottom: "80px"}} className="mt-2">
@@ -285,4 +327,83 @@ function StepTwo({onClose}) {
   )
 }
 
-export {StepOne, StepTwo, formStyle}
+
+function ActivityModal({fromTrip}) {
+  const [isOpen, setOpen] = React.useState(null);
+  const handleOpen = () => {
+    setOpen(true);
+    setStepThree(false)
+  };
+  const handleClose = () => {
+    // setOpen(false);
+    // setStepThree(false)
+    onClose()
+  };
+  const handleBack = () => {
+    setOpen(false);
+    setStepThree(false)
+  }
+  const [stepThree, setStepThree] = React.useState(false)
+
+  const randomGenerator = () => {
+    setStepThree(true)
+  }
+
+  let navigate = useNavigate()
+  const saveTrip = () => {
+    navigate('/trip/1')
+  }
+
+  return(
+    <React.Fragment>
+      {fromTrip ? (
+        <div className='d-flex flex-row align-items-center me-2'>
+        <IconButton onClick={handleOpen}>
+          <LocalActivityIcon color='teal'></LocalActivityIcon>
+        </IconButton>
+        <Typography variant='caption' className='color-medium-teal'>View activities</Typography>
+        </div>
+      ): (
+        <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
+          <IconButton onClick={handleOpen}>
+            <LocalActivityIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></LocalActivityIcon>
+          </IconButton>
+          <Typography variant='caption' className='color-medium-teal'>View activities</Typography>
+        </div>
+      )}
+      <Modal
+        open={isOpen}
+      >
+        <Box sx={styleThree}>
+          <div style={{display: "flex", justifyContent: "end", flexDirection: "row", alignItems: "center", paddingBottom: "20px"}}>
+            <IconButton onClick={handleBack}>
+              <CloseIcon color='teal' sx={{marginTop: "10px", marginRight: "5px"}} fontSize="small"></CloseIcon>
+            </IconButton>
+            {/* <Typography variant='body' className='color-medium-teal mt-2'>Back</Typography> */}
+          </div>
+          <Typography variant="heading2" className='color-dark-teal text-center'>
+            Things to do
+          </Typography>
+          <Carousel 
+            responsive={responsive} 
+            // containerClass="location-carousel"
+            autoPlay={false}
+            arrows={true}
+            shouldResetAutoplay={false}
+            itemClass="location-card"
+            centerMode={true}
+            // className="bg-light-teal"
+          >
+            <ActivityCard></ActivityCard>
+            <ActivityCard></ActivityCard>
+            <ActivityCard></ActivityCard>
+            <ActivityCard></ActivityCard>
+            <ActivityCard></ActivityCard>
+          </Carousel>
+        </Box>
+      </Modal>
+    </React.Fragment>
+  )
+}
+
+export {StepOne, StepTwo, ActivityModal}

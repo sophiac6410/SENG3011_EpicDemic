@@ -20,7 +20,7 @@ function Trip() {
           <Typography variant="bodyText" className="color-dark-teal">Back</Typography>
         </IconButton>
         <Row className="justify-content-center">
-          <div className="text-center">
+          <div className="text-center mt-5">
             <Typography variant="title" className="color-dark-teal">Tiana’s Europe Adventures</Typography>
           </div>
           <Row className='align-items-center justify-content-center mt-4 ps-5'>
@@ -46,7 +46,7 @@ function Trip() {
             </Col>
           </Row>
         </Row>
-        <Typography variant="heading1" style={{marginTop: "80px", marginLeft: "70px"}}>Destinations</Typography>
+        <Typography variant="heading1" style={{marginTop: "60px", marginLeft: "70px"}}>Destinations</Typography>
         <div className='justify-content-center' style={{display: "flex", flexDirection: "column"}}>
           <TripCard></TripCard>
           <TripCard></TripCard>
