@@ -1684,3 +1684,99 @@
     Process Time: 0.031455039978027344
     ----------------------------------------
     
+    Timestamp: 1650197647.63699
+    Accessed Time: 2022-04-17 22:14:07.636990
+    Client: 127.0.0.1:60887
+    
+    Request: GET /
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.004426002502441406
+    ----------------------------------------
+    
+    Timestamp: 1650197650.910708
+    Accessed Time: 2022-04-17 22:14:10.910708
+    Client: 127.0.0.1:60887
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0006871223449707031
+    ----------------------------------------
+    
+    Timestamp: 1650197720.516232
+    Accessed Time: 2022-04-17 22:15:20.516232
+    Client: 127.0.0.1:60922
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0008840560913085938
+    ----------------------------------------
+    
+    Timestamp: 1650197720.605314
+    Accessed Time: 2022-04-17 22:15:20.605314
+    Client: 127.0.0.1:60922
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.06148791313171387
+    ----------------------------------------
+    
+    Timestamp: 1650198028.32865
+    Accessed Time: 2022-04-17 22:20:28.328650
+    Client: 127.0.0.1:60969
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0007970333099365234
+    ----------------------------------------
+    
+    Timestamp: 1650198033.951414
+    Accessed Time: 2022-04-17 22:20:33.951414
+    Client: 127.0.0.1:60970
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0006158351898193359
+    ----------------------------------------
+    
+    Timestamp: 1650198061.014109
+    Accessed Time: 2022-04-17 22:21:01.014109
+    Client: 127.0.0.1:60990
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0011479854583740234
+    ----------------------------------------
+    
+    Timestamp: 1650198061.078355
+    Accessed Time: 2022-04-17 22:21:01.078355
+    Client: 127.0.0.1:60990
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.06350398063659668
+    ----------------------------------------
+    
