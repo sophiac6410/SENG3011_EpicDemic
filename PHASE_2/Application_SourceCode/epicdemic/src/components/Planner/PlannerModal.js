@@ -16,7 +16,6 @@ import { Col } from 'react-bootstrap';
 import PublicIcon from '@mui/icons-material/Public';
 import EmojiFlagsIcon from '@mui/icons-material/EmojiFlags';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
-import SearchIcon from '@mui/icons-material/Search';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -29,7 +28,14 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import CountryField from './CountryField';
 import RegionField from './RegionField';
 import GetCities from './GetCities';
+<<<<<<< HEAD
 //import GetActivities from './GetActivities';
+=======
+// import GetActivities from './GetActivities';
+import { addCityToTrip, createTrip } from './tripApiCalls';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { TripOriginOutlined } from '@mui/icons-material';
+>>>>>>> TripApi
 
 const style = {
   position: 'absolute',
@@ -138,6 +144,8 @@ const regionOptions = [
 function StepOne({isOpen, onClose, onNext}) {
   const [startDate, setStartDate] = React.useState(null);
   const [endDate, setEndDate] = React.useState(null);
+  const [name, setName] = React.useState('');
+  const [travellers, setTravellers] = React.useState();
   const teal = "#0F83A0";
 
   return(
@@ -153,7 +161,7 @@ function StepOne({isOpen, onClose, onNext}) {
         <Box autoComplete='off' sx={formStyle}>
           <BorderColorIcon  sx={{marginTop: "10px", marginRight: "5px"}} color="teal"></BorderColorIcon>
           <FormControl color='teal' variant="standard" sx={{ width: '20ch'}}>
-            <Input color='teal' placeholder='Name your trip'/>
+            <Input color='teal' type='text' placeholder='Name your trip' value={name} value={name} onChange={(event) => {setName(event.target.value)}}/>
           </FormControl>
           <Divider orientation="vertical" flexItem  variant="middle" flex />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -210,46 +218,64 @@ function StepOne({isOpen, onClose, onNext}) {
           <Divider orientation="vertical" flexItem  variant="middle" flex />
           <PeopleOutlineIcon  sx={{marginTop: "10px", marginRight: "5px"}} color='teal'></PeopleOutlineIcon>
           <FormControl variant="standard" sx={{ width: '20ch'}}>
-            <Input color='teal' placeholder='How many travellers'/>
+            <Input color='teal'  placeholder='How many travellers' type='number' value={travellers} onChange={(event) => {setTravellers(event.target.value)}}/>
           </FormControl>
         </Box>
         <Box sx={{display: "flex", flexDirection: "row", marginTop: "80px"}}>
           <Col md={6}>
             <TealBotton onClick={onClose}>Cancel</TealBotton>
           </Col>
-          <StepTwo onClose={onClose}></StepTwo>
+          <StepTwo onClose={onClose} name={name} start={startDate} end={endDate} travellers={travellers} ></StepTwo>
         </Box>
       </Box>
     </Modal>
   )
 }
 
-function StepTwo({onClose}) {
+function StepTwo({onClose, name, start, end, travellers}) {
   const [isOpen, setOpen] = React.useState(null);
   const [country, setCountry] = React.useState(null);
   const [region, setRegion] = React.useState(null);
   const [city, setCity] = React.useState(null);
-  const [cityOptions, setCityOptions] = React.useState([])
-  const handleOpen = () => {
+  const [cityOptions, setCityOptions] = React.useState([]);
+  const [lat, setLat] = React.useState(0.0000)
+  const [long, setLong] = React.useState(0.0000)
+  const [tripId, setTripId] = React.useState(1);
+  const [back, setBack] = React.useState(false);
+  const [added, setAdded] = React.useState(false);
+
+  const handleOpen = async () => {
+    
+    if (!back) {
+      console.log("helloo")
+      console.log(name, start, end, travellers)
+      const start_date = new Date(start);
+      const end_date = new Date(end);
+      const data = await createTrip(name, start_date, end_date, parseInt(travellers));
+      // setTripId(data["id"])
+      console.log(data)
+    }
     setOpen(true);
-    setStepThree(false)
+    setStepThree(false);
   };
   const handleClose = () => {
-    // setOpen(false);
-    // setStepThree(false)
-    onClose()
+    console.log(name, lat, long, country.name, country.code)
+    addCityToTrip(name, lat, long, country.name, country.code);
+    setAdded(true)
   };
   const handleBack = () => {
     setOpen(false);
     setCountry(null);
     setRegion(null);
     setCity(null);
-    setStepThree(false)
+    setStepThree(false);
+    setBack(true);
   };
   const [stepThree, setStepThree] = React.useState(false)
 
   const randomGenerator = async () => {
     setStepThree(true)
+    
     const index = Math.floor((Math.random() * 100) + 1);
     const data = await GetCities(country, "-population")
     const cityCount = data.metadata.totalCount;
@@ -258,12 +284,18 @@ function StepTwo({onClose}) {
     } 
     setCityOptions(data.data)
     setCity(data.data[index])
+    setLat(data.data[index].latitude)
+    setLong(data.data[index].longitude)
     if (!country) {
       setCountry({"name": data.data[index].country, "code": data.data[index].countryCode })
     } 
     if (!region) {
       setRegion(regionOptions[0])
     }
+<<<<<<< HEAD
+=======
+    setAdded(false)
+>>>>>>> TripApi
     // const activities = await GetActivities(data.data[index].latitude, data.data[index].longitude)
   };
 
@@ -277,9 +309,7 @@ function StepTwo({onClose}) {
   let navigate = useNavigate()
   const saveTrip = () => {
     navigate('/trip/1')
-  }
-  const addTrip = () => {
-    setStepThree(false)
+    // navigate(`trip/${tripId}`)
   }
   
   return(
@@ -328,12 +358,21 @@ function StepTwo({onClose}) {
                     </IconButton>
                     <Typography variant='caption' className='color-medium-teal'>Try again</Typography>
                   </div>
-                  {<div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
+                  { added ? (
+                    <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
                     <IconButton onClick={handleClose}>
-                      <AddCircleIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></AddCircleIcon>
+                      <CheckCircleIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></CheckCircleIcon>
+                    </IconButton>
+                    <Typography variant='caption' className='color-medium-teal'>City Added!</Typography>
+                  </div>
+                  ) : (
+                  <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
+                  <IconButton onClick={handleClose}>
+                    <AddCircleIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></AddCircleIcon>
                     </IconButton>
                     <Typography variant='caption' className='color-medium-teal'>Add to Trip</Typography>
-                  </div>}
+                  </div>
+                  )}
                   <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
                     <IconButton>
                       <LocalActivityIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></LocalActivityIcon>

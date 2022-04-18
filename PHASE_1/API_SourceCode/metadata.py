@@ -43,5 +43,11 @@ tags = [
         "description": """
         The recent updates for each destination, including on travel restrictions and diseases
         """
+    },
+    {
+        "name": "trips",
+        "description": """
+        The saved trips for each user.
+        """
     }
 ]
