@@ -69,7 +69,7 @@ export default function FlightTabs({Deflights, Reflights, depart, dest, loading}
         </div>
       </TabPanel>
       <TabPanel value={value} index={1} style={{
-        height: '600px',
+        height: '800px',
         overflow: 'scroll'
       }}>
         <div style={{display: loading ? "flex" : "none"}} className="flex-row justify-content-center align-items-center">
