@@ -392,3 +392,63 @@
     Process Time: 0.018769025802612305
     ----------------------------------------
     
+    Timestamp: 1650265569.500434
+    Accessed Time: 2022-04-18 17:06:09.500434
+    Client: 127.0.0.1:51076
+    
+    Request: GET /
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0032401084899902344
+    ----------------------------------------
+    
+    Timestamp: 1650265572.460831
+    Accessed Time: 2022-04-18 17:06:12.460831
+    Client: 127.0.0.1:51076
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.002362966537475586
+    ----------------------------------------
+    
+    Timestamp: 1650265766.912038
+    Accessed Time: 2022-04-18 17:09:26.912038
+    Client: 127.0.0.1:51391
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0005629062652587891
+    ----------------------------------------
+    
+    Timestamp: 1650265847.673585
+    Accessed Time: 2022-04-18 17:10:47.673585
+    Client: 127.0.0.1:51502
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0004980564117431641
+    ----------------------------------------
+    
+    Timestamp: 1650265847.808378
+    Accessed Time: 2022-04-18 17:10:47.808378
+    Client: 127.0.0.1:51502
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.08336997032165527
+    ----------------------------------------
+    

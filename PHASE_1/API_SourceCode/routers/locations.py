@@ -17,17 +17,17 @@ router = APIRouter(
 async def get_all_locations():
 	data = list(locations_col.find({}, {
 		"id": "$_id",
-		"country" : "$country",
-		"capital" : "$capital",
-		"geonames_id" : "$geonames_id",
-		"longitude": "$longitude",
-		"latitude": "$latitude",
-		"region": "$region",
-		"entry_description": "$entry_description",
-		"disease_risk": "$disease_risk",
-		"travel_status": "$travel_status",
-		"safety_score": "$safety_score",
-		"advice_level": "$advice_level",
+		"country" : 1,
+		"capital" : 1,
+		"geonames_id" : 1,
+		"longitude": 1,
+		"latitude": 1,
+		"region": 1,
+		"entry_description": 1,
+		"disease_risk": 1,
+		"travel_status": 1,
+		"safety_score": 1,
+		"advice_level": 1,
 	}).sort("country", 1))
 	for d in data:
 		updates = list(updates_col.find({"location_id": d.get("_id")}).sort("date", -1))
