@@ -157,9 +157,9 @@ function Overview() {
               <Typography variant="bodyImportant">OVERALL ADVICE: EXERCISE CAUTION</Typography>
             </div>
           </Row>
-          <Row>
+          {/* <Row>
             <Typography variant="bodyText" className="color-dark-teal pt-4 pb-4">{intro}</Typography>
-          </Row>
+          </Row> */}
           <Row className="align-items-center justify-content-start">
             <Col md={4}>
               <Typography variant="bodyText" className="color-dark-teal ">TRAVEL STATUS</Typography>

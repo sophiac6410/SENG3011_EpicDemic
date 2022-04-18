@@ -32,13 +32,10 @@ const GlobalUpdate = () => {
       console.log("here " + newData);
       setStats(newData)
 
-      const covidcases = await fetch('http://localhost:8000/v1/locations/covidcases', {
-        mode: 'cors',
-        headesr: {
-          'Content-Type': 'application/json'
-        }
-      }).then(res => res.json())
-
+      const covidcases = await fetch('http://localhost:8000/v1/locations/covidcases').then(res => res.json())
+      
+      console.log("marker elements")
+      console.log(covidcases)
       const markerElements = [];
       for (var i in covidcases.data.cases_per_country) {
         const casedata = covidcases.data.cases_per_country[i];
@@ -127,29 +124,13 @@ const GlobalUpdate = () => {
           </Row>
         </Col>
       </Row>
-{/* <<<<<<< HEAD
-      <Row className="bg-darkteal justify-content-center align-items-center pb-5">
-        <Col md={3} className="align-self-center ms-4">
-          {checked ?
-            <>
-              <UpdateBox number={convertToBillions(stats.doses)} text="doses administered" color="blue"/>
-              <UpdateBox number={stats.deaths} text="deaths" color="white"/>
-              <UpdateBox number={stats.todayCases} text="daily cases" color="blue"/>
-            </>
-            :
-            <>           
-              <UpdateBox number={convertToMillions(stats.cases)} text="total cases" color="blue"/>
-              <UpdateBox number={convertToMillions(stats.deaths)} text="deaths" color="white"/>
-              <UpdateBox number={convertToMillions(stats.todayCases)} text="daily cases" color="blue"/>
-            </>} */}
-
       <Row className="bg-darkteal justify-content-center align-items-center pb-5 m-auto">
         <Col md={2} className="align-self-center ms-4">
           {checked ?
             <>
               <UpdateBox number={convertToBillions(stats.doses)} text="doses administered" bgColor={mediumBlue} fontC='white'/>
-              <UpdateBox number={0} text="fully vaccinated" color="white" bgColor="white" fontC={mediumTeal}/>
-              <UpdateBox number={0} text="received booster" bgColor={mediumBlue} fontC='white'/>
+              <UpdateBox number={"59.2%"} text="fully vaccinated" color="white" bgColor="white" fontC={mediumTeal}/>
+              <UpdateBox number={"11.3%"} text="received booster" bgColor={mediumBlue} fontC='white'/>
             </>
             :
             <>           
