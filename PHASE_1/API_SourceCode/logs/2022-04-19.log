@@ -3594,3 +3594,291 @@
     Process Time: 0.03319907188415527
     ----------------------------------------
     
+    Timestamp: 1650301205.637693
+    Accessed Time: 2022-04-19 03:00:05.637693
+    Client: 127.0.0.1:59096
+    
+    Request: OPTIONS /v1/trips/trips/new
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0018131732940673828
+    ----------------------------------------
+    
+    Timestamp: 1650301205.644553
+    Accessed Time: 2022-04-19 03:00:05.644553
+    Client: 127.0.0.1:59096
+    
+    Request: POST /v1/trips/trips/new
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.002650022506713867
+    ----------------------------------------
+    
+    Timestamp: 1650301797.524136
+    Accessed Time: 2022-04-19 03:09:57.524136
+    Client: 127.0.0.1:61619
+    
+    Request: POST /v1/trips/trips/new
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0022759437561035156
+    ----------------------------------------
+    
+    Timestamp: 1650302237.815747
+    Accessed Time: 2022-04-19 03:17:17.815747
+    Client: 127.0.0.1:63677
+    
+    Request: OPTIONS /v1/trips/trips/new
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.000904083251953125
+    ----------------------------------------
+    
+    Timestamp: 1650302237.820037
+    Accessed Time: 2022-04-19 03:17:17.820037
+    Client: 127.0.0.1:63677
+    
+    Request: POST /v1/trips/trips/new
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0010352134704589844
+    ----------------------------------------
+    
+    Timestamp: 1650302782.197936
+    Accessed Time: 2022-04-19 03:26:22.197936
+    Client: 127.0.0.1:49714
+    
+    Request: OPTIONS /v1/trips/trips/new/city
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0007529258728027344
+    ----------------------------------------
+    
+    Timestamp: 1650302782.204969
+    Accessed Time: 2022-04-19 03:26:22.204969
+    Client: 127.0.0.1:49714
+    
+    Request: POST /v1/trips/trips/new/city
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0029010772705078125
+    ----------------------------------------
+    
+    Timestamp: 1650302783.126614
+    Accessed Time: 2022-04-19 03:26:23.126614
+    Client: 127.0.0.1:49714
+    
+    Request: POST /v1/trips/trips/new/city
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0005078315734863281
+    ----------------------------------------
+    
+    Timestamp: 1650302784.427349
+    Accessed Time: 2022-04-19 03:26:24.427349
+    Client: 127.0.0.1:49714
+    
+    Request: POST /v1/trips/trips/new/city
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0005710124969482422
+    ----------------------------------------
+    
+    Timestamp: 1650302785.297623
+    Accessed Time: 2022-04-19 03:26:25.297623
+    Client: 127.0.0.1:49714
+    
+    Request: POST /v1/trips/trips/new/city
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0005011558532714844
+    ----------------------------------------
+    
+    Timestamp: 1650302785.99745
+    Accessed Time: 2022-04-19 03:26:25.997450
+    Client: 127.0.0.1:49714
+    
+    Request: POST /v1/trips/trips/new/city
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0005049705505371094
+    ----------------------------------------
+    
+    Timestamp: 1650302943.536866
+    Accessed Time: 2022-04-19 03:29:03.536866
+    Client: 127.0.0.1:50406
+    
+    Request: OPTIONS /v1/trips/trips/new
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.005188941955566406
+    ----------------------------------------
+    
+    Timestamp: 1650302943.547853
+    Accessed Time: 2022-04-19 03:29:03.547853
+    Client: 127.0.0.1:50406
+    
+    Request: POST /v1/trips/trips/new
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.002429962158203125
+    ----------------------------------------
+    
+    Timestamp: 1650302955.867382
+    Accessed Time: 2022-04-19 03:29:15.867382
+    Client: 127.0.0.1:50464
+    
+    Request: POST /v1/trips/trips/new/city
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0005190372467041016
+    ----------------------------------------
+    
+    Timestamp: 1650302958.999842
+    Accessed Time: 2022-04-19 03:29:18.999842
+    Client: 127.0.0.1:50464
+    
+    Request: POST /v1/trips/trips/new/city
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0010721683502197266
+    ----------------------------------------
+    
+    Timestamp: 1650302983.933324
+    Accessed Time: 2022-04-19 03:29:43.933324
+    Client: 127.0.0.1:50585
+    
+    Request: POST /v1/trips/trips/new/city
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0006759166717529297
+    ----------------------------------------
+    
+    Timestamp: 1650302984.734382
+    Accessed Time: 2022-04-19 03:29:44.734382
+    Client: 127.0.0.1:50585
+    
+    Request: POST /v1/trips/trips/new/city
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0005011558532714844
+    ----------------------------------------
+    
+    Timestamp: 1650302985.336258
+    Accessed Time: 2022-04-19 03:29:45.336258
+    Client: 127.0.0.1:50585
+    
+    Request: POST /v1/trips/trips/new/city
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.00051116943359375
+    ----------------------------------------
+    
+    Timestamp: 1650302986.100544
+    Accessed Time: 2022-04-19 03:29:46.100544
+    Client: 127.0.0.1:50585
+    
+    Request: POST /v1/trips/trips/new/city
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0005021095275878906
+    ----------------------------------------
+    
+    Timestamp: 1650302986.767262
+    Accessed Time: 2022-04-19 03:29:46.767262
+    Client: 127.0.0.1:50585
+    
+    Request: POST /v1/trips/trips/new/city
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0005049705505371094
+    ----------------------------------------
+    
+    Timestamp: 1650302993.932216
+    Accessed Time: 2022-04-19 03:29:53.932216
+    Client: 127.0.0.1:50634
+    
+    Request: POST /v1/trips/trips/new/city
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0003840923309326172
+    ----------------------------------------
+    
+    Timestamp: 1650302994.701411
+    Accessed Time: 2022-04-19 03:29:54.701411
+    Client: 127.0.0.1:50634
+    
+    Request: POST /v1/trips/trips/new/city
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0005559921264648438
+    ----------------------------------------
+    
+    Timestamp: 1650302995.501026
+    Accessed Time: 2022-04-19 03:29:55.501026
+    Client: 127.0.0.1:50634
+    
+    Request: POST /v1/trips/trips/new/city
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0019960403442382812
+    ----------------------------------------
+    
+    Timestamp: 1650302996.365707
+    Accessed Time: 2022-04-19 03:29:56.365707
+    Client: 127.0.0.1:50634
+    
+    Request: POST /v1/trips/trips/new/city
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.00028014183044433594
+    ----------------------------------------
+    
