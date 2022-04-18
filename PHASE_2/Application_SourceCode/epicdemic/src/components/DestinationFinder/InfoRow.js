@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Row, Col, Button, Image } from "react-bootstrap";
 import "../../styles/DestinationFinder.css";
 import Checkbox from '@mui/material/Checkbox';
@@ -9,10 +9,22 @@ import { Typography } from "@mui/material";
 import "../../styles/DestinationFinder.css";
 import { useNavigate, } from 'react-router-dom';
 import { travelStatusColor, travelStatus } from "../../styles/Theme";
+import { saveDestination } from "../../apiCalls";
 
 const InfoRow = ({country, updateDesc, lastUpdated, travelStat, saved, code}) => {
     const [isSaved, setSaved] = React.useState(saved);
     let navigate = useNavigate(); 
+    const handleClickSave = (event) => {
+        let method;
+        if (saved) {
+            method = 'DELETE';
+        } else {
+            method = 'PUT';
+        }
+        setSaved(event.target.checked);
+        saveDestination(method, code);
+    }
+    
     return (
         <Row className="info-row">
             <Col xs={1} style={{textAlignLast: 'left'}}>
@@ -31,10 +43,10 @@ const InfoRow = ({country, updateDesc, lastUpdated, travelStat, saved, code}) =>
                 <Typography variant="bodyText" className="color-white">{travelStatus(travelStat)}</Typography>
             </Col>
             <Col xs={1} style={{textAlignLast: 'center'}}>
-                <Checkbox checked={isSaved} icon={<FavoriteBorder />} checkedIcon={<Favorite />} onClick={(event)=> {setSaved(event.target.checked)}} />
+                <Checkbox checked={isSaved} icon={<FavoriteBorder />} checkedIcon={<Favorite />} onClick={handleClickSave} />
             </Col>
             <Col xs={1}>
-                <LightButton oncClick={()=> {
+                <LightButton onClick={()=> {
                     navigate(`/destination/${code}/book`)
                 }}>Book</LightButton>
             </Col>
