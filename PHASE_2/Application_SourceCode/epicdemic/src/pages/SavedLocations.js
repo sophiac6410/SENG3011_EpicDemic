@@ -55,9 +55,9 @@ const SavedLocations = () => {
             <Row style={{"marginTop": "10vh", "marginLeft": "5vw", "marginRight": "5vw"}}>
                 <Col style={{"marginBottom": "1vh"}}>
                     <Typography variant="heading2" style={{display: 'inline'}}>Your saved locations</Typography>
-                    <Image height="60%" style={{"marginLeft": "2vw", "marginBottom": "1vh", cursor: 'pointer'}} src={BluePlus} onClick={() => {
+                    {/* <Image height="60%" style={{"marginLeft": "2vw", "marginBottom": "1vh", cursor: 'pointer'}} src={BluePlus} onClick={() => {
                             navigate('/finder')
-                        }}/>
+                        }}/> */}
                 </Col>
                 {savedLocations !== [] &&
                 <Col>

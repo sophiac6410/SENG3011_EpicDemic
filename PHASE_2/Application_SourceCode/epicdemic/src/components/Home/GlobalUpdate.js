@@ -18,39 +18,43 @@ const GlobalUpdate = () => {
   useEffect(() => {
     // On initial load, get all the relevant stats and cases
     async function fetchData() {
-      const covid = await fetch(`https://disease.sh/v3/covid-19/all`).then(res => res.json())
-      var newData = {
-        cases: covid.cases,
-        deaths: covid.deaths,
-        todayCases: covid.todayCases
+      try {
+        const covid = await fetch(`https://disease.sh/v3/covid-19/all`).then(res => res.json())
+        var newData = {
+          cases: covid.cases,
+          deaths: covid.deaths,
+          todayCases: covid.todayCases
+        }
+
+        const vaccine = await fetch('https://disease.sh/v3/covid-19/vaccine/coverage?lastdays=all&fullData=false').then(res => res.json())
+        var total = vaccine[Object.keys(vaccine).pop()]
+        newData["doses"] = total;
+        
+        console.log("here " + newData);
+        setStats(newData)
+
+        const covidcases = await fetch('http://localhost:8000/v1/cases').then(res => res.json())
+        
+        console.log("marker elements")
+        console.log(covidcases)
+        const markerElements = [];
+        for (var i in covidcases.data.cases_per_country) {
+          const casedata = covidcases.data.cases_per_country[i];
+
+          markerElements.push({
+            id: i,
+            longitude: parseFloat(casedata.longitude),
+            latitude: parseFloat(casedata.latitude),
+            cases: casedata.cases
+          });
+        }
+        
+        console.log("global update map");
+        console.log(markerElements);
+        setCases(markerElements);
+      } catch (e) {
+        console.log(e);
       }
-
-      const vaccine = await fetch('https://disease.sh/v3/covid-19/vaccine/coverage?lastdays=all&fullData=false').then(res => res.json())
-      var total = vaccine[Object.keys(vaccine).pop()]
-      newData["doses"] = total;
-      
-      console.log("here " + newData);
-      setStats(newData)
-
-      const covidcases = await fetch('http://localhost:8000/v1/locations/covidcases').then(res => res.json())
-      
-      console.log("marker elements")
-      console.log(covidcases)
-      const markerElements = [];
-      for (var i in covidcases.data.cases_per_country) {
-        const casedata = covidcases.data.cases_per_country[i];
-
-        markerElements.push({
-          id: i,
-          longitude: parseFloat(casedata.longitude),
-          latitude: parseFloat(casedata.latitude),
-          cases: casedata.cases
-        });
-      }
-      
-      console.log("global update map");
-      console.log(markerElements);
-      setCases(markerElements);
     }
     fetchData()
   }, []);

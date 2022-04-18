@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-const GenericSearch = ({ fieldLabel, options }) => {
+const GenericSearch = ({ fieldLabel, options, handleInput }) => {
     const classes = useStyles();
     return (
         <div className="searchfield-container bg-white border-radius-large">
@@ -38,6 +38,7 @@ const GenericSearch = ({ fieldLabel, options }) => {
                     classes={classes}
                     options={options}
                     autoHighlight
+                    onChange={handleInput}
                     getOptionLabel={(option) => option.label}
                     renderOption={(props, option) => (
                         <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>

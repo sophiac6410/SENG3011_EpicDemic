@@ -29,7 +29,7 @@ const responsive = {
     }
   };
 
-const colours = [ '#0F83A0', '#E2F2FC', '#70C4E8' ]
+const colours = [ '#0F83A0', '#FFFFFF', '#70C4E8' ]
 const fontColours = [ 'white', '#0F83A0', 'white' ]
 
 class NewsBar extends React.Component {
