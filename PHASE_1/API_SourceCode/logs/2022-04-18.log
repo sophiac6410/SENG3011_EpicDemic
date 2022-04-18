@@ -6264,3 +6264,84 @@
     Process Time: 0.07691383361816406
     ----------------------------------------
     
+    Timestamp: 1650281716.306829
+    Accessed Time: 2022-04-18 21:35:16.306829
+    Client: 127.0.0.1:61413
+    
+    Request: GET /v1/locations/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.5910799503326416
+    ----------------------------------------
+    
+    Timestamp: 1650281717.240699
+    Accessed Time: 2022-04-18 21:35:17.240699
+    Client: 127.0.0.1:61413
+    
+    Request: OPTIONS /v1/users/saved
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.001859903335571289
+    ----------------------------------------
+    
+    Timestamp: 1650281717.246054
+    Accessed Time: 2022-04-18 21:35:17.246054
+    Client: 127.0.0.1:61413
+    
+    Request: GET /v1/users/saved
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 401
+    Process Time: 0.00646209716796875
+    ----------------------------------------
+    
+    Timestamp: 1650281729.714183
+    Accessed Time: 2022-04-18 21:35:29.714183
+    Client: 127.0.0.1:61420
+    
+    Request: GET /v1/updates/
+    Request Query Param: 
+			location=
+			category=document,testing,quarantine
+			start=1
+			end=5
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.08609986305236816
+    ----------------------------------------
+    
+    Timestamp: 1650281729.774155
+    Accessed Time: 2022-04-18 21:35:29.774155
+    Client: 127.0.0.1:61421
+    
+    Request: GET /v1/updates/
+    Request Query Param: 
+			location=
+			category=mask,Others,tracing,policies
+			start=1
+			end=5
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.029003143310546875
+    ----------------------------------------
+    
+    Timestamp: 1650281731.063873
+    Accessed Time: 2022-04-18 21:35:31.063873
+    Client: 127.0.0.1:61420
+    
+    Request: GET /v1/locations/covidcases
+    Request Query Param: None
+    Request Path Param: 
+			id=covidcases
+   
+    Response Code: 204
+    Process Time: 0.02257704734802246
+    ----------------------------------------
+    
