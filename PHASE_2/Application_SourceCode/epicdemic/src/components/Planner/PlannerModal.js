@@ -28,14 +28,10 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import CountryField from './CountryField';
 import RegionField from './RegionField';
 import GetCities from './GetCities';
-<<<<<<< HEAD
-//import GetActivities from './GetActivities';
-=======
 // import GetActivities from './GetActivities';
 import { addCityToTrip, createTrip } from './tripApiCalls';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { TripOriginOutlined } from '@mui/icons-material';
->>>>>>> TripApi
 
 const style = {
   position: 'absolute',
@@ -292,10 +288,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
     if (!region) {
       setRegion(regionOptions[0])
     }
-<<<<<<< HEAD
-=======
     setAdded(false)
->>>>>>> TripApi
     // const activities = await GetActivities(data.data[index].latitude, data.data[index].longitude)
   };
 
