@@ -28,11 +28,12 @@ const DestinationFinder = () => {
 
     useEffect(() => {
         async function fetchData () {
-            const data = await getAllLocations();
-            console.log(data);
-            setDestinations(data);
-            data = await getUserSaved();
-            setSavedLocations(data.saved_locations);
+            let locations = await getAllLocations();
+            console.log(locations);
+            setDestinations(locations);
+            let user = await getUserSaved();
+            setSavedLocations(user.saved_locations);
+            console.log(user.saved_locations);
         }
         // setInfoRows([...infoRowData]);
         fetchData();
