@@ -138,6 +138,7 @@ async def get_travel_overview(
 	print('--area restriction--')
 	for a in data['area_restrction']:
 		area_list.append(a)
+		print(a)
 
 	return baseModels.createResponse(True, 200, {
 			'declaration': data['declaration'],
