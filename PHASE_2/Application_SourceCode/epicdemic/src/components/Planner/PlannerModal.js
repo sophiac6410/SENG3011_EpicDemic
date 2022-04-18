@@ -25,12 +25,11 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import ActivityCard from './ActivityCard';
 import Carousel from "react-multi-carousel";
 import CloseIcon from '@mui/icons-material/Close';
-
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import CountryField from './CountryField';
 import RegionField from './RegionField';
 import GetCities from './GetCities';
-// import GetActivities from './GetActivities';
+//import GetActivities from './GetActivities';
 
 const style = {
   position: 'absolute',
@@ -128,12 +127,12 @@ const responsive = {
   }
 };
 const regionOptions = [
-  { code: 'EU', name: 'Europe' },
-  { code: 'SEA', name: 'South-East Asia' },
-  { code: 'EMED', name: 'Eastern Mediterranean' },
-  { code: 'WP', name: 'Western Pacific' },
-  { code: 'AMER', name: 'Americas' },
-  { code: 'AF', name: 'Africa' },
+  { id: 'EU', name: 'Europe' },
+  { id: 'SEA', name: 'South-East Asia' },
+  { id: 'EMED', name: 'Eastern Mediterranean' },
+  { id: 'WP', name: 'Western Pacific' },
+  { id: 'AMER', name: 'Americas' },
+  { id: 'AF', name: 'Africa' },
 ]
 
 function StepOne({isOpen, onClose, onNext}) {
@@ -149,7 +148,7 @@ function StepOne({isOpen, onClose, onNext}) {
     >
       <Box sx={style}>
         <Typography variant="heading2" className='color-dark-teal'>
-          Enter your travel details
+          Enter your trip details
         </Typography>
         <Box autoComplete='off' sx={formStyle}>
           <BorderColorIcon  sx={{marginTop: "10px", marginRight: "5px"}} color="teal"></BorderColorIcon>
@@ -230,6 +229,7 @@ function StepTwo({onClose}) {
   const [country, setCountry] = React.useState(null);
   const [region, setRegion] = React.useState(null);
   const [city, setCity] = React.useState(null);
+  const [cityOptions, setCityOptions] = React.useState([])
   const handleOpen = () => {
     setOpen(true);
     setStepThree(false)
@@ -251,20 +251,28 @@ function StepTwo({onClose}) {
   const randomGenerator = async () => {
     setStepThree(true)
     const index = Math.floor((Math.random() * 100) + 1);
-    const data = await GetCities(country)
+    const data = await GetCities(country, "-population")
     const cityCount = data.metadata.totalCount;
     if (cityCount < 100) {
       index = Math.floor((Math.random() * cityCount) + 1);
     } 
-    setCity(data.data[index].name)
+    setCityOptions(data.data)
+    setCity(data.data[index])
     if (!country) {
       setCountry({"name": data.data[index].country, "code": data.data[index].countryCode })
     } 
     if (!region) {
       setRegion(regionOptions[0])
     }
-    // const activities = await GetActivities(data[index].latitude, data[index].longitude)
+    // const activities = await GetActivities(data.data[index].latitude, data.data[index].longitude)
   };
+
+  const handleCountry = async (country) => {
+    setCountry(country)
+    setCity(null)
+    const data = await GetCities(country, "name")
+    setCityOptions(data.data)
+  }
 
   let navigate = useNavigate()
   const saveTrip = () => {
@@ -297,17 +305,17 @@ function StepTwo({onClose}) {
             <PublicIcon  sx={{marginTop: "10px", marginRight: "5px"}} color="teal"></PublicIcon>
             <FormControl color='teal' variant="standard" sx={{ width: '10'}}>
               {/* <Input color='teal' placeholder='Europe' value="Europe"/> */}
-              <RegionField options={regionOptions} placeholder='Any region' region={region} handleInput={(e, v) => setRegion(v)}></RegionField>
+              <RegionField options={regionOptions} placeholder='Any region' width={150} value={region} handleInput={(e, v) => setRegion(v)}></RegionField>
             </FormControl>
             <Divider orientation="vertical" flexItem  variant="middle" flex />
             <EmojiFlagsIcon  sx={{marginTop: "10px", marginRight: "5px"}} color="teal"></EmojiFlagsIcon>
             <FormControl color='teal' variant="standard" sx={{ width: '10'}}>
-              <CountryField value={country} handleInput={(e, v) => setCountry(v) } ></CountryField>
+              <CountryField value={country} handleInput={(e, v) => handleCountry(v) } ></CountryField>
             </FormControl>
             <Divider orientation="vertical" flexItem  variant="middle" flex />
             <LocationCityIcon  sx={{marginTop: "10px", marginRight: "5px"}} color='teal'></LocationCityIcon>
             <FormControl variant="standard" sx={{ width: '40' }} color="teal">
-              <Input color='teal' placeholder='City' value={city}/>
+            <RegionField options={cityOptions} placeholder='City' width={280} value={city} handleInput={(e, v) => setCity(v)}></RegionField>
             </FormControl>
           </Box>
           <div style={{display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center"}} className="mt-2">

@@ -9,22 +9,30 @@ export default getActivities = async (latitude, longitude) =>  {
     hostname: 'production'
   });
 
-  try {
-    const response = await amadeus.shopping.activities.get({
-    longitude: 2.160873,
-    latitude: 41.397158
-    })
-    const result = await response.json();
+
+    // const response = await amadeus.client.get('test.api.amadeus.com/v1/shopping/activities/', JSON.stringify({
+    // longitude: 2.160873,
+    // latitude: 41.397158
+    // }))
+    amadeus.shopping.activities.get({
+      latitude: 41.397158,
+      longitude: 2.160873
+    }).then(function (response) {
+      console.log(response);
+    }).catch(function (response) {
+      console.error(response);
+    });
+    /*const result = await response.json();
     console.log(data);
     if (!result.data) {
         alert("error")
     } else {
         console.log(result.data)
-        return reesult.data;
+        return result.data;
     }
   } catch (e) {
     console.log(e)
-  }
+  }*/
 
 }
 
