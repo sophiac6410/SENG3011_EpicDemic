@@ -21,7 +21,11 @@ import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import CountryField from './CountryField';
+import RegionField from './RegionField';
+import GetCities from './GetCities';
 import LocalActivityIcon from '@mui/icons-material/LocalActivity';
+// import GetActivities from './GetActivities';
 
 const style = {
   position: 'absolute',
@@ -82,6 +86,15 @@ const formStyle = {
   },
 };
 
+const regionOptions = [
+  { code: 'EU', name: 'Europe' },
+  { code: 'SEA', name: 'South-East Asia' },
+  { code: 'EMED', name: 'Eastern Mediterranean' },
+  { code: 'WP', name: 'Western Pacific' },
+  { code: 'AMER', name: 'Americas' },
+  { code: 'AF', name: 'Africa' },
+]
+
 function StepOne({isOpen, onClose, onNext}) {
   const [value, setValue] = React.useState(null);
   const teal = "#0F83A0";
@@ -133,7 +146,7 @@ function StepOne({isOpen, onClose, onNext}) {
         </Box>
         <Box sx={{display: "flex", flexDirection: "row", marginTop: "80px"}}>
           <Col md={6}>
-            <TealBotton onClick={onClose}>Cancle</TealBotton>
+            <TealBotton onClick={onClose}>Cancel</TealBotton>
           </Col>
           <StepTwo onClose={onClose}></StepTwo>
         </Box>
@@ -144,6 +157,9 @@ function StepOne({isOpen, onClose, onNext}) {
 
 function StepTwo({onClose}) {
   const [isOpen, setOpen] = React.useState(null);
+  const [country, setCountry] = React.useState(null);
+  const [region, setRegion] = React.useState(null);
+  const [city, setCity] = React.useState(null);
   const handleOpen = () => {
     setOpen(true);
     setStepThree(false)
@@ -154,14 +170,38 @@ function StepTwo({onClose}) {
     onClose()
   };
   const handleBack = () => {
+    console.log("backkk")
     setOpen(false);
+    setCountry(null);
+    setRegion(null);
+    setCity(null);
     setStepThree(false)
   }
   const [stepThree, setStepThree] = React.useState(false)
 
-  const randomGenerator = () => {
+  const randomGenerator = async () => {
     setStepThree(true)
+    const index = Math.floor((Math.random() * 100) + 1);
+    console.log(index)
+    console.log(country)
+    const data = await GetCities(country)
+    console.log(data)
+    const cityCount = data.metadata.totalCount;
+    if (cityCount < 100) {
+      index = Math.floor((Math.random() * cityCount) + 1);
+    } 
+    setCity(data.data[index].name)
+    if (!country) {
+      console.log("hi")
+      setCountry({"name": data.data[index].country, "code": data.data[index].countryCode })
+    } 
+    if (!region) {
+      setRegion(regionOptions[0])
+    }
+    console.log(data[index].name)
+    // const activities = await GetActivities(data[index].latitude, data[index].longitude)
   }
+
 
   const addTrip = () => {
     setStepThree(false)
@@ -185,41 +225,40 @@ function StepTwo({onClose}) {
           <Typography variant="heading2" className='color-dark-teal text-center'>
             Add cities to your trip
           </Typography>
+          <Typography variant='body2' className='color-dark-teal mt-2 text-center'>Optionally enter a region and/or country and click 'Find my city' and we will show you a recommended city.</Typography>
           <Box autoComplete='off' sx={formStyle}>
             <PublicIcon  sx={{marginTop: "10px", marginRight: "5px"}} color="teal"></PublicIcon>
-            <FormControl color='teal' variant="standard" sx={{ width: '20'}}>
-              <Input color='teal' placeholder='Europe' value="Europe"/>
+            <FormControl color='teal' variant="standard" sx={{ width: '10'}}>
+              {/* <Input color='teal' placeholder='Europe' value="Europe"/> */}
+              <RegionField options={regionOptions} placeholder='Any region' region={region} handleInput={(e, v) => setRegion(v)}></RegionField>
             </FormControl>
             <Divider orientation="vertical" flexItem  variant="middle" flex />
             <EmojiFlagsIcon  sx={{marginTop: "10px", marginRight: "5px"}} color="teal"></EmojiFlagsIcon>
-            <FormControl color='teal' variant="standard" sx={{ width: '20'}}>
-              <Input color='teal' placeholder='Any Country'/>
+            <FormControl color='teal' variant="standard" sx={{ width: '10'}}>
+              <CountryField value={country} handleInput={(e, v) => setCountry(v) } ></CountryField>
             </FormControl>
             <Divider orientation="vertical" flexItem  variant="middle" flex />
             <LocationCityIcon  sx={{marginTop: "10px", marginRight: "5px"}} color='teal'></LocationCityIcon>
-            <FormControl variant="standard" sx={{ width: '20'}} color="teal">
-              <Input color='teal' placeholder='City'/>
+            <FormControl variant="standard" sx={{ width: '40' }} color="teal">
+              <Input color='teal' placeholder='City' value={city}/>
             </FormControl>
-            <IconButton onClick={randomGenerator}>
-              <SearchIcon x={{marginTop: "10px", marginRight: "5px"}} color='teal'></SearchIcon>
-            </IconButton>
           </Box>
           <div style={{display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center"}} className="mt-2">
             {
               stepThree ? (
                 <div style={{display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center", paddingBottom: "20px"}}>
                   <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
-                    <IconButton onClick={handleClose}>
+                    <IconButton onClick={randomGenerator}>
                       <ChangeCircleIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></ChangeCircleIcon>
                     </IconButton>
-                    <Typography variant='caption' className='color-medium-teal'>Choose for you</Typography>
+                    <Typography variant='caption' className='color-medium-teal'>Try again</Typography>
                   </div>
-                  {/* <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
+                  {<div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
                     <IconButton onClick={handleClose}>
                       <AddCircleIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></AddCircleIcon>
                     </IconButton>
                     <Typography variant='caption' className='color-medium-teal'>Add to Trip</Typography>
-                  </div> */}
+                  </div>}
                   <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
                     <IconButton>
                       <LocalActivityIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></LocalActivityIcon>
@@ -232,7 +271,7 @@ function StepTwo({onClose}) {
                   <IconButton onClick={randomGenerator}>
                     <ChangeCircleIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></ChangeCircleIcon>
                   </IconButton>
-                  <Typography variant='bodyImportant' className='color-medium-teal mt-2'>Choose for you</Typography>
+                  <Typography variant='bodyImportant' className='color-medium-teal mt-2'>Find my city</Typography>
                 </div>
               )
             }
@@ -240,7 +279,7 @@ function StepTwo({onClose}) {
             {stepThree ? (
               <Box sx={{display: "flex", flexDirection: "row", marginTop: "10px"}} className="text-center">
                 <Col md={6}>
-                  <TealBotton onClick={handleClose}>Cancle</TealBotton>
+                  <TealBotton onClick={handleClose}>Cancel</TealBotton>
                 </Col>
                 <Col md={6}>
                   <TealBotton>Save and view trip</TealBotton>
@@ -256,3 +295,4 @@ function StepTwo({onClose}) {
 }
 
 export {StepOne, StepTwo}
+
