@@ -87,30 +87,6 @@ function Book() {
   }, [search])
 
 
-  // useEffect(() => {
-  //   var {out, controller} = getFligtData(searchDe)
-  //   out.then(res => {
-  //     console.log(res.data)
-  //     setDepartData(res.data); // dispatching data to components state
-  //     setLoading(false)
-  //   }).catch(err => {
-  //     console.log(err)
-  //     setLoading(false)
-  //   });
-  // }, [searchDe])
-
-  // useEffect(() => {
-  //   var {out, controller} = getFligtData(searchRe)
-  //   out.then(res => {
-  //     console.log(res.data)
-  //     setReturnData(res.data); // dispatching data to components state
-  //     setLoading(false)
-  //   }).catch(err => {
-  //     console.log(err)
-  //     setLoading(false)
-  //   });
-  // }, [searchRe])
-
   const searchFlight = async() => {
     setLoading(true)
     var {out, controller} = getFligtData(searchDe)
@@ -136,6 +112,11 @@ function Book() {
     setSearch({...search, [prop]: event.target.value})
   })
 
+  const handleCity = ((value) => {
+    console.log(value)
+    setSearch({...search, ["destinationCode"]: value})
+  })
+
   if(search == null) {
     return <div/>
   }
@@ -153,7 +134,7 @@ function Book() {
           <FlightLandIcon className="color-dark-teal mt-3" fontSize="large" />
         </Col>
         <Col md={2} className="bg-white search-container p-1 ps-2 pe-3" style={{flex: 1}}>
-          <CitySelectPhilippines fieldLabel={"Destination"} city={search.destinationCode}></CitySelectPhilippines>
+          <CitySelectPhilippines fieldLabel={"Destination"} city={search.destinationCode} handleCity={handleCity}></CitySelectPhilippines>
         </Col>
         <Col md={1}></Col>
         <Col md={2} style={{flex: 1}}>

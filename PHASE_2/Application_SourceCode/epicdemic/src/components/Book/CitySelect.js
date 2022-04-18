@@ -5,7 +5,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import "react-multi-carousel/lib/styles.css";
 import { Col, Row } from 'react-bootstrap';
 
-export function CitySelectPhilippines({fieldLabel, city}) {
+export function CitySelectPhilippines({fieldLabel, city, handleCity}) {
   return (
     <Row className='justify-content-center align-items-center'>
       <Col>
@@ -14,6 +14,7 @@ export function CitySelectPhilippines({fieldLabel, city}) {
           // sx={{ width: 250 }}
           options={iatas}
           defaultValue={city}
+          onInputChange={(e, v)=>handleCity(v)}
           autoHighlight
           getOptionLabel={(option) => option}
           renderOption={(props, option) => (
