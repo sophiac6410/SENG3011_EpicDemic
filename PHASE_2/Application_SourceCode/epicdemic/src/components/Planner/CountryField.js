@@ -18,9 +18,16 @@ const useStyles = makeStyles((theme) => ({
     "&.MuiInput-underline:after": {
       borderBottom: "2px solid #0F83A0"
     },
+    "&.MuiAutocomplete-inputRoot": {
+      paddingRight: "0px"
+    },
     color: "black",
     backgroundColor: "white",
+    paddingRight: "Opx",
   },
+  endAdornment: {
+    top: "calc(12% - 14px)"
+  }
 }));
 
 export default function CountrySelect({isFrom, handleInput, value }) {
@@ -31,7 +38,7 @@ export default function CountrySelect({isFrom, handleInput, value }) {
       <Autocomplete
         id="country-select-demo"
         classes={classes}
-        sx={{ width: 250 }}
+        sx={{ width: 200 }}
         popupIcon={""}
         value={value}
         options={ isFrom ? aus : countries }
@@ -39,8 +46,8 @@ export default function CountrySelect({isFrom, handleInput, value }) {
         underlineShow={false}
         onChange={handleInput}
         getOptionLabel={(option) => option.name}
-        id="disable-clearable"
-        disableClearable
+        // id="disable-clearable"
+        // disableClearable
         renderOption={(props, option) => (
           <Box component="li" sx={{ '& > img': { mr: 1, flexShrink: 0 } }} {...props}>
             <img
@@ -50,7 +57,7 @@ export default function CountrySelect({isFrom, handleInput, value }) {
               srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
               alt=""
             />
-            {option.name} ({option.code})
+            {option.name}
           </Box>
         )}
         renderInput={(params) => (

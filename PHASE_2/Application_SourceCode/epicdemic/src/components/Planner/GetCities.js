@@ -1,10 +1,12 @@
+import { TableSortLabel } from '@material-ui/core';
 import React from 'react'
 
 export const getUserSaved = async () => {
   
 }
 
-const GetCities = async (country) => {
+const GetCities = async (country, sort) => {
+  console.log(sort)
   const options = {
     method: 'GET',
     headers: {
@@ -15,7 +17,7 @@ const GetCities = async (country) => {
   if (country) {
     console.log("ok")
     try {
-      const response = await fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/adminDivisions?sort=-population&limit=100&countryIds=${country.code}`, options);
+      const response = await fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/adminDivisions?sort=${sort}&limit=100&countryIds=${country.code}`, options);
       const data = await response.json();
       console.log(data);
       if (!data.data) {
@@ -31,7 +33,7 @@ const GetCities = async (country) => {
     console.log("hello")
     const countries = "AD%2CAL%2CAT%2CBA%2CBE%2CBG%2CBY%2CCH%2CCY%2CCZ%2CDE%2CDK%2CEE%2CES%2CFI%2CFR%2CGB%2CGR%2CHR%2CHU%2CIE%2CIT%2CJE%2CLI%2CLT%2CLU%2CLV%2CMC%2CMD%2CMK%2CMT%2CNL%2CNO%2CPL%2CPT%2CRO%2CRU%2CSE%2CSI%2CSK%2CSM%2CUA%2CVA"
     try {
-      const response = await fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/adminDivisions?sort=-population&limit=100&countryIds=${countries}`, options);
+      const response = await fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/adminDivisions?sort=${sort}&limit=100&countryIds=${countries}`, options);
       const data = await response.json();
       console.log(data);
       if (!data.data) {
