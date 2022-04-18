@@ -41,15 +41,18 @@ const COLOR = 'white';
 
 export default function DiseaseReportBar() {
   const [diseaseData, setDiseaseData] = useState([]);
+  const [diseaseData2, setDiseaseData2] = useState([]);
 
   useEffect(() => {
     if (diseaseData === []) return;
 
     async function fetchData() {
       console.log('fetching diseases data');
-      const data = await fetch(`http://127.0.0.1:8000/v1/articles/?start_date=2021-01-01T10%3A10%3A10&end_date=2023-01-01T10%3A10%3A10&key_terms=Corona&timezone=Australia%2FSydney&start_range=1&end_range=6`).then(res => res.json())
-      console.log('printing data', data)
+      const data = await fetch(`http://127.0.0.1:8000/v1/articles/?start_date=2021-01-01T10%3A10%3A10&end_date=2023-01-01T10%3A10%3A10&key_terms=Corona&timezone=Australia%2FSydney&start_range=1&end_range=4`).then(res => res.json())
+      const data2 = await fetch(`http://127.0.0.1:8000/v1/articles/?start_date=2021-01-01T10%3A10%3A10&end_date=2023-01-01T10%3A10%3A10&key_terms=Corona&timezone=Australia%2FSydney&start_range=5&end_range=8`).then(res => res.json())
+      console.log('printing data', data2)
       setDiseaseData(data.data.articles)
+      setDiseaseData2(data2.data.articles)
     }
     fetchData()
   }, [])
@@ -70,24 +73,44 @@ export default function DiseaseReportBar() {
               {diseaseData.map((data, idx) => {
 
                   return (
-                      <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%' }} >
-                      <CardContent>
-                        <Typography variant="caption" color="text.secondary">
-                          {data.date_of_publication}
-                        </Typography>
-                        <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
-                            {(data.headline).replace("PRO/AH/EDR>", "")}
-                        </Typography>
-                        <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { window.open(data.url) }}>
-                          <Typography variant='bodyImportant'>
-                            Read more
+                      <div className="news-container-col">
+                        <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
+                        <CardContent>
+                          <Typography variant="caption" color="text.secondary">
+                            {data.date_of_publication}
                           </Typography>
-                        </LightButton>
-                        <Typography variant="caption" color="text.secondary" sx={{display: 'block'}} gutterBottom>
-                          Source: Promed
-                        </Typography>
-                      </CardContent>
-                      </Card>
+                          <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
+                              {(data.headline).replace("PRO/AH/EDR>", "")}
+                          </Typography>
+                          <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { window.open(data.url) }}>
+                            <Typography variant='bodyImportant'>
+                              Read more
+                            </Typography>
+                          </LightButton>
+                          <Typography variant="caption" color="text.secondary" sx={{display: 'block'}} gutterBottom>
+                            Source: Promed
+                          </Typography>
+                        </CardContent>
+                        </Card>
+                        <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
+                        <CardContent>
+                          <Typography variant="caption" color="text.secondary">
+                            {diseaseData2[idx].date_of_publication}
+                          </Typography>
+                          <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
+                              {(diseaseData2[idx].headline).replace("PRO/AH/EDR>", "")}
+                          </Typography>
+                          <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { window.open(diseaseData2[idx].url) }}>
+                            <Typography variant='bodyImportant'>
+                              Read more
+                            </Typography>
+                          </LightButton>
+                          <Typography variant="caption" color="text.secondary" sx={{display: 'block'}} gutterBottom>
+                            Source: Promed
+                          </Typography>
+                        </CardContent>
+                        </Card>
+                      </div>
                   )
                 })}
             
