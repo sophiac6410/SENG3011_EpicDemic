@@ -61,36 +61,36 @@ class LocationTravelOverview(BaseModel):
                     example='FR')
 	country: str = Field(..., description="The name of the country", 
                     example='France')
-	declaration: dict = Field(..., description="The travel declaration of the country", 
-                    example={
-						"date": "2022-04-07",
-						"text" : "<p><strong>Other document</strong><br>Travellers who don&#39;t comply ...",
-						"documentRequired": "Yes"
-					})
-	declaration: dict = Field(..., description="The travel declaration of the country", 
-                    example={
-						"date": "2022-04-07",
-						"text" : "<p><strong>Other document</strong><br>Travellers who don&#39;t comply ...",
-						"documentRequired": "Yes"
-					})
-	declaration: dict = Field(..., description="The travel declaration of the country", 
-                    example={
-						"date": "2022-04-07",
-						"text" : "<p><strong>Other document</strong><br>Travellers who don&#39;t comply ...",
-						"documentRequired": "Yes"
-					})
-	declaration: dict = Field(..., description="The travel declaration of the country", 
-                    example={
-						"date": "2022-04-07",
-						"text" : "<p><strong>Other document</strong><br>Travellers who don&#39;t comply ...",
-						"documentRequired": "Yes"
-					})
+	# declaration: dict = Field(..., description="The travel declaration of the country", 
+  #                   example={
+	# 					"date": "2022-04-07",
+	# 					"text" : "<p><strong>Other document</strong><br>Travellers who don&#39;t comply ...",
+	# 					"documentRequired": "Yes"
+	# 				})
+	# declaration: dict = Field(..., description="The travel declaration of the country", 
+  #                   example={
+	# 					"date": "2022-04-07",
+	# 					"text" : "<p><strong>Other document</strong><br>Travellers who don&#39;t comply ...",
+	# 					"documentRequired": "Yes"
+	# 				})
+	# declaration: dict = Field(..., description="The travel declaration of the country", 
+  #                   example={
+	# 					"date": "2022-04-07",
+	# 					"text" : "<p><strong>Other document</strong><br>Travellers who don&#39;t comply ...",
+	# 					"documentRequired": "Yes"
+	# 				})
+	# declaration: dict = Field(..., description="The travel declaration of the country", 
+  #                   example={
+	# 					"date": "2022-04-07",
+	# 					"text" : "<p><strong>Other document</strong><br>Travellers who don&#39;t comply ...",
+	# 					"documentRequired": "Yes"
+	# 				})
 
 class LocationDeclaration(BaseModel):
 	date: str = Field(..., description="The date the declaration was created", 
                     example="2022-04-07")
-	text: str = Field(..., description="The description of the declaration", 
-                    example="Those who do not comply will get deported")
+	# text: str = Field(..., description="The description of the declaration", 
+  #                   example="Those who do not comply will get deported")
 	documentRequired: str  = Field(..., description="If documents are required in travel entry", 
                     example="No") 
 	travelDocumentation: str or None = None

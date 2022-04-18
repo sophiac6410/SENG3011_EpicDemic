@@ -241,6 +241,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
   const [back, setBack] = React.useState(false);
   const [added, setAdded] = React.useState(false);
   const [activity, setActivity] = React.useState([])
+  const [cityIndex, setCityIndex] = React.useState(-1)
 
   const handleOpen = async () => {
     
@@ -270,9 +271,13 @@ function StepTwo({onClose, name, start, end, travellers}) {
     setCity(null);
     setStepThree(false);
     setBack(true);
+    setCityIndex(-1);
   };
   const [stepThree, setStepThree] = React.useState(false)
 
+  const handleCity = async (city) => {
+    setCity(city)
+  }
   const randomGenerator = async () => {
     setStepThree(true)
     
@@ -281,7 +286,8 @@ function StepTwo({onClose, name, start, end, travellers}) {
     const cityCount = data.metadata.totalCount;
     if (cityCount < 100) {
       index = Math.floor((Math.random() * cityCount) + 1);
-    } 
+    }
+    console.log(data.data)
     setCityOptions(data.data)
     setCity(data.data[index])
     setLat(data.data[index].latitude)
@@ -312,7 +318,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
   useEffect(() => {
     async function updateActivity() {
       // setLoading(true)
-      var {out, controller} = GetActivities({lat: lat, lot: long})
+      var {out, controller} = GetActivities({lat: city.latitude, lot: city.longitude})
       out.then(res => {
         console.log(res.data)
         setActivity(res.data); // dispatching data to components state
@@ -322,7 +328,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
       });
     }
     updateActivity()
-  }, [lat, long])
+  }, [city])
   
   return(
     <React.Fragment>
@@ -357,7 +363,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
             <Divider orientation="vertical" flexItem  variant="middle" flex />
             <LocationCityIcon  sx={{marginTop: "10px", marginRight: "5px"}} color='teal'></LocationCityIcon>
             <FormControl variant="standard" sx={{ width: '40' }} color="teal">
-            <RegionField options={cityOptions} placeholder='City' width={280} value={city} handleInput={(e, v) => setCity(v)}></RegionField>
+            <RegionField options={cityOptions} placeholder='City' width={280} value={city} handleInput={(e, v) => handleCity(v)}></RegionField>
             </FormControl>
           </Box>
           <div style={{display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center"}} className="mt-2">
