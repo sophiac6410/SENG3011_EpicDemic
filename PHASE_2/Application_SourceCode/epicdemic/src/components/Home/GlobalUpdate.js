@@ -33,7 +33,7 @@ const GlobalUpdate = () => {
         console.log("here " + newData);
         setStats(newData)
 
-        const covidcases = await fetch('http://localhost:8000/v1/locations/covidcases').then(res => res.json())
+        const covidcases = await fetch('http://localhost:8000/v1/cases').then(res => res.json())
         
         console.log("marker elements")
         console.log(covidcases)
