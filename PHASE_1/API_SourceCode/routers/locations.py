@@ -4,7 +4,6 @@ from util import DATETIME_REGEX, parse_datetime_string
 from database import locations_col, diseaseLocations_col, updates_col, safety_col, travel_col
 import re
 from datetime import datetime
-import pytz
 from typing import Optional
 from models import baseModels, locationModels
 
