@@ -19,7 +19,7 @@ import React, { useState, useEffect } from "react";
 import CircleIcon from '@mui/icons-material/Circle';
 import WarningIcon from '@mui/icons-material/Warning';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
-import { colorScore } from "../styles/Theme"
+import { adviceLevel, adviceLevelColor, travelStatus, travelStatusColor, safetyScore, safteyScoreColor, diseaseRisk, diseaseRiskColor, safteyScore } from "../styles/Theme"
 
 const intro = "Philippines, island country of Southeast Asia in the western Pacific Ocean. It is an archipelago consisting of more than 7,000 islands and islets lying about 500 miles (800 km) off the coast of Vietnam. Manila is the capital, but nearby Quezon City is the country’s most-populous city."
 const safetySource = "The safety and security ratings determined by GeoSure GeoSafeScores which analyzes crime, health and economic data, official travel alerts, local reporting and a variety of other sources.  Scores go from 1 (not likely) to 100 (very likely)."
@@ -41,7 +41,7 @@ const SafetyBoard = (safetyDis) => {
               </div>
             </Col>
             <Col md={1}>
-              <div style={{color: "white", backgroundColor: colorScore(v.score)}} className="text-center border-radius-med">
+              <div style={{color: "white", backgroundColor: safteyScoreColor(v.score)}} className="text-center border-radius-med">
                 <Typography variant="bodyImportant">{v.score}</Typography>
               </div>
             </Col>
@@ -153,8 +153,8 @@ function Overview() {
         </Col>
         <Col>
           <Row className="align-items-center">
-            <div className="pt-3 pb-3 pe-1 ps-1 text-center border-radius-large bg-yellow">
-              <Typography variant="bodyImportant">OVERALL ADVICE: EXERCISE CAUTION</Typography>
+            <div className="pt-3 pb-3 pe-1 ps-1 text-center border-radius-large" style={{backgroundColor: adviceLevelColor(dest.adviceLevel)}}>
+              <Typography variant="bodyImportant">OVERALL ADVICE: {adviceLevel(dest.adviceLevel).toUpperCase()}</Typography>
             </div>
           </Row>
           {/* <Row>
@@ -165,10 +165,10 @@ function Overview() {
               <Typography variant="bodyText" className="color-dark-teal ">TRAVEL STATUS</Typography>
             </Col>
             <Col md={1}>
-              <CircleIcon className="color-yellow" sx={{fontSize: 18}}/>
+              <CircleIcon style={{color: travelStatusColor(dest.travelStatus)}} sx={{fontSize: 18}}/>
             </Col>
             <Col className="pt-1">
-            <Typography variant="bodyImportant" className="color-dark-teal">Open With Restrictions</Typography>
+            <Typography variant="bodyImportant" className="color-dark-teal">{travelStatus(dest.travelStatus)}</Typography>
             </Col>
           </Row>
           <Row className="align-items-center justify-content-start">
@@ -176,10 +176,10 @@ function Overview() {
             <Typography variant="bodyText" className="color-dark-teal">SAFETY</Typography>
             </Col>
             <Col md={1}>
-                <WarningIcon className="color-yellow" sx={{fontSize: 18}}/>
+                <WarningIcon style={{color: safteyScoreColor(dest.safetyScore)}} sx={{fontSize: 20}}/>
             </Col>
             <Col className="pt-1 text-start">
-              <Typography variant="bodyImportant" className="color-dark-teal">Low to medium levels of threat</Typography>
+              <Typography variant="bodyImportant" className="color-dark-teal">{safteyScore(dest.safetyScore)} levels of threat</Typography>
             </Col>
           </Row>
           <Row className="align-items-center justify-content-start">
@@ -187,10 +187,10 @@ function Overview() {
             <Typography variant="bodyText" className="color-dark-teal">DISEASE RISK</Typography>
             </Col>
             <Col md={1}>
-                <LocalHospitalIcon className="color-red" sx={{fontSize: 18}}/>
+                <LocalHospitalIcon style={{color: diseaseRiskColor(dest.diseaseRisk)}} sx={{fontSize: 20}}/>
             </Col>
             <Col className="pt-1">
-              <Typography variant="bodyImportant" className="color-dark-teal">High</Typography>
+              <Typography variant="bodyImportant" className="color-dark-teal">{diseaseRisk(dest.diseaseRisk)}</Typography>
             </Col>
           </Row>
         </Col>
@@ -199,13 +199,11 @@ function Overview() {
         <Col>
           <Typography variant="heading2" className="color-dark-teal">Safety</Typography>
           <div className="mt-4 ps-2" style={{flexDirection: "row", display: "flex"}}>
-              <WarningIcon className="color-yellow"></WarningIcon>
-              {/* <img src={wYellow} width="30px" height="30px" style={{flexDirection: "column"}} >
-              </img> */}
-              <Typography variant="bodyImportant" className="color-dark-teal ms-3">Low to medium levels of threat</Typography>
+              <WarningIcon style={{color: safteyScoreColor(dest.safetyScore)}}></WarningIcon>
+              <Typography variant="bodyImportant" className="color-dark-teal ms-3">{safteyScore(dest.safetyScore)} levels of threat</Typography>
           </div>
         </Col>
-        <Col md={3} className="text-center pt-3 pb-3 bg-yellow border-radius-med">
+        <Col md={3} className="text-center pt-3 pb-3 border-radius-med" style={{backgroundColor: safteyScoreColor(dest.safetyScore)}}>
           <Row><Typography variant="heading2">{dest.safetyScore}</Typography></Row>
           <Row><Typography variant="bodyText" sx={{textAlign: 'center'}}>OVERALL SAFETY RATING</Typography></Row>
         </Col>

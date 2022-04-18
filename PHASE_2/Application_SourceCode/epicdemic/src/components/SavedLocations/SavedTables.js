@@ -31,7 +31,7 @@ function SavedTables (props) {
             country={loc.country}
             updateDesc={loc.entry_description}
             lastUpdated={getDate(loc.last_update)}
-            travelStatus={loc.travel_status}
+            travelStat={loc.travel_status}
             saved={true}
             />
           )

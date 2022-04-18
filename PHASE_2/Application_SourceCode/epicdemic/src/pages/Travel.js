@@ -11,6 +11,7 @@ import NavbarComp from "../components/NavBar";
 import { Typography } from "@mui/material";
 import CircleIcon from '@mui/icons-material/Circle';
 import { getDestination } from "../apiCalls";
+import { travelStatusColor, travelStatus } from "../styles/Theme";
 
 const validCheck = <p>
   Before you book your travel, check if you meet Australia’s definition of fully vaccinated for international travel purposes. To meet Australia’s vaccination requirements and be considered a ‘fully vaccinated’ traveller for the purpose of Australia’s border arrangements, you need to provide evidence that you either: 
@@ -61,7 +62,7 @@ For alert level 2: Max of 50% indoor venue capacity* and 70% outdoor venue capac
 
 const foodCheck = <p>Open with restrictions</p>
 
-function Travel() {
+function Travel(travelStat) {
   const [data, setData] = useState(null);
   const { code } = useParams();
 
@@ -171,6 +172,7 @@ function Travel() {
       var newData = {
         code: code,
         country: country.country,
+        travelStatus: country.travel_status,
         areaR: data.area_restriction,
         mask: data.mask,
         areaP: data.area_policy,
@@ -206,20 +208,20 @@ function Travel() {
         </Row>
         <Row className="align-items-center pt-1 justify-content-start mt-3 mb-3">
           <Col md={1} className="justify-content-center">
-            <CircleIcon className="color-orange"/>
+            <CircleIcon style={{color: travelStatusColor(data.travelStatus)}}/>
           </Col>
           <Col className="pt-1">
-            <Typography variant="bodyImportant" className="color-orange">Open with Restrictions</Typography>
+            <Typography variant="bodyImportant" style={{color: travelStatusColor(data.travelStatus)}}>{travelStatus(data.travelStatus)}</Typography>
           </Col>
         </Row>
         <Typography variant="heading1" className="color-dark-teal">Visiting {data.country}</Typography>
         <div class="square border-start border-3 mt-3 mb-5" id="tealBorder">
-          <Typography variant="heading2" className="color-dark-teal mb-3">Before you travel</Typography>
+          <Typography variant="heading2" className="color-dark-teal mb-3">BEFORE YOU TRAVEL</Typography>
           <Typography variant="heading3" className="color-dark-teal mb-1">Check if you are considered a vaccinated traveller</Typography>
           <Typography variant="bodyText" className="color-dark-teal mb-1">{validCheck}</Typography>
           <Typography variant="heading3" className="color-dark-teal mb-1">Ensure you can provide proof</Typography>
           <Typography variant="bodyText" className="color-dark-teal mb-5">{proofCheck}</Typography>
-          <Typography variant="heading2" className="color-dark-teal mb-3">Entering the region</Typography>
+          <Typography variant="heading2" className="color-dark-teal mb-3">ENTERING THE REGION</Typography>
           <Row className="mt-4 mb-5">
             {data.enterCheck.map((check) => 
               <Col md={6}>
@@ -227,7 +229,7 @@ function Travel() {
               </Col>
             )}
           </Row>
-          <Typography variant="heading2" className="color-dark-teal mb-3">While you’re there</Typography>
+          <Typography variant="heading2" className="color-dark-teal mb-3">WHILE YOU'RE THERE</Typography>
           <div>{
             data.ArrivalCheck.map((check) => 
               <Row>
