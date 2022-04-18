@@ -136,7 +136,7 @@ async def get_travel_overview(
 	data = list(travel_col.find({'_id':id}))[0]
 	area_list = []
 	print('--area restriction--')
-	for a in data['area_restrction'][0]:
+	for a in data['area_restrction']:
 		area_list.append(a)
 
 	return baseModels.createResponse(True, 200, {
