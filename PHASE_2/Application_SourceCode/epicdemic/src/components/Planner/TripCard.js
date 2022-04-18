@@ -83,7 +83,7 @@ function TripCard({name, tripId, latitude, longitude, activities}) {
         <Typography variant='caption' className='color-medium-teal'>Book flights</Typography>
       </div>
       <div className="d-flex flex-row mt-3">
-        <Typography variant="heading3" class="color-grey">YOUR BUCKELIST</Typography>
+        <Typography variant="heading3" class="color-grey">YOUR BUCKETLIST</Typography>
       </div>
       {/* <div className="d-flex flex-wrap mt-3 justify-content-even">
         <BucketCard></BucketCard>

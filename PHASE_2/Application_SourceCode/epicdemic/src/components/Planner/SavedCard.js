@@ -41,7 +41,7 @@ function SavedCard({name, start, end, travellers, tripId}) {
   }, []);
 
   const removeTrip = () => {
-    // deleteTrip(tripId)
+    deleteTrip(tripId)
   }
 
   const goToTrip = () => {

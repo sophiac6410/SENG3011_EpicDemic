@@ -47,6 +47,7 @@ async def get_saved_trips (
         {"$match": {"_id": {"$in": user['saved_trips']}}},
         {"$project": {"id": "$_id", "name": 1, "start_date": 1, "end_date": 1, "travellers": 1, "cities": 1 }}
     ]))
+    print(trips)
     for t in trips:
         for i in range(len(t['cities'])):
             t['cities'][i] = tripCities_col.find_one(
@@ -63,10 +64,11 @@ async def get_saved_trips (
                     "activities": 1
                 }
             )
+    print(trips)
 
     return baseModels.createResponse(True, 200, trips)
 
-@router.get("/{tripId}", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.TripResponse, responses={401: {"model": baseModels.ErrorResponse}})
+@router.get("/{tripId}", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.TripByIdResponse, responses={401: {"model": baseModels.ErrorResponse}})
 async def get_trip_by_id (
     Authorization: str = Header(..., example=token_example),
     tripId: int = Path(..., description="The unique id of the trip")
@@ -75,28 +77,27 @@ async def get_trip_by_id (
     if tripId not in user['saved_trips']:
         return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content={"error": "Not authorised to add city to trip"})
 
-    trips = list(trip_col.aggregate([
-        {"$match": {"_id": tripId}},
-        {"$project": {"id": "$_id", "name": 1, "start_date": 1, "end_date": 1, "travellers": 1, "cities": 1 }}
-    ]))
-    for t in trips:
-        for i in range(len(t['cities'])):
-            t['cities'][i] = tripCities_col.find_one(
-                {"_id": t['cities'][i]},
-                { 
-                    "id": "$_id",
-                    "city_name": 1,
-                    "latitude": 1,
-                    "longitude": 1,
-                    "start_date": 1,
-                    "end_date": 1,
-                    "country_code": 1,
-                    "country_name": 1,
-                    "activities": 1
-                }
-            )
+    trip = trip_col.find_one(
+        {"_id": tripId},
+        {"id": "$_id", "name": 1, "start_date": 1, "end_date": 1, "travellers": 1, "cities": 1 }
+    )
+    for i in range(len(trip['cities'])):
+        trip['cities'][i] = tripCities_col.find_one(
+            {"_id": trip['cities'][i]},
+            { 
+                "id": "$_id",
+                "city_name": 1,
+                "latitude": 1,
+                "longitude": 1,
+                "start_date": 1,
+                "end_date": 1,
+                "country_code": 1,
+                "country_name": 1,
+                "activities": 1
+            }
+        )
 
-    return baseModels.createResponse(True, 200, trips)
+    return baseModels.createResponse(True, 200, trip)
 
 
 @router.delete("/{tripId}", status_code=status.HTTP_200_OK, tags=['trips'], response_model=baseModels.Response, responses={401: {"model": baseModels.ErrorResponse}})
@@ -171,7 +172,7 @@ async def add_new_city_to_trip (
         "start_date": city.start_date,
         "end_date": city.end_date,
         "country_code": city.country_code,
-        "country_code": city.country_name,
+        "country_name": city.country_name,
         "activities": []
     })
 

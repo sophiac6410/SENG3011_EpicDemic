@@ -325,7 +325,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
   useEffect(() => {
     async function updateActivity() {
       // setLoading(true)
-      var {out, controller} = GetActivities({lat: city.latitude, lot: city.longitude})
+      var {out, controller} = await GetActivities({lat: city.latitude, lot: city.longitude})
       out.then(res => {
         console.log(res.data)
         setActivity(res.data); // dispatching data to components state
@@ -404,7 +404,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
                     </IconButton>
                     <Typography variant='caption' className='color-medium-teal'>View activities</Typography>
                   </div> */}
-                  <ActivityModal activities={activity}></ActivityModal>
+                  <ActivityModal fromTrip={true} tripId={tripId} activities={activity}></ActivityModal>
                 </div>
               ) : (
                 <div style={{display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center", marginBottom: "80px"}} className="mt-2">
@@ -435,8 +435,8 @@ function StepTwo({onClose, name, start, end, travellers}) {
 }
 
 
-function ActivityModal({fromTrip, activities}) {
-  const [isOpen, setOpen] = React.useState(null);
+function ActivityModal(fromTrip, activities, tripId) {
+  const [isOpen, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
     setStepThree(false)
@@ -458,8 +458,7 @@ function ActivityModal({fromTrip, activities}) {
 
   let navigate = useNavigate()
   const saveTrip = () => {
-    navigate('/trip/1')
-    //navigate(`/trip/${tripId}`)
+    navigate(`/trip/${tripId}`)
   }
 
   return(
@@ -502,9 +501,10 @@ function ActivityModal({fromTrip, activities}) {
             centerMode={true}
             // className="bg-light-teal"
           >
-            {
+            {/* { console.log(activities) }
+            { activities !== [] && activities !== {} &&
               activities.map((activity) => <ActivityCard key={activity.id} activity={activity}></ActivityCard>)
-            }
+            } */}
           </Carousel>
         </Box>
       </Modal>

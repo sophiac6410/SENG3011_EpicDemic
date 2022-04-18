@@ -43,7 +43,7 @@ export const getSavedTrips = async () => {
       console.log(data)
       alert(data.data.error);
     } else {
-      return (data)
+      return (data.data)
     }
   } catch (e) {
       console.log(e)

@@ -28,29 +28,29 @@ function Planner() {
   const getTrips = async () => {
     const data = await getSavedTrips();
     console.log(data)
-    // setTrips(data.data)
-    setTrips([{ 
-      "id": 1,
-      "name": "Europe Adventures", 
-      "start_date": "2022-06-01T00:00:00.000+00:00",
-      "end_date": "2022-08-07T00:00:00.000+00:00",
-      "travellers": "4",
-    }, 
-    { 
-      "id": 2,
-      "name": "Australian Roadtrip", 
-      "start_date": "2022-06-01T00:00:00.000+00:00",
-      "end_date": "2022-08-07T00:00:00.000+00:00",
-      "travellers": "2",
-    }, 
-    { 
-      "id": 3,
-      "name": "Family holiday", 
-      "start_date": "2022-06-01T00:00:00.000+00:00",
-      "end_date": "2022-08-07T00:00:00.000+00:00",
-      "travellers": "6",
-    },
-  ])
+    setTrips(data)
+  //   setTrips([{ 
+  //     "id": 1,
+  //     "name": "Europe Adventures", 
+  //     "start_date": "2022-06-01T00:00:00.000+00:00",
+  //     "end_date": "2022-08-07T00:00:00.000+00:00",
+  //     "travellers": "4",
+  //   }, 
+  //   { 
+  //     "id": 2,
+  //     "name": "Australian Roadtrip", 
+  //     "start_date": "2022-06-01T00:00:00.000+00:00",
+  //     "end_date": "2022-08-07T00:00:00.000+00:00",
+  //     "travellers": "2",
+  //   }, 
+  //   { 
+  //     "id": 3,
+  //     "name": "Family holiday", 
+  //     "start_date": "2022-06-01T00:00:00.000+00:00",
+  //     "end_date": "2022-08-07T00:00:00.000+00:00",
+  //     "travellers": "6",
+  //   },
+  // ])
   }
 
   return(
