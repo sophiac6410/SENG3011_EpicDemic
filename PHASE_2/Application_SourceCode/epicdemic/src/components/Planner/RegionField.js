@@ -19,9 +19,12 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
     backgroundColor: "white",
   },
-  }));
+  endAdornment: {
+    top: "calc(12% - 14px)"
+  }
+}));
 
-const GenericSearch = ({ region, options, placeholder, handleInput }) => {
+const GenericSearch = ({ value, options, placeholder, handleInput, width }) => {
     const classes = useStyles();
     return (
         <div className="searchfield-container bg-white border-radius-large">
@@ -29,13 +32,13 @@ const GenericSearch = ({ region, options, placeholder, handleInput }) => {
                 <div className="me-3">
                 </div>
                 <Autocomplete
-                    sx={{ width: 200 }}
+                    sx={{ width: {width} }}
                     classes={classes}
                     popupIcon={""}
-                    value={region}
+                    value={value}
                     options={options}
-                    id="disable-clearable"
-                    disableClearable
+                    // id="disable-clearable"
+                    // disableClearable
                     autoHighlight
                     onChange={handleInput}
                     getOptionLabel={(option) => option.name}
