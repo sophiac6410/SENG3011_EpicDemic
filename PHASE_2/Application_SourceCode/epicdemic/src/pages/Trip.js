@@ -9,13 +9,16 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import TripCard from "../components/Planner/TripCard";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { useNavigate } from "react-router-dom";
+
 
 function Trip() {
+  const navigate = useNavigate()
   return(
     <div className="bg-off-white" style={{paddingBottom: "200px"}}>
       <NavbarComp bg={true}></NavbarComp>
       <Container>
-        <IconButton>
+        <IconButton onClick={() => navigate(-1)}>
           <ArrowBackIosIcon color="darkTeal" fontSize="medium"></ArrowBackIosIcon>
           <Typography variant="bodyText" className="color-dark-teal">Back</Typography>
         </IconButton>

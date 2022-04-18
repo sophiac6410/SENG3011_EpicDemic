@@ -49,4 +49,5 @@ function Planner() {
   )
 }
 
-export default Planner
+export default Planner;
+
