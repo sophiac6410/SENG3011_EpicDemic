@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography'
@@ -28,7 +28,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import CountryField from './CountryField';
 import RegionField from './RegionField';
 import GetCities from './GetCities';
-// import GetActivities from './GetActivities';
+import { GetActivities } from '../../adapters/activityAPI';
 import { addCityToTrip, createTrip } from './tripApiCalls';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { TripOriginOutlined } from '@mui/icons-material';
@@ -239,6 +239,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
   const [tripId, setTripId] = React.useState(1);
   const [back, setBack] = React.useState(false);
   const [added, setAdded] = React.useState(false);
+  const [activity, setActivity] = React.useState([])
 
   const handleOpen = async () => {
     
@@ -254,10 +255,13 @@ function StepTwo({onClose, name, start, end, travellers}) {
     setOpen(true);
     setStepThree(false);
   };
-  const handleClose = () => {
+  const handleAdd = () => {
     console.log(name, lat, long, country.name, country.code)
     addCityToTrip(name, lat, long, country.name, country.code);
-    setAdded(true)
+    setAdded(!added)
+  };
+  const handleClose = () => {
+    onClose()
   };
   const handleBack = () => {
     setOpen(false);
@@ -272,7 +276,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
   const randomGenerator = async () => {
     setStepThree(true)
     
-    const index = Math.floor((Math.random() * 100) + 1);
+    var index = Math.floor((Math.random() * 100) + 1);
     const data = await GetCities(country, "-population")
     const cityCount = data.metadata.totalCount;
     if (cityCount < 100) {
@@ -304,6 +308,21 @@ function StepTwo({onClose, name, start, end, travellers}) {
     navigate('/trip/1')
     // navigate(`trip/${tripId}`)
   }
+
+  useEffect(() => {
+    async function updateActivity() {
+      // setLoading(true)
+      var {out, controller} = GetActivities({lat: lat, lot: long})
+      out.then(res => {
+        console.log(res.data)
+        setActivity(res.data); // dispatching data to components state
+      }).catch(err => {
+        console.log(err)
+        setLoading(false)
+      });
+    }
+    updateActivity()
+  }, [lat, long])
   
   return(
     <React.Fragment>
@@ -353,26 +372,26 @@ function StepTwo({onClose, name, start, end, travellers}) {
                   </div>
                   { added ? (
                     <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
-                    <IconButton onClick={handleClose}>
+                    <IconButton onClick={handleAdd}>
                       <CheckCircleIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></CheckCircleIcon>
                     </IconButton>
                     <Typography variant='caption' className='color-medium-teal'>City Added!</Typography>
                   </div>
                   ) : (
                   <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
-                  <IconButton onClick={handleClose}>
+                  <IconButton onClick={handleAdd}>
                     <AddCircleIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></AddCircleIcon>
                     </IconButton>
                     <Typography variant='caption' className='color-medium-teal'>Add to Trip</Typography>
                   </div>
                   )}
-                  <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
+                  {/* <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
                     <IconButton>
                       <LocalActivityIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></LocalActivityIcon>
                     </IconButton>
                     <Typography variant='caption' className='color-medium-teal'>View activities</Typography>
-                  </div>
-                  <ActivityModal></ActivityModal>
+                  </div> */}
+                  <ActivityModal activities={activity}></ActivityModal>
                 </div>
               ) : (
                 <div style={{display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center", marginBottom: "80px"}} className="mt-2">
@@ -403,7 +422,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
 }
 
 
-function ActivityModal({fromTrip}) {
+function ActivityModal({fromTrip, activities}) {
   const [isOpen, setOpen] = React.useState(null);
   const handleOpen = () => {
     setOpen(true);
@@ -470,11 +489,9 @@ function ActivityModal({fromTrip}) {
             centerMode={true}
             // className="bg-light-teal"
           >
-            <ActivityCard></ActivityCard>
-            <ActivityCard></ActivityCard>
-            <ActivityCard></ActivityCard>
-            <ActivityCard></ActivityCard>
-            <ActivityCard></ActivityCard>
+            {
+              activities.map((activity) => <ActivityCard key={activity.id} activity={activity}></ActivityCard>)
+            }
           </Carousel>
         </Box>
       </Modal>
