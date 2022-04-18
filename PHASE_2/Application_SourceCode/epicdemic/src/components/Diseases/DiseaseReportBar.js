@@ -50,7 +50,7 @@ export default function DiseaseReportBar(code) {
     if (diseaseData === []) return;
 
     async function fetchData() {
-      const data = await fetch(`https://prod.greatescape.co/api/travel/countries/DE/corona`, options).then(res => res.json())
+      const data = await fetch(`https://prod.greatescape.co/api/travel/countries/${code}/corona`, options).then(res => res.json())
       console.log('printing data', data)
       setDiseaseData(data.news)
     }
