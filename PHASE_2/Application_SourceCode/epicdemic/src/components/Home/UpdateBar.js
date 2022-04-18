@@ -57,10 +57,10 @@ function UpdateBar() {
 	}
 
 	return(
-		<Col md={10} className="pt-4 text-center justify-content-center">
+		<Col md={10} className="pt-4 text-center">
 			<Typography variant="heading1" className="color-dark-teal">LATEST UPDATES</Typography>
-			<div className="d-flex">
-				<div className="m-4">
+			<div className="d-flex flex-row justify-content-center ms-5 me-5">
+				<div className="m-4 col-6">
 					<Typography variant="heading2" className="color-dark-teal">Travel Requirements</Typography>
 					{travelUpdates.map((updates, idx) => {
                         return (
@@ -77,7 +77,7 @@ function UpdateBar() {
                         )
                     })}
 				</div>
-				<div className="m-4">
+				<div className="m-4 col-6">
 					<Typography variant="heading2" className="color-dark-teal">Country Policies</Typography>
 					{countryUpdates.map((updates, idx) => {
                         return (
