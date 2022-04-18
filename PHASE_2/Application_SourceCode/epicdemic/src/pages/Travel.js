@@ -212,7 +212,7 @@ function Travel() {
             <Typography variant="bodyImportant" className="color-orange">Open with Restrictions</Typography>
           </Col>
         </Row>
-        <Typography variant="heading1" className="color-dark-teal">Visiting the {data.country}</Typography>
+        <Typography variant="heading1" className="color-dark-teal">Visiting {data.country}</Typography>
         <div class="square border-start border-3 mt-3 mb-5" id="tealBorder">
           <Typography variant="heading2" className="color-dark-teal mb-3">Before you travel</Typography>
           <Typography variant="heading3" className="color-dark-teal mb-1">Check if you are considered a vaccinated traveller</Typography>
