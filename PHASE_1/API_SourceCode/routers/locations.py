@@ -4,7 +4,6 @@ from util import DATETIME_REGEX, parse_datetime_string
 from database import locations_col, diseaseLocations_col, updates_col, safety_col, travel_col
 import re
 from datetime import datetime
-import pytz
 from typing import Optional
 from models import baseModels, locationModels
 
@@ -109,8 +108,9 @@ async def get_travel_overview(
 	data = list(travel_col.find({'_id':id}))[0]
 	area_list = []
 	print('--area restriction--')
-	for a in data['area_restrction'][0]:
+	for a in data['area_restrction']:
 		area_list.append(a)
+		print(a)
 
 	return baseModels.createResponse(True, 200, {
 			'declaration': data['declaration'],

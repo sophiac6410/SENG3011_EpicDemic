@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, {useEffect, useState} from 'react';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -44,7 +45,21 @@ function a11yProps(index) {
 
 export default function FullWidthTabs() {
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+  const [govPolicy, setGovPolicy] = useState("");
+  const { code } = useParams();
+
+  useEffect(() => {
+    if (code === null) return;
+
+    async function fetchData() {
+      const travel = await fetch(`http://127.0.0.1:8000/v1/locations/${code}/travel`).then(res => res.json())
+    
+      setGovPolicy(travel.data.testing.text);
+    }
+
+    fetchData();
+  }, [code])
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -96,7 +111,7 @@ export default function FullWidthTabs() {
         </ul>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <Typography variant="bodyText"> If you are positive with COVID-19, you must isolate at home for 7 days after a positive PCR/RAT test. </Typography> 
+          <Typography variant="bodyText">{govPolicy}</Typography> 
         </TabPanel>
     </div>
   );

@@ -79,7 +79,7 @@ const DestinationFinder = () => {
                             country={dest.country}
                             updateDesc={dest.entry_description}
                             lastUpdated={getDate(dest.last_update)}
-                            travelStatus={dest.travel_status}
+                            travelStat={dest.travel_status}
                             saved={savedLocations.includes(dest.id)}
                             />
                             )
@@ -121,7 +121,7 @@ const DestinationFinder = () => {
                                     key={idx}
                                     country={popDest.country}
                                     arrivals={popDest.arrivals}
-                                    travelStatus={popDest.travelStatus}
+                                    travelStat={popDest.travelStatus}
                                     />
                                     )
                                 })}
@@ -236,17 +236,11 @@ const popularDestinationsData = [
     { 'country': 'France', 'arrivals': 89400000, 'travelStatus': 'Open with Restrictions' },
     { 'country': 'Spain', 'arrivals': 8370000, 'travelStatus': 'Open with Restrictions' },
     { 'country': 'United States', 'arrivals': 79300000, 'travelStatus': 'Open with Restrictions' },
-    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
-    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
-    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
-    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
-    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
-    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
-    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
-    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
-    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
-    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
-    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
-    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
-    { 'country': 'China', 'arrivals': 79300000, 'travelStatus': 'Closed' },
+    { 'country': 'China', 'arrivals': 65700000, 'travelStatus': 'Closed' },
+    { 'country': 'Italy', 'arrivals': 64500000, 'travelStatus': 'Open with Restrictions' },
+    { 'country': 'Turkey', 'arrivals': 51200000, 'travelStatus': 'Open with Restrictions' },
+    { 'country': 'Mexico', 'arrivals': 45000000, 'travelStatus': 'Open' },
+    { 'country': 'Thailand', 'arrivals': 39800000, 'travelStatus': 'Open with Restrictions' },
+    { 'country': 'Germany', 'arrivals': 396000000, 'travelStatus': 'Open with Restrictions' },
+    { 'country': 'United Kingdom', 'arrivals': 39400000, 'travelStatus': 'Open' },
 ]

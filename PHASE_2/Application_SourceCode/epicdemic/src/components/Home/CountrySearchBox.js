@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function CountrySelect({isFrom, handleInput}) {
   const classes = useStyles();
 

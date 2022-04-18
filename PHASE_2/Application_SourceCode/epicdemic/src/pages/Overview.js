@@ -19,44 +19,43 @@ import React, { useState, useEffect } from "react";
 import CircleIcon from '@mui/icons-material/Circle';
 import WarningIcon from '@mui/icons-material/Warning';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
-import { colorScore } from "../styles/Theme"
+import { adviceLevel, adviceLevelColor, travelStatus, travelStatusColor, safetyScore, safteyScoreColor, diseaseRisk, diseaseRiskColor, safteyScore } from "../styles/Theme"
 
 const intro = "Philippines, island country of Southeast Asia in the western Pacific Ocean. It is an archipelago consisting of more than 7,000 islands and islets lying about 500 miles (800 km) off the coast of Vietnam. Manila is the capital, but nearby Quezon City is the country’s most-populous city."
 const safetySource = "The safety and security ratings determined by GeoSure GeoSafeScores which analyzes crime, health and economic data, official travel alerts, local reporting and a variety of other sources.  Scores go from 1 (not likely) to 100 (very likely)."
 const covidSource = <p>Health advice is continually changing as we learn more about COVID-19 and new variants are discovered. Rules and restrictions to prevent outbreaks can change quickly. It’s important to regularly check the rules in the destinations you’re travelling to and transiting through, as well as the requirements at the Australian border. These may differ between state and territory jurisdictions.
 <br /> <br />Read the Australian Government’s global health advisory and step-by-step guide to travel during COVID-19 for more information.</p>
 
-const safetyDis = [
-  {title: "MEDICAL", text: "Likelihood of illness or disease, assessment of water and air quality, and access to reliable medical care", score: 34},
-  {title: "WOMEN", text: "Likelihood of inappropriate behavior against females", score: 0},
-  {title: "PHYSICAL HARM", text: "Likelihood of injury due to harmful intent", score: 36},
-  {title: "THEFT", text: "Likelihood of theft", score: 36},
-  {title: "POLITICAL FREEDOM", text: "Potential for infringement of political rights or political unrest", score: 50},
-  {title: "LGBTQ", text: "Likelihood of harm or discrimination against LGBTQ persons or groups and level of caution required at location", score: 39}
-]
-
-const SafetyBoard = safetyDis.map(function(props) {
-    const bgColor = colorScore(props.score);
-    return(
-      <Row className="ps-5 mt-4 align-items-center">
-        <Col>
-          <Typography variant="bodyImportant" className="color-medium-teal">{props.title}</Typography>
-          <div>
-            <Typography variant="bodyText">{props.text}</Typography>
-          </div>
-        </Col>
-        <Col md={1}>
-          <div style={{color: "white", backgroundColor: bgColor}} className="text-center border-radius-med">
-            <Typography variant="bodyImportant">{props.score}</Typography>
-          </div>
-        </Col>
-      </Row>
-    )
-});
+const SafetyBoard = (safetyDis) => {
+  console.log("inside safety board")
+  console.log(safetyDis);
+  return (
+    <>
+      {safetyDis.map((v, i) => {
+        return (
+          <Row className="ps-5 mt-4 align-items-center">
+            <Col>
+              <Typography variant="bodyImportant" className="color-medium-teal">{v.title}</Typography>
+              <div>
+                <Typography variant="bodyText">{v.text}</Typography>
+              </div>
+            </Col>
+            <Col md={1}>
+              <div style={{color: "white", backgroundColor: safteyScoreColor(v.score)}} className="text-center border-radius-med">
+                <Typography variant="bodyImportant">{v.score}</Typography>
+              </div>
+            </Col>
+          </Row>
+        )
+      })}
+    </>
+  )
+}
 
 function Overview() {
   const [data, setData] = useState(null);
   const [dest, setDest] = useState(null);
+  const [safetyData, setSafetyData] = useState(null);
   const { code } = useParams();
 
   useEffect(() => {
@@ -78,6 +77,25 @@ function Overview() {
       var total = vaccine.timeline[Object.keys(vaccine.timeline).pop()] / 3;
 
       newData["vaccinationPercentage"] = total * 100 / newData.population;
+
+      // Get the safety data too
+      const safety = await fetch(`http://127.0.0.1:8000/v1/locations/${code}/safety`).then(res => res.json())
+      var newSafety = [
+          {title: "MEDICAL", text: "Likelihood of illness or disease, assessment of water and air quality, and access to reliable medical care", score: 34},
+          {title: "WOMEN", text: "Likelihood of inappropriate behavior against females", score: 0},
+          {title: "PHYSICAL HARM", text: "Likelihood of injury due to harmful intent", score: 36},
+          {title: "THEFT", text: "Likelihood of theft", score: 36},
+          {title: "POLITICAL FREEDOM", text: "Potential for infringement of political rights or political unrest", score: 50},
+          {title: "LGBTQ", text: "Likelihood of harm or discrimination against LGBTQ persons or groups and level of caution required at location", score: 39}
+      ];
+
+      newSafety[0].score = safety.data.medical;
+      newSafety[1].score = safety.data.women;
+      newSafety[2].score = safety.data.physical_harm;
+      newSafety[3].score = safety.data.theft;
+      newSafety[4].score = safety.data.political_freedom;
+      newSafety[5].score = safety.data.lgbtq;
+      setSafetyData(newSafety);
 
       setData(newData);
 
@@ -105,7 +123,7 @@ function Overview() {
     return [dest.latitude, dest.longitude];
   }
 
-  if (data == null || dest == null) {
+  if (data == null || dest == null || safetyData == null) {
     return (
       <div/>
     )
@@ -135,22 +153,22 @@ function Overview() {
         </Col>
         <Col>
           <Row className="align-items-center">
-            <div className="pt-3 pb-3 pe-1 ps-1 text-center border-radius-large bg-yellow">
-              <Typography variant="bodyImportant">OVERALL ADVICE: EXERCISE CAUTION</Typography>
+            <div className="pt-3 pb-3 pe-1 ps-1 text-center border-radius-large" style={{backgroundColor: adviceLevelColor(dest.adviceLevel)}}>
+              <Typography variant="bodyImportant">OVERALL ADVICE: {adviceLevel(dest.adviceLevel).toUpperCase()}</Typography>
             </div>
           </Row>
-          <Row>
+          {/* <Row>
             <Typography variant="bodyText" className="color-dark-teal pt-4 pb-4">{intro}</Typography>
-          </Row>
+          </Row> */}
           <Row className="align-items-center justify-content-start">
             <Col md={4}>
               <Typography variant="bodyText" className="color-dark-teal ">TRAVEL STATUS</Typography>
             </Col>
             <Col md={1}>
-              <CircleIcon className="color-yellow" sx={{fontSize: 18}}/>
+              <CircleIcon style={{color: travelStatusColor(dest.travelStatus)}} sx={{fontSize: 18}}/>
             </Col>
             <Col className="pt-1">
-            <Typography variant="bodyImportant" className="color-dark-teal">Open With Restrictions</Typography>
+            <Typography variant="bodyImportant" className="color-dark-teal">{travelStatus(dest.travelStatus)}</Typography>
             </Col>
           </Row>
           <Row className="align-items-center justify-content-start">
@@ -158,10 +176,10 @@ function Overview() {
             <Typography variant="bodyText" className="color-dark-teal">SAFETY</Typography>
             </Col>
             <Col md={1}>
-                <WarningIcon className="color-yellow" sx={{fontSize: 18}}/>
+                <WarningIcon style={{color: safteyScoreColor(dest.safetyScore)}} sx={{fontSize: 20}}/>
             </Col>
             <Col className="pt-1 text-start">
-              <Typography variant="bodyImportant" className="color-dark-teal">Low to medium levels of threat</Typography>
+              <Typography variant="bodyImportant" className="color-dark-teal">{safteyScore(dest.safetyScore)} levels of threat</Typography>
             </Col>
           </Row>
           <Row className="align-items-center justify-content-start">
@@ -169,10 +187,10 @@ function Overview() {
             <Typography variant="bodyText" className="color-dark-teal">DISEASE RISK</Typography>
             </Col>
             <Col md={1}>
-                <LocalHospitalIcon className="color-red" sx={{fontSize: 18}}/>
+                <LocalHospitalIcon style={{color: diseaseRiskColor(dest.diseaseRisk)}} sx={{fontSize: 20}}/>
             </Col>
             <Col className="pt-1">
-              <Typography variant="bodyImportant" className="color-dark-teal">High</Typography>
+              <Typography variant="bodyImportant" className="color-dark-teal">{diseaseRisk(dest.diseaseRisk)}</Typography>
             </Col>
           </Row>
         </Col>
@@ -181,18 +199,16 @@ function Overview() {
         <Col>
           <Typography variant="heading2" className="color-dark-teal">Safety</Typography>
           <div className="mt-4 ps-2" style={{flexDirection: "row", display: "flex"}}>
-              <WarningIcon className="color-yellow"></WarningIcon>
-              {/* <img src={wYellow} width="30px" height="30px" style={{flexDirection: "column"}} >
-              </img> */}
-              <Typography variant="bodyImportant" className="color-dark-teal ms-3">Low to medium levels of threat</Typography>
+              <WarningIcon style={{color: safteyScoreColor(dest.safetyScore)}}></WarningIcon>
+              <Typography variant="bodyImportant" className="color-dark-teal ms-3">{safteyScore(dest.safetyScore)} levels of threat</Typography>
           </div>
         </Col>
-        <Col md={3} className="text-center pt-3 pb-3 bg-yellow border-radius-med">
+        <Col md={3} className="text-center pt-3 pb-3 border-radius-med" style={{backgroundColor: safteyScoreColor(dest.safetyScore)}}>
           <Row><Typography variant="heading2">{dest.safetyScore}</Typography></Row>
           <Row><Typography variant="bodyText" sx={{textAlign: 'center'}}>OVERALL SAFETY RATING</Typography></Row>
         </Col>
       </Row>
-      <ul>{SafetyBoard}</ul>
+      <ul>{SafetyBoard(safetyData)}</ul>
       <Typography variant="caption" className="mt-5 mb-5">{safetySource}</Typography>
       <Typography variant="heading2" className="mb-4 mt-5 pt-4">COVID-19 Statistics</Typography>
       <Row className="mb-5 justify-content-start">

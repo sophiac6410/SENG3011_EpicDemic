@@ -1,8 +1,8 @@
 from pymongo import MongoClient
 import requests
-import geocoder
+# import geocoder
 import json
-from amadeus import Client, ResponseError
+# from amadeus import Client, ResponseError
 
 def parser(data):
     vaccine_info = {

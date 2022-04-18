@@ -3,8 +3,9 @@ import { Row, Col, Button, Image } from "react-bootstrap";
 import "../../styles/DestinationFinder.css";
 import InfoIcon from '@mui/icons-material/Info';
 import { LightButton } from "../../styles/Button";
+import { travelStatusColor, travelStatus } from "../../styles/Theme";
 
-const InfoRow2 = ({country, arrivals, travelStatus}) => {
+const InfoRow2 = ({country, arrivals, travelStat}) => {
     return (
         <Row className="info-row-2">
             <Col xs={2}>
@@ -14,7 +15,7 @@ const InfoRow2 = ({country, arrivals, travelStatus}) => {
                 {arrivals.toLocaleString()}
             </Col>
             <Col xs={4}>
-                {travelStatus}
+                {travelStat}
                 <InfoIcon fontSize="small" className="color-medium-blue" sx={{ml: 1}}/>
             </Col>
             <Col xs={2}>
