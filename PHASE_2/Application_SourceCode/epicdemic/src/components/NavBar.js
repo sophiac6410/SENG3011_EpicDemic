@@ -75,7 +75,7 @@ function NavbarComp(props) {
                   <FavoriteIcon sx={{ color: "white", fontSize: 30, display:'block', mx: 'auto'}} />
                   <Typography variant="caption" sx={{color: "white"}}>Saved Locations</Typography>
                 </Nav.Link>
-                <Nav.Link href="/trips" name="saved-trips" className="mx-3">
+                <Nav.Link href="/planner" name="saved-trips" className="mx-3">
                   <FlightIcon sx={{ color: "white", fontSize: 30, display:'block', mx: 'auto'}} />
                   <Typography variant="caption" sx={{color: "white"}}>Saved Trips</Typography>
                 </Nav.Link>

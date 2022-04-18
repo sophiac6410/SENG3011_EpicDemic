@@ -4,13 +4,13 @@ import API_URL from '../../config.json';
 export const createTrip = async (name, start_date, end_date, travellers) => {
   console.log(name, start_date, end_date, travellers)
   try {
-    const response = await fetch(`${API_URL.API_URL}/v1/trips/trips/new`, {
+    const response = await fetch(`${API_URL.API_URL}/v1/trips/new`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
         Authorization: localStorage.getItem('token')
       },
-      Trip: JSON.stringify({
+      body: JSON.stringify({
         name: name,
         start_date: start_date,
         end_date: end_date,
@@ -22,7 +22,7 @@ export const createTrip = async (name, start_date, end_date, travellers) => {
       console.log(data)
       alert(data.data.error);
     } else {
-      return (data)
+      return (data.data)
     }
   } catch (e) {
       console.log(e)
@@ -31,7 +31,7 @@ export const createTrip = async (name, start_date, end_date, travellers) => {
 
 export const getSavedTrips = async () => {
   try {
-    const response = await fetch(`${API_URL.API_URL}/v1/trips/trips`, {
+    const response = await fetch(`${API_URL.API_URL}/v1/trips`, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
@@ -50,8 +50,8 @@ export const getSavedTrips = async () => {
   }
 }
 
-export const addCityToTrip = async (name, latitude, longitude, country_code, country_name) => {
-  console.log(name, latitude, longitude, country_code, country_name)
+export const addCityToTrip = async (tripId, name, latitude, longitude, country_code, country_name) => {
+  console.log(tripId, name, latitude, longitude, country_code, country_name)
   try {
     const response = await fetch(`${API_URL.API_URL}/v1/trips/new/city`, {
       method: 'POST',
@@ -59,12 +59,13 @@ export const addCityToTrip = async (name, latitude, longitude, country_code, cou
         'Content-type': 'application/json',
         Authorization: localStorage.getItem('token')
       },
-      City: JSON.stringify({
-        name: name,
+      body: JSON.stringify({
+        trip_id: tripId,
+        city_name: name,
         latitude: latitude,
         longitude: longitude,
-        start_date: null,
-        end_date: null,
+        // start_date: null,
+        // end_date: null,
         country_name: country_name,
         country_code: country_code,
       }),
@@ -74,7 +75,7 @@ export const addCityToTrip = async (name, latitude, longitude, country_code, cou
       console.log(data)
       console.log(response)
     } else {
-      return (data)
+      return (data.data)
     }
   } catch (e) {
       console.log(e)
@@ -89,7 +90,7 @@ export const addActivityToCity = async (activityId, cityId, tripId) => {
         'Content-type': 'application/json',
         Authorization: localStorage.getItem('token')
       },
-      Activity: JSON.stringify({
+      body: JSON.stringify({
         tripId: tripId,
         cityId: cityId,
         activityId: activityId,
@@ -139,8 +140,10 @@ export const getTripById = async (tripId) => {
     if (response.status !== 200) {
       console.log(data)
       console.log(response)
-    } 
-    console.log(data)
+    } else {
+      console.log(data)
+      return data.data
+    }
   } catch (e) {
       console.log(e)
   }

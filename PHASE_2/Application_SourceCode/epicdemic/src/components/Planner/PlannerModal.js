@@ -157,7 +157,7 @@ function StepOne({isOpen, onClose, onNext}) {
         <Box autoComplete='off' sx={formStyle}>
           <BorderColorIcon  sx={{marginTop: "10px", marginRight: "5px"}} color="teal"></BorderColorIcon>
           <FormControl color='teal' variant="standard" sx={{ width: '20ch'}}>
-            <Input color='teal' type='text' placeholder='Name your trip' value={name} value={name} onChange={(event) => {setName(event.target.value)}}/>
+            <Input color='teal' type='text' placeholder='Name your trip' value={name} onChange={(event) => {setName(event.target.value)}}/>
           </FormControl>
           <Divider orientation="vertical" flexItem  variant="middle" flex />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -244,21 +244,21 @@ function StepTwo({onClose, name, start, end, travellers}) {
   const [cityIndex, setCityIndex] = React.useState(-1)
 
   const handleOpen = async () => {
-    
     if (!back) {
       console.log(name, start, end, travellers)
-      const start_date = new Date(start);
-      const end_date = new Date(end);
-      const data = await createTrip(name, start_date, end_date, parseInt(travellers));
-      // setTripId(data["id"])
+      const data = await createTrip(name, start, end, parseInt(travellers));
       console.log(data)
+      console.log(data.id, data['id']);
+      setTripId(data.id)
     }
     setOpen(true);
     setStepThree(false);
   };
-  const handleAdd = () => {
-    console.log(name, lat, long, country.name, country.code)
-    addCityToTrip(name, lat, long, country.name, country.code);
+  const handleAdd = async () => {
+    console.log(tripId);
+    console.log(city.name, lat, long, country.name, country.code)
+    const data = await addCityToTrip(tripId, city.name, lat, long, country.name, country.code);
+    setCityId(data.id);
     setAdded(!added)
   };
   const handleClose = () => {
@@ -318,7 +318,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
 
   let navigate = useNavigate()
   const saveTrip = () => {
-    navigate('/trip/1')
+    navigate(`/trip/${tripId}`)
     // navigate(`trip/${tripId}`)
   }
 
