@@ -1,24 +1,71 @@
-from datetime import datetime
-from email.header import Header
-from lib2to3.pgen2 import token
-from dateutil.parser import parse
-from fastapi import APIRouter, status, Header, Query, Path
-from fastapi.responses import JSONResponse
-from pydantic import BaseModel, Field
-from datetime import datetime, timedelta
-from typing import Optional, List
-from database import trip_col, tripCities_col, users_col
-from models import tripModels, baseModels
-import auth
+import React from 'react';
+import API_URL from '../../config.json';
 
-router = APIRouter(
-    prefix='/v1/trips'
-)
+export const createTrip = async (name, start_date, end_date, travellers) => {
+  console.log(name, start_date, end_date, travellers)
+  try {
+    const response = await fetch(`${API_URL.API_URL}/v1/trips/trips/new`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      },
+      Trip: JSON.stringify({
+        name: name,
+        start_date: start_date,
+        end_date: end_date,
+        travellers: travellers
+      }),
+    });
+    const data = await response.json();
+    if (response.status !== 200) {
+      console.log("hmmm")
+      console.log(data)
+      alert(data.data.error);
+    } else {
+      return (data)
+    }
+  } catch (e) {
+      console.log(e)
+  }
+}
 
-token_example = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huLmRvZUBlbWFpbC5jb20iLCJleHAiOjE2NDk5OTc4NTJ9.bkGLfoU3AUHUNf46ctdFsoHlC7mYfFE1Rl6P97Xt8Uc"
+export const getSavedTrips = async () => {
+  
+}
 
+export const addCityToTrip = async (name, latitude, longitude, country_code) => {
+  try {
+    const response = await fetch(`${API_URL.API_URL}/v1/trips/trips/new/city`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      },
+      City: JSON.stringify({
+        name: name,
+        latitude: latitude,
+        longitude: longitude,
+        start_date: null,
+        end_date: null,
+        country_code: country_code,
+      }),
+    });
+    const data = await response.json();
+    if (response.status !== 200) {
+      console.log(data)
+      console.log(response)
+    } else {
+      return (data)
+    }
+  } catch (e) {
+      console.log(e)
+  }
+}
+
+/* 
 class Trip(BaseModel):
-    name: str = Field(..., description="The name of the trip", example="Tiana's Europe Adventures")
+    name: int = Field(..., description="The name of the trip", example="Tiana's Europe Adventures")
     start_date: datetime = Field(..., description="The date of departure for the trip", example='2022-06-01T00:00:00.000+00:00')
     end_date: datetime = Field(..., description="The return date of the trip", example='2022-12-01T00:00:00.000+00:00')
     travellers: int = Field(..., description="The number of travellers on the trip", example=6)
@@ -61,7 +108,7 @@ async def get_saved_trips (
                 }
             )
 
-    return baseModels.createResponse(True, 200, trips)
+    return baseModels.createResponse(True, 200, trips) 
 
 @router.delete("/trips/{tripId}", status_code=status.HTTP_200_OK, tags=['trips'], response_model=baseModels.Response)
 async def delete_saved_trip (
@@ -158,5 +205,42 @@ async def add_new_city_to_trip (
         {"$push": {"activities": activity.activityId}}
     )
     return baseModels.createResponse(True, 200, {})
-
+*/
    
+
+export const getDestination = async (code) => {
+  try {
+      const response = await fetch(`${API_URL.API_URL}/v1/locations/${code}`);
+      const data = await response.json();
+      console.log(data);
+      if (!data.ok) {
+          alert(data.data.error);
+      } else {
+          return data.data;
+      }
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export const getUpdates = async (locations, categories, start, end) => {
+  try {
+      let url = `${API_URL.API_URL}/v1/updates/?location=${locations}&category=${categories}`;
+      if (start !== null) {
+          url += `&start=${start}`;
+      }
+      if (end !== null) {
+          url += `&end=${end}`;
+      }
+      console.log(url)
+      const response = await fetch(url);
+      const data = await response.json();
+      if (!data.ok) {
+          alert(data.data.error);
+      } else {
+          return data.data;
+      }
+  } catch (e) {
+      console.log(e);
+  }
+}

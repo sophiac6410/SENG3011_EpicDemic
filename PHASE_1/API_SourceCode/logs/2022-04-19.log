@@ -1,0 +1,25 @@
+
+    Timestamp: 1650299471.433379
+    Accessed Time: 2022-04-19 02:31:11.433379
+    Client: 127.0.0.1:53611
+    
+    Request: OPTIONS /v1/trips/trips/new
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.001708984375
+    ----------------------------------------
+    
+    Timestamp: 1650299471.440098
+    Accessed Time: 2022-04-19 02:31:11.440098
+    Client: 127.0.0.1:53611
+    
+    Request: POST /v1/trips/trips/new
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.0011529922485351562
+    ----------------------------------------
+    

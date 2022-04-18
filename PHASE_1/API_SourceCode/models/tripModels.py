@@ -15,7 +15,7 @@ class City(BaseModel):
 
 class Trips(BaseModel):
     id: int = Field(..., description="The unique id of the trip", example=1)
-    name: int = Field(..., description="The name of the trip", example="Tiana's Europe Adventures")
+    name: str = Field(..., description="The name of the trip", example="Tiana's Europe Adventures")
     start_date: datetime = Field(..., description="The date of departure for the trip", example='2022-06-01T00:00:00.000+00:00')
     end_date: datetime = Field(..., description="The return date of the trip", example='2022-12-01T00:00:00.000+00:00')
     travellers: int = Field(..., description="The number of travellers on the trip", example=6)

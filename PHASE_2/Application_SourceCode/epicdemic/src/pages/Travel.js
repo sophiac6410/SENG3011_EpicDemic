@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import NavbarComp from "../components/NavBar";
 import { Typography } from "@mui/material";
 import CircleIcon from '@mui/icons-material/Circle';
+import { getDestination } from "../apiCalls";
 
 const validCheck = <p>
   Before you book your travel, check if you meet Australia’s definition of fully vaccinated for international travel purposes. To meet Australia’s vaccination requirements and be considered a ‘fully vaccinated’ traveller for the purpose of Australia’s border arrangements, you need to provide evidence that you either: 
@@ -60,52 +61,137 @@ For alert level 2: Max of 50% indoor venue capacity* and 70% outdoor venue capac
 
 const foodCheck = <p>Open with restrictions</p>
 
-
-const enterChecks = [
-  {title: "QUARANTINE RULES", date: "Last updated 23/02/22", text: "International travellers are not required to quarantine upon arrival. However, the CDC recommends that travellers stay home and self-quarantine for 7 days after arrival. Travellers should take a test again 3-5 days after arrival; if a test is not available or results are delayed, travellers are recommended to stay home and self-quarantine for a total of 10 days after travelling"},
-  {title: "VACCINATION REQUIREMENTS", date: "Last updated 23/02/22", text: vacineCheck},
-  {title: "TESTING REQUIREMENTS", date: "Last updated 23/02/22", text: testCheck},
-  {title: "DOCUMENTATION DECLARATION", date: "Last updated 23/02/22", text: docCheck}
-]
-
-const EnterBoard = enterChecks.map(function(check) {
-  return (
-    <Col md={6}>
-      <BlueCard check={check}></BlueCard>
-    </Col>
-  )
-});
-
-
-const ArrivalCheck = [
-  {title: "Masks", date: "Last updated 23/02/22", text: maskCheck},
-  {title: "Lockdowns", date: "Last updated 23/02/22", text: lockCheck},
-  {title: "Events", date: "Last updated 23/02/22", text: event},
-  {title: "Restuarants and Bars", date: "Last updated 23/02/22", text: foodCheck}
-]
-
-const arriveBoard = ArrivalCheck.map(function(check) {
-  return (
-    <Row>
-      <BlueCard check={check}></BlueCard>
-    </Row>
-  )
-});
-
 function Travel() {
   const [data, setData] = useState(null);
   const { code } = useParams();
 
+  const defaultEnterChecks = [
+    {title: "QUARANTINE RULES", date: "Last updated 23/02/22", text: "International travellers are not required to quarantine upon arrival. However, the CDC recommends that travellers stay home and self-quarantine for 7 days after arrival. Travellers should take a test again 3-5 days after arrival; if a test is not available or results are delayed, travellers are recommended to stay home and self-quarantine for a total of 10 days after travelling"},
+    {title: "VACCINATION REQUIREMENTS", date: "Last updated 23/02/22", text: vacineCheck},
+    {title: "TESTING REQUIREMENTS", date: "Last updated 23/02/22", text: testCheck},
+    {title: "DOCUMENTATION DECLARATION", date: "Last updated 23/02/22", text: docCheck}
+  ]
+
   useEffect(() => {
-    // From the code, look up the relevant travel status details
-    setData({
-      code: code,
-      // TODO: MORE
-    })
+    if(code == null) return;
+
+    async function fetchData() {
+      const response = await fetch(`http://localhost:8000/v1/locations/${code}/travel`).then(res => res.json())
+      const data = response.data
+      var enterChecks = []
+      const country = await getDestination(code);
+
+      if(data.quaratine == undefined){
+        enterChecks[0] = defaultEnterChecks[0]
+      }else{
+        enterChecks[0] = {
+          title: "QUARANTINE RULES",
+          date: data.quaratine.date,
+          text: data.quaratine.text 
+        }
+      }
+
+      if(typeof data.vaccine_info == "undefined") {
+        enterChecks[1] = defaultEnterChecks[1]
+      }else{
+        enterChecks[1] = {
+          title: "VACCINATION REQUIREMENTS",
+          date: data.vaccine_info.last_updated,
+          text: data.vaccine_info.info 
+        }
+      }
+
+      if(data.testing == undefined) {
+        enterChecks[2] = defaultEnterChecks[2]
+      }else{
+        enterChecks[2] = {
+          title: "TESTING REQUIREMENTS",
+          date: data.testing.date,
+          text: data.testing.text 
+        }
+      }
+
+      if(data.declaration == undefined) {
+        enterChecks[3] = defaultEnterChecks[3]
+      }else{
+        enterChecks[3] = {
+          title: "DOCUMENTATION DECLARATION",
+          date: data.declaration.date,
+          text: data.declaration.text 
+        }
+      }
+
+
+      const ArrivalCheck = []
+      if(typeof data.mask !== "undefined") {
+        ArrivalCheck.push({
+          title: "Mask",
+          date: data.mask.last_updated,
+          text: data.mask.text 
+        })
+      }
+      if(typeof data.tracing !== "undefined") {
+        ArrivalCheck.push({
+          title: "Tracing",
+          date: data.tracing.last_updated,
+          text: data.tracing.text 
+        })
+      }
+      if(typeof data.event_info !== "undefined") {
+        ArrivalCheck.push({
+          title: "Event",
+          date: data.event_info.last_updated,
+          text: data.event_info.entry_status 
+        })
+      }
+      if(typeof data.attractions_info !== "undefined") {
+        ArrivalCheck.push({
+          title: "Attraction",
+          date: data.attractions_info.last_updated,
+          text: data.attractions_info.entry_status 
+        })
+      }
+      if(typeof data.shopping_info !== "undefined") {
+        ArrivalCheck.push({
+          title: "Shopping",
+          date: data.shopping_info.last_updated,
+          text: data.shopping_info.entry_status 
+        })
+      }
+
+      for(var i = 0; i < data.area_restriction.length; i++) {
+        var restriction = data.area_restriction[i]
+        ArrivalCheck.push({
+          title: restriction.restrictionType,
+          date: restriction.last_updated,
+          text: restriction.text 
+        })
+      }
+
+      var newData = {
+        code: code,
+        country: country.country,
+        areaR: data.area_restriction,
+        mask: data.mask,
+        areaP: data.area_policy,
+        tracing: data.tracing,
+        attraction: data.attractions_info,
+        entryInfo: data.attractions_info,
+        eventInfo: data.event_info,
+        shoppingInfo: data.shopping_info,
+        vaccineInfo: data.vaccine_info,
+        enterCheck: enterChecks,
+        ArrivalCheck: ArrivalCheck
+      }
+      console.log(newData)
+      // From the code, look up the relevant travel status details
+      setData(newData)
+    }
+    fetchData();
   }, [code])
 
-  if (data === null) {
-    return (
+  if(data == null) {
+    return(
       <div/>
     )
   }
@@ -126,7 +212,7 @@ function Travel() {
             <Typography variant="bodyImportant" className="color-orange">Open with Restrictions</Typography>
           </Col>
         </Row>
-        <Typography variant="heading1" className="color-dark-teal">Visiting the Phillippines</Typography>
+        <Typography variant="heading1" className="color-dark-teal">Visiting the {data.country}</Typography>
         <div class="square border-start border-3 mt-3 mb-5" id="tealBorder">
           <Typography variant="heading2" className="color-dark-teal mb-3">Before you travel</Typography>
           <Typography variant="heading3" className="color-dark-teal mb-1">Check if you are considered a vaccinated traveller</Typography>
@@ -135,10 +221,19 @@ function Travel() {
           <Typography variant="bodyText" className="color-dark-teal mb-5">{proofCheck}</Typography>
           <Typography variant="heading2" className="color-dark-teal mb-3">Entering the region</Typography>
           <Row className="mt-4 mb-5">
-            {EnterBoard}
+            {data.enterCheck.map((check) => 
+              <Col md={6}>
+                <BlueCard check={check}></BlueCard>
+              </Col>
+            )}
           </Row>
           <Typography variant="heading2" className="color-dark-teal mb-3">While you’re there</Typography>
-          <div>{arriveBoard}</div>
+          <div>{
+            data.ArrivalCheck.map((check) => 
+              <Row>
+                <BlueCard check={check}></BlueCard>
+              </Row>
+            )}</div>
         </div>
         <Row style={{"marginTop": "10vh", "marginBottom": "20vh"}}>
           <Typography variant="heading2" className="color-dark-teal mb-3">Recommended Cities</Typography>

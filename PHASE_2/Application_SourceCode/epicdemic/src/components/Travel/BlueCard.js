@@ -11,13 +11,18 @@ function BlueCard(props) {
   return(
     // <Col md={6}>
       <Card style={{backgroundColor: "#EBF3FF", borderRadius: "30px"}} sx={{ display: 'flex', height: '97%' }} className="p-4 m-2" >
-      <CardContent>
+      <CardContent sx={{ maxHeight: '300px', overflow: "auto"}}>
         <Typography variant="bodyHeading">{props.check.title}</Typography>
         <Typography variant="caption" sx={{ mb: 1.5 }}>
-        {props.check.date}
+          {props.check.date ? (
+            <div>Last Update {props.check.date}</div>
+          ): (
+            <div></div>
+          )}
         </Typography>
         <Typography variant="bodyText">
-          {props.check.text}
+          <div dangerouslySetInnerHTML={{__html: props.check.text}}></div>
+          {/* {props.check.text} */}
         </Typography>
         </CardContent>
       </Card>
