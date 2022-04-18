@@ -5,16 +5,18 @@ import Autocomplete from '@mui/material/Autocomplete';
 import "react-multi-carousel/lib/styles.css";
 import { Col, Row } from 'react-bootstrap';
 
-export function CitySelectPhilippines({fieldLabel}) {
+export function CitySelectPhilippines({fieldLabel, city, handleCity}) {
   return (
     <Row className='justify-content-center align-items-center'>
       <Col>
         <Autocomplete
           id="city-philippines-select-demo"
           // sx={{ width: 250 }}
-          options={citiesPhilippines}
+          options={iatas}
+          defaultValue={city}
+          onInputChange={(e, v)=>handleCity(v)}
           autoHighlight
-          getOptionLabel={(option) => option.label}
+          getOptionLabel={(option) => option}
           renderOption={(props, option) => (
             <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
               {/* <img
@@ -24,7 +26,7 @@ export function CitySelectPhilippines({fieldLabel}) {
                 srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
                 alt=""
               /> */}
-              {option.label} ({option.code})
+              {option}
             </Box>
           )}
           renderInput={(params) => (
@@ -33,6 +35,7 @@ export function CitySelectPhilippines({fieldLabel}) {
               variant="standard"
               {...params}
               label={fieldLabel}
+              defaultValue={city}
               inputProps={{
                 ...params.inputProps,
                 autoComplete: 'new-password', // disable autocomplete and autofill
@@ -45,22 +48,6 @@ export function CitySelectPhilippines({fieldLabel}) {
   );
 }
 
-const citiesPhilippines = [
-    { code: 'MNL', label: 'Manila'},
-    { code: 'CEB', label: 'Mactan-Cebu'},
-    { code: 'ILO', label: 'Iloio'},
-    { code: 'DVO', label: 'Davao'},
-    { code: 'CRK', label: 'Clark'},
-    { code: 'PPS', label: 'Puerto Princesa'},
-    { code: 'CGY', label: 'Languindingan'},
-    { code: 'BCD', label: 'Bacolod-Silay'},
-    { code: 'TAC', label: 'Tacloban City'},
-    { code: 'KLO', label: 'Kalibo'},
-    { code: 'ZAM', label: 'Zamboanga'},
-    { code: 'TAG', label: 'Bohol-Panglao'},
-    { code: 'GES', label: 'General Santos'},
-    { code: 'MPH', label: 'Boracay'},
-]
 
 export function CitySelectSydney({fieldLabel}) {
     return (
@@ -69,9 +56,10 @@ export function CitySelectSydney({fieldLabel}) {
           <Autocomplete
             id="city-philippines-select-demo"
             // sx={{ width: 250 }}
-            options={citiesSydney}
+            options={iatas}
             autoHighlight
-            getOptionLabel={(option) => option.label}
+            getOptionLabel={(option) => option}
+            defaultValue={iatas[0]}
             renderOption={(props, option) => (
               <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
                 {/* <img
@@ -81,7 +69,7 @@ export function CitySelectSydney({fieldLabel}) {
                   srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
                   alt=""
                 /> */}
-                {option.label} ({option.code})
+                {option}
               </Box>
             )}
             renderInput={(params) => (
@@ -102,11 +90,163 @@ export function CitySelectSydney({fieldLabel}) {
     );
   }
   
-  const citiesSydney = [
-      { code: 'ADL', label: 'Adelaide'},
-      { code: 'BNE', label: 'Brisbane'},
-      { code: 'CBR', label: 'Canberra'},
-      { code: 'MEL', label: 'Melbourne'},
-      { code: 'PER', label: 'Perth'},
-      { code: 'SYD', label: 'Sydney'}
+  const iatas = [
+    "SYD",
+    "AAL",
+    "ABZ",
+    "MAD",
+    "ALC",
+    "AMS",
+    "BCN",
+    "BRI",
+    "BFS",
+    "BEG",
+    "BGO",
+    "SXF",
+    "TXL",
+    "BLL",
+    "BHX",
+    "BOO",
+    "BLQ",
+    "BOD",
+    "KBP",
+    "BOH",
+    "BRE",
+    "BRS",
+    "BRU",
+    "CRL",
+    "BUD",
+    "BOJ",
+    "CAG",
+    "CWL",
+    "CTA",
+    "CDG",
+    "CIA",
+    "CGN",
+    "CPH",
+    "WRO",
+    "ORK",
+    "DME",
+    "DTM",
+    "DRS",
+    "DUB",
+    "DUS",
+    "EMA",
+    "EDI",
+    "EIN",
+    "ATH",
+    "BSL",
+    "EXT",
+    "PMO",
+    "FAO",
+    "OPO",
+    "FRA",
+    "GDN",
+    "GVA",
+    "GOA",
+    "BHD",
+    "GLA",
+    "GOT",
+    "LPA",
+    "GRV",
+    "HAM",
+    "HAJ",
+    "HEL",
+    "OTP",
+    "HER",
+    "LIS",
+    "BGY",
+    "PDL",
+    "FKB",
+    "KTW",
+    "KZN",
+    "KEF",
+    "HRK",
+    "KRK",
+    "KUF",
+    "SPC",
+    "TER",
+    "LBA",
+    "LEJ",
+    "TLL",
+    "FCO",
+    "LGG",
+    "LPL",
+    "LJU",
+    "LGW",
+    "LHR",
+    "LTN",
+    "STN",
+    "LLA",
+    "LUX",
+    "LYS",
+    "BTS",
+    "AGP",
+    "MMX",
+    "MXP",
+    "MLA",
+    "MAN",
+    "MRS",
+    "LIN",
+    "MSQ",
+    "WMI",
+    "MUC",
+    "FMO",
+    "NAP",
+    "NCL",
+    "NCE",
+    "NWI",
+    "NUE",
+    "ODS",
+    "OSL",
+    "PMI",
+    "ORY",
+    "PSA",
+    "ROV",
+    "TGD",
+    "POZ",
+    "PRN",
+    "LED",
+    "AKT",
+    "BZZ",
+    "FFD",
+    "LKZ",
+    "MHZ",
+    "RMS",
+    "RIX",
+    "DSA",
+    "SCQ",
+    "SJJ",
+    "SNN",
+    "SVO",
+    "SIP",
+    "SKP",
+    "AER",
+    "SOF",
+    "SOU",
+    "SVG",
+    "ARN",
+    "STR",
+    "TFN",
+    "TFS",
+    "SKG",
+    "TIA",
+    "TLS",
+    "TSF",
+    "TOS",
+    "TRD",
+    "TRN",
+    "UFA",
+    "PRG",
+    "VAR",
+    "VCE",
+    "VRN",
+    "VIE",
+    "VNO",
+    "VKO",
+    "WAW",
+    "KJA",
+    "ZAG",
+    "ZIA",
+    "ZRH",
   ]
