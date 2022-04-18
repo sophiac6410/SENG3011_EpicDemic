@@ -5,8 +5,9 @@ const router = require("express").Router();
 const API = `api`;
 // This is AMADEUS client for getting authToken that we need to make actual call to amadeus API 
 const amadeus = new Amadeus({
-  clientId: "mGjZ7901nb0kV25dnkj2WZy1tEtLqVbp",
-  clientSecret: "zzyRaxseNwed0V0D"
+  clientId: 'LwLbO6Ao6Gq2AdfFXsGAGlNuLoy9l1Fb',
+  clientSecret: 'TRQA07tq1ZtPAZEg',
+  hostname: 'production'
 });
 
 // Endpoint
@@ -23,6 +24,23 @@ router.get(`/${API}/flight-search`, async (req, res) => {
         departureDate: dateOfDeparture,
         adults: adults,
         max: '10'
+    });
+    await res.header("Access-Control-Allow-Origin", "*");
+    await res.json(response.data);
+  } catch(err) {
+    await res.json(err);
+  }
+});
+
+router.get(`/${API}/activity-search`, async (req, res) => {
+  const lat = req.query.lat;
+  const lot = req.query.lot;
+  // Find the cheapest flights
+  try {
+    const response = await amadeus.shopping.activities.get({
+      latitude: lat,
+      longitude: lot,
+      radius: 20
     });
     await res.header("Access-Control-Allow-Origin", "*");
     await res.json(response.data);

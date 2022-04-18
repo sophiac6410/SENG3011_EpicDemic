@@ -29,6 +29,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import CountryField from './CountryField';
 import RegionField from './RegionField';
 import GetCities from './GetCities';
+import { GetActivities } from '../../adapters/activityAPI';
 //import GetActivities from './GetActivities';
 
 const style = {
@@ -230,6 +231,8 @@ function StepTwo({onClose}) {
   const [region, setRegion] = React.useState(null);
   const [city, setCity] = React.useState(null);
   const [cityOptions, setCityOptions] = React.useState([])
+  const [activityData, setActivityData] = React.useState([])
+
   const handleOpen = () => {
     setOpen(true);
     setStepThree(false)
@@ -264,7 +267,8 @@ function StepTwo({onClose}) {
     if (!region) {
       setRegion(regionOptions[0])
     }
-    // const activities = await GetActivities(data.data[index].latitude, data.data[index].longitude)
+    const activities = await GetActivities(data.data[index].latitude, data.data[index].longitude)
+    setActivityData(activities)
   };
 
   const handleCountry = async (country) => {
