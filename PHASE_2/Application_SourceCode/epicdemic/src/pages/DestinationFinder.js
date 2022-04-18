@@ -79,7 +79,7 @@ const DestinationFinder = () => {
                             country={dest.country}
                             updateDesc={dest.entry_description}
                             lastUpdated={getDate(dest.last_update)}
-                            travelStatus={dest.travel_status}
+                            travelStat={dest.travel_status}
                             saved={savedLocations.includes(dest.id)}
                             />
                             )
@@ -121,7 +121,7 @@ const DestinationFinder = () => {
                                     key={idx}
                                     country={popDest.country}
                                     arrivals={popDest.arrivals}
-                                    travelStatus={popDest.travelStatus}
+                                    travelStat={popDest.travelStatus}
                                     />
                                     )
                                 })}

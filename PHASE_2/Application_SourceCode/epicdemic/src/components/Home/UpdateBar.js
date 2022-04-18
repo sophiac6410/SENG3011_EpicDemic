@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Row, Col, Card, Container } from "react-bootstrap";
-// import "../../styles/Home.css"
+import { useNavigate, } from 'react-router-dom';
 import Typography from '@mui/material/Typography'
 import { Box } from "@mui/system";
 import PropTypes from 'prop-types';
@@ -13,6 +13,9 @@ function RestrictBox(props){
 	RestrictBox.propTypes = {text: PropTypes.string}
 	RestrictBox.propTypes = {date: PropTypes.string}
 	RestrictBox.propTypes = {type: PropTypes.string}
+	RestrictBox.propTypes = {code: PropTypes.string}
+
+	let navigate = useNavigate(); 
 	return (
 		<Row className="mt-2 mb-3 py-3 px-4 border-radius-small" style={{backgroundColor: props.bgColor, boxShadow: '0px 1px 5px #CCCCCC'}}>
 			<div className="justify-content-start mb-2">
@@ -20,7 +23,11 @@ function RestrictBox(props){
 			</div>
 			<Box sx={{ display: 'flex'}}>
 				<Typography variant="caption" sx={{color: props.fontC, flex: 1, justifyContent: 'flex-start', textAlign: 'left' }}>{props.date}</Typography>
-				<Typography variant="caption" sx={{color: props.fontC, flex: 1, justifyContent: 'flex-end', textAlign: 'right', textDecoration: 'underline'}}>See more</Typography>
+				<Typography variant="caption" sx={{color: props.fontC, flex: 1, justifyContent: 'flex-end', textAlign: 'right', textDecoration: 'underline', cursor: 'pointer'}}
+					onClick={() => {
+						navigate(`/destination/${props.code}/travel`)
+					}}
+				>See more</Typography>
 			</Box>
 		</Row>
 	);
@@ -65,6 +72,7 @@ function UpdateBar() {
                             text={updates.text}
                             date={getDateString(updates.date)}
 							type={updates.collection_type}
+							code={updates.location_id}
                             />
                         )
                     })}
@@ -81,6 +89,7 @@ function UpdateBar() {
                             text={updates.text}
                             date={getDateString(updates.date)}
 							type={updates.collection_type}
+							code={updates.location_id}
                             />
                         )
                     })}

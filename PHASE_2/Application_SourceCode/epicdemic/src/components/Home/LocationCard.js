@@ -4,7 +4,7 @@ import CircleIcon from '@mui/icons-material/Circle';
 import { useNavigate, } from 'react-router-dom';
 import React, { useEffect } from "react";
 import { Typography } from "@mui/material";
-import {colorScore} from "../../styles/Theme";
+import { travelStatus, travelStatusColor, adviceLevel, adviceLevelColor } from "../../styles/Theme";
 import { getDestination } from "../../apiCalls";
   
 function LocationCard({id}) {
@@ -14,11 +14,21 @@ function LocationCard({id}) {
   }
 
   const [country, setCountry] = React.useState('');
+  const [travelStatusText, setTravelStatusText] = React.useState('');
+  const [adviceLevelText, setAdviceLevelText] = React.useState('');
+  const [travelColor, setTravelColor] = React.useState('');
+  const [adviceColor, setAdviceColor] = React.useState('');
+  
+  
 
   useEffect(() => {
     async function fetchData () {
       const data = await getDestination(id);
       setCountry(data.country);
+      setTravelStatusText(travelStatus(data.travel_status));
+      setAdviceLevelText(adviceLevel(data.advice_level));
+      setTravelColor(travelStatusColor(data.travel_status));
+      setAdviceColor(adviceLevelColor(data.advice_level));
     }
     fetchData();
   }, []);
@@ -33,9 +43,9 @@ function LocationCard({id}) {
           <Typography variant="bodyText">Overall Advice</Typography>
         </Card.Subtitle>
         <Row className="align-items-center pt-1 justify-content-start" style={{marginBottom: '10px'}}>
-          <Col>
-            <SimCardAlertIcon className="color-yellow" sx={{ fontSize: 30, mx: 1 }}></SimCardAlertIcon>
-            <Typography variant="bodyImportant" sx={{display: 'inline'}}>Exercise Caution</Typography>
+          <Col className="d-flex">
+            <SimCardAlertIcon sx={{ fontSize: 30, mx: 1, mt: 1, color: adviceColor, display: 'flex' }}></SimCardAlertIcon>
+            <Typography variant="bodyImportant" sx={{display: 'flex'}}>{adviceLevelText}</Typography>
           </Col>
         </Row>
         <Card.Subtitle className="pt-2 text-muted">
@@ -43,8 +53,8 @@ function LocationCard({id}) {
         </Card.Subtitle>
         <Row className="align-items-center pt-1 justify-content-start">
           <Col>
-            <CircleIcon className="color-yellow" sx={{ fontSize: 15, mx: 2 }}></CircleIcon>
-            <Typography variant="bodyImportant" sx={{display: 'inline'}}>Open with Restrictions</Typography>
+            <CircleIcon sx={{ fontSize: 15, mx: 2, color: travelColor }}></CircleIcon>
+            <Typography variant="bodyImportant" sx={{display: 'inline'}}>{travelStatusText}</Typography>
           </Col>
         </Row>
         <Row className="pt-2 text-muted">
