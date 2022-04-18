@@ -2,7 +2,7 @@ from dotenv import dotenv_values
 from os import access
 from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
-from routers import locations, reports, articles, users, updates, cases
+from routers import locations, reports, articles, users, updates, cases, trips
 import uvicorn
 import time
 from datetime import datetime
@@ -21,6 +21,7 @@ app = FastAPI(
 origins = [
     "http://localhost",
     "http://localhost:3000",
+    "http://localhost:3001",
 ]
 
 app.add_middleware(
@@ -77,6 +78,7 @@ app.include_router(users.router)
 app.include_router(locations.router)
 app.include_router(updates.router)
 app.include_router(cases.router)
+app.include_router(trips.router)
 
 @app.get('/', status_code=status.HTTP_200_OK, response_model=statusModels.HealthCheckResponse, tags=["status"])
 async def index():

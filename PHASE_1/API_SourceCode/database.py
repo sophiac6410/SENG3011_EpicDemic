@@ -27,4 +27,5 @@ diseaseLocations_col = db["DiseaseLocations"]
 updates_col = db["Updates"]
 safety_col = db["Safety"]
 travel_col = db["Travel"]
-
+trip_col = db["Trips"]
+tripCities_col = db["TripCities"]
