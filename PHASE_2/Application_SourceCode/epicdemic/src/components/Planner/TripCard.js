@@ -55,31 +55,14 @@ const responsive = {
   }
 };
 
-function TripCard() {
+function TripCard({name, tripId, latitude, longitude, activities}) {
+  console.log(activities)
   return(
     <Box style={cardStyle} sx={{width: "90%"}}>
-      {/* <Row>
-        <Col className="align-content-center">
-          <Row className="justify-content-start align-items-center">
-            <Col md={1}>
-              <LocationCityIcon color="teal"></LocationCityIcon>
-            </Col>
-            <Col>
-              <Typography variant="bodyImportant" className="color-medium-teal">Paris, France</Typography>
-            </Col>
-          </Row>
-        </Col>
-        <Col>
-          <TealBotton>View travel details</TealBotton>
-          <IconButton>
-            <DeleteOutline color="teal" fontSize="large"></DeleteOutline>
-          </IconButton>
-        </Col>
-      </Row> */}
       <div className="d-flex flex-row justify-content-between">
         <div className="d-flex flex-row align-items-center">
           <LocationCityIcon color="teal"></LocationCityIcon>
-          <Typography variant="bodyHeading" className="color-medium-teal ms-2">Paris, France</Typography>
+          <Typography variant="bodyHeading" className="color-medium-teal ms-2">{name}</Typography>
         </div>
         <div className="d-flex flex-row">
           <TealBotton>View travel details</TealBotton>

@@ -255,7 +255,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
     setStepThree(false);
   };
   const handleClose = async () => {
-    const data = await addCityToTrip(city.name, lat, long, country.code);
+    const data = await addCityToTrip(city.name, lat, long, country.code, country.name);
     // setCityId(data["id"])
     setAdded(true)
   };
@@ -299,6 +299,13 @@ function StepTwo({onClose, name, start, end, travellers}) {
     setCityOptions(data.data)
   }
 
+  const handleCity = async (city) => {
+    setCity(city)
+    setStepThree(true)
+    setAdded(false)
+    const data = await addCityToTrip(city.name, lat, long, country.code, country.name);
+  }
+
   let navigate = useNavigate()
   const saveTrip = () => {
     navigate('/trip/1')
@@ -338,7 +345,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
             <Divider orientation="vertical" flexItem  variant="middle" flex />
             <LocationCityIcon  sx={{marginTop: "10px", marginRight: "5px"}} color='teal'></LocationCityIcon>
             <FormControl variant="standard" sx={{ width: '40' }} color="teal">
-            <RegionField options={cityOptions} placeholder='City' width={280} value={city} handleInput={(e, v) => setCity(v)}></RegionField>
+            <RegionField options={cityOptions} placeholder='City' width={280} value={city} handleInput={(e, v) => handleCity(v)}></RegionField>
             </FormControl>
           </Box>
           <div style={{display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center"}} className="mt-2">

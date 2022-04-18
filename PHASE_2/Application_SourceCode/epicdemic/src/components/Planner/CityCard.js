@@ -28,7 +28,7 @@ const cardStyle = {
   },
 };
 
-function SavedCard() {
+function CityCard() {
   return(
     <Box style={cardStyle} sx={{width: "90%"}}>
       <Row className='align-items-center'>
@@ -75,4 +75,4 @@ function SavedCard() {
   )
 }
 
-export default SavedCard
+export default CityCard
