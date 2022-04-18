@@ -11,7 +11,7 @@ import '../styles/Covid.css'
 import Typography from '@mui/material/Typography';
 import CovidStat from "../static/philStats.png"
 import CovidTabs from "../components/Diseases/CovidTabs";
-import DiseaseReportBar from "../components/Home/DiseaseReportBar";
+import DiseaseReportBar from "../components/Diseases/DiseaseReportBar";
 import NavbarComp from "../components/NavBar";
 
 function Covid() {
@@ -23,7 +23,7 @@ function Covid() {
     if (code == null) return;
 
     async function fetchData() {
-      const trend = await fetch('https://disease.sh/v3/covid-19/historical/PHL?lastdays=all').then(res => res.json())
+      const trend = await fetch(`https://disease.sh/v3/covid-19/historical/${code}?lastdays=all`).then(res => res.json())
 
       const casesChartData = [];
 
@@ -133,7 +133,7 @@ function Covid() {
         </div>
       </Row>
     </Container>
-    <DiseaseReportBar></DiseaseReportBar>
+    <DiseaseReportBar code={code}></DiseaseReportBar>
     </>
   )
 }
