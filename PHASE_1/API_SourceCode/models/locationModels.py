@@ -110,7 +110,7 @@ class LocationTesting(BaseModel):
                     example="No")
 
 class LocationQuarantine(BaseModel):
-	duration: int = Field(..., description="Length (days) of the quarantine", 
+	duration: str = Field(..., description="Length (days) of the quarantine", 
                     example=10)
 	eligiblePerson: str = Field(..., description="Who are required to travel", 
                     example="Some travellers")
