@@ -10,6 +10,14 @@ import { Typography } from '@mui/material'
 import React, { useState, useEffect } from "react";
 import { NavLink, Outlet, useParams } from "react-router-dom"
 import { getFligtData } from '../adapters/flightAPI'
+import { getDestination, getIATA } from '../apiCalls'
+import { CitySelectPhilippines, CitySelectSydney } from '../components/Book/CitySelect'
+import { Row, Col } from 'react-bootstrap'
+import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
+import FlightLandIcon from '@mui/icons-material/FlightLand';
+import { TextField } from '@mui/material'
+import { TailSpin } from  'react-loader-spinner'
+// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 function handleClick() {
   const flightSection = document.getElementById('flight-title');
@@ -18,49 +26,173 @@ function handleClick() {
 
 function Book() {
   const { code } = useParams();
-  const [sourcedata, setSourceData] = useState([]);
-  const [search, setSearch] = useState({
+  const [departData, setDepartData] = useState([]);
+  const [returnData, setReturnData] = useState([]);
+
+  const [search, setSearch] = useState(null);
+
+  const [searchDe, setSearchDe] = useState({
     originCode: "SYD", 
-    destinationCode: "BKK", 
-    dateOfDeparture: "2022-05-01", 
+    dateOfDeparture: "2022-05-01",
     adults: 1
   });
+
+  const [searchRe, setSearchRe] = useState({
+    destinationCode: "SYD", 
+    dateOfDeparture: "2022-05-05",
+    adults: 1
+  });
+
+  // setSearch({destinationCode: dest})
+
   const [loading, setLoading] = React.useState(false)
 
   useEffect(() => {
     if(code == null) return
 
-    const {out, controller} = getFligtData(search)
+    async function getSearchData() {
+      const data = await getDestination(code);
+      const destination = await getIATA(data.latitude, data.longitude);
 
+      setSearch({
+        originCode: "SYD",
+        destinationCode: destination, 
+        dateOfDeparture: "2022-05-01",
+        dateOfReturn: "2022-05-05",
+        adults: 1
+      })
+    }
+    getSearchData()
+  }, [code])
+
+
+  useEffect(() => {
+    async function updateSearch() {
+      // setSearch({destinationCode: dest})
+      setSearchDe({
+        originCode: search.originCode,
+        destinationCode: search.destinationCode, 
+        dateOfDeparture: search.dateOfDeparture,
+        adults: 1
+      })
+      // setSearch({destinationCode: dest})
+      setSearchRe({
+        originCode: search.destinationCode,
+        destinationCode: search.originCode, 
+        dateOfDeparture: search.dateOfReturn,
+        adults: 1
+      })
+    }
+    updateSearch()
+  }, [search])
+
+
+  // useEffect(() => {
+  //   var {out, controller} = getFligtData(searchDe)
+  //   out.then(res => {
+  //     console.log(res.data)
+  //     setDepartData(res.data); // dispatching data to components state
+  //     setLoading(false)
+  //   }).catch(err => {
+  //     console.log(err)
+  //     setLoading(false)
+  //   });
+  // }, [searchDe])
+
+  // useEffect(() => {
+  //   var {out, controller} = getFligtData(searchRe)
+  //   out.then(res => {
+  //     console.log(res.data)
+  //     setReturnData(res.data); // dispatching data to components state
+  //     setLoading(false)
+  //   }).catch(err => {
+  //     console.log(err)
+  //     setLoading(false)
+  //   });
+  // }, [searchRe])
+
+  const searchFlight = async() => {
+    setLoading(true)
+    var {out, controller} = getFligtData(searchDe)
     out.then(res => {
-      // If we send too many request to the api per second - we will get an error and app will break
-      // Therefore we implemented simple check to prevent error on client side.
-      console.log(res)
-      setData(res); // dispatching data to components state
+      console.log(res.data)
+      setDepartData(res.data); // dispatching data to components state
+    }).catch(err => {
+      console.log(err)
+      setLoading(false)
+    });
+    var {out, controller} = getFligtData(searchRe)
+    out.then(res => {
+      console.log(res.data)
+      setReturnData(res.data); // dispatching data to components state
       setLoading(false)
     }).catch(err => {
       console.log(err)
       setLoading(false)
     });
-    // controller.abort()
-  }, [code, search])
+  }
 
-  if(sourcedata == []) {
+  const handleDate = ((prop) => (event) => {
+    setSearch({...search, [prop]: event.target.value})
+  })
+
+  if(search == null) {
     return <div/>
   }
   return(
     <div className="mt-5" style={{margin: '0% 15%', width: 'auto'}}>
       <Typography variant="heading2">Book</Typography>
-      <FlightSearch></FlightSearch>
-      <DarkButton sx={{display: 'flex', marginX: 'auto', mb: 7, mt: 3}}>Find My Flight</DarkButton>
+      <Row style={{display: 'flex'}}>
+        <Col md={1} style={{width: 'auto'}}>
+          <FlightTakeoffIcon className="color-dark-teal mt-3" fontSize="large"/>
+        </Col>
+        <Col md={2} className="bg-white search-container p-1 ps-2 pe-3" style={{flex: 1}}>
+          <CitySelectSydney fieldLabel={"From"}></CitySelectSydney>
+        </Col>
+        <Col md={1} style={{width: 'auto'}}>
+          <FlightLandIcon className="color-dark-teal mt-3" fontSize="large" />
+        </Col>
+        <Col md={2} className="bg-white search-container p-1 ps-2 pe-3" style={{flex: 1}}>
+          <CitySelectPhilippines fieldLabel={"Destination"} city={search.destinationCode}></CitySelectPhilippines>
+        </Col>
+        <Col md={1}></Col>
+        <Col md={2} style={{flex: 1}}>
+          <TextField
+            id="departure-date"
+            label="Departure Date"
+            type="date"
+            value={search.dateOfDeparture}
+            onChange={handleDate('dateOfDeparture')}
+            defaultValue="2022-04-05"
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        </Col>
+        <Col md={2} style={{flex: 1}}>
+          <TextField
+            id="return-date"
+            label="Return Date"
+            type="date"
+            value={search.dateOfReturn}
+            onChange={handleDate('dateOfReturn')}
+            defaultValue="2022-04-06"
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        </Col>
+      </Row>
+      <DarkButton onClick={searchFlight} sx={{display: 'flex', marginX: 'auto', mb: 7, mt: 3}}>Find My Flight</DarkButton>
       {/* <button id='book-search' class='btn-base btn-dark btn-flight' onClick={handleClick}>Find My Flight</button> */}
       <hr size="3" width="100%" color="grey"></hr>
       <Typography variant="heading2" sx={{display: 'block', margin: '2% 0%'}}>Flights</Typography>
-      <div style={{
-        display: 'flex',
-      }}>
-        <FlightFilter></FlightFilter>
-        <FlightTabs></FlightTabs>
+      <div className='d-flex flex-row'>
+        <FlightFilter className="col-3"></FlightFilter>
+        {/* <div style={{display: loading ? "block" : "none"}}>
+          <TailSpin color="#70C4E8" height={80} width={80} />
+        </div> */}
+        <FlightTabs className="ms-5" loading={loading}Deflights={departData} Reflights={returnData} depart={search.originCode} dest={search.destinationCode}></FlightTabs>
       </div>
     </div>
   )

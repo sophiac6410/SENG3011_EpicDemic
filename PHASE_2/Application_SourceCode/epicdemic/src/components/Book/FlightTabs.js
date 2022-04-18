@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import FlightDeal from './FlightDeal';
+import { TailSpin } from  'react-loader-spinner'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -39,7 +40,7 @@ function a11yProps(index) {
   };
 }
 
-export default function FlightTabs() {
+export default function FlightTabs({Deflights, Reflights, depart, dest, loading}) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -55,34 +56,30 @@ export default function FlightTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0} style={{
-        height: '600px',
+        height: '800px',
         overflow: 'scroll'
       }}>
-        <div >
-          <FlightDeal></FlightDeal>
-          <FlightDeal></FlightDeal>
-          <FlightDeal></FlightDeal>
-          <FlightDeal></FlightDeal>
-          <FlightDeal></FlightDeal>
-          <FlightDeal></FlightDeal>
-          <FlightDeal></FlightDeal>
-          <FlightDeal></FlightDeal>
-          <FlightDeal></FlightDeal>
+        <div style={{display: loading ? "flex" : "none"}} className="flex-row justify-content-center align-items-center">
+          <TailSpin color='#70C4E8'></TailSpin>
+        </div>
+        <div style={{display: loading ? "none" : "block"}}>
+          {Deflights.map((flight)=> 
+            <FlightDeal key={flight.id} data={flight} depart={depart} dest={dest}></FlightDeal>
+          )}
         </div>
       </TabPanel>
       <TabPanel value={value} index={1} style={{
         height: '600px',
         overflow: 'scroll'
       }}>
-      <FlightDeal></FlightDeal>
-        <FlightDeal></FlightDeal>
-        <FlightDeal></FlightDeal>
-        <FlightDeal></FlightDeal>
-        <FlightDeal></FlightDeal>
-        <FlightDeal></FlightDeal>
-        <FlightDeal></FlightDeal>
-        <FlightDeal></FlightDeal>
-        <FlightDeal></FlightDeal>
+        <div style={{display: loading ? "flex" : "none"}} className="flex-row justify-content-center align-items-center">
+          <TailSpin color='#70C4E8'></TailSpin>
+        </div>
+        <div style={{display: loading ? "none" : "block"}}>
+          {Reflights.map((flight)=> 
+            <FlightDeal key={flight.id} data={flight} depart={depart} dest={dest}></FlightDeal>
+          )}
+        </div>
       </TabPanel>
     </Box>
   );

@@ -93,3 +93,14 @@ export const getAllLocations = async () => {
       console.log(e);
     }
 }
+
+
+export const getIATA = async(lat, lot) => {
+    try{
+        const response = await fetch(`https://iatageo.com/getCode/${lat}/${lot}`).then((res) => res.json())
+        const data = await response
+        return data.IATA
+    }catch(e) {
+        console.log(e)
+    }
+}
