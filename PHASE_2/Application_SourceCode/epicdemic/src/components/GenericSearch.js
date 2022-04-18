@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
       fontFamily: "Open Sans, sans-serif",
       fontStyle: "normal",
       fontWeight: 500,
-      fontSize: "1em",
+      fontSize: "0.9em",
       marginBottom: "6px",
     //   width: "90%"
     }
@@ -42,14 +42,7 @@ const GenericSearch = ({ fieldLabel, options, handleInput }) => {
                     getOptionLabel={(option) => option.label}
                     renderOption={(props, option) => (
                         <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-                            <img
-                            loading="lazy"
-                            width="20"
-                            src={`${option.imageUrl}`}
-                            srcSet={`${option.imageUrl}`}
-                            alt=""
-                            />
-                            {option.label} ({option.code})
+                            {option.label}
                         </Box>
                     )}
                     renderInput={(params) => (
