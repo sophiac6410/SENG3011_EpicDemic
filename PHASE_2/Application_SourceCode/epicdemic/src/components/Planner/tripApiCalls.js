@@ -19,7 +19,6 @@ export const createTrip = async (name, start_date, end_date, travellers) => {
     });
     const data = await response.json();
     if (response.status !== 200) {
-      console.log("hmmm")
       console.log(data)
       alert(data.data.error);
     } else {
@@ -31,12 +30,30 @@ export const createTrip = async (name, start_date, end_date, travellers) => {
 }
 
 export const getSavedTrips = async () => {
-  
+  try {
+    const response = await fetch(`${API_URL.API_URL}/v1/trips/trips`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      },
+    });
+    const data = await response.json();
+    if (response.status !== 200) {
+      console.log(data)
+      alert(data.data.error);
+    } else {
+      return (data)
+    }
+  } catch (e) {
+      console.log(e)
+  }
 }
 
 export const addCityToTrip = async (name, latitude, longitude, country_code) => {
+  console.log(name, latitude, longitude, country_code)
   try {
-    const response = await fetch(`${API_URL.API_URL}/v1/trips/trips/new/city`, {
+    const response = await fetch(`${API_URL.API_URL}/v1/trips/new/city`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -58,6 +75,31 @@ export const addCityToTrip = async (name, latitude, longitude, country_code) => 
     } else {
       return (data)
     }
+  } catch (e) {
+      console.log(e)
+  }
+}
+
+export const addActivityToCity = async (activityId, cityId, tripId) => {
+  try {
+    const response = await fetch(`${API_URL.API_URL}/v1/trips/new/activity`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      },
+      Activity: JSON.stringify({
+        tripId: tripId,
+        cityId: cityId,
+        activityId: activityId,
+      }),
+    });
+    const data = await response.json();
+    if (response.status !== 200) {
+      console.log(data)
+      console.log(response)
+    } 
+    console.log(data)
   } catch (e) {
       console.log(e)
   }
