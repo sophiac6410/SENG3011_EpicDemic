@@ -427,6 +427,7 @@ function ActivityModal({fromTrip}) {
   let navigate = useNavigate()
   const saveTrip = () => {
     navigate('/trip/1')
+    //navigate(`/trip/${tripId}`)
   }
 
   return(
