@@ -29,7 +29,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import CountryField from './CountryField';
 import RegionField from './RegionField';
 import GetCities from './GetCities';
-// import GetActivities from './GetActivities';
+import GetActivities from './GetActivities';
 
 const style = {
   position: 'absolute',
@@ -264,7 +264,7 @@ function StepTwo({onClose}) {
     if (!region) {
       setRegion(regionOptions[0])
     }
-    // const activities = await GetActivities(data.data[index].latitude, data.data[index].longitude)
+    const activities = await GetActivities(data.data[index].latitude, data.data[index].longitude)
   };
 
   const handleCountry = async (country) => {
