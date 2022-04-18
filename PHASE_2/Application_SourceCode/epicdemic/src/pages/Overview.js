@@ -26,37 +26,36 @@ const safetySource = "The safety and security ratings determined by GeoSure GeoS
 const covidSource = <p>Health advice is continually changing as we learn more about COVID-19 and new variants are discovered. Rules and restrictions to prevent outbreaks can change quickly. It’s important to regularly check the rules in the destinations you’re travelling to and transiting through, as well as the requirements at the Australian border. These may differ between state and territory jurisdictions.
 <br /> <br />Read the Australian Government’s global health advisory and step-by-step guide to travel during COVID-19 for more information.</p>
 
-const safetyDis = [
-  {title: "MEDICAL", text: "Likelihood of illness or disease, assessment of water and air quality, and access to reliable medical care", score: 34},
-  {title: "WOMEN", text: "Likelihood of inappropriate behavior against females", score: 0},
-  {title: "PHYSICAL HARM", text: "Likelihood of injury due to harmful intent", score: 36},
-  {title: "THEFT", text: "Likelihood of theft", score: 36},
-  {title: "POLITICAL FREEDOM", text: "Potential for infringement of political rights or political unrest", score: 50},
-  {title: "LGBTQ", text: "Likelihood of harm or discrimination against LGBTQ persons or groups and level of caution required at location", score: 39}
-]
-
-const SafetyBoard = safetyDis.map(function(props) {
-    const bgColor = colorScore(props.score);
-    return(
-      <Row className="ps-5 mt-4 align-items-center">
-        <Col>
-          <Typography variant="bodyImportant" className="color-medium-teal">{props.title}</Typography>
-          <div>
-            <Typography variant="bodyText">{props.text}</Typography>
-          </div>
-        </Col>
-        <Col md={1}>
-          <div style={{color: "white", backgroundColor: bgColor}} className="text-center border-radius-med">
-            <Typography variant="bodyImportant">{props.score}</Typography>
-          </div>
-        </Col>
-      </Row>
-    )
-});
+const SafetyBoard = (safetyDis) => {
+  console.log("inside safety board")
+  console.log(safetyDis);
+  return (
+    <>
+      {safetyDis.map((v, i) => {
+        return (
+          <Row className="ps-5 mt-4 align-items-center">
+            <Col>
+              <Typography variant="bodyImportant" className="color-medium-teal">{v.title}</Typography>
+              <div>
+                <Typography variant="bodyText">{v.text}</Typography>
+              </div>
+            </Col>
+            <Col md={1}>
+              <div style={{color: "white", backgroundColor: colorScore(v.score)}} className="text-center border-radius-med">
+                <Typography variant="bodyImportant">{v.score}</Typography>
+              </div>
+            </Col>
+          </Row>
+        )
+      })}
+    </>
+  )
+}
 
 function Overview() {
   const [data, setData] = useState(null);
   const [dest, setDest] = useState(null);
+  const [safetyData, setSafetyData] = useState(null);
   const { code } = useParams();
 
   useEffect(() => {
@@ -78,6 +77,25 @@ function Overview() {
       var total = vaccine.timeline[Object.keys(vaccine.timeline).pop()] / 3;
 
       newData["vaccinationPercentage"] = total * 100 / newData.population;
+
+      // Get the safety data too
+      const safety = await fetch(`http://127.0.0.1:8000/v1/locations/${code}/safety`).then(res => res.json())
+      var newSafety = [
+          {title: "MEDICAL", text: "Likelihood of illness or disease, assessment of water and air quality, and access to reliable medical care", score: 34},
+          {title: "WOMEN", text: "Likelihood of inappropriate behavior against females", score: 0},
+          {title: "PHYSICAL HARM", text: "Likelihood of injury due to harmful intent", score: 36},
+          {title: "THEFT", text: "Likelihood of theft", score: 36},
+          {title: "POLITICAL FREEDOM", text: "Potential for infringement of political rights or political unrest", score: 50},
+          {title: "LGBTQ", text: "Likelihood of harm or discrimination against LGBTQ persons or groups and level of caution required at location", score: 39}
+      ];
+
+      newSafety[0].score = safety.data.medical;
+      newSafety[1].score = safety.data.women;
+      newSafety[2].score = safety.data.physical_harm;
+      newSafety[3].score = safety.data.theft;
+      newSafety[4].score = safety.data.political_freedom;
+      newSafety[5].score = safety.data.lgbtq;
+      setSafetyData(newSafety);
 
       setData(newData);
 
@@ -105,7 +123,7 @@ function Overview() {
     return [dest.latitude, dest.longitude];
   }
 
-  if (data == null || dest == null) {
+  if (data == null || dest == null || safetyData == null) {
     return (
       <div/>
     )
@@ -192,7 +210,7 @@ function Overview() {
           <Row><Typography variant="bodyText" sx={{textAlign: 'center'}}>OVERALL SAFETY RATING</Typography></Row>
         </Col>
       </Row>
-      <ul>{SafetyBoard}</ul>
+      <ul>{SafetyBoard(safetyData)}</ul>
       <Typography variant="caption" className="mt-5 mb-5">{safetySource}</Typography>
       <Typography variant="heading2" className="mb-4 mt-5 pt-4">COVID-19 Statistics</Typography>
       <Row className="mb-5 justify-content-start">
