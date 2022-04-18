@@ -14,13 +14,13 @@ except Exception as e:
     print(e.message)
     exit(1)
 
-# db = client["epicdemic_db"]
+disease_db = client["epicdemic_db"]
 db = client["parser_test_db"]
 
-articles_col = db["Articles"]
-reports_col = db["Reports"]
-diseases_col = db["Diseases"]
-syndromes_col = db["Syndromes"]
+articles_col = disease_db["Articles"]
+reports_col = disease_db["Reports"]
+diseases_col = disease_db["Diseases"]
+syndromes_col = disease_db["Syndromes"]
 users_col = db['Users']
 locations_col = db["Locations"]
 diseaseLocations_col = db["DiseaseLocations"]
