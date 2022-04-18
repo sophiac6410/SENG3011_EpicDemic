@@ -29,6 +29,7 @@ class City(BaseModel):
     longitude: float = Field(..., description="The longitude of the city", example=48.8566)
     start_date: datetime = Field(..., description="The date of arrival in the city", example='2022-07-01T00:00:00.000+00:00')
     end_date: datetime = Field(..., description="The date of departure from the city", example='2022-10-01T00:00:00.000+00:00')
+    country_name: str = Field(..., description="The name of the country", example='France')
     country_code: str = Field(..., description="The ISO code of the city's country", example="FR")
 
 class Activity(BaseModel):
@@ -57,6 +58,7 @@ async def get_saved_trips (
                     "start_date": 1,
                     "end_date": 1,
                     "country_code": 1,
+                    "country_name": 1,
                     "activities": 1
                 }
             )
@@ -133,6 +135,7 @@ async def add_new_city_to_trip (
         "start_date": city.start_date,
         "end_date": city.end_date,
         "country_code": city.country_code,
+        "country_code": city.country_name,
         "activities": []
     })
 

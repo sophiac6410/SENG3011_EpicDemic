@@ -275,9 +275,9 @@ function StepTwo({onClose, name, start, end, travellers}) {
   };
   const [stepThree, setStepThree] = React.useState(false)
 
-  const handleCity = async (city) => {
+  /*const handleCity = async (city) => {
     setCity(city)
-  }
+  }*/
   const randomGenerator = async () => {
     setStepThree(true)
     
@@ -309,6 +309,13 @@ function StepTwo({onClose, name, start, end, travellers}) {
     setCityOptions(data.data)
   }
 
+  const handleCity = (city) => {
+    setCity(city)
+    setStepThree(true)
+    setAdded(false)
+    // const data = await addCityToTrip(city.name, lat, long, country.code, country.name);
+  }
+
   let navigate = useNavigate()
   const saveTrip = () => {
     navigate('/trip/1')
@@ -324,7 +331,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
         setActivity(res.data); // dispatching data to components state
       }).catch(err => {
         console.log(err)
-        setLoading(false)
+        // setLoading(false)
       });
     }
     updateActivity()
