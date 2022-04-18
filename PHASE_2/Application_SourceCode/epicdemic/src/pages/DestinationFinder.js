@@ -16,13 +16,18 @@ import { DarkButton, WhiteButton } from "../styles/Button";
 import NavbarComp from "../components/NavBar";
 import Typography from '@mui/material/Typography';
 import { getAllLocations, getUserSaved } from "../apiCalls";
-
+import { travelStatus } from "../styles/Theme";
 
 const DestinationFinder = () => {
     // const [infoRows, setInfoRows] = useState([]);
     const [destinations, setDestinations] = useState([]);
     const [popularDestinations, setPopularDestinations] = useState([]);
     const [savedLocations, setSavedLocations] = useState([]);
+    const [searchFilter, setSearchFilter] = useState({
+        "region": null,
+        "advice": null,
+        "travel": null,
+    });
 
     let navigate = useNavigate(); 
 
@@ -45,6 +50,12 @@ const DestinationFinder = () => {
 		return dateObj;
 	}
 
+    const updateSearch = (k, v) => {
+        var newSearch = {...searchFilter}
+        newSearch[k] = v;
+        setSearchFilter(newSearch);
+    }
+
     return (
         <div className="bg-off-white">
             <div className="bg-plane">
@@ -54,17 +65,17 @@ const DestinationFinder = () => {
                 </div>
                 <Row style={{margin: "3% 5% 1%"}} className="justify-content-center">
                     <Col className="pe-5 ps-5">
-                        <GenericSearch fieldLabel={"Region"} options={regionOptions}/>
+                        <GenericSearch fieldLabel={"Region"} options={regionOptions} handleInput={(e, v) => updateSearch("region", v)}/>
                     </Col>
                     <Col className="pe-5 ps-5">
-                        <GenericSearch fieldLabel={"Advice Level"} options={adviceLevelOptions}/>
+                        <GenericSearch fieldLabel={"Advice Level"} options={adviceLevelOptions} handleInput={(e, v) => updateSearch("advice", v)}/>
                     </Col>
                     <Col className="pe-5 ps-5">
-                        <GenericSearch fieldLabel={"Travel Status"} options={travelStatusOptions}/>
+                        <GenericSearch fieldLabel={"Travel Status"} options={travelStatusOptions} handleInput={(e, v) => updateSearch("travel", v)}/>
                     </Col>
                 </Row>
                 <div style={{paddingBottom: '5%'}}>
-                    <WhiteButton sx={{display: 'block', margin: 'auto', marginTop: '3%'}}>Search</WhiteButton>
+                    <WhiteButton onClick={() => console.log(searchFilter)} sx={{display: 'block', margin: 'auto', marginTop: '3%'}}>Search</WhiteButton>
                 </div>  
             </div>
             
@@ -73,17 +84,21 @@ const DestinationFinder = () => {
                 <HeaderInfoRow/>
                 <Container style={{height: '80vh', overflowY: 'scroll'}}>
                     {destinations.map((dest, idx) => {
-                        return (
-                            <InfoRow
-                            key={idx}
-                            code={dest.id}
-                            country={dest.country}
-                            updateDesc={dest.entry_description}
-                            lastUpdated={getDate(dest.last_update)}
-                            travelStat={dest.travel_status}
-                            saved={savedLocations.includes(dest.id)}
-                            />
+                        if (searchFilter.travel === null || searchFilter.travel.label === travelStatus(dest.travel_status)) {
+                            return (
+                                <InfoRow
+                                key={idx}
+                                code={dest.id}
+                                country={dest.country}
+                                updateDesc={dest.entry_description}
+                                lastUpdated={getDate(dest.last_update)}
+                                travelStat={dest.travel_status}
+                                saved={savedLocations.includes(dest.id)}
+                                />
                             )
+                        } else {
+                            return <></>
+                        }
                         })}
                     </Container>
                 {/* </Container> */}
