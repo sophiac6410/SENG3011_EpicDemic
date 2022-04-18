@@ -237,13 +237,13 @@ function StepTwo({onClose, name, start, end, travellers}) {
   const [lat, setLat] = React.useState(0.0000)
   const [long, setLong] = React.useState(0.0000)
   const [tripId, setTripId] = React.useState(1);
+  const [cityId, setCityId] = React.useState(1);
   const [back, setBack] = React.useState(false);
   const [added, setAdded] = React.useState(false);
 
   const handleOpen = async () => {
     
     if (!back) {
-      console.log("helloo")
       console.log(name, start, end, travellers)
       const start_date = new Date(start);
       const end_date = new Date(end);
@@ -254,9 +254,9 @@ function StepTwo({onClose, name, start, end, travellers}) {
     setOpen(true);
     setStepThree(false);
   };
-  const handleClose = () => {
-    console.log(name, lat, long, country.name, country.code)
-    addCityToTrip(name, lat, long, country.name, country.code);
+  const handleClose = async () => {
+    const data = await addCityToTrip(city.name, lat, long, country.code);
+    // setCityId(data["id"])
     setAdded(true)
   };
   const handleBack = () => {
