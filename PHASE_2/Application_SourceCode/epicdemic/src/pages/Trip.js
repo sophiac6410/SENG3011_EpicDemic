@@ -20,9 +20,8 @@ function Trip() {
   const [name, setName] = React.useState("")
   const [dates, setDates] = React.useState("")
   const [travellers, setTravellers] = React.useState(0)
-  const [cities, setCities] = React.useState([
-    data
-  ])
+  const [cities, setCities] = React.useState([])
+  const [activities, setActivities] = React.useState([])
   
   // useEffect(() => {
   //   async function fetchTrip () {
@@ -49,6 +48,7 @@ function Trip() {
       setDates(date1.getDate() + '/' + (date1.getMonth() + 1) + '/' + date1.getFullYear() + " - " + date2.getDate() + '/' + (date2.getMonth() + 1) + '/' + date2.getFullYear())
       setTravellers(data.travellers)
       setCities(data.cities)
+      setActivities(data.activities)
     }
     getTrip()
   },[tripId])

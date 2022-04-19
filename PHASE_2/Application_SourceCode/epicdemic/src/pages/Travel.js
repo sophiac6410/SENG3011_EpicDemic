@@ -237,24 +237,6 @@ function Travel(travelStat) {
               </Row>
             )}</div>
         </div>
-        <Row style={{"marginTop": "10vh", "marginBottom": "20vh"}}>
-          <Typography variant="heading2" className="color-dark-teal mb-3">Recommended Cities</Typography>
-          <HeaderInfoRow3/>
-          <Container fluid style={{overflowY: 'scroll', height: '60vh'}}>
-            {recCities.map((rec, idx) => {
-              return (
-                <InfoRow3
-                key={idx}
-                city={rec.city}
-                safetyRating={rec.safetyRating}
-                diseaseRisk={rec.diseaseRisk}
-                travelStatus={rec.travelStatus}
-                lockdown={rec.lockdown}
-                />
-                )
-              })}
-          </Container>
-        </Row>
       </Col>
     </Container>
   )
