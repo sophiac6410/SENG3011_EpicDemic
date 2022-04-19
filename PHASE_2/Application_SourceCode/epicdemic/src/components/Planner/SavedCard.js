@@ -7,6 +7,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { Col, Row } from 'react-bootstrap';
 import { IconButton } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { deleteTrip } from './tripApiCalls';
+import { useNavigate } from 'react-router';
 
 const cardStyle = {
   marginTop: "25px",
@@ -28,12 +31,29 @@ const cardStyle = {
   },
 };
 
-function SavedCard() {
+function SavedCard({name, start, end, travellers, tripId}) {
+  const [dateStr, setDateStr] = useState("")
+
+  useEffect(() => {
+    const date1 = new Date(start);
+    const date2 = new Date(end);
+    setDateStr(date1.getDate() + '/' + (date1.getMonth() + 1) + '/' + date1.getFullYear() + " - " + date2.getDate() + '/' + (date2.getMonth() + 1) + '/' + date2.getFullYear())
+  }, []);
+
+  const removeTrip = () => {
+    deleteTrip(tripId)
+  }
+
+  const goToTrip = () => {
+    navigate(`/trip/${tripId}`)
+  }
+  const navigate = useNavigate()
+
   return(
     <Box style={cardStyle} sx={{width: "90%"}}>
       <Row className='align-items-center'>
-        <Col md={4}>
-          <Typography variant="bodyImportant" className='color-medium-teal me-5'>Tiana’s Europe Adventures</Typography>
+        <Col md={4} onClick={goToTrip}>
+          <Typography variant="bodyImportant" className='color-medium-teal me-5'>{name}</Typography>
         </Col>
         <Col md={3}>
           <Row className='align-items-center'>
@@ -41,7 +61,7 @@ function SavedCard() {
               <DateRangeIcon color='teal'></DateRangeIcon>
             </Col>
             <Col>
-              <Typography variant="bodyText" className='color-medium-teal'>23/06/22 - 23/08/22</Typography>
+              <Typography variant="bodyText" className='color-medium-teal'>{dateStr}</Typography>
             </Col>
           </Row>
         </Col>
@@ -51,19 +71,19 @@ function SavedCard() {
               <PeopleOutlineIcon color='teal'></PeopleOutlineIcon>
             </Col>
             <Col>
-              <Typography variant="bodyText" className='color-medium-teal'>2 Travellers</Typography>
+              <Typography variant="bodyText" className='color-medium-teal'>{travellers} Travellers</Typography>
             </Col>
           </Row>
         </Col>
         <Col md={2}>
           <Row className='align-items-center'>
             <Col>
-              <IconButton className='me-4'>
+              <IconButton onClick={goToTrip} className='me-4'>
                 <EditIcon color='teal'></EditIcon>
               </IconButton>
             </Col>
             <Col>
-              <IconButton>
+              <IconButton onClick={removeTrip}>
                 <DeleteOutlineIcon color='teal'></DeleteOutlineIcon>
               </IconButton>
             </Col>

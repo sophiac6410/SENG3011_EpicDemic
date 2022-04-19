@@ -160,7 +160,7 @@ function App() {
               <Route path="/finder" element={<DestinationFinder/>}/>
               <Route path="/saved" element={<SavedLocations/>}/>
               <Route path="/planner" element={<Planner/>}/>
-              <Route path="/trip/:id" element={<Trip></Trip>}/>
+              <Route path="/trip/:tripId" element={<Trip></Trip>}/>
             </Routes>
           </BrowserRouter>
           <Footer></Footer>

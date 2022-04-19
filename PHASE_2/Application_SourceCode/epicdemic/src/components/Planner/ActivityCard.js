@@ -19,7 +19,13 @@ function ActivityCard({activity}) {
             {/* <StarIcon color="darkTeal" fontSize="15px"></StarIcon>
             <StarIcon color="darkTeal" fontSize="15px"></StarIcon>
             <StarIcon color="darkTeal" fontSize="15px"></StarIcon> */}
-            <Typography variant="bodyImportant" className="color-dark-teal me-3" sx={{fontWeight: 700}}>{Math.round((activity.rating) * 100) / 100}</Typography>
+            {
+              activity.rating ? (
+                <Typography variant="bodyImportant" className="color-dark-teal me-3" sx={{fontWeight: 700}}>{Math.round((activity.rating) * 100) / 100}</Typography>
+              ): (
+                <Typography variant="bodyText" className="color-dark-teal me-3">Not Available</Typography>
+              )
+            }
           </div>
           <Typography variant="bodyText" className="color-dark-teal" sx={{fontWeight: 700}}>${activity.price.amount} EUR</Typography>
         </div>
