@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { GetActivity } from "../../adapters/activityAPI";
 
-function BucketCard({id}) {
+function BucketCard({id, loading}) {
   const [data, setData] = useState(null)
 
   useEffect(()=> {
@@ -15,7 +15,7 @@ function BucketCard({id}) {
     }).catch(err => {
       console.log(err)
     });
-  },[id])
+  },[id, loading])
 
   if(data == null) {
     return(

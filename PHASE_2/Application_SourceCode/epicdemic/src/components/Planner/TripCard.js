@@ -59,6 +59,7 @@ const responsive = {
 
 function TripCard({name, tripId, latitude, longitude, city}) {
   const [activity, setActivity] = React.useState([])
+  const [loading, setLoading] = React.useState([])
 
   useEffect(() => {
     async function updateActivity() {
@@ -73,6 +74,7 @@ function TripCard({name, tripId, latitude, longitude, city}) {
       });
     }
     updateActivity()
+    setLoading(!loading)
   }, [city])
 
 
@@ -125,7 +127,7 @@ function TripCard({name, tripId, latitude, longitude, city}) {
             <Typography variant='caption' className='color-medium-teal me-3'>Add Some Activity</Typography>
           ):(
             city.activities.map((activityId) => 
-            <BucketCard id={activityId}></BucketCard>
+            <BucketCard id={activityId} loading={loading}></BucketCard>
           )
         )
         }
