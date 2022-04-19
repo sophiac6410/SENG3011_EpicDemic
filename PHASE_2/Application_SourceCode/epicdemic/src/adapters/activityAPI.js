@@ -27,3 +27,15 @@ export const GetActivities = params => {
 
   return { out, controller }
 };
+
+export const GetActivity = params => {
+  const { id } = params;
+  const out = axios.get(
+    `http://localhost:8080/api/activity-by-id/?id=${id}`,
+    {
+      signal: controller.signal
+    }
+  )
+
+  return { out, controller }
+};

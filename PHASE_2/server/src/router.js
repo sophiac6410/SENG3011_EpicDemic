@@ -49,3 +49,15 @@ router.get(`/${API}/activity-search`, async (req, res) => {
   }
 });
 module.exports = router;
+
+router.get(`${API}/activity-by-id`, async (req, res) => {
+  const id = req.query.id;
+  try {
+    const response = await amadeus.shopping.activity(id).get()
+    await res.header("Access-Control-Allow-Origin", "*");
+    await res.json(response.data);
+  } catch (err) {
+    await res.json(err);
+  }
+});
+module.exports = router;
