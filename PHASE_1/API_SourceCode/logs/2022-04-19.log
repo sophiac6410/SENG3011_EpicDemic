@@ -12274,3 +12274,16 @@
     Process Time: 0.12441301345825195
     ----------------------------------------
     
+    Timestamp: 1650335896.315757
+    Accessed Time: 2022-04-19 12:38:16.315757
+    Client: 127.0.0.1:49321
+    
+    Request: GET /v1/trips/16
+    Request Query Param: None
+    Request Path Param: 
+			tripId=16
+   
+    Response Code: 200
+    Process Time: 0.18797707557678223
+    ----------------------------------------
+    
