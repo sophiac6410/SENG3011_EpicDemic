@@ -13,6 +13,7 @@ import Carousel from "react-multi-carousel";
 import { ActivityModal } from "./PlannerModal";
 import React, { useState, useEffect } from "react";
 import { GetActivities } from '../../adapters/activityAPI';
+import { useNavigate } from 'react-router';
 
 const cardStyle = {
   marginTop: "25px",
@@ -57,9 +58,14 @@ const responsive = {
   }
 };
 
-function TripCard({name, tripId, latitude, longitude, city}) {
+function TripCard({name, tripId, latitude, longitude, city, country}) {
   const [activity, setActivity] = React.useState([])
   const [loading, setLoading] = React.useState([])
+  const navigate = useNavigate();
+  
+  const goToTravel = () => {
+    navigate(`/destination/${country}/travel`)
+  }
 
   useEffect(() => {
     async function updateActivity() {
@@ -86,7 +92,7 @@ function TripCard({name, tripId, latitude, longitude, city}) {
           <Typography variant="bodyHeading" className="color-medium-teal ms-2">{name}</Typography>
         </div>
         <div className="d-flex flex-row">
-          <TealBotton>View travel details</TealBotton>
+          <TealBotton onClick={goToTravel}>View travel details</TealBotton>
           <IconButton>
             <DeleteOutline color="teal"></DeleteOutline>
           </IconButton>
