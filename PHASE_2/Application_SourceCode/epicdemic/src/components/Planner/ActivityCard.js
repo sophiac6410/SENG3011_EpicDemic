@@ -36,7 +36,7 @@ function ActivityCard({activity}) {
           <div className="justify-content-end">
             <TealBotton className="mt-4 mb-4 ms-2" href={activity.bookingLink}>Book</TealBotton>
           </div>
-          <div className="justify-content-end">
+          <div className="justify-content-end mt-4">
             <IconButton className="d-flex flex-column">
               <FavoriteIcon color="teal"></FavoriteIcon>
               <Typography variant="bodySmall" className="color-medium-teal">Save to bucketlist</Typography>

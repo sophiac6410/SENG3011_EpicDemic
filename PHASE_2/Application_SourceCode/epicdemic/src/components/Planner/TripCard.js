@@ -11,6 +11,8 @@ import FlightIcon from '@mui/icons-material/Flight';
 import BucketCard from "./BucketCard";
 import Carousel from "react-multi-carousel";
 import { ActivityModal } from "./PlannerModal";
+import React, { useState, useEffect } from "react";
+import { GetActivities } from '../../adapters/activityAPI';
 
 const cardStyle = {
   marginTop: "25px",
@@ -55,8 +57,24 @@ const responsive = {
   }
 };
 
-function TripCard({name, tripId, latitude, longitude, activities}) {
-  console.log(activities)
+function TripCard({name, tripId, latitude, longitude}) {
+  const [activity, setActivity] = React.useState([])
+
+  useEffect(() => {
+    async function updateActivity() {
+      // setLoading(true)
+      var {out, controller} = await GetActivities({lat: city.latitude, lot: city.longitude})
+      out.then(res => {
+        console.log(res.data)
+        setActivity(res.data); // dispatching data to components state
+      }).catch(err => {
+        console.log(err)
+        // setLoading(false)
+      });
+    }
+    updateActivity()
+  }, [latitude, longitude])
+
   return(
     <Box style={cardStyle} sx={{width: "90%"}}>
       <div className="d-flex flex-row justify-content-between">
@@ -76,7 +94,7 @@ function TripCard({name, tripId, latitude, longitude, activities}) {
           <AddCircleIcon color="teal"></AddCircleIcon>
         </IconButton>
         <Typography variant='caption' className='color-medium-teal me-3'>Add dates</Typography>
-        <ActivityModal fromTrip={true}></ActivityModal>
+        <ActivityModal fromTrip={true} activities={activity}></ActivityModal>
         <IconButton sx={{paddingRight: "5px"}}>
           <FlightIcon sx={{marginRight: "5px"}} color='teal'></FlightIcon>
         </IconButton>
