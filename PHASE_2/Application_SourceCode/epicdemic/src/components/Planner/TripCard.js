@@ -57,7 +57,7 @@ const responsive = {
   }
 };
 
-function TripCard({name, tripId, latitude, longitude}) {
+function TripCard({name, tripId, latitude, longitude, city}) {
   const [activity, setActivity] = React.useState([])
 
   useEffect(() => {
@@ -73,7 +73,8 @@ function TripCard({name, tripId, latitude, longitude}) {
       });
     }
     updateActivity()
-  }, [latitude, longitude])
+  }, [city])
+
 
   return(
     <Box style={cardStyle} sx={{width: "90%"}}>
@@ -94,7 +95,7 @@ function TripCard({name, tripId, latitude, longitude}) {
           <AddCircleIcon color="teal"></AddCircleIcon>
         </IconButton>
         <Typography variant='caption' className='color-medium-teal me-3'>Add dates</Typography>
-        <ActivityModal fromTrip={true} activities={activity}></ActivityModal>
+        <ActivityModal fromTrip={true} activities={activity} tripId={tripId} city={city}></ActivityModal>
         <IconButton sx={{paddingRight: "5px"}}>
           <FlightIcon sx={{marginRight: "5px"}} color='teal'></FlightIcon>
         </IconButton>
@@ -119,11 +120,15 @@ function TripCard({name, tripId, latitude, longitude}) {
         centerMode={true}
         // className="bg-light-teal"
       >
-        <BucketCard></BucketCard>
-        <BucketCard></BucketCard>
-        <BucketCard></BucketCard>
-        <BucketCard></BucketCard>
-        <BucketCard></BucketCard>
+        {
+          city.activities.length == 0 ? (
+            <Typography variant='caption' className='color-medium-teal me-3'>Add Some Activity</Typography>
+          ):(
+            city.activities.map((activityId) => 
+            <BucketCard id={activityId}></BucketCard>
+          )
+        )
+        }
       </Carousel>
     </Box>
   )

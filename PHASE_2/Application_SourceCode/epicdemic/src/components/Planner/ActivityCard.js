@@ -4,8 +4,27 @@ import { Typography } from "@mui/material";
 import { TealBotton } from "../../styles/Button";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import StarIcon from '@mui/icons-material/Star';
+import React, { useState, useEffect } from "react";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { addActivityToCity } from "./tripApiCalls";
 
-function ActivityCard({activity}) {
+function ActivityCard({activity, cityId, tripId}) {
+  const [save, setSave] = React.useState(false)
+
+  const handleSave = () => {
+    setSave(!save)
+  }
+  useEffect(()=>{
+    async function saveActivity(){
+      console.log(activity.id)
+      console.log(cityId)
+      console.log(tripId)
+      const response = await addActivityToCity(activity.id, cityId, tripId)
+      console.log(response)
+    }
+    saveActivity()
+  }, [save])
+
   return(
     <div className="border-radius-med flex-column m-2 col-3 bg-light-blue" style={{width: 'auto', maxHeight: "700px", overflow: "auto"}}>
       <div>
@@ -37,8 +56,14 @@ function ActivityCard({activity}) {
             <TealBotton className="mt-4 mb-4 ms-2" href={activity.bookingLink}>Book</TealBotton>
           </div>
           <div className="justify-content-end mt-4">
-            <IconButton className="d-flex flex-column">
-              <FavoriteIcon color="teal"></FavoriteIcon>
+            <IconButton className="d-flex flex-column" onClick={handleSave}>
+              {
+                save ? (
+                  <FavoriteIcon color="teal"></FavoriteIcon>
+                ) : (
+                  <FavoriteBorderIcon color="teal"></FavoriteBorderIcon>
+                )
+              }
               <Typography variant="bodySmall" className="color-medium-teal">Save to bucketlist</Typography>
             </IconButton>
           </div>

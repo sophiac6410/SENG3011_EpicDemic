@@ -91,9 +91,9 @@ export const addActivityToCity = async (activityId, cityId, tripId) => {
         Authorization: localStorage.getItem('token')
       },
       body: JSON.stringify({
-        tripId: tripId,
-        cityId: cityId,
-        activityId: activityId,
+        tripId,
+        cityId,
+        activityId,
       }),
     });
     const data = await response.json();
