@@ -22,6 +22,7 @@ function Trip() {
   const [travellers, setTravellers] = React.useState(0)
   const [cities, setCities] = React.useState([])
   const [activities, setActivities] = React.useState([])
+  const [data, setData] = React.useState([])
   
   // useEffect(() => {
   //   async function fetchTrip () {
@@ -53,18 +54,18 @@ function Trip() {
     getTrip()
   },[tripId])
 
-  useEffect(()=>{
-    // setName(data.name)
-    // const date1 = new Date(data.start_date);
-    // const date2 = new Date(data.end_date);
-    // setDates(date1.getDate() + '/' + (date1.getMonth() + 1) + '/' + date1.getFullYear() + " - " + date2.getDate() + '/' + (date2.getMonth() + 1) + '/' + date2.getFullYear())
-    // setTravellers(data.travellers)
-    // setCities(data.cities)
-    async function getBucket() {
+  // useEffect(()=>{
+  //   // setName(data.name)
+  //   // const date1 = new Date(data.start_date);
+  //   // const date2 = new Date(data.end_date);
+  //   // setDates(date1.getDate() + '/' + (date1.getMonth() + 1) + '/' + date1.getFullYear() + " - " + date2.getDate() + '/' + (date2.getMonth() + 1) + '/' + date2.getFullYear())
+  //   // setTravellers(data.travellers)
+  //   // setCities(data.cities)
+  //   async function getBucket() {
 
-    }
-    getBucket
-  }, [data])
+  //   }
+  //   getBucket
+  // }, [data])
 
 
   return(
