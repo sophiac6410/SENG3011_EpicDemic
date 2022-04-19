@@ -157,7 +157,7 @@ function StepOne({isOpen, onClose, onNext}) {
         <Box autoComplete='off' sx={formStyle}>
           <BorderColorIcon  sx={{marginTop: "10px", marginRight: "5px"}} color="teal"></BorderColorIcon>
           <FormControl color='teal' variant="standard" sx={{ width: '20ch'}}>
-            <Input color='teal' type='text' placeholder='Name your trip' value={name} value={name} onChange={(event) => {setName(event.target.value)}}/>
+            <Input color='teal' type='text' placeholder='Name your trip' value={name} onChange={(event) => {setName(event.target.value)}}/>
           </FormControl>
           <Divider orientation="vertical" flexItem  variant="middle" flex />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -244,21 +244,21 @@ function StepTwo({onClose, name, start, end, travellers}) {
   const [cityIndex, setCityIndex] = React.useState(-1)
 
   const handleOpen = async () => {
-    
     if (!back) {
       console.log(name, start, end, travellers)
-      const start_date = new Date(start);
-      const end_date = new Date(end);
-      const data = await createTrip(name, start_date, end_date, parseInt(travellers));
-      // setTripId(data["id"])
+      const data = await createTrip(name, start, end, parseInt(travellers));
       console.log(data)
+      console.log(data.id, data['id']);
+      setTripId(data.id)
     }
     setOpen(true);
     setStepThree(false);
   };
-  const handleAdd = () => {
-    console.log(name, lat, long, country.name, country.code)
-    addCityToTrip(name, lat, long, country.name, country.code);
+  const handleAdd = async () => {
+    console.log(tripId);
+    console.log(city.name, lat, long, country.name, country.code)
+    const data = await addCityToTrip(tripId, city.name, lat, long, country.name, country.code);
+    setCityId(data.id);
     setAdded(!added)
   };
   const handleClose = () => {
@@ -275,9 +275,9 @@ function StepTwo({onClose, name, start, end, travellers}) {
   };
   const [stepThree, setStepThree] = React.useState(false)
 
-  const handleCity = async (city) => {
+  /*const handleCity = async (city) => {
     setCity(city)
-  }
+  }*/
   const randomGenerator = async () => {
     setStepThree(true)
     
@@ -309,22 +309,29 @@ function StepTwo({onClose, name, start, end, travellers}) {
     setCityOptions(data.data)
   }
 
+  const handleCity = (city) => {
+    setCity(city)
+    setStepThree(true)
+    setAdded(false)
+    // const data = await addCityToTrip(city.name, lat, long, country.code, country.name);
+  }
+
   let navigate = useNavigate()
   const saveTrip = () => {
-    navigate('/trip/1')
+    navigate(`/trip/${tripId}`)
     // navigate(`trip/${tripId}`)
   }
 
   useEffect(() => {
     async function updateActivity() {
       // setLoading(true)
-      var {out, controller} = GetActivities({lat: city.latitude, lot: city.longitude})
+      var {out, controller} = await GetActivities({lat: city.latitude, lot: city.longitude})
       out.then(res => {
         console.log(res.data)
         setActivity(res.data); // dispatching data to components state
       }).catch(err => {
         console.log(err)
-        setLoading(false)
+        // setLoading(false)
       });
     }
     updateActivity()
@@ -397,7 +404,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
                     </IconButton>
                     <Typography variant='caption' className='color-medium-teal'>View activities</Typography>
                   </div> */}
-                  <ActivityModal activities={activity}></ActivityModal>
+                  <ActivityModal tripId={tripId} activities={activity}></ActivityModal>
                 </div>
               ) : (
                 <div style={{display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center", marginBottom: "80px"}} className="mt-2">
@@ -428,8 +435,8 @@ function StepTwo({onClose, name, start, end, travellers}) {
 }
 
 
-function ActivityModal({fromTrip, activities}) {
-  const [isOpen, setOpen] = React.useState(null);
+function ActivityModal({fromTrip, activities, tripId}) {
+  const [isOpen, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
     setStepThree(false)
@@ -451,8 +458,7 @@ function ActivityModal({fromTrip, activities}) {
 
   let navigate = useNavigate()
   const saveTrip = () => {
-    navigate('/trip/1')
-    //navigate(`/trip/${tripId}`)
+    navigate(`/trip/${tripId}`)
   }
 
   return(
@@ -495,9 +501,10 @@ function ActivityModal({fromTrip, activities}) {
             centerMode={true}
             // className="bg-light-teal"
           >
-            {
+            {/* { console.log(activities) }
+            { activities !== [] && activities !== {} &&
               activities.map((activity) => <ActivityCard key={activity.id} activity={activity}></ActivityCard>)
-            }
+            } */}
           </Carousel>
         </Box>
       </Modal>

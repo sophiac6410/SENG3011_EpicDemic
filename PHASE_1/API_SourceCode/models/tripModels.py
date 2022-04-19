@@ -8,8 +8,9 @@ class City(BaseModel):
     city_name: str = Field(..., description="The name of the city", example='Paris')
     latitude: float = Field(..., description="The latitude of the city", example=2.3522)
     longitude: float = Field(..., description="The longitude of the city", example=48.8566)
-    start_date: datetime = Field(..., description="The date of arrival in the city", example='2022-07-01T00:00:00.000+00:00')
-    end_date: datetime = Field(..., description="The date of departure from the city", example='2022-10-01T00:00:00.000+00:00')
+    start_date: datetime or None = Field(None, description="The date of arrival in the city", example='2022-07-01T00:00:00.000+00:00')
+    end_date: datetime or None = Field(None, description="The date of departure from the city", example='2022-10-01T00:00:00.000+00:00')
+    country_name: str = Field(..., description="The name of the country", example="France")
     country_code: str = Field(..., description="The ISO code of the city's country", example="FR")
     activities: List[int] = Field(..., description="The list of activities to do in the city. Activities are referenced by their id, which corresponds to Amadeus API's activity ids.", example=[1, 2, 3])
 
@@ -25,6 +26,9 @@ class TripId(BaseModel):
     id: int = Field(..., description="The id of the newly created trip or city", example=1)
 
 class TripResponse(baseModels.Response):
+    data: List[Trips]
+
+class TripByIdResponse(baseModels.Response):
     data: Trips
 
 class TripIdResponse(baseModels.Response):
