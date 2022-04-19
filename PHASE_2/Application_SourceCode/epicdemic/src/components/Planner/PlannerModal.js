@@ -257,7 +257,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
   const handleAdd = async () => {
     console.log(tripId);
     console.log(city.name, lat, long, country.name, country.code)
-    const data = await addCityToTrip(tripId, city.name, lat, long, country.name, country.code);
+    const data = await addCityToTrip(tripId, city.name, lat, long, country.code, country.name);
     setCityId(data.id);
     setAdded(!added)
   };
