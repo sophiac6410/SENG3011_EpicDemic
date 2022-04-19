@@ -113,6 +113,7 @@ function Trip() {
               longitude={cities[key].longitude}
               activities={cities[key].activities}
               tripId={tripId}
+              country={cities[key].country_code}
               city={cities[key]}
             ></TripCard>)
           )}
