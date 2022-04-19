@@ -501,10 +501,10 @@ function ActivityModal({fromTrip, activities, tripId}) {
             centerMode={true}
             // className="bg-light-teal"
           >
-            {/* { console.log(activities) }
+            
             { activities !== [] && activities !== {} &&
               activities.map((activity) => <ActivityCard key={activity.id} activity={activity}></ActivityCard>)
-            } */}
+            }
           </Carousel>
         </Box>
       </Modal>

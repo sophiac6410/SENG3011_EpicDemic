@@ -21,6 +21,7 @@ function Trip() {
   const [dates, setDates] = React.useState("")
   const [travellers, setTravellers] = React.useState(0)
   const [cities, setCities] = React.useState([])
+  const [activities, setActivities] = React.useState([])
   
   useEffect(() => {
     async function fetchTrip () {
@@ -33,49 +34,10 @@ function Trip() {
       setDates(date1.getDate() + '/' + (date1.getMonth() + 1) + '/' + date1.getFullYear() + " - " + date2.getDate() + '/' + (date2.getMonth() + 1) + '/' + date2.getFullYear())
       setTravellers(data.travellers)
       setCities(data.cities)
+      setActivities(data.activities)
     }
     fetchTrip();
   }, []);
-
-  const getTrip = async () => {
-    // const data = await getTripById();
-    // console.log(data)
-    const data = { 
-      "id": 1,
-      "name": "Europe Adventures", 
-      "start_date": "2022-06-01T00:00:00.000+00:00",
-      "end_date": "2022-08-07T00:00:00.000+00:00",
-      "travellers": 4,
-      "cities": [ {
-        "_id": 1,
-        "city_name": "Paris",
-        "latitude": 2.3522,
-        "longitude": 48.8566,
-        "start_date": null,
-        "end_date": null,
-        "country_code": "FR",
-        "country_name": "France",
-        "activities": [ 1 ]
-      }, {
-        "_id": 2,
-        "city_name": "Rome",
-        "latitude": 12.4964,
-        "longitude": 41.9028,
-        "start_date": null,
-        "end_date": null,
-        "country_code": "IT",
-        "country_name": "Italy",
-        "activities": [ ]
-      },
-      ]
-    }
-    setName(data.name)
-    const date1 = new Date(data.start_date);
-    const date2 = new Date(data.end_date);
-    setDates(date1.getDate() + '/' + (date1.getMonth() + 1) + '/' + date1.getFullYear() + " - " + date2.getDate() + '/' + (date2.getMonth() + 1) + '/' + date2.getFullYear())
-    setTravellers(data.travellers)
-    setCities(data.cities)
-  }
 
   return(
     <div className="bg-off-white" style={{paddingBottom: "200px"}}>
