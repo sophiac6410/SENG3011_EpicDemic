@@ -31,7 +31,7 @@ export const GetActivities = params => {
 export const GetActivity = params => {
   const { id } = params;
   const out = axios.get(
-    `http://localhost:8080/api/activity-by-id/?id=${id}`,
+    `http://localhost:8080/api/activity-by-id/?activityId=${id}`,
     {
       signal: controller.signal
     }

@@ -9,6 +9,9 @@ import { Typography } from "@mui/material";
 import PropTypes from 'prop-types';
 import { Context, useContext } from '../context';
 import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { useNavigate } from 'react-router-dom';
 
 function Notification (props) {
   return (
@@ -56,7 +59,24 @@ function Notification (props) {
 function NavbarComp(props) {
   NavbarComp.propTypes = {bg: PropTypes.bool};
   const bgColor = props.bg ? '#0F83A0' : 'none';
-  const { getters } = useContext(Context);
+  const { getters, setters } = useContext(Context);
+
+  let navigate = useNavigate();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setAnchorEl(null);
+    setters.setLoggedIn(false);
+  }
+
   return (
       <Navbar className='justify-content-center' variant="dark" style={{zIndex: 2, width: '100vw', background: bgColor}}>
         <Container style={{margin: '1% 10% 0%'}}>
@@ -79,10 +99,25 @@ function NavbarComp(props) {
                   <FlightIcon sx={{ color: "white", fontSize: 30, display:'block', mx: 'auto'}} />
                   <Typography variant="caption" sx={{color: "white"}}>Saved Trips</Typography>
                 </Nav.Link>
-                <Nav.Link href="/" name="profile" className="mx-3">
+                <Nav.Link name="profile" className="mx-3" aria-controls={open ? 'basic-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}>
                   <AccountCircleIcon sx={{ color: "white", fontSize: 30, display:'block', mx: 'auto'}} />
                   <Typography variant="caption" sx={{color: "white"}}>Profile</Typography>
                 </Nav.Link>
+                
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                  }}
+                >
+                  <MenuItem href="/" onClick={handleLogout}>Logout</MenuItem>
+                </Menu>
               </Nav>
             )
             : (

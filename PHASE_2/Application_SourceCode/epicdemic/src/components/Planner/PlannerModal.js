@@ -404,7 +404,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
                     </IconButton>
                     <Typography variant='caption' className='color-medium-teal'>View activities</Typography>
                   </div> */}
-                  <ActivityModal tripId={tripId} activities={activity}></ActivityModal>
+                  <ActivityModal tripId={tripId} activities={activity} city={city}></ActivityModal>
                 </div>
               ) : (
                 <div style={{display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center", marginBottom: "80px"}} className="mt-2">
@@ -435,7 +435,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
 }
 
 
-function ActivityModal({fromTrip, activities, tripId}) {
+function ActivityModal({fromTrip, activities, tripId, city}) {
   const [isOpen, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -501,10 +501,9 @@ function ActivityModal({fromTrip, activities, tripId}) {
             centerMode={true}
             // className="bg-light-teal"
           >
-            {/* { console.log(activities) }
             { activities !== [] && activities !== {} &&
-              activities.map((activity) => <ActivityCard key={activity.id} activity={activity}></ActivityCard>)
-            } */}
+              activities.map((activity) => <ActivityCard key={activity.id} activity={activity} cityId={city.id} tripId={tripId}></ActivityCard>)
+            }
           </Carousel>
         </Box>
       </Modal>

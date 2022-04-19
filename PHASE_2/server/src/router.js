@@ -48,12 +48,11 @@ router.get(`/${API}/activity-search`, async (req, res) => {
     await res.json(err);
   }
 });
-module.exports = router;
 
-router.get(`${API}/activity-by-id`, async (req, res) => {
-  const id = req.query.id;
+router.get(`/${API}/activity-by-id`, async (req, res) => {
+  const activityId = req.query.activityId;
   try {
-    const response = await amadeus.shopping.activity(id).get()
+    const response = await amadeus.shopping.activity(activityId).get()
     await res.header("Access-Control-Allow-Origin", "*");
     await res.json(response.data);
   } catch (err) {
