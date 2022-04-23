@@ -49,5 +49,17 @@ tags = [
         "description": """
         The saved trips for each user.
         """
+    },
+    {
+        "name": "locations",
+        "description": """
+        All locations and their travel information, safety ratings, and disease information
+        """
+    },
+    {
+        "name": "cases",
+        "description": """
+        The disease cases and statistics for all destinations
+        """
     }
 ]

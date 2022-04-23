@@ -50,17 +50,17 @@ async def get_articles_by_query(
 	)
 ):
 	if re.fullmatch(DATETIME_REGEX, start_date) == None or re.fullmatch(DATETIME_REGEX, end_date) == None:
-		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Date must be in the format yyyy-mm-ddTHH:mm:ss"})
+		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Date must be in the format yyyy-mm-ddTHH:mm:ss"}))
 	if timezone not in pytz.all_timezones:
-		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Timezone is not in the correct format and/or cannot be found."})
+		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Timezone is not in the correct format and/or cannot be found."}))
 	
 	start_date = parse_datetime_string(start_date, timezone)
 	end_date = parse_datetime_string(end_date, timezone)
 
 	if start_date > end_date:
-		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start date must be earlier than end date."})
+		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Start date must be earlier than end date."}))
 	if end_range < start_range:
-		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start range must be less than end range."})
+		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Start range must be less than end range."}))
 	
 	terms_list = [".*"]
 	if key_terms != None and key_terms != "":
