@@ -7,7 +7,7 @@ from httplib2 import Response
 from pydantic import BaseModel, Field
 import pytz
 from util import DATETIME_REGEX, parse_datetime_string, generate_query
-from database import reports_col, diseases_col, locations_col
+from database import reports_col, diseases_col, locations_promed_col
 import re
 from geonames import get_location_ids
 from models import reportModels, baseModels
@@ -62,7 +62,7 @@ async def get_reports_by_id(
 
     # Look up all the locations in one go
     # Map location id to location object
-    location_docs = list(locations_col.find(
+    location_docs = list(locations_promed_col.find(
         {"_id":{"$in": list(location_ids)}}
     ))
     locations = {}
@@ -97,17 +97,17 @@ async def get_reports_by_query(
     *, # including this allows parameters to be defined in any order
     start_date: str = Query(
     	..., # no default, is required
-    	description="Requests reports published after the start_date. Format: 'yyyy-MM-ddTHH:mm:ss'",
+    	description="Requests reports event dates occuring after the start_date. Format: 'yyyy-MM-ddTHH:mm:ss'",
     	example="2021-01-01T10:10:10"
     ),
     end_date: str = Query(
 		...,
-	    description="Requests reports published before the end_date. Format: 'yyyy-MM-ddTHH:mm:ss'",
+	    description="Requests reports event dates occuring before the end_date. Format: 'yyyy-MM-ddTHH:mm:ss'",
 	    example="2023-01-01T10:10:10"
 	),
-    article_ids: Optional[List[int]] = Query(
+    article_ids: str = Query(
         None,
-        description="List of articles reports of interest should belong to.",
+        description="Articles' id's that reports of interest should belong to. Ids are separated by commas.",
         example="1,2,3"
     ),
     location: Optional[str] = Query(
@@ -127,21 +127,21 @@ async def get_reports_by_query(
 	),
     start_range: Optional[int] = Query(
         1,
-        description="Specifies the position of the article to start from.",
+        description="Specifies the position of the report to start from.",
         example="1",
         ge=1
     ),
     end_range: Optional[int] = Query(
         10,
-        description="Specifies the position of the last article to return. If the position is out of range, the API will return up to the last article.",
+        description="Specifies the position of the last report to return. If the position is out of range, the API will return up to the last report.",
         example="10",
         ge=1
     )
 ):
     if re.fullmatch(DATETIME_REGEX, start_date) == None or re.fullmatch(DATETIME_REGEX, end_date) == None:
-        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Date must be in the format yyyy-mm-ddTHH:mm:ss"})
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Date must be in the format yyyy-mm-ddTHH:mm:ss"}))
     if timezone not in pytz.all_timezones:
-        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Timezone is not in the correct format and/or cannot be found."})
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Timezone is not in the correct format and/or cannot be found."}))
 
     start_date = parse_datetime_string(start_date, timezone)
     end_date = parse_datetime_string(end_date, timezone)
@@ -149,8 +149,15 @@ async def get_reports_by_query(
     if end_range < start_range:
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Start range must be less than end range."}))
     if end_date < start_date:
-        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Start date must be earlier than end date."})
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Start date must be earlier than end date."}))
     
+    try:
+        if article_ids != None and article_ids != "":
+            article_ids = [int(i) for i in article_ids.split(",")]
+        else:
+            article_ids = []
+    except:
+        return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, content=baseModels.createResponse(False, 422, {"error": "Article id's must be comma separated integers"}))
 
     # First get a list of all the locations objects from their ids
     locations = {}

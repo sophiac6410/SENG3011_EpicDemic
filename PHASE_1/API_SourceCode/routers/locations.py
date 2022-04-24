@@ -12,7 +12,7 @@ router = APIRouter(
 )
 
 ############## GET LOCATION BY IDS ###############
-@router.get("/", status_code=status.HTTP_200_OK, response_model=locationModels.LocationAllResponse)
+@router.get("/", status_code=status.HTTP_200_OK, tags=["locations"], response_model=locationModels.LocationAllResponse)
 async def get_all_locations():
 	data = list(locations_col.find({}, {
 		"id": "$_id",
@@ -39,7 +39,7 @@ async def get_all_locations():
 
 
 ############## GET LOCATION BY IDS ###############
-@router.get("/{id}", status_code=status.HTTP_200_OK, response_model=locationModels.LocationResponse)
+@router.get("/{id}", status_code=status.HTTP_200_OK, tags=["locations"], response_model=locationModels.LocationResponse)
 async def get_location_by_id(
 	id: str = Path(
 		...,
@@ -74,7 +74,7 @@ async def get_location_by_id(
 
 
 ############## GET SAEFTY SCORE OF A COUNTRY ###############
-@router.get("/{id}/safety", status_code=status.HTTP_200_OK, response_model=locationModels.LocationSafetyResponse)
+@router.get("/{id}/safety", status_code=status.HTTP_200_OK, tags=["locations"], response_model=locationModels.LocationSafetyResponse)
 async def get_location_by_id(
 	id: str = Path(
 		...,
@@ -97,7 +97,7 @@ async def get_location_by_id(
 
 
 ############## GET TRAVEL OVERVIEW OF THE COUNTRY ###############
-@router.get("/{id}/travel", status_code=status.HTTP_200_OK, response_model=locationModels.LocationTravelOverviewResponse)
+@router.get("/{id}/travel", status_code=status.HTTP_200_OK, tags=["locations"], response_model=locationModels.LocationTravelOverviewResponse)
 async def get_travel_overview(
 	id: str = Path(
 		...,

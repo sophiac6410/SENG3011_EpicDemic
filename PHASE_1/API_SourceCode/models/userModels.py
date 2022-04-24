@@ -7,7 +7,7 @@ from models import baseModels
 ############### USER RESPONSE MODELS ##############
 class Auth(BaseModel):
     token: str = Field(..., description="The unique token for an authenticated user", 
-                    example="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9")
+                    example="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huLmRvZUBlbWFpbC5jb20iLCJleHAiOjE2NDk5OTc4NTJ9.bkGLfoU3AUHUNf46ctdFsoHlC7mYfFE1Rl6P97Xt8Uc")
 
 class AuthResponse(baseModels.Response):
     data: Auth

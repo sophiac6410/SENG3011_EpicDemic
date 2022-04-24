@@ -34,7 +34,7 @@ class City(BaseModel):
     country_code: str = Field(..., description="The ISO code of the city's country", example="FR")
 
 class Activity(BaseModel):
-    activityId: int = Field(..., description="The unique id of the activity being added", example=1)
+    activityId: int = Field(..., description="The unique id of the activity being added", example=49488)
     cityId: int = Field(..., description="The unique id of the city that the activity is held in", example=1)
     tripId: int = Field(..., description="The unique id of the trip the activity is being added to", example=1)
 
@@ -75,7 +75,7 @@ async def get_trip_by_id (
 ):
     user = auth.get_current_user(Authorization)
     if tripId not in user['saved_trips']:
-        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content={"error": "Not authorised to add city to trip"})
+        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Not authorised to view trip"}))
 
     trip = trip_col.find_one(
         {"_id": tripId},
@@ -107,7 +107,7 @@ async def delete_saved_trip (
 ):
     user = auth.get_current_user(Authorization)
     if tripId not in user['saved_trips']:
-        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content={"error": "Not authorised to add city to trip"})
+        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Not authorised to delete trip"}))
 
     users_col.update_one(
         {"email": user['email']},
@@ -156,7 +156,7 @@ async def add_new_city_to_trip (
 ):
     user = auth.get_current_user(Authorization)
     if city.trip_id not in user['saved_trips']:
-        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content={"error": "Not authorised to add city to trip"})
+        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Not authorised to add city to trip"}))
 
     id = 1
     if (len(list(tripCities_col.find())) == 0):
@@ -191,7 +191,11 @@ async def add_new_city_to_trip (
 ):
     user = auth.get_current_user(Authorization)
     if activity.tripId not in user['saved_trips']:
-        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content={"error": "Not authorised to add activity to trip"})
+        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Not authorised to add activity to trip"}))
+    
+    trip = trip_col.find_one({"_id": activity.tripId}) 
+    if (trip == None or activity.cityId not in trip['cities']):
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "City does not exist in trip"}))
     
     tripCities_col.update_one(
         {"_id": activity.cityId},
