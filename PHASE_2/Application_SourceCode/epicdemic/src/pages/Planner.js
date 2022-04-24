@@ -74,15 +74,19 @@ function Planner() {
       <Container className="pt-5 pb-5">
         <Typography variant="heading2" className="color-dark-teal">Your saved trips</Typography>
         <div className='justify-content-center' style={{display: "flex", flexDirection: "column"}}>
-          {Object.keys(trips).map((key, i) => 
-            (<SavedCard 
-              key={key}
-              name={trips[key].name}
-              start={trips[key].start_date}
-              end={trips[key].end_date}
-              travellers={trips[i].travellers}
-              tripId={trips[i].id}
-            ></SavedCard>)
+          {trips == [] || trips == null || trips == undefined ? (
+            <div></div>
+          ) : (
+            Object.keys(trips).map((key, i) => 
+              (<SavedCard 
+                key={key}
+                name={trips[key].name}
+                start={trips[key].start_date}
+                end={trips[key].end_date}
+                travellers={trips[i].travellers}
+                tripId={trips[i].id}
+              ></SavedCard>)
+            )
           )}
         </div>
       </Container>
