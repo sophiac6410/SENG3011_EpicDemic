@@ -9,12 +9,15 @@ Team Members:
 
 ## Final Application - Local Deployment
 Run:
-* Backend API
-  Inside the folder PHASE_1/API_SourceCode, run `python3 server.py`
-* Amadeus Server
-  Inside the folder PHASE_2/server, run `npm install` and `npm start`
-* ReactJS Frontend
-  Inside the folder PHASE_2/Application_SourceCode/epicdemic, run `npm install` and `npm start`
+### Backend API
+Inside the folder PHASE_1/API_SourceCode
+run `python3 server.py`
+### Amadeus Server
+Inside the folder PHASE_2/server
+run `npm install` and `npm start`
+### ReactJS Frontend
+Inside the folder PHASE_2/Application_SourceCode/epicdemic
+run `npm install` and `npm start`
 
 ## Deliverable 1
 Report:
