@@ -23,14 +23,14 @@ class RegisterUser(User):
 async def login(user: User):
     authUser = auth.authenticate_user(user.email, user.password);
     if not authUser:
-        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content={"error": "Email or password is incorrect"})
+        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Email or password is incorrect"}))
     else:
         return baseModels.createResponse(True, 200, {"token": auth.create_access_token(user.email)})
 
 @router.post("/register", status_code=status.HTTP_200_OK, tags=["users"], response_model=userModels.AuthResponse, responses={400: {"model": baseModels.ErrorResponse}})
 async def register(user: RegisterUser):
     if (users_col.find_one({"email": user.email})):
-        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"error": "Email already registered"})
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Email already registered"}))
     else:
         users_col.insert_one({
             "name": user.name,

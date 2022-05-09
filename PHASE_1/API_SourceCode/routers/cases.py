@@ -10,7 +10,7 @@ router = APIRouter(
 	prefix="/v1/cases"
 )
 
-@router.get("/", status_code=status.HTTP_200_OK, response_model=locationModels.LocationCovidResponse)
+@router.get("/", status_code=status.HTTP_200_OK, tags=["cases"], response_model=locationModels.LocationCovidResponse)
 async def get_covid_cases():
 	data = list(diseaseLocations_col.find())
 	cases_per_country = []
