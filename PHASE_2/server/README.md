@@ -1,1 +1,3 @@
-node src/index.js
+# Amadeus Server
+## Local Deployment
+Run `npm start`

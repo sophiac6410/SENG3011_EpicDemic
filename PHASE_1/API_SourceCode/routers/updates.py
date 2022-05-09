@@ -14,7 +14,7 @@ router = APIRouter(
     prefix='/v1/updates'
 )
 
-@router.get("/", status_code=status.HTTP_200_OK, response_model=updateModels.Response)
+@router.get("/", status_code=status.HTTP_200_OK, tags=["updates"], response_model=updateModels.Response)
 async def get_updates(
     location: Optional[str] = Query("", description="The ISO code for the country of the updates. To get multiple locations, separate ISO codes by a comma ", example="AT, BG"),
     category: Optional[str] = Query("", description="The categories of the update, separated by commas. Possible values are 'quarantine', 'testing', 'document', 'mask', 'tracing', 'policies', 'Others'", example="mask,testing"),
@@ -22,8 +22,6 @@ async def get_updates(
     end: Optional[int] = Query(20, description="The end index for the returned update")
 ):
     updates = []
-    print("location is " + location)
-    print("category is " + category)
     if location == "" and category == "":
         updates = list(
             updates_col.find({},{"_id": False})
@@ -66,6 +64,6 @@ async def get_updates(
         updates == []
     return baseModels.createResponse(True, 200, {
         "start": start,
-        "end": end,
+        "end": start + len(updates) - 1,
         "updates": updates
     })
