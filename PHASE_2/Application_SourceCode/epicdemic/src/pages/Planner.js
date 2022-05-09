@@ -27,8 +27,12 @@ function Planner() {
 
   const getTrips = async () => {
     const data = await getSavedTrips();
-    console.log(data)
-    setTrips(data)
+    //unauthorized
+    if(data == undefined) {
+      setTrips([])
+    }else{
+      setTrips(data)
+    }
   //   setTrips([{ 
   //     "id": 1,
   //     "name": "Europe Adventures", 
@@ -74,7 +78,7 @@ function Planner() {
       <Container className="pt-5 pb-5">
         <Typography variant="heading2" className="color-dark-teal">Your saved trips</Typography>
         <div className='justify-content-center' style={{display: "flex", flexDirection: "column"}}>
-          {trips == [] || trips == null || trips == undefined ? (
+          {trips == [] || trips == null ? (
             <div></div>
           ) : (
             Object.keys(trips).map((key, i) => 
