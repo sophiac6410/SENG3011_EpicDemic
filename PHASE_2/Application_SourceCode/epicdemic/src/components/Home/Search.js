@@ -28,12 +28,12 @@ function Search() {
     navigate('/finder');
   }
     return(
-      <div className="border-radius-large bg-white mt-3 mb-5" style={{width: "70%", paddingTop: '2%', paddingBottom: '4%'}}>
+      <div className="border-radius-large bg-white mt-3 mb-5" style={{opacity: 0.85, paddingTop: '1%', paddingBottom: '1.5%'}}>
         <div className="search-row">
-          <div className="search-col ps-4">
+          <div className="search-col ps-4" style={{ marginLeft: 25 }}>
             <Typography variant="bodyImportant" className="color-dark-teal ps-3 mb-2">FROM</Typography>
-            <div className="border-radius-large searchfield-container ps-3 pe-5">
-              <FlightTakeoffIcon fontSize="large"></FlightTakeoffIcon>
+            <div className="border-radius-large searchfield-container ps-3 pe-5" >
+              <FlightTakeoffIcon fontSize="large" ></FlightTakeoffIcon>
               <CountrySelect isFrom={true} handleInput={() => {}}></CountrySelect>
             </div>
           </div>
@@ -50,11 +50,11 @@ function Search() {
               <CountrySelect isFrom={false} handleInput={(e, v) => setDest(v)}></CountrySelect>
             </div>
           </div>
-          <div className="bg-dark-teal border-radius-med text-center">
+          <div className="bg-dark-teal border-radius-med text-center" style={{ padding: 0, marginRight: 20 }}>
             <IconButton 
               aria-label="search"
               onClick={ routeChange }>
-              <SearchIcon sx={{ color: "white", fontSize: 40, mt: 3, mb:3, mr:3, ml: 3}}/>
+              <SearchIcon sx={{ color: "white", padding: 0, fontSize: 30, mt: 2, mb:2, mr:2, ml: 2}}/>
             </IconButton>
           </div>
         </div>

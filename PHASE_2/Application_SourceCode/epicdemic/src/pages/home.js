@@ -48,16 +48,16 @@ function Home() {
             <div>
               <div id="header">
                 <div>
-                  <Typography variant="superTitle" className="color-white mt-5" style={{display: "inline"}}>Travel </Typography>
-                  <Typography variant="superTitle" className="color-dark-teal mt-5" style={{display: "inline"}}>Safely</Typography>
+                  <Typography variant="superTitle" className="color-white mt-5" style={{display: "inline", fontFamily: 'Open Sans'}}>Travel </Typography>
+                  <Typography variant="superTitle" className="color-dark-teal mt-5" style={{display: "inline", fontFamily: 'Open Sans'}}>Safely</Typography>
                 </div>
                 <div className="text-center" style={{margin: '1% 15%'}}>
-                  <Typography variant="title" className="color-dark-teal">
+                  <Typography variant="title" className="color-dark-teal" style={{ fontSize: '24px'}}>
                     {slogan}
                   </Typography>
                 </div>
-                <div className="text-center" style={{margin: '1% 15%', width: '40%'}}>
-                  <Typography variant="heading2" className="color-dark-grey">
+                <div className="text-center" style={{margin: '1% 15%', width: '40%', fontSize: '11px', fontFamily: 'Open Sans'}}>
+                  <Typography variant="heading2" className="color-black">
                     {intro}
                   </Typography>
                 </div>
