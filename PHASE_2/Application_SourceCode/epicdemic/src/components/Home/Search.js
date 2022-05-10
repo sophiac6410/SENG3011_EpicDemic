@@ -10,6 +10,7 @@ import "./../../styles/App.css"
 import Typography from '@mui/material/Typography'
 import { Row } from "react-bootstrap";
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
+import FlightLandIcon from '@mui/icons-material/FlightLand';
 import React, { useState } from "react";
 import { Divider } from "@mui/material";
 
@@ -28,7 +29,7 @@ function Search() {
     navigate('/finder');
   }
     return(
-      <div className="border-radius-large bg-white mt-3 mb-5" style={{width: "70%", paddingTop: '2%', paddingBottom: '4%'}}>
+      <div className="border-radius-med bg-white mt-3 mb-5" style={{width: "70%", paddingTop: '1%', paddingBottom: '1%'}}>
         <div className="search-row">
           <div className="search-col ps-4">
             <Typography variant="bodyImportant" className="color-dark-teal ps-3 mb-2">FROM</Typography>
@@ -46,7 +47,7 @@ function Search() {
           <div className="search-col me-4">
             <Typography variant="bodyImportant" className="color-dark-teal ps-5 mb-2">TO</Typography>
             <div className="border-radius-large searchfield-container ps-5 pe-5">
-              <FlightTakeoffIcon fontSize="large"></FlightTakeoffIcon>
+              <FlightLandIcon fontSize="large"></FlightLandIcon>
               <CountrySelect isFrom={false} handleInput={(e, v) => setDest(v)}></CountrySelect>
             </div>
           </div>
