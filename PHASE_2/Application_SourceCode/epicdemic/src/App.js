@@ -46,6 +46,14 @@ const theme = createTheme({
   // },
   typography: {
     fontFamily: ['Nunito', 'serif', 'Open Sans'].join(','),
+    superTitle: {
+      fontFamily: "Nunito, serif",
+      fontWeight: 700,
+      fontWeight: "bold",
+      fontSize: "60px",
+      lineHeight: 1.5,
+      display: 'inline',
+    },
     title: {
       fontFamily: "Nunito, serif",
       fontWeight: 700,

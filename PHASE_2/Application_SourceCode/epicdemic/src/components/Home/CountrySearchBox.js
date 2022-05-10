@@ -9,17 +9,17 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const useStyles = makeStyles((theme) => ({
   inputRoot: {
-    "&.MuiInput-underline:before": {
-      borderBottom: "2px solid #7CC9E9"
-    },
-    "&.MuiInput-underline:hover:before": {
-      borderBottom: "2px solid white"
-    },
-    "&.MuiInput-underline:after": {
-      borderBottom: "2px solid #7CC9E9"
-    },
-    color: "white",
-    backgroundColor: "#7CC9E9",
+    // "&.MuiInput-underline:before": {
+    //   borderBottom: "2px solid #7CC9E9"
+    // },
+    // "&.MuiInput-underline:hover:before": {
+    //   borderBottom: "2px solid white"
+    // },
+    // "&.MuiInput-underline:after": {
+    //   borderBottom: "2px solid #7CC9E9"
+    // },
+    color: "#515151",
+    // backgroundColor: "#7CC9E9",
     fontFamily: "Open Sans, sans-serif",
     fontStyle: "normal",
     fontWeight: 700,
