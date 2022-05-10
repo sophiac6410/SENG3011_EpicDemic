@@ -7,6 +7,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import data from './data.js'
 
 import '../../styles/Covid.css'
 
@@ -43,23 +44,34 @@ function a11yProps(index) {
   };
 }
 
-export default function FullWidthTabs() {
+export default function FullWidthTabs({disease}) {
   const theme = useTheme();
   const [value, setValue] = useState(0);
   const [govPolicy, setGovPolicy] = useState("");
   const { code } = useParams();
+  const [diseaseNum, setDiseaseNum] = useState(0);
 
   useEffect(() => {
     if (code === null) return;
 
-    async function fetchData() {
-      const travel = await fetch(`http://127.0.0.1:8000/v1/locations/${code}/travel`).then(res => res.json())
-    
-      setGovPolicy(travel.data.testing.text);
+    if (disease == 'Dengue') {
+      setDiseaseNum(1);
     }
+    else if (disease == 'HIV/AIDS') {
+      setDiseaseNum(2);
+    }
+    else {
+      setDiseaseNum(0);
+      async function fetchData() {
+        const travel = await fetch(`http://127.0.0.1:8000/v1/locations/${code}/travel`).then(res => res.json())
+      
+        setGovPolicy(travel.data.testing.text);
+      }
+      fetchData();
+    } 
 
-    fetchData();
-  }, [code])
+
+  }, [code, disease])
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -86,32 +98,27 @@ export default function FullWidthTabs() {
       </AppBar>
         <TabPanel value={value} index={0} dir={theme.direction}>
           <Typography variant="bodyText">
-            Coronavirus disease (COVID-19) is an infectious disease caused by the SARS-CoV-2 virus.
-            Most people who fall sick with COVID-19 will experience mild to moderate symptoms and recover without special treatment. However, some will become seriously ill and require medical attention.
+            {data[diseaseNum]['about']}
           </Typography>
           <br/>
           <Typography variant="bodyText">
             How it spreads:
           </Typography>
           <Typography variant="bodyText">
-            The virus can spread from an infected person’s mouth or nose in small liquid particles when they cough, sneeze, speak, sing or breathe. These particles range from larger respiratory droplets to smaller aerosols.
+            {data[diseaseNum]['method']}
           </Typography>
           <br />
-          <Typography variant="bodyText">
-            You can be infected by breathing in the virus if you are near someone who has COVID-19, or by touching a contaminated surface and then your eyes, nose or mouth. The virus spreads more easily indoors and in crowded settings.
-          </Typography>
         </TabPanel>
 
         <TabPanel value={value} index={1} dir={theme.direction}>
         <ul>
-          <li><Typography variant="bodyText"> Cough </Typography> </li>
-          <li><Typography variant="bodyText"> Runny Nose </Typography> </li>
-          <li> <Typography variant="bodyText"> High Fever </Typography> </li>
-          <li> <Typography variant="bodyText"> Loss sense of smell and taste </Typography> </li>
+        {data[diseaseNum]['symptoms'].map((val, idx) => {
+          return (<li><Typography variant="bodyText"> {val} </Typography> </li>)
+        })}
         </ul>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <Typography variant="bodyText">{govPolicy}</Typography> 
+          { diseaseNum == 0 ? <Typography variant="bodyText">{govPolicy}</Typography> : <Typography variant="bodyText"> Nothing specified </Typography> }
         </TabPanel>
     </div>
   );

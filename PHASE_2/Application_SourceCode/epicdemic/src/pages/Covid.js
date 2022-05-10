@@ -56,7 +56,7 @@ function Covid() {
     }
 
     fetchData();
-  }, [code])
+  }, [code, disease])
 
 
   const handleChange = (event) => {
@@ -92,7 +92,7 @@ function Covid() {
       </Row>
 
       <Row style={{ paddingTop: '20px' }}>
-        <DiseaseTabs></DiseaseTabs>
+        <DiseaseTabs disease={disease}></DiseaseTabs>
       </Row>
 
       <Row style={{ maxWidth: 600, paddingTop: '40px' }}>
@@ -134,7 +134,7 @@ function Covid() {
         </div>
       </Row>
     </Container>
-    <DiseaseReportBar code={code}></DiseaseReportBar>
+    <DiseaseReportBar code={code} disease={disease}></DiseaseReportBar>
     </>
   )
 }
