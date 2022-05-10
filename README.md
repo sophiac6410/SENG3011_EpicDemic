@@ -7,6 +7,17 @@ Team Members:
 * Rovielyn Espiritu
 * Sophia Chen
 
+## Final Application - Local Deployment
+Run:
+### Backend API
+Inside the folder PHASE_1/API_SourceCode
+run `python3 server.py`
+### Amadeus Server
+Inside the folder PHASE_2/server
+run `npm install` and `npm start`
+### ReactJS Frontend
+Inside the folder PHASE_2/Application_SourceCode/epicdemic
+run `npm install` and `npm start`
 
 ## Deliverable 1
 Report:
@@ -33,3 +44,28 @@ Report:
   - API Design (Updates)
 * Management Report (Updates)
 * Testing Report (New)
+
+## Deliverable 3
+Application Implementation
+* Building frontend on React JS based on Figma prototype, using dummy data.
+
+## Deliverable 4
+Frontend Implementation
+* Refining and building application, and connecting frontend to API
+
+API Implementation
+* Database
+* API Endpoints
+
+API Documentation
+* Swagger
+
+API Testing
+* Test cases (explained in testing report)
+
+Report
+* Final Report (New)
+  - Database Schemas (New)
+  - Frontend API Endpoints (New)
+* Management Report (Updates)
+* Testing Report (Updates)

@@ -5,10 +5,9 @@ const PORT = 8080;
 const app = express();
 let cors = require("cors");
 // applying handler for API
-app.use("/", router);
-app.use(cors({
-  origin: 'http://localhost:3000'
-}));
+// app.use(cors({
+//   origin: 'http://localhost:3000'
+// }));
 app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
@@ -28,7 +27,11 @@ app.use(function (req, res, next) {
   next();
 });
 // Handling serving static files
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(function (req, res, next) {
+  express.static(path.join(__dirname, '../client/build'));
+  next();
+}); 
+app.use("/", router);
 // Serving app on PORT we defined
 app.listen(PORT, () => {
   console.log(`Express is running on port ${PORT}`);

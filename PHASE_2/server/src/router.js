@@ -56,7 +56,25 @@ router.get(`/${API}/activity-by-id`, async (req, res) => {
     await res.header("Access-Control-Allow-Origin", "*");
     await res.json(response.data);
   } catch (err) {
-    await res.json(err);
+    console.log(err)
+    res.status(500)
+    res.send("Amadeus Network Limit Exceed")
   }
+});
+
+router.get(`/${API}/activity-by-ids`, async (req, res) => {
+  const activityIds = req.query.activityIds.split(',');
+  let result = []
+  for(const activityId of activityIds) {
+    try {
+      const response = await amadeus.shopping.activity(activityId).get()
+      result.push(response.data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  console.log(result)
+  await res.header("Access-Control-Allow-Origin", "*");
+  await res.json(result);
 });
 module.exports = router;

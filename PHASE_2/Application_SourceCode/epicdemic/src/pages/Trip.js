@@ -11,7 +11,7 @@ import TripCard from "../components/Planner/TripCard";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router';
-import { getTripById } from '../components/Planner/tripApiCalls';
+import { getTripById } from '../adapters/tripAPI';
 import React, { useEffect } from 'react';
 
 function Trip() {
