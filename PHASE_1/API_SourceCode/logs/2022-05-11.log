@@ -607,3 +607,250 @@
     Process Time: 0.009374141693115234
     ----------------------------------------
     
+    Timestamp: 1652194897.358572
+    Accessed Time: 2022-05-11 01:01:37.358572
+    Client: 127.0.0.1:48886
+    
+    Request: GET /
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0012140274047851562
+    ----------------------------------------
+    
+    Timestamp: 1652194897.445088
+    Accessed Time: 2022-05-11 01:01:37.445088
+    Client: 127.0.0.1:48886
+    
+    Request: GET /favicon.ico
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 404
+    Process Time: 0.00032901763916015625
+    ----------------------------------------
+    
+    Timestamp: 1652194906.533056
+    Accessed Time: 2022-05-11 01:01:46.533056
+    Client: 127.0.0.1:48888
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0004029273986816406
+    ----------------------------------------
+    
+    Timestamp: 1652194908.987147
+    Accessed Time: 2022-05-11 01:01:48.987147
+    Client: 127.0.0.1:48888
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.09647679328918457
+    ----------------------------------------
+    
+    Timestamp: 1652194958.806441
+    Accessed Time: 2022-05-11 01:02:38.806441
+    Client: 127.0.0.1:48890
+    
+    Request: GET /v1/reports/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			location=Finland
+			key_terms=dengue
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 1.5971670150756836
+    ----------------------------------------
+    
+    Timestamp: 1652194983.363633
+    Accessed Time: 2022-05-11 01:03:03.363633
+    Client: 127.0.0.1:48906
+    
+    Request: GET /v1/reports/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			key_terms=Dengue
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.023554086685180664
+    ----------------------------------------
+    
+    Timestamp: 1652194997.792808
+    Accessed Time: 2022-05-11 01:03:17.792808
+    Client: 127.0.0.1:48908
+    
+    Request: GET /v1/articles/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			key_terms=Corona
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.41736483573913574
+    ----------------------------------------
+    
+    Timestamp: 1652195009.42614
+    Accessed Time: 2022-05-11 01:03:29.426140
+    Client: 127.0.0.1:48910
+    
+    Request: GET /v1/articles/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			key_terms=Dengue
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.30713391304016113
+    ----------------------------------------
+    
+    Timestamp: 1652195033.852388
+    Accessed Time: 2022-05-11 01:03:53.852388
+    Client: 127.0.0.1:48912
+    
+    Request: GET /v1/reports/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			key_terms=Dengue
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0235140323638916
+    ----------------------------------------
+    
+    Timestamp: 1652195041.349507
+    Accessed Time: 2022-05-11 01:04:01.349507
+    Client: 127.0.0.1:48914
+    
+    Request: GET /v1/reports/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			key_terms=Corona
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.027324914932250977
+    ----------------------------------------
+    
+    Timestamp: 1652195267.596737
+    Accessed Time: 2022-05-11 01:07:47.596737
+    Client: 127.0.0.1:48996
+    
+    Request: GET /v1/reports/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			location=Finland
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.9234230518341064
+    ----------------------------------------
+    
+    Timestamp: 1652195271.779442
+    Accessed Time: 2022-05-11 01:07:51.779442
+    Client: 127.0.0.1:48996
+    
+    Request: GET /v1/reports/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			location=Finland
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7815990447998047
+    ----------------------------------------
+    
+    Timestamp: 1652195289.244463
+    Accessed Time: 2022-05-11 01:08:09.244463
+    Client: 127.0.0.1:49006
+    
+    Request: GET /v1/reports/
+    Request Query Param: 
+			start_date=2020-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			location=Belgium
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.6901209354400635
+    ----------------------------------------
+    
+    Timestamp: 1652195295.048768
+    Accessed Time: 2022-05-11 01:08:15.048768
+    Client: 127.0.0.1:49010
+    
+    Request: GET /v1/reports/
+    Request Query Param: 
+			start_date=2010-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			location=Belgium
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.6864569187164307
+    ----------------------------------------
+    
+    Timestamp: 1652195302.847463
+    Accessed Time: 2022-05-11 01:08:22.847463
+    Client: 127.0.0.1:49014
+    
+    Request: GET /v1/reports/
+    Request Query Param: 
+			start_date=2010-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			location=Australia
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=10
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.8402330875396729
+    ----------------------------------------
+    
