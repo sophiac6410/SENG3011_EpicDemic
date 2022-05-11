@@ -47,6 +47,7 @@ function RestrictBox(props){
 function UpdateBar() {
 	const mediumTeal = '#0F83A0';
 	const darkTeal = '#1B4965';
+	const lightBlue = '#E2F2FC';
 	const [travelUpdates, setTravelUpdates] = React.useState([]);
 	const [countryUpdates, setCountryUpdates] = React.useState([]);
 	useEffect(() => {
@@ -77,8 +78,8 @@ function UpdateBar() {
                         return (
                             <RestrictBox
                             key={idx}
-							bgColor={mediumTeal}
-							fontC='white'
+							bgColor={lightBlue}
+							fontC={darkTeal}
                             country={updates.country}
                             text={updates.text}
                             date={getDateString(updates.date)}
