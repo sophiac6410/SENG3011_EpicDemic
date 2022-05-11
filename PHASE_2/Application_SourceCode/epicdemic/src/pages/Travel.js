@@ -1,3 +1,4 @@
+import React from 'react'
 import { Col, Container, Row } from "react-bootstrap"
 import midDot from "../static/mid-dot.svg"
 import '../styles/Destination.css'
@@ -12,6 +13,12 @@ import { Typography } from "@mui/material";
 import CircleIcon from '@mui/icons-material/Circle';
 import { getDestination } from "../apiCalls";
 import { travelStatusColor, travelStatus } from "../styles/Theme";
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepContent from '@mui/material/StepContent';
+import StepButton from '@mui/material/StepButton';
+import { ThreeCircles } from "react-loader-spinner";
+import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 
 const validCheck = <p>
   Before you book your travel, check if you meet Australia’s definition of fully vaccinated for international travel purposes. To meet Australia’s vaccination requirements and be considered a ‘fully vaccinated’ traveller for the purpose of Australia’s border arrangements, you need to provide evidence that you either: 
@@ -65,6 +72,8 @@ const foodCheck = <p>Open with restrictions</p>
 function Travel(travelStat) {
   const [data, setData] = useState(null);
   const { code } = useParams();
+  const steps = ['BEFORE YOU TRAVEL', 'ENTERING THE REGION', "WHILE YOU'RE THERE",];
+  const [activeStep, setActiveStep] = React.useState(0);
 
   const defaultEnterChecks = [
     {title: "QUARANTINE RULES", date: "Last updated 23/02/22", text: "International travellers are not required to quarantine upon arrival. However, the CDC recommends that travellers stay home and self-quarantine for 7 days after arrival. Travellers should take a test again 3-5 days after arrival; if a test is not available or results are delayed, travellers are recommended to stay home and self-quarantine for a total of 10 days after travelling"},
@@ -82,13 +91,13 @@ function Travel(travelStat) {
       var enterChecks = []
       const country = await getDestination(code);
 
-      if(data.quaratine == undefined){
+      if(data.quarantine == undefined){
         enterChecks[0] = defaultEnterChecks[0]
       }else{
         enterChecks[0] = {
           title: "QUARANTINE RULES",
-          date: data.quaratine.date,
-          text: data.quaratine.text 
+          date: data.quarantine.date,
+          text: data.quarantine.text 
         }
       }
 
@@ -198,8 +207,34 @@ function Travel(travelStat) {
     )
   }
 
+  function getContent(index) {
+    if (index == 0) {
+      return <div className="m-4">
+        <Typography variant="heading3" className="color-dark-teal mb-1">Check if you are considered a vaccinated traveller</Typography>
+        <Typography variant="bodyText" className="color-dark-teal mb-1">{validCheck}</Typography>
+        <Typography variant="heading3" className="color-dark-teal mb-1">Ensure you can provide proof</Typography>
+        <Typography variant="bodyText" className="color-dark-teal mb-1">{proofCheck}</Typography>
+      </div>
+    } else if (index == 1) {
+      return <Row className="mt-4 mb-5">
+        {data.enterCheck.map((check) => 
+          <Col md={6}>
+            <BlueCard check={check}></BlueCard>
+          </Col>
+        )}
+      </Row>
+    } else if (index == 2) {
+      return <Row className="mt-4 mb-5">
+        {data.ArrivalCheck.map((check) => 
+          <Col md={6}>
+            <BlueCard check={check}></BlueCard>
+          </Col>
+        )}
+      </Row>
+    }
+  }
   return(
-    <Container className="mt-4" style={{margin: '0% 15%', width: 'auto'}}>
+    <Container style={{margin: '0% 15%', width: 'auto'}}>
       <Col>
         <Row>
           <Typography variant="bodyHeading" className="color-dark-teal">
@@ -215,7 +250,21 @@ function Travel(travelStat) {
           </Col>
         </Row>
         <Typography variant="heading1" className="color-dark-teal">Visiting {data.country}</Typography>
-        <div class="square border-start border-3 mt-3 mb-5" id="tealBorder">
+        <div className="mb-4">
+          <Stepper nonLinear activeStep={activeStep} orientation="vertical">
+            {steps.map((label, index) => (
+              <Step key={label}>
+                <StepButton icon={<CircleOutlinedIcon className="color-medium-teal"/>} onClick={() => {setActiveStep(index)}}>
+                  <Typography variant="heading2" className="color-dark-teal">{label}</Typography>
+                </StepButton>
+                <StepContent>
+                  {getContent(index)}
+                </StepContent>
+              </Step>
+            ))}
+          </Stepper>
+        </div>
+        {/* <div class="square border-start border-3 mt-3 mb-5" id="tealBorder">
           <Typography variant="heading2" className="color-dark-teal mb-3">BEFORE YOU TRAVEL</Typography>
           <Typography variant="heading3" className="color-dark-teal mb-1">Check if you are considered a vaccinated traveller</Typography>
           <Typography variant="bodyText" className="color-dark-teal mb-1">{validCheck}</Typography>
@@ -232,11 +281,10 @@ function Travel(travelStat) {
           <Typography variant="heading2" className="color-dark-teal mb-3">WHILE YOU'RE THERE</Typography>
           <div>{
             data.ArrivalCheck.map((check) => 
-              <Row>
-                <BlueCard check={check}></BlueCard>
-              </Row>
-            )}</div>
-        </div>
+              <BlueCard check={check}></BlueCard>
+            )}
+          </div>
+        </div> */}
       </Col>
     </Container>
   )

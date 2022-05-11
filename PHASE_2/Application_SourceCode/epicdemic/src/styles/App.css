@@ -197,3 +197,8 @@
     font-size: 25px;
     font-weight: bold;
 }
+
+/* BOX SHADOW */
+.shadow {
+    box-shadow: '5px 5px 3px #ccc';
+}

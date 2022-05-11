@@ -46,11 +46,11 @@ export const WhiteButton = styled(BaseButton)({
 
 const NotActiveDestinationTabs = styled(BaseButton) ({
   variant: "outlined",
-  color: mediumBlue,
+  color: lightTeal,
   border: '3px solid',
   fontWeight: "bold",
   '&:hover': {
-    backgroundColor: mediumBlue,
+    backgroundColor: lightTeal,
     color: "white",
     border: '3px solid',
     variant: "outlined",
@@ -58,13 +58,13 @@ const NotActiveDestinationTabs = styled(BaseButton) ({
   }
 })
 const ActiveDestinationTab = styled(BaseButton) ({
-  backgroundColor: mediumBlue,
+  backgroundColor: lightTeal,
   color: "white",
   border: '3px solid',
   variant: "outlined",
   fontWeight: "bold",
   '&:hover': {
-    backgroundColor: mediumBlue,
+    backgroundColor: lightTeal,
     color: "white",
     border: '3px solid',
     variant: "outlined",

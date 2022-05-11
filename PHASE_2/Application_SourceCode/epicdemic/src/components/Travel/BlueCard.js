@@ -1,31 +1,46 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import '../../styles/Destination.css'
+import { areIntervalsOverlapping } from 'date-fns';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 function BlueCard(props) {
   console.log(props)
+  const [open, setOpen] = React.useState(false);
+  
+  function isOpen() {
+    if (open) {
+      return 'block';
+    } else {
+      return 'none';
+    }
+  }
   return(
     // <Col md={6}>
-      <Card style={{backgroundColor: "#EBF3FF", borderRadius: "30px"}} sx={{ display: 'flex', height: '97%' }} className="p-4 m-2" >
-      <CardContent sx={{ maxHeight: '300px', overflow: "auto"}}>
-        <Typography variant="bodyHeading">{props.check.title}</Typography>
-        <Typography variant="caption" sx={{ mb: 1.5 }}>
-          {props.check.date ? (
-            <div>Last Update {props.check.date}</div>
-          ): (
-            <div></div>
-          )}
-        </Typography>
-        <Typography variant="bodyText">
-          <div dangerouslySetInnerHTML={{__html: props.check.text}}></div>
+    <div className="m-2 mb-4 border-radius-med shadow">
+      <div className="bg-light-blue p-4 ps-5 d-flex" style={{width: '100%', cursor: 'pointer'}} onClick={() => {setOpen(!open)}}>
+        <div className="justify-content-start" style={{flex: 8}}>
+          <Typography variant="bodyHeading">{props.check.title}</Typography>
+          <Typography variant="caption">
+            {props.check.date ? (
+              <div>Last Update {props.check.date}</div>
+            ): (
+              <div></div>
+            )}
+          </Typography>
+        </div>
+        <div className="justify-content-end pt-1" style={{flex: 1}}>
+          <KeyboardArrowDownIcon sx={{color: '#1B4965', justifyContent: 'end'}}/>
+        </div>
+      </div>
+      <div className="p-4" style={{ maxHeight: '300px', overflow: "auto", display: isOpen()}}>
+        <Typography variant="bodyText">{props.check.text}
+          {/* <div dangerouslySetInnerHTML={{__html: props.check.text}}></div> */}
           {/* {props.check.text} */}
         </Typography>
-        </CardContent>
-      </Card>
+      </div>
+    </div>
     // </Col>
   )
 }
