@@ -35,6 +35,7 @@ import { TripOriginOutlined } from '@mui/icons-material';
 
 import InputField from '../InputField';
 import { addMember, removeMember, getMembers, getTripOwner } from '../../adapters/tripAPI';
+import { connected } from "process";
 
 
 const style = {
@@ -518,21 +519,26 @@ function ActivityModal({fromTrip, activities, tripId, city}) {
 
 /// FOR ADD MEMBER MODAL ///
 
-function RestrictBox(props){
+function RestrictBox({name, email, owner}){
   const darkTeal = '#1B4965';
-	RestrictBox.propTypes = {email: PropTypes.string}
-	RestrictBox.propTypes = {name: PropTypes.string}
 
 	return (
-		<Row className="mt-2 mb-3 py-3 px-4 border-radius-small" style={{backgroundColor: 'white', boxShadow: '0px 1px 5px #CCCCCC'}}>
-			<div className="justify-content-start mb-2">
-				<Typography variant="heading3" sx={{color: darkTeal}}> {props.name} </Typography>	
-			</div>
+		<Row className="mt-2 mb-3 py-3 px-4 border-radius-small" style={{backgroundColor: 'white', boxShadow: '0px 1px 5px #CCCCCC', marginLeft: '80px', marginRight: '80px' }}>
 			<Box sx={{ display: 'flex'}}>
-				<Typography variant="caption" sx={{color: darkTeal, flex: 1, justifyContent: 'flex-start', textAlign: 'left' }}>{props.email}</Typography>
-				<Typography variant="caption" sx={{color: darkTeal, flex: 1, justifyContent: 'flex-end', textAlign: 'right', textDecoration: 'underline', cursor: 'pointer'}}
-					onClick={() => { }}
-				> Remove </Typography>
+				<Typography variant="heading3" sx={{color: darkTeal, flex: 1, justifyContent: 'flex-start', textAlign: 'left' }}> {name} </Typography>	
+        {
+          owner ? <Typography variant="heading4" sx={{color: darkTeal, flex: 1, justifyContent: 'flex-end', textAlign: 'right'}}> Owner </Typography>
+          : <></>
+        }
+			</Box>
+			<Box sx={{ display: 'flex'}}>
+				<Typography variant="caption" sx={{color: darkTeal, flex: 1, justifyContent: 'flex-start', textAlign: 'left' }}>{email}</Typography>
+        {
+          owner ? <></>
+          : <Typography variant="caption" sx={{color: darkTeal, flex: 1, justifyContent: 'flex-end', textAlign: 'right', textDecoration: 'underline', cursor: 'pointer'}}
+              onClick={() => { }}
+            > Remove </Typography>
+        }
 			</Box>
 		</Row>
 	);
@@ -541,7 +547,7 @@ function RestrictBox(props){
 function AddMember({isOpen, onClose , tripId}) {
   const teal = "#0F83A0";
   const [email, setEmail] = useState('')
-  const [owner, setOwner] = useState('')
+  const [owner, setOwner] = useState({})
   const [members, setMembers] = useState([])
 
   const add_member = async () => {
@@ -552,20 +558,19 @@ function AddMember({isOpen, onClose , tripId}) {
   }
 
   useEffect(() => {
-    console.log('members:')
     async function updateMembers() {
-      console.log('getting members')
       const data = await getMembers(tripId)
-      console.log(data)
+      setMembers(data)
+      console.log('members', members)
     }
     updateMembers()
-  }, [members])
+  }, [email])
 
   useEffect(() => {
-    console.log('owner:')
     async function getOwner() {
       const data = await getTripOwner(tripId)
-      console.log(data)
+      setOwner(data)
+      console.log('owner', owner)
     }
     getOwner()
   }, [])
@@ -587,8 +592,21 @@ function AddMember({isOpen, onClose , tripId}) {
         </div>
 
         <div sx={{display: "flex", flexDirection: "column"}}>
-          <Typography variant="heading2" className="color-dark-teal">Travel Requirements</Typography>
-
+          <RestrictBox
+                    email={owner.email}
+                    name={owner.name}
+                    owner={true}
+                  />
+          { members.map((idx, mem) => {
+            return (
+              <RestrictBox
+                key={idx}
+                email={mem.email}
+                name={mem.name}
+                owner={false}
+              />  
+            )
+          })}
         </div>
 
         <Box sx={{display: "flex", flexDirection: "row", marginTop: "80px"}}>
