@@ -38,6 +38,9 @@ class Activity(BaseModel):
     cityId: int = Field(..., description="The unique id of the city that the activity is held in", example=1)
     tripId: int = Field(..., description="The unique id of the trip the activity is being added to", example=1)
 
+class User(BaseModel):
+    email: str = Field(..., description="The email of the user", example='jess@mail.com')
+
 @router.get("/", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.TripResponse)
 async def get_saved_trips (
     Authorization: str = Header(..., example=token_example),
@@ -139,7 +142,8 @@ async def add_new_trip (
         "start_date": trip.start_date,
         "end_date": trip.end_date,
         "travellers": trip.travellers,
-        "cities": []
+        "cities": [],
+        "members": []
     })
 
     users_col.update_one(
@@ -202,5 +206,36 @@ async def add_new_city_to_trip (
         {"$push": {"activities": activity.activityId}}
     )
     return baseModels.createResponse(True, 200, {})
+
+
+@router.post("/{tripId}/new/member", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.UserResponse, responses={401: {"model": baseModels.ErrorResponse}, 400: {"model": baseModels.ErrorResponse}})
+async def add_user_to_trip (
+    user: User,
+    tripId: int = Path(..., description="The unique id of the trip"),
+    Authorization: str = Header(..., example=token_example),
+):
+
+    if not auth.get_current_user(Authorization):
+        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Not authorised to add members to trip"}))
+
+    owner = list(trip_col.find({ "_id": tripId }))[0]['owner']
+    members = list(trip_col.find({ "_id": tripId }))[0]['members']
+    if owner == user.email or user.email in members:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Cannot existing members"}))
+
+    if auth.get_user(user.email): 
+        trip_col.update_one(
+            {"_id": tripId},
+            {"$push": {"members": user.email}}
+        )
+    else:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Email not found in the database"}))
+
+    ret = {
+        'email': user.email,
+        'name': list(users_col.find({ "email": user.email }))[0]['name']
+    }
+
+    return baseModels.createResponse(True, 200, ret)
 
    
