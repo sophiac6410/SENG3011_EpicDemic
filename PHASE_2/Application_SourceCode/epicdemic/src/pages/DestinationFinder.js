@@ -17,11 +17,11 @@ import NavbarComp from "../components/NavBar";
 import Typography from '@mui/material/Typography';
 import { getAllLocations, getUserSaved } from "../apiCalls";
 import { travelStatus } from "../styles/Theme";
+import CountryCard from "../components/DestinationFinder/CountryCard.js"
+
 
 const DestinationFinder = () => {
-    // const [infoRows, setInfoRows] = useState([]);
-    const [destinations, setDestinations] = useState([]);
-    const [popularDestinations, setPopularDestinations] = useState([]);
+    const [countries, setCountries] = useState([]);
     const [savedLocations, setSavedLocations] = useState([]);
     const [searchFilter, setSearchFilter] = useState({
         "region": null,
@@ -35,14 +35,14 @@ const DestinationFinder = () => {
         async function fetchData () {
             let locations = await getAllLocations();
             console.log(locations);
-            setDestinations(locations);
+            setCountries(locations);
+            
             let user = await getUserSaved();
             setSavedLocations(user.saved_locations);
+            console.log('================');
             console.log(user.saved_locations);
         }
-        // setInfoRows([...infoRowData]);
         fetchData();
-        setPopularDestinations([...popularDestinationsData]);
     }, []);
 
     const getDate = (date) => {
@@ -79,8 +79,17 @@ const DestinationFinder = () => {
                 </div>  
             </div>
             
-            <Row style={{"margin": "5%", "padding": '1%', "marginTop": "10vh"}}>
-                {/* <Container fluid className="latest-updates"> */}
+            <Row style={{"marginLeft": "6vw", "marginRight": "6vw", "marginTop": "10vh", "marginBottom": "10vh"}}>
+                <div className="image-gallery">
+                    {countries.map((country, idx) => {
+                        return(<CountryCard code={country.id} country={country.country} status={country.travel_status}/>)
+                    })}
+                </div>
+                {/* <Container style={{height: '80vh', overflowY: 'scroll'}}>
+                    <CountryCard />
+                </Container> */}
+            </Row>
+            {/* <Row style={{"margin": "5%", "padding": '1%', "marginTop": "10vh"}}>
                 <HeaderInfoRow/>
                 <Container style={{height: '80vh', overflowY: 'scroll'}}>
                     {destinations.map((dest, idx) => {
@@ -99,9 +108,8 @@ const DestinationFinder = () => {
                         } else {
                             return <></>
                         }
-                        })}
-                    </Container>
-                {/* </Container> */}
+                    })}
+                </Container>
             </Row>
             <Row className="map-section">
                 <Typography variant="heading1">TRAVEL REGULATIONS MAP</Typography>
@@ -153,7 +161,7 @@ const DestinationFinder = () => {
                         </Col>
                     </Row>
                 </Container>
-            </Row>
+            </Row> */}
         </div>
     );
 };
