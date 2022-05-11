@@ -28,7 +28,7 @@ function Destination() {
   const [dest, setDest] = useState(null);
   const [saved, setSaved] = useState(false);
   const { code } = useParams();
-  let navigate = useNavigate(); 
+  let navigate = useNavigate();
 
   useEffect(() => {
     if (code === null) return;
@@ -95,16 +95,16 @@ function Destination() {
           </Col>
           <div class="d-flex justify-content-end flex-end">
             <NavLink to="" style={linkStyle}>
-              <DestinationTabs>Overview</DestinationTabs>
+              <DestinationTabs active={window.location.pathname.endsWith(code)} name="Overview">Overview</DestinationTabs>
             </NavLink>
             <NavLink to="travel" style={linkStyle}>
-              <DestinationTabs>Travel</DestinationTabs>
+              <DestinationTabs active={window.location.pathname.endsWith('/travel')} name="Travel">Travel</DestinationTabs>
             </NavLink>
             <NavLink to="covid" style={linkStyle}>
-              <DestinationTabs>Diseases</DestinationTabs>
+              <DestinationTabs active={window.location.pathname.endsWith('/covid')} name="Diseases">Diseases</DestinationTabs>
             </NavLink>
-            <NavLink to="Book" style={linkStyle}>
-              <DestinationTabs>Book</DestinationTabs>
+            <NavLink to="book" style={linkStyle}>
+              <DestinationTabs active={window.location.pathname.endsWith('/book')} name="Book">Book</DestinationTabs>
             </NavLink>
           </div>
         </div>
