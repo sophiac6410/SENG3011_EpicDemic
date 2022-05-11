@@ -48,7 +48,7 @@ async def get_saved_trips (
     user = auth.get_current_user(Authorization)
     trips = list(trip_col.aggregate([
         {"$match": {"_id": {"$in": user['saved_trips']}}},
-        {"$project": {"id": "$_id", "name": 1, "start_date": 1, "end_date": 1, "travellers": 1, "cities": 1 }}
+        {"$project": {"id": "$_id", "name": 1, "start_date": 1, "end_date": 1, "travellers": 1, "cities": 1, "members": 1, "owner": 1 }}
     ]))
     print(trips)
     for t in trips:
@@ -214,19 +214,22 @@ async def add_user_to_trip (
     tripId: int = Path(..., description="The unique id of the trip"),
     Authorization: str = Header(..., example=token_example),
 ):
-
-    if not auth.get_current_user(Authorization):
+    owner = list(trip_col.find({ "_id": tripId }))[0]['owner']
+    if auth.get_current_user(Authorization)['email'] != owner:
         return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Not authorised to add members to trip"}))
 
-    owner = list(trip_col.find({ "_id": tripId }))[0]['owner']
     members = list(trip_col.find({ "_id": tripId }))[0]['members']
     if owner == user.email or user.email in members:
-        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Cannot existing members"}))
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Cannot add existing members"}))
 
     if auth.get_user(user.email): 
         trip_col.update_one(
             {"_id": tripId},
             {"$push": {"members": user.email}}
+        )
+        users_col.update_one(
+            {"email": user.email},
+            {"$push": {"saved_trips": tripId}}
         )
     else:
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Email not found in the database"}))
@@ -237,5 +240,69 @@ async def add_user_to_trip (
     }
 
     return baseModels.createResponse(True, 200, ret)
+    
 
+
+@router.get("/{tripId}/members", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.UsersResponse, responses={401: {"model": baseModels.ErrorResponse}, 400: {"model": baseModels.ErrorResponse}})
+async def add_user_to_trip (
+    tripId: int = Path(..., description="The unique id of the trip"),
+    Authorization: str = Header(..., example=token_example),
+):
+    members = list(trip_col.find({ "_id": tripId }))[0]['members']
+
+    mem_list = []
+    for member in members:
+        mem_list.append({
+            'email': member,
+            'name': list(users_col.find({ "email": member }))[0]['name']
+        })
+
+    return baseModels.createResponse(True, 200, mem_list)
+
+
+@router.get("/{tripId}/owner", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.UserResponse, responses={401: {"model": baseModels.ErrorResponse}, 400: {"model": baseModels.ErrorResponse}})
+async def add_user_to_trip (
+    tripId: int = Path(..., description="The unique id of the trip"),
+    Authorization: str = Header(..., example=token_example),
+):
+
+    try:
+        owner = list(trip_col.find({ "_id": tripId }))[0]['owner']
+        name = list(users_col.find({ "email": owner }))[0]['name']
+    except:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Error"}))
+
+    return baseModels.createResponse(True, 200, {
+        'email': owner,
+        'name': name
+    })
+
+
+@router.delete("/{tripId}/delete/member", status_code=status.HTTP_200_OK, tags=['trips'], response_model=baseModels.Response, responses={401: {"model": baseModels.ErrorResponse}})
+async def delete_saved_trip (
+    user: User,
+    Authorization: str = Header(..., example=token_example),
+    tripId: int = Path(..., description="The unique id of the trip")
+):
+    user = auth.get_current_user(Authorization)
+    if tripId not in user['saved_trips']:
+        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Not authorised to delete members"}))
+
+    owner = list(trip_col.find({ "_id": tripId }))[0]['owner']
+    if user['email'] != owner:
+        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Not authorised to delete members"}))
+
+    if auth.get_user(user.email): 
+        trip_col.update_one(
+            {"_id": tripId},
+            {"$pull": {"members": user.email}}
+        )
+        users_col.update_one(
+            {"email": user.email},
+            {"$pull": {"saved_trips": tripId}}
+        )
+    else:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Email not found in the database"}))
+
+    return baseModels.createResponse(True, 200, {})
    

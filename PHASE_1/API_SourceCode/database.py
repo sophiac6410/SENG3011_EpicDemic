@@ -45,3 +45,15 @@ tripCities_col = db["TripCities"]
 #         )
 
 # print('-done-')
+tripId=28
+members = list(trip_col.find({ "_id": tripId }))[0]['members']
+
+mem_list = []
+for member in members:
+    mem_list.append({
+        'email': member,
+        'name': list(users_col.find({ "email": member }))[0]['name']
+    })
+
+print(mem_list)
+    

@@ -114,7 +114,7 @@ function Trip() {
             </Col>
           </Row>
         </Row>
-        <AddMember isOpen={openAdd} onClose={closeAddModal}></AddMember>
+        <AddMember isOpen={openAdd} onClose={closeAddModal} tripId={tripId}></AddMember>
         <Typography variant="heading1" style={{marginTop: "60px", marginLeft: "70px"}}>Destinations</Typography>
         <div className='justify-content-center' style={{display: "flex", flexDirection: "column"}}>
         {Object.keys(cities).map((key, i) => 

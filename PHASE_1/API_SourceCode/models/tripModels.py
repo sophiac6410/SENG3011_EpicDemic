@@ -40,3 +40,6 @@ class TripIdResponse(baseModels.Response):
 
 class UserResponse(baseModels.Response):
     data: User
+
+class UsersResponse(baseModels.Response):
+    data: List[User]
