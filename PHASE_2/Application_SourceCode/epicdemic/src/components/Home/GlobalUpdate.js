@@ -82,6 +82,7 @@ const GlobalUpdate = () => {
   const mediumTeal = '#0F83A0';
   const mediumBlue = '#70C4E8';
   const lightTeal = '#62B6CB';
+  const darkTeal = '#1B4965';
 
   const getMarkerIcon = (size) => {
     if (size < 100000) return smallMarkerIcon
@@ -97,7 +98,7 @@ const GlobalUpdate = () => {
   }
 
   return(
-    <Col className="pt-3 pb-4 mx-5">
+    <Col className="pt-3 pb-4 mx-4 justify-content-center">
       <div className="text-center">
         <Typography variant="heading1" className="color-dark-teal">WORLDWIDE COVID</Typography>
       </div>
@@ -129,22 +130,22 @@ const GlobalUpdate = () => {
         </Col>
       </Row>
       <Row className="bg-darkteal justify-content-center align-items-center pb-5 m-auto">
-        <Col md={2} className="align-self-center ms-4">
+        <Col md={3} className="align-self-center ms-5">
           {checked ?
             <>
-              <UpdateBox number={convertToBillions(stats.doses)} text="doses administered" bgColor={mediumBlue} fontC='white'/>
-              <UpdateBox number={"59.2%"} text="fully vaccinated" color="white" bgColor="white" fontC={mediumTeal}/>
-              <UpdateBox number={"11.3%"} text="received booster" bgColor={mediumBlue} fontC='white'/>
+              <UpdateBox number={convertToBillions(stats.doses)} text="doses administered" bgColor={darkTeal} fontC='white'/>
+              <UpdateBox number={"59.2%"} text="fully vaccinated" color="white" bgColor="white" fontC={darkTeal}/>
+              <UpdateBox number={"11.3%"} text="received booster" bgColor={darkTeal} fontC='white'/>
             </>
             :
             <>           
-              <UpdateBox number={convertToMillions(stats.cases)} text="total cases" bgColor={mediumBlue} fontC='white'/>
-              <UpdateBox number={convertToMillions(stats.deaths)} text="deaths" bgColor={mediumBlue} fontC='white'/>
-              <UpdateBox number={convertToMillions(stats.todayCases)} text="daily cases" bgColor={mediumBlue} fontC='white'/>
+              <UpdateBox number={convertToMillions(stats.cases)} text="total cases" bgColor={darkTeal} fontC='white'/>
+              <UpdateBox number={convertToMillions(stats.deaths)} text="deaths" bgColor='white' fontC={darkTeal}/>
+              <UpdateBox number={convertToMillions(stats.todayCases)} text="daily cases" bgColor={darkTeal} fontC='white'/>
             </>
           }
         </Col>
-        <Col className="flex-end pb-4">
+        <Col className="flex-end pb-4 ms-5">
           <MapContainer
             className="leaflet-container1"
             center={[35, 25]} 
@@ -188,10 +189,10 @@ function UpdateBox(props) {
     <Row className="m-2 me-4 mb-4 py-3 border-radius-small" style={{backgroundColor: props.bgColor, boxShadow: '0px 1px 5px #CCCCCC'}}>
       <Col>
         <Row className="align-self-center justify-content-center">
-          <Typography variant="heading2" sx={{display: 'block', color: props.fontC, textAlign: 'center'}}>{props.number}</Typography>
+          <Typography variant="heading1" sx={{p: 0, color: props.fontC, textAlign: 'center'}}>{props.number}</Typography>
         </Row>
         <Row className="align-self-center justify-content-center">
-          <Typography variant="bodyImportant" sx={{display: 'block', color: props.fontC, textAlign: 'center'}}>{props.text}</Typography>
+          <Typography variant="heading3" sx={{p: 0, color: props.fontC, textAlign: 'center'}}>{props.text}</Typography>
         </Row>
       </Col>
     </Row>

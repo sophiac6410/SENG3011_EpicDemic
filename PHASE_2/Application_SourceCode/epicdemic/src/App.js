@@ -49,7 +49,6 @@ const theme = createTheme({
     superTitle: {
       fontFamily: "Nunito, serif",
       fontWeight: 700,
-      fontWeight: "bold",
       fontSize: "4.5em",
       lineHeight: 1.5,
       display: 'inline',

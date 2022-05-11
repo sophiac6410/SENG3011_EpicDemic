@@ -30,8 +30,8 @@ const responsive = {
     }
   };
 
-const colours = [ '#0F83A0', 'white', '#70C4E8' ]
-const fontColours = [ 'white', '#0F83A0', 'white' ]
+const colours = [ '#1B4965', 'white', '#E2F2FC' ]
+const fontColours = [ 'white', '#1B4965', '#1B4965' ]
 
 const news = [
   {

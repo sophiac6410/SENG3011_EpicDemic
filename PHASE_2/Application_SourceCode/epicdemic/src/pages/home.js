@@ -18,7 +18,6 @@ import { useNavigate, } from 'react-router-dom';
 import { useEffect } from "react";
 import { getUserSaved } from "../apiCalls";
 
-
 const intro = "Epicdemic collates and analyses a diverse range of government, airline, COVID and tourism data to provide you with the confidence you need to book your next trip."
 const slogan = "Effortless. Efficient. Epic"
 function Home() {
@@ -74,7 +73,7 @@ function Home() {
             </div>
         </div>
         <NewsBar></NewsBar>
-        <LocationBar locations={savedLocations}></LocationBar>
+        {/* <LocationBar locations={savedLocations}></LocationBar> */}
         <Row className="mt-5 mb-5 p-1 ps-3 align-items-center justify-content-center">
           <UpdateBar></UpdateBar>
         </Row>

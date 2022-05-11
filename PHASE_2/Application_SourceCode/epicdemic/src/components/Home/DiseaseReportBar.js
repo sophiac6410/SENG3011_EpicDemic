@@ -62,7 +62,7 @@ export default function DiseaseReportBar() {
     <div style={{ padding: '3% 10% 10%', backgroundColor: '#E9F0FB' }}>
       <Row className="mt-2" style={{ backgroundColor: '#E9F0FB' }}>
         <div className="text-center">
-          <Typography variant="heading1" className="color-dark-teal">RECENT DISEASE REPORT</Typography>
+          <Typography variant="heading1" className="color-dark-teal">GLOBAL RECENT DISEASE REPORTS</Typography>
         </div>
         <div className="news-carousel" style={{ backgroundColor: '#E9F0FB' }}>
           <Carousel 
