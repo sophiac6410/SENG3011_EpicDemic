@@ -50,7 +50,7 @@ const theme = createTheme({
       fontFamily: "Nunito, serif",
       fontWeight: 700,
       fontWeight: "bold",
-      fontSize: "60px",
+      fontSize: "4.5em",
       lineHeight: 1.5,
       display: 'inline',
     },
