@@ -570,10 +570,17 @@ function AddMember({isOpen, onClose , tripId}) {
     async function getOwner() {
       const data = await getTripOwner(tripId)
       setOwner(data)
-      console.log('owner', owner)
     }
     getOwner()
   }, [])
+
+  useEffect(() => {
+    console.log('owner', owner)
+  }, [owner])
+
+  useEffect(() => {
+    console.log('members', members)
+  }, [members])
 
   return(
     <Modal
@@ -597,7 +604,8 @@ function AddMember({isOpen, onClose , tripId}) {
                     name={owner.name}
                     owner={true}
                   />
-          { members.map((idx, mem) => {
+          { members.map((mem, idx) => {
+            console.log(mem)
             return (
               <RestrictBox
                 key={idx}
