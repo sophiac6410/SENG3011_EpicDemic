@@ -1,0 +1,135 @@
+
+    Timestamp: 1652249878.719052
+    Accessed Time: 2022-05-11 16:17:58.719052
+    Client: 127.0.0.1:37976
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0005519390106201172
+    ----------------------------------------
+    
+    Timestamp: 1652249878.933047
+    Accessed Time: 2022-05-11 16:17:58.933047
+    Client: 127.0.0.1:37976
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.06062197685241699
+    ----------------------------------------
+    
+    Timestamp: 1652249890.434464
+    Accessed Time: 2022-05-11 16:18:10.434464
+    Client: 127.0.0.1:37978
+    
+    Request: POST /v1/users/login
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.05956912040710449
+    ----------------------------------------
+    
+    Timestamp: 1652249906.522296
+    Accessed Time: 2022-05-11 16:18:26.522296
+    Client: 127.0.0.1:37984
+    
+    Request: GET /v1/trips/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 422
+    Process Time: 0.0011861324310302734
+    ----------------------------------------
+    
+    Timestamp: 1652249995.275426
+    Accessed Time: 2022-05-11 16:19:55.275426
+    Client: 127.0.0.1:37986
+    
+    Request: GET /v1/locations/BE
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.016944169998168945
+    ----------------------------------------
+    
+    Timestamp: 1652250402.587046
+    Accessed Time: 2022-05-11 16:26:42.587046
+    Client: 127.0.0.1:38022
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0004119873046875
+    ----------------------------------------
+    
+    Timestamp: 1652250402.812526
+    Accessed Time: 2022-05-11 16:26:42.812526
+    Client: 127.0.0.1:38022
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.06205391883850098
+    ----------------------------------------
+    
+    Timestamp: 1652250425.364081
+    Accessed Time: 2022-05-11 16:27:05.364081
+    Client: 127.0.0.1:38024
+    
+    Request: POST /v1/users/login
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.07628917694091797
+    ----------------------------------------
+    
+    Timestamp: 1652250438.251189
+    Accessed Time: 2022-05-11 16:27:18.251189
+    Client: 127.0.0.1:38028
+    
+    Request: GET /v1/trips/54
+    Request Query Param: None
+    Request Path Param: 
+			tripId=54
+   
+    Response Code: 422
+    Process Time: 0.0010559558868408203
+    ----------------------------------------
+    
+    Timestamp: 1652250842.827782
+    Accessed Time: 2022-05-11 16:34:02.827782
+    Client: 127.0.0.1:38034
+    
+    Request: POST /v1/users/login
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.007845163345336914
+    ----------------------------------------
+    
+    Timestamp: 1652250862.434032
+    Accessed Time: 2022-05-11 16:34:22.434032
+    Client: 127.0.0.1:38036
+    
+    Request: GET /v1/trips/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 422
+    Process Time: 0.0004971027374267578
+    ----------------------------------------
+    
