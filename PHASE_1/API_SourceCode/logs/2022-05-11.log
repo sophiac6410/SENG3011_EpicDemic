@@ -854,3 +854,523 @@
     Process Time: 0.8402330875396729
     ----------------------------------------
     
+    Timestamp: 1652232755.341372
+    Accessed Time: 2022-05-11 11:32:35.341372
+    Client: 127.0.0.1:36876
+    
+    Request: GET /v1/articles/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			key_terms=Corona
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=4
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.333172082901001
+    ----------------------------------------
+    
+    Timestamp: 1652232755.674342
+    Accessed Time: 2022-05-11 11:32:35.674342
+    Client: 127.0.0.1:36880
+    
+    Request: GET /v1/updates/
+    Request Query Param: 
+			location=
+			category=document,testing,quarantine
+			start=1
+			end=5
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.01838397979736328
+    ----------------------------------------
+    
+    Timestamp: 1652232755.674404
+    Accessed Time: 2022-05-11 11:32:35.674404
+    Client: 127.0.0.1:36882
+    
+    Request: GET /v1/updates/
+    Request Query Param: 
+			location=
+			category=mask,Others,tracing,policies
+			start=1
+			end=5
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.018767118453979492
+    ----------------------------------------
+    
+    Timestamp: 1652232755.674458
+    Accessed Time: 2022-05-11 11:32:35.674458
+    Client: 127.0.0.1:36884
+    
+    Request: OPTIONS /v1/users/saved
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.019006967544555664
+    ----------------------------------------
+    
+    Timestamp: 1652232755.697032
+    Accessed Time: 2022-05-11 11:32:35.697032
+    Client: 127.0.0.1:36884
+    
+    Request: GET /v1/users/saved
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.008249044418334961
+    ----------------------------------------
+    
+    Timestamp: 1652232755.880742
+    Accessed Time: 2022-05-11 11:32:35.880742
+    Client: 127.0.0.1:36884
+    
+    Request: GET /v1/locations/BE
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.03186798095703125
+    ----------------------------------------
+    
+    Timestamp: 1652232755.899136
+    Accessed Time: 2022-05-11 11:32:35.899136
+    Client: 127.0.0.1:36882
+    
+    Request: GET /v1/locations/ES
+    Request Query Param: None
+    Request Path Param: 
+			id=ES
+   
+    Response Code: 200
+    Process Time: 0.014005899429321289
+    ----------------------------------------
+    
+    Timestamp: 1652232757.179848
+    Accessed Time: 2022-05-11 11:32:37.179848
+    Client: 127.0.0.1:36882
+    
+    Request: GET /v1/cases
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 307
+    Process Time: 0.0013051033020019531
+    ----------------------------------------
+    
+    Timestamp: 1652232757.219286
+    Accessed Time: 2022-05-11 11:32:37.219286
+    Client: 127.0.0.1:36882
+    
+    Request: GET /v1/cases/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.47129201889038086
+    ----------------------------------------
+    
+    Timestamp: 1652232803.668548
+    Accessed Time: 2022-05-11 11:33:23.668548
+    Client: 127.0.0.1:36888
+    
+    Request: OPTIONS /v1/trips
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0004467964172363281
+    ----------------------------------------
+    
+    Timestamp: 1652232803.672565
+    Accessed Time: 2022-05-11 11:33:23.672565
+    Client: 127.0.0.1:36888
+    
+    Request: GET /v1/trips
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 307
+    Process Time: 0.0006330013275146484
+    ----------------------------------------
+    
+    Timestamp: 1652232803.680593
+    Accessed Time: 2022-05-11 11:33:23.680593
+    Client: 127.0.0.1:36888
+    
+    Request: OPTIONS /v1/trips/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.00024390220642089844
+    ----------------------------------------
+    
+    Timestamp: 1652232803.683063
+    Accessed Time: 2022-05-11 11:33:23.683063
+    Client: 127.0.0.1:36888
+    
+    Request: GET /v1/trips/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.014854907989501953
+    ----------------------------------------
+    
+    Timestamp: 1652232814.606136
+    Accessed Time: 2022-05-11 11:33:34.606136
+    Client: 127.0.0.1:36896
+    
+    Request: OPTIONS /v1/trips/28
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0008599758148193359
+    ----------------------------------------
+    
+    Timestamp: 1652232814.615052
+    Accessed Time: 2022-05-11 11:33:34.615052
+    Client: 127.0.0.1:36896
+    
+    Request: GET /v1/trips/28
+    Request Query Param: None
+    Request Path Param: 
+			tripId=28
+   
+    Response Code: 200
+    Process Time: 0.020592927932739258
+    ----------------------------------------
+    
+    Timestamp: 1652232822.851912
+    Accessed Time: 2022-05-11 11:33:42.851912
+    Client: 127.0.0.1:36898
+    
+    Request: GET /v1/trips
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 307
+    Process Time: 0.0005970001220703125
+    ----------------------------------------
+    
+    Timestamp: 1652232822.860555
+    Accessed Time: 2022-05-11 11:33:42.860555
+    Client: 127.0.0.1:36898
+    
+    Request: GET /v1/trips/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.013808012008666992
+    ----------------------------------------
+    
+    Timestamp: 1652232845.873843
+    Accessed Time: 2022-05-11 11:34:05.873843
+    Client: 127.0.0.1:36900
+    
+    Request: OPTIONS /v1/trips/new
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0010449886322021484
+    ----------------------------------------
+    
+    Timestamp: 1652232845.882267
+    Accessed Time: 2022-05-11 11:34:05.882267
+    Client: 127.0.0.1:36900
+    
+    Request: POST /v1/trips/new
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.1157538890838623
+    ----------------------------------------
+    
+    Timestamp: 1652233082.487881
+    Accessed Time: 2022-05-11 11:38:02.487881
+    Client: 127.0.0.1:36952
+    
+    Request: GET /v1/trips/28
+    Request Query Param: None
+    Request Path Param: 
+			tripId=28
+   
+    Response Code: 200
+    Process Time: 0.022694110870361328
+    ----------------------------------------
+    
+    Timestamp: 1652233297.714741
+    Accessed Time: 2022-05-11 11:41:37.714741
+    Client: 127.0.0.1:36966
+    
+    Request: GET /v1/trips
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 307
+    Process Time: 0.0014290809631347656
+    ----------------------------------------
+    
+    Timestamp: 1652233297.730151
+    Accessed Time: 2022-05-11 11:41:37.730151
+    Client: 127.0.0.1:36966
+    
+    Request: GET /v1/trips/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.023231983184814453
+    ----------------------------------------
+    
+    Timestamp: 1652233300.652161
+    Accessed Time: 2022-05-11 11:41:40.652161
+    Client: 127.0.0.1:36966
+    
+    Request: OPTIONS /v1/trips/62
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.00019311904907226562
+    ----------------------------------------
+    
+    Timestamp: 1652233300.654779
+    Accessed Time: 2022-05-11 11:41:40.654779
+    Client: 127.0.0.1:36966
+    
+    Request: DELETE /v1/trips/62
+    Request Query Param: None
+    Request Path Param: 
+			tripId=62
+   
+    Response Code: 200
+    Process Time: 0.033699989318847656
+    ----------------------------------------
+    
+    Timestamp: 1652233303.666404
+    Accessed Time: 2022-05-11 11:41:43.666404
+    Client: 127.0.0.1:36966
+    
+    Request: GET /v1/trips
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 307
+    Process Time: 0.00040602684020996094
+    ----------------------------------------
+    
+    Timestamp: 1652233303.686311
+    Accessed Time: 2022-05-11 11:41:43.686311
+    Client: 127.0.0.1:36966
+    
+    Request: GET /v1/trips/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.015964984893798828
+    ----------------------------------------
+    
+    Timestamp: 1652233662.466623
+    Accessed Time: 2022-05-11 11:47:42.466623
+    Client: 127.0.0.1:36992
+    
+    Request: OPTIONS /v1/trips
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.00018596649169921875
+    ----------------------------------------
+    
+    Timestamp: 1652233662.469451
+    Accessed Time: 2022-05-11 11:47:42.469451
+    Client: 127.0.0.1:36992
+    
+    Request: GET /v1/trips
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 307
+    Process Time: 0.0003421306610107422
+    ----------------------------------------
+    
+    Timestamp: 1652233662.47362
+    Accessed Time: 2022-05-11 11:47:42.473620
+    Client: 127.0.0.1:36992
+    
+    Request: OPTIONS /v1/trips/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0002181529998779297
+    ----------------------------------------
+    
+    Timestamp: 1652233662.476023
+    Accessed Time: 2022-05-11 11:47:42.476023
+    Client: 127.0.0.1:36992
+    
+    Request: GET /v1/trips/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.015025138854980469
+    ----------------------------------------
+    
+    Timestamp: 1652234108.104566
+    Accessed Time: 2022-05-11 11:55:08.104566
+    Client: 127.0.0.1:37032
+    
+    Request: OPTIONS /v1/trips/28
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0008819103240966797
+    ----------------------------------------
+    
+    Timestamp: 1652234108.114085
+    Accessed Time: 2022-05-11 11:55:08.114085
+    Client: 127.0.0.1:37032
+    
+    Request: GET /v1/trips/28
+    Request Query Param: None
+    Request Path Param: 
+			tripId=28
+   
+    Response Code: 200
+    Process Time: 0.03149008750915527
+    ----------------------------------------
+    
+    Timestamp: 1652234174.993949
+    Accessed Time: 2022-05-11 11:56:14.993949
+    Client: 127.0.0.1:37044
+    
+    Request: GET /v1/trips/28
+    Request Query Param: None
+    Request Path Param: 
+			tripId=28
+   
+    Response Code: 200
+    Process Time: 0.016672134399414062
+    ----------------------------------------
+    
+    Timestamp: 1652234351.391093
+    Accessed Time: 2022-05-11 11:59:11.391093
+    Client: 127.0.0.1:37070
+    
+    Request: GET /v1/trips/28
+    Request Query Param: None
+    Request Path Param: 
+			tripId=28
+   
+    Response Code: 200
+    Process Time: 0.014371871948242188
+    ----------------------------------------
+    
+    Timestamp: 1652234378.34803
+    Accessed Time: 2022-05-11 11:59:38.348030
+    Client: 127.0.0.1:37072
+    
+    Request: GET /v1/trips/28
+    Request Query Param: None
+    Request Path Param: 
+			tripId=28
+   
+    Response Code: 200
+    Process Time: 0.01491093635559082
+    ----------------------------------------
+    
+    Timestamp: 1652234411.080071
+    Accessed Time: 2022-05-11 12:00:11.080071
+    Client: 127.0.0.1:37080
+    
+    Request: GET /v1/trips/28
+    Request Query Param: None
+    Request Path Param: 
+			tripId=28
+   
+    Response Code: 200
+    Process Time: 0.013278007507324219
+    ----------------------------------------
+    
+    Timestamp: 1652234426.185748
+    Accessed Time: 2022-05-11 12:00:26.185748
+    Client: 127.0.0.1:37082
+    
+    Request: GET /v1/trips/28
+    Request Query Param: None
+    Request Path Param: 
+			tripId=28
+   
+    Response Code: 200
+    Process Time: 0.01464986801147461
+    ----------------------------------------
+    
+    Timestamp: 1652234471.462588
+    Accessed Time: 2022-05-11 12:01:11.462588
+    Client: 127.0.0.1:37088
+    
+    Request: GET /v1/trips/28
+    Request Query Param: None
+    Request Path Param: 
+			tripId=28
+   
+    Response Code: 200
+    Process Time: 0.015288829803466797
+    ----------------------------------------
+    
+    Timestamp: 1652234488.084374
+    Accessed Time: 2022-05-11 12:01:28.084374
+    Client: 127.0.0.1:37090
+    
+    Request: GET /v1/trips/28
+    Request Query Param: None
+    Request Path Param: 
+			tripId=28
+   
+    Response Code: 200
+    Process Time: 0.015336990356445312
+    ----------------------------------------
+    
+    Timestamp: 1652235179.976287
+    Accessed Time: 2022-05-11 12:12:59.976287
+    Client: 127.0.0.1:37128
+    
+    Request: OPTIONS /v1/trips/28
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0008170604705810547
+    ----------------------------------------
+    
+    Timestamp: 1652235179.983543
+    Accessed Time: 2022-05-11 12:12:59.983543
+    Client: 127.0.0.1:37128
+    
+    Request: GET /v1/trips/28
+    Request Query Param: None
+    Request Path Param: 
+			tripId=28
+   
+    Response Code: 200
+    Process Time: 0.01746511459350586
+    ----------------------------------------
+    

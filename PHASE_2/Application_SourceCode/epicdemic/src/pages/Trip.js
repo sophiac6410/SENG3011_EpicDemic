@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router';
 import { getTripById } from '../adapters/tripAPI';
 import React, { useEffect } from 'react';
+import {AddMember} from '../components/Planner/PlannerModal'
 
 function Trip() {
   const { tripId } = useParams()
@@ -23,7 +24,10 @@ function Trip() {
   const [cities, setCities] = React.useState([])
   const [activities, setActivities] = React.useState([])
   const [data, setData] = React.useState([])
-  
+  const [openAdd, setAdd] = React.useState(false);
+  const openAddModal = () => setAdd(true)
+  const closeAddModal = () => setAdd(false)
+
   // useEffect(() => {
   //   async function fetchTrip () {
   //     console.log(tripId);
@@ -94,15 +98,23 @@ function Trip() {
             <Col md={2}>
               <Row className='align-items-center justify-content-start'>
                 <Col md={1}>
-                  <PeopleOutlineIcon color='teal' ></PeopleOutlineIcon>
+                  <PeopleOutlineIcon color='teal' onClick={openAddModal}></PeopleOutlineIcon>
                 </Col>
                 <Col>
                   <Typography variant="bodyText" className='color-medium-teal' style={{textAlign: "start", marginLeft: "5px"}}>{travellers} Travellers</Typography>
                 </Col>
               </Row>
             </Col>
+            <Col md={2}>
+              <Row>
+                <Col md={1}>
+                  <PeopleOutlineIcon color='teal' onClick={openAddModal}></PeopleOutlineIcon>
+                </Col>
+              </Row>
+            </Col>
           </Row>
         </Row>
+        <AddMember isOpen={openAdd} onClose={closeAddModal}></AddMember>
         <Typography variant="heading1" style={{marginTop: "60px", marginLeft: "70px"}}>Destinations</Typography>
         <div className='justify-content-center' style={{display: "flex", flexDirection: "column"}}>
         {Object.keys(cities).map((key, i) => 

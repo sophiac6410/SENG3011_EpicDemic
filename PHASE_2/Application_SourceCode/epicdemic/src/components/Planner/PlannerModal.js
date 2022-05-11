@@ -12,7 +12,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { TealBotton } from '../../styles/Button';
-import { Col } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import PublicIcon from '@mui/icons-material/Public';
 import EmojiFlagsIcon from '@mui/icons-material/EmojiFlags';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
@@ -32,6 +32,9 @@ import { GetActivities } from '../../adapters/activityAPI';
 import { addCityToTrip, createTrip } from './tripApiCalls';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { TripOriginOutlined } from '@mui/icons-material';
+
+import InputField from '../InputField';
+
 
 const style = {
   position: 'absolute',
@@ -512,4 +515,34 @@ function ActivityModal({fromTrip, activities, tripId, city}) {
 }
 
 
-export {StepOne, StepTwo, ActivityModal}
+function AddMember({isOpen, onClose}) {
+  const teal = "#0F83A0";
+  const [email, setEmail] = useState('')
+  return(
+    <Modal
+      open={isOpen}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={style}>
+        <Typography variant="heading2" className='color-dark-teal'>
+          Share with other users
+        </Typography>
+
+        <div sx={{display: "flex", flexDirection: "column"}}>
+          <InputField type="email" change={e => setEmail(e.target.value)} placeholder="Enter your email"></InputField>
+          <TealBotton onClick={onClose}> Share </TealBotton>
+        </div>
+
+        <Box sx={{display: "flex", flexDirection: "row", marginTop: "80px"}}>
+          <Col md={6}>
+            <TealBotton onClick={onClose}>Cancel</TealBotton>
+          </Col>
+        </Box>
+      </Box>
+    </Modal>
+  )
+}
+
+
+export {StepOne, StepTwo, ActivityModal, AddMember}
