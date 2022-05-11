@@ -62,10 +62,10 @@ function Home() {
                   </Typography>
                 </div>
                 <div className="mt-5 mb-5 d-flex">
-                  <DarkButton onClick={goDestination} className="align-self-center pt-3 pb-3" style={{width: "180px"}}>  
+                  <DarkButton onClick={goDestination} className="align-self-center pt-2 pb-2" style={{width: "180px"}}>  
                     <Typography variant="bodyHeading">Find a destination</Typography>
                   </DarkButton>
-                  <WhiteButton onClick={goPlaner} className="align-self-center ms-4 pt-3 pb-3" style={{width: "180px"}}>
+                  <WhiteButton onClick={goPlaner} className="align-self-center ms-4 pt-2 pb-2" style={{width: "180px"}}>
                     <Typography variant="bodyHeading">Plan my trip</Typography>
                   </WhiteButton>
                 </div>
