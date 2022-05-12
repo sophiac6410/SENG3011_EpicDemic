@@ -8,12 +8,15 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import '../styles/Covid.css'
+import { getDestination } from "../apiCalls";
 import Typography from '@mui/material/Typography';
 import CovidStat from "../static/philStats.png"
 import CovidTabs from "../components/Diseases/CovidTabs";
 import DiseaseReportBar from "../components/Diseases/DiseaseReportBar";
 // import DiseaseReportBar from "../components/Home/DiseaseReportBar";
 import NavbarComp from "../components/NavBar";
+import { diseaseRiskColor, diseaseRisk } from "../styles/Theme";
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 
 function Covid() {
   const [disease, setDisease] = useState('Covid-19');
@@ -22,10 +25,11 @@ function Covid() {
 
   useEffect(() => {
     if (code == null) return;
-
+    
     async function fetchData() {
       const trend = await fetch(`https://disease.sh/v3/covid-19/historical/${code}?lastdays=all`).then(res => res.json())
-
+      const country = await getDestination(code);
+  
       const casesChartData = [];
 
       var lastDate = null;
@@ -51,7 +55,8 @@ function Covid() {
 
       console.log(casesChartData)
       setData({
-        casesChartData: casesChartData
+        casesChartData: casesChartData,
+        diseaseRisk: country.disease_risk
       });
     }
 
@@ -72,9 +77,14 @@ function Covid() {
   return(
     <>
     <Container style={{margin: '0% 15%', width: 'auto'}}>
+      <div className="d-flex">
+        <Typography variant="bodyHeading" className="color-dark-teal me-4">DISEASE RISK</Typography>
+        <LocalHospitalIcon sx={{color: diseaseRiskColor(data.diseaseRisk), fontSize: 'large', mt: 1}}/>
+        <Typography variant="bodyImportant" className="mx-2 mt-1" sx={{color: diseaseRiskColor(data.diseaseRisk)}}>{diseaseRisk(data.diseaseRisk)}</Typography>
+      </div>
       <Row className="mt-5">
           <Col>
-            <Box sx={{ minWidth: 300 }}>
+            <Box sx={{ minWidth: 300}}>
             <FormControl sx={{ minWidth: 300 }}>
               <Select
                 value={disease}
@@ -106,7 +116,7 @@ function Covid() {
           </div>
 
           <div className="flex-stats">
-            <div className="teal box border-radius-med">
+            <div className="bg-dark-teal color-white box border-radius-med">
               <Typography variant="title">
                 11.1 B
               </Typography>
@@ -114,7 +124,7 @@ function Covid() {
                 doses administered
               </Typography>
             </div>
-            <div className="lightblue box border-radius-med">
+            <div className="bg-light-blue color-dark-teal box border-radius-med">
               <Typography variant="title">
                 57.8 %
               </Typography>
@@ -122,7 +132,7 @@ function Covid() {
                 fully vaccinated
               </Typography>
             </div>
-            <div className="teal box border-radius-med">
+            <div className="bg-dark-teal color-white box border-radius-med">
               <Typography variant="title">
                 20.5 % 
               </Typography>

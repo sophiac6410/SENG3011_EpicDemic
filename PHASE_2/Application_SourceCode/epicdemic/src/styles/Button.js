@@ -29,7 +29,7 @@ export const DarkButton = styled(BaseButton)({
 });
 
 export const LightButton = styled(BaseButton)({
-  backgroundColor: mediumBlue,
+  backgroundColor: lightTeal,
   color: 'white',
   '&:hover': {
     backgroundColor: darkTeal,

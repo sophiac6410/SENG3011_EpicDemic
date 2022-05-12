@@ -197,10 +197,10 @@ function Overview() {
       <div className="shadow border-radius-med mt-5 mb-5">
         <Row style={{"justify-content": "space-between", backgroundColor: safteyScoreColor(dest.safetyScore)}} className=" pt-1 pb-2 justify-content-center align-items-center">
           <Col className="mx-5">
-            <Typography variant="heading2" className="color-dark-teal py-1" style={{lineHeight: 1.6}}>SAFETY</Typography>
+            <Typography variant="heading2" className="py-1" style={{lineHeight: 1.6}}>SAFETY</Typography>
             <div style={{flexDirection: "row", display: "flex"}}>
                 <WarningIcon></WarningIcon>
-                <Typography variant="bodyImportant" className="color-dark-teal ms-3">{safteyScore(dest.safetyScore)} levels of threat</Typography>
+                <Typography variant="bodyImportant" className="ms-3">{safteyScore(dest.safetyScore)} levels of threat</Typography>
             </div>
           </Col>
           <Col md={3} className="text-center pt-3 pb-3 border-radius-med" style={{backgroundColor: safteyScoreColor(dest.safetyScore)}}>
@@ -211,56 +211,60 @@ function Overview() {
         <ul>{SafetyBoard(safetyData)}</ul>
         <Typography sx={{px: 10}}variant="caption" className="mt-5 mb-5">{safetySource}</Typography>
       </div>
-      <Typography variant="heading1" className="mb-4 mt-5 pt-4">COVID-19 Statistics</Typography>
-      <Row className="mb-5 justify-content-start">
-        <Col md={5} className="pt-5 me-5">
-          <Typography variant="title" className="color-medium-teal mt-5">DECLINING</Typography>
-          <Typography variant="bodyHeading" className="color-medium-teal">CONDITION</Typography>
-          <div className="end">
-            <CircularProgressbarWithChildren
-              value={Math.round(data.vaccinationPercentage)}
-              styles={buildStyles({            
-                strokeLinecap: 'butt',    
-                pathColor: '#0F83A0',
-                width: '20px'
-              })}
-              >
-              <div 
-                className="medium-teal"
-                style={{ textAlign: "center"}}
-              >
-                <Typography variant="title">{data.vaccinationPercentage.toFixed(1)}%</Typography>
-                <Typography variant="heading3">vaccinated</Typography>
-              </div>
-            </CircularProgressbarWithChildren>            
-          </div>
-          <Typography variant="title" className="medium-teal">{data.todayCases}</Typography>
-          <Typography variant="bodyHeading" className="medium-teal mb-5">CASES TODAY</Typography>
-        </Col>
-        <Col md={6}>
-          <MapContainer
-            className="leaflet-container2"
-            style={{ width: 500, height: 500}}
-            center={getCentre()} 
-            zoom={5}
-            zoomControl={false}
-            minZoom={5}
-            maxBounds={bounds}
-            maxBoundsViscosity={0.7}
-          >
-            <TileLayer
-              attribution='Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ'
-              url='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'
-            />
-            <Marker 
-              id={1}
-              position={getCentre()}
-              icon={hugeMarkerIcon}
-            />
-          </MapContainer>
-        </Col>
-      </Row>
-      <Typography variant="caption" className="mb-5">{covidSource}</Typography>
+      <div className="shadow border-radius-med mt-5 mb-5">
+        <div className="px-5 py-4 bg-light-blue mb-4">
+          <Typography variant="heading2" className="py-2">COVID-19 STATISTICS</Typography>
+        </div>
+        <Row className="mb-5 px-5 justify-content-start">
+          <Col md={5} className="pt-5 me-5">
+            <Typography variant="title" className="color-medium-teal mt-5">DECLINING</Typography>
+            <Typography variant="bodyHeading" className="color-medium-teal">CONDITION</Typography>
+            <div className="end">
+              <CircularProgressbarWithChildren
+                value={Math.round(data.vaccinationPercentage)}
+                styles={buildStyles({            
+                  strokeLinecap: 'butt',    
+                  pathColor: '#0F83A0',
+                  width: '20px'
+                })}
+                >
+                <div 
+                  className="medium-teal"
+                  style={{ textAlign: "center"}}
+                >
+                  <Typography variant="title">{data.vaccinationPercentage.toFixed(1)}%</Typography>
+                  <Typography variant="heading3">vaccinated</Typography>
+                </div>
+              </CircularProgressbarWithChildren>            
+            </div>
+            <Typography variant="title" className="medium-teal">{data.todayCases}</Typography>
+            <Typography variant="bodyHeading" className="medium-teal mb-5">CASES TODAY</Typography>
+          </Col>
+          <Col md={6} style={{alignItems: 'center', display: 'flex'}}>
+            <MapContainer
+              className="leaflet-container2"
+              style={{ width: 450, height: 450}}
+              center={getCentre()} 
+              zoom={7}
+              zoomControl={false}
+              minZoom={5}
+              maxBounds={bounds}
+              maxBoundsViscosity={0.7}
+            >
+              <TileLayer
+                attribution='Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ'
+                url='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'
+              />
+              <Marker 
+                id={1}
+                position={getCentre()}
+                icon={hugeMarkerIcon}
+              />
+            </MapContainer>
+          </Col>
+        </Row>
+        <Typography variant="caption" className="mb-5 px-5">{covidSource}</Typography>
+      </div>
     </Container>
     <Container style={{margin: '0% 10% 3%', width: 'auto'}}>
       <NewsBar></NewsBar>

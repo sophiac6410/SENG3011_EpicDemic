@@ -4,10 +4,11 @@ import Typography from '@mui/material/Typography';
 import '../../styles/Destination.css'
 import { areIntervalsOverlapping } from 'date-fns';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 function BlueCard(props) {
   console.log(props)
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(props.open);
   
   function isOpen() {
     if (open) {
@@ -31,14 +32,17 @@ function BlueCard(props) {
           </Typography>
         </div>
         <div className="justify-content-end pt-1" style={{flex: 1}}>
-          <KeyboardArrowDownIcon sx={{color: '#1B4965', justifyContent: 'end'}}/>
+          { open ? <KeyboardArrowUpIcon sx={{color: '#1B4965', justifyContent: 'end'}}/>
+            : <KeyboardArrowDownIcon sx={{color: '#1B4965', justifyContent: 'end'}}/>
+          }
         </div>
       </div>
       <div className="p-4" style={{ maxHeight: '300px', overflow: "auto", display: isOpen()}}>
-        <Typography variant="bodyText">{props.check.text}
+        {props.check.text}
+        {/* <Typography variant="bodyText">{props.check.text} */}
           {/* <div dangerouslySetInnerHTML={{__html: props.check.text}}></div> */}
           {/* {props.check.text} */}
-        </Typography>
+        {/* </Typography> */}
       </div>
     </div>
     // </Col>
