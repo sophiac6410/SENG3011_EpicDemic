@@ -47,7 +47,7 @@ function RestrictBox(props){
 function UpdateBar() {
 	const mediumTeal = '#0F83A0';
 	const darkTeal = '#1B4965';
-	const lightBlue = '#E2F2FC';
+	const lightBlue = '#E5F0F6';
 	const [travelUpdates, setTravelUpdates] = React.useState([]);
 	const [countryUpdates, setCountryUpdates] = React.useState([]);
 	useEffect(() => {

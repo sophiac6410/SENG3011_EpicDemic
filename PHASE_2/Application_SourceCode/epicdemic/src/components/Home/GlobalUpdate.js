@@ -186,13 +186,13 @@ const convertToBillions = (num) => {
 
 function UpdateBox(props) {
   return(
-    <Row className="m-2 me-4 mb-4 py-3 border-radius-small" style={{backgroundColor: props.bgColor, boxShadow: '0px 1px 5px #CCCCCC'}}>
+    <Row className="m-2 me-4 mb-4 py-4 border-radius-med" style={{backgroundColor: props.bgColor, boxShadow: '0px 1px 5px #CCCCCC'}}>
       <Col>
         <Row className="align-self-center justify-content-center">
-          <Typography variant="heading1" sx={{p: 0, color: props.fontC, textAlign: 'center'}}>{props.number}</Typography>
+          <Typography variant="title" sx={{p: 1, color: props.fontC, textAlign: 'center'}}>{props.number}</Typography>
         </Row>
         <Row className="align-self-center justify-content-center">
-          <Typography variant="heading3" sx={{p: 0, color: props.fontC, textAlign: 'center'}}>{props.text}</Typography>
+          <Typography variant="bodyImportant" sx={{p: 0, color: props.fontC, textAlign: 'center'}}>{props.text}</Typography>
         </Row>
       </Col>
     </Row>

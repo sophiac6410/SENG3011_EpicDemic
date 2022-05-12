@@ -41,7 +41,7 @@ function Home() {
   }, []);
 
   return (
-      <div className="bg-off-white">
+      <div>
         <div className="bg-forest" style={{height: '100vh'}}>
             <NavbarComp bg={false}></NavbarComp>
             <div>
