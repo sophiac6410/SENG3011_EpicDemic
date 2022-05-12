@@ -113,25 +113,25 @@ async def get_travel_overview(
 		print(a)
 
 	return baseModels.createResponse(True, 200, {
-			'declaration': data['declaration'],
-			'quarantine': data['quarantine'],
-			'area_restriction': area_list,
-			'testing': data['testing'],
-			'mask': data['mask'],
-			'area_policy': data['area_policy'],
-			'tracing': {
-				'date': data['tracing']['date'],
-				'text': data['tracing']['text'],
-				'isRequired': data['tracing']['isRequired'],
-				'androidLink': data['tracing']['androidUrl'][0],
-				'iosLink': data['tracing']['iosUrl'][0]
-			},
-			'attractions_info': data['attractions_info'],
-			'entry_info': data['entry_info'],
-			'event_info': data['event_info'],
-			'shopping_info': data['shopping_info'],
-			'vaccine_info': data['vaccine_info']
-		})
+		'declaration': data['declaration'],
+		'quarantine': data['quarantine'],
+		'area_restriction': area_list,
+		'testing': data['testing'],
+		'mask': data['mask'],
+		'area_policy': data['area_policy'],
+		'tracing': {
+			'date': data['tracing']['date'],
+			'text': data['tracing']['text'],
+			'isRequired': data['tracing']['isRequired'],
+			'androidLink': data['tracing']['androidUrl'][0],
+			'iosLink': data['tracing']['iosUrl'][0]
+		},
+		'attractions_info': data['attractions_info'],
+		'entry_info': data['entry_info'],
+		'event_info': data['event_info'],
+		'shopping_info': data['shopping_info'],
+		'vaccine_info': data['vaccine_info']
+	})
 
 
 

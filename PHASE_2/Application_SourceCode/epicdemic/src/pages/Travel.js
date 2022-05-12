@@ -1,3 +1,4 @@
+import React from 'react'
 import { Col, Container, Row } from "react-bootstrap"
 import midDot from "../static/mid-dot.svg"
 import '../styles/Destination.css'
@@ -12,6 +13,12 @@ import { Typography } from "@mui/material";
 import CircleIcon from '@mui/icons-material/Circle';
 import { getDestination } from "../apiCalls";
 import { travelStatusColor, travelStatus } from "../styles/Theme";
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepContent from '@mui/material/StepContent';
+import StepButton from '@mui/material/StepButton';
+import { ThreeCircles } from "react-loader-spinner";
+import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 
 const validCheck = <p>
   Before you book your travel, check if you meet Australia’s definition of fully vaccinated for international travel purposes. To meet Australia’s vaccination requirements and be considered a ‘fully vaccinated’ traveller for the purpose of Australia’s border arrangements, you need to provide evidence that you either: 
@@ -65,6 +72,8 @@ const foodCheck = <p>Open with restrictions</p>
 function Travel(travelStat) {
   const [data, setData] = useState(null);
   const { code } = useParams();
+  const steps = ['BEFORE YOU TRAVEL', 'ENTERING THE REGION', "WHILE YOU'RE THERE",];
+  const [activeStep, setActiveStep] = React.useState(0);
 
   const defaultEnterChecks = [
     {title: "QUARANTINE RULES", date: "Last updated 23/02/22", text: "International travellers are not required to quarantine upon arrival. However, the CDC recommends that travellers stay home and self-quarantine for 7 days after arrival. Travellers should take a test again 3-5 days after arrival; if a test is not available or results are delayed, travellers are recommended to stay home and self-quarantine for a total of 10 days after travelling"},
@@ -79,16 +88,26 @@ function Travel(travelStat) {
     async function fetchData() {
       const response = await fetch(`http://localhost:8000/v1/locations/${code}/travel`).then(res => res.json())
       const data = response.data
+      console.log(data);
       var enterChecks = []
       const country = await getDestination(code);
 
-      if(data.quaratine == undefined){
+      if(data.quarantine == undefined){
         enterChecks[0] = defaultEnterChecks[0]
       }else{
         enterChecks[0] = {
           title: "QUARANTINE RULES",
-          date: data.quaratine.date,
-          text: data.quaratine.text 
+          date: data.quarantine.date,
+          text: <>
+            <Typography variant="bodyText" sx={{display: 'inline'}}><b>Duration: </b>{data.quarantine.duration === '' ? 0 : data.quarantine.duration} days</Typography>
+            <br></br>
+            <Typography variant="bodyText"sx={{display: 'inline'}}><b>Eligible Persons: </b>{data.quarantine.eligiblePerson === '' ? 'None' : data.quarantine.eligiblePerson}</Typography>
+            <br/><br/>
+            <Typography variant="bodyText">{data.quarantine.text}</Typography>
+            <br/>
+            <Typography variant="bodyText">Source: </Typography>
+            <a variant="bodyText" href={data.quarantine.rules}>{data.quarantine.rules}</a>
+          </>
         }
       }
 
@@ -98,7 +117,12 @@ function Travel(travelStat) {
         enterChecks[1] = {
           title: "VACCINATION REQUIREMENTS",
           date: data.vaccine_info.last_updated,
-          text: data.vaccine_info.info 
+          text: <>
+            <Typography variant="bodyText">{data.vaccine_info.info}</Typography>
+            <br/>
+            <Typography variant="bodyText">Source: </Typography>
+            <a variant="bodyText" href={data.vaccine_info.source}>{data.vaccine_info.source}</a>
+          </>
         }
       }
 
@@ -108,7 +132,14 @@ function Travel(travelStat) {
         enterChecks[2] = {
           title: "TESTING REQUIREMENTS",
           date: data.testing.date,
-          text: data.testing.text 
+          text: <>
+          <Typography variant="bodyText" sx={{display: 'inline'}}><b>Required: </b>{data.testing.isRequired}</Typography>
+          <br/><br/>
+          <Typography variant="bodyText">{data.testing.text}</Typography>
+          <br/>
+          <Typography variant="bodyText">Source: </Typography>
+          <a variant="bodyText" href={data.testing.rules}>{data.testing.rules}</a>
+        </>
         }
       }
 
@@ -118,36 +149,67 @@ function Travel(travelStat) {
         enterChecks[3] = {
           title: "DOCUMENTATION DECLARATION",
           date: data.declaration.date,
-          text: data.declaration.text 
+          text: <>
+            <Typography variant="bodyText" sx={{display: 'inline'}}><b>Required: </b>{data.declaration.documentRequired}</Typography>
+            {data.declaration.travelDocumentation !== null && data.declaration.travelDocumentation !== ''
+              ? <><br/>
+                <Typography variant="bodyText"><b>Documentation: </b><a href={data.declaration.travelDocumentation}>{data.declaration.travelDocumentation}</a></Typography>
+                </>
+              : <></>
+            }
+            <br/><br/>
+            <Typography variant="bodyText">{data.declaration.text}</Typography>
+            <br/>
+          </>
         }
       }
-
 
       const ArrivalCheck = []
       if(typeof data.mask !== "undefined") {
         ArrivalCheck.push({
-          title: "Mask",
-          date: data.mask.last_updated,
-          text: data.mask.text 
+          title: "Masks",
+          date: data.mask.date,
+          text: <>
+            <Typography variant="bodyText" sx={{display: 'inline'}}><b>Required: </b>{data.mask.isRequired}</Typography>
+            <br/><br/>
+            <Typography variant="bodyText">{data.mask.text}</Typography>
+            </>
         })
       }
       if(typeof data.tracing !== "undefined") {
         ArrivalCheck.push({
-          title: "Tracing",
-          date: data.tracing.last_updated,
-          text: data.tracing.text 
+          title: "Tracing Application",
+          date: data.tracing.date,
+          text: <>
+            <Typography variant="bodyText" sx={{display: 'inline'}}><b>Required: </b>{data.tracing.isRequired}</Typography>
+            <br/><br/>
+            <Typography variant="bodyText">{data.tracing.text}</Typography>
+            {data.tracing.iosLink !== undefined
+              ? <><br/>
+                <Typography variant="bodyText" sx={{display: 'inline'}}><b>Download for IOS: </b><a href={data.tracing.iosLink}>{data.tracing.iosLink}</a></Typography>
+              </>
+              : <></>
+            }
+            {data.tracing.androidLink !== undefined
+              ? <><br/>
+                <Typography variant="bodyText" sx={{display: 'inline'}}><b>Download for Android: </b><a href={data.tracing.androidLink}>{data.tracing.androidLink}</a></Typography>
+              </>
+              : <></>
+            }
+            
+          </>
         })
       }
       if(typeof data.event_info !== "undefined") {
         ArrivalCheck.push({
-          title: "Event",
+          title: "Events",
           date: data.event_info.last_updated,
           text: data.event_info.entry_status 
         })
       }
       if(typeof data.attractions_info !== "undefined") {
         ArrivalCheck.push({
-          title: "Attraction",
+          title: "Attractions",
           date: data.attractions_info.last_updated,
           text: data.attractions_info.entry_status 
         })
@@ -159,15 +221,22 @@ function Travel(travelStat) {
           text: data.shopping_info.entry_status 
         })
       }
-
-      for(var i = 0; i < data.area_restriction.length; i++) {
-        var restriction = data.area_restriction[i]
+      if(typeof data.entry_info !== "undefined") {
         ArrivalCheck.push({
-          title: restriction.restrictionType,
-          date: restriction.last_updated,
-          text: restriction.text 
+          title: "Others",
+          date: data.entry_info.last_updated,
+          text: data.entry_info.info,
         })
       }
+
+      // for(var i = 0; i < data.area_restriction.length; i++) {
+      //   var restriction = data.area_restriction[i]
+      //   ArrivalCheck.push({
+      //     title: restriction.restrictionType,
+      //     date: restriction.last_updated,
+      //     text: restriction.text 
+      //   })
+      // }
 
       var newData = {
         code: code,
@@ -183,7 +252,8 @@ function Travel(travelStat) {
         shoppingInfo: data.shopping_info,
         vaccineInfo: data.vaccine_info,
         enterCheck: enterChecks,
-        ArrivalCheck: ArrivalCheck
+        ArrivalCheck: ArrivalCheck,
+        entryRequirements: country.entry_description
       }
       console.log(newData)
       // From the code, look up the relevant travel status details
@@ -198,24 +268,86 @@ function Travel(travelStat) {
     )
   }
 
+  function getContent(index) {
+    if (index == 0) {
+      return <div className="m-4">
+        <Typography variant="heading3" className="color-dark-teal mb-1">Check if you are considered a vaccinated traveller</Typography>
+        <Typography variant="bodyText" className="color-dark-teal mb-1">{validCheck}</Typography>
+        <Typography variant="heading3" className="color-dark-teal mb-1">Ensure you can provide proof</Typography>
+        <Typography variant="bodyText" className="color-dark-teal mb-1">{proofCheck}</Typography>
+      </div>
+    } else if (index == 1) {
+      return <Row className="m-4">
+        <Col md={12}>
+          <BlueCard open check={{
+            title: 'Entry Requirements',
+            text: <Typography variant="bodyText">{data.entryRequirements}</Typography>,
+          }} />
+        </Col>
+        {data.enterCheck.map((check, i) => 
+          <Col md={12}>
+            <BlueCard key={i} check={check}></BlueCard>
+          </Col>
+        )}
+      </Row>
+    } else if (index == 2) {
+      return <Row className="m-4">
+        <Col md={12}>
+          <BlueCard open check={{
+            title: 'AREA POLICY: ' + data.areaP.status.toUpperCase(),
+            date: data.areaP.date,
+            text: <>
+              <div className='d-flex'>
+                <Typography variant="bodyText" className="mb-1 justify-content-start" sx={{flex: 1}}><b>Start Date: </b>{data.areaP.startDate}</Typography>
+                <Typography variant="bodyText" className="mb-1 justify-content-center" sx={{flex: 1}}><b>End Date: </b>{data.areaP.endDate === 'indef' ? 'indefinite' : data.areaP.endDate}</Typography>
+              </div>
+              <Typography variant="bodyText" className="mb-3">{data.areaP.text}</Typography>
+              <Typography variant="bodyText">Source: <a href={data.areaP.referenceLink}>{data.areaP.referenceLink}</a></Typography>
+              <br/>
+              <Typography variant="bodyHeading">Restrictions</Typography>
+              {data.areaR.map((restriction, i) => {
+                return <div key={i}>
+                  <Typography variant="bodyImportant">{restriction.restrictionType}</Typography>
+                  <Typography variant="bodyText">{restriction.text}</Typography>
+                  <br/>
+                </div>
+              })
+              }
+            </>
+          }}/>
+        </Col>
+        {data.ArrivalCheck.map((check) =>
+          <Col md={6}>
+            <BlueCard check={check}></BlueCard>
+          </Col>
+        )}
+      </Row>
+    }
+  }
   return(
-    <Container className="mt-4" style={{margin: '0% 15%', width: 'auto'}}>
+    <Container style={{margin: '0% 15%', width: 'auto'}}>
       <Col>
-        <Row>
-          <Typography variant="bodyHeading" className="color-dark-teal">
-            TRAVEL STATUS
-          </Typography>
-        </Row>
-        <Row className="align-items-center pt-1 justify-content-start mt-3 mb-3">
-          <Col md={1} className="justify-content-center">
-            <CircleIcon style={{color: travelStatusColor(data.travelStatus)}}/>
-          </Col>
-          <Col className="pt-1">
-            <Typography variant="bodyImportant" style={{color: travelStatusColor(data.travelStatus)}}>{travelStatus(data.travelStatus)}</Typography>
-          </Col>
-        </Row>
+        <div className="d-flex">
+          <Typography variant="bodyHeading" className="color-dark-teal me-4">TRAVEL STATUS</Typography>
+          <CircleIcon sx={{color: travelStatusColor(data.travelStatus), fontSize: 'large', mt: 1}}/>
+          <Typography variant="bodyImportant" className="mx-2 mt-1" sx={{color: travelStatusColor(data.travelStatus)}}>{travelStatus(data.travelStatus)}</Typography>
+        </div>
         <Typography variant="heading1" className="color-dark-teal">Visiting {data.country}</Typography>
-        <div class="square border-start border-3 mt-3 mb-5" id="tealBorder">
+        <div className="mb-4">
+          <Stepper nonLinear activeStep={activeStep} orientation="vertical">
+            {steps.map((label, index) => (
+              <Step key={label}>
+                <StepButton icon={<CircleOutlinedIcon className="color-medium-teal"/>} onClick={() => {setActiveStep(index)}}>
+                  <Typography variant="heading2" className="color-dark-teal">{label}</Typography>
+                </StepButton>
+                <StepContent>
+                  {getContent(index)}
+                </StepContent>
+              </Step>
+            ))}
+          </Stepper>
+        </div>
+        {/* <div class="square border-start border-3 mt-3 mb-5" id="tealBorder">
           <Typography variant="heading2" className="color-dark-teal mb-3">BEFORE YOU TRAVEL</Typography>
           <Typography variant="heading3" className="color-dark-teal mb-1">Check if you are considered a vaccinated traveller</Typography>
           <Typography variant="bodyText" className="color-dark-teal mb-1">{validCheck}</Typography>
@@ -232,11 +364,10 @@ function Travel(travelStat) {
           <Typography variant="heading2" className="color-dark-teal mb-3">WHILE YOU'RE THERE</Typography>
           <div>{
             data.ArrivalCheck.map((check) => 
-              <Row>
-                <BlueCard check={check}></BlueCard>
-              </Row>
-            )}</div>
-        </div>
+              <BlueCard check={check}></BlueCard>
+            )}
+          </div>
+        </div> */}
       </Col>
     </Container>
   )

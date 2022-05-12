@@ -8,6 +8,7 @@ import Carousel from "react-multi-carousel";
 import NewsCard from "../Home/NewsCard";
 import globe from '../../static/globe.svg'
 import '../../styles/Destination.css'
+import { Typography } from '@mui/material';
 
 const responsive = {
     superLargeDesktop: {
@@ -29,8 +30,8 @@ const responsive = {
     }
   };
 
-const colours = [ '#0F83A0', '#FFFFFF', '#70C4E8' ]
-const fontColours = [ 'white', '#0F83A0', 'white' ]
+const colours = [ '#1B4965', 'white', '#E2F2FC' ]
+const fontColours = [ 'white', '#1B4965', '#1B4965' ]
 
 const news = [
   {
@@ -69,8 +70,8 @@ class NewsBar extends React.Component {
   render() {
     return(
       <Row className="mt-5 pt-5 mb-5">
-        <div className="title-h3 mt-5">Latest News</div>
-        <div className="news-carousel">
+        <Typography variant="heading2" className="py-2" sx={{textAlign: 'center'}}>LATEST NEWS</Typography>
+        <div>
           <Carousel 
             swipeable={true}
             showStatus={false}
