@@ -80,35 +80,31 @@ function Trip() {
           <ArrowBackIosIcon color="darkTeal" fontSize="medium"></ArrowBackIosIcon>
           <Typography variant="bodyText" className="color-dark-teal">Back</Typography>
         </IconButton>
-        <Row className="justify-content-center">
-          <div className="text-center mt-5">
-            <Typography variant="title" className="color-dark-teal">{name}</Typography>
-          </div>
-          <Row className='align-items-center justify-content-center mt-4 ps-5'>
-            <Col md={2} className="align-self-center ms-5">
+        <Row>
+          <Row className='align-items-center justify-content-center mt-6 ps-5'>
+            <div className="text-center mt-5" style={{marginBottom: "10px"}}>
+              <Typography variant="title" className="color-dark-teal">{name}</Typography>
+            </div>
+            <Col md={3} className="align-self-center">
               <Row className='align-items-center justify-content-end'>
                 <Col md={2}>
                   <DateRangeIcon color='teal'></DateRangeIcon>
                 </Col>
                 <Col className="align-self-center">
-                  <Typography variant="bodyText" className='color-medium-teal' style={{textAlign: "start", marginLeft: "5px"}}>{dates}</Typography>
+                  <Typography variant="bodyText" className='color-medium-teal' sx={{textAlign: "start", marginLeft: "5px"}}>{dates}</Typography>
                 </Col>
               </Row>
             </Col>
             <Col md={2}>
               <Row className='align-items-center justify-content-start'>
-                <Col md={1}>
-                  <PeopleOutlineIcon color='teal' onClick={openAddModal}></PeopleOutlineIcon>
+                <Col md={2}>
+                  <IconButton>
+                    <PeopleOutlineIcon color='teal' onClick={openAddModal}></PeopleOutlineIcon>
+                  </IconButton>
+                  
                 </Col>
                 <Col>
                   <Typography variant="bodyText" className='color-medium-teal' style={{textAlign: "start", marginLeft: "5px"}}>{travellers} Travellers</Typography>
-                </Col>
-              </Row>
-            </Col>
-            <Col md={2}>
-              <Row>
-                <Col md={1}>
-                  <PeopleOutlineIcon color='teal' onClick={openAddModal}></PeopleOutlineIcon>
                 </Col>
               </Row>
             </Col>

@@ -180,7 +180,7 @@ export const removeMember = async (email, tripId) => {
   console.log(email, tripId)
   try {
     const response = await fetch(`${API_URL.API_URL}/v1/trips/${tripId}/delete/member`, {
-      method: 'POST',
+      method: 'DELETE',
       headers: {
         'Content-type': 'application/json',
         Authorization: localStorage.getItem('token')

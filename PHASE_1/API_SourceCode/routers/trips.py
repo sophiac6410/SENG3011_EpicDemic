@@ -244,7 +244,7 @@ async def add_user_to_trip (
 
 
 @router.get("/{tripId}/members", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.UsersResponse, responses={401: {"model": baseModels.ErrorResponse}, 400: {"model": baseModels.ErrorResponse}})
-async def add_user_to_trip (
+async def get_user_to_trip (
     tripId: int = Path(..., description="The unique id of the trip"),
     Authorization: str = Header(..., example=token_example),
 ):
@@ -261,7 +261,7 @@ async def add_user_to_trip (
 
 
 @router.get("/{tripId}/owner", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.UserResponse, responses={401: {"model": baseModels.ErrorResponse}, 400: {"model": baseModels.ErrorResponse}})
-async def add_user_to_trip (
+async def get_owner (
     tripId: int = Path(..., description="The unique id of the trip"),
     Authorization: str = Header(..., example=token_example),
 ):
@@ -279,20 +279,14 @@ async def add_user_to_trip (
 
 
 @router.delete("/{tripId}/delete/member", status_code=status.HTTP_200_OK, tags=['trips'], response_model=baseModels.Response, responses={401: {"model": baseModels.ErrorResponse}})
-async def delete_saved_trip (
+async def delete_member (
     user: User,
     Authorization: str = Header(..., example=token_example),
     tripId: int = Path(..., description="The unique id of the trip")
 ):
-    user = auth.get_current_user(Authorization)
-    if tripId not in user['saved_trips']:
-        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Not authorised to delete members"}))
 
-    owner = list(trip_col.find({ "_id": tripId }))[0]['owner']
-    if user['email'] != owner:
-        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Not authorised to delete members"}))
 
-    if auth.get_user(user.email): 
+    if auth.get_current_user(Authorization): 
         trip_col.update_one(
             {"_id": tripId},
             {"$pull": {"members": user.email}}

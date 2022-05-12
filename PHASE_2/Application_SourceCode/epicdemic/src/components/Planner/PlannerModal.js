@@ -31,9 +31,10 @@ import GetCities from './GetCities';
 import { GetActivities } from '../../adapters/activityAPI';
 import { addCityToTrip, createTrip } from './tripApiCalls';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { TripOriginOutlined } from '@mui/icons-material';
+import { Margin, TripOriginOutlined } from '@mui/icons-material';
 
 import InputField from '../InputField';
+import { Field } from '../Form'
 import { addMember, removeMember, getMembers, getTripOwner } from '../../adapters/tripAPI';
 import { connected } from "process";
 
@@ -519,12 +520,19 @@ function ActivityModal({fromTrip, activities, tripId, city}) {
 
 /// FOR ADD MEMBER MODAL ///
 
-function RestrictBox({name, email, owner}){
+function RestrictBox({name, email, owner, trigger, setTrigger, id}){
   const darkTeal = '#1B4965';
+
+  const remove_member = async () => {
+    console.log(email)
+    const data = await removeMember(email, id);
+    console.log(data)
+    setTrigger(trigger + 1)
+  }
 
 	return (
 		<Row className="mt-2 mb-3 py-3 px-4 border-radius-small" style={{backgroundColor: 'white', boxShadow: '0px 1px 5px #CCCCCC', marginLeft: '80px', marginRight: '80px' }}>
-			<Box sx={{ display: 'flex'}}>
+			<Box sx={{ display: 'flex' }}>
 				<Typography variant="heading3" sx={{color: darkTeal, flex: 1, justifyContent: 'flex-start', textAlign: 'left' }}> {name} </Typography>	
         {
           owner ? <Typography variant="heading4" sx={{color: darkTeal, flex: 1, justifyContent: 'flex-end', textAlign: 'right'}}> Owner </Typography>
@@ -536,7 +544,7 @@ function RestrictBox({name, email, owner}){
         {
           owner ? <></>
           : <Typography variant="caption" sx={{color: darkTeal, flex: 1, justifyContent: 'flex-end', textAlign: 'right', textDecoration: 'underline', cursor: 'pointer'}}
-              onClick={() => { }}
+              onClick={remove_member}
             > Remove </Typography>
         }
 			</Box>
@@ -544,17 +552,20 @@ function RestrictBox({name, email, owner}){
 	);
 }
 
+
 function AddMember({isOpen, onClose , tripId}) {
   const teal = "#0F83A0";
   const [email, setEmail] = useState('')
   const [owner, setOwner] = useState({})
   const [members, setMembers] = useState([])
+  const [trigger, setTrigger] = useState(0)
 
   const add_member = async () => {
     console.log(email)
     const data = await addMember(email, tripId);
     console.log(data)
     setEmail('')
+    setTrigger(trigger + 1)
   }
 
   useEffect(() => {
@@ -564,7 +575,7 @@ function AddMember({isOpen, onClose , tripId}) {
       console.log('members', members)
     }
     updateMembers()
-  }, [email])
+  }, [trigger])
 
   useEffect(() => {
     async function getOwner() {
@@ -593,16 +604,21 @@ function AddMember({isOpen, onClose , tripId}) {
           Share with other users
         </Typography>
 
-        <div sx={{display: "flex", flexDirection: "column"}}>
-          <InputField type="email" change={e => setEmail(e.target.value)} placeholder="Enter your email"></InputField>
-          <TealBotton onClick={add_member}> Share </TealBotton>
-        </div>
+        <Box sx={{ display: 'flex', marginLeft: '80px', marginRight: '80px' }}>
+          <Field type="email" onChange={e => setEmail(e.target.value)} placeholder="Enter your email" value={email}
+            sx={{ marginLeft: '40px', marginRight: '40px' }}></Field>
+          {/* <InputField type="email" change={} placeholder="Enter your email"></InputField> */}
+          <TealBotton onClick={add_member} sx={{marginTop: '20px', marginBottom: '20px'}}> Share </TealBotton>
+        </Box>
 
         <div sx={{display: "flex", flexDirection: "column"}}>
           <RestrictBox
                     email={owner.email}
                     name={owner.name}
                     owner={true}
+                    trigger={trigger}
+                    setTrigger={setTrigger}
+                    id={tripId}
                   />
           { members.map((mem, idx) => {
             console.log(mem)
@@ -612,14 +628,17 @@ function AddMember({isOpen, onClose , tripId}) {
                 email={mem.email}
                 name={mem.name}
                 owner={false}
+                trigger={trigger}
+                setTrigger={setTrigger}
+                id={tripId}
               />  
             )
           })}
         </div>
 
-        <Box sx={{display: "flex", flexDirection: "row", marginTop: "80px"}}>
+        <Box sx={{display: "flex", flexDirection: "row", marginTop: "80px", justifyContent: 'center'}}>
           <Col md={6}>
-            <TealBotton onClick={onClose}>Cancel</TealBotton>
+            <TealBotton onClick={onClose}>Close</TealBotton>
           </Col>
         </Box>
       </Box>
