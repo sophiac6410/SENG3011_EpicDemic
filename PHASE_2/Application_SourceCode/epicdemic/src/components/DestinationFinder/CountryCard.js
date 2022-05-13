@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from "react";
 import { Card, Image, Badge } from "react-bootstrap";
 import { travelStatus, travelStatusColor} from "../../styles/Theme.js";
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import "../../styles/CountryCard.css";
 
-const CountryCard = ({code, country, status}) => {
+const CountryCard = ({code, country, status, saved}) => {
     const [travel, setTravel] = useState({});
 
     useEffect(() => {
@@ -30,8 +32,9 @@ const CountryCard = ({code, country, status}) => {
             <img src={require('../../static/countryCardPics/' + country + '.png')}
                 style={{ "width": "18vw", "height": "12vw", "objectFit": "cover", "borderTopLeftRadius": "20px", "borderTopRightRadius": "20px" }}
             />
-            <Card.Footer style={{"height": "6vw"}}>
+            <Card.Footer style={{"height": "6vw", position: "relative"}}>
                 <b style={{fontSize: "18px"}}>{country}</b>
+                {saved ? <FavoriteIcon fontSize="large" sx={{color: "#62B6CB"}} style={{ position: "absolute", top: 0, right: 0, paddingTop: "1.5%", paddingRight: "1.5%"}}/> : <FavoriteBorderOutlinedIcon fontSize="large" sx={{color: "#62B6CB"}} style={{ position: "absolute", top: 0, right: 0, paddingTop: "1.5%", paddingRight: "1.5%"}}/>}
                 <br/>
                 <Badge className={travel.tStatusColor} pill>
                     {travel.tStatus}

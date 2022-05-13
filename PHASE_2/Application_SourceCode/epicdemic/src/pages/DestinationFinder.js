@@ -82,86 +82,10 @@ const DestinationFinder = () => {
             <Row style={{"marginLeft": "6vw", "marginRight": "6vw", "marginTop": "10vh", "marginBottom": "10vh"}}>
                 <div className="image-gallery">
                     {countries.map((country, idx) => {
-                        return(<CountryCard code={country.id} country={country.country} status={country.travel_status}/>)
+                        return(<CountryCard code={country.id} country={country.country} status={country.travel_status} saved={savedLocations.includes(country.id)}/>)
                     })}
                 </div>
-                {/* <Container style={{height: '80vh', overflowY: 'scroll'}}>
-                    <CountryCard />
-                </Container> */}
             </Row>
-            {/* <Row style={{"margin": "5%", "padding": '1%', "marginTop": "10vh"}}>
-                <HeaderInfoRow/>
-                <Container style={{height: '80vh', overflowY: 'scroll'}}>
-                    {destinations.map((dest, idx) => {
-                        if (searchFilter.travel === null || searchFilter.travel.label === travelStatus(dest.travel_status)) {
-                            return (
-                                <InfoRow
-                                key={idx}
-                                code={dest.id}
-                                country={dest.country}
-                                updateDesc={dest.entry_description}
-                                lastUpdated={getDate(dest.last_update)}
-                                travelStat={dest.travel_status}
-                                saved={savedLocations.includes(dest.id)}
-                                />
-                            )
-                        } else {
-                            return <></>
-                        }
-                    })}
-                </Container>
-            </Row>
-            <Row className="map-section">
-                <Typography variant="heading1">TRAVEL REGULATIONS MAP</Typography>
-                <Image className="world-map" src={WorldMap}/>
-            </Row>
-            <Row className="map-legend">
-                <Col style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
-                    <Image style={{"marginRight" : "1vw"}} src={HexTeal}/>
-                    Closed
-                </Col>
-                <Col style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
-                    <Image style={{"marginRight" : "1vw"}} src={HexWhite}/>
-                    Open with restrictions
-                </Col>
-                <Col style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
-                    <Image style={{"marginRight" : "1vw"}} src={HexMedTeal}/>
-                    Open
-                </Col>
-            </Row>
-            <Row style={{marginTop: "15vh"}}>
-                <Container fluid style={{margin: '8% 0%'}}>
-                    <Row>
-                        <Col md={4}>
-                            <Image className="balloon-background" src={BalloonBackground}/>
-                        </Col>
-                        <Col md={7} style={{marginTop: 0}}>
-                            <Typography variant="heading1">MOST POPULAR TRAVEL DESTINATIONS</Typography>
-                            <HeaderInfoRow2/>
-                            <Container style={{height: '55vh', overflowY: 'scroll', marginBottom: '3%'}}>
-                            {popularDestinations.map((popDest, idx) => {
-                                return (
-                                    <InfoRow2
-                                    key={idx}
-                                    country={popDest.country}
-                                    arrivals={popDest.arrivals}
-                                    travelStat={popDest.travelStatus}
-                                    />
-                                    )
-                                })}
-                            </Container>
-                            <DarkButton
-                                sx={{display: 'block', margin: 'auto'}}
-                                onClick={() => {
-                                    navigate('/saved');
-                                }}
-                            >
-                                Recommend me a destination
-                            </DarkButton>
-                        </Col>
-                    </Row>
-                </Container>
-            </Row> */}
         </div>
     );
 };
