@@ -38,7 +38,7 @@ export default function CountrySelect({isFrom, handleInput}) {
         sx={{ width: 250 }}
         options={ isFrom ? aus : countries }
         autoHighlight
-        underlineShow={false}
+        // underlineShow={false}
         onChange={handleInput}
         getOptionLabel={(option) => option.label}
         renderOption={(props, option) => (
@@ -64,7 +64,7 @@ export default function CountrySelect({isFrom, handleInput}) {
             inputProps={{
               ...params.inputProps,
               autoComplete: 'new-password', // disable autocomplete and autofill
-              disableUnderline: true,
+              // disableUnderline: true,
             }}
           />
         )}

@@ -32,6 +32,7 @@ import { GetActivities } from '../../adapters/activityAPI';
 import { addCityToTrip, createTrip } from './tripApiCalls';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { TripOriginOutlined } from '@mui/icons-material';
+import { Countries } from "./CountryField";
 
 const style = {
   position: 'absolute',
@@ -229,7 +230,7 @@ function StepOne({isOpen, onClose, onNext}) {
 }
 
 function StepTwo({onClose, name, start, end, travellers}) {
-  const [isOpen, setOpen] = React.useState(null);
+  const [isOpen, setOpen] = React.useState(false);
   const [country, setCountry] = React.useState(null);
   const [region, setRegion] = React.useState(null);
   const [city, setCity] = React.useState(null);
@@ -283,6 +284,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
     
     var index = Math.floor((Math.random() * 100) + 1);
     const data = await GetCities(country, "-population")
+    // const data = Countries
     const cityCount = data.metadata.totalCount;
     if (cityCount < 100) {
       index = Math.floor((Math.random() * cityCount) + 1);
@@ -325,16 +327,29 @@ function StepTwo({onClose, name, start, end, travellers}) {
   useEffect(() => {
     async function updateActivity() {
       // setLoading(true)
-      var {out, controller} = await GetActivities({lat: city.latitude, lot: city.longitude})
-      out.then(res => {
-        console.log(res.data)
-        setActivity(res.data); // dispatching data to components state
-      }).catch(err => {
-        console.log(err)
-        // setLoading(false)
-      });
+      if(city){
+        var {out, controller} = await GetActivities({lat: city.latitude, lot: city.longitude})
+        out.then(res => {
+          console.log(res.status)
+          console.log(res.data)
+          if(res.data == null || res.status != 200) {
+            setActivity([]); // dispatching data to components state
+          }else{
+            setActivity(res.data); // dispatching data to components state
+          }
+          console.log(res.data)
+        }).catch(err => {
+          console.log(err)
+          // setLoading(false)
+        });
+      }else{
+        setActivity([]); // dispatching data to components state
+      }
     }
     updateActivity()
+    return () => {
+      setActivity([]);
+    };
   }, [city])
   
   return(
@@ -404,7 +419,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
                     </IconButton>
                     <Typography variant='caption' className='color-medium-teal'>View activities</Typography>
                   </div> */}
-                  <ActivityModal tripId={tripId} activities={activity} city={city}></ActivityModal>
+                  <ActivityModal fromTrip={false} tripId={tripId} activities={activity} city={city}></ActivityModal>
                 </div>
               ) : (
                 <div style={{display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center", marginBottom: "80px"}} className="mt-2">
@@ -501,8 +516,17 @@ function ActivityModal({fromTrip, activities, tripId, city}) {
             centerMode={true}
             // className="bg-light-teal"
           >
-            { activities !== [] && activities !== {} &&
-              activities.map((activity) => <ActivityCard key={activity.id} activity={activity} cityId={city.id} tripId={tripId}></ActivityCard>)
+            { activities !== [] && activities !== {} ? (
+              activities.map((activity, id) => {
+                if(activity !== null && city != null) {
+                  console.log(activity)
+                  console.log(city)
+                  return <ActivityCard key={activity.id} activity={activity} cityId={city.id} tripId={tripId}></ActivityCard>
+                }
+              })
+            ): (
+              <div></div>
+            )
             }
           </Carousel>
         </Box>

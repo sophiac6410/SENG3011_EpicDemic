@@ -9,13 +9,13 @@ import SavedCard from '../components/Planner/SavedCard'
 import { getSavedTrips, deleteTrip } from '../components/Planner/tripApiCalls'
 
 function Planner() {
-  const [stepOne, setStepOne] = React.useState(false);
+  const [stepOneOpen, setStepOneOpen] = React.useState(false);
   const [stepTwo, setStepTwo] = React.useState(false);
   const [trips, setTrips] = React.useState([])
-  const openStepOne = () => setStepOne(true)
-  const closeStepOne = () => setStepOne(false)
+  const openStepOne = () => setStepOneOpen(true)
+  const closeStepOne = () => setStepOneOpen(false)
   const openStepTwo = () => {
-    setStepOne(false);
+    setStepOneOpen(false);
     setStepTwo(true)
   }
   const closeStepTwo = () => setStepTwo(false)
@@ -23,7 +23,10 @@ function Planner() {
   
   useEffect(() => {
     getTrips()
-  }, [trips]);
+    return () => {
+      setTrips([]);
+    };
+  }, []);
 
   const getTrips = async () => {
     const data = await getSavedTrips();
@@ -49,8 +52,7 @@ function Planner() {
           <WhiteButton onClick={openStepOne}>
             <Typography variant="bodyImportant" className="me-5 ms-5">Plan a new trip</Typography>
           </WhiteButton>
-          <StepOne isOpen={stepOne} onClose={closeStepOne} onNext={openStepTwo}></StepOne>
-          {/* <StepTwo isOpen={stepTwo} onClose={closeStepTwo} onSave={saveTrip}></StepTwo> */}
+          <StepOne isOpen={stepOneOpen} onClose={closeStepOne} onNext={openStepTwo}></StepOne>
         </div>
       </div>
       <Container className="pt-5 pb-5">
@@ -67,6 +69,7 @@ function Planner() {
                 end={trips[key].end_date}
                 travellers={trips[i].travellers}
                 tripId={trips[i].id}
+                update={getTrips}
               ></SavedCard>)
             )
           )}
