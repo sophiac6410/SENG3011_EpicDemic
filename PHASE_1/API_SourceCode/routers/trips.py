@@ -286,6 +286,9 @@ async def delete_member (
     tripId: int = Path(..., description="The unique id of the trip")
 ):
 
+    owner = list(trip_col.find({ "_id": tripId }))[0]['owner']
+    if auth.get_current_user(Authorization)['email'] != owner:
+        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Not authorised to remove members from trip"}))
 
     if auth.get_current_user(Authorization): 
         trip_col.update_one(

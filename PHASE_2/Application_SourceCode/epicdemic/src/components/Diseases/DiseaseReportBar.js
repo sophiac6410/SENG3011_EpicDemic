@@ -54,8 +54,8 @@ export default function DiseaseReportBar({code, disease}) {
 
     console.log('the disease is', disease)
     async function fetchData() {
-      // const data = await fetch(`https://prod.greatescape.co/api/travel/countries/${code}/corona`, options).then(res => res.json())
-      const data = await fetch(`https://newsdata.io/api/1/news?apikey=${API_KEY}&country=${code}&language=en&q=${disease}`, options).then(res => res.json())
+      const data = await fetch(`https://prod.greatescape.co/api/travel/countries/${code}/corona`, options).then(res => res.json())
+      // const data = await fetch(`https://newsdata.io/api/1/news?apikey=${API_KEY}&country=${code}&language=en&q=${disease}`, options).then(res => res.json())
       console.log('printing data', data)
       setDiseaseData(data.news.slice(0, (data.news.length / 2)))
       setDiseaseData2(data.news.slice((data.news.length / 2), data.news.length))
