@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import { alpha, styled } from '@mui/material/styles';
+import PropTypes from 'prop-types';
 
 const mediumTeal = '#0F83A0';
 const lightTeal = '#62B6CB';
@@ -17,7 +18,6 @@ const BaseButton = styled(Button)({
   borderRadius: brSmall,
   padding: '10px 20px',
   fontFamily: 'Nunito',
-  variant: 'bodyImportant',
 });
 
 export const DarkButton = styled(BaseButton)({
@@ -29,7 +29,7 @@ export const DarkButton = styled(BaseButton)({
 });
 
 export const LightButton = styled(BaseButton)({
-  backgroundColor: mediumBlue,
+  backgroundColor: lightTeal,
   color: 'white',
   '&:hover': {
     backgroundColor: darkTeal,
@@ -44,24 +44,41 @@ export const WhiteButton = styled(BaseButton)({
   },
 });
 
-export const DestinationTabs = styled(BaseButton) ({
+const NotActiveDestinationTabs = styled(BaseButton) ({
   variant: "outlined",
-  color: mediumBlue,
+  color: lightTeal,
   border: '3px solid',
   fontWeight: "bold",
   '&:hover': {
-    backgroundColor: mediumBlue,
+    backgroundColor: lightTeal,
     color: "white",
     border: '3px solid',
     variant: "outlined",
     fontWeight: "bold",
-  },
-  '&:active': {
-    backgroundColor: mediumBlue,
-    color: "white",
-    border: 'none'
-  },
+  }
 })
+const ActiveDestinationTab = styled(BaseButton) ({
+  backgroundColor: lightTeal,
+  color: "white",
+  border: '3px solid',
+  variant: "outlined",
+  fontWeight: "bold",
+  '&:hover': {
+    backgroundColor: lightTeal,
+    color: "white",
+    border: '3px solid',
+    variant: "outlined",
+    fontWeight: "bold",
+  }
+})
+export function DestinationTabs(props) {
+  DestinationTabs.propTypes = {active: PropTypes.bool, name: PropTypes.string}
+  if (props.active) {
+    return <ActiveDestinationTab>{props.name}</ActiveDestinationTab>
+  } else {
+    return <NotActiveDestinationTabs>{props.name}</NotActiveDestinationTabs>
+  }
+}
 export const TealBotton = styled(BaseButton)({
   backgroundColor: mediumTeal,
   paddingLeft: "30px",

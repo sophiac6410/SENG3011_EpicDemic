@@ -79,27 +79,42 @@ function NavbarComp(props) {
 
   return (
       <Navbar className='justify-content-center' variant="dark" style={{zIndex: 2, width: '100vw', background: bgColor}}>
-        <Container style={{margin: '1% 10% 0%'}}>
+        <Container style={{margin: '1% 0% 0%'}}>
+          <div className="d-flex">
           <Navbar.Brand href="/">
             <Typography variant="heading3">EPICDEMIC</Typography>
           </Navbar.Brand>
-          <div className="d-flex justify-content-end pe-4">
+          <div className="d-flex justify-content-start p-1">
+              <Nav>
+                <Nav.Link href="/" name="home" className="mx-1">
+                  <Typography variant='bodyHeading' sx={{color: 'white'}}>HOME</Typography>
+                </Nav.Link>
+                <Nav.Link href="/finder" name="destination" className="mx-1">
+                  <Typography variant='bodyHeading' sx={{color: 'white'}}>DESTINATIONS</Typography>
+                </Nav.Link>
+                <Nav.Link href="/planner" name="trip" className="mx-1">
+                  <Typography variant='bodyHeading' sx={{color: 'white'}}>PLAN YOUR TRIP</Typography>
+                </Nav.Link>
+              </Nav>
+          </div> 
+          </div>
+          <div className="d-flex justify-content-end">
             {getters.loggedIn 
             ? (
               <Nav>
-                <Nav.Link href="/saved" name="updates" className="mx-3">
+                <Nav.Link href="/saved" name="updates" className="mx-1">
                   <Notification updateNum={ props.updateNum }/>
                   <Typography variant="caption" sx={{color: "white"}}>Updates</Typography>
                 </Nav.Link>
-                <Nav.Link href="/saved" name="saved-locations" className="mx-3">
+                <Nav.Link href="/saved" name="saved-locations" className="mx-1">
                   <FavoriteIcon sx={{ color: "white", fontSize: 30, display:'block', mx: 'auto'}} />
                   <Typography variant="caption" sx={{color: "white"}}>Saved Locations</Typography>
                 </Nav.Link>
-                <Nav.Link href="/planner" name="saved-trips" className="mx-3">
+                <Nav.Link href="/planner" name="saved-trips" className="mx-1">
                   <FlightIcon sx={{ color: "white", fontSize: 30, display:'block', mx: 'auto'}} />
                   <Typography variant="caption" sx={{color: "white"}}>Saved Trips</Typography>
                 </Nav.Link>
-                <Nav.Link name="profile" className="mx-3" aria-controls={open ? 'basic-menu' : undefined}
+                <Nav.Link name="profile" className="mx-1" aria-controls={open ? 'basic-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick}>

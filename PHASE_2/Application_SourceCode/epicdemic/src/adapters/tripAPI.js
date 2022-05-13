@@ -148,3 +148,99 @@ export const getTripById = async (tripId) => {
       console.log(e)
   }
 }
+
+///// FOR GROUPS /////
+
+export const addMember = async (email, tripId) => {
+  console.log(email, tripId)
+  try {
+    const response = await fetch(`${API_URL.API_URL}/v1/trips/${tripId}/new/member`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      },
+      body: JSON.stringify({
+        email: email
+      }),
+    });
+    const data = await response.json();
+    if (response.status !== 200) {
+      console.log(data)
+      alert(data.data.error);
+    } else {
+      return (data.data)
+    }
+  } catch (e) {
+      console.log(e)
+  }
+}
+
+export const removeMember = async (email, tripId) => {
+  console.log(email, tripId)
+  try {
+    const response = await fetch(`${API_URL.API_URL}/v1/trips/${tripId}/delete/member`, {
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      },
+      body: JSON.stringify({
+        email: email
+      }),
+    });
+    const data = await response.json();
+    if (response.status !== 200) {
+      console.log(data)
+      alert(data.data.error);
+    } else {
+      return (data.data)
+    }
+  } catch (e) {
+      console.log(e)
+  }
+}
+
+export const getMembers = async (tripId) => {
+  try {
+    const response = await fetch(`${API_URL.API_URL}/v1/trips/${tripId}/members`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      },
+    });
+    const data = await response.json();
+    if (response.status !== 200) {
+      console.log(data)
+      console.log(response)
+    } else {
+      console.log(data)
+      return data.data
+    }
+  } catch (e) {
+      console.log(e)
+  }
+}
+
+export const getTripOwner = async (tripId) => {
+  try {
+    const response = await fetch(`${API_URL.API_URL}/v1/trips/${tripId}/owner`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      },
+    });
+    const data = await response.json();
+    if (response.status !== 200) {
+      console.log(data)
+      console.log(response)
+    } else {
+      console.log(data)
+      return data.data
+    }
+  } catch (e) {
+      console.log(e)
+  }
+}

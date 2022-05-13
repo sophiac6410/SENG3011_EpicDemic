@@ -35,8 +35,11 @@ const responsive = {
 
 const COLOR = 'white';
 
-export default function DiseaseReportBar(code) {
+const API_KEY="pub_72536ca59b511c07890630cdccd42c8723d4";
+
+export default function DiseaseReportBar({code, disease}) {
   const [diseaseData, setDiseaseData] = useState([]);
+  const [diseaseData2, setDiseaseData2] = useState([]);
 
   const options = {
     method: "GET",
@@ -49,13 +52,16 @@ export default function DiseaseReportBar(code) {
   useEffect(() => {
     if (diseaseData === []) return;
 
+    console.log('the disease is', disease)
     async function fetchData() {
       const data = await fetch(`https://prod.greatescape.co/api/travel/countries/${code}/corona`, options).then(res => res.json())
+      // const data = await fetch(`https://newsdata.io/api/1/news?apikey=${API_KEY}&country=${code}&language=en&q=${disease}`, options).then(res => res.json())
       console.log('printing data', data)
-      setDiseaseData(data.news)
+      setDiseaseData(data.news.slice(0, (data.news.length / 2)))
+      setDiseaseData2(data.news.slice((data.news.length / 2), data.news.length))
     }
     fetchData()
-  }, [])
+  }, [disease])
 
   return(
     <div style={{ padding: '3% 10% 10%', backgroundColor: '#E9F0FB' }}>
@@ -70,10 +76,11 @@ export default function DiseaseReportBar(code) {
             responsive={responsive} 
           >
             
-              {diseaseData.map((data, idx) => {
+              {diseaseData2.map((data, idx) => {
 
                   return (
-                      <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%' }} >
+                    <div className="news-container-col">
+                      <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
                       <CardContent>
                         <Typography variant="caption" color="text.secondary">
                           {(new Date(data.date)).toDateString()}
@@ -91,6 +98,26 @@ export default function DiseaseReportBar(code) {
                         </Typography>
                       </CardContent>
                       </Card>
+
+                      <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
+                      <CardContent>
+                        <Typography variant="caption" color="text.secondary">
+                          {(new Date(diseaseData[idx].date)).toDateString()}
+                        </Typography>
+                        <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
+                            {diseaseData[idx].title}
+                        </Typography>
+                        <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { window.open(diseaseData[idx].link) }}>
+                          <Typography variant='bodyImportant'>
+                            Read more
+                          </Typography>
+                        </LightButton>
+                        <Typography variant="caption" color="text.secondary" sx={{display: 'block'}} gutterBottom>
+                          Source: {diseaseData[idx].pub}
+                        </Typography>
+                      </CardContent>
+                      </Card>
+                      </div>
                   )
                 })}
             

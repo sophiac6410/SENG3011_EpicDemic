@@ -49,8 +49,7 @@ const theme = createTheme({
     superTitle: {
       fontFamily: "Nunito, serif",
       fontWeight: 700,
-      fontWeight: "bold",
-      fontSize: "60px",
+      fontSize: "4.5em",
       lineHeight: 1.5,
       display: 'inline',
     },
@@ -92,7 +91,7 @@ const theme = createTheme({
       fontFamily: "Open Sans, sans-serif",
       fontStyle: "normal",
       fontWeight: 400,
-      fontSize: '0.8em',
+      fontSize: '0.9em',
       lineHeight: 1.5,
       display: 'block',
       // textAlign: 'start'

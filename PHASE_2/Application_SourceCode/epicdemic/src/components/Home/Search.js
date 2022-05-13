@@ -29,12 +29,12 @@ function Search() {
     navigate('/finder');
   }
     return(
-      <div className="border-radius-med bg-white mt-3 mb-5" style={{width: "70%", paddingTop: '1%', paddingBottom: '1%'}}>
+      <div className="border-radius-med bg-white mt-3 mb-5" style={{opacity: 0.85, paddingTop: '1%', paddingBottom: '1%'}}>
         <div className="search-row">
-          <div className="search-col ps-4">
-            <Typography variant="bodyImportant" className="color-dark-teal ps-3 mb-2">FROM</Typography>
-            <div className="border-radius-large searchfield-container ps-3 pe-5">
-              <FlightTakeoffIcon fontSize="large"></FlightTakeoffIcon>
+          <div className="search-col ps-4" style={{ marginLeft: 25 }}>
+            <Typography variant="bodyImportant" className="color-dark-grey ps-3">FROM</Typography>
+            <div className="border-radius-large searchfield-container ps-3 pe-5" >
+              <FlightTakeoffIcon fontSize="large" ></FlightTakeoffIcon>
               <CountrySelect isFrom={true} handleInput={() => {}}></CountrySelect>
             </div>
           </div>
@@ -43,19 +43,19 @@ function Search() {
               <img src={arrow} alt="arrow" width="55%" height="55%"></img>
             </div>
           </div> */}
-          <Divider orientation="vertical" flexItem style={{hieght: "90%"}}/>
+          <Divider className="color-dark-grey" orientation="vertical" flexItem style={{height: "90%"}}/>
           <div className="search-col me-4">
-            <Typography variant="bodyImportant" className="color-dark-teal ps-5 mb-2">TO</Typography>
+            <Typography variant="bodyImportant" className="color-dark-grey ps-5">TO</Typography>
             <div className="border-radius-large searchfield-container ps-5 pe-5">
               <FlightLandIcon fontSize="large"></FlightLandIcon>
               <CountrySelect isFrom={false} handleInput={(e, v) => setDest(v)}></CountrySelect>
             </div>
           </div>
-          <div className="bg-dark-teal border-radius-med text-center">
+          <div className="bg-dark-teal border-radius-med text-center" style={{ padding: 0, marginRight: 15 }}>
             <IconButton 
               aria-label="search"
               onClick={ routeChange }>
-              <SearchIcon sx={{ color: "white", fontSize: 40, mt: 3, mb:3, mr:3, ml: 3}}/>
+              <SearchIcon sx={{ color: "white", padding: 0, fontSize: 30, m: 3}}/>
             </IconButton>
           </div>
         </div>

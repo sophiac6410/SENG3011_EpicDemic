@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     // backgroundColor: "#7CC9E9",
     fontFamily: "Open Sans, sans-serif",
     fontStyle: "normal",
-    fontWeight: 700,
+    fontWeight: 500,
     fontSize: "1em",
   },
 }));
@@ -31,12 +31,13 @@ export default function CountrySelect({isFrom, handleInput}) {
   const classes = useStyles();
 
   return (
-    <div style={{ display: "flex", alignItems: "center", flexDirection: "row", padding: '2%' }}>
+    <div style={{ display: "flex", alignItems: "center", flexDirection: "row", padding: '1%' }}>
       <Autocomplete
         id="country-select-demo"
         classes={classes}
-        sx={{ width: 250 }}
+        sx={{ width: 250, marginLeft: 2 }}
         options={ isFrom ? aus : countries }
+        value={ isFrom ? aus[0] : null}
         autoHighlight
         // underlineShow={false}
         onChange={handleInput}
@@ -502,7 +503,7 @@ const countries = [
 const aus = [
   {
     code: 'AU',
-    label: 'Australia',
+    label: 'Sydney, Australia',
     phone: '61',
   },
 ];
