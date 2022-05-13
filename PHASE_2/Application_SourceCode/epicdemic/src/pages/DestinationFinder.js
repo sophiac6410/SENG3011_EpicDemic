@@ -45,11 +45,6 @@ const DestinationFinder = () => {
         fetchData();
     }, []);
 
-    const getDate = (date) => {
-		const dateObj = new Date(date);
-		return dateObj;
-	}
-
     const updateSearch = (k, v) => {
         var newSearch = {...searchFilter}
         newSearch[k] = v;
@@ -58,11 +53,15 @@ const DestinationFinder = () => {
 
     return (
         <div className="bg-off-white">
-            <div className="bg-plane">
-                <NavbarComp bg={false}/>
-                <div className="text-center mb-5" style={{marginTop: "300px"}}>
-                    <Typography variant="title" className="color-white mt-5">FIND A DESTINATION BY...</Typography>
+            <div className="bg-plane"/>
+            <NavbarComp bg={false}/>
+            <div style={{position: "relative"}}>
+                <div className="text-center mb-5" style={{ marginTop: "10vh" }}>
+                    <Typography variant="title" className="color-white mt-5">WHERE WILL YOU GO NEXT?</Typography>
                 </div>
+                
+                <WhiteButton onClick={() => console.log(searchFilter)} sx={{display: 'block', margin: 'auto', marginTop: '3%'}}>Search</WhiteButton>
+
                 <Row style={{margin: "3% 5% 1%"}} className="justify-content-center">
                     <Col className="pe-5 ps-5">
                         <GenericSearch fieldLabel={"Region"} options={regionOptions} handleInput={(e, v) => updateSearch("region", v)}/>
@@ -74,9 +73,6 @@ const DestinationFinder = () => {
                         <GenericSearch fieldLabel={"Travel Status"} options={travelStatusOptions} handleInput={(e, v) => updateSearch("travel", v)}/>
                     </Col>
                 </Row>
-                <div style={{paddingBottom: '5%'}}>
-                    <WhiteButton onClick={() => console.log(searchFilter)} sx={{display: 'block', margin: 'auto', marginTop: '3%'}}>Search</WhiteButton>
-                </div>  
             </div>
             
             <Row style={{"marginLeft": "6vw", "marginRight": "6vw", "marginTop": "10vh", "marginBottom": "10vh"}}>
