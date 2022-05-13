@@ -143,7 +143,8 @@ async def add_new_trip (
         "end_date": trip.end_date,
         "travellers": trip.travellers,
         "cities": [],
-        "members": []
+        "members": [],
+        "owner": user['email']
     })
 
     users_col.update_one(
