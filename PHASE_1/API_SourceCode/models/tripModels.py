@@ -12,7 +12,8 @@ class City(BaseModel):
     end_date: datetime or None = Field(None, description="The date of departure from the city", example='2022-10-01T00:00:00.000+00:00')
     country_name: str = Field(..., description="The name of the country", example="France")
     country_code: str = Field(..., description="The ISO code of the city's country", example="FR")
-    activities: List[int] = Field(..., description="The list of activities to do in the city. Activities are referenced by their id, which corresponds to Amadeus API's activity ids.", example=[49488, 265211, 298635, 106708])
+    activities: List[int] = Field(..., description="The list of activities to do in the city. Activities are referenced by their id, which corresponds to Amadeus API's activity ids.", example=[49488, 265211, 298635, 106708]),
+    checklist: List[object] = Field(..., description="A list of the things you need to do")
 
 class Trips(BaseModel):
     id: int = Field(..., description="The unique id of the trip", example=1)

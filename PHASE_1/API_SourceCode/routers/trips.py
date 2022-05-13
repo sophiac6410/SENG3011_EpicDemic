@@ -2,12 +2,13 @@ from datetime import datetime
 from email.header import Header
 from lib2to3.pgen2 import token
 from dateutil.parser import parse
+from numpy import array
 from fastapi import APIRouter, status, Header, Query, Path
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 from datetime import datetime, timedelta
 from typing import Optional, List
-from database import trip_col, tripCities_col, users_col
+from database import trip_col, tripCities_col, users_col, travel_col
 from models import tripModels, baseModels
 import auth
 
@@ -38,6 +39,10 @@ class Activity(BaseModel):
     cityId: int = Field(..., description="The unique id of the city that the activity is held in", example=1)
     tripId: int = Field(..., description="The unique id of the trip the activity is being added to", example=1)
 
+class CheckListItem(BaseModel):
+    item: str = Field(..., description="The name of the item in the checklist")
+    groups = List[str] = Field(..., description="A list of the groups the item is being added to")
+
 @router.get("/", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.TripResponse)
 async def get_saved_trips (
     Authorization: str = Header(..., example=token_example),
@@ -61,7 +66,8 @@ async def get_saved_trips (
                     "end_date": 1,
                     "country_code": 1,
                     "country_name": 1,
-                    "activities": 1
+                    "activities": 1,
+                    "checklist": 1,
                 }
             )
     print(trips)
@@ -93,7 +99,8 @@ async def get_trip_by_id (
                 "end_date": 1,
                 "country_code": 1,
                 "country_name": 1,
-                "activities": 1
+                "activities": 1,
+                "checklist": 1,
             }
         )
 
@@ -163,6 +170,15 @@ async def add_new_city_to_trip (
         id = 1
     else:
         id = list(tripCities_col.find().limit(1).sort([('$natural',-1)]))[0]['_id'] + 1
+
+    # find documents needed for checklist
+    travel = travel_col.find_one({"_id": city.country_code})
+    documents = []
+    if (travel != None):
+        if (travel['declaration']['documentRequired']):
+            documents.append({'item': travel['declaration']['text'], 'checked': False})
+        if (travel['testing']['isRequired']):
+            documents.append({'item': travel['testing']['text'], 'checked': False})
     
     tripCities_col.insert_one({
         "_id": id,
@@ -173,7 +189,19 @@ async def add_new_city_to_trip (
         "end_date": city.end_date,
         "country_code": city.country_code,
         "country_name": city.country_name,
-        "activities": []
+        "activities": [],
+        "checklist": [
+            {'name': 'Documents', 'items': documents},
+            {'name': 'Bookings', 'items': [
+                {'item': 'Book incoming flight',
+                'checked': False},
+                {'item': 'Book outgoing flight',
+                'checked': False},
+                {'item': 'Book accommodation',
+                'checked': False},
+            ]},
+            {'name': 'Activities', 'items': []}
+        ],
     })
 
     trip_col.update_one(
@@ -203,4 +231,30 @@ async def add_new_city_to_trip (
     )
     return baseModels.createResponse(True, 200, {})
 
-   
+@router.put("/new/city/{cityId}/checklist/item", status_code=status.HTTP_200_OK, tags=['trips'], response_model=baseModels.Response)
+async def add_new_item_to_checklist (
+    item: CheckListItem,
+    cityId: int = Path(..., description="The id of the city the item is being added to"),
+    Authorization: str = Header(..., example=token_example),
+):
+    user = auth.get_current_user(Authorization)
+    
+    city = tripCities_col.find_one({"_id": cityId})
+    if (city == None):
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "City does not exist"}))
+    for c in city['checklist']:
+        if (c['name'] in item.groups):
+            c['items'].append(item)
+
+    tripCities_col.update({"_id": cityId}, {"$set": {"checklist": city['checklist']}})
+    return baseModels.createResponse(True, 200, {})
+
+@router.post("/new/city/{cityId}/checklist/group", status_code=status.HTTP_200_OK, tags=['trips'], response_model=baseModels.Response)
+async def add_new_group_to_checklist (
+    group: str = Query(..., description="The new group being added"),
+    cityId: int = Path(..., description="The id of the city the item is being added to"),
+    Authorization: str = Header(..., example=token_example),
+):
+    user = auth.get_current_user(Authorization)
+    tripCities_col.update_one({"_id": cityId}, {"$push": {"checklist": {"name": group, "items": []}}})
+    return baseModels.createResponse(True, 200, {})
