@@ -14,6 +14,7 @@ import { useParams } from 'react-router';
 import { getTripById } from '../adapters/tripAPI';
 import React, { useEffect } from 'react';
 import {AddMember} from '../components/Planner/PlannerModal'
+import { setDate } from "date-fns";
 
 function Trip() {
   const { tripId } = useParams()
@@ -56,6 +57,13 @@ function Trip() {
       setActivities(data.activities)
     }
     getTrip()
+    return() => {
+      setName("")
+      setDates("")
+      setTravellers([])
+      setCities([])
+      setActivities([])
+    }
   },[tripId])
 
   // useEffect(()=>{

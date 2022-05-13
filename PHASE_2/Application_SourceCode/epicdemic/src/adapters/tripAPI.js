@@ -214,6 +214,7 @@ export const getMembers = async (tripId) => {
     if (response.status !== 200) {
       console.log(data)
       console.log(response)
+      return undefined
     } else {
       console.log(data)
       return data.data
@@ -236,6 +237,7 @@ export const getTripOwner = async (tripId) => {
     if (response.status !== 200) {
       console.log(data)
       console.log(response)
+      return undefined
     } else {
       console.log(data)
       return data.data

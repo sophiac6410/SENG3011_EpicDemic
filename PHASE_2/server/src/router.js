@@ -73,7 +73,7 @@ router.get(`/${API}/activity-by-ids`, async (req, res) => {
     try {
       const response = await amadeus.shopping.activity(activityId).get()
       console.log(response)
-      if(response.status == 200) {
+      if(response.statusCode == 200) {
         result.push(response.data)
       }
     } catch (err) {

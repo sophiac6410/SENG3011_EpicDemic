@@ -523,9 +523,8 @@ function ActivityModal({fromTrip, activities, tripId, city}) {
           >
             { activities !== [] && activities !== {} ? (
               activities.map((activity, id) => {
-                if(activity !== null && city != null) {
-                  console.log(activity)
-                  console.log(city)
+                if(activity !== null && city !== null) {
+                  // console.log(activity)
                   return <ActivityCard key={activity.id} activity={activity} cityId={city.id} tripId={tripId}></ActivityCard>
                 }
               })
@@ -594,18 +593,28 @@ function AddMember({isOpen, onClose , tripId}) {
   useEffect(() => {
     async function updateMembers() {
       const data = await getMembers(tripId)
-      setMembers(data)
-      console.log('members', members)
+      if(data != undefined) {
+        setMembers(data)
+        console.log('members', members)
+      }
     }
     updateMembers()
+    return () => {
+      setMembers([])
+    }
   }, [trigger])
 
   useEffect(() => {
     async function getOwner() {
       const data = await getTripOwner(tripId)
-      setOwner(data)
+      if(data !== undefined) {
+        setOwner(data)
+      }
     }
     getOwner()
+    return () => {
+      setOwner([])
+    }
   }, [])
 
   useEffect(() => {
@@ -636,13 +645,13 @@ function AddMember({isOpen, onClose , tripId}) {
 
         <div sx={{display: "flex", flexDirection: "column"}}>
           <RestrictBox
-                    email={owner.email}
-                    name={owner.name}
-                    owner={true}
-                    trigger={trigger}
-                    setTrigger={setTrigger}
-                    id={tripId}
-                  />
+            email={owner.email}
+            name={owner.name}
+            owner={true}
+            trigger={trigger}
+            setTrigger={setTrigger}
+            id={tripId}
+          />
           { members.map((mem, idx) => {
             console.log(mem)
             return (
