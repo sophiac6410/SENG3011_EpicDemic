@@ -468,7 +468,7 @@ function ActivityModal({fromTrip, activities, tripId, city}) {
         <IconButton onClick={handleOpen}>
           <LocalActivityIcon color='teal'></LocalActivityIcon>
         </IconButton>
-        <Typography variant='caption' className='color-medium-teal'>View activities</Typography>
+        <Typography variant='caption' className='color-medium-teal' sx={{cursor: 'pointer'}} onClick={handleOpen}>View activities</Typography>
         </div>
       ): (
         <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>

@@ -15,7 +15,8 @@ import React, { useState, useEffect } from "react";
 import { GetActivities, GetActivityByIds } from '../../adapters/activityAPI';
 import { useNavigate } from 'react-router';
 import { TailSpin } from "react-loader-spinner"
-
+import ChecklistModal from "./ChecklistModal";
+import { Check } from "@mui/icons-material";
 
 const cardStyle = {
   marginTop: "25px",
@@ -60,7 +61,7 @@ const responsive = {
   }
 };
 
-function TripCard({name, tripId, latitude, longitude, city, country}) {
+function TripCard({name, tripId, latitude, longitude, city, country, checklist}) {
   //City's Activities
   const [activity, setActivity] = React.useState([])
   //User's Activities in this city
@@ -123,12 +124,13 @@ function TripCard({name, tripId, latitude, longitude, city, country}) {
         <IconButton sx={{paddingLeft: "0"}}>
           <AddCircleIcon color="teal"></AddCircleIcon>
         </IconButton>
-        <Typography variant='caption' className='color-medium-teal me-3'>Add dates</Typography>
+        <Typography variant='caption' className='color-medium-teal me-3' sx={{cursor: 'pointer'}}>Add dates</Typography>
         <ActivityModal fromTrip={true} activities={activity} tripId={tripId} city={city}></ActivityModal>
         <IconButton sx={{paddingRight: "5px"}}>
           <FlightIcon sx={{marginRight: "5px"}} color='teal'></FlightIcon>
         </IconButton>
-        <Typography variant='caption' className='color-medium-teal'>Book flights</Typography>
+        <Typography variant='caption' className='color-medium-teal' sx={{cursor: 'pointer'}}>Book flights</Typography>
+        <ChecklistModal checklist={checklist} city={city}/>
       </div>
       <div className="d-flex flex-row mt-3">
         <Typography variant="heading3" class="color-grey">YOUR BUCKETLIST</Typography>

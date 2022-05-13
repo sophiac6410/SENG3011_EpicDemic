@@ -231,3 +231,6 @@ class LocationTravelOverviewResponse(baseModels.Response):
 
 class LocationAllResponse(baseModels.Response):
 	data: List[Location]
+
+class LocationDiseaseResponse(baseModels.Response):
+	data: List[str]

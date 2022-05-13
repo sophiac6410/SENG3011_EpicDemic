@@ -115,6 +115,7 @@ function Trip() {
               tripId={tripId}
               country={cities[key].country_code}
               city={cities[key]}
+              checklist={cities[key].checklist}
             ></TripCard>)
           )}
         </div>

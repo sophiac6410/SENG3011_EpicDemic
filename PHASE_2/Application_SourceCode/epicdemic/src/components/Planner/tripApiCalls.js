@@ -82,7 +82,7 @@ export const addCityToTrip = async (tripId, name, latitude, longitude, country_c
   }
 }
 
-export const addActivityToCity = async (activityId, cityId, tripId) => {
+export const addActivityToCity = async (activityId, cityId, tripId, name) => {
   try {
     const response = await fetch(`${API_URL.API_URL}/v1/trips/new/activity`, {
       method: 'POST',
@@ -94,6 +94,7 @@ export const addActivityToCity = async (activityId, cityId, tripId) => {
         tripId,
         cityId,
         activityId,
+        name
       }),
     });
     const data = await response.json();

@@ -1,7 +1,9 @@
+from email.mime import base
+from django.forms import BaseModelFormSet
 from fastapi import APIRouter, Query, status, Path
 from fastapi.responses import JSONResponse
 from util import DATETIME_REGEX, parse_datetime_string
-from database import locations_col, diseaseLocations_col, updates_col, safety_col, travel_col
+from database import locations_col, diseaseLocations_col, updates_col, safety_col, travel_col, reports_col, diseases_col, locations_promed_col
 import re
 from datetime import datetime
 from typing import Optional
@@ -134,6 +136,40 @@ async def get_travel_overview(
 	})
 
 
+### GET DISEASES IN LOCATION ###
+@router.get('/{id}/diseases', status_code=status.HTTP_200_OK, tags=["locations"], response_model=locationModels.LocationDiseaseResponse)
+async def get_diseases_in_location(
+	id: str = Path(
+		...,
+		description="The country's unique ISO code",
+		example="PH",
+	)
+):
+	countryName = locations_col.find_one({"_id": id})['country']
+	locations = locations_promed_col.find({"country": countryName}, {"_id": True})
+	locationIds = []
+	for l in locations:
+		locationIds.append(l['_id'])
+	print('locations' + str(locationIds))
+	reports = list(reports_col.find(
+		{"locations": {"$in": locationIds}},
+		{"diseases": True, "_id": False}
+	))
+	diseaseIds = set(())
+	for r in reports:
+		print(r['diseases'])
+		diseaseIds.update(r['diseases'])
+	print(diseaseIds)
+	diseases = list(diseases_col.find({"_id": {"$in": list(diseaseIds)}}).sort("name", 1))
+	diseaseList = []
+	for d in diseases:
+		diseaseList.append(str.title(d['name']))
+	print(diseaseList)
+
+
+	return baseModels.createResponse(True, 200, diseaseList)
+
+	
 
 
 

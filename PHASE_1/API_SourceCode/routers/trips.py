@@ -1,8 +1,8 @@
 from datetime import datetime
 from email.header import Header
 from lib2to3.pgen2 import token
+from pydoc import describe
 from dateutil.parser import parse
-from numpy import array
 from fastapi import APIRouter, status, Header, Query, Path
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
@@ -38,10 +38,11 @@ class Activity(BaseModel):
     activityId: int = Field(..., description="The unique id of the activity being added", example=49488)
     cityId: int = Field(..., description="The unique id of the city that the activity is held in", example=1)
     tripId: int = Field(..., description="The unique id of the trip the activity is being added to", example=1)
+    name: str = Field(..., description="The name of the activity")
 
 class CheckListItem(BaseModel):
     item: str = Field(..., description="The name of the item in the checklist")
-    groups = List[str] = Field(..., description="A list of the groups the item is being added to")
+    groups: List[str] = Field(..., description="A list of the groups the item is being added to")
 
 @router.get("/", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.TripResponse)
 async def get_saved_trips (
@@ -225,10 +226,18 @@ async def add_new_city_to_trip (
     if (trip == None or activity.cityId not in trip['cities']):
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "City does not exist in trip"}))
     
+    city = tripCities_col.find_one({"_id": activity.cityId})
+    for c in city['checklist']:
+        if c['name'] == 'Activities':
+            c['items'].append({'item': 'Book ' + activity.name, 'checked': False})
     tripCities_col.update_one(
         {"_id": activity.cityId},
-        {"$push": {"activities": activity.activityId}}
+        {
+            "$push": {"activities": activity.activityId},
+            "$set": {"checklist": city['checklist']}
+        }
     )
+
     return baseModels.createResponse(True, 200, {})
 
 @router.put("/new/city/{cityId}/checklist/item", status_code=status.HTTP_200_OK, tags=['trips'], response_model=baseModels.Response)
@@ -244,7 +253,7 @@ async def add_new_item_to_checklist (
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "City does not exist"}))
     for c in city['checklist']:
         if (c['name'] in item.groups):
-            c['items'].append(item)
+            c['items'].append({"item": item.item, "checked": False})
 
     tripCities_col.update({"_id": cityId}, {"$set": {"checklist": city['checklist']}})
     return baseModels.createResponse(True, 200, {})
