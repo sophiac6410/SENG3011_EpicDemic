@@ -357,3 +357,76 @@
     Process Time: 0.07996702194213867
     ----------------------------------------
     
+    Timestamp: 1652453022.487664
+    Accessed Time: 2022-05-14 00:43:42.487664
+    Client: 127.0.0.1:52388
+    
+    Request: OPTIONS /v1/trips
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0014939308166503906
+    ----------------------------------------
+    
+    Timestamp: 1652453022.499463
+    Accessed Time: 2022-05-14 00:43:42.499463
+    Client: 127.0.0.1:52388
+    
+    Request: GET /v1/trips
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 307
+    Process Time: 0.005266904830932617
+    ----------------------------------------
+    
+    Timestamp: 1652453022.518228
+    Accessed Time: 2022-05-14 00:43:42.518228
+    Client: 127.0.0.1:52388
+    
+    Request: OPTIONS /v1/trips/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0006339550018310547
+    ----------------------------------------
+    
+    Timestamp: 1652453022.522901
+    Accessed Time: 2022-05-14 00:43:42.522901
+    Client: 127.0.0.1:52388
+    
+    Request: GET /v1/trips/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.1809709072113037
+    ----------------------------------------
+    
+    Timestamp: 1652453024.571681
+    Accessed Time: 2022-05-14 00:43:44.571681
+    Client: 127.0.0.1:52388
+    
+    Request: OPTIONS /v1/trips/83
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.00047588348388671875
+    ----------------------------------------
+    
+    Timestamp: 1652453024.574119
+    Accessed Time: 2022-05-14 00:43:44.574119
+    Client: 127.0.0.1:52388
+    
+    Request: GET /v1/trips/83
+    Request Query Param: None
+    Request Path Param: 
+			tripId=83
+   
+    Response Code: 200
+    Process Time: 0.07048583030700684
+    ----------------------------------------
+    
