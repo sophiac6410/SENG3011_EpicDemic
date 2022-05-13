@@ -43,9 +43,12 @@ router.get(`/${API}/activity-search`, async (req, res) => {
       radius: 20
     });
     await res.header("Access-Control-Allow-Origin", "*");
-    await res.json(response.data);
+    await res.status(response.statusCode).json(response.data);
+    console.log(response)
   } catch(err) {
-    await res.json(err);
+    console.log("======44====")
+    console.log(err)
+    await res.status(500).json(err);
   }
 });
 
@@ -54,6 +57,7 @@ router.get(`/${API}/activity-by-id`, async (req, res) => {
   try {
     const response = await amadeus.shopping.activity(activityId).get()
     await res.header("Access-Control-Allow-Origin", "*");
+    await res.status(response.status)
     await res.json(response.data);
   } catch (err) {
     console.log(err)
@@ -68,13 +72,17 @@ router.get(`/${API}/activity-by-ids`, async (req, res) => {
   for(const activityId of activityIds) {
     try {
       const response = await amadeus.shopping.activity(activityId).get()
-      result.push(response.data)
+      console.log(response)
+      if(response.status == 200) {
+        result.push(response.data)
+      }
     } catch (err) {
       console.log(err)
     }
   }
   console.log(result)
   await res.header("Access-Control-Allow-Origin", "*");
+  // await res.status(response.status)
   await res.json(result);
 });
 module.exports = router;
