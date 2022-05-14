@@ -31,7 +31,7 @@ const cardStyle = {
   },
 };
 
-function SavedCard({name, start, end, travellers, tripId}) {
+function SavedCard({name, start, end, travellers, tripId, update}) {
   const [dateStr, setDateStr] = useState("")
 
   useEffect(() => {
@@ -42,6 +42,7 @@ function SavedCard({name, start, end, travellers, tripId}) {
 
   const removeTrip = () => {
     deleteTrip(tripId)
+    update()
   }
 
   const goToTrip = () => {

@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function CountrySelect({isFrom, handleInput, value }) {
+export default function CountrySelect({isFrom = false, handleInput, value }) {
   const classes = useStyles();
 
   return (
@@ -41,9 +41,9 @@ export default function CountrySelect({isFrom, handleInput, value }) {
         sx={{ width: 200 }}
         popupIcon={""}
         value={value}
-        options={ isFrom ? aus : countries }
+        options={ isFrom ? aus : Countries }
         autoHighlight
-        underlineShow={false}
+        // underlineShow={false}
         onChange={handleInput}
         getOptionLabel={(option) => option.name}
         // id="disable-clearable"
@@ -71,7 +71,7 @@ export default function CountrySelect({isFrom, handleInput, value }) {
             inputProps={{
               ...params.inputProps,
               autoComplete: 'new-password', // disable autocomplete and autofill
-              disableUnderline: true,
+              // disableUnderline: true,
             }}
           />
         )}
@@ -81,7 +81,7 @@ export default function CountrySelect({isFrom, handleInput, value }) {
 }
 
 // From https://bitbucket.org/atlassian/atlaskit-mk-2/raw/4ad0e56649c3e6c973e226b7efaeb28cb240ccb0/packages/core/select/src/data/countries.js
-const countries = [{
+export const Countries = [{
   "name": "Andorra",
   "code": "AD"
 }, {

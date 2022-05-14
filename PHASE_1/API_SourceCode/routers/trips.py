@@ -47,6 +47,9 @@ class CheckListItem(BaseModel):
 class NewGroup(BaseModel):
     group: str = Field(..., description="The new group being added")
 
+class User(BaseModel):
+    email: str = Field(..., description="The email of the user", example='jess@mail.com')
+
 @router.get("/", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.TripResponse)
 async def get_saved_trips (
     Authorization: str = Header(..., example=token_example),
@@ -54,7 +57,7 @@ async def get_saved_trips (
     user = auth.get_current_user(Authorization)
     trips = list(trip_col.aggregate([
         {"$match": {"_id": {"$in": user['saved_trips']}}},
-        {"$project": {"id": "$_id", "name": 1, "start_date": 1, "end_date": 1, "travellers": 1, "cities": 1 }}
+        {"$project": {"id": "$_id", "name": 1, "start_date": 1, "end_date": 1, "travellers": 1, "cities": 1, "members": 1, "owner": 1 }}
     ]))
     print(trips)
     for t in trips:
@@ -179,7 +182,9 @@ async def add_new_trip (
         "start_date": trip.start_date,
         "end_date": trip.end_date,
         "travellers": trip.travellers,
-        "cities": []
+        "cities": [],
+        "members": [],
+        "owner": user['email']
     })
 
     users_col.update_one(
@@ -299,3 +304,99 @@ async def add_new_group_to_checklist (
     user = auth.get_current_user(Authorization)
     tripCities_col.update_one({"_id": cityId}, {"$push": {"checklist": {"name": group.group, "items": []}}})
     return baseModels.createResponse(True, 200, {})
+
+@router.post("/{tripId}/new/member", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.UserResponse, responses={401: {"model": baseModels.ErrorResponse}, 400: {"model": baseModels.ErrorResponse}})
+async def add_user_to_trip (
+    user: User,
+    tripId: int = Path(..., description="The unique id of the trip"),
+    Authorization: str = Header(..., example=token_example),
+):
+    owner = list(trip_col.find({ "_id": tripId }))[0]['owner']
+    if auth.get_current_user(Authorization)['email'] != owner:
+        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Not authorised to add members to trip"}))
+
+    members = list(trip_col.find({ "_id": tripId }))[0]['members']
+    if owner == user.email or user.email in members:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Cannot add existing members"}))
+
+    if auth.get_user(user.email): 
+        trip_col.update_one(
+            {"_id": tripId},
+            {"$push": {"members": user.email}}
+        )
+        users_col.update_one(
+            {"email": user.email},
+            {"$push": {"saved_trips": tripId}}
+        )
+    else:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Email not found in the database"}))
+
+    ret = {
+        'email': user.email,
+        'name': list(users_col.find({ "email": user.email }))[0]['name']
+    }
+
+    return baseModels.createResponse(True, 200, ret)
+    
+
+
+@router.get("/{tripId}/members", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.UsersResponse, responses={401: {"model": baseModels.ErrorResponse}, 400: {"model": baseModels.ErrorResponse}})
+async def get_user_to_trip (
+    tripId: int = Path(..., description="The unique id of the trip"),
+    Authorization: str = Header(..., example=token_example),
+):
+    members = list(trip_col.find({ "_id": tripId }))[0]['members']
+
+    mem_list = []
+    for member in members:
+        mem_list.append({
+            'email': member,
+            'name': list(users_col.find({ "email": member }))[0]['name']
+        })
+
+    return baseModels.createResponse(True, 200, mem_list)
+
+
+@router.get("/{tripId}/owner", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.UserResponse, responses={401: {"model": baseModels.ErrorResponse}, 400: {"model": baseModels.ErrorResponse}})
+async def get_owner (
+    tripId: int = Path(..., description="The unique id of the trip"),
+    Authorization: str = Header(..., example=token_example),
+):
+
+    try:
+        owner = list(trip_col.find({ "_id": tripId }))[0]['owner']
+        name = list(users_col.find({ "email": owner }))[0]['name']
+    except:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Error"}))
+
+    return baseModels.createResponse(True, 200, {
+        'email': owner,
+        'name': name
+    })
+
+
+@router.delete("/{tripId}/delete/member", status_code=status.HTTP_200_OK, tags=['trips'], response_model=baseModels.Response, responses={401: {"model": baseModels.ErrorResponse}})
+async def delete_member (
+    user: User,
+    Authorization: str = Header(..., example=token_example),
+    tripId: int = Path(..., description="The unique id of the trip")
+):
+
+    owner = list(trip_col.find({ "_id": tripId }))[0]['owner']
+    if auth.get_current_user(Authorization)['email'] != owner:
+        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Not authorised to remove members from trip"}))
+
+    if auth.get_current_user(Authorization): 
+        trip_col.update_one(
+            {"_id": tripId},
+            {"$pull": {"members": user.email}}
+        )
+        users_col.update_one(
+            {"email": user.email},
+            {"$pull": {"saved_trips": tripId}}
+        )
+    else:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Email not found in the database"}))
+
+    return baseModels.createResponse(True, 200, {})
+   

@@ -23,6 +23,10 @@ class Trips(BaseModel):
     travellers: int = Field(..., description="The number of travellers on the trip", example=6)
     cities: List[City] = Field(..., description="The list of cities to visit in the trip")
 
+class User(BaseModel):
+    email: str = Field(..., description="The email of the user", example='jess@mail.com')
+    name: str = Field(..., description="The first and last name of the user", example='Jessica Smith')
+
 class TripId(BaseModel):
     id: int = Field(..., description="The id of the newly created trip or city", example=1)
 
@@ -37,3 +41,9 @@ class TripIdResponse(baseModels.Response):
 
 class TripCityByIdResponse(baseModels.Response):
     data: City
+
+class UserResponse(baseModels.Response):
+    data: User
+
+class UsersResponse(baseModels.Response):
+    data: List[User]

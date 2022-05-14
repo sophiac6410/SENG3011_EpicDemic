@@ -35,7 +35,9 @@ const responsive = {
 
 const COLOR = 'white';
 
-export default function DiseaseReportBar({code}) {
+const API_KEY="pub_72536ca59b511c07890630cdccd42c8723d4";
+
+export default function DiseaseReportBar({code, disease}) {
   const [diseaseData, setDiseaseData] = useState([]);
   const [diseaseData2, setDiseaseData2] = useState([]);
 
@@ -50,14 +52,16 @@ export default function DiseaseReportBar({code}) {
   useEffect(() => {
     if (diseaseData === []) return;
 
+    console.log('the disease is', disease)
     async function fetchData() {
       const data = await fetch(`https://prod.greatescape.co/api/travel/countries/${code}/corona`, options).then(res => res.json())
+      // const data = await fetch(`https://newsdata.io/api/1/news?apikey=${API_KEY}&country=${code}&language=en&q=${disease}`, options).then(res => res.json())
       console.log('printing data', data)
       setDiseaseData(data.news.slice(0, (data.news.length / 2)))
       setDiseaseData2(data.news.slice((data.news.length / 2), data.news.length))
     }
     fetchData()
-  }, [])
+  }, [disease])
 
   return(
     <div style={{ padding: '3% 10% 10%', backgroundColor: '#E9F0FB' }}>
