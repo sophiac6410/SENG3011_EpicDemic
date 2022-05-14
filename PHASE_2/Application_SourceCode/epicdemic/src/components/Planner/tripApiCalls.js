@@ -149,3 +149,25 @@ export const getTripById = async (tripId) => {
       console.log(e)
   }
 }
+
+export const getTripCityById = async (tripId, cityId) => {
+  try {
+    const response = await fetch(`${API_URL.API_URL}/v1/trips/${tripId}/${cityId}`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      },
+    });
+    const data = await response.json();
+    if (response.status !== 200) {
+      console.log(data)
+      console.log(response)
+    } else {
+      console.log(data)
+      return data.data
+    }
+  } catch (e) {
+      console.log(e)
+  }
+}

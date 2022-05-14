@@ -34,3 +34,6 @@ class TripByIdResponse(baseModels.Response):
 
 class TripIdResponse(baseModels.Response):
     data: TripId
+
+class TripCityByIdResponse(baseModels.Response):
+    data: City

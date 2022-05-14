@@ -111,11 +111,9 @@ function Trip() {
               name={cities[key].city_name + ", " + cities[key].country_name}
               latitude={cities[key].latitude}
               longitude={cities[key].longitude}
-              activities={cities[key].activities}
               tripId={tripId}
               country={cities[key].country_code}
               city={cities[key]}
-              checklist={cities[key].checklist}
             ></TripCard>)
           )}
         </div>

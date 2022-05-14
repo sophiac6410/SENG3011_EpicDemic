@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router';
 import { TailSpin } from "react-loader-spinner"
 import ChecklistModal from "./ChecklistModal";
 import { Check } from "@mui/icons-material";
+import { getTripCityById } from './tripApiCalls';
 
 const cardStyle = {
   marginTop: "25px",
@@ -61,7 +62,7 @@ const responsive = {
   }
 };
 
-function TripCard({name, tripId, latitude, longitude, city, country, checklist}) {
+function TripCard({name, tripId, latitude, longitude, city, country}) {
   //City's Activities
   const [activity, setActivity] = React.useState([])
   //User's Activities in this city
@@ -76,7 +77,7 @@ function TripCard({name, tripId, latitude, longitude, city, country, checklist})
   useEffect(() => {
     async function getCityActivities() {
       // setLoading(true)
-      var {out, controller} = await GetActivities({lat: city.latitude, lot: city.longitude})
+      var {out, controller} = GetActivities({lat: city.latitude, lot: city.longitude})
       out.then(res => {
         console.log(res.data)
         setActivity(res.data); // dispatching data to components state
@@ -85,7 +86,10 @@ function TripCard({name, tripId, latitude, longitude, city, country, checklist})
       });
     }
     async function getSavedActivities() {
-      var {out, controller} = GetActivityByIds({ids: city.activities.toString()})
+      const data = await getTripCityById(tripId, city.id);
+      console.log(data);
+
+      var {out, controller} = GetActivityByIds({ids: data.activities.toString()})
       out.then(res => {
         console.log(res)
         if(res.status == 200){
@@ -130,7 +134,7 @@ function TripCard({name, tripId, latitude, longitude, city, country, checklist})
           <FlightIcon sx={{marginRight: "5px"}} color='teal'></FlightIcon>
         </IconButton>
         <Typography variant='caption' className='color-medium-teal' sx={{cursor: 'pointer'}}>Book flights</Typography>
-        <ChecklistModal checklist={checklist} city={city}/>
+        <ChecklistModal city={city} tripId={tripId}/>
       </div>
       <div className="d-flex flex-row mt-3">
         <Typography variant="heading3" class="color-grey">YOUR BUCKETLIST</Typography>

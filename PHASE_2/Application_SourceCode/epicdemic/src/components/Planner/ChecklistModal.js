@@ -1,6 +1,7 @@
 import React from 'react'
 import Modal from '@mui/material/Modal';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import { IconButton } from "@mui/material";
 import { Typography } from "@mui/material";
@@ -15,13 +16,15 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import TextField from '@mui/material/TextField';
+import { addNewItem, addNewGroup } from './ChecklistApiCalls';
+import { getTripCityById } from './tripApiCalls';
 
 const mainModal = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: "40vw",
+  width: "50vw",
   minWidth: '550px',
   height: "90vh",
   bgcolor: 'background.paper',
@@ -41,6 +44,23 @@ const popUp = {
   width: "45vw",
   minWidth: '300px',
   height: "60vh",
+  bgcolor: 'background.paper',
+  borderRadius: "30px",
+  boxShadow: 24,
+  p: 4,
+  backgroundColor: "white",
+  display: "flex",
+  flexDirection: "column",
+}
+
+const popUpNewGroup = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: "40vw",
+  minWidth: '300px',
+  height: "40vh",
   bgcolor: 'background.paper',
   borderRadius: "30px",
   boxShadow: 24,
@@ -91,27 +111,87 @@ function ChecklistGroup({group}) {
         </div>
       </div>
       <FormGroup sx={{display: isOpen(), mt: 3}}>
-        {group.items.map((item, i) => {
-          return <ChecklistItem key={i} item={item}/>
-        })}
+        { group.items.length === 0 
+          ? <Typography variant="bodyText" className="color-medium-teal">Nothing to do here</Typography>
+          : (group.items.map((item, i) => {
+              return <ChecklistItem key={i} item={item}/>
+            }))
+        }
       </FormGroup>
     </div>
   )
 }
 
-function ChecklistModal({checklist, city}) {
+function ChecklistModal({city, tripId}) {
   const [open, setOpen] = React.useState(false);
+  const [checklist, setChecklist] = React.useState([]);
+  const [openAddItemModal, setOpenAddItemModal] = React.useState(false);
+  const [newItem, setNewItem] = React.useState('');
+  const [options, setOptions] = React.useState({});
+  const [openNewGroupModal, setOpenNewGroupModal] = React.useState(false);
+  const [newGroup, setNewGroup] = React.useState('');
+  async function getCityChecklist() {
+    const data = await getTripCityById(tripId, city.id);
+    setChecklist(data.checklist);
+    let groups = {}
+    data.checklist.map((c) => {
+      groups[c.name] = false;
+    })
+    setOptions(groups);
+  }
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
-  console.log(city)
+  const handleOpenAddItemModal = () => {
+    setOpenAddItemModal(true);
+  };
+  const handleCloseAddItemModal = () => {
+    setOpenAddItemModal(false);
+    setNewItem('');
+  };
+  const handleClickAddItemToGroup = (event) => {
+    setOptions({
+      ...options,
+      [event.target.value]: event.target.checked
+    })
+  }
+  const handleAddItem = () => {
+    let groups = []
+    Object.entries(options).map(([key, value]) => {
+      if (value) {
+        groups.push(key);
+      }
+    });
+    addNewItem(city.id, newItem, groups);
+    getCityChecklist();
+    handleCloseAddItemModal();
+  }
+  const handleOpenNewGroupModal = () => {
+    setOpenNewGroupModal(true);
+  };
+  const handleCloseNewGroupModal = () => {
+    setNewGroup('');
+    setOpenNewGroupModal(false);
+  };
+  const handleAddGroup = () => {
+    addNewGroup(city.id, newGroup);
+    setOptions({
+      ...options,
+      [newGroup]: true
+    })
+    setChecklist([...checklist, {name: newGroup, items: []}])
+    handleCloseNewGroupModal();
+  }
+  React.useEffect(() => {
+    getCityChecklist();
+  }, []);
   return (
     <>
     <IconButton sx={{marginLeft: "5px"}} onClick={handleOpen}>
-      <CheckBoxOutlineBlankIcon sx={{marginLeft: "5px"}} color='teal'></CheckBoxOutlineBlankIcon>
+      <CheckBoxIcon sx={{marginLeft: "5px"}} color='teal'></CheckBoxIcon>
     </IconButton>
     <Typography variant='caption' className='color-medium-teal' sx={{cursor: 'pointer'}} onClick={handleOpen}>Ready to travel</Typography>
     <Modal
@@ -135,7 +215,90 @@ function ChecklistModal({checklist, city}) {
             return <ChecklistGroup key={i} group={group}/>
           })}
         </div>
-        <AddItemModal groups={checklist}/>
+        {/* ADD ITEM MODAL */}
+        <div style={{display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center"}}>
+          <IconButton sx={{marginLeft: "5px"}} onClick={handleOpenAddItemModal}>
+            <AddCircleIcon sx={{marginLeft: "5px"}} className="color-medium-teal"></AddCircleIcon>
+          </IconButton>
+          <Typography variant='bodyText' className='color-medium-teal' sx={{cursor: 'pointer'}} onClick={handleOpenAddItemModal}>Add Item</Typography>
+        </div>
+        <Modal
+          open={openAddItemModal}
+          onClose={handleCloseAddItemModal}
+          scroll='body'
+          aria-labelledby="checklist-dialog"
+        >
+          <Box sx={popUp}>
+            <div style={{display: "flex", justifyContent: "start", flexDirection: "row", alignItems: "center"}}>
+              <IconButton onClick={handleCloseAddItemModal}>
+                <ArrowBackIosIcon color='teal' fontSize="small"></ArrowBackIosIcon>
+              </IconButton>
+              <Typography variant='bodyText' className='color-medium-teal' sx={{cursor: 'pointer'}} onClick={handleCloseAddItemModal}>Back</Typography>
+            </div>
+            <Typography variant="heading2" className="color-dark-teal" sx={{textAlign: 'center', lineHeight: 0}}>New Item</Typography>
+            <div className="mx-4 mt-4 mb-5 border-radius-med px-5 pb-2 align-items-center" style={{width: '90%', height: '60px', border: '1px solid #1B4965'}}>
+              <TextField label="I want to do ..." variant="standard" fullWidth value={newItem} onChange={(event) => {setNewItem(event.target.value)}}/>
+            </div>
+            <div className="mx-5 px-5">
+              <div className="d-flex justify-content-between">
+                <Typography variant="bodyHeading" className="color-dark-teal" sx={{textAlign: 'center'}}>Add To ...</Typography>
+                {/* NEW GROUP MODAL*/}
+                <div style={{display: "flex", justifyContent: "end", flexDirection: "row", alignItems: "center"}}>
+                  <IconButton sx={{marginLeft: "5px"}} onClick={handleOpenNewGroupModal}>
+                    <AddCircleIcon sx={{marginLeft: "5px"}} className="color-medium-teal"></AddCircleIcon>
+                  </IconButton>
+                  <Typography variant='bodyText' className='color-medium-teal' sx={{cursor: 'pointer'}} onClick={handleOpen}>New Group</Typography>
+                </div>
+                <Modal
+                open={openNewGroupModal}
+                onClose={handleCloseNewGroupModal}
+                scroll='body'
+                aria-labelledby="checklist-dialog"
+                >
+                  <Box sx={popUpNewGroup}>
+                    <div style={{display: "flex", justifyContent: "start", flexDirection: "row", alignItems: "center"}}>
+                      <IconButton onClick={handleClose}>
+                        <ArrowBackIosIcon color='teal' fontSize="small"></ArrowBackIosIcon>
+                      </IconButton>
+                      <Typography variant='bodyText' className='color-medium-teal' sx={{cursor: 'pointer'}} onClick={handleClose}>Back</Typography>
+                    </div>
+                    <Typography variant="heading2" className="color-dark-teal" sx={{textAlign: 'center', lineHeight: 0}}>New Group</Typography>
+                    <div className="mx-4 my-5 border-radius-med px-5 pb-2" style={{width: '90%', border: '1px solid #1B4965'}}>
+                      <TextField label="Group Name" variant="standard" fullWidth value={newGroup} onChange={(event) => {setNewGroup(event.target.value)}}/>
+                    </div>
+                    <div className="d-flex justify-content-end mx-5" style={{flexDirection: "row"}}>
+                      <TealBotton onClick={handleAddGroup} style={{width: 'auto'}}>Create New Group</TealBotton>
+                    </div>
+                  </Box>
+                </Modal>
+                {/* END OF NEW GROUP MODAL*/}
+              </div>
+              <div style={{my: 2, justifyContent: 'start', display: 'flex', m: 'auto', height: '150px', width: '100%', overflow: 'auto'}}>
+                <FormGroup style={{mt: 3, justifyContent: 'center', display: 'block', m: 'auto'}}>
+                  {Object.entries(options).map(([key, value]) => {
+                    return <FormControlLabel
+                      sx={{display: 'block'}}
+                      label={key}
+                      control={
+                        <Checkbox
+                          icon={<CheckBoxOutlineBlankIcon className="color-medium-teal"/>}
+                          checkedIcon={<CheckBoxIcon className="color-medium-teal"/>}
+                          value={key}
+                          checked={value}
+                          onChange={handleClickAddItemToGroup}
+                        />
+                      }
+                    />
+                  })}
+                </FormGroup>
+              </div>
+            </div>
+            <div className="d-flex justify-content-end mx-5 mt-3" style={{flexDirection: "row"}}>
+              <TealBotton onClick={handleAddItem} style={{width: '120px'}}>Add Item</TealBotton>
+            </div>
+          </Box>
+        </Modal>
+         {/* END OF ADD ITEM MODAL */}
         <div style={{display: "flex", justifyContent: "end", flexDirection: "row", alignItems: "center"}}>
           <TealBotton onClick={handleClose} style={{width: '95px'}}>Done</TealBotton>
         </div>
@@ -143,63 +306,6 @@ function ChecklistModal({checklist, city}) {
     </Modal>
     </>
   )
-}
-
-function AddItemModal({groups}) {
-  const [open, setOpen] = React.useState(false);
-  const [newItem, setNewItem] = React.useState('');
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-  return <>
-    <div style={{display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center"}}>
-      <IconButton sx={{marginLeft: "5px"}} onClick={handleOpen}>
-        <AddCircleIcon sx={{marginLeft: "5px"}} className="color-medium-teal"></AddCircleIcon>
-      </IconButton>
-      <Typography variant='bodyText' className='color-medium-teal' sx={{cursor: 'pointer'}} onClick={handleOpen}>Add Item</Typography>
-    </div>
-    <Modal
-      open={open}
-      onClose={handleClose}
-      scroll='body'
-      aria-labelledby="checklist-dialog"
-    >
-      <Box sx={popUp}>
-        <div style={{display: "flex", justifyContent: "start", flexDirection: "row", alignItems: "center"}}>
-          <IconButton onClick={handleClose}>
-            <ArrowBackIosIcon color='teal' fontSize="small"></ArrowBackIosIcon>
-          </IconButton>
-          <Typography variant='bodyText' className='color-medium-teal' sx={{cursor: 'pointer'}} onClick={handleClose}>Back</Typography>
-        </div>
-        <Typography variant="heading2" className="color-dark-teal" sx={{textAlign: 'center', lineHeight: 0}}>New Item</Typography>
-        <TextField id="outlined-basic" label="I want to do ..." variant="outlined" className="m-4 my-5" value={newItem} onChange={(event) => {setNewItem(event.target.value)}}/>
-        <Typography variant="bodyHeading" className="color-dark-teal" sx={{textAlign: 'center'}}>Add To ...</Typography>
-        <div style={{mt: 3, justifyContent: 'center', display: 'flex', m: 'auto', overflow: 'auto'}}>
-        <FormGroup style={{mt: 3, justifyContent: 'center', display: 'flex', m: 'auto', overflow: 'auto'}}>
-          {groups.map((group, i) => {
-            return <FormControlLabel
-              sx={{display: 'block'}}
-              label={group.name}
-              key={i}
-              control={
-                <Checkbox
-                  icon={<CheckBoxOutlineBlankIcon className="color-medium-teal"/>}
-                  checkedIcon={<CheckBoxIcon className="color-medium-teal"/>}
-                />
-              }
-            />
-          })}
-        </FormGroup>
-        </div>
-        <div style={{display: "flex", justifyContent: "end", flexDirection: "row", alignItems: "center"}}>
-          <TealBotton onClick={handleClose} style={{width: '120px'}}>Add Item</TealBotton>
-        </div>
-      </Box>
-    </Modal>
-  </>
 }
 
 export default ChecklistModal
