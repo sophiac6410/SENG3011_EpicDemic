@@ -261,7 +261,7 @@ function ChecklistModal({city, tripId}) {
     <IconButton sx={{marginLeft: "5px"}} onClick={handleOpen}>
       <CheckBoxIcon sx={{marginLeft: "5px"}} color='teal'></CheckBoxIcon>
     </IconButton>
-    <Typography variant='caption' className='color-medium-teal' sx={{cursor: 'pointer'}} onClick={handleOpen}>Ready to travel</Typography>
+    <Typography variant='caption' className='color-medium-teal' sx={{cursor: 'pointer'}} onClick={handleOpen}>Checklist</Typography>
     <Modal
       open={open}
       onClose={handleClose}

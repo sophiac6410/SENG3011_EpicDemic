@@ -84,12 +84,12 @@ function Trip() {
     <div className="bg-off-white" style={{paddingBottom: "200px"}}>
       <NavbarComp bg={true}></NavbarComp>
       <Container>
-        <IconButton onClick={() => navigate(-1)}>
-          <ArrowBackIosIcon color="darkTeal" fontSize="medium"></ArrowBackIosIcon>
+        <IconButton onClick={() => navigate(-1)} sx={{mt: 3}}>
+          <ArrowBackIosIcon color="darkTeal" fontSize="small"></ArrowBackIosIcon>
           <Typography variant="bodyText" className="color-dark-teal">Back</Typography>
         </IconButton>
         <Row>
-          <Row className='align-items-center justify-content-center mt-6 ps-5'>
+          <Row className='align-items-center justify-content-center ps-5'>
             <div className="text-center mt-5" style={{marginBottom: "10px"}}>
               <Typography variant="title" className="color-dark-teal">{name}</Typography>
             </div>
@@ -108,18 +108,17 @@ function Trip() {
                 <Col md={2}>
                   <IconButton>
                     <PeopleOutlineIcon color='teal' onClick={openAddModal}></PeopleOutlineIcon>
-                  </IconButton>
-                  
+                  </IconButton>          
                 </Col>
                 <Col>
-                  <Typography variant="bodyText" className='color-medium-teal' style={{textAlign: "start", marginLeft: "5px"}}>{travellers} Travellers</Typography>
+                  <Typography variant="bodyText" onClick={openAddModal} className='color-medium-teal' style={{textAlign: "start", marginLeft: "5px", cursor: 'pointer'}}>{travellers} Travellers</Typography>
                 </Col>
               </Row>
             </Col>
           </Row>
         </Row>
         <AddMember isOpen={openAdd} onClose={closeAddModal} tripId={tripId}></AddMember>
-        <Typography variant="heading1" style={{marginTop: "60px", marginLeft: "70px"}}>Destinations</Typography>
+        <Typography variant="heading1" style={{marginTop: '40px', marginLeft: "70px"}}>Destinations</Typography>
         <div className='justify-content-center' style={{display: "flex", flexDirection: "column"}}>
         {Object.keys(cities).map((key, i) => 
             (<TripCard 

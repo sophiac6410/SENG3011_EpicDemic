@@ -50,6 +50,7 @@ class NewGroup(BaseModel):
 
 class User(BaseModel):
     email: str = Field(..., description="The email of the user", example='jess@mail.com')
+    type: str = Field(..., description="The type of the user", example="Editor")
 
 @router.get("/", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.TripResponse)
 async def get_saved_trips (
@@ -113,36 +114,6 @@ async def get_trip_by_id (
         )
 
     return baseModels.createResponse(True, 200, trip)
-
-@router.get("/{tripId}/{cityId}", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.TripCityByIdResponse, responses={401: {"model": baseModels.ErrorResponse}})
-async def get_trip_city_by_id(
-    Authorization: str = Header(..., example=token_example),
-    tripId: int = Path(..., description="The unique id of the trip"),
-    cityId: int = Path(..., description="The unique id of the city")
-):
-    user = auth.get_current_user(Authorization)
-    if tripId not in user['saved_trips']:
-        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Not authorised to view trip"}))
-    
-    trip = trip_col.find_one({"_id": tripId})
-    if cityId not in trip['cities']:
-        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "City does not exist in trip"}))
-
-    city = tripCities_col.find_one(
-        {"_id": cityId},
-        {
-            "id": "$_id",
-            "city_name": 1,
-            "latitude": 1,
-            "longitude": 1,
-            "start_date": 1,
-            "end_date": 1,
-            "country_code": 1,
-            "country_name": 1,
-            "activities": 1,
-            "checklist": 1,
-        })
-    return baseModels.createResponse(True, 200, city)
 
 @router.delete("/{tripId}", status_code=status.HTTP_200_OK, tags=['trips'], response_model=baseModels.Response, responses={401: {"model": baseModels.ErrorResponse}})
 async def delete_saved_trip (
@@ -327,7 +298,7 @@ async def add_user_to_trip (
     if auth.get_user(user.email): 
         trip_col.update_one(
             {"_id": tripId},
-            {"$push": {"members": user.email}}
+            {"$push": {"members": {"email": user.email, "type": user.type}}}
         )
         users_col.update_one(
             {"email": user.email},
@@ -355,8 +326,9 @@ async def get_user_to_trip (
     mem_list = []
     for member in members:
         mem_list.append({
-            'email': member,
-            'name': list(users_col.find({ "email": member }))[0]['name']
+            'email': member['email'],
+            'name': list(users_col.find({ "email": member['email'] }))[0]['name'],
+            'type': member['type']
         })
 
     return baseModels.createResponse(True, 200, mem_list)
@@ -376,7 +348,8 @@ async def get_owner (
 
     return baseModels.createResponse(True, 200, {
         'email': owner,
-        'name': name
+        'name': name,
+        'type': 'Owner'
     })
 
 
@@ -394,7 +367,7 @@ async def delete_member (
     if auth.get_current_user(Authorization): 
         trip_col.update_one(
             {"_id": tripId},
-            {"$pull": {"members": user.email}}
+            {"$pull": {"members": {"email": user.email}}}
         )
         users_col.update_one(
             {"email": user.email},
@@ -405,3 +378,32 @@ async def delete_member (
 
     return baseModels.createResponse(True, 200, {})
    
+@router.get("/{tripId}/{cityId}", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.TripCityByIdResponse, responses={401: {"model": baseModels.ErrorResponse}})
+async def get_trip_city_by_id(
+    Authorization: str = Header(..., example=token_example),
+    tripId: int = Path(..., description="The unique id of the trip"),
+    cityId: int = Path(..., description="The unique id of the city")
+):
+    user = auth.get_current_user(Authorization)
+    if tripId not in user['saved_trips']:
+        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Not authorised to view trip"}))
+    
+    trip = trip_col.find_one({"_id": tripId})
+    if cityId not in trip['cities']:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "City does not exist in trip"}))
+
+    city = tripCities_col.find_one(
+        {"_id": cityId},
+        {
+            "id": "$_id",
+            "city_name": 1,
+            "latitude": 1,
+            "longitude": 1,
+            "start_date": 1,
+            "end_date": 1,
+            "country_code": 1,
+            "country_name": 1,
+            "activities": 1,
+            "checklist": 1,
+        })
+    return baseModels.createResponse(True, 200, city)

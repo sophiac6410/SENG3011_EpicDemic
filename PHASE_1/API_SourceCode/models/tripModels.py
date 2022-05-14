@@ -26,6 +26,7 @@ class Trips(BaseModel):
 class User(BaseModel):
     email: str = Field(..., description="The email of the user", example='jess@mail.com')
     name: str = Field(..., description="The first and last name of the user", example='Jessica Smith')
+    type: str = Field(..., description="The type of the user", example="Viewer")
 
 class TripId(BaseModel):
     id: int = Field(..., description="The id of the newly created trip or city", example=1)
