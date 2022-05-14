@@ -47,7 +47,7 @@ def get_location_ids(loc_string):
 
 def main():
     # get_location_ids("Sydney, Australia")
-    res = get_location_ids("United States")
+    # res = get_location_ids("Belgium")
     print(res)
 
 if __name__ == "__main__":

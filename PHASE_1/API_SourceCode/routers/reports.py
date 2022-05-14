@@ -192,7 +192,8 @@ async def get_reports_by_query(
 
         matched_disease_ids = [x["_id"] for x in matched_diseases]
 
-    query = generate_query(start_date, end_date, article_ids, location_ids, matched_disease_ids)
+    # query = generate_query(start_date, end_date, article_ids, location_ids, matched_disease_ids)
+    query=[{'locations': {'$in': location_ids}}, {'diseases': {'$in': matched_disease_ids}}]
 
     report_docs = list(reports_col.find(
         {
