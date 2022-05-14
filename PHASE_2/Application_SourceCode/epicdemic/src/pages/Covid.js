@@ -144,7 +144,7 @@ function Covid() {
         </div>
       </Row>
     </Container>
-    <DiseaseReportBar code={code} disease={disease}></DiseaseReportBar>
+    <DiseaseReportBar code={code}></DiseaseReportBar>
     </>
   )
 }
