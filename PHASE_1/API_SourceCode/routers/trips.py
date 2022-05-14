@@ -42,6 +42,7 @@ class Activity(BaseModel):
 
 class CheckListItem(BaseModel):
     item: str = Field(..., description="The name of the item in the checklist")
+    description: str = Field(..., description="The description of the item")
     groups: List[str] = Field(..., description="A list of the groups the item is being added to")
 
 class NewGroup(BaseModel):
@@ -214,9 +215,10 @@ async def add_new_city_to_trip (
     documents = []
     if (travel != None):
         if (travel['declaration']['documentRequired']):
-            documents.append({'item': travel['declaration']['text'], 'checked': False})
+            documents.append({'item': 'Meet documentation requirements', 'description': travel['declaration']['text'], 'checked': False})
         if (travel['testing']['isRequired']):
-            documents.append({'item': travel['testing']['text'], 'checked': False})
+            documents.append({'item': 'Meet Covid-19 testing requirements','description': travel['testing']['text'], 'checked': False})
+        documents.append({'item': 'Meet vaccination requirements', 'description': travel['vaccine_info']['info'], 'checked': False})
     
     tripCities_col.insert_one({
         "_id": id,
@@ -232,10 +234,13 @@ async def add_new_city_to_trip (
             {'name': 'Documents', 'items': documents},
             {'name': 'Bookings', 'items': [
                 {'item': 'Book incoming flight',
+                'description': '',
                 'checked': False},
                 {'item': 'Book outgoing flight',
+                'description': '',
                 'checked': False},
                 {'item': 'Book accommodation',
+                'description': '',
                 'checked': False},
             ]},
             {'name': 'Activities', 'items': []}
@@ -266,7 +271,7 @@ async def add_new_city_to_trip (
     city = tripCities_col.find_one({"_id": activity.cityId})
     for c in city['checklist']:
         if c['name'] == 'Activities':
-            c['items'].append({'item': 'Book ' + activity.name, 'checked': False})
+            c['items'].append({'item': 'Book ' + activity.name, 'description': '', 'checked': False})
     tripCities_col.update_one(
         {"_id": activity.cityId},
         {
@@ -290,7 +295,7 @@ async def add_new_item_to_checklist (
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "City does not exist"}))
     for c in city['checklist']:
         if (c['name'] in item.groups):
-            c['items'].append({"item": item.item, "checked": False})
+            c['items'].append({"item": item.item, 'description': item.description, "checked": False})
 
     tripCities_col.update_one({"_id": cityId}, {"$set": {"checklist": city['checklist']}})
     return baseModels.createResponse(True, 200, {})

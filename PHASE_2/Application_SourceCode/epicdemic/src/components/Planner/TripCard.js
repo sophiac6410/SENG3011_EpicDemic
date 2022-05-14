@@ -139,8 +139,9 @@ function TripCard({name, tripId, latitude, longitude, city, country}) {
       <div className="d-flex flex-row mt-3">
         <Typography variant="heading3" class="color-grey">YOUR BUCKETLIST</Typography>
       </div>
-      {
-        loading == false ? (
+      { savedActivity.length == 0
+        ? <Typography variant='caption' className='color-medium-teal justify-content-start d-flex'>No activities yet</Typography>
+        : loading == false ? (
           <Carousel 
             responsive={responsive} 
             // containerClass="location-carousel"
@@ -151,13 +152,8 @@ function TripCard({name, tripId, latitude, longitude, city, country}) {
             centerMode={true}
             // className="bg-light-teal"
           >
-            {
-              savedActivity.length == 0 ? (
-                <Typography variant='caption' className='color-medium-teal me-3'>Add Some Activity</Typography>
-              ):(
-                savedActivity.map((activity) => 
+            {savedActivity.map((activity) => 
                 <BucketCard activity={activity} key={activity.id}></BucketCard>)
-              )
             }
           </Carousel>
         ):(

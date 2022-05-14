@@ -18,6 +18,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import TextField from '@mui/material/TextField';
 import { addNewItem, addNewGroup } from './ChecklistApiCalls';
 import { getTripCityById } from './tripApiCalls';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 const mainModal = {
   position: 'absolute',
@@ -43,7 +44,7 @@ const popUp = {
   transform: 'translate(-50%, -50%)',
   width: "45vw",
   minWidth: '300px',
-  height: "60vh",
+  height: "80vh",
   bgcolor: 'background.paper',
   borderRadius: "30px",
   boxShadow: 24,
@@ -70,12 +71,43 @@ const popUpNewGroup = {
   flexDirection: "column",
 }
 
+const popUpDescription = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: "40vw",
+  minWidth: '300px',
+  height: "50vh",
+  bgcolor: 'background.paper',
+  borderRadius: "30px",
+  boxShadow: 24,
+  px: 4,
+  py: 3,
+  backgroundColor: "white",
+  display: "flex",
+  flexDirection: "column",
+}
+
+
 function ChecklistItem({item}) {
   const [checked, setChecked] = React.useState(item.checked);
+  const [openDescription, setOpenDescription] = React.useState(false);
+  const [description, setDescription] = React.useState(item.description ? item.description : '');
   const handleClick = () => {
     setChecked(!checked);
   }
-  return <FormControlLabel
+  const handleOpenDescription = () => {
+    setOpenDescription(true);
+  }
+  const handleCloseDescription = () => {
+    setOpenDescription(false);
+  }
+  const handleSaveDescription = () => {
+    handleCloseDescription();
+  }
+  return <>
+  <FormControlLabel
     sx={{display: 'block'}}
     label={item.item}
     control={
@@ -87,6 +119,38 @@ function ChecklistItem({item}) {
       />
     }   
   />
+  <IconButton onClick={handleOpenDescription}>
+    <MoreHorizIcon className="color-dark-teal"/>
+  </IconButton>
+  <Modal
+    open={openDescription}
+    onClose={handleCloseDescription}
+    scroll='body'
+    aria-labelledby="checklist-dialog"
+  >
+    <Box sx={popUpDescription}>
+      <div style={{display: "flex", justifyContent: "end", flexDirection: "row", alignItems: "center"}}>
+        <IconButton onClick={handleCloseDescription}>
+          <CloseIcon color='teal' fontSize="small"></CloseIcon>
+        </IconButton>
+      </div>
+      <Typography variant="heading3" className="color-dark-teal" sx={{textAlign: 'center', lineHeight: 0}}>{item.item}</Typography>
+      <Typography variant="bodyImportant" className="color-dark-teal mt-2" sx={{textAlign: 'center'}}>Description</Typography>
+      <div className="justify-content-center d-flex my-2" style={{overflowY: 'auto'}}>
+        <textarea 
+          style={{width: '90%', height: '230px'}}
+          placeholder='Add a description'
+          onChange={(event)=>{setDescription(event.target.value)}}
+        >
+          {description}
+        </textarea>
+      </div>
+      <div className="d-flex justify-content-end mx-5" style={{flexDirection: "row"}}>
+        <TealBotton onClick={handleSaveDescription} style={{width: 'auto'}}>Save</TealBotton>
+      </div>
+    </Box>
+  </Modal>
+  </>
 }
 
 function ChecklistGroup({group}) {
@@ -114,7 +178,9 @@ function ChecklistGroup({group}) {
         { group.items.length === 0 
           ? <Typography variant="bodyText" className="color-medium-teal">Nothing to do here</Typography>
           : (group.items.map((item, i) => {
-              return <ChecklistItem key={i} item={item}/>
+              return <div className="d-flex justify-content-between">
+                <ChecklistItem key={i} item={item}/>
+              </div>
             }))
         }
       </FormGroup>
@@ -127,6 +193,7 @@ function ChecklistModal({city, tripId}) {
   const [checklist, setChecklist] = React.useState([]);
   const [openAddItemModal, setOpenAddItemModal] = React.useState(false);
   const [newItem, setNewItem] = React.useState('');
+  const [description, setDescription] = React.useState('');
   const [options, setOptions] = React.useState({});
   const [openNewGroupModal, setOpenNewGroupModal] = React.useState(false);
   const [newGroup, setNewGroup] = React.useState('');
@@ -165,7 +232,8 @@ function ChecklistModal({city, tripId}) {
         groups.push(key);
       }
     });
-    addNewItem(city.id, newItem, groups);
+    console.log(groups);
+    addNewItem(city.id, newItem, groups, description);
     getCityChecklist();
     handleCloseAddItemModal();
   }
@@ -236,8 +304,9 @@ function ChecklistModal({city, tripId}) {
               <Typography variant='bodyText' className='color-medium-teal' sx={{cursor: 'pointer'}} onClick={handleCloseAddItemModal}>Back</Typography>
             </div>
             <Typography variant="heading2" className="color-dark-teal" sx={{textAlign: 'center', lineHeight: 0}}>New Item</Typography>
-            <div className="mx-4 mt-4 mb-5 border-radius-med px-5 pb-2 align-items-center" style={{width: '90%', height: '60px', border: '1px solid #1B4965'}}>
+            <div className="mx-4 mt-4 mb-4 border-radius-med px-5 py-3 align-items-center" style={{width: '90%', border: '1px solid #1B4965'}}>
               <TextField label="I want to do ..." variant="standard" fullWidth value={newItem} onChange={(event) => {setNewItem(event.target.value)}}/>
+              <textarea className="mt-4" style={{width: '100%', height: '150px'}} placeholder="Add a description" onChange={(event) => {setDescription(event.target.value)}}>{description}</textarea>
             </div>
             <div className="mx-5 px-5">
               <div className="d-flex justify-content-between">

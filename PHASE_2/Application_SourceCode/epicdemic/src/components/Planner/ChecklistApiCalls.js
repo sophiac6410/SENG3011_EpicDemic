@@ -2,7 +2,7 @@ import { GroupAdd } from '@mui/icons-material';
 import React from 'react';
 import API_URL from '../../config.json';
 
-export const addNewItem = async (cityId, item, groups) => {
+export const addNewItem = async (cityId, item, groups, description) => {
   console.log(cityId, item, groups)
   try {
     const response = await fetch(`${API_URL.API_URL}/v1/trips/new/city/${cityId}/checklist/item`, {
@@ -13,7 +13,8 @@ export const addNewItem = async (cityId, item, groups) => {
       },
       body: JSON.stringify({
         item,
-        groups
+        groups,
+        description,
       }),
     });
     const data = await response.json();
