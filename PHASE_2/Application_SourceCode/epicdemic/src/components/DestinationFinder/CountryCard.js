@@ -19,8 +19,6 @@ const CountryCard = ({code, country, status, saved}) => {
         } else if (tStatusColor === "#DA4848") {
             colorClass = "red";
         }
-        console.log("tStatusColor = " + tStatusColor);
-        console.log("colorClass = " + colorClass);
         setTravel({
             tStatus: travelStatus(status),
             tStatusColor: colorClass

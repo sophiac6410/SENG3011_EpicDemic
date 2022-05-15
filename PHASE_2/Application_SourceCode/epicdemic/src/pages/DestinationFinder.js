@@ -16,9 +16,10 @@ import { DarkButton, WhiteButton } from "../styles/Button";
 import NavbarComp from "../components/NavBar";
 import Typography from '@mui/material/Typography';
 import { getAllLocations, getUserSaved } from "../apiCalls";
-import { travelStatus } from "../styles/Theme";
+import { travelStatus, adviceLevel } from "../styles/Theme";
 import CountryCard from "../components/DestinationFinder/CountryCard.js"
 
+const allCountries = [];
 
 const DestinationFinder = () => {
     const [countries, setCountries] = useState([]);
@@ -35,6 +36,9 @@ const DestinationFinder = () => {
         async function fetchData () {
             let locations = await getAllLocations();
             console.log(locations);
+            for (var country of locations) {
+                allCountries.push({...country})
+            }
             setCountries(locations);
             
             let user = await getUserSaved();
@@ -51,6 +55,38 @@ const DestinationFinder = () => {
         setSearchFilter(newSearch);
     }
 
+    const filterCountries = () => {
+        var filtered = [];
+    
+        for (var country of allCountries) {
+            filtered.push({...country})
+        }
+
+        if (searchFilter.region === null && searchFilter.travel === null && searchFilter.advice === null) {
+            setCountries(filtered);
+        }        
+        
+        if (searchFilter.region !== null) {
+            filtered = filtered.filter((country) => {
+                return country.region === searchFilter.region.label
+            })
+        }
+
+        if (searchFilter.travel !== null) {
+            filtered = filtered.filter((country) => {
+                return travelStatus(country.travel_status) === searchFilter.travel.label
+            })
+        }
+
+        if (searchFilter.advice !== null) {
+            filtered = filtered.filter((country) => {
+                return adviceLevel(country.advice_level) === searchFilter.advice.label
+            })
+        }
+
+        setCountries(filtered);
+    }
+
     return (
         <div className="bg-off-white">
             <div className="bg-plane"/>
@@ -60,7 +96,7 @@ const DestinationFinder = () => {
                     <Typography variant="title" className="color-white mt-5">WHERE WILL YOU GO NEXT?</Typography>
                 </div>
                 
-                <WhiteButton onClick={() => console.log(searchFilter)} sx={{display: 'block', margin: 'auto', marginTop: '3%'}}>Search</WhiteButton>
+                <WhiteButton onClick={filterCountries} sx={{display: 'block', margin: 'auto', marginTop: '3%'}}>Search</WhiteButton>
 
                 <Row style={{margin: "3% 5% 1%"}} className="justify-content-center">
                     <Col className="pe-5 ps-5">
@@ -78,7 +114,7 @@ const DestinationFinder = () => {
             <Row style={{"marginLeft": "6vw", "marginRight": "6vw", "marginTop": "10vh", "marginBottom": "10vh"}}>
                 <div className="image-gallery">
                     {countries.map((country, idx) => {
-                        return(<CountryCard code={country.id} country={country.country} status={country.travel_status} saved={savedLocations.includes(country.id)}/>)
+                        return(<CountryCard key={country.id} code={country.id} country={country.country} status={country.travel_status} saved={savedLocations.includes(country.id)}/>)
                     })}
                 </div>
             </Row>
@@ -98,82 +134,16 @@ const regionOptions = [
 ]
 
 const adviceLevelOptions = [
-    { code: '4', label: 'Regular Precautions', imageUrl: 'test' },
-    { code: '3', label: 'Exercise Caution', imageUrl: 'test' },
+    { code: '0', label: 'Regular Precautions', imageUrl: 'test' },
+    { code: '1', label: 'Exercise Caution', imageUrl: 'test' },
     { code: '2', label: 'Reconsider your need for travel', imageUrl: 'test' },
-    { code: '1', label: 'Do not travel', imageUrl: 'test' },
+    { code: '3', label: 'Do not travel', imageUrl: 'test' },
 ]
 
 const travelStatusOptions = [
     { code: 'O', label: 'Open', imageUrl: 'test' },
     { code: 'R', label: 'Open with Restrictions', imageUrl: 'test' },
     { code: 'C', label: 'Closed', imageUrl: 'test' }
-]
-
-const infoRowData = [
-    { 
-        country: 'France', 
-        latestUpdate: 'Unvaccinated travelers can now travel to France provided that they have compelling reasons or pressing grounds',
-        lastUpdated: new Date(2022, 3, 31),
-        travelStatus: 'Open with Restrictions',
-        saved: false      
-    },
-    { 
-        country: 'Phillipines', 
-        latestUpdate: 'Fully vaccinated nationals of non-visa required countries under Executive Order No. 408 (s.1960) as amended, shall be allowed to enter the Philippines',
-        lastUpdated: new Date(2022, 3, 22),
-        travelStatus: 'Open with Restrictions',
-        saved: true      
-    },
-    { 
-        country: 'Ukraine', 
-        latestUpdate: 'The Russian invasion of Ukraine is ongoing. The security situation continues to be volatile and is deteriorating rapidly. Infrastructure and military...',
-        lastUpdated: new Date(2022, 3, 20),
-        travelStatus: 'Open with Restrictions',
-        saved: true      
-    },
-    { 
-        country: 'China', 
-        latestUpdate: 'Pre-departure requirements for travel to china from Australia have changed. In addition to meeting visa requirements, there are health testing requirements',
-        lastUpdated: new Date(2022, 3, 15),
-        travelStatus: 'Closed',
-        saved: false      
-    },
-    { 
-        country: 'China', 
-        latestUpdate: 'Pre-departure requirements for travel to china from Australia have changed. In addition to meeting visa requirements, there are health testing requirements',
-        lastUpdated: new Date(2022, 3, 15),
-        travelStatus: 'Closed',
-        saved: true      
-    },
-    { 
-        country: 'China', 
-        latestUpdate: 'Pre-departure requirements for travel to china from Australia have changed. In addition to meeting visa requirements, there are health testing requirements',
-        lastUpdated: new Date(2022, 3, 15),
-        travelStatus: 'Closed',
-        saved: true      
-    },
-    { 
-        country: 'China', 
-        latestUpdate: 'Pre-departure requirements for travel to china from Australia have changed. In addition to meeting visa requirements, there are health testing requirements',
-        lastUpdated: new Date(2022, 3, 15),
-        travelStatus: 'Closed',
-        saved: true      
-    },
-    { 
-        country: 'China', 
-        latestUpdate: 'Pre-departure requirements for travel to china from Australia have changed. In addition to meeting visa requirements, there are health testing requirements',
-        lastUpdated: new Date(2022, 3, 15),
-        travelStatus: 'Closed',
-        saved: true      
-    },
-    { 
-        country: 'China', 
-        latestUpdate: 'Pre-departure requirements for travel to china from Australia have changed. In addition to meeting visa requirements, there are health testing requirements',
-        lastUpdated: new Date(2022, 3, 15),
-        travelStatus: 'Closed',
-        saved: true      
-    }
 ]
 
 const popularDestinationsData = [
