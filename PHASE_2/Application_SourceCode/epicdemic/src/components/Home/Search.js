@@ -34,7 +34,7 @@ function Search() {
           <div className="search-col ps-4" style={{ marginLeft: 25 }}>
             <Typography variant="bodyImportant" className="color-dark-grey ps-3">FROM</Typography>
             <div className="border-radius-large searchfield-container ps-3 pe-5" >
-              <FlightTakeoffIcon fontSize="large" ></FlightTakeoffIcon>
+              <FlightTakeoffIcon fontSize="large" className="color-dark-teal"></FlightTakeoffIcon>
               <CountrySelect isFrom={true} handleInput={() => {}}></CountrySelect>
             </div>
           </div>
@@ -47,7 +47,7 @@ function Search() {
           <div className="search-col me-4">
             <Typography variant="bodyImportant" className="color-dark-grey ps-5">TO</Typography>
             <div className="border-radius-large searchfield-container ps-5 pe-5">
-              <FlightLandIcon fontSize="large"></FlightLandIcon>
+              <FlightLandIcon fontSize="large" className="color-dark-teal"></FlightLandIcon>
               <CountrySelect isFrom={false} handleInput={(e, v) => setDest(v)}></CountrySelect>
             </div>
           </div>
@@ -55,7 +55,7 @@ function Search() {
             <IconButton 
               aria-label="search"
               onClick={ routeChange }>
-              <SearchIcon sx={{ color: "white", padding: 0, fontSize: 30, m: 3}}/>
+              <SearchIcon sx={{ color: "white", padding: 0, fontSize: 35, m: 1.5}}/>
             </IconButton>
           </div>
         </div>

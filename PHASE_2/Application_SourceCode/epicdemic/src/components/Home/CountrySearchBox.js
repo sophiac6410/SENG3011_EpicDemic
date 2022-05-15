@@ -58,7 +58,7 @@ export default function CountrySelect({isFrom, handleInput}) {
           <TextField
             id="standard-basic" 
             defaultValue={isFrom && 'Australia'}
-            placeholder={isFrom ? '' : 'Search a travel destination...'}
+            placeholder={isFrom ? '' : 'Choose a travel destination...'}
             variant="standard"
             size="large"
             {...params}
