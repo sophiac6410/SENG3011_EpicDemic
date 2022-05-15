@@ -278,7 +278,6 @@ async def get_owner (
         'name': name
     })
 
-
 @router.delete("/{tripId}/delete/member", status_code=status.HTTP_200_OK, tags=['trips'], response_model=baseModels.Response, responses={401: {"model": baseModels.ErrorResponse}})
 async def delete_member (
     user: User,
@@ -303,4 +302,38 @@ async def delete_member (
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Email not found in the database"}))
 
     return baseModels.createResponse(True, 200, {})
+
+@router.get("/{tripId}/city/{cityKey}/activity", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.ActivityIdResponse, responses={401: {"model": baseModels.ErrorResponse}})
+async def get_trip_by_id (
+    Authorization: str = Header(..., example=token_example),
+    tripId: int = Path(..., description="The unique id of the trip"),
+    cityKey: int = Path(..., description="city key"),
+):
+    user = auth.get_current_user(Authorization)
+    if tripId not in user['saved_trips']:
+        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Not authorised to view trip"}))
+    print(tripId)
+    trip = trip_col.find_one(
+        {"_id": tripId},
+        {"id": "$_id", "name": 1, "start_date": 1, "end_date": 1, "travellers": 1, "cities": 1 }
+    )
+    city = tripCities_col.find_one(
+        {"_id": trip['cities'][cityKey]},
+        { 
+            "id": "$_id",
+            "city_name": 1,
+            "latitude": 1,
+            "longitude": 1,
+            "start_date": 1,
+            "end_date": 1,
+            "country_code": 1,
+            "country_name": 1,
+            "activities": 1
+        }
+    )
+    activity = {
+        "ids": city['activities']
+    }
+
+    return baseModels.createResponse(True, 200, activity)
    

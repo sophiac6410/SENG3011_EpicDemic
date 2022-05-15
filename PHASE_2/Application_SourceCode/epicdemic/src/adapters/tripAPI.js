@@ -246,3 +246,16 @@ export const getTripOwner = async (tripId) => {
       console.log(e)
   }
 }
+
+export const getActivityByCity = async (tripId, cityId) => {
+    const response = await fetch(`${API_URL.API_URL}/v1/trips/${tripId}/city/${cityId}/activity`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      }, 
+    })
+
+    const data = response.json()
+    return data
+}
