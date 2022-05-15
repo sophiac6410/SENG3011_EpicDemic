@@ -65,7 +65,7 @@ function Home() {
                     <Typography variant="bodyHeading">Find a destination</Typography>
                   </DarkButton>
                   <WhiteButton onClick={goPlaner} className="align-self-center ms-4 pt-2 pb-2" style={{width: "180px"}}>
-                    <Typography variant="bodyHeading">Plan my trip</Typography>
+                    <Typography variant="bodyHeading">Trip Planner</Typography>
                   </WhiteButton>
                 </div>
                 <Search></Search>

@@ -28,13 +28,15 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import CountryField from './CountryField';
 import RegionField from './RegionField';
 import GetCities from './GetCities';
+import FindCities from './FindCities';
 import { GetActivities } from '../../adapters/activityAPI';
 import { addCityToTrip, createTrip } from './tripApiCalls';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { Margin, TripOriginOutlined } from '@mui/icons-material';
+import { ConstructionOutlined, Margin, TripOriginOutlined } from '@mui/icons-material';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+const { allCountries } = require('./CountryField');
 
 import InputField from '../InputField';
 import { Field } from '../Form'
@@ -151,14 +153,6 @@ const responsive = {
     items: 1
   }
 };
-const regionOptions = [
-  { id: 'EU', name: 'Europe' },
-  { id: 'SEA', name: 'South-East Asia' },
-  { id: 'EMED', name: 'Eastern Mediterranean' },
-  { id: 'WP', name: 'Western Pacific' },
-  { id: 'AMER', name: 'Americas' },
-  { id: 'AF', name: 'Africa' },
-]
 
 function StepOne({isOpen, onClose, onNext}) {
   const [startDate, setStartDate] = React.useState(null);
@@ -236,8 +230,8 @@ function StepOne({isOpen, onClose, onNext}) {
           </LocalizationProvider>
           <Divider orientation="vertical" flexItem  variant="middle" flex />
           <PeopleOutlineIcon  sx={{marginTop: "10px", marginRight: "5px"}} color='teal'></PeopleOutlineIcon>
-          <FormControl variant="standard" sx={{ width: '20ch'}}>
-            <Input color='teal'  placeholder='How many travellers' type='number' value={travellers} onChange={(event) => {setTravellers(event.target.value)}}/>
+          <FormControl variant="standard" sx={{ width: '12ch'}}>
+            <Input color='teal'  placeholder='Travellers' type='number' value={travellers} onChange={(event) => {setTravellers(event.target.value)}}/>
           </FormControl>
         </Box>
         <Box sx={{display: "flex", flexDirection: "row", marginTop: "80px"}}>
@@ -266,21 +260,18 @@ function StepTwo({onClose, name, start, end, travellers}) {
   const [activity, setActivity] = React.useState([])
   const [cityIndex, setCityIndex] = React.useState(-1)
   const [cityPhoto, setCityPhoto] = React.useState('')
+  const [knownFor, setKnownFor] = React.useState([])
 
   const handleOpen = async () => {
     if (!back) {
-      console.log(name, start, end, travellers)
       const data = await createTrip(name, start, end, parseInt(travellers));
-      console.log(data)
-      console.log(data.id, data['id']);
       setTripId(data.id)
     }
     setOpen(true);
+    setKnownFor([])
     setStepThree(false);
   };
   const handleAdd = async () => {
-    console.log(tripId);
-    console.log(city.name, lat, long, country.name, country.code)
     const data = await addCityToTrip(tripId, city.name, lat, long, country.code, country.name);
     setCityId(data.id);
     setAdded(!added)
@@ -305,8 +296,9 @@ function StepTwo({onClose, name, start, end, travellers}) {
   const randomGenerator = async () => {
     setStepThree(true)
     
-    var index = Math.floor((Math.random() * 100) + 1);
+    /* var index = Math.floor((Math.random() * 100) + 1);
     const data = await GetCities(country, "-population")
+    FindCities(country)
     // const data = Countries
     const cityCount = data.metadata.totalCount;
     if (cityCount < 100) {
@@ -322,26 +314,53 @@ function StepTwo({onClose, name, start, end, travellers}) {
     } 
     if (!region) {
       setRegion(regionOptions[0])
+    }*/
+    var index = Math.floor((Math.random() * 9) + 0)
+    const data = await FindCities(country)
+    console.log(data)
+    const cities = await data.data.getPlaces
+    if (cities.length < 10) {
+      index = Math.floor((Math.random() * (cities.length - 1)))
     }
+
+    const cityObj = { "id": cities[index].id, "name": cities[index].name, "latitude": cities[index].lat, "country": cities[index].country, "longitude": cities[index].lng }
+    setCityOptions(cities)
+    setCity(cityObj)
+    setLat(cities[index].lat)
+    setLong(cities[index].lng)
+    setCountry({"name": cities[index].country, "code": "AU" })
+    const countryObj = allCountries.find(e => e.name === cities[index].country)
+    if (countryObj) {
+      setCountry(countryObj)
+      setRegion(countryObj.continent)
+    }
+    
     setAdded(false)
     async function getPhoto(city) {
-      console.log('inside get photo func');
-      const photos = await getDestinationPhotos(city.name + ', ' + city.country, false)
+      const { photos, known_for } = await getDestinationPhotos(city.name + ', ' + city.country, false)
       console.log('photo', photos);
-      if (photos.length > 0) {
+      if (photos && photos.length > 0) {
         setCityPhoto(photos[0])
       }
+      if (known_for && known_for.length > 0) {
+        setKnownFor(known_for)
+        console.log(known_for)
+      } else {
+        setKnownFor([])
+      }
     }
-    getPhoto(data.data[index])
+    getPhoto(cities[index])
     // const activities = await GetActivities(data.data[index].latitude, data.data[index].longitude)
+    
   };
 
   const handleCountry = async (country) => {
     setCountry(country)
     setCity(null)
     const data = await GetCities(country, "name")
-    console.log('city options', data);
     setCityOptions(data.data)
+    setKnownFor([])
+    setRegion(country.continent)
   }
 
   const handleCity = (city) => {
@@ -349,14 +368,22 @@ function StepTwo({onClose, name, start, end, travellers}) {
     setCity(city)
     setStepThree(true)
     setAdded(false)
+
     async function getPhoto() {
-      console.log('inside get photo func');
       if (city !== null && city.name !== null) {
-        const data = await getDestinationPhotos(city.name + ', ' + city.country, false)
-        console.log('photo', data);
-        if (data.length > 0) {
-          setCityPhoto(data[0])
+        const { photos, known_for } = await getDestinationPhotos(city.name + ', ' + city.country, false)
+        console.log('photo', photos);
+        if (photos && photos.length > 0) {
+          setCityPhoto(photos[0])
+        } 
+        if (known_for && known_for.length > 0) {
+          setKnownFor(known_for)
+          console.log("known for", known_for)
+        } else {
+          setKnownFor([])
         }
+      } else {
+        setKnownFor([])
       }
     }
     getPhoto()
@@ -376,7 +403,12 @@ function StepTwo({onClose, name, start, end, travellers}) {
     async function updateActivity() {
       // setLoading(true)
       if(city){
-        var {out, controller} = await GetActivities({lat: city.latitude, lot: city.longitude})
+        if (city.latitude) {
+          var {out, controller} = await GetActivities({lat: city.latitude, lot: city.longitude})
+        } else {
+          var {out, controller} = await GetActivities({lat: city.lat, lot: city.lng})
+        }
+        console.log(out)
         out.then(res => {
           console.log(res.status)
           console.log(res.data)
@@ -419,11 +451,21 @@ function StepTwo({onClose, name, start, end, travellers}) {
                   </IconButton>
                   <Typography variant='body' className='color-white mt-2'>Back</Typography>
                 </div>
-                <div style={{verticalAlign: 'bottom', margin: 'auto', display: 'flex', justifyContent: 'center', marginTop: '250px'}}>
+                <div style={{verticalAlign: 'bottom', margin: 'auto', justifyContent: 'center', marginTop: '250px'}}>
                   <Typography variant="heading1" className='color-white text-center'><b>{city !== null ? (city.name + ', ' + city.country) : ''}</b></Typography>
+                  <div style={{ display: 'flex', width: '100%', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center'}}>
+                  {knownFor.length > 0 && Object.keys(knownFor).map((key, _) => 
+                  {
+                    return(
+                    <div key={key}style={{display: 'flex', flexDirection: 'row'}}>
+                      <img src={knownFor[key].icon+"-48.png"} style={{width:'30px', height: '30px', marginLeft: '20px'}}></img>
+                      <Typography variant="body" className='color-dark-teal text-center' style={{marginTop: '5px', marginLeft: '15px'}} >{knownFor[key].name}</Typography>
+                  </div>)
+                  })}
                 </div>
+                </div>   
               </div>
-              <Typography variant='body2' className='color-dark-teal mt-2 text-center'>This city is within the top 100 tourist cities in this region</Typography>
+              {knownFor.length > 7 ? <div style={{height: '50px'}}></div> : <div style={{height: '20px'}}></div> }
               </>
             : <>
               <div style={{display: "flex", justifyContent: "start", flexDirection: "row", alignItems: "center", paddingBottom: "20px"}}>
@@ -435,7 +477,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
               <Typography variant="heading2" className='color-dark-teal text-center'>
                 Add cities to your trip
               </Typography>
-              <Typography variant='body2' className='color-dark-teal mt-2 text-center'>Optionally enter a region and/or country and click 'Find my city' and we will show you a recommended city.</Typography>
+              <Typography variant='body2' className='color-dark-teal mt-2 text-center'>Optionally enter a region and/or country and click 'Recommend me a city' and we will recommended you a destination.</Typography>
             </>
           }
           </div>
@@ -443,17 +485,17 @@ function StepTwo({onClose, name, start, end, travellers}) {
             <PublicIcon  sx={{marginTop: "10px", marginRight: "5px"}} color="teal"></PublicIcon>
             <FormControl color='teal' variant="standard" sx={{ width: '10'}}>
               {/* <Input color='teal' placeholder='Europe' value="Europe"/> */}
-              <RegionField options={regionOptions} placeholder='Any region' width={150} value={region} handleInput={(e, v) => setRegion(v)}></RegionField>
+              <RegionField placeholder='Any region' width={170} value={region} handleInput={(e, v) => setRegion(v)}></RegionField>
             </FormControl>
             <Divider orientation="vertical" flexItem  variant="middle" flex />
             <EmojiFlagsIcon  sx={{marginTop: "10px", marginRight: "5px"}} color="teal"></EmojiFlagsIcon>
             <FormControl color='teal' variant="standard" sx={{ width: '10'}}>
-              <CountryField value={country} handleInput={(e, v) => handleCountry(v) } ></CountryField>
+              <CountryField value={country} region={region} handleInput={(e, v) => handleCountry(v) } ></CountryField>
             </FormControl>
             <Divider orientation="vertical" flexItem  variant="middle" flex />
             <LocationCityIcon  sx={{marginTop: "10px", marginRight: "5px"}} color='teal'></LocationCityIcon>
             <FormControl variant="standard" sx={{ width: '40' }} color="teal">
-            <RegionField options={cityOptions} placeholder='City' width={280} value={city} handleInput={(e, v) => handleCity(v)}></RegionField>
+            <RegionField options={cityOptions} placeholder='City' width={270} value={city} handleInput={(e, v) => handleCity(v)}></RegionField>
             </FormControl>
           </Box>
           <div style={{display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center"}} className="mt-2">
@@ -494,7 +536,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
                   <IconButton onClick={randomGenerator}>
                     <ChangeCircleIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></ChangeCircleIcon>
                   </IconButton>
-                  <Typography variant='bodyImportant' className='color-medium-teal mt-2'>Find my city</Typography>
+                  <Typography variant='bodyImportant' className='color-medium-teal mt-2'>Recommend me a city</Typography>
                 </div>
               )
             }
@@ -749,6 +791,5 @@ function AddMember({isOpen, onClose , tripId}) {
     </Modal>
   )
 }
-
 
 export {StepOne, StepTwo, ActivityModal, AddMember}

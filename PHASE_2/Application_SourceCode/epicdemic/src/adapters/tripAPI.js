@@ -293,6 +293,7 @@ export const getDestinationPhotos = async (destination, small) => {
       } else {
         console.log('got destination', dataDestination);
         let photos = []
+        let known_for = []
         dataDestination.included.map((data) => {
           if (data.type == 'photo') {
             if (small) {
@@ -300,10 +301,12 @@ export const getDestinationPhotos = async (destination, small) => {
             } else {
               photos = [data.attributes.image.large, ...photos]
             }
+          } else if (data.type == 'known_for') {
+            known_for.push(data.attributes)
           }
         })
         console.log('photos', photos);
-        return photos
+        return { photos: photos, known_for: known_for }
       }
     } else {
       return []

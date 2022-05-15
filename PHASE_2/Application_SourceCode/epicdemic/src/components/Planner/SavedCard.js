@@ -55,14 +55,7 @@ function SavedCard({name, start, end, travellers, tripId, update}) {
   const navigate = useNavigate()
 
   const handleClickSave = (event) => {
-    let method;
-    if (saved) {
-      method = 'DELETE';
-    } else {
-      method = 'PUT';
-    }
     setSaved(event.target.checked);
-    saveDestination(method, code);
   }
 
   return(

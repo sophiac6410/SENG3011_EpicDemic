@@ -15,7 +15,6 @@ const GetCities = async (country, sort) => {
     }
   };
   if (country) {
-    console.log("ok")
     try {
       const response = await fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/adminDivisions?sort=${sort}&limit=100&countryIds=${country.code}`, options);
       const data = await response.json();

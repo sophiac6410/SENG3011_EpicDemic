@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import NavbarComp from "../components/NavBar"
 import "./../styles/Planner.css"
 import Typography from '@mui/material/Typography'
-import { WhiteButton } from "../styles/Button"
+import { WhiteButton, DarkButton } from "../styles/Button"
 import { Container, Row } from "react-bootstrap"
 import {StepOne, StepTwo} from '../components/Planner/PlannerModal'
 import SavedCard from '../components/Planner/SavedCard'
@@ -46,12 +46,15 @@ function Planner() {
           <Typography variant="title" className="color-white mt-5">Start planning your trip</Typography>
         </div>
         <div className="text-center mt-3">
-          <Typography variant="caption" className="color-white mt-5">Our trip planner will recommend countries, cities and activities taking into consideration your travel preferences.</Typography>
+          <Typography variant="caption" className="color-white mt-5">Our trip planner will recommend and showcase countries, cities and activities taking into consideration your travel preferences.</Typography>
         </div>
-        <div className="text-center mt-5">
-          <WhiteButton onClick={openStepOne}>
-            <Typography variant="bodyImportant" className="me-5 ms-5">Plan a new trip</Typography>
+        <div style={{display: "flex", flexDirection: "row", justifyContent: "center", marginTop: '50px'}}>
+          <WhiteButton onClick={openStepOne} className="align-self-center pt-2 pb-2" style={{width: "200px"}}>  
+            <Typography variant="bodyHeading">Plan a new trip</Typography>
           </WhiteButton>
+          <DarkButton className="align-self-center ms-4 pt-2 pb-2" style={{width: "250px"}}>
+            <Typography variant="bodyHeading">Adjust my travel preferences</Typography>
+          </DarkButton>
           <StepOne isOpen={stepOneOpen} onClose={closeStepOne} onNext={openStepTwo}></StepOne>
         </div>
       </div>
@@ -81,4 +84,3 @@ function Planner() {
 }
 
 export default Planner;
-
