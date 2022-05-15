@@ -474,20 +474,17 @@ function StepTwo({onClose, name, start, end, travellers}) {
 }
 
 
-function ActivityModal({fromTrip, activities, tripId, city}) {
+function ActivityModal({fromTrip, activities, tripId, city, updateActivity}) {
   const [isOpen, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
     setStepThree(false)
   };
-  const handleClose = () => {
-    // setOpen(false);
-    // setStepThree(false)
-    onClose()
-  };
+
   const handleBack = () => {
-    setOpen(false);
+    setOpen(false)
     setStepThree(false)
+    updateActivity()
   }
   const [stepThree, setStepThree] = React.useState(false)
 
@@ -543,7 +540,6 @@ function ActivityModal({fromTrip, activities, tripId, city}) {
             { activities !== [] && activities !== {} ? (
               activities.map((activity, id) => {
                 if(activity !== null && city !== null) {
-                  // console.log(activity)
                   return <ActivityCard key={activity.id} activity={activity} cityId={city.id} tripId={tripId}></ActivityCard>
                 }
               })

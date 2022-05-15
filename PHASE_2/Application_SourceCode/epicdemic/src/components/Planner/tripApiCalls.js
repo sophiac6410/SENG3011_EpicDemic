@@ -102,7 +102,7 @@ export const addActivityToCity = async (activityId, cityId, tripId, name) => {
       console.log(data)
       console.log(response)
     } 
-    console.log(data)
+    console.log("Activity added")
   } catch (e) {
       console.log(e)
   }

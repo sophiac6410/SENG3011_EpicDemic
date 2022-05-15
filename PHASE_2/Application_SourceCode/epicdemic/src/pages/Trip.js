@@ -26,36 +26,24 @@ function Trip() {
   const [activities, setActivities] = React.useState([])
   const [data, setData] = React.useState([])
   const [openAdd, setAdd] = React.useState(false);
+  // const [reload, setReload] = React.useState(false);
   const openAddModal = () => setAdd(true)
   const closeAddModal = () => setAdd(false)
+  
 
-  // useEffect(() => {
-  //   async function fetchTrip () {
-  //     console.log(tripId);
-  //     const data = await getTripById(tripId);
-  //     console.log(data)
-  //     setName(data.name)
-  //     const date1 = new Date(data.start_date);
-  //     const date2 = new Date(data.end_date);
-  //     setDates(date1.getDate() + '/' + (date1.getMonth() + 1) + '/' + date1.getFullYear() + " - " + date2.getDate() + '/' + (date2.getMonth() + 1) + '/' + date2.getFullYear())
-  //     setTravellers(data.travellers)
-  //     setCities(data.cities)
-  //   }
-  //   fetchTrip();
-  // }, []);
+  const getTrip = async function() {
+    const data = await getTripById(tripId);
+    console.log(data)
+    setName(data.name)
+    const date1 = new Date(data.start_date);
+    const date2 = new Date(data.end_date);
+    setDates(date1.getDate() + '/' + (date1.getMonth() + 1) + '/' + date1.getFullYear() + " - " + date2.getDate() + '/' + (date2.getMonth() + 1) + '/' + date2.getFullYear())
+    setTravellers(data.travellers)
+    setCities(data.cities)
+    setActivities(data.activities)
+  }
 
   useEffect(() => {
-    async function getTrip() {
-      const data = await getTripById(tripId);
-      console.log(data)
-      setName(data.name)
-      const date1 = new Date(data.start_date);
-      const date2 = new Date(data.end_date);
-      setDates(date1.getDate() + '/' + (date1.getMonth() + 1) + '/' + date1.getFullYear() + " - " + date2.getDate() + '/' + (date2.getMonth() + 1) + '/' + date2.getFullYear())
-      setTravellers(data.travellers)
-      setCities(data.cities)
-      setActivities(data.activities)
-    }
     getTrip()
     return() => {
       setName("")
@@ -84,10 +72,12 @@ function Trip() {
     <div className="bg-off-white" style={{paddingBottom: "200px"}}>
       <NavbarComp bg={true}></NavbarComp>
       <Container>
+        {/* <IconButton onClick={() => navigate(-1)}>
+          <ArrowBackIosIcon color="darkTeal" fontSize="medium"></ArrowBackIosIcon>
         <IconButton onClick={() => navigate(-1)} sx={{mt: 3}}>
           <ArrowBackIosIcon color="darkTeal" fontSize="small"></ArrowBackIosIcon>
           <Typography variant="bodyText" className="color-dark-teal">Back</Typography>
-        </IconButton>
+        </IconButton> */}
         <Row>
           <Row className='align-items-center justify-content-center ps-5'>
             <div className="text-center mt-5" style={{marginBottom: "10px"}}>
@@ -106,9 +96,10 @@ function Trip() {
             <Col md={2}>
               <Row className='align-items-center justify-content-start'>
                 <Col md={2}>
-                  <IconButton>
-                    <PeopleOutlineIcon color='teal' onClick={openAddModal}></PeopleOutlineIcon>
-                  </IconButton>          
+                  <IconButton onClick={openAddModal}>
+                    <PeopleOutlineIcon color='teal'></PeopleOutlineIcon>
+                  </IconButton>
+                  
                 </Col>
                 <Col>
                   <Typography variant="bodyText" onClick={openAddModal} className='color-medium-teal' style={{textAlign: "start", marginLeft: "5px", cursor: 'pointer'}}>{travellers} Travellers</Typography>
@@ -122,13 +113,15 @@ function Trip() {
         <div className='justify-content-center' style={{display: "flex", flexDirection: "column"}}>
         {Object.keys(cities).map((key, i) => 
             (<TripCard 
-              key={key}
-              name={cities[key].city_name + ", " + cities[key].country_name}
-              latitude={cities[key].latitude}
-              longitude={cities[key].longitude}
-              tripId={tripId}
-              country={cities[key].country_code}
-              city={cities[key]}
+                key={key}
+                name={cities[key].city_name + ", " + cities[key].country_name}
+                latitude={cities[key].latitude}
+                longitude={cities[key].longitude}
+                activities={cities[key].activities}
+                tripId={tripId}
+                country={cities[key].country_code}
+                city={cities[key]}
+                cityId={key}
             ></TripCard>)
           )}
         </div>
