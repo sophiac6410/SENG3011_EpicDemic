@@ -32,12 +32,13 @@ import { GetActivities } from '../../adapters/activityAPI';
 import { addCityToTrip, createTrip } from './tripApiCalls';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Margin, TripOriginOutlined } from '@mui/icons-material';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 import InputField from '../InputField';
 import { Field } from '../Form'
-import { addMember, removeMember, getMembers, getTripOwner } from '../../adapters/tripAPI';
-import { connected } from "process";
-
+import { addMember, removeMember, getMembers, getTripOwner, getDestinationPhotos } from '../../adapters/tripAPI';
 
 const style = {
   position: 'absolute',
@@ -46,7 +47,7 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: "1000px",
   bgcolor: 'background.paper',
-  borderRadius: "20px",
+  borderRadius: "30px",
   boxShadow: 24,
   p: 4,
   textAlign: "center",
@@ -64,9 +65,9 @@ const styleTwo = {
   transform: 'translate(-50%, -50%)',
   width: "1000px",
   bgcolor: 'background.paper',
-  borderRadius: "20px",
+  borderRadius: "30px",
   boxShadow: 24,
-  p: 4,
+  pb: 4,
   backgroundColor: "#EEF0F2",
   display: "flex",
   flexDirection: "column",
@@ -81,7 +82,7 @@ const styleThree = {
   width: "1000px",
   hight: "1000px",
   bgcolor: 'background.paper',
-  borderRadius: "20px",
+  borderRadius: "30px",
   boxShadow: 24,
   p: 4,
   backgroundColor: "#EEF0F2",
@@ -102,7 +103,7 @@ const formStyle = {
   paddingBottom: "10px",
   paddingTop: "10px",
   width: "fit-content",
-  borderRadius: "20px",
+  borderRadius: "30px",
   textAlign: "center",
   backgroundColor: "white",
   boxShadow: "1px 3px #888888",
@@ -113,6 +114,22 @@ const formStyle = {
   '& svg': {
     m: 1.5,
   },
+};
+
+const shareMemberStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: "1000px",
+  bgcolor: 'background.paper',
+  borderRadius: "30px",
+  boxShadow: 24,
+  p: 4,
+  textAlign: "center",
+  backgroundColor: "#EEF0F2",
+  display: "flex",
+  flexDirection: "column",
 };
 
 const responsive = {
@@ -248,6 +265,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
   const [added, setAdded] = React.useState(false);
   const [activity, setActivity] = React.useState([])
   const [cityIndex, setCityIndex] = React.useState(-1)
+  const [cityPhoto, setCityPhoto] = React.useState('')
 
   const handleOpen = async () => {
     if (!back) {
@@ -306,6 +324,15 @@ function StepTwo({onClose, name, start, end, travellers}) {
       setRegion(regionOptions[0])
     }
     setAdded(false)
+    async function getPhoto(city) {
+      console.log('inside get photo func');
+      const photos = await getDestinationPhotos(city.name + ', ' + city.country, false)
+      console.log('photo', photos);
+      if (photos.length > 0) {
+        setCityPhoto(photos[0])
+      }
+    }
+    getPhoto(data.data[index])
     // const activities = await GetActivities(data.data[index].latitude, data.data[index].longitude)
   };
 
@@ -313,16 +340,32 @@ function StepTwo({onClose, name, start, end, travellers}) {
     setCountry(country)
     setCity(null)
     const data = await GetCities(country, "name")
+    console.log('city options', data);
     setCityOptions(data.data)
   }
 
   const handleCity = (city) => {
+    console.log('city', city);
     setCity(city)
     setStepThree(true)
     setAdded(false)
+    async function getPhoto() {
+      console.log('inside get photo func');
+      if (city !== null && city.name !== null) {
+        const data = await getDestinationPhotos(city.name + ', ' + city.country, false)
+        console.log('photo', data);
+        if (data.length > 0) {
+          setCityPhoto(data[0])
+        }
+      }
+    }
+    getPhoto()
     // const data = await addCityToTrip(city.name, lat, long, country.code, country.name);
   }
 
+  function getPhoto() {
+    return `url(${cityPhoto})`
+  }
   let navigate = useNavigate()
   const saveTrip = () => {
     navigate(`/trip/${tripId}`)
@@ -366,16 +409,36 @@ function StepTwo({onClose, name, start, end, travellers}) {
         open={isOpen}
       >
         <Box sx={styleTwo}>
-          <div style={{display: "flex", justifyContent: "start", flexDirection: "row", alignItems: "center", paddingBottom: "20px"}}>
-            <IconButton onClick={handleBack}>
-              <ArrowBackIosIcon color='teal' sx={{marginTop: "10px", marginRight: "5px"}} fontSize="small"></ArrowBackIosIcon>
-            </IconButton>
-            {/* <Typography variant='body' className='color-medium-teal mt-2'>Back</Typography> */}
+          <div className= "border-radius-med">
+          { stepThree
+            ? <>
+              <div style={{backgroundImage: getPhoto(), height: '400px', marginBottom: '20px'}}>
+                <div style={{display: "flex", flexDirection: "row", padding: "20px", height: '80px'}}>
+                  <IconButton onClick={handleBack} sx={{alignItems: 'top'}}>
+                    <ArrowBackIosIcon sx={{color: 'white'}} fontSize="small"></ArrowBackIosIcon>
+                  </IconButton>
+                  <Typography variant='body' className='color-white mt-2'>Back</Typography>
+                </div>
+                <div style={{verticalAlign: 'bottom', margin: 'auto', display: 'flex', justifyContent: 'center', marginTop: '250px'}}>
+                  <Typography variant="heading1" className='color-white text-center'><b>{city !== null ? (city.name + ', ' + city.country) : ''}</b></Typography>
+                </div>
+              </div>
+              <Typography variant='body2' className='color-dark-teal mt-2 text-center'>This city is within the top 100 tourist cities in this region</Typography>
+              </>
+            : <>
+              <div style={{display: "flex", justifyContent: "start", flexDirection: "row", alignItems: "center", paddingBottom: "20px"}}>
+                <IconButton onClick={handleBack}>
+                  <ArrowBackIosIcon color='teal' sx={{marginTop: "10px"}} fontSize="small"></ArrowBackIosIcon>
+                </IconButton>
+                <Typography variant='body' className='color-medium-teal mt-2'>Back</Typography>
+              </div>
+              <Typography variant="heading2" className='color-dark-teal text-center'>
+                Add cities to your trip
+              </Typography>
+              <Typography variant='body2' className='color-dark-teal mt-2 text-center'>Optionally enter a region and/or country and click 'Find my city' and we will show you a recommended city.</Typography>
+            </>
+          }
           </div>
-          <Typography variant="heading2" className='color-dark-teal text-center'>
-            Add cities to your trip
-          </Typography>
-          <Typography variant='body2' className='color-dark-teal mt-2 text-center'>Optionally enter a region and/or country and click 'Find my city' and we will show you a recommended city.</Typography>
           <Box autoComplete='off' sx={formStyle}>
             <PublicIcon  sx={{marginTop: "10px", marginRight: "5px"}} color="teal"></PublicIcon>
             <FormControl color='teal' variant="standard" sx={{ width: '10'}}>
@@ -455,20 +518,17 @@ function StepTwo({onClose, name, start, end, travellers}) {
 }
 
 
-function ActivityModal({fromTrip, activities, tripId, city}) {
+function ActivityModal({fromTrip, activities, tripId, city, updateActivity}) {
   const [isOpen, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
     setStepThree(false)
   };
-  const handleClose = () => {
-    // setOpen(false);
-    // setStepThree(false)
-    onClose()
-  };
+
   const handleBack = () => {
-    setOpen(false);
+    setOpen(false)
     setStepThree(false)
+    updateActivity()
   }
   const [stepThree, setStepThree] = React.useState(false)
 
@@ -524,7 +584,6 @@ function ActivityModal({fromTrip, activities, tripId, city}) {
             { activities !== [] && activities !== {} ? (
               activities.map((activity, id) => {
                 if(activity !== null && city !== null) {
-                  // console.log(activity)
                   return <ActivityCard key={activity.id} activity={activity} cityId={city.id} tripId={tripId}></ActivityCard>
                 }
               })
@@ -542,9 +601,9 @@ function ActivityModal({fromTrip, activities, tripId, city}) {
 
 /// FOR ADD MEMBER MODAL ///
 
-function RestrictBox({name, email, owner, trigger, setTrigger, id}){
+function RestrictBox({name, email, owner, trigger, setTrigger, id, type}){
   const darkTeal = '#1B4965';
-
+  const [memberType, setMemberType] = useState(type)
   const remove_member = async () => {
     console.log(email)
     const data = await removeMember(email, id);
@@ -558,7 +617,16 @@ function RestrictBox({name, email, owner, trigger, setTrigger, id}){
 				<Typography variant="heading3" sx={{color: darkTeal, flex: 1, justifyContent: 'flex-start', textAlign: 'left' }}> {name} </Typography>	
         {
           owner ? <Typography variant="heading4" sx={{color: darkTeal, flex: 1, justifyContent: 'flex-end', textAlign: 'right'}}> Owner </Typography>
-          : <></>
+          : <FormControl size="small" sx={{m: 0, p: 0}}>
+              <Select
+                label="."
+                value={memberType}
+                onChange={(event)=>{setMemberType(event.target.value)}}
+              >
+                <MenuItem value={'Viewer'}>Viewer</MenuItem>
+                <MenuItem value={'Editor'}>Editor</MenuItem>
+              </Select>
+            </FormControl>
         }
 			</Box>
 			<Box sx={{ display: 'flex'}}>
@@ -581,49 +649,33 @@ function AddMember({isOpen, onClose , tripId}) {
   const [owner, setOwner] = useState({})
   const [members, setMembers] = useState([])
   const [trigger, setTrigger] = useState(0)
-
+  const [memberType, setMemberType] = useState('Viewer')
   const add_member = async () => {
     console.log(email)
-    const data = await addMember(email, tripId);
+    const data = await addMember(email, tripId, memberType);
     console.log(data)
     setEmail('')
     setTrigger(trigger + 1)
   }
 
   useEffect(() => {
-    async function updateMembers() {
-      const data = await getMembers(tripId)
-      if(data != undefined) {
-        setMembers(data)
-        console.log('members', members)
-      }
-    }
-    updateMembers()
-    return () => {
-      setMembers([])
-    }
-  }, [trigger])
-
-  useEffect(() => {
     async function getOwner() {
       const data = await getTripOwner(tripId)
       if(data !== undefined) {
         setOwner(data)
+        console.log('owner', data);
+      }
+    }
+    async function updateMembers() {
+      const data = await getMembers(tripId)
+      if(data != undefined) {
+        setMembers(data)
+        console.log('members', data)
       }
     }
     getOwner()
-    return () => {
-      setOwner([])
-    }
-  }, [])
-
-  useEffect(() => {
-    console.log('owner', owner)
-  }, [owner])
-
-  useEffect(() => {
-    console.log('members', members)
-  }, [members])
+    updateMembers()
+  }, [trigger])
 
   return(
     <Modal
@@ -631,19 +683,38 @@ function AddMember({isOpen, onClose , tripId}) {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={style}>
+      <Box sx={shareMemberStyle}>
+        <div style={{display: "flex", justifyContent: "end", flexDirection: "row", alignItems: "center"}}>
+          <IconButton onClick={onClose}>
+            <CloseIcon color='teal' fontSize="small"></CloseIcon>
+          </IconButton>
+        </div>
         <Typography variant="heading2" className='color-dark-teal'>
-          Share with other users
+          Share your trip with other users
         </Typography>
-
-        <Box sx={{ display: 'flex', marginLeft: '80px', marginRight: '80px' }}>
-          <Field type="email" onChange={e => setEmail(e.target.value)} placeholder="Enter your email" value={email}
-            sx={{ marginLeft: '40px', marginRight: '40px' }}></Field>
+        <Box className="justify-content-between" sx={{ display: 'flex', marginLeft: '80px', marginRight: '80px' }}>
+          <div className="border-radius-med bg-white px-5 mt-2 justify-content-between align-items-center d-flex" style={{width: '85%', height: '65px'}}>
+            <input type="email" onChange={e => setEmail(e.target.value)} placeholder="Enter an email" value={email}
+              style={{border: 'none', width: '80%', margin: 0}}
+            />
+            <FormControl size="small" sx={{m: 0, p: 0}}>
+              <Select
+                label="."
+                value={memberType}
+                onChange={(event)=>{setMemberType(event.target.value)}}
+              >
+                <MenuItem value={'Viewer'}>Viewer</MenuItem>
+                <MenuItem value={'Editor'}>Editor</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+          {/* <Field >
+          </Field> */}
           {/* <InputField type="email" change={} placeholder="Enter your email"></InputField> */}
           <TealBotton onClick={add_member} sx={{marginTop: '20px', marginBottom: '20px'}}> Share </TealBotton>
         </Box>
 
-        <div sx={{display: "flex", flexDirection: "column"}}>
+        <div className="mt-2" style={{overflow: 'auto', height: '300px'}}>
           <RestrictBox
             email={owner.email}
             name={owner.name}
@@ -659,6 +730,7 @@ function AddMember({isOpen, onClose , tripId}) {
                 key={idx}
                 email={mem.email}
                 name={mem.name}
+                type={mem.type}
                 owner={false}
                 trigger={trigger}
                 setTrigger={setTrigger}
@@ -668,9 +740,9 @@ function AddMember({isOpen, onClose , tripId}) {
           })}
         </div>
 
-        <Box sx={{display: "flex", flexDirection: "row", marginTop: "80px", justifyContent: 'center'}}>
+        <Box sx={{display: "flex", flexDirection: "row", marginTop: "30px", justifyContent: 'center'}}>
           <Col md={6}>
-            <TealBotton onClick={onClose}>Close</TealBotton>
+            <TealBotton onClick={onClose}>Done</TealBotton>
           </Col>
         </Box>
       </Box>

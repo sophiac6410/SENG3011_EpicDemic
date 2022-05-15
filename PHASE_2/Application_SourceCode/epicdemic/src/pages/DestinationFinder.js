@@ -58,9 +58,11 @@ const DestinationFinder = () => {
 
     return (
         <div className="bg-off-white">
+            
             <div className="bg-plane">
+            <div className="bg-plane-overlay">
                 <NavbarComp bg={false}/>
-                <div className="text-center mb-5" style={{marginTop: "300px"}}>
+                <div className="text-center mb-5" style={{marginTop: "250px"}}>
                     <Typography variant="title" className="color-white mt-5">FIND A DESTINATION BY...</Typography>
                 </div>
                 <Row style={{margin: "3% 5% 1%"}} className="justify-content-center">
@@ -70,14 +72,16 @@ const DestinationFinder = () => {
                     <Col className="pe-5 ps-5">
                         <GenericSearch fieldLabel={"Advice Level"} options={adviceLevelOptions} handleInput={(e, v) => updateSearch("advice", v)}/>
                     </Col>
-                    <Col className="pe-5 ps-5">
+                    <Col className="pe-5 ps-5" style={{paddingBottom: '10%'}}>
                         <GenericSearch fieldLabel={"Travel Status"} options={travelStatusOptions} handleInput={(e, v) => updateSearch("travel", v)}/>
                     </Col>
                 </Row>
-                <div style={{paddingBottom: '5%'}}>
+                {/*<div style={{paddingBottom: '5%'}}>
                     <WhiteButton onClick={() => console.log(searchFilter)} sx={{display: 'block', margin: 'auto', marginTop: '3%'}}>Search</WhiteButton>
-                </div>  
+                </div> */}
+                </div> 
             </div>
+            
             
             <Row style={{"margin": "5%", "padding": '1%', "marginTop": "10vh"}}>
                 {/* <Container fluid className="latest-updates"> */}

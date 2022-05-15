@@ -42,10 +42,15 @@ class Activity(BaseModel):
 
 class CheckListItem(BaseModel):
     item: str = Field(..., description="The name of the item in the checklist")
+    description: str = Field(..., description="The description of the item")
     groups: List[str] = Field(..., description="A list of the groups the item is being added to")
+
+class NewGroup(BaseModel):
+    group: str = Field(..., description="The new group being added")
 
 class User(BaseModel):
     email: str = Field(..., description="The email of the user", example='jess@mail.com')
+    type: str = Field(..., description="The type of the user", example="Editor")
 
 @router.get("/", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.TripResponse)
 async def get_saved_trips (
@@ -109,7 +114,6 @@ async def get_trip_by_id (
         )
 
     return baseModels.createResponse(True, 200, trip)
-
 
 @router.delete("/{tripId}", status_code=status.HTTP_200_OK, tags=['trips'], response_model=baseModels.Response, responses={401: {"model": baseModels.ErrorResponse}})
 async def delete_saved_trip (
@@ -182,9 +186,10 @@ async def add_new_city_to_trip (
     documents = []
     if (travel != None):
         if (travel['declaration']['documentRequired']):
-            documents.append({'item': travel['declaration']['text'], 'checked': False})
+            documents.append({'item': 'Meet documentation requirements', 'description': travel['declaration']['text'], 'checked': False})
         if (travel['testing']['isRequired']):
-            documents.append({'item': travel['testing']['text'], 'checked': False})
+            documents.append({'item': 'Meet Covid-19 testing requirements','description': travel['testing']['text'], 'checked': False})
+        documents.append({'item': 'Meet vaccination requirements', 'description': travel['vaccine_info']['info'], 'checked': False})
     
     tripCities_col.insert_one({
         "_id": id,
@@ -200,10 +205,13 @@ async def add_new_city_to_trip (
             {'name': 'Documents', 'items': documents},
             {'name': 'Bookings', 'items': [
                 {'item': 'Book incoming flight',
+                'description': '',
                 'checked': False},
                 {'item': 'Book outgoing flight',
+                'description': '',
                 'checked': False},
                 {'item': 'Book accommodation',
+                'description': '',
                 'checked': False},
             ]},
             {'name': 'Activities', 'items': []}
@@ -234,7 +242,7 @@ async def add_new_city_to_trip (
     city = tripCities_col.find_one({"_id": activity.cityId})
     for c in city['checklist']:
         if c['name'] == 'Activities':
-            c['items'].append({'item': 'Book ' + activity.name, 'checked': False})
+            c['items'].append({'item': 'Book ' + activity.name, 'description': '', 'checked': False})
     tripCities_col.update_one(
         {"_id": activity.cityId},
         {
@@ -258,19 +266,19 @@ async def add_new_item_to_checklist (
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "City does not exist"}))
     for c in city['checklist']:
         if (c['name'] in item.groups):
-            c['items'].append({"item": item.item, "checked": False})
+            c['items'].append({"item": item.item, 'description': item.description, "checked": False})
 
-    tripCities_col.update({"_id": cityId}, {"$set": {"checklist": city['checklist']}})
+    tripCities_col.update_one({"_id": cityId}, {"$set": {"checklist": city['checklist']}})
     return baseModels.createResponse(True, 200, {})
 
 @router.post("/new/city/{cityId}/checklist/group", status_code=status.HTTP_200_OK, tags=['trips'], response_model=baseModels.Response)
 async def add_new_group_to_checklist (
-    group: str = Query(..., description="The new group being added"),
+    group: NewGroup,
     cityId: int = Path(..., description="The id of the city the item is being added to"),
     Authorization: str = Header(..., example=token_example),
 ):
     user = auth.get_current_user(Authorization)
-    tripCities_col.update_one({"_id": cityId}, {"$push": {"checklist": {"name": group, "items": []}}})
+    tripCities_col.update_one({"_id": cityId}, {"$push": {"checklist": {"name": group.group, "items": []}}})
     return baseModels.createResponse(True, 200, {})
 
 @router.post("/{tripId}/new/member", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.UserResponse, responses={401: {"model": baseModels.ErrorResponse}, 400: {"model": baseModels.ErrorResponse}})
@@ -290,7 +298,7 @@ async def add_user_to_trip (
     if auth.get_user(user.email): 
         trip_col.update_one(
             {"_id": tripId},
-            {"$push": {"members": user.email}}
+            {"$push": {"members": {"email": user.email, "type": user.type}}}
         )
         users_col.update_one(
             {"email": user.email},
@@ -318,8 +326,9 @@ async def get_user_to_trip (
     mem_list = []
     for member in members:
         mem_list.append({
-            'email': member,
-            'name': list(users_col.find({ "email": member }))[0]['name']
+            'email': member['email'],
+            'name': list(users_col.find({ "email": member['email'] }))[0]['name'],
+            'type': member['type']
         })
 
     return baseModels.createResponse(True, 200, mem_list)
@@ -339,9 +348,9 @@ async def get_owner (
 
     return baseModels.createResponse(True, 200, {
         'email': owner,
-        'name': name
+        'name': name,
+        'type': 'Owner'
     })
-
 
 @router.delete("/{tripId}/delete/member", status_code=status.HTTP_200_OK, tags=['trips'], response_model=baseModels.Response, responses={401: {"model": baseModels.ErrorResponse}})
 async def delete_member (
@@ -357,7 +366,7 @@ async def delete_member (
     if auth.get_current_user(Authorization): 
         trip_col.update_one(
             {"_id": tripId},
-            {"$pull": {"members": user.email}}
+            {"$pull": {"members": {"email": user.email}}}
         )
         users_col.update_one(
             {"email": user.email},
@@ -368,3 +377,56 @@ async def delete_member (
 
     return baseModels.createResponse(True, 200, {})
    
+@router.get("/{tripId}/{cityId}", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.TripCityByIdResponse, responses={401: {"model": baseModels.ErrorResponse}})
+async def get_trip_city_by_id(
+    Authorization: str = Header(..., example=token_example),
+    tripId: int = Path(..., description="The unique id of the trip"),
+    cityId: int = Path(..., description="The unique id of the city")
+):
+    user = auth.get_current_user(Authorization)
+    if tripId not in user['saved_trips']:
+        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Not authorised to view trip"}))
+    
+    trip = trip_col.find_one({"_id": tripId})
+    if cityId not in trip['cities']:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "City does not exist in trip"}))
+
+    city = tripCities_col.find_one(
+        {"_id": cityId},
+        {
+            "id": "$_id",
+            "city_name": 1,
+            "latitude": 1,
+            "longitude": 1,
+            "start_date": 1,
+            "end_date": 1,
+            "country_code": 1,
+            "country_name": 1,
+            "activities": 1,
+            "checklist": 1,
+        })
+    return baseModels.createResponse(True, 200, city)
+
+@router.get("/{tripId}/city/{cityKey}/activity", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.ActivityIdResponse, responses={401: {"model": baseModels.ErrorResponse}})
+async def get_trip_by_id (
+    Authorization: str = Header(..., example=token_example),
+    tripId: int = Path(..., description="The unique id of the trip"),
+    cityKey: int = Path(..., description="city key"),
+):
+    user = auth.get_current_user(Authorization)
+    if tripId not in user['saved_trips']:
+        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Not authorised to view trip"}))
+    print(tripId)
+    trip = trip_col.find_one(
+        {"_id": tripId},
+        {"id": "$_id", "name": 1, "start_date": 1, "end_date": 1, "travellers": 1, "cities": 1 }
+    )
+    city = tripCities_col.find_one(
+        {"_id": trip['cities'][cityKey]},
+        {  "activities": 1})
+
+    activity = {
+        "ids": city['activities']
+    }
+
+    return baseModels.createResponse(True, 200, activity)

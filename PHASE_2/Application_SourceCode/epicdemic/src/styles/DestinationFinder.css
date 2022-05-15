@@ -5,9 +5,19 @@
     padding: 0;
 }
 
+.bg-plane-overlay {
+    background-color: #1B4965;
+    opacity: 0.8;
+}
+
 .bg-plane{
-    background-image: url(./../static/plane.png);
+    background-image: url(https://img.delicious.com.au/Cv626hxY/del/2020/05/we-could-be-bidding-guests-adieu-much-sooner-than-expected-according-to-the-proposed-new-timetable-to-restart-tourism-133254-2.jpg);
     background-size: cover;
+    opacity: 1;
+}
+
+.bg-plane::after{
+    opacity:1;
 }
 
 .balloon-background{

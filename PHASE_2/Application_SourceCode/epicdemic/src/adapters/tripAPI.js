@@ -1,4 +1,5 @@
 import React from 'react';
+import data from '../components/Diseases/data';
 import API_URL from '../config.json';
 
 export const createTrip = async (name, start_date, end_date, travellers) => {
@@ -151,8 +152,8 @@ export const getTripById = async (tripId) => {
 
 ///// FOR GROUPS /////
 
-export const addMember = async (email, tripId) => {
-  console.log(email, tripId)
+export const addMember = async (email, tripId, type) => {
+  console.log(email, tripId, type)
   try {
     const response = await fetch(`${API_URL.API_URL}/v1/trips/${tripId}/new/member`, {
       method: 'POST',
@@ -161,7 +162,8 @@ export const addMember = async (email, tripId) => {
         Authorization: localStorage.getItem('token')
       },
       body: JSON.stringify({
-        email: email
+        email: email,
+        type: type
       }),
     });
     const data = await response.json();
@@ -235,14 +237,76 @@ export const getTripOwner = async (tripId) => {
     });
     const data = await response.json();
     if (response.status !== 200) {
-      console.log(data)
-      console.log(response)
+      console.log(data.data)
+      alert(data.data.error)
       return undefined
     } else {
-      console.log(data)
+      console.log('get trip owner', data.data)
       return data.data
     }
   } catch (e) {
       console.log(e)
+  }
+}
+
+export const getActivityByCity = async (tripId, cityId) => {
+    const response = await fetch(`${API_URL.API_URL}/v1/trips/${tripId}/city/${cityId}/activity`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      }, 
+    })
+
+    const data = response.json()
+    return data
+}
+
+export const getDestinationPhotos = async (destination, small) => {
+  const responseFindDest = await fetch(`https://api.roadgoat.com/api/v2/destinations/auto_complete?q=${destination}`, {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application/json',
+      Authorization: 'Basic NzBjMjZkZGRjYzNmNThlYjMyNzM4NjQ4MGUxNDk3N2E6ZmY2ZjQyYWZjNWFiOTFkMjk1NTEzNmM1YzFlMjg5ODQ='
+    }
+  })
+
+  const dataFindDest = await responseFindDest.json()
+  if (responseFindDest.status !== 200) {
+    console.log(dataFindDest.errors);
+    alert('Error fetching destination');
+  } else {
+    console.log('finding dest', dataFindDest);
+    if (dataFindDest.data.length > 0) {
+      const locationId = dataFindDest.data[0].id;
+      const respDestination = await fetch(`https://api.roadgoat.com/api/v2/destinations/${locationId}`, {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: 'Basic NzBjMjZkZGRjYzNmNThlYjMyNzM4NjQ4MGUxNDk3N2E6ZmY2ZjQyYWZjNWFiOTFkMjk1NTEzNmM1YzFlMjg5ODQ='
+        }
+      })
+      const dataDestination = await respDestination.json()
+      if (respDestination.status != 200) {
+        console.log(respDestination.errors);
+        alert('Error fetching destination');
+      } else {
+        console.log('got destination', dataDestination);
+        let photos = []
+        dataDestination.included.map((data) => {
+          if (data.type == 'photo') {
+            if (small) {
+              photos = [data.attributes.image.thumb, ...photos]
+            } else {
+              photos = [data.attributes.image.large, ...photos]
+            }
+          }
+        })
+        console.log('photos', photos);
+        return photos
+      }
+    } else {
+      return []
+    }  
   }
 }
