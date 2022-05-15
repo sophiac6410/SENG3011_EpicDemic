@@ -272,9 +272,18 @@ function StepTwo({onClose, name, start, end, travellers}) {
     setStepThree(false);
   };
   const handleAdd = async () => {
-    const data = await addCityToTrip(tripId, city.name, lat, long, country.code, country.name);
-    setCityId(data.id);
-    setAdded(!added)
+    var data = {}
+    if (city.latitude) {
+      data = await addCityToTrip(tripId, city.name, city.latitude, city.longitude, country.code, country.name);
+      setCityId(data.id);
+      setAdded(!added)
+    } else {
+      data = await addCityToTrip(tripId, city.name, city.lat, city.lng, country.code, country.name);
+      setCityId(data.id);
+      setAdded(!added)
+    }
+    
+    
   };
   const handleClose = () => {
     onClose()
@@ -295,46 +304,6 @@ function StepTwo({onClose, name, start, end, travellers}) {
   }*/
   const randomGenerator = async () => {
     setStepThree(true)
-    
-    /* var index = Math.floor((Math.random() * 100) + 1);
-    const data = await GetCities(country, "-population")
-    FindCities(country)
-    // const data = Countries
-    const cityCount = data.metadata.totalCount;
-    if (cityCount < 100) {
-      index = Math.floor((Math.random() * cityCount) + 1);
-    }
-    console.log(data.data)
-    setCityOptions(data.data)
-    setCity(data.data[index])
-    setLat(data.data[index].latitude)
-    setLong(data.data[index].longitude)
-    if (!country) {
-      setCountry({"name": data.data[index].country, "code": data.data[index].countryCode })
-    } 
-    if (!region) {
-      setRegion(regionOptions[0])
-    }*/
-    var index = Math.floor((Math.random() * 9) + 0)
-    const data = await FindCities(country)
-    console.log(data)
-    const cities = await data.data.getPlaces
-    if (cities.length < 10) {
-      index = Math.floor((Math.random() * (cities.length - 1)))
-    }
-
-    const cityObj = { "id": cities[index].id, "name": cities[index].name, "latitude": cities[index].lat, "country": cities[index].country, "longitude": cities[index].lng }
-    setCityOptions(cities)
-    setCity(cityObj)
-    setLat(cities[index].lat)
-    setLong(cities[index].lng)
-    setCountry({"name": cities[index].country, "code": "AU" })
-    const countryObj = allCountries.find(e => e.name === cities[index].country)
-    if (countryObj) {
-      setCountry(countryObj)
-      setRegion(countryObj.continent)
-    }
-    
     setAdded(false)
     async function getPhoto(city) {
       const { photos, known_for } = await getDestinationPhotos(city.name + ', ' + city.country, false)
@@ -349,7 +318,47 @@ function StepTwo({onClose, name, start, end, travellers}) {
         setKnownFor([])
       }
     }
-    getPhoto(cities[index])
+    if (region && !country) {
+      var index = Math.floor((Math.random() * 100) + 1);
+      const data = await GetCities(country, "-population")
+      const cityCount = data.metadata.totalCount;
+      if (cityCount < 100) {
+        index = Math.floor((Math.random() * cityCount) + 1);
+      }
+      console.log(data.data)
+      setCityOptions(data.data)
+      setCity(data.data[index])
+      setLat(data.data[index].latitude)
+      setLong(data.data[index].longitude)
+      const countryObj = allCountries.find(e => e.name === data.data[index].country)
+      if (countryObj) {
+        setCountry(countryObj)
+        setRegion(countryObj.continent)
+      }
+      getPhoto(data.data[index])
+    } else {
+      var index = Math.floor((Math.random() * 9) + 0)
+      const data = await FindCities(country)
+      console.log(data)
+      const cities = await data.data.getPlaces
+      if (cities.length < 10) {
+        index = Math.floor((Math.random() * (cities.length - 1)))
+      }
+
+      const cityObj = { "id": cities[index].id, "name": cities[index].name, "latitude": cities[index].lat, "country": cities[index].country, "longitude": cities[index].lng }
+      setCityOptions(cities)
+      setCity(cityObj)
+      setLat(cities[index].lat)
+      setLong(cities[index].lng)
+      setCountry({"name": cities[index].country, "code": "AU" })
+      const countryObj = allCountries.find(e => e.name === cities[index].country)
+      if (countryObj) {
+        setCountry(countryObj)
+        setRegion(countryObj.continent)
+      }
+      getPhoto(cities[index])
+    }
+    
     // const activities = await GetActivities(data.data[index].latitude, data.data[index].longitude)
     
   };
