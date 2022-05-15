@@ -11,14 +11,15 @@ import DiseaseRadar from "../components/Home/DiseaseRadar";
 import DiseaseReportBar from "../components/Home/DiseaseReportBar";
 import Typography from '@mui/material/Typography'
 import NavbarComp from '../components/NavBar'
+import Button from '@mui/material/Button';
 import { DarkButton, WhiteButton } from "../styles/Button";
 import { fabClasses } from "@mui/material";
 import { useNavigate, } from 'react-router-dom';
 import { useEffect } from "react";
 import { getUserSaved } from "../apiCalls";
 
-
-const intro = "Epicdemic collates and analyses a diverse range of government, airline, COVID and tourism data to provide you with the confidence you need to book your next trip. Not sure where to go? Use our destination finder and trip planner to view our personalised recommendations.  Turn on notifications to keep informed of the latest updates."
+const intro = "Epicdemic collates and analyses a diverse range of government, airline, COVID and tourism data to provide you with the confidence you need to book your next trip."
+const slogan = "Effortless. Efficient. Epic"
 function Home() {
   let navigate = useNavigate();
   const goDestination = () =>{  
@@ -40,23 +41,31 @@ function Home() {
   }, []);
 
   return (
-      <div className="bg-off-white">
-        <div className="bg-sky" style={{height: '100vh'}}>
+      <div>
+        <div className="bg-forest" style={{height: '100vh'}}>
             <NavbarComp bg={false}></NavbarComp>
             <div>
               <div id="header">
-                <Typography variant="title" className="color-white mt-5">Travel safely with Epicdemic</Typography>
-                <div className="text-center" style={{margin: '3% 15%'}}>
-                  <Typography variant="bodyImportant" className="color-white">
+                <div>
+                  <Typography variant="superTitle" className="color-white mt-5" style={{display: "inline", fontFamily: 'Open Sans'}}>Travel </Typography>
+                  <Typography variant="superTitle" className="color-dark-teal mt-5" style={{display: "inline", fontFamily: 'Open Sans'}}>Safely</Typography>
+                </div>
+                <div className="text-center" style={{margin: '1% 15%'}}>
+                  <Typography variant="title" className="color-dark-teal" style={{ fontSize: '24px'}}>
+                    {slogan}
+                  </Typography>
+                </div>
+                <div className="text-center" style={{margin: '1% 15%', width: '40%', fontSize: '11px', fontFamily: 'Open Sans'}}>
+                  <Typography variant="heading2" className="color-black">
                     {intro}
                   </Typography>
                 </div>
-                <div className="mt-1 mb-5 d-flex">
-                  <DarkButton onClick={goDestination} className="align-self-center me-5 pe-5 ps-5">  
-                    <Typography variant="bodyImportant">Find a destination</Typography>
+                <div className="mt-5 mb-5 d-flex">
+                  <DarkButton onClick={goDestination} className="align-self-center pt-2 pb-2" style={{width: "180px"}}>  
+                    <Typography variant="bodyHeading">Find a destination</Typography>
                   </DarkButton>
-                  <WhiteButton onClick={goPlaner} className="align-self-center ms-4 pe-5 ps-5">
-                    <Typography variant="bodyImportant">Plan my trip</Typography>
+                  <WhiteButton onClick={goPlaner} className="align-self-center ms-4 pt-2 pb-2" style={{width: "180px"}}>
+                    <Typography variant="bodyHeading">Trip Planner</Typography>
                   </WhiteButton>
                 </div>
                 <Search></Search>
@@ -64,7 +73,7 @@ function Home() {
             </div>
         </div>
         <NewsBar></NewsBar>
-        <LocationBar locations={savedLocations}></LocationBar>
+        {/* <LocationBar locations={savedLocations}></LocationBar> */}
         <Row className="mt-5 mb-5 p-1 ps-3 align-items-center justify-content-center">
           <UpdateBar></UpdateBar>
         </Row>

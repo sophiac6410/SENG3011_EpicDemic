@@ -12,8 +12,14 @@ import BucketCard from "./BucketCard";
 import Carousel from "react-multi-carousel";
 import { ActivityModal } from "./PlannerModal";
 import React, { useState, useEffect } from "react";
-import { GetActivities } from '../../adapters/activityAPI';
+import { GetActivities, GetActivityByIds } from '../../adapters/activityAPI';
 import { useNavigate } from 'react-router';
+import { TailSpin } from "react-loader-spinner"
+import { getActivityByCity } from "../../adapters/tripAPI";
+
+import ChecklistModal from "./ChecklistModal";
+import { Check } from "@mui/icons-material";
+import { getTripCityById } from './tripApiCalls';
 
 const cardStyle = {
   marginTop: "25px",
@@ -58,17 +64,67 @@ const responsive = {
   }
 };
 
-function TripCard({name, tripId, latitude, longitude, city, country}) {
+function TripCard({name, tripId, latitude, longitude, city, country, cityId}) {
+  //City's Activities
   const [activity, setActivity] = React.useState([])
-  const [loading, setLoading] = React.useState([])
+  //User's Activities in this city
+  const [savedActivity, setSave] = React.useState([])
+  const [loading, setLoading] = React.useState(true)
   const navigate = useNavigate();
   
   const goToTravel = () => {
     navigate(`/destination/${country}/travel`)
   }
-
+  const getSavedActivities = async function () {
+    setLoading(true)
+    console.log("here")
+    if(city.activities) {
+      var {out, controller} = GetActivityByIds({ids: city.activities.toString()})
+      out.then(res => {
+        console.log(res)
+        if(res.status == 200){
+          console.log(res.data)
+          setSave(res.data); // dispatching data to components state
+          setLoading(false)
+        }
+      }).catch(err => {
+        console.log(err)
+        setLoading(false)
+      });
+    }
+  }
+  const updateActivity = async function() {
+    setLoading(true)
+    var fetchActivity =  getActivityByCity(tripId, cityId)
+    fetchActivity.then(res => {
+      // const data = awa
+      console.log(res)
+      // if(res.status == 200) {
+      var ids = res.data.ids
+      console.log("new list:" + ids)
+      var {out, controller} = GetActivityByIds({ids: ids.toString()})
+      out.then(response => {
+        console.log(response)
+        if(response.status == 200){
+          console.log(response.data)
+          setSave(response.data); // dispatching data to components state
+          setLoading(false)
+        }else{
+          console.log(res.data)
+          setLoading(false)
+        }
+      }).catch(err => {
+        console.log(err)
+        setLoading(false)
+      });
+      // }
+    }).catch(err => {
+      console.log(err)
+      setLoading(false)
+    })
+  }
   useEffect(() => {
-    async function updateActivity() {
+    async function getCityActivities() {
       // setLoading(true)
       var {out, controller} = await GetActivities({lat: city.latitude, lot: city.longitude})
       out.then(res => {
@@ -76,11 +132,13 @@ function TripCard({name, tripId, latitude, longitude, city, country}) {
         setActivity(res.data); // dispatching data to components state
       }).catch(err => {
         console.log(err)
-        // setLoading(false)
       });
     }
-    updateActivity()
-    setLoading(!loading)
+    getSavedActivities()
+    getCityActivities()
+    return () => {
+      setActivity([])
+    }
   }, [city])
 
 
@@ -103,41 +161,43 @@ function TripCard({name, tripId, latitude, longitude, city, country}) {
           <AddCircleIcon color="teal"></AddCircleIcon>
         </IconButton>
         <Typography variant='caption' className='color-medium-teal me-3'>Add dates</Typography>
-        <ActivityModal fromTrip={true} activities={activity} tripId={tripId} city={city}></ActivityModal>
+        <ActivityModal fromTrip={true} activities={activity} tripId={tripId} city={city} updateActivity={updateActivity}></ActivityModal>
         <IconButton sx={{paddingRight: "5px"}}>
           <FlightIcon sx={{marginRight: "5px"}} color='teal'></FlightIcon>
         </IconButton>
-        <Typography variant='caption' className='color-medium-teal'>Book flights</Typography>
+        <Typography variant='caption' className='color-medium-teal' sx={{cursor: 'pointer'}}>Book flights</Typography>
+        <ChecklistModal city={city} tripId={tripId}/>
       </div>
       <div className="d-flex flex-row mt-3">
         <Typography variant="heading3" class="color-grey">YOUR BUCKETLIST</Typography>
       </div>
-      {/* <div className="d-flex flex-wrap mt-3 justify-content-even">
-        <BucketCard></BucketCard>
-        <BucketCard></BucketCard>
-        <BucketCard></BucketCard>
-        <BucketCard></BucketCard>
-      </div> */}
-      <Carousel 
-        responsive={responsive} 
-        // containerClass="location-carousel"
-        autoPlay={false}
-        arrows={true}
-        shouldResetAutoplay={false}
-        itemClass="location-card"
-        centerMode={true}
-        // className="bg-light-teal"
-      >
-        {
-          city.activities.length == 0 ? (
-            <Typography variant='caption' className='color-medium-teal me-3'>Add Some Activity</Typography>
-          ):(
-            city.activities.map((activityId) => 
-            <BucketCard id={activityId} loading={loading}></BucketCard>
-          )
+      {
+        loading == false ? (
+            savedActivity.length == 0 ? (
+              <Typography variant='caption' className='color-medium-teal'>Add Some Activity</Typography>
+              ):(
+              <Carousel 
+              responsive={responsive} 
+              // containerClass="location-carousel"
+              autoPlay={false}
+              arrows={true}
+              shouldResetAutoplay={false}
+              itemClass="location-card"
+              centerMode={true}
+              // className="bg-light-teal"
+            >
+              {
+                savedActivity.map((activity) => 
+                <BucketCard activity={activity} key={activity.id}></BucketCard>)
+              }
+            </Carousel>
+            )
+        ):(
+          <div style={{display: "flex"}} className="flex-row justify-content-center">
+            <TailSpin color='#70C4E8' style={{}}></TailSpin>
+          </div>
         )
-        }
-      </Carousel>
+      }
     </Box>
   )
 }

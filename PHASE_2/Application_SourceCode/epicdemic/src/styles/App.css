@@ -27,7 +27,7 @@
     background-color: #EEF0F2;
 }
 .bg-light-blue {
-    background-color: #E2F2FC;
+    background-color: #E5F0F6;
 }
 .bg-dark-grey {
     background-color: #515151;
@@ -95,10 +95,13 @@
     color: #EEF0F2;
 }
 .color-light-blue {
-    color: #E2F2FC;
+    color: #E5F0F6;
 }
 .color-sky-blue{
     color: #7CC9E9;
+}
+.color-pink{
+    color: #FF8AA6;
 }
 
 /* FONT STYLES */
@@ -193,4 +196,9 @@
 .navbar-brand {
     font-size: 25px;
     font-weight: bold;
+}
+
+/* BOX SHADOW */
+.shadow {
+    box-shadow: '5px 5px 3px #ccc';
 }

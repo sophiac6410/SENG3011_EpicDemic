@@ -105,7 +105,7 @@ const DestinationFinder = () => {
                     <Col className="pe-5 ps-5">
                         <GenericSearch fieldLabel={"Advice Level"} options={adviceLevelOptions} handleInput={(e, v) => updateSearch("advice", v)}/>
                     </Col>
-                    <Col className="pe-5 ps-5">
+                    <Col className="pe-5 ps-5" style={{paddingBottom: '10%'}}>
                         <GenericSearch fieldLabel={"Travel Status"} options={travelStatusOptions} handleInput={(e, v) => updateSearch("travel", v)}/>
                     </Col>
                 </Row>

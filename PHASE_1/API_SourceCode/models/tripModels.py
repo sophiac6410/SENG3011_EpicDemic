@@ -13,6 +13,7 @@ class City(BaseModel):
     country_name: str = Field(..., description="The name of the country", example="France")
     country_code: str = Field(..., description="The ISO code of the city's country", example="FR")
     activities: List[int] = Field(..., description="The list of activities to do in the city. Activities are referenced by their id, which corresponds to Amadeus API's activity ids.", example=[49488, 265211, 298635, 106708])
+    checklist: List[object] = Field(..., description="A list of the things you need to do")
 
 class Trips(BaseModel):
     id: int = Field(..., description="The unique id of the trip", example=1)
@@ -21,6 +22,11 @@ class Trips(BaseModel):
     end_date: datetime = Field(..., description="The return date of the trip", example='2022-12-01T00:00:00.000+00:00')
     travellers: int = Field(..., description="The number of travellers on the trip", example=6)
     cities: List[City] = Field(..., description="The list of cities to visit in the trip")
+
+class User(BaseModel):
+    email: str = Field(..., description="The email of the user", example='jess@mail.com')
+    name: str = Field(..., description="The first and last name of the user", example='Jessica Smith')
+    type: str = Field(..., description="The type of the user", example="Viewer")
 
 class TripId(BaseModel):
     id: int = Field(..., description="The id of the newly created trip or city", example=1)
@@ -33,3 +39,18 @@ class TripByIdResponse(baseModels.Response):
 
 class TripIdResponse(baseModels.Response):
     data: TripId
+
+class TripCityByIdResponse(baseModels.Response):
+    data: City
+
+class UserResponse(baseModels.Response):
+    data: User
+
+class UsersResponse(baseModels.Response):
+    data: List[User]
+
+class ActivityList(BaseModel):
+    ids: List[int] = Field(..., description="The list of activities to do in the city. Activities are referenced by their id, which corresponds to Amadeus API's activity ids.", example=[49488, 265211, 298635, 106708])
+
+class ActivityIdResponse(baseModels.Response):
+    data: ActivityList

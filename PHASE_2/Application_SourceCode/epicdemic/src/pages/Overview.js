@@ -40,8 +40,8 @@ const SafetyBoard = (safetyDis) => {
                 <Typography variant="bodyText">{v.text}</Typography>
               </div>
             </Col>
-            <Col md={1}>
-              <div style={{color: "white", backgroundColor: safteyScoreColor(v.score)}} className="text-center border-radius-med">
+            <Col md={2}>
+              <div style={{color: "white", backgroundColor: safteyScoreColor(v.score)}} className="text-center border-radius-med me-5">
                 <Typography variant="bodyImportant">{v.score}</Typography>
               </div>
             </Col>
@@ -152,114 +152,119 @@ function Overview() {
           </MapContainer>
         </Col>
         <Col>
-          <Row className="align-items-center">
-            <div className="pt-3 pb-3 pe-1 ps-1 text-center border-radius-large" style={{backgroundColor: adviceLevelColor(dest.adviceLevel)}}>
+          <div className="align-items-center border-radius-med shadow mt-4">
+            <div className="py-4 px-1 text-center border-radius-med" style={{borderRadius: '30px 0px 0px', backgroundColor: adviceLevelColor(dest.adviceLevel)}}>
               <Typography variant="bodyImportant">OVERALL ADVICE: {adviceLevel(dest.adviceLevel).toUpperCase()}</Typography>
             </div>
-          </Row>
-          {/* <Row>
-            <Typography variant="bodyText" className="color-dark-teal pt-4 pb-4">{intro}</Typography>
-          </Row> */}
-          <Row className="align-items-center justify-content-start">
-            <Col md={4}>
-              <Typography variant="bodyText" className="color-dark-teal ">TRAVEL STATUS</Typography>
-            </Col>
-            <Col md={1}>
-              <CircleIcon style={{color: travelStatusColor(dest.travelStatus)}} sx={{fontSize: 18}}/>
-            </Col>
-            <Col className="pt-1">
-            <Typography variant="bodyImportant" className="color-dark-teal">{travelStatus(dest.travelStatus)}</Typography>
-            </Col>
-          </Row>
-          <Row className="align-items-center justify-content-start">
-            <Col md={4}>
-            <Typography variant="bodyText" className="color-dark-teal">SAFETY</Typography>
-            </Col>
-            <Col md={1}>
-                <WarningIcon style={{color: safteyScoreColor(dest.safetyScore)}} sx={{fontSize: 20}}/>
-            </Col>
-            <Col className="pt-1 text-start">
-              <Typography variant="bodyImportant" className="color-dark-teal">{safteyScore(dest.safetyScore)} levels of threat</Typography>
-            </Col>
-          </Row>
-          <Row className="align-items-center justify-content-start">
-            <Col md={4}>
-            <Typography variant="bodyText" className="color-dark-teal">DISEASE RISK</Typography>
-            </Col>
-            <Col md={1}>
-                <LocalHospitalIcon style={{color: diseaseRiskColor(dest.diseaseRisk)}} sx={{fontSize: 20}}/>
-            </Col>
-            <Col className="pt-1">
-              <Typography variant="bodyImportant" className="color-dark-teal">{diseaseRisk(dest.diseaseRisk)}</Typography>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
-      <Row style={{"justify-content": "space-between"}} className="mt-5 mb-5 pt-4 justify-content-center align-items-center">
-        <Col>
-          <Typography variant="heading2" className="color-dark-teal">Safety</Typography>
-          <div className="mt-4 ps-2" style={{flexDirection: "row", display: "flex"}}>
-              <WarningIcon style={{color: safteyScoreColor(dest.safetyScore)}}></WarningIcon>
-              <Typography variant="bodyImportant" className="color-dark-teal ms-3">{safteyScore(dest.safetyScore)} levels of threat</Typography>
+            <div className="p-5 pt-4">
+              <Row className="align-items-center justify-content-start">
+                <Col md={4}>
+                  <Typography variant="bodyText" className="color-dark-teal ">TRAVEL STATUS</Typography>
+                </Col>
+                <Col md={1}>
+                  <CircleIcon style={{color: travelStatusColor(dest.travelStatus)}} sx={{fontSize: 18}}/>
+                </Col>
+                <Col className="pt-1">
+                <Typography variant="bodyImportant" className="color-dark-teal">{travelStatus(dest.travelStatus)}</Typography>
+                </Col>
+              </Row>
+              <Row className="align-items-center justify-content-start">
+                <Col md={4}>
+                <Typography variant="bodyText" className="color-dark-teal">SAFETY</Typography>
+                </Col>
+                <Col md={1}>
+                    <WarningIcon style={{color: safteyScoreColor(dest.safetyScore)}} sx={{fontSize: 20}}/>
+                </Col>
+                <Col className="pt-1 text-start">
+                  <Typography variant="bodyImportant" className="color-dark-teal">{safteyScore(dest.safetyScore)} levels of threat</Typography>
+                </Col>
+              </Row>
+              <Row className="align-items-center justify-content-start">
+                <Col md={4}>
+                <Typography variant="bodyText" className="color-dark-teal">DISEASE RISK</Typography>
+                </Col>
+                <Col md={1}>
+                    <LocalHospitalIcon style={{color: diseaseRiskColor(dest.diseaseRisk)}} sx={{fontSize: 20}}/>
+                </Col>
+                <Col className="pt-1">
+                  <Typography variant="bodyImportant" className="color-dark-teal">{diseaseRisk(dest.diseaseRisk)}</Typography>
+                </Col>
+              </Row>
+            </div>
           </div>
         </Col>
-        <Col md={3} className="text-center pt-3 pb-3 border-radius-med" style={{backgroundColor: safteyScoreColor(dest.safetyScore)}}>
-          <Row><Typography variant="heading2">{dest.safetyScore}</Typography></Row>
-          <Row><Typography variant="bodyText" sx={{textAlign: 'center'}}>OVERALL SAFETY RATING</Typography></Row>
-        </Col>
       </Row>
-      <ul>{SafetyBoard(safetyData)}</ul>
-      <Typography variant="caption" className="mt-5 mb-5">{safetySource}</Typography>
-      <Typography variant="heading2" className="mb-4 mt-5 pt-4">COVID-19 Statistics</Typography>
-      <Row className="mb-5 justify-content-start">
-        <Col md={5} className="pt-5 me-5">
-          <Typography variant="title" className="color-medium-teal mt-5">DECLINING</Typography>
-          <Typography variant="bodyHeading" className="color-medium-teal">CONDITION</Typography>
-          <div className="end">
-            <CircularProgressbarWithChildren
-              value={Math.round(data.vaccinationPercentage)}
-              styles={buildStyles({            
-                strokeLinecap: 'butt',    
-                pathColor: '#0F83A0',
-                width: '20px'
-              })}
-              >
-              <div 
-                className="medium-teal"
-                style={{ textAlign: "center"}}
-              >
-                <Typography variant="title">{data.vaccinationPercentage.toFixed(1)}%</Typography>
-                <Typography variant="heading3">vaccinated</Typography>
-              </div>
-            </CircularProgressbarWithChildren>            
-          </div>
-          <Typography variant="title" className="medium-teal">{data.todayCases}</Typography>
-          <Typography variant="bodyHeading" className="medium-teal mb-5">CASES TODAY</Typography>
-        </Col>
-        <Col md={6}>
-          <MapContainer
-            className="leaflet-container2"
-            style={{ width: 500, height: 500}}
-            center={getCentre()} 
-            zoom={5}
-            zoomControl={false}
-            minZoom={5}
-            maxBounds={bounds}
-            maxBoundsViscosity={0.7}
-          >
-            <TileLayer
-              attribution='Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ'
-              url='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'
-            />
-            <Marker 
-              id={1}
-              position={getCentre()}
-              icon={hugeMarkerIcon}
-            />
-          </MapContainer>
-        </Col>
-      </Row>
-      <Typography variant="caption" className="mb-5">{covidSource}</Typography>
+      <div className="shadow border-radius-med mt-5 mb-5">
+        <Row style={{"justify-content": "space-between", backgroundColor: safteyScoreColor(dest.safetyScore)}} className=" pt-1 pb-2 justify-content-center align-items-center">
+          <Col className="mx-5">
+            <Typography variant="heading2" className="py-1" style={{lineHeight: 1.6}}>SAFETY</Typography>
+            <div style={{flexDirection: "row", display: "flex"}}>
+                <WarningIcon></WarningIcon>
+                <Typography variant="bodyImportant" className="ms-3">{safteyScore(dest.safetyScore)} levels of threat</Typography>
+            </div>
+          </Col>
+          <Col md={3} className="text-center pt-3 pb-3 border-radius-med" style={{backgroundColor: safteyScoreColor(dest.safetyScore)}}>
+            <Row><Typography variant="title" sx={{p: 1}}>{dest.safetyScore}</Typography></Row>
+            <Row><Typography variant="bodyText" sx={{textAlign: 'center'}}>OVERALL SAFETY RATING</Typography></Row>
+          </Col>
+        </Row>
+        <ul>{SafetyBoard(safetyData)}</ul>
+        <Typography sx={{px: 10}}variant="caption" className="mt-5 mb-5">{safetySource}</Typography>
+      </div>
+      <div className="shadow border-radius-med mt-5 mb-5">
+        <div className="px-5 py-4 bg-light-blue mb-4">
+          <Typography variant="heading2" className="py-2">COVID-19 STATISTICS</Typography>
+        </div>
+        <Row className="mb-5 px-5 justify-content-start">
+          <Col md={5} className="pt-5 me-5">
+            <Typography variant="title" className="color-medium-teal mt-5">DECLINING</Typography>
+            <Typography variant="bodyHeading" className="color-medium-teal">CONDITION</Typography>
+            <div className="end">
+              <CircularProgressbarWithChildren
+                value={Math.round(data.vaccinationPercentage)}
+                styles={buildStyles({            
+                  strokeLinecap: 'butt',    
+                  pathColor: '#0F83A0',
+                  width: '20px'
+                })}
+                >
+                <div 
+                  className="medium-teal"
+                  style={{ textAlign: "center"}}
+                >
+                  <Typography variant="title">{data.vaccinationPercentage.toFixed(1)}%</Typography>
+                  <Typography variant="heading3">vaccinated</Typography>
+                </div>
+              </CircularProgressbarWithChildren>            
+            </div>
+            <Typography variant="title" className="medium-teal">{data.todayCases}</Typography>
+            <Typography variant="bodyHeading" className="medium-teal mb-5">CASES TODAY</Typography>
+          </Col>
+          <Col md={6} style={{alignItems: 'center', display: 'flex'}}>
+            <MapContainer
+              className="leaflet-container2"
+              style={{ width: 450, height: 450}}
+              center={getCentre()} 
+              zoom={7}
+              zoomControl={false}
+              minZoom={5}
+              maxBounds={bounds}
+              maxBoundsViscosity={0.7}
+            >
+              <TileLayer
+                attribution='Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ'
+                url='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'
+              />
+              <Marker 
+                id={1}
+                position={getCentre()}
+                icon={hugeMarkerIcon}
+              />
+            </MapContainer>
+          </Col>
+        </Row>
+        <Typography variant="caption" className="mb-5 px-5">{covidSource}</Typography>
+      </div>
     </Container>
     <Container style={{margin: '0% 10% 3%', width: 'auto'}}>
       <NewsBar></NewsBar>

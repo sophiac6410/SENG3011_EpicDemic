@@ -9,20 +9,20 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const useStyles = makeStyles((theme) => ({
   inputRoot: {
-    "&.MuiInput-underline:before": {
-      borderBottom: "2px solid #7CC9E9"
-    },
-    "&.MuiInput-underline:hover:before": {
-      borderBottom: "2px solid white"
-    },
-    "&.MuiInput-underline:after": {
-      borderBottom: "2px solid #7CC9E9"
-    },
-    color: "white",
-    backgroundColor: "#7CC9E9",
+    // "&.MuiInput-underline:before": {
+    //   borderBottom: "2px solid #7CC9E9"
+    // },
+    // "&.MuiInput-underline:hover:before": {
+    //   borderBottom: "2px solid white"
+    // },
+    // "&.MuiInput-underline:after": {
+    //   borderBottom: "2px solid #7CC9E9"
+    // },
+    color: "#515151",
+    // backgroundColor: "#7CC9E9",
     fontFamily: "Open Sans, sans-serif",
     fontStyle: "normal",
-    fontWeight: 700,
+    fontWeight: 500,
     fontSize: "1em",
   },
 }));
@@ -31,14 +31,15 @@ export default function CountrySelect({isFrom, handleInput}) {
   const classes = useStyles();
 
   return (
-    <div style={{ display: "flex", alignItems: "center", flexDirection: "row", padding: '2%' }}>
+    <div style={{ display: "flex", alignItems: "center", flexDirection: "row", padding: '1%' }}>
       <Autocomplete
         id="country-select-demo"
         classes={classes}
-        sx={{ width: 250 }}
+        sx={{ width: 250, marginLeft: 2 }}
         options={ isFrom ? aus : countries }
+        value={ isFrom ? aus[0] : null}
         autoHighlight
-        underlineShow={false}
+        // underlineShow={false}
         onChange={handleInput}
         getOptionLabel={(option) => option.label}
         renderOption={(props, option) => (
@@ -57,14 +58,14 @@ export default function CountrySelect({isFrom, handleInput}) {
           <TextField
             id="standard-basic" 
             defaultValue={isFrom && 'Australia'}
-            placeholder={isFrom ? '' : 'Search a travel destination...'}
+            placeholder={isFrom ? '' : 'Choose a travel destination...'}
             variant="standard"
             size="large"
             {...params}
             inputProps={{
               ...params.inputProps,
               autoComplete: 'new-password', // disable autocomplete and autofill
-              disableUnderline: true,
+              // disableUnderline: true,
             }}
           />
         )}
@@ -502,7 +503,7 @@ const countries = [
 const aus = [
   {
     code: 'AU',
-    label: 'Australia',
+    label: 'Sydney, Australia',
     phone: '61',
   },
 ];

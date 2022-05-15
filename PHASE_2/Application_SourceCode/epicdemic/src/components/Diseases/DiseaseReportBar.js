@@ -1,6 +1,6 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "react-multi-carousel/lib/styles.css";
-import { Row } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Carousel from "react-multi-carousel";
@@ -12,6 +12,11 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import { LightButton } from '../../styles/Button';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+
+import { getDiseaseArticles, getDiseaseList } from "../../adapters/diseaseAPI";
 
 const responsive = {
     superLargeDesktop: {
@@ -35,8 +40,13 @@ const responsive = {
 
 const COLOR = 'white';
 
-export default function DiseaseReportBar(code) {
+const API_KEY="pub_72536ca59b511c07890630cdccd42c8723d4";
+
+export default function DiseaseReportBar({code}) {
   const [diseaseData, setDiseaseData] = useState([]);
+  const [diseaseData2, setDiseaseData2] = useState([]);
+  const [diseaseList, setDiseaseList] = useState([]);
+  const [disease, setDisease] = useState('Covid-19');
 
   const options = {
     method: "GET",
@@ -47,22 +57,77 @@ export default function DiseaseReportBar(code) {
   };
 
   useEffect(() => {
+    if (code === null) return;
+
+    async function fetchList () {
+      const data = await getDiseaseList(code);
+      setDiseaseList(data);
+    }
+    fetchList();
+  }, []);
+
+  useEffect(() => {
     if (diseaseData === []) return;
 
-    async function fetchData() {
-      const data = await fetch(`https://prod.greatescape.co/api/travel/countries/${code}/corona`, options).then(res => res.json())
-      console.log('printing data', data)
-      setDiseaseData(data.news)
+    console.log('the disease is', disease)
+
+    if (disease == 'Covid-19') {
+      async function fetchData() {
+        const data = await fetch(`https://prod.greatescape.co/api/travel/countries/${code}/corona`, options).then(res => res.json())
+        // const data = await fetch(`https://newsdata.io/api/1/news?apikey=${API_KEY}&country=${code}&language=en&q=${disease}`, options).then(res => res.json())
+        console.log('printing data', data)
+        setDiseaseData(data.news.slice(0, (data.news.length / 2)))
+        setDiseaseData2(data.news.slice((data.news.length / 2), data.news.length))
+      }
+      fetchData()
     }
-    fetchData()
-  }, [])
+    else {
+      async function fetchData2() {
+        const data = await getDiseaseArticles(code, disease);
+        console.log('return', data)
+        if (data.length > 2) {
+          setDiseaseData(data.slice(0, (data.length / 2)))
+          setDiseaseData2(data.slice((data.length / 2), data.length))
+        }
+        else {
+          setDiseaseData([])
+          setDiseaseData2(data)
+        }
+      }
+      fetchData2();
+    }
+  }, [disease])
+
+  const handleChange = (event) => {
+    setDisease(event.target.value);
+  };
+
 
   return(
     <div style={{ padding: '3% 10% 10%', backgroundColor: '#E9F0FB' }}>
       <Row className="mt-2" style={{ backgroundColor: '#E9F0FB' }}>
-        <div className="text-center">
-          <Typography variant="heading1" className="color-dark-teal">RECENT DISEASE REPORT</Typography>
-        </div>
+        <Col>
+          <Typography variant="heading1"> Disease Reports </Typography>
+        </Col>
+        <Col style={{marginTop: "15px"}}>
+            <div style={{ minWidth: 200, display: "flex", justifyContent: "flex-end"}}>
+            <FormControl sx={{ minWidth: 200 }}>
+              <Select
+                displayEmpty
+                label="."
+                value={disease}
+                onChange={handleChange}
+              >
+                { diseaseList.map((data, idx) => {
+                  return (
+                    <MenuItem value={data} idx={idx}><Typography variant="heading2">{data}</Typography></MenuItem>
+                  )
+                })}
+              </Select>
+            </FormControl>
+          </div>
+          </Col>
+
         <div className="news-carousel" style={{ backgroundColor: '#E9F0FB' }}>
           <Carousel 
             swipeable={true}
@@ -70,27 +135,55 @@ export default function DiseaseReportBar(code) {
             responsive={responsive} 
           >
             
-              {diseaseData.map((data, idx) => {
+              {diseaseData2.map((data, idx) => {
 
                   return (
-                      <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%' }} >
+                    <div className="news-container-col">
+                      <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
                       <CardContent>
                         <Typography variant="caption" color="text.secondary">
-                          {(new Date(data.date)).toDateString()}
+                          {/* {(new Date(data.date)).toDateString()} */}
                         </Typography>
                         <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
-                            {data.title}
+                            { disease != 'Covid-19' ? (data.headline) : data.title }
+                            {/* { disease != 'Covid-19' ? (data.headline).replace(/PRO\/AH\/EDR>/ig,'') : data.title } */}
                         </Typography>
-                        <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { window.open(data.link) }}>
+                        <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { disease != 'Covid-19' ? window.open(data.url) : window.open(data.link) }}>
                           <Typography variant='bodyImportant'>
                             Read more
                           </Typography>
                         </LightButton>
                         <Typography variant="caption" color="text.secondary" sx={{display: 'block'}} gutterBottom>
-                          Source: {data.pub}
+                          Source: { disease != 'Covid-19' ? 'PROMED' : data.pub }
                         </Typography>
                       </CardContent>
                       </Card>
+
+                      {
+                        diseaseData.length < 3 
+                        ? <></>
+                        : <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
+                            <CardContent>
+                              <Typography variant="caption" color="text.secondary">
+                                {/* {(new Date(diseaseData[idx].date)).toDateString()} */}
+                              </Typography>
+                              <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
+                                  { disease != 'Covid-19' ? (data.headline) : diseaseData[idx].title }
+                                  {/* { disease != 'Covid-19' ? (data.headline).replace(/PRO\/AH\/EDR>/ig,'') : diseaseData[idx].title } */}
+                              </Typography>
+                              <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { disease != 'Covid-19' ? window.open(data.url) : window.open(diseaseData[idx].link) }}>
+                                <Typography variant='bodyImportant'>
+                                  Read more
+                                </Typography>
+                              </LightButton>
+                              <Typography variant="caption" color="text.secondary" sx={{display: 'block'}} gutterBottom>
+                                Source: { disease != 'Covid-19' ? 'PROMED' : diseaseData[idx].pub }
+                              </Typography>
+                            </CardContent>
+                            </Card>
+                      }
+
+                      </div>
                   )
                 })}
             

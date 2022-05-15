@@ -89,8 +89,8 @@ class LocationTravelOverview(BaseModel):
 class LocationDeclaration(BaseModel):
 	date: str = Field(..., description="The date the declaration was created", 
                     example="2022-04-07")
-	# text: str = Field(..., description="The description of the declaration", 
-  #                   example="Those who do not comply will get deported")
+	text: str = Field(..., description="The description of the declaration", 
+                    example="Those who do not comply will get deported")
 	documentRequired: str  = Field(..., description="If documents are required in travel entry", 
                     example="No") 
 	travelDocumentation: str or None = None
@@ -231,3 +231,6 @@ class LocationTravelOverviewResponse(baseModels.Response):
 
 class LocationAllResponse(baseModels.Response):
 	data: List[Location]
+
+class LocationDiseaseResponse(baseModels.Response):
+	data: List[str]

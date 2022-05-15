@@ -1,12 +1,13 @@
 from fastapi import APIRouter, Query, status
 from fastapi.responses import JSONResponse
 from util import DATETIME_REGEX, parse_datetime_string
-from database import articles_col, reports_col
+from database import articles_col, reports_col, locations_col, diseases_col
 import re
 from datetime import datetime
 import pytz
 from typing import Optional
 from models import articleModels, baseModels
+from geonames import get_location_ids
 
 router = APIRouter(
 	prefix="/v1/articles"
@@ -95,6 +96,104 @@ async def get_articles_by_query(
 			"end_range": end_range,
 			"articles": articles
 		})
+
+
+############## GET ARTICLES BY COUNTRY ###############
+@router.get("/country", status_code=status.HTTP_200_OK, response_model=articleModels.ArticleIdResponse, tags=["articles"], responses={422: {"model": baseModels.ErrorResponse}})
+async def get_articles_by_ids(
+	code: str = Query(
+		..., # no default, is required
+		description="The country id",
+		example="BE"
+	),
+	disease: str = Query(
+		...,
+		description="The disease",
+		example="Covid-19"
+	),
+):
+	data = list(locations_col.find({'_id': code}, {
+		"id": "$_id",
+		"country" : "$country",
+		"capital" : "$capital",
+		"geonames_id" : "$geonames_id",
+		"longitude": "$longitude",
+		"latitude": "$latitude",
+		"region": "$region",
+		"entry_description": "$entry_description",
+		"disease_risk": "$disease_risk",
+		"travel_status": "$travel_status",
+		"safety_score": "$safety_score",
+		"advice_level": "$advice_level",
+	}))
+
+	if (len(data) == 0):
+		return JSONResponse(status_code=status.HTTP_204_NO_CONTENT, content={"error": "No data for country"})
+
+	data = data[0]
+	response = get_location_ids(data['country'])
+
+	if not response["success"]:
+		return JSONResponse(status_code=status.HTTP_204_NO_CONTENT, content={"error": "No data for country"})
+
+	start_range=1
+	end_range=10
+	locations = response["location_ids"]
+	location_ids = list(locations.keys())
+	key_terms_list = [x.strip() for x in disease.split(",")]
+	key_terms_regex = "|".join(key_terms_list)
+
+	matched_diseases = list(diseases_col.find({
+			"$or": [
+					{"name": {
+							"$regex": key_terms_regex,
+							"$options": "i"
+					}},
+					{"regex": {
+							"$regex": key_terms_regex,
+							"$options": "i"
+					}},
+					{"key_words": {
+							"$in": key_terms_list
+					}}
+			]
+	}))
+
+	matched_disease_ids = [x["_id"] for x in matched_diseases]
+	query=[{'locations': {'$in': location_ids}}, {'diseases': {'$in': matched_disease_ids}}]
+
+	report_docs = list(reports_col.find(
+			{
+					"$and": query
+			}
+	).skip(start_range - 1).limit(end_range + 1 - start_range))
+
+	reports = sorted(report_docs, key=lambda d: d["event_date"])
+	article_ids=[]
+
+	for r in reports:
+		article_ids.append(r["article_id"])
+
+	articles = articles_col.aggregate([
+		{"$match": {"_id": {"$in": article_ids}}},
+		{"$project": {"diseases": False}},
+		{"$project": {"id":"$_id", "url":1, "date_of_publication":1, "headline":1, "main_text":1}}
+	])
+	articles_dict = {}
+	for a in articles:
+		reports = list(reports_col.find(
+			{"article_id": a["_id"]},
+			{"_id": True}
+		))
+		report_list = []
+		for r in reports:
+			report_list.append(r["_id"])
+		a.update({"reports": report_list})
+		articles_dict.update({a["_id"]: a})
+
+	return baseModels.createResponse(True, 200, {
+		"articles": articles_dict
+	})
 
 
 ############## GET ARTICLES BY IDS ###############

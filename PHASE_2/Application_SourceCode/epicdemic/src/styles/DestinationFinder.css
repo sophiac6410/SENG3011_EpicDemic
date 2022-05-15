@@ -2,9 +2,14 @@
 
 }
 
+.bg-plane-overlay {
+    background-color: #1B4965;
+    opacity: 0.8;
+}
+
 .bg-plane{
     background-image: url(./../static/plane.svg);
-    height: 50vh;
+    height: 60vh;
     width: 100%;
     position:absolute;
     z-index: 0;

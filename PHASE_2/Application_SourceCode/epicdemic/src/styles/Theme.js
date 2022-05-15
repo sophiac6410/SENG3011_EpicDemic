@@ -5,6 +5,7 @@ const yellow = "#FFC700";
 const orange = "#FFA800";
 const darkOrange = "#ED6400";
 const red = "#DA4848";
+const lightGrey = '#EEF0F2';
 
 export function safteyScore (score) {
   if (score >= 0 && score <= 20) {
@@ -21,6 +22,9 @@ export function safteyScore (score) {
 }
 
 export function safteyScoreColor (score) {
+  if (score === undefined) {
+    return lightGrey;
+  }
   if (score >= 0 && score <= 20) {
     return green;
   } else if (score <= 40) {
@@ -31,6 +35,8 @@ export function safteyScoreColor (score) {
     return darkOrange;
   } else if (score <= 100) {
     return red;
+  } else {
+    return lightGrey;
   }
 }
 
