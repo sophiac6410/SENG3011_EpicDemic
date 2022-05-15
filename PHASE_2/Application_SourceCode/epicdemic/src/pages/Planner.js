@@ -57,6 +57,7 @@ function Planner() {
       </div>
       <Container className="pt-5 pb-5">
         <Typography variant="heading2" className="color-dark-teal">Your saved trips</Typography>
+        <Typography variant="caption" className='color-dark-teal'>Click the 'Plan a new trip' button above to create a new trip. You may edit or remove trips at any time. If you enjoyed your trip, click the heart icon, this will be used in combination with your trip preferences to help us recommend appropriate cities for you.</Typography>
         <div className='justify-content-center' style={{display: "flex", flexDirection: "column"}}>
           {trips == [] || trips == null ? (
             <div></div>
