@@ -38,9 +38,7 @@ import Select from '@mui/material/Select';
 
 import InputField from '../InputField';
 import { Field } from '../Form'
-import { addMember, removeMember, getMembers, getTripOwner } from '../../adapters/tripAPI';
-import { connected } from "process";
-
+import { addMember, removeMember, getMembers, getTripOwner, getDestinationPhotos } from '../../adapters/tripAPI';
 
 const style = {
   position: 'absolute',
@@ -69,7 +67,7 @@ const styleTwo = {
   bgcolor: 'background.paper',
   borderRadius: "30px",
   boxShadow: 24,
-  p: 4,
+  pb: 4,
   backgroundColor: "#EEF0F2",
   display: "flex",
   flexDirection: "column",
@@ -84,7 +82,7 @@ const styleThree = {
   width: "1000px",
   hight: "1000px",
   bgcolor: 'background.paper',
-  borderRadius: "20px",
+  borderRadius: "30px",
   boxShadow: 24,
   p: 4,
   backgroundColor: "#EEF0F2",
@@ -267,6 +265,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
   const [added, setAdded] = React.useState(false);
   const [activity, setActivity] = React.useState([])
   const [cityIndex, setCityIndex] = React.useState(-1)
+  const [cityPhoto, setCityPhoto] = React.useState('')
 
   const handleOpen = async () => {
     if (!back) {
@@ -325,6 +324,15 @@ function StepTwo({onClose, name, start, end, travellers}) {
       setRegion(regionOptions[0])
     }
     setAdded(false)
+    async function getPhoto(city) {
+      console.log('inside get photo func');
+      const photos = await getDestinationPhotos(city.name + ', ' + city.country, false)
+      console.log('photo', photos);
+      if (photos.length > 0) {
+        setCityPhoto(photos[0])
+      }
+    }
+    getPhoto(data.data[index])
     // const activities = await GetActivities(data.data[index].latitude, data.data[index].longitude)
   };
 
@@ -332,16 +340,32 @@ function StepTwo({onClose, name, start, end, travellers}) {
     setCountry(country)
     setCity(null)
     const data = await GetCities(country, "name")
+    console.log('city options', data);
     setCityOptions(data.data)
   }
 
   const handleCity = (city) => {
+    console.log('city', city);
     setCity(city)
     setStepThree(true)
     setAdded(false)
+    async function getPhoto() {
+      console.log('inside get photo func');
+      if (city !== null && city.name !== null) {
+        const data = await getDestinationPhotos(city.name + ', ' + city.country, false)
+        console.log('photo', data);
+        if (data.length > 0) {
+          setCityPhoto(data[0])
+        }
+      }
+    }
+    getPhoto()
     // const data = await addCityToTrip(city.name, lat, long, country.code, country.name);
   }
 
+  function getPhoto() {
+    return `url(${cityPhoto})`
+  }
   let navigate = useNavigate()
   const saveTrip = () => {
     navigate(`/trip/${tripId}`)
@@ -385,16 +409,36 @@ function StepTwo({onClose, name, start, end, travellers}) {
         open={isOpen}
       >
         <Box sx={styleTwo}>
-          <div style={{display: "flex", justifyContent: "start", flexDirection: "row", alignItems: "center", paddingBottom: "20px"}}>
-            <IconButton onClick={handleBack}>
-              <ArrowBackIosIcon color='teal' sx={{marginTop: "10px", marginRight: "5px"}} fontSize="small"></ArrowBackIosIcon>
-            </IconButton>
-            {/* <Typography variant='body' className='color-medium-teal mt-2'>Back</Typography> */}
+          <div className= "border-radius-med">
+          { stepThree
+            ? <>
+              <div style={{backgroundImage: getPhoto(), height: '400px', marginBottom: '20px'}}>
+                <div style={{display: "flex", flexDirection: "row", padding: "20px", height: '80px'}}>
+                  <IconButton onClick={handleBack} sx={{alignItems: 'top'}}>
+                    <ArrowBackIosIcon sx={{color: 'white'}} fontSize="small"></ArrowBackIosIcon>
+                  </IconButton>
+                  <Typography variant='body' className='color-white mt-2'>Back</Typography>
+                </div>
+                <div style={{verticalAlign: 'bottom', margin: 'auto', display: 'flex', justifyContent: 'center', marginTop: '250px'}}>
+                  <Typography variant="heading1" className='color-white text-center'><b>{city !== null ? (city.name + ', ' + city.country) : ''}</b></Typography>
+                </div>
+              </div>
+              <Typography variant='body2' className='color-dark-teal mt-2 text-center'>This city is within the top 100 tourist cities in this region</Typography>
+              </>
+            : <>
+              <div style={{display: "flex", justifyContent: "start", flexDirection: "row", alignItems: "center", paddingBottom: "20px"}}>
+                <IconButton onClick={handleBack}>
+                  <ArrowBackIosIcon color='teal' sx={{marginTop: "10px"}} fontSize="small"></ArrowBackIosIcon>
+                </IconButton>
+                <Typography variant='body' className='color-medium-teal mt-2'>Back</Typography>
+              </div>
+              <Typography variant="heading2" className='color-dark-teal text-center'>
+                Add cities to your trip
+              </Typography>
+              <Typography variant='body2' className='color-dark-teal mt-2 text-center'>Optionally enter a region and/or country and click 'Find my city' and we will show you a recommended city.</Typography>
+            </>
+          }
           </div>
-          <Typography variant="heading2" className='color-dark-teal text-center'>
-            Add cities to your trip
-          </Typography>
-          <Typography variant='body2' className='color-dark-teal mt-2 text-center'>Optionally enter a region and/or country and click 'Find my city' and we will show you a recommended city.</Typography>
           <Box autoComplete='off' sx={formStyle}>
             <PublicIcon  sx={{marginTop: "10px", marginRight: "5px"}} color="teal"></PublicIcon>
             <FormControl color='teal' variant="standard" sx={{ width: '10'}}>

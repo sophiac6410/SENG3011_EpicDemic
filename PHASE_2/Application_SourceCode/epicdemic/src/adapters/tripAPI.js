@@ -1,4 +1,5 @@
 import React from 'react';
+import data from '../components/Diseases/data';
 import API_URL from '../config.json';
 
 export const createTrip = async (name, start_date, end_date, travellers) => {
@@ -259,4 +260,53 @@ export const getActivityByCity = async (tripId, cityId) => {
 
     const data = response.json()
     return data
+}
+
+export const getDestinationPhotos = async (destination, small) => {
+  const responseFindDest = await fetch(`https://api.roadgoat.com/api/v2/destinations/auto_complete?q=${destination}`, {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application/json',
+      Authorization: 'Basic NzBjMjZkZGRjYzNmNThlYjMyNzM4NjQ4MGUxNDk3N2E6ZmY2ZjQyYWZjNWFiOTFkMjk1NTEzNmM1YzFlMjg5ODQ='
+    }
+  })
+
+  const dataFindDest = await responseFindDest.json()
+  if (responseFindDest.status !== 200) {
+    console.log(dataFindDest.errors);
+    alert('Error fetching destination');
+  } else {
+    console.log('finding dest', dataFindDest);
+    if (dataFindDest.data.length > 0) {
+      const locationId = dataFindDest.data[0].id;
+      const respDestination = await fetch(`https://api.roadgoat.com/api/v2/destinations/${locationId}`, {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: 'Basic NzBjMjZkZGRjYzNmNThlYjMyNzM4NjQ4MGUxNDk3N2E6ZmY2ZjQyYWZjNWFiOTFkMjk1NTEzNmM1YzFlMjg5ODQ='
+        }
+      })
+      const dataDestination = await respDestination.json()
+      if (respDestination.status != 200) {
+        console.log(respDestination.errors);
+        alert('Error fetching destination');
+      } else {
+        console.log('got destination', dataDestination);
+        let photos = []
+        dataDestination.included.map((data) => {
+          if (data.type == 'photo') {
+            if (small) {
+              photos = [data.attributes.image.thumb, ...photos]
+            } else {
+              photos = [data.attributes.image.large, ...photos]
+            }
+          }
+        })
+        console.log('photos', photos);
+        return photos
+      }
+    } else {
+      return []
+    }  
+  }
 }
