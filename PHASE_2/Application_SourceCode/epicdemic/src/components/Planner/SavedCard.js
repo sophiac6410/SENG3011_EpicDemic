@@ -1,6 +1,9 @@
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
 import { Typography } from "@mui/material";
+import Checkbox from '@mui/material/Checkbox';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import EditIcon from '@mui/icons-material/Edit';
@@ -33,6 +36,7 @@ const cardStyle = {
 
 function SavedCard({name, start, end, travellers, tripId, update}) {
   const [dateStr, setDateStr] = useState("")
+  const [saved, setSaved] = useState(false)
 
   useEffect(() => {
     const date1 = new Date(start);
@@ -50,8 +54,12 @@ function SavedCard({name, start, end, travellers, tripId, update}) {
   }
   const navigate = useNavigate()
 
+  const handleClickSave = (event) => {
+    setSaved(event.target.checked);
+  }
+
   return(
-    <Box style={cardStyle} sx={{width: "90%"}}>
+    <Box style={cardStyle} sx={{width: "100%"}}>
       <Row className='align-items-center'>
         <Col md={4} onClick={goToTrip}>
           <Typography variant="bodyImportant" className='color-medium-teal me-5'>{name}</Typography>
@@ -66,7 +74,7 @@ function SavedCard({name, start, end, travellers, tripId, update}) {
             </Col>
           </Row>
         </Col>
-        <Col md={3}>
+        <Col md={2}>
           <Row className='align-items-center'>
             <Col md={2}>
               <PeopleOutlineIcon color='teal'></PeopleOutlineIcon>
@@ -89,6 +97,9 @@ function SavedCard({name, start, end, travellers, tripId, update}) {
               </IconButton>
             </Col>
           </Row>
+        </Col>
+        <Col md={1}>
+        <Checkbox sx={{display:'block', mx: 'auto' }} checked={saved} icon={<FavoriteBorder fontSize="medium" className="color-small-teal"/>} checkedIcon={<Favorite fontSize="medium" className="color-medium-teal"/>} onClick={handleClickSave} />
         </Col>
       </Row>
       {/* <Divider orientation="vertical" flexItem  variant="middle" flex></Divider> */}
