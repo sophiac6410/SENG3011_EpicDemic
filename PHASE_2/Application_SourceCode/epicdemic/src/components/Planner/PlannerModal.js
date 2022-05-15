@@ -32,6 +32,9 @@ import { GetActivities } from '../../adapters/activityAPI';
 import { addCityToTrip, createTrip } from './tripApiCalls';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Margin, TripOriginOutlined } from '@mui/icons-material';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 import InputField from '../InputField';
 import { Field } from '../Form'
@@ -46,7 +49,7 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: "1000px",
   bgcolor: 'background.paper',
-  borderRadius: "20px",
+  borderRadius: "30px",
   boxShadow: 24,
   p: 4,
   textAlign: "center",
@@ -64,7 +67,7 @@ const styleTwo = {
   transform: 'translate(-50%, -50%)',
   width: "1000px",
   bgcolor: 'background.paper',
-  borderRadius: "20px",
+  borderRadius: "30px",
   boxShadow: 24,
   p: 4,
   backgroundColor: "#EEF0F2",
@@ -102,7 +105,7 @@ const formStyle = {
   paddingBottom: "10px",
   paddingTop: "10px",
   width: "fit-content",
-  borderRadius: "20px",
+  borderRadius: "30px",
   textAlign: "center",
   backgroundColor: "white",
   boxShadow: "1px 3px #888888",
@@ -113,6 +116,22 @@ const formStyle = {
   '& svg': {
     m: 1.5,
   },
+};
+
+const shareMemberStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: "1000px",
+  bgcolor: 'background.paper',
+  borderRadius: "30px",
+  boxShadow: 24,
+  p: 4,
+  textAlign: "center",
+  backgroundColor: "#EEF0F2",
+  display: "flex",
+  flexDirection: "column",
 };
 
 const responsive = {
@@ -485,7 +504,7 @@ function ActivityModal({fromTrip, activities, tripId, city, updateActivity}) {
         <IconButton onClick={handleOpen}>
           <LocalActivityIcon color='teal'></LocalActivityIcon>
         </IconButton>
-        <Typography variant='caption' className='color-medium-teal'>View activities</Typography>
+        <Typography variant='caption' className='color-medium-teal' sx={{cursor: 'pointer'}} onClick={handleOpen}>View activities</Typography>
         </div>
       ): (
         <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
@@ -538,9 +557,9 @@ function ActivityModal({fromTrip, activities, tripId, city, updateActivity}) {
 
 /// FOR ADD MEMBER MODAL ///
 
-function RestrictBox({name, email, owner, trigger, setTrigger, id}){
+function RestrictBox({name, email, owner, trigger, setTrigger, id, type}){
   const darkTeal = '#1B4965';
-
+  const [memberType, setMemberType] = useState(type)
   const remove_member = async () => {
     console.log(email)
     const data = await removeMember(email, id);
@@ -554,7 +573,16 @@ function RestrictBox({name, email, owner, trigger, setTrigger, id}){
 				<Typography variant="heading3" sx={{color: darkTeal, flex: 1, justifyContent: 'flex-start', textAlign: 'left' }}> {name} </Typography>	
         {
           owner ? <Typography variant="heading4" sx={{color: darkTeal, flex: 1, justifyContent: 'flex-end', textAlign: 'right'}}> Owner </Typography>
-          : <></>
+          : <FormControl size="small" sx={{m: 0, p: 0}}>
+              <Select
+                label="."
+                value={memberType}
+                onChange={(event)=>{setMemberType(event.target.value)}}
+              >
+                <MenuItem value={'Viewer'}>Viewer</MenuItem>
+                <MenuItem value={'Editor'}>Editor</MenuItem>
+              </Select>
+            </FormControl>
         }
 			</Box>
 			<Box sx={{ display: 'flex'}}>
@@ -577,49 +605,33 @@ function AddMember({isOpen, onClose , tripId}) {
   const [owner, setOwner] = useState({})
   const [members, setMembers] = useState([])
   const [trigger, setTrigger] = useState(0)
-
+  const [memberType, setMemberType] = useState('Viewer')
   const add_member = async () => {
     console.log(email)
-    const data = await addMember(email, tripId);
+    const data = await addMember(email, tripId, memberType);
     console.log(data)
     setEmail('')
     setTrigger(trigger + 1)
   }
 
   useEffect(() => {
-    async function updateMembers() {
-      const data = await getMembers(tripId)
-      if(data != undefined) {
-        setMembers(data)
-        console.log('members', members)
-      }
-    }
-    updateMembers()
-    return () => {
-      setMembers([])
-    }
-  }, [trigger])
-
-  useEffect(() => {
     async function getOwner() {
       const data = await getTripOwner(tripId)
       if(data !== undefined) {
         setOwner(data)
+        console.log('owner', data);
+      }
+    }
+    async function updateMembers() {
+      const data = await getMembers(tripId)
+      if(data != undefined) {
+        setMembers(data)
+        console.log('members', data)
       }
     }
     getOwner()
-    return () => {
-      setOwner([])
-    }
-  }, [])
-
-  useEffect(() => {
-    console.log('owner', owner)
-  }, [owner])
-
-  useEffect(() => {
-    console.log('members', members)
-  }, [members])
+    updateMembers()
+  }, [trigger])
 
   return(
     <Modal
@@ -627,19 +639,38 @@ function AddMember({isOpen, onClose , tripId}) {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={style}>
+      <Box sx={shareMemberStyle}>
+        <div style={{display: "flex", justifyContent: "end", flexDirection: "row", alignItems: "center"}}>
+          <IconButton onClick={onClose}>
+            <CloseIcon color='teal' fontSize="small"></CloseIcon>
+          </IconButton>
+        </div>
         <Typography variant="heading2" className='color-dark-teal'>
-          Share with other users
+          Share your trip with other users
         </Typography>
-
-        <Box sx={{ display: 'flex', marginLeft: '80px', marginRight: '80px' }}>
-          <Field type="email" onChange={e => setEmail(e.target.value)} placeholder="Enter your email" value={email}
-            sx={{ marginLeft: '40px', marginRight: '40px' }}></Field>
+        <Box className="justify-content-between" sx={{ display: 'flex', marginLeft: '80px', marginRight: '80px' }}>
+          <div className="border-radius-med bg-white px-5 mt-2 justify-content-between align-items-center d-flex" style={{width: '85%', height: '65px'}}>
+            <input type="email" onChange={e => setEmail(e.target.value)} placeholder="Enter an email" value={email}
+              style={{border: 'none', width: '80%', margin: 0}}
+            />
+            <FormControl size="small" sx={{m: 0, p: 0}}>
+              <Select
+                label="."
+                value={memberType}
+                onChange={(event)=>{setMemberType(event.target.value)}}
+              >
+                <MenuItem value={'Viewer'}>Viewer</MenuItem>
+                <MenuItem value={'Editor'}>Editor</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+          {/* <Field >
+          </Field> */}
           {/* <InputField type="email" change={} placeholder="Enter your email"></InputField> */}
           <TealBotton onClick={add_member} sx={{marginTop: '20px', marginBottom: '20px'}}> Share </TealBotton>
         </Box>
 
-        <div sx={{display: "flex", flexDirection: "column"}}>
+        <div className="mt-2" style={{overflow: 'auto', height: '300px'}}>
           <RestrictBox
             email={owner.email}
             name={owner.name}
@@ -655,6 +686,7 @@ function AddMember({isOpen, onClose , tripId}) {
                 key={idx}
                 email={mem.email}
                 name={mem.name}
+                type={mem.type}
                 owner={false}
                 trigger={trigger}
                 setTrigger={setTrigger}
@@ -664,9 +696,9 @@ function AddMember({isOpen, onClose , tripId}) {
           })}
         </div>
 
-        <Box sx={{display: "flex", flexDirection: "row", marginTop: "80px", justifyContent: 'center'}}>
+        <Box sx={{display: "flex", flexDirection: "row", marginTop: "30px", justifyContent: 'center'}}>
           <Col md={6}>
-            <TealBotton onClick={onClose}>Close</TealBotton>
+            <TealBotton onClick={onClose}>Done</TealBotton>
           </Col>
         </Box>
       </Box>

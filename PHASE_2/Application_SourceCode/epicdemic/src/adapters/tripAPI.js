@@ -151,8 +151,8 @@ export const getTripById = async (tripId) => {
 
 ///// FOR GROUPS /////
 
-export const addMember = async (email, tripId) => {
-  console.log(email, tripId)
+export const addMember = async (email, tripId, type) => {
+  console.log(email, tripId, type)
   try {
     const response = await fetch(`${API_URL.API_URL}/v1/trips/${tripId}/new/member`, {
       method: 'POST',
@@ -161,7 +161,8 @@ export const addMember = async (email, tripId) => {
         Authorization: localStorage.getItem('token')
       },
       body: JSON.stringify({
-        email: email
+        email: email,
+        type: type
       }),
     });
     const data = await response.json();
@@ -235,11 +236,11 @@ export const getTripOwner = async (tripId) => {
     });
     const data = await response.json();
     if (response.status !== 200) {
-      console.log(data)
-      console.log(response)
+      console.log(data.data)
+      alert(data.data.error)
       return undefined
     } else {
-      console.log(data)
+      console.log('get trip owner', data.data)
       return data.data
     }
   } catch (e) {

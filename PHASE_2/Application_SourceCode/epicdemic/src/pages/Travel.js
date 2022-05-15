@@ -22,7 +22,7 @@ import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 
 const validCheck = <p>
   Before you book your travel, check if you meet Australia’s definition of fully vaccinated for international travel purposes. To meet Australia’s vaccination requirements and be considered a ‘fully vaccinated’ traveller for the purpose of Australia’s border arrangements, you need to provide evidence that you either: 
-  <br /><ul><li>meet Australia's definition of fully vaccinated for international travel purposesare a child under the age of 12</li>
+  <br /><ul><li>meet Australia's definition of fully vaccinated for international travel purposes are a child under the age of 12</li>
   <li>are a child aged 12 to 17 years who will be travelling to Australia with at least one adult who is fully vaccinated; or</li>
   <li>cannot be vaccinated for medical reasons.</li></ul></p>;
 
@@ -96,7 +96,7 @@ function Travel(travelStat) {
         enterChecks[0] = defaultEnterChecks[0]
       }else{
         enterChecks[0] = {
-          title: "QUARANTINE RULES",
+          title: "Quarantine Rules",
           date: data.quarantine.date,
           text: <>
             <Typography variant="bodyText" sx={{display: 'inline'}}><b>Duration: </b>{data.quarantine.duration === '' ? 0 : data.quarantine.duration} days</Typography>
@@ -115,7 +115,7 @@ function Travel(travelStat) {
         enterChecks[1] = defaultEnterChecks[1]
       }else{
         enterChecks[1] = {
-          title: "VACCINATION REQUIREMENTS",
+          title: "Vaccination Requirements",
           date: data.vaccine_info.last_updated,
           text: <>
             <Typography variant="bodyText">{data.vaccine_info.info}</Typography>
@@ -130,7 +130,7 @@ function Travel(travelStat) {
         enterChecks[2] = defaultEnterChecks[2]
       }else{
         enterChecks[2] = {
-          title: "TESTING REQUIREMENTS",
+          title: "Testing Requirements",
           date: data.testing.date,
           text: <>
           <Typography variant="bodyText" sx={{display: 'inline'}}><b>Required: </b>{data.testing.isRequired}</Typography>
@@ -147,7 +147,7 @@ function Travel(travelStat) {
         enterChecks[3] = defaultEnterChecks[3]
       }else{
         enterChecks[3] = {
-          title: "DOCUMENTATION DECLARATION",
+          title: "Documentation Declaration",
           date: data.declaration.date,
           text: <>
             <Typography variant="bodyText" sx={{display: 'inline'}}><b>Required: </b>{data.declaration.documentRequired}</Typography>
@@ -280,7 +280,7 @@ function Travel(travelStat) {
       return <Row className="m-4">
         <Col md={12}>
           <BlueCard open check={{
-            title: 'Entry Requirements',
+            title: 'ENTRY REQUIREMENTS',
             text: <Typography variant="bodyText">{data.entryRequirements}</Typography>,
           }} />
         </Col>

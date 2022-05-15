@@ -17,6 +17,9 @@ import { useNavigate } from 'react-router';
 import { TailSpin } from "react-loader-spinner"
 import { getActivityByCity } from "../../adapters/tripAPI";
 
+import ChecklistModal from "./ChecklistModal";
+import { Check } from "@mui/icons-material";
+import { getTripCityById } from './tripApiCalls';
 
 const cardStyle = {
   marginTop: "25px",
@@ -162,7 +165,8 @@ function TripCard({name, tripId, latitude, longitude, city, country, cityId}) {
         <IconButton sx={{paddingRight: "5px"}}>
           <FlightIcon sx={{marginRight: "5px"}} color='teal'></FlightIcon>
         </IconButton>
-        <Typography variant='caption' className='color-medium-teal'>Book flights</Typography>
+        <Typography variant='caption' className='color-medium-teal' sx={{cursor: 'pointer'}}>Book flights</Typography>
+        <ChecklistModal city={city} tripId={tripId}/>
       </div>
       <div className="d-flex flex-row mt-3">
         <Typography variant="heading3" class="color-grey">YOUR BUCKETLIST</Typography>

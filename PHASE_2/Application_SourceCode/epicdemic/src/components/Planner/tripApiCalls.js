@@ -82,7 +82,7 @@ export const addCityToTrip = async (tripId, name, latitude, longitude, country_c
   }
 }
 
-export const addActivityToCity = async (activityId, cityId, tripId) => {
+export const addActivityToCity = async (activityId, cityId, tripId, name) => {
   try {
     const response = await fetch(`${API_URL.API_URL}/v1/trips/new/activity`, {
       method: 'POST',
@@ -94,6 +94,7 @@ export const addActivityToCity = async (activityId, cityId, tripId) => {
         tripId,
         cityId,
         activityId,
+        name
       }),
     });
     const data = await response.json();
@@ -130,6 +131,28 @@ export const deleteTrip = async (tripId) => {
 export const getTripById = async (tripId) => {
   try {
     const response = await fetch(`${API_URL.API_URL}/v1/trips/${tripId}`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      },
+    });
+    const data = await response.json();
+    if (response.status !== 200) {
+      console.log(data)
+      console.log(response)
+    } else {
+      console.log(data)
+      return data.data
+    }
+  } catch (e) {
+      console.log(e)
+  }
+}
+
+export const getTripCityById = async (tripId, cityId) => {
+  try {
+    const response = await fetch(`${API_URL.API_URL}/v1/trips/${tripId}/${cityId}`, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
