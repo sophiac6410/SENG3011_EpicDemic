@@ -62,7 +62,7 @@ const DestinationFinder = () => {
             <div className="bg-plane">
             <div className="bg-plane-overlay">
                 <NavbarComp bg={false}/>
-                <div className="text-center mb-5" style={{marginTop: "250px", opacity: 1}}>
+                <div className="text-center mb-5" style={{marginTop: "250px"}}>
                     <Typography variant="title" className="color-white mt-5">FIND A DESTINATION BY...</Typography>
                 </div>
                 <Row style={{margin: "3% 5% 1%"}} className="justify-content-center">
