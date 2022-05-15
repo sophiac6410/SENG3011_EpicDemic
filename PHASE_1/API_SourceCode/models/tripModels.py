@@ -48,3 +48,9 @@ class UserResponse(baseModels.Response):
 
 class UsersResponse(baseModels.Response):
     data: List[User]
+
+class ActivityList(BaseModel):
+    ids: List[int] = Field(..., description="The list of activities to do in the city. Activities are referenced by their id, which corresponds to Amadeus API's activity ids.", example=[49488, 265211, 298635, 106708])
+
+class ActivityIdResponse(baseModels.Response):
+    data: ActivityList
