@@ -1257,3 +1257,2413 @@
     Process Time: 0.09605193138122559
     ----------------------------------------
     
+    Timestamp: 1652619689.989642
+    Accessed Time: 2022-05-15 23:01:29.989642
+    Client: 127.0.0.1:56446
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0008289813995361328
+    ----------------------------------------
+    
+    Timestamp: 1652619691.56873
+    Accessed Time: 2022-05-15 23:01:31.568730
+    Client: 127.0.0.1:56446
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.08488583564758301
+    ----------------------------------------
+    
+    Timestamp: 1652619871.569408
+    Accessed Time: 2022-05-15 23:04:31.569408
+    Client: 127.0.0.1:56510
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0004200935363769531
+    ----------------------------------------
+    
+    Timestamp: 1652619871.758989
+    Accessed Time: 2022-05-15 23:04:31.758989
+    Client: 127.0.0.1:56510
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0776369571685791
+    ----------------------------------------
+    
+    Timestamp: 1652619950.750079
+    Accessed Time: 2022-05-15 23:05:50.750079
+    Client: 127.0.0.1:56554
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Covid-19
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 1.266179084777832
+    ----------------------------------------
+    
+    Timestamp: 1652620036.275584
+    Accessed Time: 2022-05-15 23:07:16.275584
+    Client: 127.0.0.1:56590
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0005080699920654297
+    ----------------------------------------
+    
+    Timestamp: 1652620036.489377
+    Accessed Time: 2022-05-15 23:07:16.489377
+    Client: 127.0.0.1:56590
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0854790210723877
+    ----------------------------------------
+    
+    Timestamp: 1652620108.832246
+    Accessed Time: 2022-05-15 23:08:28.832246
+    Client: 127.0.0.1:56628
+    
+    Request: GET /docs
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0003428459167480469
+    ----------------------------------------
+    
+    Timestamp: 1652620108.944504
+    Accessed Time: 2022-05-15 23:08:28.944504
+    Client: 127.0.0.1:56628
+    
+    Request: GET /openapi.json
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.06863999366760254
+    ----------------------------------------
+    
+    Timestamp: 1652620191.976753
+    Accessed Time: 2022-05-15 23:09:51.976753
+    Client: 127.0.0.1:56676
+    
+    Request: GET /v1/articles/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			key_terms=Corona
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=4
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 1.8796799182891846
+    ----------------------------------------
+    
+    Timestamp: 1652620193.856236
+    Accessed Time: 2022-05-15 23:09:53.856236
+    Client: 127.0.0.1:56680
+    
+    Request: OPTIONS /v1/users/saved
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.022098064422607422
+    ----------------------------------------
+    
+    Timestamp: 1652620193.856299
+    Accessed Time: 2022-05-15 23:09:53.856299
+    Client: 127.0.0.1:56682
+    
+    Request: GET /v1/updates/
+    Request Query Param: 
+			location=
+			category=document,testing,quarantine
+			start=1
+			end=5
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.02234816551208496
+    ----------------------------------------
+    
+    Timestamp: 1652620193.85635
+    Accessed Time: 2022-05-15 23:09:53.856350
+    Client: 127.0.0.1:56684
+    
+    Request: GET /v1/updates/
+    Request Query Param: 
+			location=
+			category=mask,Others,tracing,policies
+			start=1
+			end=5
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.02250814437866211
+    ----------------------------------------
+    
+    Timestamp: 1652620193.883766
+    Accessed Time: 2022-05-15 23:09:53.883766
+    Client: 127.0.0.1:56680
+    
+    Request: GET /v1/users/saved
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.008046150207519531
+    ----------------------------------------
+    
+    Timestamp: 1652620194.905671
+    Accessed Time: 2022-05-15 23:09:54.905671
+    Client: 127.0.0.1:56680
+    
+    Request: GET /v1/cases
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 307
+    Process Time: 0.00041604042053222656
+    ----------------------------------------
+    
+    Timestamp: 1652620194.934304
+    Accessed Time: 2022-05-15 23:09:54.934304
+    Client: 127.0.0.1:56680
+    
+    Request: GET /v1/cases/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.31735992431640625
+    ----------------------------------------
+    
+    Timestamp: 1652620206.753038
+    Accessed Time: 2022-05-15 23:10:06.753038
+    Client: 127.0.0.1:56686
+    
+    Request: GET /v1/locations/BE
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.021218061447143555
+    ----------------------------------------
+    
+    Timestamp: 1652620206.820595
+    Accessed Time: 2022-05-15 23:10:06.820595
+    Client: 127.0.0.1:56686
+    
+    Request: GET /v1/users/saved
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.007910013198852539
+    ----------------------------------------
+    
+    Timestamp: 1652620208.135789
+    Accessed Time: 2022-05-15 23:10:08.135789
+    Client: 127.0.0.1:56692
+    
+    Request: GET /v1/locations/BE/safety
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.009485006332397461
+    ----------------------------------------
+    
+    Timestamp: 1652620208.151271
+    Accessed Time: 2022-05-15 23:10:08.151271
+    Client: 127.0.0.1:56686
+    
+    Request: GET /v1/locations/BE
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.013923883438110352
+    ----------------------------------------
+    
+    Timestamp: 1652620223.129642
+    Accessed Time: 2022-05-15 23:10:23.129642
+    Client: 127.0.0.1:56694
+    
+    Request: GET /v1/locations/BE
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.023225069046020508
+    ----------------------------------------
+    
+    Timestamp: 1652620223.441826
+    Accessed Time: 2022-05-15 23:10:23.441826
+    Client: 127.0.0.1:56698
+    
+    Request: GET /v1/locations/BE/travel
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.02219080924987793
+    ----------------------------------------
+    
+    Timestamp: 1652620223.463813
+    Accessed Time: 2022-05-15 23:10:23.463813
+    Client: 127.0.0.1:56694
+    
+    Request: OPTIONS /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0011088848114013672
+    ----------------------------------------
+    
+    Timestamp: 1652620223.468541
+    Accessed Time: 2022-05-15 23:10:23.468541
+    Client: 127.0.0.1:56694
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.053640127182006836
+    ----------------------------------------
+    
+    Timestamp: 1652620331.763778
+    Accessed Time: 2022-05-15 23:12:11.763778
+    Client: 127.0.0.1:56708
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.06444501876831055
+    ----------------------------------------
+    
+    Timestamp: 1652620469.704113
+    Accessed Time: 2022-05-15 23:14:29.704113
+    Client: 127.0.0.1:56724
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.0498509407043457
+    ----------------------------------------
+    
+    Timestamp: 1652620469.756463
+    Accessed Time: 2022-05-15 23:14:29.756463
+    Client: 127.0.0.1:56724
+    
+    Request: OPTIONS /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.00026988983154296875
+    ----------------------------------------
+    
+    Timestamp: 1652620469.759527
+    Accessed Time: 2022-05-15 23:14:29.759527
+    Client: 127.0.0.1:56724
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.04998493194580078
+    ----------------------------------------
+    
+    Timestamp: 1652620469.812492
+    Accessed Time: 2022-05-15 23:14:29.812492
+    Client: 127.0.0.1:56724
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 1.182812213897705
+    ----------------------------------------
+    
+    Timestamp: 1652620470.995245
+    Accessed Time: 2022-05-15 23:14:30.995245
+    Client: 127.0.0.1:56728
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.04758310317993164
+    ----------------------------------------
+    
+    Timestamp: 1652620471.045768
+    Accessed Time: 2022-05-15 23:14:31.045768
+    Client: 127.0.0.1:56728
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.049440860748291016
+    ----------------------------------------
+    
+    Timestamp: 1652620479.453408
+    Accessed Time: 2022-05-15 23:14:39.453408
+    Client: 127.0.0.1:56730
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 1.0702629089355469
+    ----------------------------------------
+    
+    Timestamp: 1652620533.201196
+    Accessed Time: 2022-05-15 23:15:33.201196
+    Client: 127.0.0.1:56748
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.7614920139312744
+    ----------------------------------------
+    
+    Timestamp: 1652620533.20127
+    Accessed Time: 2022-05-15 23:15:33.201270
+    Client: 127.0.0.1:56750
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7618238925933838
+    ----------------------------------------
+    
+    Timestamp: 1652620538.274346
+    Accessed Time: 2022-05-15 23:15:38.274346
+    Client: 127.0.0.1:56748
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7018508911132812
+    ----------------------------------------
+    
+    Timestamp: 1652620585.381487
+    Accessed Time: 2022-05-15 23:16:25.381487
+    Client: 127.0.0.1:56754
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.04648709297180176
+    ----------------------------------------
+    
+    Timestamp: 1652620585.430015
+    Accessed Time: 2022-05-15 23:16:25.430015
+    Client: 127.0.0.1:56754
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7023739814758301
+    ----------------------------------------
+    
+    Timestamp: 1652620599.527364
+    Accessed Time: 2022-05-15 23:16:39.527364
+    Client: 127.0.0.1:56762
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.04765605926513672
+    ----------------------------------------
+    
+    Timestamp: 1652620602.959558
+    Accessed Time: 2022-05-15 23:16:42.959558
+    Client: 127.0.0.1:56762
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7105100154876709
+    ----------------------------------------
+    
+    Timestamp: 1652620663.137224
+    Accessed Time: 2022-05-15 23:17:43.137224
+    Client: 127.0.0.1:56774
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 1.1713111400604248
+    ----------------------------------------
+    
+    Timestamp: 1652620663.137534
+    Accessed Time: 2022-05-15 23:17:43.137534
+    Client: 127.0.0.1:56776
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 1.1713860034942627
+    ----------------------------------------
+    
+    Timestamp: 1652620677.233568
+    Accessed Time: 2022-05-15 23:17:57.233568
+    Client: 127.0.0.1:56780
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.052358150482177734
+    ----------------------------------------
+    
+    Timestamp: 1652620677.292663
+    Accessed Time: 2022-05-15 23:17:57.292663
+    Client: 127.0.0.1:56780
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7217409610748291
+    ----------------------------------------
+    
+    Timestamp: 1652620714.394951
+    Accessed Time: 2022-05-15 23:18:34.394951
+    Client: 127.0.0.1:56784
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.048401832580566406
+    ----------------------------------------
+    
+    Timestamp: 1652620714.445941
+    Accessed Time: 2022-05-15 23:18:34.445941
+    Client: 127.0.0.1:56784
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7115161418914795
+    ----------------------------------------
+    
+    Timestamp: 1652620716.385593
+    Accessed Time: 2022-05-15 23:18:36.385593
+    Client: 127.0.0.1:56784
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.7550051212310791
+    ----------------------------------------
+    
+    Timestamp: 1652620716.444457
+    Accessed Time: 2022-05-15 23:18:36.444457
+    Client: 127.0.0.1:56792
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.6971149444580078
+    ----------------------------------------
+    
+    Timestamp: 1652620721.66407
+    Accessed Time: 2022-05-15 23:18:41.664070
+    Client: 127.0.0.1:56792
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.7672121524810791
+    ----------------------------------------
+    
+    Timestamp: 1652620721.715224
+    Accessed Time: 2022-05-15 23:18:41.715224
+    Client: 127.0.0.1:56784
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7171170711517334
+    ----------------------------------------
+    
+    Timestamp: 1652620725.811453
+    Accessed Time: 2022-05-15 23:18:45.811453
+    Client: 127.0.0.1:56784
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7729659080505371
+    ----------------------------------------
+    
+    Timestamp: 1652620757.7438
+    Accessed Time: 2022-05-15 23:19:17.743800
+    Client: 127.0.0.1:56804
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.7818679809570312
+    ----------------------------------------
+    
+    Timestamp: 1652620757.799808
+    Accessed Time: 2022-05-15 23:19:17.799808
+    Client: 127.0.0.1:56806
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.726409912109375
+    ----------------------------------------
+    
+    Timestamp: 1652620760.34225
+    Accessed Time: 2022-05-15 23:19:20.342250
+    Client: 127.0.0.1:56806
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.70340895652771
+    ----------------------------------------
+    
+    Timestamp: 1652620778.439033
+    Accessed Time: 2022-05-15 23:19:38.439033
+    Client: 127.0.0.1:56810
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.06527996063232422
+    ----------------------------------------
+    
+    Timestamp: 1652620778.506281
+    Accessed Time: 2022-05-15 23:19:38.506281
+    Client: 127.0.0.1:56810
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7344300746917725
+    ----------------------------------------
+    
+    Timestamp: 1652620796.414785
+    Accessed Time: 2022-05-15 23:19:56.414785
+    Client: 127.0.0.1:56820
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.04949498176574707
+    ----------------------------------------
+    
+    Timestamp: 1652620796.466591
+    Accessed Time: 2022-05-15 23:19:56.466591
+    Client: 127.0.0.1:56820
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7087841033935547
+    ----------------------------------------
+    
+    Timestamp: 1652620806.419097
+    Accessed Time: 2022-05-15 23:20:06.419097
+    Client: 127.0.0.1:56826
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.057723045349121094
+    ----------------------------------------
+    
+    Timestamp: 1652620806.479033
+    Accessed Time: 2022-05-15 23:20:06.479033
+    Client: 127.0.0.1:56826
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7050299644470215
+    ----------------------------------------
+    
+    Timestamp: 1652620809.38645
+    Accessed Time: 2022-05-15 23:20:09.386450
+    Client: 127.0.0.1:56826
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.7457399368286133
+    ----------------------------------------
+    
+    Timestamp: 1652620809.435169
+    Accessed Time: 2022-05-15 23:20:09.435169
+    Client: 127.0.0.1:56836
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.6978499889373779
+    ----------------------------------------
+    
+    Timestamp: 1652620816.458179
+    Accessed Time: 2022-05-15 23:20:16.458179
+    Client: 127.0.0.1:56842
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7190101146697998
+    ----------------------------------------
+    
+    Timestamp: 1652620937.688851
+    Accessed Time: 2022-05-15 23:22:17.688851
+    Client: 127.0.0.1:56852
+    
+    Request: OPTIONS /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0004429817199707031
+    ----------------------------------------
+    
+    Timestamp: 1652620937.692471
+    Accessed Time: 2022-05-15 23:22:17.692471
+    Client: 127.0.0.1:56852
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7569448947906494
+    ----------------------------------------
+    
+    Timestamp: 1652620938.399198
+    Accessed Time: 2022-05-15 23:22:18.399198
+    Client: 127.0.0.1:56854
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.05127406120300293
+    ----------------------------------------
+    
+    Timestamp: 1652620944.384855
+    Accessed Time: 2022-05-15 23:22:24.384855
+    Client: 127.0.0.1:56858
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.048413991928100586
+    ----------------------------------------
+    
+    Timestamp: 1652620944.435603
+    Accessed Time: 2022-05-15 23:22:24.435603
+    Client: 127.0.0.1:56858
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7286190986633301
+    ----------------------------------------
+    
+    Timestamp: 1652620953.378863
+    Accessed Time: 2022-05-15 23:22:33.378863
+    Client: 127.0.0.1:56862
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.0558469295501709
+    ----------------------------------------
+    
+    Timestamp: 1652620953.438357
+    Accessed Time: 2022-05-15 23:22:33.438357
+    Client: 127.0.0.1:56862
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7172729969024658
+    ----------------------------------------
+    
+    Timestamp: 1652620957.643864
+    Accessed Time: 2022-05-15 23:22:37.643864
+    Client: 127.0.0.1:56862
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.8001961708068848
+    ----------------------------------------
+    
+    Timestamp: 1652620957.693695
+    Accessed Time: 2022-05-15 23:22:37.693695
+    Client: 127.0.0.1:56872
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7510759830474854
+    ----------------------------------------
+    
+    Timestamp: 1652621002.72585
+    Accessed Time: 2022-05-15 23:23:22.725850
+    Client: 127.0.0.1:56876
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.06870198249816895
+    ----------------------------------------
+    
+    Timestamp: 1652621002.794343
+    Accessed Time: 2022-05-15 23:23:22.794343
+    Client: 127.0.0.1:56878
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7682149410247803
+    ----------------------------------------
+    
+    Timestamp: 1652621008.777131
+    Accessed Time: 2022-05-15 23:23:28.777131
+    Client: 127.0.0.1:56882
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.05878782272338867
+    ----------------------------------------
+    
+    Timestamp: 1652621008.850919
+    Accessed Time: 2022-05-15 23:23:28.850919
+    Client: 127.0.0.1:56882
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 1.8617329597473145
+    ----------------------------------------
+    
+    Timestamp: 1652621011.188648
+    Accessed Time: 2022-05-15 23:23:31.188648
+    Client: 127.0.0.1:56882
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.9612970352172852
+    ----------------------------------------
+    
+    Timestamp: 1652621031.721734
+    Accessed Time: 2022-05-15 23:23:51.721734
+    Client: 127.0.0.1:56892
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.0498199462890625
+    ----------------------------------------
+    
+    Timestamp: 1652621031.77452
+    Accessed Time: 2022-05-15 23:23:51.774520
+    Client: 127.0.0.1:56892
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7324371337890625
+    ----------------------------------------
+    
+    Timestamp: 1652621055.204204
+    Accessed Time: 2022-05-15 23:24:15.204204
+    Client: 127.0.0.1:56898
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.04668903350830078
+    ----------------------------------------
+    
+    Timestamp: 1652621055.253063
+    Accessed Time: 2022-05-15 23:24:15.253063
+    Client: 127.0.0.1:56898
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 1.493049144744873
+    ----------------------------------------
+    
+    Timestamp: 1652621145.692675
+    Accessed Time: 2022-05-15 23:25:45.692675
+    Client: 127.0.0.1:56918
+    
+    Request: OPTIONS /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0511469841003418
+    ----------------------------------------
+    
+    Timestamp: 1652621145.692937
+    Accessed Time: 2022-05-15 23:25:45.692937
+    Client: 127.0.0.1:56916
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.05149412155151367
+    ----------------------------------------
+    
+    Timestamp: 1652621145.747357
+    Accessed Time: 2022-05-15 23:25:45.747357
+    Client: 127.0.0.1:56918
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 1.0367660522460938
+    ----------------------------------------
+    
+    Timestamp: 1652621152.697443
+    Accessed Time: 2022-05-15 23:25:52.697443
+    Client: 127.0.0.1:56920
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.054392099380493164
+    ----------------------------------------
+    
+    Timestamp: 1652621152.762723
+    Accessed Time: 2022-05-15 23:25:52.762723
+    Client: 127.0.0.1:56920
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7259640693664551
+    ----------------------------------------
+    
+    Timestamp: 1652621197.761287
+    Accessed Time: 2022-05-15 23:26:37.761287
+    Client: 127.0.0.1:56926
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.09037399291992188
+    ----------------------------------------
+    
+    Timestamp: 1652621197.854734
+    Accessed Time: 2022-05-15 23:26:37.854734
+    Client: 127.0.0.1:56926
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7357151508331299
+    ----------------------------------------
+    
+    Timestamp: 1652621268.721823
+    Accessed Time: 2022-05-15 23:27:48.721823
+    Client: 127.0.0.1:56942
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.7667880058288574
+    ----------------------------------------
+    
+    Timestamp: 1652621268.769622
+    Accessed Time: 2022-05-15 23:27:48.769622
+    Client: 127.0.0.1:56944
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.719857931137085
+    ----------------------------------------
+    
+    Timestamp: 1652621277.371875
+    Accessed Time: 2022-05-15 23:27:57.371875
+    Client: 127.0.0.1:56948
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.05168294906616211
+    ----------------------------------------
+    
+    Timestamp: 1652621277.425793
+    Accessed Time: 2022-05-15 23:27:57.425793
+    Client: 127.0.0.1:56948
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.9357199668884277
+    ----------------------------------------
+    
+    Timestamp: 1652621284.677583
+    Accessed Time: 2022-05-15 23:28:04.677583
+    Client: 127.0.0.1:56952
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.05897712707519531
+    ----------------------------------------
+    
+    Timestamp: 1652621284.73904
+    Accessed Time: 2022-05-15 23:28:04.739040
+    Client: 127.0.0.1:56952
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7310280799865723
+    ----------------------------------------
+    
+    Timestamp: 1652621338.182103
+    Accessed Time: 2022-05-15 23:28:58.182103
+    Client: 127.0.0.1:56962
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.0551600456237793
+    ----------------------------------------
+    
+    Timestamp: 1652621338.239318
+    Accessed Time: 2022-05-15 23:28:58.239318
+    Client: 127.0.0.1:56962
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7278411388397217
+    ----------------------------------------
+    
+    Timestamp: 1652621352.448874
+    Accessed Time: 2022-05-15 23:29:12.448874
+    Client: 127.0.0.1:56968
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.057678937911987305
+    ----------------------------------------
+    
+    Timestamp: 1652621352.513986
+    Accessed Time: 2022-05-15 23:29:12.513986
+    Client: 127.0.0.1:56968
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.8607778549194336
+    ----------------------------------------
+    
+    Timestamp: 1652621359.848235
+    Accessed Time: 2022-05-15 23:29:19.848235
+    Client: 127.0.0.1:56978
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.05224800109863281
+    ----------------------------------------
+    
+    Timestamp: 1652621359.902802
+    Accessed Time: 2022-05-15 23:29:19.902802
+    Client: 127.0.0.1:56978
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7402820587158203
+    ----------------------------------------
+    
+    Timestamp: 1652621443.755489
+    Accessed Time: 2022-05-15 23:30:43.755489
+    Client: 127.0.0.1:56992
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7793920040130615
+    ----------------------------------------
+    
+    Timestamp: 1652621443.755861
+    Accessed Time: 2022-05-15 23:30:43.755861
+    Client: 127.0.0.1:56990
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.7801508903503418
+    ----------------------------------------
+    
+    Timestamp: 1652621474.388368
+    Accessed Time: 2022-05-15 23:31:14.388368
+    Client: 127.0.0.1:56996
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.0465850830078125
+    ----------------------------------------
+    
+    Timestamp: 1652621474.437012
+    Accessed Time: 2022-05-15 23:31:14.437012
+    Client: 127.0.0.1:56996
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7064840793609619
+    ----------------------------------------
+    
+    Timestamp: 1652621538.498331
+    Accessed Time: 2022-05-15 23:32:18.498331
+    Client: 127.0.0.1:57002
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.748668909072876
+    ----------------------------------------
+    
+    Timestamp: 1652621563.875496
+    Accessed Time: 2022-05-15 23:32:43.875496
+    Client: 127.0.0.1:57006
+    
+    Request: OPTIONS /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0004341602325439453
+    ----------------------------------------
+    
+    Timestamp: 1652621563.87885
+    Accessed Time: 2022-05-15 23:32:43.878850
+    Client: 127.0.0.1:57006
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.9810950756072998
+    ----------------------------------------
+    
+    Timestamp: 1652621564.859692
+    Accessed Time: 2022-05-15 23:32:44.859692
+    Client: 127.0.0.1:57016
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.07192301750183105
+    ----------------------------------------
+    
+    Timestamp: 1652621566.9274
+    Accessed Time: 2022-05-15 23:32:46.927400
+    Client: 127.0.0.1:57016
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7176799774169922
+    ----------------------------------------
+    
+    Timestamp: 1652621631.681278
+    Accessed Time: 2022-05-15 23:33:51.681278
+    Client: 127.0.0.1:57028
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.04894399642944336
+    ----------------------------------------
+    
+    Timestamp: 1652621640.394291
+    Accessed Time: 2022-05-15 23:34:00.394291
+    Client: 127.0.0.1:57030
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.04952812194824219
+    ----------------------------------------
+    
+    Timestamp: 1652621644.589436
+    Accessed Time: 2022-05-15 23:34:04.589436
+    Client: 127.0.0.1:57030
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7236919403076172
+    ----------------------------------------
+    
+    Timestamp: 1652621684.68641
+    Accessed Time: 2022-05-15 23:34:44.686410
+    Client: 127.0.0.1:57038
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.7874751091003418
+    ----------------------------------------
+    
+    Timestamp: 1652621684.686482
+    Accessed Time: 2022-05-15 23:34:44.686482
+    Client: 127.0.0.1:57040
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7876801490783691
+    ----------------------------------------
+    
+    Timestamp: 1652621769.702905
+    Accessed Time: 2022-05-15 23:36:09.702905
+    Client: 127.0.0.1:57060
+    
+    Request: OPTIONS /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.07249116897583008
+    ----------------------------------------
+    
+    Timestamp: 1652621769.703244
+    Accessed Time: 2022-05-15 23:36:09.703244
+    Client: 127.0.0.1:57058
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.07280302047729492
+    ----------------------------------------
+    
+    Timestamp: 1652621769.778765
+    Accessed Time: 2022-05-15 23:36:09.778765
+    Client: 127.0.0.1:57060
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 1.051603078842163
+    ----------------------------------------
+    
+    Timestamp: 1652621791.378565
+    Accessed Time: 2022-05-15 23:36:31.378565
+    Client: 127.0.0.1:57062
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.04744386672973633
+    ----------------------------------------
+    
+    Timestamp: 1652621791.427804
+    Accessed Time: 2022-05-15 23:36:31.427804
+    Client: 127.0.0.1:57062
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7037351131439209
+    ----------------------------------------
+    
+    Timestamp: 1652621821.585733
+    Accessed Time: 2022-05-15 23:37:01.585733
+    Client: 127.0.0.1:57070
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7949650287628174
+    ----------------------------------------
+    
+    Timestamp: 1652621859.754124
+    Accessed Time: 2022-05-15 23:37:39.754124
+    Client: 127.0.0.1:57078
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.8096840381622314
+    ----------------------------------------
+    
+    Timestamp: 1652621859.810673
+    Accessed Time: 2022-05-15 23:37:39.810673
+    Client: 127.0.0.1:57080
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7556970119476318
+    ----------------------------------------
+    
+    Timestamp: 1652621872.370903
+    Accessed Time: 2022-05-15 23:37:52.370903
+    Client: 127.0.0.1:57084
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7105119228363037
+    ----------------------------------------
+    
+    Timestamp: 1652621887.706116
+    Accessed Time: 2022-05-15 23:38:07.706116
+    Client: 127.0.0.1:57088
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.8286831378936768
+    ----------------------------------------
+    
+    Timestamp: 1652621887.70625
+    Accessed Time: 2022-05-15 23:38:07.706250
+    Client: 127.0.0.1:57090
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.8295519351959229
+    ----------------------------------------
+    
+    Timestamp: 1652621910.385848
+    Accessed Time: 2022-05-15 23:38:30.385848
+    Client: 127.0.0.1:57094
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.049974918365478516
+    ----------------------------------------
+    
+    Timestamp: 1652621910.438557
+    Accessed Time: 2022-05-15 23:38:30.438557
+    Client: 127.0.0.1:57094
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7058072090148926
+    ----------------------------------------
+    
+    Timestamp: 1652621986.889327
+    Accessed Time: 2022-05-15 23:39:46.889327
+    Client: 127.0.0.1:57106
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7276968955993652
+    ----------------------------------------
+    
+    Timestamp: 1652622063.08843
+    Accessed Time: 2022-05-15 23:41:03.088430
+    Client: 127.0.0.1:57116
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.7747340202331543
+    ----------------------------------------
+    
+    Timestamp: 1652622063.149327
+    Accessed Time: 2022-05-15 23:41:03.149327
+    Client: 127.0.0.1:57118
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.714669942855835
+    ----------------------------------------
+    
+    Timestamp: 1652622075.569926
+    Accessed Time: 2022-05-15 23:41:15.569926
+    Client: 127.0.0.1:57122
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.788862943649292
+    ----------------------------------------
+    
+    Timestamp: 1652622078.515351
+    Accessed Time: 2022-05-15 23:41:18.515351
+    Client: 127.0.0.1:57122
+    
+    Request: OPTIONS /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Leigonares
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.00040984153747558594
+    ----------------------------------------
+    
+    Timestamp: 1652622078.518357
+    Accessed Time: 2022-05-15 23:41:18.518357
+    Client: 127.0.0.1:57122
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Leigonares
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7643289566040039
+    ----------------------------------------
+    
+    Timestamp: 1652622147.267947
+    Accessed Time: 2022-05-15 23:42:27.267947
+    Client: 127.0.0.1:57132
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.8756370544433594
+    ----------------------------------------
+    
+    Timestamp: 1652622147.332175
+    Accessed Time: 2022-05-15 23:42:27.332175
+    Client: 127.0.0.1:57134
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Leigonares
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.8142969608306885
+    ----------------------------------------
+    
+    Timestamp: 1652622165.227941
+    Accessed Time: 2022-05-15 23:42:45.227941
+    Client: 127.0.0.1:57138
+    
+    Request: OPTIONS /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0003230571746826172
+    ----------------------------------------
+    
+    Timestamp: 1652622165.230851
+    Accessed Time: 2022-05-15 23:42:45.230851
+    Client: 127.0.0.1:57138
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Leigonares
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.752263069152832
+    ----------------------------------------
+    
+    Timestamp: 1652622165.98299
+    Accessed Time: 2022-05-15 23:42:45.982990
+    Client: 127.0.0.1:57144
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.05025792121887207
+    ----------------------------------------
+    
+    Timestamp: 1652622169.717795
+    Accessed Time: 2022-05-15 23:42:49.717795
+    Client: 127.0.0.1:57144
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7831790447235107
+    ----------------------------------------
+    
+    Timestamp: 1652622186.888931
+    Accessed Time: 2022-05-15 23:43:06.888931
+    Client: 127.0.0.1:57146
+    
+    Request: GET /v1/locations/BE
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.014214038848876953
+    ----------------------------------------
+    
+    Timestamp: 1652622186.9327
+    Accessed Time: 2022-05-15 23:43:06.932700
+    Client: 127.0.0.1:57146
+    
+    Request: OPTIONS /v1/users/saved
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.00041103363037109375
+    ----------------------------------------
+    
+    Timestamp: 1652622186.93564
+    Accessed Time: 2022-05-15 23:43:06.935640
+    Client: 127.0.0.1:57146
+    
+    Request: GET /v1/users/saved
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.008874893188476562
+    ----------------------------------------
+    
+    Timestamp: 1652622187.254691
+    Accessed Time: 2022-05-15 23:43:07.254691
+    Client: 127.0.0.1:57146
+    
+    Request: GET /v1/locations/BE
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.013667106628417969
+    ----------------------------------------
+    
+    Timestamp: 1652622187.368925
+    Accessed Time: 2022-05-15 23:43:07.368925
+    Client: 127.0.0.1:57154
+    
+    Request: GET /v1/locations/BE/travel
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.06094098091125488
+    ----------------------------------------
+    
+    Timestamp: 1652622187.379597
+    Accessed Time: 2022-05-15 23:43:07.379597
+    Client: 127.0.0.1:57146
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.05081009864807129
+    ----------------------------------------
+    
+    Timestamp: 1652622192.338176
+    Accessed Time: 2022-05-15 23:43:12.338176
+    Client: 127.0.0.1:57146
+    
+    Request: OPTIONS /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Listeriosis
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.00025200843811035156
+    ----------------------------------------
+    
+    Timestamp: 1652622192.340587
+    Accessed Time: 2022-05-15 23:43:12.340587
+    Client: 127.0.0.1:57146
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Listeriosis
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.6952080726623535
+    ----------------------------------------
+    
+    Timestamp: 1652622196.304354
+    Accessed Time: 2022-05-15 23:43:16.304354
+    Client: 127.0.0.1:57146
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Leigonares
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7656080722808838
+    ----------------------------------------
+    
+    Timestamp: 1652622267.113171
+    Accessed Time: 2022-05-15 23:44:27.113171
+    Client: 127.0.0.1:57160
+    
+    Request: OPTIONS /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Other
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0003979206085205078
+    ----------------------------------------
+    
+    Timestamp: 1652622267.118022
+    Accessed Time: 2022-05-15 23:44:27.118022
+    Client: 127.0.0.1:57160
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Other
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.9018030166625977
+    ----------------------------------------
+    
+    Timestamp: 1652622377.946169
+    Accessed Time: 2022-05-15 23:46:17.946169
+    Client: 127.0.0.1:57172
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 1.2327980995178223
+    ----------------------------------------
+    
+    Timestamp: 1652622377.992689
+    Accessed Time: 2022-05-15 23:46:17.992689
+    Client: 127.0.0.1:57174
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Other
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 1.187162160873413
+    ----------------------------------------
+    
+    Timestamp: 1652622407.394326
+    Accessed Time: 2022-05-15 23:46:47.394326
+    Client: 127.0.0.1:57176
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.051837921142578125
+    ----------------------------------------
+    
+    Timestamp: 1652622407.448289
+    Accessed Time: 2022-05-15 23:46:47.448289
+    Client: 127.0.0.1:57176
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Other
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.8938519954681396
+    ----------------------------------------
+    
+    Timestamp: 1652622415.025705
+    Accessed Time: 2022-05-15 23:46:55.025705
+    Client: 127.0.0.1:57182
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.04877591133117676
+    ----------------------------------------
+    
+    Timestamp: 1652622415.076862
+    Accessed Time: 2022-05-15 23:46:55.076862
+    Client: 127.0.0.1:57182
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Other
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.8571779727935791
+    ----------------------------------------
+    
+    Timestamp: 1652622429.85937
+    Accessed Time: 2022-05-15 23:47:09.859370
+    Client: 127.0.0.1:57190
+    
+    Request: GET /v1/locations/BE
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.0153961181640625
+    ----------------------------------------
+    
+    Timestamp: 1652622429.989938
+    Accessed Time: 2022-05-15 23:47:09.989938
+    Client: 127.0.0.1:57190
+    
+    Request: GET /v1/users/saved
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.008220911026000977
+    ----------------------------------------
+    
+    Timestamp: 1652622430.054171
+    Accessed Time: 2022-05-15 23:47:10.054171
+    Client: 127.0.0.1:57190
+    
+    Request: GET /v1/locations/BE
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.01606583595275879
+    ----------------------------------------
+    
+    Timestamp: 1652622430.270332
+    Accessed Time: 2022-05-15 23:47:10.270332
+    Client: 127.0.0.1:57198
+    
+    Request: GET /v1/locations/BE/travel
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.06251096725463867
+    ----------------------------------------
+    
+    Timestamp: 1652622430.281944
+    Accessed Time: 2022-05-15 23:47:10.281944
+    Client: 127.0.0.1:57190
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.052139997482299805
+    ----------------------------------------
+    
+    Timestamp: 1652622434.265512
+    Accessed Time: 2022-05-15 23:47:14.265512
+    Client: 127.0.0.1:57190
+    
+    Request: OPTIONS /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.00027489662170410156
+    ----------------------------------------
+    
+    Timestamp: 1652622434.26862
+    Accessed Time: 2022-05-15 23:47:14.268620
+    Client: 127.0.0.1:57190
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Influenza A/H5N1
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7157530784606934
+    ----------------------------------------
+    
+    Timestamp: 1652622469.991338
+    Accessed Time: 2022-05-15 23:47:49.991338
+    Client: 127.0.0.1:57208
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Leigonares
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7507750988006592
+    ----------------------------------------
+    
+    Timestamp: 1652622470.741843
+    Accessed Time: 2022-05-15 23:47:50.741843
+    Client: 127.0.0.1:57212
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.061615943908691406
+    ----------------------------------------
+    
+    Timestamp: 1652622470.81259
+    Accessed Time: 2022-05-15 23:47:50.812590
+    Client: 127.0.0.1:57214
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Leigonares
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7410650253295898
+    ----------------------------------------
+    
+    Timestamp: 1652622552.686435
+    Accessed Time: 2022-05-15 23:49:12.686435
+    Client: 127.0.0.1:57224
+    
+    Request: GET /v1/locations/BE
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.013512134552001953
+    ----------------------------------------
+    
+    Timestamp: 1652622552.74389
+    Accessed Time: 2022-05-15 23:49:12.743890
+    Client: 127.0.0.1:57224
+    
+    Request: GET /v1/users/saved
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.008847951889038086
+    ----------------------------------------
+    
+    Timestamp: 1652622552.953146
+    Accessed Time: 2022-05-15 23:49:12.953146
+    Client: 127.0.0.1:57224
+    
+    Request: GET /v1/locations/BE
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.01806497573852539
+    ----------------------------------------
+    
+    Timestamp: 1652622553.068838
+    Accessed Time: 2022-05-15 23:49:13.068838
+    Client: 127.0.0.1:57228
+    
+    Request: GET /v1/locations/BE/travel
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.058936119079589844
+    ----------------------------------------
+    
+    Timestamp: 1652622553.078565
+    Accessed Time: 2022-05-15 23:49:13.078565
+    Client: 127.0.0.1:57224
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.050205230712890625
+    ----------------------------------------
+    
+    Timestamp: 1652622564.370083
+    Accessed Time: 2022-05-15 23:49:24.370083
+    Client: 127.0.0.1:57226
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.04949688911437988
+    ----------------------------------------
+    
+    Timestamp: 1652622580.444688
+    Accessed Time: 2022-05-15 23:49:40.444688
+    Client: 127.0.0.1:57234
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Leigonares
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7726149559020996
+    ----------------------------------------
+    
+    Timestamp: 1652622614.37843
+    Accessed Time: 2022-05-15 23:50:14.378430
+    Client: 127.0.0.1:57238
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.05446314811706543
+    ----------------------------------------
+    
+    Timestamp: 1652622614.435955
+    Accessed Time: 2022-05-15 23:50:14.435955
+    Client: 127.0.0.1:57238
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Leigonares
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7459869384765625
+    ----------------------------------------
+    
+    Timestamp: 1652622625.265952
+    Accessed Time: 2022-05-15 23:50:25.265952
+    Client: 127.0.0.1:57242
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.04784679412841797
+    ----------------------------------------
+    
+    Timestamp: 1652622625.316655
+    Accessed Time: 2022-05-15 23:50:25.316655
+    Client: 127.0.0.1:57242
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Leigonares
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.746178150177002
+    ----------------------------------------
+    
+    Timestamp: 1652622627.712882
+    Accessed Time: 2022-05-15 23:50:27.712882
+    Client: 127.0.0.1:57242
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.7895450592041016
+    ----------------------------------------
+    
+    Timestamp: 1652622627.765193
+    Accessed Time: 2022-05-15 23:50:27.765193
+    Client: 127.0.0.1:57250
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Leigonares
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7378129959106445
+    ----------------------------------------
+    
+    Timestamp: 1652622660.809044
+    Accessed Time: 2022-05-15 23:51:00.809044
+    Client: 127.0.0.1:57260
+    
+    Request: GET /v1/locations/BE/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=BE
+   
+    Response Code: 200
+    Process Time: 0.8229780197143555
+    ----------------------------------------
+    
+    Timestamp: 1652622660.874229
+    Accessed Time: 2022-05-15 23:51:00.874229
+    Client: 127.0.0.1:57262
+    
+    Request: GET /v1/articles/country
+    Request Query Param: 
+			code=BE
+			disease=Leigonares
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.7588479518890381
+    ----------------------------------------
+    

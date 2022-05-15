@@ -80,22 +80,22 @@ export default function DiseaseReportBar({code}) {
         setDiseaseData2(data.news.slice((data.news.length / 2), data.news.length))
       }
       fetchData()
-    } 
+    }
     else {
       async function fetchData2() {
         const data = await getDiseaseArticles(code, disease);
-        if (data.length > 3) {
+        console.log('return', data)
+        if (data.length > 2) {
           setDiseaseData(data.slice(0, (data.length / 2)))
           setDiseaseData2(data.slice((data.length / 2), data.length))
         }
         else {
-          setDiseaseData(data)
-          setDiseaseData2([])
+          setDiseaseData([])
+          setDiseaseData2(data)
         }
       }
-      fetchData2()
+      fetchData2();
     }
-
   }, [disease])
 
   const handleChange = (event) => {
@@ -145,7 +145,8 @@ export default function DiseaseReportBar({code}) {
                           {/* {(new Date(data.date)).toDateString()} */}
                         </Typography>
                         <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
-                            { disease != 'Covid-19' ? data.headline : data.title }
+                            { disease != 'Covid-19' ? (data.headline) : data.title }
+                            {/* { disease != 'Covid-19' ? (data.headline).replace(/PRO\/AH\/EDR>/ig,'') : data.title } */}
                         </Typography>
                         <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { disease != 'Covid-19' ? window.open(data.url) : window.open(data.link) }}>
                           <Typography variant='bodyImportant'>
@@ -158,24 +159,30 @@ export default function DiseaseReportBar({code}) {
                       </CardContent>
                       </Card>
 
-                      <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
-                      <CardContent>
-                        <Typography variant="caption" color="text.secondary">
-                          {/* {(new Date(diseaseData[idx].date)).toDateString()} */}
-                        </Typography>
-                        <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
-                            { disease != 'Covid-19' ? data.headline : diseaseData[idx].title }
-                        </Typography>
-                        <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { disease != 'Covid-19' ? window.open(data.url) : window.open(diseaseData[idx].link) }}>
-                          <Typography variant='bodyImportant'>
-                            Read more
-                          </Typography>
-                        </LightButton>
-                        <Typography variant="caption" color="text.secondary" sx={{display: 'block'}} gutterBottom>
-                          Source: { disease != 'Covid-19' ? 'PROMED' : diseaseData[idx].pub }
-                        </Typography>
-                      </CardContent>
-                      </Card>
+                      {
+                        diseaseData.length < 3 
+                        ? <></>
+                        : <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
+                            <CardContent>
+                              <Typography variant="caption" color="text.secondary">
+                                {/* {(new Date(diseaseData[idx].date)).toDateString()} */}
+                              </Typography>
+                              <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
+                                  { disease != 'Covid-19' ? (data.headline) : diseaseData[idx].title }
+                                  {/* { disease != 'Covid-19' ? (data.headline).replace(/PRO\/AH\/EDR>/ig,'') : diseaseData[idx].title } */}
+                              </Typography>
+                              <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { disease != 'Covid-19' ? window.open(data.url) : window.open(diseaseData[idx].link) }}>
+                                <Typography variant='bodyImportant'>
+                                  Read more
+                                </Typography>
+                              </LightButton>
+                              <Typography variant="caption" color="text.secondary" sx={{display: 'block'}} gutterBottom>
+                                Source: { disease != 'Covid-19' ? 'PROMED' : diseaseData[idx].pub }
+                              </Typography>
+                            </CardContent>
+                            </Card>
+                      }
+
                       </div>
                   )
                 })}

@@ -13,7 +13,6 @@ import Typography from '@mui/material/Typography';
 import CovidStat from "../static/philStats.png"
 import CovidTabs from "../components/Diseases/CovidTabs";
 import DiseaseReportBar from "../components/Diseases/DiseaseReportBar";
-// import DiseaseReportBar from "../components/Home/DiseaseReportBar";
 import NavbarComp from "../components/NavBar";
 import { diseaseRiskColor, diseaseRisk } from "../styles/Theme";
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
@@ -83,25 +82,12 @@ function Covid() {
         <Typography variant="bodyImportant" className="mx-2 mt-1" sx={{color: diseaseRiskColor(data.diseaseRisk)}}>{diseaseRisk(data.diseaseRisk)}</Typography>
       </div>
       <Row className="mt-5">
-          <Col>
-            <Box sx={{ minWidth: 300}}>
-            <FormControl sx={{ minWidth: 300 }}>
-              <Select
-                value={disease}
-                displayEmpty
-                onChange={handleChange}
-                label="."
-              >
-                <MenuItem value={'Covid-19'}><Typography variant="heading2">Covid19</Typography></MenuItem>
-                <MenuItem value={'Dengue'}><Typography variant="heading2">Dengue</Typography></MenuItem>
-                <MenuItem value={'HIV/AIDS'}><Typography variant="heading2">HIV/AIDS</Typography></MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-          </Col>
+        <Col>
+          <Typography variant="heading1">Covid-19</Typography>
+        </Col>
       </Row>
 
-      <Row style={{ paddingTop: '20px' }}>
+      <Row>
         <DiseaseTabs disease={disease}></DiseaseTabs>
       </Row>
 
