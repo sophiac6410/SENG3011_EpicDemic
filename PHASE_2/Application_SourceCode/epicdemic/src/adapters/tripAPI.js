@@ -83,7 +83,7 @@ export const addCityToTrip = async (tripId, name, latitude, longitude, country_c
   }
 }
 
-export const addActivityToCity = async (activityId, cityId, tripId) => {
+export const addActivityToCity = async (activityId, cityId, tripId, name) => {
   try {
     const response = await fetch(`${API_URL.API_URL}/v1/trips/new/activity`, {
       method: 'POST',
@@ -95,6 +95,7 @@ export const addActivityToCity = async (activityId, cityId, tripId) => {
         tripId,
         cityId,
         activityId,
+        name
       }),
     });
     const data = await response.json();
@@ -311,5 +312,25 @@ export const getDestinationPhotos = async (destination, small) => {
     } else {
       return []
     }  
+  }
+}
+
+export const deleteTripCity = async (tripId, cityId) => {
+  try {
+    const response = await fetch(`${API_URL.API_URL}/v1/trips/${tripId}/${cityId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: localStorage.getItem('token')
+      },
+    });
+    const data = await response.json();
+    if (response.status !== 200) {
+      console.log(data)
+      console.log(response)
+    } 
+    console.log(data)
+  } catch (e) {
+      console.log(e)
   }
 }

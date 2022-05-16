@@ -151,6 +151,7 @@ function Trip() {
                 country={cities[key].country_code}
                 city={cities[key]}
                 cityId={key}
+                update={getTrip}
             ></TripCard>)
           )}
         </div>

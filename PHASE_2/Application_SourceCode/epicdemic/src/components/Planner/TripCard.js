@@ -14,7 +14,7 @@ import React, { useState, useEffect } from "react";
 import { GetActivities, GetActivityByIds } from '../../adapters/activityAPI';
 import { useNavigate } from 'react-router';
 import { TailSpin } from "react-loader-spinner"
-import { getActivityByCity } from "../../adapters/tripAPI";
+import { deleteTripCity, getActivityByCity } from "../../adapters/tripAPI";
 
 import ChecklistModal from "./ChecklistModal";
 import { Check } from "@mui/icons-material";
@@ -64,7 +64,7 @@ const responsive = {
   }
 };
 
-function TripCard({name, tripId, latitude, longitude, city, country, cityId}) {
+function TripCard({name, tripId, latitude, longitude, city, country, cityId, update}) {
   //City's Activities
   const [activity, setActivity] = React.useState([])
   //User's Activities in this city
@@ -92,6 +92,10 @@ function TripCard({name, tripId, latitude, longitude, city, country, cityId}) {
         setLoading(false)
       });
     }
+  }
+  const removeCity = async function() {
+    deleteTripCity(tripId, cityId)
+    update()
   }
   const updateActivity = async function() {
     setLoading(true)
@@ -151,7 +155,7 @@ function TripCard({name, tripId, latitude, longitude, city, country, cityId}) {
         </div>
         <div className="d-flex flex-row">
           <TealBotton onClick={goToTravel}>View travel details</TealBotton>
-          <IconButton>
+          <IconButton onClick={removeCity}>
             <DeleteOutline color="teal"></DeleteOutline>
           </IconButton>
         </div>
