@@ -36,11 +36,13 @@ import { ConstructionOutlined, Margin, TripOriginOutlined } from '@mui/icons-mat
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-const { allCountries } = require('./CountryField');
-
 import InputField from '../InputField';
 import { Field } from '../Form'
 import { addMember, removeMember, getMembers, getTripOwner, getDestinationPhotos } from '../../adapters/tripAPI';
+import ActivityModal from "./ActivityModal";
+
+
+const { allCountries } = require('./CountryField');
 
 const style = {
   position: 'absolute',
@@ -70,23 +72,6 @@ const styleTwo = {
   borderRadius: "30px",
   boxShadow: 24,
   pb: 4,
-  backgroundColor: "#EEF0F2",
-  display: "flex",
-  flexDirection: "column",
-  paddingBottom: "80px",
-};
-
-const styleThree = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: "1000px",
-  hight: "1000px",
-  bgcolor: 'background.paper',
-  borderRadius: "30px",
-  boxShadow: 24,
-  p: 4,
   backgroundColor: "#EEF0F2",
   display: "flex",
   flexDirection: "column",
@@ -132,26 +117,6 @@ const shareMemberStyle = {
   backgroundColor: "#EEF0F2",
   display: "flex",
   flexDirection: "column",
-};
-
-const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 1024 },
-    items: 1,
-  },
-  desktop: {
-    breakpoint: { max: 2000, min: 1024 },
-    items: 1,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 1,
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1
-  }
 };
 
 function StepOne({isOpen, onClose, onNext}) {
@@ -254,7 +219,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
   const [lat, setLat] = React.useState(0.0000)
   const [long, setLong] = React.useState(0.0000)
   const [tripId, setTripId] = React.useState(1);
-  const [cityId, setCityId] = React.useState(1);
+  const [cityId, setCityId] = React.useState(0);
   const [back, setBack] = React.useState(false);
   const [added, setAdded] = React.useState(false);
   const [activity, setActivity] = React.useState([])
@@ -282,12 +247,17 @@ function StepTwo({onClose, name, start, end, travellers}) {
       setCityId(data.id);
       setAdded(!added)
     }
-    
-    
   };
+
+  const handleRemove = async () => {
+    //TODO
+    console.log("unsave City")
+  };
+
   const handleClose = () => {
     onClose()
   };
+  
   const handleBack = () => {
     setOpen(false);
     setCountry(null);
@@ -519,7 +489,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
                   </div>
                   { added ? (
                     <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
-                    <IconButton onClick={handleAdd}>
+                    <IconButton onClick={handleRemove}>
                       <CheckCircleIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></CheckCircleIcon>
                     </IconButton>
                     <Typography variant='caption' className='color-medium-teal'>City Added!</Typography>
@@ -532,12 +502,6 @@ function StepTwo({onClose, name, start, end, travellers}) {
                     <Typography variant='caption' className='color-medium-teal'>Add to Trip</Typography>
                   </div>
                   )}
-                  {/* <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
-                    <IconButton>
-                      <LocalActivityIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></LocalActivityIcon>
-                    </IconButton>
-                    <Typography variant='caption' className='color-medium-teal'>View activities</Typography>
-                  </div> */}
                   <ActivityModal fromTrip={false} tripId={tripId} activities={activity} city={city}></ActivityModal>
                 </div>
               ) : (
@@ -562,87 +526,6 @@ function StepTwo({onClose, name, start, end, travellers}) {
             ) : (
               <div></div>
             )}
-        </Box>
-      </Modal>
-    </React.Fragment>
-  )
-}
-
-
-function ActivityModal({fromTrip, activities, tripId, city, updateActivity}) {
-  const [isOpen, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-    setStepThree(false)
-  };
-
-  const handleBack = () => {
-    setOpen(false)
-    setStepThree(false)
-    updateActivity()
-  }
-  const [stepThree, setStepThree] = React.useState(false)
-
-  const randomGenerator = () => {
-    setStepThree(true)
-  }
-
-  let navigate = useNavigate()
-  const saveTrip = () => {
-    navigate(`/trip/${tripId}`)
-  }
-
-  return(
-    <React.Fragment>
-      {fromTrip ? (
-        <div className='d-flex flex-row align-items-center me-2'>
-        <IconButton onClick={handleOpen}>
-          <LocalActivityIcon color='teal'></LocalActivityIcon>
-        </IconButton>
-        <Typography variant='caption' className='color-medium-teal' sx={{cursor: 'pointer'}} onClick={handleOpen}>View activities</Typography>
-        </div>
-      ): (
-        <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", width:"120px"}}>
-          <IconButton onClick={handleOpen}>
-            <LocalActivityIcon sx={{marginTop: "10px", marginRight: "5px"}} color='teal' fontSize='large'></LocalActivityIcon>
-          </IconButton>
-          <Typography variant='caption' className='color-medium-teal'>View activities</Typography>
-        </div>
-      )}
-      <Modal
-        open={isOpen}
-      >
-        <Box sx={styleThree}>
-          <div style={{display: "flex", justifyContent: "end", flexDirection: "row", alignItems: "center", paddingBottom: "20px"}}>
-            <IconButton onClick={handleBack}>
-              <CloseIcon color='teal' sx={{marginTop: "10px", marginRight: "5px"}} fontSize="small"></CloseIcon>
-            </IconButton>
-            {/* <Typography variant='body' className='color-medium-teal mt-2'>Back</Typography> */}
-          </div>
-          <Typography variant="heading2" className='color-dark-teal text-center'>
-            Things to do
-          </Typography>
-          <Carousel 
-            responsive={responsive} 
-            // containerClass="location-carousel"
-            autoPlay={false}
-            arrows={true}
-            shouldResetAutoplay={false}
-            itemClass="location-card"
-            centerMode={true}
-            // className="bg-light-teal"
-          >
-            { activities !== [] && activities !== {} ? (
-              activities.map((activity, id) => {
-                if(activity !== null && city !== null) {
-                  return <ActivityCard key={activity.id} activity={activity} cityId={city.id} tripId={tripId}></ActivityCard>
-                }
-              })
-            ): (
-              <div></div>
-            )
-            }
-          </Carousel>
         </Box>
       </Modal>
     </React.Fragment>
@@ -693,112 +576,4 @@ function RestrictBox({name, email, owner, trigger, setTrigger, id, type}){
 	);
 }
 
-
-function AddMember({isOpen, onClose , tripId}) {
-  const teal = "#0F83A0";
-  const [email, setEmail] = useState('')
-  const [owner, setOwner] = useState({})
-  const [members, setMembers] = useState([])
-  const [trigger, setTrigger] = useState(0)
-  const [memberType, setMemberType] = useState('Viewer')
-  const add_member = async () => {
-    console.log(email)
-    const data = await addMember(email, tripId, memberType);
-    console.log(data)
-    setEmail('')
-    setTrigger(trigger + 1)
-  }
-
-  useEffect(() => {
-    async function getOwner() {
-      const data = await getTripOwner(tripId)
-      if(data !== undefined) {
-        setOwner(data)
-        console.log('owner', data);
-      }
-    }
-    async function updateMembers() {
-      const data = await getMembers(tripId)
-      if(data != undefined) {
-        setMembers(data)
-        console.log('members', data)
-      }
-    }
-    getOwner()
-    updateMembers()
-  }, [trigger])
-
-  return(
-    <Modal
-      open={isOpen}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box sx={shareMemberStyle}>
-        <div style={{display: "flex", justifyContent: "end", flexDirection: "row", alignItems: "center"}}>
-          <IconButton onClick={onClose}>
-            <CloseIcon color='teal' fontSize="small"></CloseIcon>
-          </IconButton>
-        </div>
-        <Typography variant="heading2" className='color-dark-teal'>
-          Share your trip with other users
-        </Typography>
-        <Box className="justify-content-between" sx={{ display: 'flex', marginLeft: '80px', marginRight: '80px' }}>
-          <div className="border-radius-med bg-white px-5 mt-2 justify-content-between align-items-center d-flex" style={{width: '85%', height: '65px'}}>
-            <input type="email" onChange={e => setEmail(e.target.value)} placeholder="Enter an email" value={email}
-              style={{border: 'none', width: '80%', margin: 0}}
-            />
-            <FormControl size="small" sx={{m: 0, p: 0}}>
-              <Select
-                label="."
-                value={memberType}
-                onChange={(event)=>{setMemberType(event.target.value)}}
-              >
-                <MenuItem value={'Viewer'}>Viewer</MenuItem>
-                <MenuItem value={'Editor'}>Editor</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-          {/* <Field >
-          </Field> */}
-          {/* <InputField type="email" change={} placeholder="Enter your email"></InputField> */}
-          <TealBotton onClick={add_member} sx={{marginTop: '20px', marginBottom: '20px'}}> Share </TealBotton>
-        </Box>
-
-        <div className="mt-2" style={{overflow: 'auto', height: '300px'}}>
-          <RestrictBox
-            email={owner.email}
-            name={owner.name}
-            owner={true}
-            trigger={trigger}
-            setTrigger={setTrigger}
-            id={tripId}
-          />
-          { members.map((mem, idx) => {
-            console.log(mem)
-            return (
-              <RestrictBox
-                key={idx}
-                email={mem.email}
-                name={mem.name}
-                type={mem.type}
-                owner={false}
-                trigger={trigger}
-                setTrigger={setTrigger}
-                id={tripId}
-              />  
-            )
-          })}
-        </div>
-
-        <Box sx={{display: "flex", flexDirection: "row", marginTop: "30px", justifyContent: 'center'}}>
-          <Col md={6}>
-            <TealBotton onClick={onClose}>Done</TealBotton>
-          </Col>
-        </Box>
-      </Box>
-    </Modal>
-  )
-}
-
-export {StepOne, StepTwo, ActivityModal, AddMember}
+export {StepOne, StepTwo, ActivityModal}

@@ -10,7 +10,6 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import FlightIcon from '@mui/icons-material/Flight';
 import BucketCard from "./BucketCard";
 import Carousel from "react-multi-carousel";
-import { ActivityModal } from "./PlannerModal";
 import React, { useState, useEffect } from "react";
 import { GetActivities, GetActivityByIds } from '../../adapters/activityAPI';
 import { useNavigate } from 'react-router';
@@ -20,6 +19,7 @@ import { getActivityByCity } from "../../adapters/tripAPI";
 import ChecklistModal from "./ChecklistModal";
 import { Check } from "@mui/icons-material";
 import { getTripCityById } from './tripApiCalls';
+import ActivityModal from "./ActivityModal";
 
 const cardStyle = {
   marginTop: "25px",

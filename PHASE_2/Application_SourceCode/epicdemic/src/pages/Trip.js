@@ -13,8 +13,8 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router';
 import { getTripById } from '../adapters/tripAPI';
 import React, { useEffect } from 'react';
-import {AddMember} from '../components/Planner/PlannerModal'
 import { setDate } from "date-fns";
+import AddMember from "../components/Planner/AddMember";
 
 function Trip() {
   const { tripId } = useParams()
