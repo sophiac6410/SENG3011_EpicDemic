@@ -11656,3 +11656,153 @@
     Process Time: 0.006822824478149414
     ----------------------------------------
     
+    Timestamp: 1652694989.551931
+    Accessed Time: 2022-05-16 19:56:29.551931
+    Client: 127.0.0.1:64304
+    
+    Request: POST /v1/trips/new/activity
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 422
+    Process Time: 0.0010280609130859375
+    ----------------------------------------
+    
+    Timestamp: 1652695017.039843
+    Accessed Time: 2022-05-16 19:56:57.039843
+    Client: 127.0.0.1:64441
+    
+    Request: OPTIONS /v1/trips/135/owner
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.1307539939880371
+    ----------------------------------------
+    
+    Timestamp: 1652695017.040055
+    Accessed Time: 2022-05-16 19:56:57.040055
+    Client: 127.0.0.1:64442
+    
+    Request: OPTIONS /v1/trips/135/members
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.1311788558959961
+    ----------------------------------------
+    
+    Timestamp: 1652695017.040122
+    Accessed Time: 2022-05-16 19:56:57.040122
+    Client: 127.0.0.1:64444
+    
+    Request: POST /v1/trips/new/activity
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.13121485710144043
+    ----------------------------------------
+    
+    Timestamp: 1652695017.171444
+    Accessed Time: 2022-05-16 19:56:57.171444
+    Client: 127.0.0.1:64447
+    
+    Request: OPTIONS /v1/trips/135
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0013420581817626953
+    ----------------------------------------
+    
+    Timestamp: 1652695017.171471
+    Accessed Time: 2022-05-16 19:56:57.171471
+    Client: 127.0.0.1:64448
+    
+    Request: OPTIONS /v1/trips/135
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0015549659729003906
+    ----------------------------------------
+    
+    Timestamp: 1652695017.178194
+    Accessed Time: 2022-05-16 19:56:57.178194
+    Client: 127.0.0.1:64444
+    
+    Request: GET /v1/trips/135/owner
+    Request Query Param: None
+    Request Path Param: 
+			tripId=135
+   
+    Response Code: 200
+    Process Time: 0.18049407005310059
+    ----------------------------------------
+    
+    Timestamp: 1652695017.222892
+    Accessed Time: 2022-05-16 19:56:57.222892
+    Client: 127.0.0.1:64442
+    
+    Request: GET /v1/trips/135/members
+    Request Query Param: None
+    Request Path Param: 
+			tripId=135
+   
+    Response Code: 200
+    Process Time: 0.13765907287597656
+    ----------------------------------------
+    
+    Timestamp: 1652695017.223006
+    Accessed Time: 2022-05-16 19:56:57.223006
+    Client: 127.0.0.1:64448
+    
+    Request: GET /v1/trips/135
+    Request Query Param: None
+    Request Path Param: 
+			tripId=135
+   
+    Response Code: 200
+    Process Time: 0.13807296752929688
+    ----------------------------------------
+    
+    Timestamp: 1652695017.363719
+    Accessed Time: 2022-05-16 19:56:57.363719
+    Client: 127.0.0.1:64444
+    
+    Request: GET /v1/trips/135
+    Request Query Param: None
+    Request Path Param: 
+			tripId=135
+   
+    Response Code: 200
+    Process Time: 0.10604405403137207
+    ----------------------------------------
+    
+    Timestamp: 1652695017.46961
+    Accessed Time: 2022-05-16 19:56:57.469610
+    Client: 127.0.0.1:64448
+    
+    Request: OPTIONS /v1/trips/135/107
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.001631021499633789
+    ----------------------------------------
+    
+    Timestamp: 1652695017.473124
+    Accessed Time: 2022-05-16 19:56:57.473124
+    Client: 127.0.0.1:64448
+    
+    Request: GET /v1/trips/135/107
+    Request Query Param: None
+    Request Path Param: 
+			tripId=135
+			cityId=107
+   
+    Response Code: 200
+    Process Time: 0.08078789710998535
+    ----------------------------------------
+    
