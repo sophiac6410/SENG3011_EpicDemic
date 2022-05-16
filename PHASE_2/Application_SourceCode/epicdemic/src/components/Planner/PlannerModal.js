@@ -47,7 +47,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: "1000px",
+  width: "70vw",
   bgcolor: 'background.paper',
   borderRadius: "30px",
   boxShadow: 24,
@@ -65,7 +65,7 @@ const styleTwo = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: "1000px",
+  width: "70vw",
   bgcolor: 'background.paper',
   borderRadius: "30px",
   boxShadow: 24,
@@ -453,7 +453,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
           <div className= "border-radius-med">
           { stepThree
             ? <>
-              <div style={{backgroundImage: getPhoto(), height: '400px', marginBottom: '20px'}}>
+              <div style={{backgroundImage: getPhoto(), backgroundSize: 'cover', backgroundRepeat: 'no-repeat', width: '100%', marginBottom: '10px'}}>
                 <div style={{display: "flex", flexDirection: "row", padding: "20px", height: '80px'}}>
                   <IconButton onClick={handleBack} sx={{alignItems: 'top'}}>
                     <ArrowBackIosIcon sx={{color: 'white'}} fontSize="small"></ArrowBackIosIcon>
@@ -461,33 +461,29 @@ function StepTwo({onClose, name, start, end, travellers}) {
                   <Typography variant='body' className='color-white mt-2'>Back</Typography>
                 </div>
                 <div style={{verticalAlign: 'bottom', margin: 'auto', justifyContent: 'center', marginTop: '250px'}}>
-                  <Typography variant="heading1" className='color-white text-center'><b>{city !== null ? (city.name + ', ' + city.country) : ''}</b></Typography>
-                  <div style={{ display: 'flex', width: '100%', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center'}}>
-                  {knownFor.length > 0 && Object.keys(knownFor).map((key, _) => 
-                  {
-                    return(
-                    <div key={key}style={{display: 'flex', flexDirection: 'row'}}>
-                      <img src={knownFor[key].icon+"-48.png"} style={{width:'30px', height: '30px', marginLeft: '20px'}}></img>
-                      <Typography variant="body" className='color-dark-teal text-center' style={{marginTop: '5px', marginLeft: '15px'}} >{knownFor[key].name}</Typography>
-                  </div>)
-                  })}
+                <Typography variant="heading1" className='color-white text-center'><b>{city !== null ? (city.name + ', ' + city.country) : ''}</b></Typography>
                 </div>
-                </div>   
               </div>
-              {knownFor.length > 7 ? <div style={{height: '50px'}}></div> : <div style={{height: '20px'}}></div> }
+              <div style={{ display: 'flex', width: '100%', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center'}}>
+                {knownFor.length > 0 && Object.keys(knownFor).map((key, _) => {
+                  return(
+                  <div key={key}style={{display: 'flex', flexDirection: 'row'}}>
+                    <img src={knownFor[key].icon+"-48.png"} style={{width:'30px', height: '30px', marginLeft: '20px'}}></img>
+                    <Typography variant="body" className='color-dark-teal text-center' style={{marginTop: '5px', marginLeft: '15px'}} >{knownFor[key].name}</Typography>
+                  </div>)
+                })}
+                {knownFor.length > 7 
+                  ? <div style={{height: '50px'}}></div>
+                  : <div style={{height: '20px'}}></div>
+                }
+              </div>
               </>
             : <>
-              <div style={{display: "flex", justifyContent: "start", flexDirection: "row", alignItems: "center", paddingBottom: "20px"}}>
-                <IconButton onClick={handleBack}>
-                  <ArrowBackIosIcon color='teal' sx={{marginTop: "10px"}} fontSize="small"></ArrowBackIosIcon>
-                </IconButton>
-                <Typography variant='body' className='color-medium-teal mt-2'>Back</Typography>
-              </div>
-              <Typography variant="heading2" className='color-dark-teal text-center'>
-                Add cities to your trip
-              </Typography>
-              <Typography variant='body2' className='color-dark-teal mt-2 text-center'>Optionally enter a region and/or country and click 'Recommend me a city' and we will recommended you a destination.</Typography>
-            </>
+                <Typography variant="heading2" className='color-dark-teal text-center'>
+                  Add cities to your trip
+                </Typography>
+                <Typography variant='body2' className='color-dark-teal mt-2 text-center'>Optionally enter a region and/or country and click 'Recommend me a city' and we will recommended you a destination.</Typography>
+              </> 
           }
           </div>
           <Box autoComplete='off' sx={formStyle}>
@@ -622,27 +618,27 @@ function ActivityModal({fromTrip, activities, tripId, city, updateActivity}) {
           <Typography variant="heading2" className='color-dark-teal text-center'>
             Things to do
           </Typography>
-          <Carousel 
-            responsive={responsive} 
-            // containerClass="location-carousel"
-            autoPlay={false}
-            arrows={true}
-            shouldResetAutoplay={false}
-            itemClass="location-card"
-            centerMode={true}
-            // className="bg-light-teal"
-          >
-            { activities !== [] && activities !== {} ? (
-              activities.map((activity, id) => {
-                if(activity !== null && city !== null) {
-                  return <ActivityCard key={activity.id} activity={activity} cityId={city.id} tripId={tripId}></ActivityCard>
-                }
-              })
-            ): (
-              <div></div>
-            )
-            }
-          </Carousel>
+          { activities !== [] && activities !== {} 
+            ? <Carousel 
+                responsive={responsive} 
+                // containerClass="location-carousel"
+                autoPlay={false}
+                arrows={true}
+                shouldResetAutoplay={false}
+                itemClass="location-card"
+                centerMode={true}
+                // className="bg-light-teal"
+              >
+                {activities.map((activity, id) => {
+                  if(activity !== null && city !== null) {
+                    return <ActivityCard key={activity.id} activity={activity} cityId={city.id} tripId={tripId}></ActivityCard>
+                  } else {
+                    return <Typography variant="bodyText">No activities to book here. Maybe just sightseeing?</Typography>
+                  }
+                })}
+              </Carousel>
+            : <Typography variant="bodyText">No activities to book here. Maybe just sightseeing?</Typography>
+          }
         </Box>
       </Modal>
     </React.Fragment>
