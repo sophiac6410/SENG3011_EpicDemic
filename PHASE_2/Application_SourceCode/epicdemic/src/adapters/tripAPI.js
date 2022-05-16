@@ -297,7 +297,7 @@ export const getDestinationPhotos = async (destination, small) => {
         dataDestination.included.map((data) => {
           if (data.type == 'photo') {
             if (small) {
-              photos = [data.attributes.image.thumb, ...photos]
+              photos = [data.attributes.image.medium, ...photos]
             } else {
               photos = [data.attributes.image.large, ...photos]
             }

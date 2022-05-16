@@ -48,7 +48,6 @@ function RestrictBox({name, email, owner, trigger, setTrigger, id, type}){
 	);
 }
 
-
 function AddMember({isOpen, onClose , tripId}) {
   const teal = "#0F83A0";
   const [email, setEmail] = useState('')

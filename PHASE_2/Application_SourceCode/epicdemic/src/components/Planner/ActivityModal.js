@@ -109,16 +109,13 @@ function ActivityModal({fromTrip, activities, tripId, city, updateActivity}) {
             centerMode={true}
             // className="bg-light-teal"
           >
-            { activities !== [] && activities !== {} ? (
-              activities.map((activity, id) => {
-                if(activity !== null && city !== null) {
-                  return <ActivityCard key={activity.id} activity={activity} cityId={city.id} tripId={tripId}></ActivityCard>
-                }
-              })
-            ): (
-              <div></div>
-            )
-            }
+            {activities.map((activity, id) => {
+              if(activity !== null && city !== null) {
+                return <ActivityCard key={activity.id} activity={activity} cityId={city.id} tripId={tripId}></ActivityCard>
+              } else {
+                return <Typography variant="bodyText">No activities to book here. Maybe just sightseeing?</Typography>
+              }
+            })}
           </Carousel>
         </Box>
       </Modal>
