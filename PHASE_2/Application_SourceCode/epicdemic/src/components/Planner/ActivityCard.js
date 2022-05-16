@@ -8,30 +8,33 @@ import React, { useState, useEffect } from "react";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { addActivityToCity, addCityToTrip } from "../../adapters/tripAPI";
 
-function ActivityCard({activity, tripId, city, country, isSave}) {
-  const [save, setSave] = React.useState(isSave)
-
+function ActivityCard({activity, tripId, city, country, isSave, updateCityId, cityId}) {
+  const [isActivitySaved, saveActivity] = React.useState(isSave)
   const handleSave = () => {
-    setSave(!save)
+    saveActivity(!isActivitySaved)
   }
   useEffect(()=>{
     async function saveActivity(){
-      if(save) {
-        if(city.id){
-          const response = await addActivityToCity(activity.id, city.id, tripId, activity.name)
-          console.log("add activity" + activity.id + "to" + city.id)
-        }else{
-          const data = await addCityToTrip(tripId, city.name, city.latitude, city.longitude, country.code, country.name);
-          const response = await addActivityToCity(activity.id, data.id, tripId, activity.name)
-          console.log("add activity" + activity.id + "to" + data.id)
-        }
+      if(isActivitySaved){
+        if(city.id) {
+            const response = await addActivityToCity(activity.id, city.id, tripId, activity.name)
+            console.log("add activity" + activity.id + "to" + city.id)
+          }else if(cityId){
+            const response = await addActivityToCity(activity.id, cityId, tripId, activity.name)
+            console.log("add activity" + activity.id + "to" + cityId)
+          }else{
+            const data = await addCityToTrip(tripId, city.name, city.latitude, city.longitude, country.code, country.name);
+            updateCityId(data.id)
+            const response = await addActivityToCity(activity.id, data.id, tripId, activity.name)
+            console.log("add activity" + activity.id + "to" + data.id)
+          }
       }else{
         //TODO
         console.log("unsave activity")
       }
     }
     saveActivity()
-  }, [save])
+  }, [isActivitySaved])
 
   return(
     <div className="border-radius-med flex-column m-2 col-3 bg-light-blue" style={{width: 'auto', maxHeight: "700px", overflow: "auto"}}>
@@ -66,7 +69,7 @@ function ActivityCard({activity, tripId, city, country, isSave}) {
           <div className="justify-content-end mt-4">
             <IconButton className="d-flex flex-column" onClick={handleSave}>
               {
-                save ? (
+                isActivitySaved ? (
                   <FavoriteIcon color="teal"></FavoriteIcon>
                 ) : (
                   <FavoriteBorderIcon color="teal"></FavoriteBorderIcon>
