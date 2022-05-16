@@ -18,6 +18,10 @@ import Typography from '@mui/material/Typography';
 import { getAllLocations, getUserSaved } from "../apiCalls";
 import { travelStatus, adviceLevel } from "../styles/Theme";
 import CountryCard from "../components/DestinationFinder/CountryCard.js"
+import Search from "../components/Home/Search";
+import CountrySelect from "../components/Home/CountrySearchBox";
+import SearchIcon from '@mui/icons-material/Search';
+import IconButton from '@mui/material/IconButton';
 
 const allCountries = [];
 
@@ -28,6 +32,7 @@ const DestinationFinder = () => {
         "region": null,
         "advice": null,
         "travel": null,
+        "country": null
     });
 
     let navigate = useNavigate(); 
@@ -52,6 +57,10 @@ const DestinationFinder = () => {
     const updateSearch = (k, v) => {
         var newSearch = {...searchFilter}
         newSearch[k] = v;
+
+        console.log("=====NEW SEARCH=====")
+        console.log(newSearch);
+
         setSearchFilter(newSearch);
     }
 
@@ -62,7 +71,7 @@ const DestinationFinder = () => {
             filtered.push({...country})
         }
 
-        if (searchFilter.region === null && searchFilter.travel === null && searchFilter.advice === null) {
+        if (searchFilter.region === null && searchFilter.travel === null && searchFilter.advice === null && searchFilter.country === null) {
             setCountries(filtered);
         }        
         
@@ -84,6 +93,12 @@ const DestinationFinder = () => {
             })
         }
 
+        if (searchFilter.country !== null) {
+            filtered = filtered.filter((country) => {
+                return country.country === searchFilter.country
+            })
+        }
+
         setCountries(filtered);
     }
 
@@ -96,9 +111,25 @@ const DestinationFinder = () => {
                     <Typography variant="title" className="color-white mt-5">WHERE WILL YOU GO NEXT?</Typography>
                 </div>
                 
-                <WhiteButton onClick={filterCountries} sx={{display: 'block', margin: 'auto', marginTop: '3%'}}>Search</WhiteButton>
+                <div className="border-radius-large searchfield-container ps-5 pe-5">
+                    <div style={{ display: "flex", backgroundColor: "white", padding: "5px", borderRadius: "15px" }}>
+                        <CountrySelect isFrom={false} handleInput={(e, v) => updateSearch("country", v.label)}></CountrySelect>
+                        <div className="bg-dark-teal border-radius-med text-center" style={{ padding: 0, marginRight: 15 }}>
+                            <IconButton
+                                aria-label="search"
+                                onClick={filterCountries}
+                            >
+                                <SearchIcon sx={{ color: "white", padding: 0, fontSize: 20, m: 1.5}}/>
+                            </IconButton>
+                        </div>
+                    </div>
+                </div>
 
-                <div style={{backgroundColor: "white", padding: "20px 30px", position: "absolute", bottom: 0, margin: "auto", left: 0, right: 0, marginLeft: "10%", marginRight: "10%", borderRadius: "20px", boxShadow: "0px 0px 12px 0px black" }}>
+                <div className="text-center mb-5" style={{ position: "absolute", margin: "auto", bottom: "3vh", left: 0, right: 0, marginLeft: "5%", marginRight: "5%"}}>
+                    <Typography variant="title" className="color-white mt-5">OR FIND A DESTINATION BY...</Typography>
+                </div>
+
+                <div style={{backgroundColor: "white", padding: "15px 30px", position: "absolute", bottom: "-5vh", margin: "auto", left: 0, right: 0, marginLeft: "5%", marginRight: "5%", borderRadius: "20px", boxShadow: "0px 0px 12px 0px black" }}>
                     <Row className="justify-content-center">
                         <Col className="pe-5 ps-5">
                             <GenericSearch fieldLabel={"Region"} options={regionOptions} handleInput={(e, v) => updateSearch("region", v)}/>

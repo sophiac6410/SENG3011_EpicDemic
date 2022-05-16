@@ -31,7 +31,7 @@ export default function CountrySelect({isFrom, handleInput}) {
   const classes = useStyles();
 
   return (
-    <div style={{ display: "flex", alignItems: "center", flexDirection: "row", padding: '1%' }}>
+    <div style={{display: "flex", alignItems: "center", flexDirection: "row", padding: '1%' }}>
       <Autocomplete
         id="country-select-demo"
         classes={classes}
@@ -465,6 +465,7 @@ const countries = [
   //   phone: '1',
   //   suggested: true,
   // },
+  { code: 'US', label: 'United States of America', phone: '1' }
   // { code: 'UY', label: 'Uruguay', phone: '598' },
   // { code: 'UZ', label: 'Uzbekistan', phone: '998' },
   // {

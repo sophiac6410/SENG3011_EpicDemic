@@ -9,9 +9,10 @@
 
 .bg-plane{
     background-image: url(./../static/plane.svg);
+    background-size: cover;
     height: 60vh;
     width: 100%;
-    position:absolute;
+    position: absolute;
     z-index: 0;
     padding: 0;
 }
