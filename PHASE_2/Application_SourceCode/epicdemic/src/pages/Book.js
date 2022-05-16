@@ -33,13 +33,13 @@ function Book() {
 
   const [searchDe, setSearchDe] = useState({
     originCode: "SYD", 
-    dateOfDeparture: "2022-05-01",
+    dateOfDeparture: "2022-05-18",
     adults: 1
   });
 
   const [searchRe, setSearchRe] = useState({
     destinationCode: "SYD", 
-    dateOfDeparture: "2022-05-05",
+    dateOfDeparture: "2022-05-20",
     adults: 1
   });
 
@@ -57,12 +57,17 @@ function Book() {
       setSearch({
         originCode: "SYD",
         destinationCode: destination, 
-        dateOfDeparture: "2022-05-01",
-        dateOfReturn: "2022-05-05",
+        dateOfDeparture: "2022-05-18",
+        dateOfReturn: "2022-05-20",
         adults: 1
       })
     }
     getSearchData()
+    return () => {
+      setSearch(null)
+      setDepartData([])
+      setReturnData([])
+    }
   }, [code])
 
 
@@ -91,16 +96,22 @@ function Book() {
     setLoading(true)
     var {out, controller} = getFligtData(searchDe)
     out.then(res => {
-      console.log(res.data)
-      setDepartData(res.data); // dispatching data to components state
+      if(res.status == 200){
+        setDepartData(res.data); // dispatching data to components state
+      }
+      setLoading(false)
+      console.log(res)
     }).catch(err => {
       console.log(err)
       setLoading(false)
     });
     var {out, controller} = getFligtData(searchRe)
     out.then(res => {
-      console.log(res.data)
-      setReturnData(res.data); // dispatching data to components state
+      console.log(res)
+      if(res.status == 200){
+        setReturnData(res.data); // dispatching data to components state
+      }
+      console.log(res.data.response)
       setLoading(false)
     }).catch(err => {
       console.log(err)
@@ -144,7 +155,6 @@ function Book() {
             type="date"
             value={search.dateOfDeparture}
             onChange={handleDate('dateOfDeparture')}
-            defaultValue="2022-04-05"
             InputLabelProps={{
               shrink: true,
             }}
@@ -157,7 +167,7 @@ function Book() {
             type="date"
             value={search.dateOfReturn}
             onChange={handleDate('dateOfReturn')}
-            defaultValue="2022-04-06"
+            defaultValue="2022-05-20"
             InputLabelProps={{
               shrink: true,
             }}
@@ -173,7 +183,7 @@ function Book() {
         {/* <div style={{display: loading ? "block" : "none"}}>
           <TailSpin color="#70C4E8" height={80} width={80} />
         </div> */}
-        <FlightTabs className="ms-5" loading={loading}Deflights={departData} Reflights={returnData} depart={search.originCode} dest={search.destinationCode}></FlightTabs>
+        <FlightTabs className="ms-5" loading={loading} Deflights={departData} Reflights={returnData} depart={search.originCode} dest={search.destinationCode}></FlightTabs>
       </div>
     </div>
   )

@@ -239,17 +239,19 @@ async def add_new_city_to_trip (
     if (trip == None or activity.cityId not in trip['cities']):
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "City does not exist in trip"}))
     
+    # prevent duplicate activity
     city = tripCities_col.find_one({"_id": activity.cityId})
-    for c in city['checklist']:
-        if c['name'] == 'Activities':
-            c['items'].append({'item': 'Book ' + activity.name, 'description': '', 'checked': False})
-    tripCities_col.update_one(
-        {"_id": activity.cityId},
-        {
-            "$push": {"activities": activity.activityId},
-            "$set": {"checklist": city['checklist']}
-        }
-    )
+    if activity.activityId not in city['activities']:
+        for c in city['checklist']:
+            if c['name'] == 'Activities':
+                c['items'].append({'item': 'Book ' + activity.name, 'description': '', 'checked': False})
+        tripCities_col.update_one(
+            {"_id": activity.cityId},
+            {
+                "$push": {"activities": activity.activityId},
+                "$set": {"checklist": city['checklist']}
+            }
+        )
 
     return baseModels.createResponse(True, 200, {})
 
@@ -407,8 +409,26 @@ async def get_trip_city_by_id(
         })
     return baseModels.createResponse(True, 200, city)
 
+@router.delete("/{tripId}/{cityKey}", status_code=status.HTTP_200_OK, tags=['trips'], response_model=baseModels.Response, responses={401: {"model": baseModels.ErrorResponse}})
+async def delete_saved_tripCity (
+    Authorization: str = Header(..., example=token_example),
+    tripId: int = Path(..., description="The unique id of the trip"),
+    cityKey: int = Path(..., description="The unique key of the city in trip")
+):
+    user = auth.get_current_user(Authorization)
+    if tripId not in user['saved_trips']:
+        return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content=baseModels.createResponse(False, 401, {"error": "Not authorised to delete trip"}))
+    trip = trip_col.find_one({"_id": tripId})
+    cityId = trip["cities"][cityKey]
+    trip_col.update_one(
+        {"_id": tripId},
+        {"$pull": {"cities": cityId}}
+    )
+    tripCities_col.delete_one({"_id": cityId})
+
+
 @router.get("/{tripId}/city/{cityKey}/activity", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.ActivityIdResponse, responses={401: {"model": baseModels.ErrorResponse}})
-async def get_trip_by_id (
+async def get_activity_by_cityid (
     Authorization: str = Header(..., example=token_example),
     tripId: int = Path(..., description="The unique id of the trip"),
     cityKey: int = Path(..., description="city key"),
