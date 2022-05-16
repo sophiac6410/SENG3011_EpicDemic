@@ -91,24 +91,26 @@ const DestinationFinder = () => {
         <div className="bg-off-white">
             <div className="bg-plane"/>
             <NavbarComp bg={false}/>
-            <div style={{position: "relative"}}>
+            <div style={{height: "40vh", position: "relative"}}>
                 <div className="text-center mb-5" style={{ marginTop: "10vh" }}>
                     <Typography variant="title" className="color-white mt-5">WHERE WILL YOU GO NEXT?</Typography>
                 </div>
                 
                 <WhiteButton onClick={filterCountries} sx={{display: 'block', margin: 'auto', marginTop: '3%'}}>Search</WhiteButton>
 
-                <Row style={{margin: "3% 5% 1%"}} className="justify-content-center">
-                    <Col className="pe-5 ps-5">
-                        <GenericSearch fieldLabel={"Region"} options={regionOptions} handleInput={(e, v) => updateSearch("region", v)}/>
-                    </Col>
-                    <Col className="pe-5 ps-5">
-                        <GenericSearch fieldLabel={"Advice Level"} options={adviceLevelOptions} handleInput={(e, v) => updateSearch("advice", v)}/>
-                    </Col>
-                    <Col className="pe-5 ps-5" style={{paddingBottom: '10%'}}>
-                        <GenericSearch fieldLabel={"Travel Status"} options={travelStatusOptions} handleInput={(e, v) => updateSearch("travel", v)}/>
-                    </Col>
-                </Row>
+                <div style={{backgroundColor: "white", padding: "20px 30px", position: "absolute", bottom: 0, margin: "auto", left: 0, right: 0, marginLeft: "10%", marginRight: "10%", borderRadius: "20px", boxShadow: "0px 0px 12px 0px black" }}>
+                    <Row className="justify-content-center">
+                        <Col className="pe-5 ps-5">
+                            <GenericSearch fieldLabel={"Region"} options={regionOptions} handleInput={(e, v) => updateSearch("region", v)}/>
+                        </Col>
+                        <Col className="pe-5 ps-5">
+                            <GenericSearch fieldLabel={"Advice Level"} options={adviceLevelOptions} handleInput={(e, v) => updateSearch("advice", v)}/>
+                        </Col>
+                        <Col className="pe-5 ps-5">
+                            <GenericSearch fieldLabel={"Travel Status"} options={travelStatusOptions} handleInput={(e, v) => updateSearch("travel", v)}/>
+                        </Col>
+                    </Row>
+                </div>
             </div>
             
             <Row style={{"marginLeft": "6vw", "marginRight": "6vw", "marginTop": "10vh", "marginBottom": "10vh"}}>
@@ -129,7 +131,7 @@ const regionOptions = [
     { code: 'SEA', label: 'South-East Asia', imageUrl: 'test' },
     { code: 'EMED', label: 'Eastern Mediterranean', imageUrl: 'test' },
     { code: 'WP', label: 'Western Pacific', imageUrl: 'test' },
-    { code: 'AMER', label: 'Americas', imageUrl: 'test' },
+    { code: 'NA', label: 'North America', imageUrl: 'test' },
     { code: 'AF', label: 'Africa', imageUrl: 'test' },
 ]
 
