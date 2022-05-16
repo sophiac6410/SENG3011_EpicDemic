@@ -17,6 +17,18 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import { LightButton } from '../../styles/Button';
 
+function padTo2Digits(num) {
+  return num.toString().padStart(2, '0');
+}
+
+function formatDate(date) {
+  return [
+    padTo2Digits(date.getDate()),
+    padTo2Digits(date.getMonth() + 1),
+    date.getFullYear(),
+  ].join(' ');
+}
+
 const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -41,19 +53,25 @@ const COLOR = 'white';
 
 export default function DiseaseReportBar() {
   const [diseaseData, setDiseaseData] = useState([]);
-  // const [diseaseData2, setDiseaseData2] = useState([]);
+  const [diseaseData2, setDiseaseData2] = useState([]);
+
+  const options = {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json',
+      'authorization': 'Bearer GbHl378d8f4L1y1MdQB0HoCpGj8mzBCwjMbSnshBFWFymm7LNClDzQ0e69ZUzioyb95U4W5RdYbY'
+    },
+  };
 
   useEffect(() => {
     if (diseaseData === []) return;
 
     async function fetchData() {
       console.log('fetching diseases data');
-      const data = await fetch(`http://127.0.0.1:8000/v1/articles/?start_date=2021-01-01T10%3A10%3A10&end_date=2023-01-01T10%3A10%3A10&key_terms=Corona&timezone=Australia%2FSydney&start_range=1&end_range=4`).then(res => res.json())
-      // const data2 = await fetch(`http://127.0.0.1:8000/v1/articles/?start_date=2021-01-01T10%3A10%3A10&end_date=2023-01-01T10%3A10%3A10&key_terms=Corona&timezone=Australia%2FSydney&start_range=5&end_range=8`).then(res => res.json())
+      const data = await fetch(`https://prod.greatescape.co/api/travel/countries/AU/corona`, options).then(res => res.json())
       // console.log('printing data', data2)
-      setDiseaseData(data.data.articles)
-      // setDiseaseData2(data)
-      // setDiseaseData2(data2.data.articles)
+        setDiseaseData(data.news.slice(0, (data.news.length / 2)))
+        setDiseaseData2(data.news.slice((data.news.length / 2), data.news.length))
     }
     fetchData()
   }, [])
@@ -64,6 +82,7 @@ export default function DiseaseReportBar() {
         <div className="text-center">
           <Typography variant="heading1" className="color-dark-teal">GLOBAL RECENT DISEASE REPORTS</Typography>
         </div>
+
         <div className="news-carousel" style={{ backgroundColor: '#E9F0FB' }}>
           <Carousel 
             swipeable={true}
@@ -71,52 +90,59 @@ export default function DiseaseReportBar() {
             responsive={responsive} 
           >
             
-              {diseaseData.map((data, idx) => {
+              {diseaseData2.map((data, idx) => {
 
                   return (
-                      <div className="news-container-col">
-                        <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
-                        <CardContent>
-                          <Typography variant="caption" color="text.secondary">
-                            {data.date_of_publication}
+                    <div className="news-container-col">
+                      <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
+                      <CardContent>
+                        <Typography variant="caption" color="text.secondary">
+                          {(new Date(data.date)).toDateString()}
+                        </Typography>
+                        <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
+                            { data.title }
+                        </Typography>
+                        <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { window.open(data.link) }}>
+                          <Typography variant='bodyImportant'>
+                            Read more
                           </Typography>
-                          <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
-                              {(data.headline).replace("PRO/AH/EDR>", "")}
-                          </Typography>
-                          <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { window.open(data.url) }}>
-                            <Typography variant='bodyImportant'>
-                              Read more
-                            </Typography>
-                          </LightButton>
-                          <Typography variant="caption" color="text.secondary" sx={{display: 'block'}} gutterBottom>
-                            Source: Promed
-                          </Typography>
-                        </CardContent>
-                        </Card>
-                        <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
-                        <CardContent>
-                          <Typography variant="caption" color="text.secondary">
-                            {diseaseData[idx].date_of_publication}
-                          </Typography>
-                          <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
-                              {(diseaseData[idx].headline).replace("PRO/AH/EDR>", "")}
-                          </Typography>
-                          <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { window.open(diseaseData[idx].url) }}>
-                            <Typography variant='bodyImportant'>
-                              Read more
-                            </Typography>
-                          </LightButton>
-                          <Typography variant="caption" color="text.secondary" sx={{display: 'block'}} gutterBottom>
-                            Source: Promed
-                          </Typography>
-                        </CardContent>
-                        </Card>
+                        </LightButton>
+                        <Typography variant="caption" color="text.secondary" sx={{display: 'block'}} gutterBottom>
+                          Source: { data.pub }
+                        </Typography>
+                      </CardContent>
+                      </Card>
+
+                      {
+                        diseaseData.length < 3 
+                        ? <></>
+                        : <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
+                            <CardContent>
+                              <Typography variant="caption" color="text.secondary">
+                                {(new Date(diseaseData[idx].date)).toDateString()}
+                              </Typography>
+                              <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
+                                  { diseaseData[idx].title }
+                              </Typography>
+                              <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { window.open(diseaseData[idx].link) }}>
+                                <Typography variant='bodyImportant'>
+                                  Read more
+                                </Typography>
+                              </LightButton>
+                              <Typography variant="caption" color="text.secondary" sx={{display: 'block'}} gutterBottom>
+                                Source: { diseaseData[idx].pub }
+                              </Typography>
+                            </CardContent>
+                            </Card>
+                      }
+
                       </div>
                   )
                 })}
             
           </Carousel>
         </div>
+
       </Row>
     </div>
 

@@ -142,11 +142,10 @@ export default function DiseaseReportBar({code}) {
                       <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
                       <CardContent>
                         <Typography variant="caption" color="text.secondary">
-                          {/* {(new Date(data.date)).toDateString()} */}
+                          { disease != 'Covid-19' ? (new Date(data.date_of_publication)).toDateString() : (new Date(data.date)).toDateString()}
                         </Typography>
                         <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
                             { disease != 'Covid-19' ? (data.headline) : data.title }
-                            {/* { disease != 'Covid-19' ? (data.headline).replace(/PRO\/AH\/EDR>/ig,'') : data.title } */}
                         </Typography>
                         <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { disease != 'Covid-19' ? window.open(data.url) : window.open(data.link) }}>
                           <Typography variant='bodyImportant'>
@@ -165,11 +164,10 @@ export default function DiseaseReportBar({code}) {
                         : <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
                             <CardContent>
                               <Typography variant="caption" color="text.secondary">
-                                {/* {(new Date(diseaseData[idx].date)).toDateString()} */}
+                                { disease != 'Covid-19' ? (new Date(diseaseData[idx].date_of_publication)).toDateString() : (new Date(diseaseData[idx].date)).toDateString()}
                               </Typography>
                               <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
-                                  { disease != 'Covid-19' ? (data.headline) : diseaseData[idx].title }
-                                  {/* { disease != 'Covid-19' ? (data.headline).replace(/PRO\/AH\/EDR>/ig,'') : diseaseData[idx].title } */}
+                                  { disease != 'Covid-19' ? (diseaseData[idx].headline) : diseaseData[idx].title }
                               </Typography>
                               <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { disease != 'Covid-19' ? window.open(data.url) : window.open(diseaseData[idx].link) }}>
                                 <Typography variant='bodyImportant'>

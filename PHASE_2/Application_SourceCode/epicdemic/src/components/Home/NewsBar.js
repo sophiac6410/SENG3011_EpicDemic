@@ -36,32 +36,32 @@ const fontColours = [ 'white', '#1B4965', '#1B4965' ]
 const news = [
   {
     'title': "The Americas and Asia Pacific regions show increased hotel pipeline activity",
-    'date': "18 Apr 2022",
+    'date': "16 May 2022",
     'link': 'https://www.traveldailynews.com/post/the-americas-and-asia-pacific-regions-show-increased-hotel-pipeline-activity'
   },
   {
-    'title': "Fraport traffic figures – March 2022: Upward trend in passenger traffic continues",
-    'date': "18 Apr 2022",
-    'link': 'https://www.traveldailynews.com/post/fraport-traffic-figures-march-2022-upward-trend-in-passenger-traffic-continues'
+    'title': "Trends shaping 2022 travel recovery revealed in new Skyscanner report",
+    'date': "13 May 2022",
+    'link': 'https://www.traveldailynews.com/post/trends-shaping-2022-travel-recovery-revealed-in-new-skyscanner-report'
   },
   {
-    'title': "Gulf Air to restore over 90% of India schedule this summer",
-    'date': "18 Apr 2022",
-    'link': 'https://www.traveldailynews.com/post/gulf-air-to-restore-over-90-of-india-schedule-this-summer'
+    'title': "Travellers hit by lengthy lines at Sydney Airport again",
+    'date': "09 May 2022",
+    'link': 'https://www.9news.com.au/national/sydney-airport-delays-domestic-international-no-staff/4d18de11-03be-4ec9-bd97-5c5ebac5a992'
   },
   {
-    'title': "Australia to scrap Covid test entry requirement for overseas travellers",
-    'date': "18 Apr 2022",
-    'link': 'https://www.news.com.au/travel/travel-updates/australia-to-scrap-covid-test-entry-requirement-for-overseas-travellers/news-story/0cf503d2c7d49e2e5213c931a1f5b89c'
+    'title': "Passenger taken into custody after opening emergency exit and walking on wing of plane",
+    'date': "07 May 2022",
+    'link': 'https://www.9news.com.au/world/us-travel-flight-passenger-taken-into-custody-after-opening-emergency-exit-walking-on-wing-of-plane/c30e03c3-fc2d-4286-a949-6e35fe546af3'
   },
   {
-    'title': "Luggage left behind in chaotic airport crush over Easter weekend",
-    'date': "18 Apr 2022",
-    'link': 'https://www.news.com.au/travel/travel-updates/half-a-km-long-chaos-at-airports-continues-over-easter/news-story/78624b98e5e19ba2550c001537143c21'
+    'title': "How private aviation will redefine the air travel experience in 2022",
+    'date': "03 May 2022",
+    'link': 'https://www.traveldailynews.com/post/how-private-aviation-will-redefine-the-air-travel-experience-in-2022'
   },
   {
     'title': "Australia scraps COVID-19 testing for international arrivals",
-    'date': "18 Apr 2022",
+    'date': "30 Apr 2022",
     'link': 'https://www.9news.com.au/national/covid-19-australia-stops-all-coronavirus-testing-for-international-arrivals/a01f0f72-27ab-40d3-a56e-9251b13cbabf'
   }
 ]
@@ -76,12 +76,11 @@ class NewsBar extends React.Component {
             <LanguageIcon fontSize="large" className="color-medium-blue"  sx={{marginBottom: '1%', marginRight: '0.5%'}}/>
             <Typography variant="heading1" className="color-dark-teal" style={{display: 'inline'}}>GLOBAL NEWS</Typography>
           </div>
-          <div className="news-carousel bg-off-white">
+          <div>
             <Carousel 
               swipeable={true}
               showStatus={false}
               responsive={responsive}
-              className="bg-off-white"
             >
               <NewsCard col={colours[0]} fontC={fontColours[0]} title={news[0].title} link={news[0].link} date={news[0].date}></NewsCard>
               <div className="news-container-col">
