@@ -38,7 +38,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import InputField from '../InputField';
 import { Field } from '../Form'
-import { addMember, removeMember, getMembers, getTripOwner, getDestinationPhotos } from '../../adapters/tripAPI';
 import ActivityModal from "./ActivityModal";
 
 
@@ -103,21 +102,6 @@ const formStyle = {
   },
 };
 
-const shareMemberStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: "1000px",
-  bgcolor: 'background.paper',
-  borderRadius: "30px",
-  boxShadow: 24,
-  p: 4,
-  textAlign: "center",
-  backgroundColor: "#EEF0F2",
-  display: "flex",
-  flexDirection: "column",
-};
 
 function StepOne({isOpen, onClose, onNext}) {
   const [startDate, setStartDate] = React.useState(null);

@@ -14,7 +14,7 @@ import { useParams } from 'react-router';
 import { getTripById } from '../adapters/tripAPI';
 import React, { useEffect } from 'react';
 import { setDate } from "date-fns";
-import AddMember from "../components/Planner/AddMember";
+import AddMemberCard from "../components/Planner/AddMemberCard";
 
 function Trip() {
   const { tripId } = useParams()
@@ -108,7 +108,7 @@ function Trip() {
             </Col>
           </Row>
         </Row>
-        <AddMember isOpen={openAdd} onClose={closeAddModal} tripId={tripId}></AddMember>
+        <AddMemberCard isOpen={openAdd} onClose={closeAddModal} tripId={tripId}></AddMemberCard>
         <Typography variant="heading1" style={{marginTop: '40px', marginLeft: "70px"}}>Destinations</Typography>
         <div className='justify-content-center' style={{display: "flex", flexDirection: "column"}}>
         {Object.keys(cities).map((key, i) => 

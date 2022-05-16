@@ -17,7 +17,6 @@ function ActivityCard({activity, tripId, city, country}) {
   useEffect(()=>{
     async function saveActivity(){
       if(save) {
-        //TODO check cityId
         if(city.id){
           const response = await addActivityToCity(activity.id, city.id, tripId)
           console.log("add activity" + activity.id + "to" + city.id)

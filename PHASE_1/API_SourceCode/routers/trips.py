@@ -408,7 +408,7 @@ async def get_trip_city_by_id(
     return baseModels.createResponse(True, 200, city)
 
 @router.get("/{tripId}/city/{cityKey}/activity", status_code=status.HTTP_200_OK, tags=['trips'], response_model=tripModels.ActivityIdResponse, responses={401: {"model": baseModels.ErrorResponse}})
-async def get_trip_by_id (
+async def get_activity_by_cityid (
     Authorization: str = Header(..., example=token_example),
     tripId: int = Path(..., description="The unique id of the trip"),
     cityKey: int = Path(..., description="city key"),
