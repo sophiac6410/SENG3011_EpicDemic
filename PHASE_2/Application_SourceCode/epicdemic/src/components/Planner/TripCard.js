@@ -69,6 +69,7 @@ function TripCard({name, tripId, latitude, longitude, city, country, cityId, upd
   const [activity, setActivity] = React.useState([])
   //User's Activities in this city
   const [savedActivity, setSave] = React.useState([])
+  const [savedId, setSavedId] = React.useState([]) 
   const [loading, setLoading] = React.useState(true)
   const navigate = useNavigate();
   
@@ -79,11 +80,11 @@ function TripCard({name, tripId, latitude, longitude, city, country, cityId, upd
     setLoading(true)
     console.log("here")
     if(city.activities) {
+      setSavedId(city.activities)
       var {out, controller} = GetActivityByIds({ids: city.activities.toString()})
       out.then(res => {
         console.log(res)
         if(res.status == 200){
-          console.log(res.data)
           setSave(res.data); // dispatching data to components state
           setLoading(false)
         }
@@ -101,10 +102,8 @@ function TripCard({name, tripId, latitude, longitude, city, country, cityId, upd
     setLoading(true)
     var fetchActivity =  getActivityByCity(tripId, cityId)
     fetchActivity.then(res => {
-      // const data = awa
-      console.log(res)
-      // if(res.status == 200) {
       var ids = res.data.ids
+      setSavedId(ids)
       console.log("new list:" + ids)
       var {out, controller} = GetActivityByIds({ids: ids.toString()})
       out.then(response => {
@@ -165,7 +164,7 @@ function TripCard({name, tripId, latitude, longitude, city, country, cityId, upd
           <AddCircleIcon color="teal"></AddCircleIcon>
         </IconButton>
         <Typography variant='caption' className='color-medium-teal me-3'>Add dates</Typography>
-        <ActivityModal fromTrip={true} activities={activity} tripId={tripId} city={city} updateActivity={updateActivity}></ActivityModal>
+        <ActivityModal fromTrip={true} activities={activity} tripId={tripId} city={city} updateActivity={updateActivity} savedActivity={savedId}></ActivityModal>
         <IconButton sx={{paddingRight: "5px"}}>
           <FlightIcon sx={{marginRight: "5px"}} color='teal'></FlightIcon>
         </IconButton>

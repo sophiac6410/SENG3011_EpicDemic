@@ -21,7 +21,6 @@ import IconButton from '@mui/material/IconButton';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import LocalActivityIcon from '@mui/icons-material/LocalActivity';
 import { Navigate, useNavigate } from 'react-router-dom';
-import ActivityCard from './ActivityCard';
 import Carousel from "react-multi-carousel";
 import CloseIcon from '@mui/icons-material/Close';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -38,7 +37,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import InputField from '../InputField';
 import { Field } from '../Form'
-import ActivityModal from "./ActivityModal";
 import AddCityCard from "./AddCityCard";
 
 

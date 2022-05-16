@@ -7,6 +7,9 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { Navigate, useNavigate } from 'react-router-dom';
 import ActivityCard from "./ActivityCard";
+import { GetActivityByIds } from "../../adapters/activityAPI";
+
+
 
 const responsive = {
   superLargeDesktop: {
@@ -45,9 +48,11 @@ const activityModalStyle = {
   paddingBottom: "80px",
 };
 
-function ActivityModal({fromTrip, activities, tripId, city, updateActivity, country}) {
+function ActivityModal({fromTrip, activities, tripId, city, updateActivity, country, savedActivity}) {
   console.log(city)
   const [isOpen, setOpen] = React.useState(false);
+  // const [savedActivity, setSave] = React.useState([])
+
   const handleOpen = () => {
     setOpen(true);
     setStepThree(false)
@@ -70,6 +75,22 @@ function ActivityModal({fromTrip, activities, tripId, city, updateActivity, coun
   const saveTrip = () => {
     navigate(`/trip/${tripId}`)
   }
+
+  const isSave = (aId) => {
+    if(savedActivity){
+      return savedActivity.includes(Number(aId))
+    }
+  }
+  // const getSavedActivities = async function () {
+  //   setSave(city.activities)
+  // }
+  
+  // useEffect(() => {
+  //   // getSavedActivities()
+  //   return ()=>{
+  //     setSave([])
+  //   }
+  // }, [])
 
   return(
     <React.Fragment>
@@ -113,7 +134,7 @@ function ActivityModal({fromTrip, activities, tripId, city, updateActivity, coun
           >
             {activities.map((activity, id) => {
               if(activity !== null && city !== null) {
-                return <ActivityCard key={activity.id} activity={activity} city={city} tripId={tripId} country={country}></ActivityCard>
+                return <ActivityCard key={activity.id} activity={activity} city={city} tripId={tripId} country={country} isSave={isSave(activity.id)}></ActivityCard>
               } else {
                 return <Typography variant="bodyText">No activities to book here. Maybe just sightseeing?</Typography>
               }

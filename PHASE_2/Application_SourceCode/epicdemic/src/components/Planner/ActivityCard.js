@@ -8,8 +8,8 @@ import React, { useState, useEffect } from "react";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { addActivityToCity, addCityToTrip } from "../../adapters/tripAPI";
 
-function ActivityCard({activity, tripId, city, country}) {
-  const [save, setSave] = React.useState(false)
+function ActivityCard({activity, tripId, city, country, isSave}) {
+  const [save, setSave] = React.useState(isSave)
 
   const handleSave = () => {
     setSave(!save)
