@@ -11581,3 +11581,78 @@
     Process Time: 0.06337594985961914
     ----------------------------------------
     
+    Timestamp: 1652694830.891669
+    Accessed Time: 2022-05-16 19:53:50.891669
+    Client: 127.0.0.1:63523
+    
+    Request: POST /v1/trips/new/city
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.3697659969329834
+    ----------------------------------------
+    
+    Timestamp: 1652694834.569098
+    Accessed Time: 2022-05-16 19:53:54.569098
+    Client: 127.0.0.1:63523
+    
+    Request: GET /v1/trips/135
+    Request Query Param: None
+    Request Path Param: 
+			tripId=135
+   
+    Response Code: 200
+    Process Time: 0.08591794967651367
+    ----------------------------------------
+    
+    Timestamp: 1652694834.794365
+    Accessed Time: 2022-05-16 19:53:54.794365
+    Client: 127.0.0.1:63523
+    
+    Request: GET /v1/trips/135/107
+    Request Query Param: None
+    Request Path Param: 
+			tripId=135
+			cityId=107
+   
+    Response Code: 200
+    Process Time: 0.1039431095123291
+    ----------------------------------------
+    
+    Timestamp: 1652694860.581036
+    Accessed Time: 2022-05-16 19:54:20.581036
+    Client: 127.0.0.1:63679
+    
+    Request: OPTIONS /v1/trips/new/activity
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.00031495094299316406
+    ----------------------------------------
+    
+    Timestamp: 1652694860.587523
+    Accessed Time: 2022-05-16 19:54:20.587523
+    Client: 127.0.0.1:63679
+    
+    Request: POST /v1/trips/new/activity
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 422
+    Process Time: 0.02491593360900879
+    ----------------------------------------
+    
+    Timestamp: 1652694956.055494
+    Accessed Time: 2022-05-16 19:55:56.055494
+    Client: 127.0.0.1:64141
+    
+    Request: POST /v1/trips/new/activity
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 422
+    Process Time: 0.006822824478149414
+    ----------------------------------------
+    

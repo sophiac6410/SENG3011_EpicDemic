@@ -18,11 +18,11 @@ function ActivityCard({activity, tripId, city, country}) {
     async function saveActivity(){
       if(save) {
         if(city.id){
-          const response = await addActivityToCity(activity.id, city.id, tripId)
+          const response = await addActivityToCity(activity.id, city.id, tripId, activity.name)
           console.log("add activity" + activity.id + "to" + city.id)
         }else{
           const data = await addCityToTrip(tripId, city.name, city.latitude, city.longitude, country.code, country.name);
-          const response = await addActivityToCity(activity.id, data.id, tripId)
+          const response = await addActivityToCity(activity.id, data.id, tripId, activity.name)
           console.log("add activity" + activity.id + "to" + data.id)
         }
       }else{
