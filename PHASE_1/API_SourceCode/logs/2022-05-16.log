@@ -11832,3 +11832,15 @@
     Process Time: 0.11436700820922852
     ----------------------------------------
     
+    Timestamp: 1652695158.616919
+    Accessed Time: 2022-05-16 19:59:18.616919
+    Client: 127.0.0.1:65156
+    
+    Request: POST /v1/trips/new/activity
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.18612003326416016
+    ----------------------------------------
+    
