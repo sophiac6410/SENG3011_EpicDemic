@@ -20,7 +20,7 @@ function SavedTables (props) {
 
   return (
     <>  
-      <Row style={{"marginTop": "4vh", "marginLeft": "5vw", "marginRight": "5vw"}}>
+      {/* <Row style={{"marginTop": "4vh", "marginLeft": "5vw", "marginRight": "5vw"}}>
       <HeaderInfoRow4/>
       <Container style={{overflowY: 'scroll', maxHeight: '60vh', marginBottom: '5%'}}>
         {props.locations.map((loc, idx) => {
@@ -37,10 +37,10 @@ function SavedTables (props) {
           )
         })}
       </Container>
-    </Row>
-    <Row style={{backgroundColor: '#0F83A0'}}>
-      <Col style={{"marginTop": "5vh", marginBottom: '8vh', "paddingLeft": 0, "paddingRight": 0, "marginLeft": "15vw", "marginRight": "15vw"}}>
-        <Typography variant="heading2" className="color-white" sx={{textAlign: 'center'}}>Latest updates on your saved locations</Typography>
+    </Row> */}
+    <Row>
+      <Col style={{ marginBottom: '8vh', "paddingLeft": 0, "paddingRight": 0}}>
+        {/* <Typography variant="heading2" className="color-dark-teal" sx={{textAlign: 'center'}}>Latest Updates</Typography> */}
         <Container fluid style={{overflowY: 'scroll', maxHeight: '60vh'}}>
           {props.updates.map((update, idx) => {
             return (
@@ -50,6 +50,7 @@ function SavedTables (props) {
                 country={update.country}
                 desc={update.text}
                 dateTime={getDate(update.date)}
+                updateType={update.collection_type}
               />
             )
           })}

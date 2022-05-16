@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import HappyFamily from "../static/happyfamily.svg";
+import HappyFamily2 from './savedLocationBg.png'
 import BluePlus from "../static/blueplus.svg";
 import InfoRow4 from "../components/DestinationFinder/InfoRow4";
 import InfoRow5 from "../components/DestinationFinder/InfoRow5";
@@ -12,6 +13,7 @@ import NavbarComp from '../components/NavBar';
 import { Typography } from '@mui/material';
 import { getUserSaved, getDestination, getUpdates } from "../apiCalls"
 import SavedTables from "../components/SavedLocations/SavedTables"
+import LocationBar from '../components/Home/LocationBar';
 
 const SavedLocations = () => {
     const [savedLocations, setSavedLocations] = React.useState([]);
@@ -41,19 +43,16 @@ const SavedLocations = () => {
     return (
         <Container fluid style={{"overflowX": "hidden", "paddingLeft": 0, "paddingRight": 0, "marginLeft": 0, "marginRight": 0, "backgroundColor": "#EEF5FF"}}>
             <NavbarComp bg={true}></NavbarComp>
-            <Row style={{"backgroundColor": "rgba(27, 73, 101, 0.7)"}}>
+            <div style={{backgroundImage: `url(${HappyFamily2})`, backgroundSize: 'cover', height: '400px'}}>
+                <div className="bg-dark-teal d-flex justify-content-center align-items-center" style={{opacity: 0.8, height: '100%'}}>
+                <div className="color-white py-5">
+                    <Typography variant="title">SAVED LOCATIONS AND UPDATES</Typography>
+                    <Typography variant="heading3">Manage and view your saved locations as well as see all notifications</Typography>
+                </div>
+                </div>
+            </div>
+            <Row style={{"marginTop": "10vh", "marginLeft": "8vw", "marginRight": "8vw"}}>
                 <Col>
-                    <Image style={{"width": "50vw"}} src={HappyFamily}/>
-                </Col>
-                <Col style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
-                    <Row style={{"color": "white", "display": "flex", "flexDirection": "column", "justifyContent": "center", "alignItems": "center"}}>
-                        <Typography variant="title">SAVED LOCATIONS AND UPDATES</Typography>
-                        <Typography variant="heading3">Manage and view your saved locations as well as see all notifications</Typography>
-                    </Row>
-                </Col>
-            </Row>
-            <Row style={{"marginTop": "10vh", "marginLeft": "5vw", "marginRight": "5vw"}}>
-                <Col style={{"marginBottom": "1vh"}}>
                     <Typography variant="heading2" style={{display: 'inline'}}>Your saved locations</Typography>
                     {/* <Image height="60%" style={{"marginLeft": "2vw", "marginBottom": "1vh", cursor: 'pointer'}} src={BluePlus} onClick={() => {
                             navigate('/finder')
@@ -67,21 +66,16 @@ const SavedLocations = () => {
                 </Col>
                 }
             </Row>
+            <LocationBar locations={savedLocations}></LocationBar>
             {savedLocations === []
-            ? <Typography variant="heading3" className="color-dark-grey">You have no saved locations</Typography>
-            : <SavedTables locations={locationDetails} updates={updates} />
+            ? <></>
+            : <>
+                <Row className="mb-0 p-0" style={{"marginTop": "10vh", "marginLeft": "8vw", "marginRight": "8vw"}}>
+                    <Typography variant="heading2" sx={{p: 0}}>Latest updates</Typography>
+                    <SavedTables locations={locationDetails} updates={updates} />
+                </Row>
+            </>
             }
-            <Row position="relative" style={{"marginLeft": 0, "marginRight": 0, "marginTop": "10vh", "paddingBottom": "15vh", "paddingLeft": 0, "paddingRight": 0}}>
-                <Col style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
-                    <Button className="dest-search-button"
-                        onClick={() => {
-                            navigate('/finder')
-                        }}
-                    >
-                        Find a Destination
-                    </Button>
-                </Col>
-            </Row>
         </Container>
     );
 }

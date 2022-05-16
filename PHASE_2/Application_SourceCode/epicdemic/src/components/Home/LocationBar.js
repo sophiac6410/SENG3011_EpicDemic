@@ -31,6 +31,7 @@ const responsive = {
   };
 
 function getBar (loggedIn, locations) {
+  let navigate = useNavigate();
   if (loggedIn) {
     if (locations.length === 0) {
       return (
@@ -44,7 +45,7 @@ function getBar (loggedIn, locations) {
             onClick={() => {
               navigate('/finder');
             }}>
-            <Typography variant="bodyImportant">Search Destinations</Typography>
+            <Typography variant="bodyImportant" onClick={()=>{navigate('/finder')}}>Find a Destination</Typography>
           </DarkButton>
         </Row>
         </>
@@ -61,7 +62,6 @@ function getBar (loggedIn, locations) {
             shouldResetAutoplay={false}
             itemClass="location-card"
             centerMode={true}
-            className="bg-light-teal"
           >
             {locations !== undefined
               ? locations.map((loc, index) => {
@@ -74,9 +74,9 @@ function getBar (loggedIn, locations) {
         <Row md={5} className="justify-content-center mt-5 mb-3">
           <DarkButton className="align-self-center"
             onClick={() => {
-              navigate('/saved');
+              navigate('/finder');
             }}>
-              <Typography variant="bodyImportant">See all latest updates</Typography>
+            <Typography variant="bodyImportant" onClick={()=>{navigate('/finder')}}>Find a Destination</Typography>
           </DarkButton>
         </Row>
         </>
@@ -98,11 +98,8 @@ function LocationBar(props) {
   const { getters } = useContext(Context);
   const Bar = getBar(getters.loggedIn, props.locations);
   return(
-    <Row className="ms-1 me-1 pt-4 bg-light-teal">
+    <Row className="ms-1 me-1 pt-4">
       <Col className="mt-2" style={{ paddingLeft: '9%', paddingRight: '9%', marginBottom: '3%'}}>
-        <div className="text-center">
-          <Typography variant="heading1" className="color-white">YOUR SAVED LOCATIONS</Typography>
-        </div>
         {Bar}
       </Col>
     </Row>
