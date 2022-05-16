@@ -6,9 +6,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import StarIcon from '@mui/icons-material/Star';
 import React, { useState, useEffect } from "react";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { addActivityToCity } from "./tripApiCalls";
+import { addActivityToCity, addCityToTrip } from "../../adapters/tripAPI";
 
-function ActivityCard({activity, cityId, tripId}) {
+function ActivityCard({activity, tripId, city, country}) {
   const [save, setSave] = React.useState(false)
 
   const handleSave = () => {
@@ -18,8 +18,14 @@ function ActivityCard({activity, cityId, tripId}) {
     async function saveActivity(){
       if(save) {
         //TODO check cityId
-        const response = await addActivityToCity(activity.id, cityId, tripId)
-        console.log("add activity" + activity.id + "to" + cityId)
+        if(city.id){
+          const response = await addActivityToCity(activity.id, city.id, tripId)
+          console.log("add activity" + activity.id + "to" + city.id)
+        }else{
+          const data = await addCityToTrip(tripId, city.name, city.latitude, city.longitude, country.code, country.name);
+          const response = await addActivityToCity(activity.id, data.id, tripId)
+          console.log("add activity" + activity.id + "to" + data.id)
+        }
       }else{
         //TODO
         console.log("unsave activity")

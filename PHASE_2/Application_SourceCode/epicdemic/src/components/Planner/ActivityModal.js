@@ -45,7 +45,7 @@ const activityModalStyle = {
   paddingBottom: "80px",
 };
 
-function ActivityModal({fromTrip, activities, tripId, city, updateActivity}) {
+function ActivityModal({fromTrip, activities, tripId, city, updateActivity, country}) {
   console.log(city)
   const [isOpen, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -56,6 +56,8 @@ function ActivityModal({fromTrip, activities, tripId, city, updateActivity}) {
   const handleBack = () => {
     setOpen(false)
     setStepThree(false)
+    //case 1: from plannermodal set added
+    //case 2: from trip page update activity
     updateActivity()
   }
   const [stepThree, setStepThree] = React.useState(false)
@@ -111,7 +113,7 @@ function ActivityModal({fromTrip, activities, tripId, city, updateActivity}) {
           >
             {activities.map((activity, id) => {
               if(activity !== null && city !== null) {
-                return <ActivityCard key={activity.id} activity={activity} cityId={city.id} tripId={tripId}></ActivityCard>
+                return <ActivityCard key={activity.id} activity={activity} city={city} tripId={tripId} country={country}></ActivityCard>
               } else {
                 return <Typography variant="bodyText">No activities to book here. Maybe just sightseeing?</Typography>
               }

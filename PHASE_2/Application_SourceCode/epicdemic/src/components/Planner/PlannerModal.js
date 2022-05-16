@@ -249,6 +249,10 @@ function StepTwo({onClose, name, start, end, travellers}) {
     }
   };
 
+  const addCity = () => {
+    setAdded(true)
+  }
+
   const handleRemove = async () => {
     //TODO
     console.log("unsave City")
@@ -504,7 +508,7 @@ function StepTwo({onClose, name, start, end, travellers}) {
                     <Typography variant='caption' className='color-medium-teal'>Add to Trip</Typography>
                   </div>
                   )}
-                  <ActivityModal fromTrip={false} tripId={tripId} activities={activity} city={city}></ActivityModal>
+                  <ActivityModal fromTrip={false} tripId={tripId} activities={activity} city={city} country={country} updateActivity={addCity}></ActivityModal>
                 </div>
               ) : (
                 <div style={{display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center", marginBottom: "80px"}} className="mt-2">
