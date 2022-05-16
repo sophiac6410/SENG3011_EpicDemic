@@ -33,13 +33,13 @@ function Book() {
 
   const [searchDe, setSearchDe] = useState({
     originCode: "SYD", 
-    dateOfDeparture: "2022-05-01",
+    dateOfDeparture: "2022-05-18",
     adults: 1
   });
 
   const [searchRe, setSearchRe] = useState({
     destinationCode: "SYD", 
-    dateOfDeparture: "2022-05-05",
+    dateOfDeparture: "2022-05-20",
     adults: 1
   });
 
@@ -57,8 +57,8 @@ function Book() {
       setSearch({
         originCode: "SYD",
         destinationCode: destination, 
-        dateOfDeparture: "2022-05-01",
-        dateOfReturn: "2022-05-05",
+        dateOfDeparture: "2022-05-18",
+        dateOfReturn: "2022-05-20",
         adults: 1
       })
     }
@@ -155,7 +155,6 @@ function Book() {
             type="date"
             value={search.dateOfDeparture}
             onChange={handleDate('dateOfDeparture')}
-            defaultValue="2022-04-05"
             InputLabelProps={{
               shrink: true,
             }}
@@ -168,7 +167,7 @@ function Book() {
             type="date"
             value={search.dateOfReturn}
             onChange={handleDate('dateOfReturn')}
-            defaultValue="2022-04-06"
+            defaultValue="2022-05-20"
             InputLabelProps={{
               shrink: true,
             }}
