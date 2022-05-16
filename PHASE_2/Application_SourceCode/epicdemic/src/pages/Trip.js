@@ -15,6 +15,7 @@ import { getTripById } from '../adapters/tripAPI';
 import React, { useEffect } from 'react';
 import { setDate } from "date-fns";
 import AddMemberCard from "../components/Planner/AddMemberCard";
+import AddCityCard from "../components/Planner/AddCityCard";
 
 function Trip() {
   const { tripId } = useParams()
@@ -26,9 +27,18 @@ function Trip() {
   const [activities, setActivities] = React.useState([])
   const [data, setData] = React.useState([])
   const [openAdd, setAdd] = React.useState(false);
-  // const [reload, setReload] = React.useState(false);
+  const [startDate, setStartDate] =  React.useState("")
+  const [endDate, setEndDate] =  React.useState("")
+  const [reload, setReload] = React.useState(false);
+  const [openAddCityCard, setOpenAddCityCard] = React.useState(false)
   const openAddModal = () => setAdd(true)
   const closeAddModal = () => setAdd(false)
+  const closeCityCard = () => {
+    setOpenAddCityCard(false)
+    setReload(!reload)
+  }
+  const openAddCity = () => setOpenAddCityCard(true)
+
   
 
   const getTrip = async function() {
@@ -37,6 +47,8 @@ function Trip() {
     setName(data.name)
     const date1 = new Date(data.start_date);
     const date2 = new Date(data.end_date);
+    setStartDate(date1.getDate() + '/' + (date1.getMonth() + 1) + '/' + date1.getFullYear())
+    setEndDate(date2.getDate() + '/' + (date2.getMonth() + 1) + '/' + date2.getFullYear())
     setDates(date1.getDate() + '/' + (date1.getMonth() + 1) + '/' + date1.getFullYear() + " - " + date2.getDate() + '/' + (date2.getMonth() + 1) + '/' + date2.getFullYear())
     setTravellers(data.travellers)
     setCities(data.cities)
@@ -48,11 +60,28 @@ function Trip() {
     return() => {
       setName("")
       setDates("")
+      setStartDate("")
+      setEndDate("")
       setTravellers([])
       setCities([])
       setActivities([])
     }
   },[tripId])
+
+  useEffect(() => {
+    getTrip()
+    return() => {
+      setName("")
+      setDates("")
+      setStartDate("")
+      setEndDate("")
+      setTravellers([])
+      setCities([])
+      setActivities([])
+    }
+  },[reload])
+
+
 
   // useEffect(()=>{
   //   // setName(data.name)
@@ -126,10 +155,12 @@ function Trip() {
           )}
         </div>
         <div className="mt-5 flex-row d-flex justify-content-center align-items-center">
-          <IconButton>
+          <IconButton onClick={openAddCity}>
             <AddCircleIcon color="teal" fontSize="large"></AddCircleIcon>
           </IconButton>
           <Typography variant="bodyText" className="color-medium-teal">Add City</Typography>
+          {/* AddCityCard({isOpen, onClose, name, start, end, travellers} */}
+          <AddCityCard isOpen={openAddCityCard} onClose={closeCityCard} name={name} start={startDate} end={endDate} travellers={travellers} defaultTripId={tripId}></AddCityCard>
         </div>
       </Container>
     </div>
