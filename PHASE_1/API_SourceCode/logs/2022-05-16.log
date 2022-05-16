@@ -11806,3 +11806,29 @@
     Process Time: 0.08078789710998535
     ----------------------------------------
     
+    Timestamp: 1652695029.517541
+    Accessed Time: 2022-05-16 19:57:09.517541
+    Client: 127.0.0.1:64519
+    
+    Request: POST /v1/trips/new/activity
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.11714601516723633
+    ----------------------------------------
+    
+    Timestamp: 1652695031.518599
+    Accessed Time: 2022-05-16 19:57:11.518599
+    Client: 127.0.0.1:64519
+    
+    Request: GET /v1/trips/135/city/0/activity
+    Request Query Param: None
+    Request Path Param: 
+			tripId=135
+			cityKey=0
+   
+    Response Code: 200
+    Process Time: 0.11436700820922852
+    ----------------------------------------
+    
