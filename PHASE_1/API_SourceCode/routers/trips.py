@@ -239,17 +239,19 @@ async def add_new_city_to_trip (
     if (trip == None or activity.cityId not in trip['cities']):
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "City does not exist in trip"}))
     
+    # prevent duplicate activity
     city = tripCities_col.find_one({"_id": activity.cityId})
-    for c in city['checklist']:
-        if c['name'] == 'Activities':
-            c['items'].append({'item': 'Book ' + activity.name, 'description': '', 'checked': False})
-    tripCities_col.update_one(
-        {"_id": activity.cityId},
-        {
-            "$push": {"activities": activity.activityId},
-            "$set": {"checklist": city['checklist']}
-        }
-    )
+    if activity.activityId not in city['activities']:
+        for c in city['checklist']:
+            if c['name'] == 'Activities':
+                c['items'].append({'item': 'Book ' + activity.name, 'description': '', 'checked': False})
+        tripCities_col.update_one(
+            {"_id": activity.cityId},
+            {
+                "$push": {"activities": activity.activityId},
+                "$set": {"checklist": city['checklist']}
+            }
+        )
 
     return baseModels.createResponse(True, 200, {})
 
