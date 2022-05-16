@@ -25,10 +25,10 @@ router.get(`/${API}/flight-search`, async (req, res) => {
         adults: adults,
         max: '10'
     });
-    await res.header("Access-Control-Allow-Origin", "*");
-    await res.json(response.data);
+    await res.header("Access-Control-Allow-Origin", "*").status(response.statusCode).json(response.data);
   } catch(err) {
-    await res.json(err);
+    console.log(err)
+    await res.status(500).json(err);
   }
 });
 
@@ -46,7 +46,6 @@ router.get(`/${API}/activity-search`, async (req, res) => {
     await res.status(response.statusCode).json(response.data);
     console.log(response)
   } catch(err) {
-    console.log("======44====")
     console.log(err)
     await res.status(500).json(err);
   }

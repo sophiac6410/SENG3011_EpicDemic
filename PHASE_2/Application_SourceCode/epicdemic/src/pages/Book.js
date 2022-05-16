@@ -63,6 +63,11 @@ function Book() {
       })
     }
     getSearchData()
+    return () => {
+      setSearch(null)
+      setDepartData([])
+      setReturnData([])
+    }
   }, [code])
 
 
@@ -91,16 +96,22 @@ function Book() {
     setLoading(true)
     var {out, controller} = getFligtData(searchDe)
     out.then(res => {
-      console.log(res.data)
-      setDepartData(res.data); // dispatching data to components state
+      if(res.status == 200){
+        setDepartData(res.data); // dispatching data to components state
+      }
+      setLoading(false)
+      console.log(res)
     }).catch(err => {
       console.log(err)
       setLoading(false)
     });
     var {out, controller} = getFligtData(searchRe)
     out.then(res => {
-      console.log(res.data)
-      setReturnData(res.data); // dispatching data to components state
+      console.log(res)
+      if(res.status == 200){
+        setReturnData(res.data); // dispatching data to components state
+      }
+      console.log(res.data.response)
       setLoading(false)
     }).catch(err => {
       console.log(err)
@@ -173,7 +184,7 @@ function Book() {
         {/* <div style={{display: loading ? "block" : "none"}}>
           <TailSpin color="#70C4E8" height={80} width={80} />
         </div> */}
-        <FlightTabs className="ms-5" loading={loading}Deflights={departData} Reflights={returnData} depart={search.originCode} dest={search.destinationCode}></FlightTabs>
+        <FlightTabs className="ms-5" loading={loading} Deflights={departData} Reflights={returnData} depart={search.originCode} dest={search.destinationCode}></FlightTabs>
       </div>
     </div>
   )
