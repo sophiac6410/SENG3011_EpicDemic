@@ -48,10 +48,8 @@ const DestinationFinder = () => {
     }, []);
 
     const updateSearch = (k, v) => {
-        var newSearch = {...searchFilter}
-        newSearch[k] = v;
-
-        setSearchFilter(newSearch);
+        searchFilter[k] = v;
+        filterCountries();
     }
 
     const filterCountries = () => {
