@@ -105,8 +105,7 @@ function Travel(travelStat) {
             <br/><br/>
             <Typography variant="bodyText">{data.quarantine.text}</Typography>
             <br/>
-            <Typography variant="bodyText">Source: </Typography>
-            <a variant="bodyText" href={data.quarantine.rules}>{data.quarantine.rules}</a>
+            <Typography variant="bodyText">Source: <a href={data.quarantine.rules}>{data.quarantine.rules}</a></Typography>
           </>
         }
       }
@@ -120,8 +119,7 @@ function Travel(travelStat) {
           text: <>
             <Typography variant="bodyText">{data.vaccine_info.info}</Typography>
             <br/>
-            <Typography variant="bodyText">Source: </Typography>
-            <a variant="bodyText" href={data.vaccine_info.source}>{data.vaccine_info.source}</a>
+            <Typography variant="bodyText">Source: <a href={data.vaccine_info.source}>{data.vaccine_info.source}</a></Typography>
           </>
         }
       }
@@ -137,8 +135,7 @@ function Travel(travelStat) {
           <br/><br/>
           <Typography variant="bodyText">{data.testing.text}</Typography>
           <br/>
-          <Typography variant="bodyText">Source: </Typography>
-          <a variant="bodyText" href={data.testing.rules}>{data.testing.rules}</a>
+          <Typography variant="bodyText">Source: <a href={data.testing.rules}>{data.testing.rules}</a></Typography>
         </>
         }
       }
@@ -204,28 +201,28 @@ function Travel(travelStat) {
         ArrivalCheck.push({
           title: "Events",
           date: data.event_info.last_updated,
-          text: data.event_info.entry_status 
+          text: <Typography variant="bodyText">{data.event_info.entry_status}</Typography>
         })
       }
       if(typeof data.attractions_info !== "undefined") {
         ArrivalCheck.push({
           title: "Attractions",
           date: data.attractions_info.last_updated,
-          text: data.attractions_info.entry_status 
+          text:  <Typography variant="bodyText">{data.attractions_info.entry_status}</Typography>
         })
       }
       if(typeof data.shopping_info !== "undefined") {
         ArrivalCheck.push({
           title: "Shopping",
           date: data.shopping_info.last_updated,
-          text: data.shopping_info.entry_status 
+          text:  <Typography variant="bodyText">{data.shopping_info.entry_status}</Typography>
         })
       }
       if(typeof data.entry_info !== "undefined") {
         ArrivalCheck.push({
           title: "Others",
           date: data.entry_info.last_updated,
-          text: data.entry_info.info,
+          text:  <Typography variant="bodyText">{data.entry_info.info}</Typography>
         })
       }
 

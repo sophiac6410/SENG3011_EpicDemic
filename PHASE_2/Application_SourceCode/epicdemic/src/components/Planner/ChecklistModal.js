@@ -135,15 +135,17 @@ function ChecklistItem({item}) {
         </IconButton>
       </div>
       <Typography variant="heading3" className="color-dark-teal" sx={{textAlign: 'center', lineHeight: 0}}>{item.item}</Typography>
-      <Typography variant="bodyImportant" className="color-dark-teal mt-2" sx={{textAlign: 'center'}}>Description</Typography>
       <div className="justify-content-center d-flex my-2" style={{overflowY: 'auto'}}>
-        <textarea 
-          style={{width: '90%', height: '230px'}}
-          placeholder='Add a description'
-          onChange={(event)=>{setDescription(event.target.value)}}
-        >
-          {description}
-        </textarea>
+        <div style={{width: '90%'}}>
+          <Typography variant="bodyText" className="color-dark-teal mt-2" sx={{textAlign: 'left'}}>Description</Typography>
+          <textarea 
+            style={{width: '100%', height: '230px'}}
+            placeholder='Add a description'
+            onChange={(event)=>{setDescription(event.target.value)}}
+          >
+            {description}
+          </textarea>
+        </div>
       </div>
       <div className="d-flex justify-content-end mx-5" style={{flexDirection: "row"}}>
         <TealBotton onClick={handleSaveDescription} style={{width: 'auto'}}>Save</TealBotton>
@@ -164,11 +166,11 @@ function ChecklistGroup({group}) {
   }
   return (
     <div className="border-radius-med px-5 py-4 bg-white mb-4">
-      <div className="d-flex" onClick={() => {setOpen(!open)}} style={{cursor: 'pointer'}}>
-        <div className="justify-content-start" style={{flex: 10}}>
+      <div className="d-flex justify-content-between" onClick={() => {setOpen(!open)}} style={{cursor: 'pointer'}}>
+        <div>
           <Typography variant="heading3" className="color-dark-teal">{group.name}</Typography>
         </div>
-        <div className="justify-content-end" style={{flex: 1}}>
+        <div className="me-2">
           { open ? <KeyboardArrowUpIcon className="color-medium-teal" sx={{justifyContent: 'end'}}/>
             : <KeyboardArrowDownIcon className="color-medium-teal" sx={{justifyContent: 'end'}}/>
           }
@@ -218,6 +220,7 @@ function ChecklistModal({city, tripId}) {
   const handleCloseAddItemModal = () => {
     setOpenAddItemModal(false);
     setNewItem('');
+    setDescription('');
   };
   const handleClickAddItemToGroup = (event) => {
     setOptions({
@@ -232,10 +235,17 @@ function ChecklistModal({city, tripId}) {
         groups.push(key);
       }
     });
-    console.log(groups);
+    let checklistTemp = []
+    checklist.map((group) => {
+      if (groups.includes(group.name)) {
+        group.items.push({item: newItem, checked: false, 'description': description})
+      }
+      checklistTemp.push(group);
+    })
+    setChecklist(checklistTemp);
     addNewItem(city.id, newItem, groups, description);
-    getCityChecklist();
     handleCloseAddItemModal();
+    getCityChecklist();
   }
   const handleOpenNewGroupModal = () => {
     setOpenNewGroupModal(true);

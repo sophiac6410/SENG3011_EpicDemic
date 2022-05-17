@@ -28,8 +28,8 @@ const useStyles = makeStyles((theme) => ({
 const GenericSearch = ({ fieldLabel, options, handleInput }) => {
     const classes = useStyles();
     return (
-        <div className="searchfield-container bg-white border-radius-large">
-            <div style={{ display: "flex", alignItems: "center", flexDirection: "row"}} className="pe-1">
+        <div style={{backgroundColor: "white", borderRadius: "15px", border: "1px solid #0F83A0"}}>
+            <div className="search-row" style={{ display: "flex", alignItems: "center", flexDirection: "row"}}>
                 <div className="me-3">
                     <SearchIcon fontSize='medium'></SearchIcon>
                 </div>

@@ -31,7 +31,7 @@ export default function CountrySelect({isFrom, handleInput}) {
   const classes = useStyles();
 
   return (
-    <div style={{ display: "flex", alignItems: "center", flexDirection: "row", padding: '1%' }}>
+    <div style={{display: "flex", alignItems: "center", flexDirection: "row", padding: '1%' }}>
       <Autocomplete
         id="country-select-demo"
         classes={classes}
@@ -39,6 +39,7 @@ export default function CountrySelect({isFrom, handleInput}) {
         options={ isFrom ? aus : countries }
         value={ isFrom ? aus[0] : null}
         autoHighlight
+        clearOnBlur={false}
         // underlineShow={false}
         onChange={handleInput}
         getOptionLabel={(option) => option.label}
@@ -155,7 +156,7 @@ const countries = [
   //   label: 'Congo, Republic of the',
   //   phone: '242',
   // },
-  // { code: 'CH', label: 'Switzerland', phone: '41' },
+  { code: 'CH', label: 'China', phone: '41' },
   // { code: 'CI', label: "Cote d'Ivoire", phone: '225' },
   // { code: 'CK', label: 'Cook Islands', phone: '682' },
   // { code: 'CL', label: 'Chile', phone: '56' },
@@ -186,7 +187,7 @@ const countries = [
   // { code: 'DZ', label: 'Algeria', phone: '213' },
   // { code: 'EC', label: 'Ecuador', phone: '593' },
   { code: 'EE', label: 'Estonia', phone: '372' },
-  // { code: 'EG', label: 'Egypt', phone: '20' },
+  { code: 'EG', label: 'Egypt', phone: '20' },
   // { code: 'EH', label: 'Western Sahara', phone: '212' },
   // { code: 'ER', label: 'Eritrea', phone: '291' },
   { code: 'ES', label: 'Spain', phone: '34' },

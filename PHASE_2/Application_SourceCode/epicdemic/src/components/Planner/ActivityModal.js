@@ -49,8 +49,9 @@ const activityModalStyle = {
 };
 
 function ActivityModal({fromTrip, activities, tripId, city, updateActivity, country, savedActivity}) {
-  console.log(city)
   const [isOpen, setOpen] = React.useState(false);
+  //for planner modal
+  const [cityId, setCityId] = React.useState(0);
   // const [savedActivity, setSave] = React.useState([])
 
   const handleOpen = () => {
@@ -66,6 +67,10 @@ function ActivityModal({fromTrip, activities, tripId, city, updateActivity, coun
     updateActivity()
   }
   const [stepThree, setStepThree] = React.useState(false)
+
+  const updateCityId = (cityKey) => {
+    setCityId(cityKey)
+  }
 
   const randomGenerator = () => {
     setStepThree(true)
@@ -134,7 +139,7 @@ function ActivityModal({fromTrip, activities, tripId, city, updateActivity, coun
           >
             {activities.map((activity, id) => {
               if(activity !== null && city !== null) {
-                return <ActivityCard key={activity.id} activity={activity} city={city} tripId={tripId} country={country} isSave={isSave(activity.id)}></ActivityCard>
+                return <ActivityCard key={activity.id} activity={activity} city={city} tripId={tripId} country={country} isSave={isSave(activity.id)} updateCityId={updateCityId} cityId={cityId}></ActivityCard>
               } else {
                 return <Typography variant="bodyText">No activities to book here. Maybe just sightseeing?</Typography>
               }

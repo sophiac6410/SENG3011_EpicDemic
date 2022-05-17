@@ -4,29 +4,28 @@ import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import WorldMap from "../static/hexworldmap.svg";
 import "../styles/DestinationFinder.css";
 import GenericSearch from "../components/GenericSearch";
-import InfoRow from "../components/DestinationFinder/InfoRow";
-import InfoRow2 from "../components/DestinationFinder/InfoRow2";
-import HeaderInfoRow from "../components/DestinationFinder/HeaderInfoRow";
-import HeaderInfoRow2 from "../components/DestinationFinder/HeaderInfoRow2";
-import HexTeal from "../static/hexteal.svg";
-import HexMedTeal from "../static/hexmedteal.svg";
-import HexWhite from "../static/hexwhite.svg";
-import BalloonBackground from "../static/balloontravel.jpg"
-import { DarkButton, WhiteButton } from "../styles/Button";
 import NavbarComp from "../components/NavBar";
 import Typography from '@mui/material/Typography';
 import { getAllLocations, getUserSaved } from "../apiCalls";
-import { travelStatus } from "../styles/Theme";
+import { travelStatus, adviceLevel } from "../styles/Theme";
+import CountryCard from "../components/DestinationFinder/CountryCard.js"
+import Search from "../components/Home/Search";
+import CountrySelect from "../components/Home/CountrySearchBox";
+import CountrySearch from "../components/DestinationFinder/CountrySearch"
+import SearchIcon from '@mui/icons-material/Search';
+import IconButton from '@mui/material/IconButton';
+
+
+const allCountries = [];
 
 const DestinationFinder = () => {
-    // const [infoRows, setInfoRows] = useState([]);
-    const [destinations, setDestinations] = useState([]);
-    const [popularDestinations, setPopularDestinations] = useState([]);
+    const [countries, setCountries] = useState([]);
     const [savedLocations, setSavedLocations] = useState([]);
     const [searchFilter, setSearchFilter] = useState({
         "region": null,
         "advice": null,
         "travel": null,
+        "country": null
     });
 
     let navigate = useNavigate(); 
@@ -35,128 +34,115 @@ const DestinationFinder = () => {
         async function fetchData () {
             let locations = await getAllLocations();
             console.log(locations);
-            setDestinations(locations);
+            for (var country of locations) {
+                allCountries.push({...country})
+            }
+            setCountries(locations);
+            
             let user = await getUserSaved();
             setSavedLocations(user.saved_locations);
+            console.log('================');
             console.log(user.saved_locations);
         }
-        // setInfoRows([...infoRowData]);
         fetchData();
-        setPopularDestinations([...popularDestinationsData]);
     }, []);
-
-    const getDate = (date) => {
-		const dateObj = new Date(date);
-		return dateObj;
-	}
 
     const updateSearch = (k, v) => {
         var newSearch = {...searchFilter}
         newSearch[k] = v;
+
+        console.log("=====NEW SEARCH=====")
+        console.log(newSearch);
+
         setSearchFilter(newSearch);
+    }
+
+    const filterCountries = () => {
+        var filtered = [];
+    
+        for (var country of allCountries) {
+            filtered.push({...country})
+        }
+
+        if (searchFilter.region === null && searchFilter.travel === null && searchFilter.advice === null && searchFilter.country === null) {
+            setCountries(filtered);
+        }        
+        
+        if (searchFilter.region !== null) {
+            filtered = filtered.filter((country) => {
+                return country.region === searchFilter.region.label
+            })
+        }
+
+        if (searchFilter.travel !== null) {
+            filtered = filtered.filter((country) => {
+                return travelStatus(country.travel_status) === searchFilter.travel.label
+            })
+        }
+
+        if (searchFilter.advice !== null) {
+            filtered = filtered.filter((country) => {
+                return adviceLevel(country.advice_level) === searchFilter.advice.label
+            })
+        }
+
+        if (searchFilter.country !== null) {
+            filtered = filtered.filter((country) => {
+                return country.country === searchFilter.country.label
+            })
+        }
+
+        setCountries(filtered);
     }
 
     return (
         <div className="bg-off-white">
-            
-            <div className="bg-plane">
-            <div className="bg-plane-overlay">
-                <NavbarComp bg={false}/>
-                <div className="text-center mb-5" style={{marginTop: "250px"}}>
-                    <Typography variant="title" className="color-white mt-5">FIND A DESTINATION BY...</Typography>
+            <div className="bg-plane"/>
+            <NavbarComp bg={false}/>
+            <div style={{height: "40vh", position: "relative"}}>
+                <div className="text-center mb-5" style={{ marginTop: "10vh" }}>
+                    <Typography variant="title" className="color-white mt-5">WHERE WILL YOU GO NEXT?</Typography>
                 </div>
-                <Row style={{margin: "3% 5% 1%"}} className="justify-content-center">
-                    <Col className="pe-5 ps-5">
-                        <GenericSearch fieldLabel={"Region"} options={regionOptions} handleInput={(e, v) => updateSearch("region", v)}/>
-                    </Col>
-                    <Col className="pe-5 ps-5">
-                        <GenericSearch fieldLabel={"Advice Level"} options={adviceLevelOptions} handleInput={(e, v) => updateSearch("advice", v)}/>
-                    </Col>
-                    <Col className="pe-5 ps-5" style={{paddingBottom: '10%'}}>
-                        <GenericSearch fieldLabel={"Travel Status"} options={travelStatusOptions} handleInput={(e, v) => updateSearch("travel", v)}/>
-                    </Col>
-                </Row>
-                {/*<div style={{paddingBottom: '5%'}}>
-                    <WhiteButton onClick={() => console.log(searchFilter)} sx={{display: 'block', margin: 'auto', marginTop: '3%'}}>Search</WhiteButton>
-                </div> */}
-                </div> 
-            </div>
-            
-            
-            <Row style={{"margin": "5%", "padding": '1%', "marginTop": "10vh"}}>
-                {/* <Container fluid className="latest-updates"> */}
-                <HeaderInfoRow/>
-                <Container style={{height: '80vh', overflowY: 'scroll'}}>
-                    {destinations.map((dest, idx) => {
-                        if (searchFilter.travel === null || searchFilter.travel.label === travelStatus(dest.travel_status)) {
-                            return (
-                                <InfoRow
-                                key={idx}
-                                code={dest.id}
-                                country={dest.country}
-                                updateDesc={dest.entry_description}
-                                lastUpdated={getDate(dest.last_update)}
-                                travelStat={dest.travel_status}
-                                saved={savedLocations.includes(dest.id)}
-                                />
-                            )
-                        } else {
-                            return <></>
-                        }
-                        })}
-                    </Container>
-                {/* </Container> */}
-            </Row>
-            <Row className="map-section">
-                <Typography variant="heading1">TRAVEL REGULATIONS MAP</Typography>
-                <Image className="world-map" src={WorldMap}/>
-            </Row>
-            <Row className="map-legend">
-                <Col style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
-                    <Image style={{"marginRight" : "1vw"}} src={HexTeal}/>
-                    Closed
-                </Col>
-                <Col style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
-                    <Image style={{"marginRight" : "1vw"}} src={HexWhite}/>
-                    Open with restrictions
-                </Col>
-                <Col style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}}>
-                    <Image style={{"marginRight" : "1vw"}} src={HexMedTeal}/>
-                    Open
-                </Col>
-            </Row>
-            <Row style={{marginTop: "15vh"}}>
-                <Container fluid style={{margin: '8% 0%'}}>
-                    <Row>
-                        <Col md={4}>
-                            <Image className="balloon-background" src={BalloonBackground}/>
-                        </Col>
-                        <Col md={7} style={{marginTop: 0}}>
-                            <Typography variant="heading1">MOST POPULAR TRAVEL DESTINATIONS</Typography>
-                            <HeaderInfoRow2/>
-                            <Container style={{height: '55vh', overflowY: 'scroll', marginBottom: '3%'}}>
-                            {popularDestinations.map((popDest, idx) => {
-                                return (
-                                    <InfoRow2
-                                    key={idx}
-                                    country={popDest.country}
-                                    arrivals={popDest.arrivals}
-                                    travelStat={popDest.travelStatus}
-                                    />
-                                    )
-                                })}
-                            </Container>
-                            <DarkButton
-                                sx={{display: 'block', margin: 'auto'}}
-                                onClick={() => {
-                                    navigate('/saved');
-                                }}
+                
+                <div className="border-radius-large searchfield-container ps-5 pe-5">
+                    <div style={{ display: "flex", backgroundColor: "white", padding: "3px 15px", borderRadius: "30px" }}>
+                        <CountrySearch handleInput={(e, v) => updateSearch("country", v)}></CountrySearch>
+                        <div className="bg-dark-teal border-radius-med text-center" style={{ padding: 0, marginRight: 5 }}>
+                            <IconButton
+                                aria-label="search"
+                                onClick={filterCountries}
                             >
-                                Recommend me a destination
-                            </DarkButton>
+                                <SearchIcon sx={{ color: "white", padding: 0, fontSize: 20, m: 1.5}}/>
+                            </IconButton>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="text-center mb-5" style={{ position: "absolute", margin: "auto", bottom: "3vh", left: 0, right: 0, marginLeft: "5%", marginRight: "5%"}}>
+                    <Typography variant="title" className="color-white mt-5">OR FIND A DESTINATION BY...</Typography>
+                </div>
+
+                <div style={{backgroundColor: "white", padding: "15px 30px", position: "absolute", bottom: "-5vh", margin: "auto", left: 0, right: 0, marginLeft: "5%", marginRight: "5%", borderRadius: "20px", boxShadow: "0px 0px 12px 0px black" }}>
+                    <Row className="justify-content-center">
+                        <Col className="pe-5 ps-5">
+                            <GenericSearch fieldLabel={"Region"} options={regionOptions} handleInput={(e, v) => updateSearch("region", v)}/>
+                        </Col>
+                        <Col className="pe-5 ps-5">
+                            <GenericSearch fieldLabel={"Advice Level"} options={adviceLevelOptions} handleInput={(e, v) => updateSearch("advice", v)}/>
+                        </Col>
+                        <Col className="pe-5 ps-5">
+                            <GenericSearch fieldLabel={"Travel Status"} options={travelStatusOptions} handleInput={(e, v) => updateSearch("travel", v)}/>
                         </Col>
                     </Row>
-                </Container>
+                </div>
+            </div>
+            
+            <Row style={{"marginLeft": "6vw", "marginRight": "6vw", "marginTop": "10vh", "marginBottom": "10vh"}}>
+                <div className="image-gallery">
+                    {countries.map((country, idx) => {
+                        return(<CountryCard key={country.id} code={country.id} country={country.country} status={country.travel_status} saved={savedLocations.includes(country.id)}/>)
+                    })}
+                </div>
             </Row>
         </div>
     );
@@ -169,87 +155,21 @@ const regionOptions = [
     { code: 'SEA', label: 'South-East Asia', imageUrl: 'test' },
     { code: 'EMED', label: 'Eastern Mediterranean', imageUrl: 'test' },
     { code: 'WP', label: 'Western Pacific', imageUrl: 'test' },
-    { code: 'AMER', label: 'Americas', imageUrl: 'test' },
+    { code: 'NA', label: 'North America', imageUrl: 'test' },
     { code: 'AF', label: 'Africa', imageUrl: 'test' },
 ]
 
 const adviceLevelOptions = [
-    { code: '4', label: 'Regular Precautions', imageUrl: 'test' },
-    { code: '3', label: 'Exercise Caution', imageUrl: 'test' },
+    { code: '0', label: 'Regular Precautions', imageUrl: 'test' },
+    { code: '1', label: 'Exercise Caution', imageUrl: 'test' },
     { code: '2', label: 'Reconsider your need for travel', imageUrl: 'test' },
-    { code: '1', label: 'Do not travel', imageUrl: 'test' },
+    { code: '3', label: 'Do not travel', imageUrl: 'test' },
 ]
 
 const travelStatusOptions = [
     { code: 'O', label: 'Open', imageUrl: 'test' },
     { code: 'R', label: 'Open with Restrictions', imageUrl: 'test' },
     { code: 'C', label: 'Closed', imageUrl: 'test' }
-]
-
-const infoRowData = [
-    { 
-        country: 'France', 
-        latestUpdate: 'Unvaccinated travelers can now travel to France provided that they have compelling reasons or pressing grounds',
-        lastUpdated: new Date(2022, 3, 31),
-        travelStatus: 'Open with Restrictions',
-        saved: false      
-    },
-    { 
-        country: 'Phillipines', 
-        latestUpdate: 'Fully vaccinated nationals of non-visa required countries under Executive Order No. 408 (s.1960) as amended, shall be allowed to enter the Philippines',
-        lastUpdated: new Date(2022, 3, 22),
-        travelStatus: 'Open with Restrictions',
-        saved: true      
-    },
-    { 
-        country: 'Ukraine', 
-        latestUpdate: 'The Russian invasion of Ukraine is ongoing. The security situation continues to be volatile and is deteriorating rapidly. Infrastructure and military...',
-        lastUpdated: new Date(2022, 3, 20),
-        travelStatus: 'Open with Restrictions',
-        saved: true      
-    },
-    { 
-        country: 'China', 
-        latestUpdate: 'Pre-departure requirements for travel to china from Australia have changed. In addition to meeting visa requirements, there are health testing requirements',
-        lastUpdated: new Date(2022, 3, 15),
-        travelStatus: 'Closed',
-        saved: false      
-    },
-    { 
-        country: 'China', 
-        latestUpdate: 'Pre-departure requirements for travel to china from Australia have changed. In addition to meeting visa requirements, there are health testing requirements',
-        lastUpdated: new Date(2022, 3, 15),
-        travelStatus: 'Closed',
-        saved: true      
-    },
-    { 
-        country: 'China', 
-        latestUpdate: 'Pre-departure requirements for travel to china from Australia have changed. In addition to meeting visa requirements, there are health testing requirements',
-        lastUpdated: new Date(2022, 3, 15),
-        travelStatus: 'Closed',
-        saved: true      
-    },
-    { 
-        country: 'China', 
-        latestUpdate: 'Pre-departure requirements for travel to china from Australia have changed. In addition to meeting visa requirements, there are health testing requirements',
-        lastUpdated: new Date(2022, 3, 15),
-        travelStatus: 'Closed',
-        saved: true      
-    },
-    { 
-        country: 'China', 
-        latestUpdate: 'Pre-departure requirements for travel to china from Australia have changed. In addition to meeting visa requirements, there are health testing requirements',
-        lastUpdated: new Date(2022, 3, 15),
-        travelStatus: 'Closed',
-        saved: true      
-    },
-    { 
-        country: 'China', 
-        latestUpdate: 'Pre-departure requirements for travel to china from Australia have changed. In addition to meeting visa requirements, there are health testing requirements',
-        lastUpdated: new Date(2022, 3, 15),
-        travelStatus: 'Closed',
-        saved: true      
-    }
 ]
 
 const popularDestinationsData = [

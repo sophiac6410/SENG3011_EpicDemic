@@ -1,23 +1,12 @@
-.plane-background{
-    height: 50vh;
-    position:relative;
-    z-index: 10;
-    padding: 0;
-}
-
-.bg-plane-overlay {
-    background-color: #1B4965;
-    opacity: 0.8;
-}
-
 .bg-plane{
-    background-image: url(https://img.delicious.com.au/Cv626hxY/del/2020/05/we-could-be-bidding-guests-adieu-much-sooner-than-expected-according-to-the-proposed-new-timetable-to-restart-tourism-133254-2.jpg);
+    background-image: url(./../static/plane.svg);
     background-size: cover;
-    opacity: 1;
-}
-
-.bg-plane::after{
-    opacity:1;
+    height: 60vh;
+    width: 100%;
+    position: absolute;
+    z-index: 0;
+    padding: 0;
+    box-shadow: inset 0 0 0 100vmax rgba(27, 73, 101, 0.8)
 }
 
 .balloon-background{
@@ -27,6 +16,15 @@
 
 .world-map{
     width: 70vw;
+}
+
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-row-gap: 30px;
+    grid-column-gap: 30px;
+    height: 80vh;
+    overflow-y: scroll;
 }
 
 .filter-destination{
