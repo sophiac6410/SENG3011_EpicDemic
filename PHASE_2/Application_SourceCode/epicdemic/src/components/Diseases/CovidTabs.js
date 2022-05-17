@@ -92,43 +92,14 @@ export default function CovidTabs({casesChartData}) {
         <div className="mx-5" style={{flex: 1}}>
           <Typography variant="title" className="color-dark-grey">{checked ? 'Deaths' : 'Cases'}</Typography>
         </div>
-        <div style={{flex: 1, display: 'flex', marginLeft: '250px'}}>
-          <div>
-            <Typography variant="bodyHeading" sx={{textAlign: 'right'}}>Cases</Typography>
-          </div>
-          <div className="mx-3">
-            <Switch
-              checked={checked}
-              onChange={() => setChecked(!checked)}
-              onColor={lightTeal}
-              onHandleColor={mediumTeal}
-              handleDiameter={30}
-              uncheckedIcon={false}
-              checkedIcon={false}
-              height={20}
-              width={48}
-              className="react-switch align-self-center"
-              id="material-switch"
-              />
-          </div>
-          <div>
-            <Typography variant="bodyHeading">Deaths</Typography>
-          </div>
-        </div>
       </div>
-      {
-        !checked 
-        ? <>
-          <LineChart width={650} height={450} data={casesChartData}>
-            <Line type="monotone" dataKey="data" stroke="#0F83A0"/>
-            <XAxis dataKey="name" tickCount={casesChartData.length}/>
-            <YAxis tickFormatter={DataFormatter}/>
-          </LineChart>
-          </>
-        : <>
-            <img src={new_cases} style={{ width: "650px" }}></img>
-          </>
-      }
+      <>
+      <LineChart width={650} height={450} data={casesChartData}>
+        <Line type="monotone" dataKey="data" stroke="#0F83A0"/>
+        <XAxis dataKey="name" tickCount={casesChartData.length}/>
+        <YAxis tickFormatter={DataFormatter}/>
+      </LineChart>
+      </>
       {/* <TabsUnstyled defaultValue={0}>
         <TabsList>
           <Tab><Typography variant="bodyHeading">Cases</Typography></Tab>

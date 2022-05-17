@@ -20,22 +20,22 @@ async def get_articles_by_query(
 	start_date: str = Query(
 		..., # no default, is required
 		description="Requests articles published after the start_date. Format: 'yyyy-MM-ddTHH:mm:ss'",
-		example="2021-01-01T10:10:10"
+		example="2021-01-01T10:10:10",
 	),
 	end_date: str = Query(
 		...,
 		description="Requests articles published before the end_date. Format: 'yyyy-MM-ddTHH:mm:ss'",
-		example="2023-01-01T10:10:10"
+		example="2023-01-01T10:10:10",
 	),
 	key_terms: Optional[str] = Query(
 		None, # is optional, default is None
 		description="Requests articles that include the key terms. Key words must be separated by a commas, e.g. 'Anthrax,Zika'",
-		example="Corona"
+		example="Corona",
 	),
 	timezone: Optional[str] = Query(
 		"Australia/Sydney",
 		description="The timezone of the start_date and end_date. Must be in the pytz format.",
-		example="Australia/Sydney"
+		example="Australia/Sydney",
 	),
 	start_range: Optional[int] = Query(
 		1,
@@ -50,6 +50,7 @@ async def get_articles_by_query(
 		ge=1
 	)
 ):
+
 	if re.fullmatch(DATETIME_REGEX, start_date) == None or re.fullmatch(DATETIME_REGEX, end_date) == None:
 		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Date must be in the format yyyy-mm-ddTHH:mm:ss"}))
 	if timezone not in pytz.all_timezones:
@@ -62,11 +63,10 @@ async def get_articles_by_query(
 		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Start date must be earlier than end date."}))
 	if end_range < start_range:
 		return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=baseModels.createResponse(False, 400, {"error": "Start range must be less than end range."}))
-	
+
 	terms_list = [".*"]
 	if key_terms != None and key_terms != "":
 		terms_list = key_terms.split(',')
-
 	articles = list(articles_col.aggregate([
 		{"$match": {
 			"date_of_publication": {"$gte": start_date, "$lte": end_date},
