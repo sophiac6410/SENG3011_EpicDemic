@@ -42,7 +42,7 @@ const SavedLocations = () => {
 
     return (
         <Container fluid style={{"overflowX": "hidden", "paddingLeft": 0, "paddingRight": 0, "marginLeft": 0, "marginRight": 0, "backgroundColor": "#EEF5FF"}}>  
-            <div style={{backgroundImage: `url(${HappyFamily2})`, backgroundSize: 'cover', height: '400px'}}> 
+            <div style={{backgroundImage: `url(https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8&w=1000&q=80)`, backgroundSize: 'cover', height: '400px'}}> 
                 <div className="bg-dark-teal justify-content-center align-items-center" style={{opacity: 0.8, height: '100%'}}>
                     <NavbarComp bg={false}></NavbarComp>
                     <div className="color-white mt-5 pt-5 d-flex justify-content-center">
