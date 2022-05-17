@@ -48,7 +48,7 @@ const GenericSearch = ({ fieldLabel, options, handleInput }) => {
                             label={fieldLabel}
                             inputProps={{
                                 ...params.inputProps,
-                                autoComplete: 'new-password'
+                                autoComplete: 'off'
                             }}
                         />
                         )}

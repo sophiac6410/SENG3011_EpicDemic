@@ -65,7 +65,7 @@ export default function CountrySelect({isFrom, handleInput}) {
             {...params}
             inputProps={{
               ...params.inputProps,
-              autoComplete: 'new-password', // disable autocomplete and autofill
+              autoComplete: "off", // disable autocomplete and autofill
               // disableUnderline: true,
             }}
           />
