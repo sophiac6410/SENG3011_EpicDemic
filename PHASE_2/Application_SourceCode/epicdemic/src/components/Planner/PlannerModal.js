@@ -42,8 +42,6 @@ import AddCityCard from "./AddCityCard";
 
 const { allCountries } = require('./CountryField');
 
-
-
 const style = {
   position: 'absolute',
   top: '50%',
@@ -146,7 +144,7 @@ function StepOne({isOpen, onClose, onNext}) {
                     // input: {color},
                     // label: {color}
                   }}
-                  inputProps={{...params.inputProps, placeholder: "Start date"}}/>
+                  inputProps={{...params.inputProps, autoComplete: 'off', placeholder: "Start date"}}/>
               }
             />
           </LocalizationProvider>
@@ -172,7 +170,7 @@ function StepOne({isOpen, onClose, onNext}) {
                     // input: {color},
                     // label: {color}
                   }}
-                  inputProps={{...params.inputProps, placeholder: "End date"}}/>
+                  inputProps={{...params.inputProps, autoComplete: 'off', placeholder: "End date"}}/>
               }
             />
           </LocalizationProvider>

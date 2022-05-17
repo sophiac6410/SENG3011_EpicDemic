@@ -36,6 +36,7 @@ export default function CountrySelect({handleInput}) {
         classes={classes}
         sx={{ width: 250 }}
         options={countries}
+        popupIcon={""}
         autoHighlight
         onChange={handleInput}
         getOptionLabel={(option) => option.label}
@@ -53,13 +54,13 @@ export default function CountrySelect({handleInput}) {
         )}
         renderInput={(params) => (
           <TextField
-            placeholder={'Choose a travel destination...'}
+            placeholder={'Search a travel destination...'}
             variant="standard"
             size="large"
             {...params}
             inputProps={{
               ...params.inputProps,
-              autoComplete: 'new-password', // disable autocomplete and autofill
+              autoComplete: 'off', // disable autocomplete and autofill
             }}
           />
         )}

@@ -40,7 +40,7 @@ export default function TinyCountrySelect({fieldLabel}) {
               label={fieldLabel}
               inputProps={{
                 ...params.inputProps,
-                autoComplete: 'new-password', // disable autocomplete and autofill
+                autoComplete: 'off', // disable autocomplete and autofill
               }}
               // if this is removed, auto-fill works
               // InputProps={{

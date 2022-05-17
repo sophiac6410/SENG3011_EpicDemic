@@ -18,6 +18,9 @@ const GenericSearch = ({ fieldLabel }) => {
                         style={{"width": "20vw"}}
                         variant="standard"
                         label={fieldLabel}
+                        inputProps = {{
+                            autoComplete: 'off',
+                        }}
                     />
                 </div>
             </div>
