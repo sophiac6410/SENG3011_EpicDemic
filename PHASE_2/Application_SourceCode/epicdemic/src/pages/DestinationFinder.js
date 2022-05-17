@@ -112,9 +112,9 @@ const DestinationFinder = () => {
                 </div>
                 
                 <div className="border-radius-large searchfield-container ps-5 pe-5">
-                    <div style={{ display: "flex", backgroundColor: "white", padding: "5px", borderRadius: "15px" }}>
+                    <div style={{ display: "flex", backgroundColor: "white", padding: "3px 20px", borderRadius: "30px" }}>
                         <CountrySelect isFrom={false} handleInput={(e, v) => updateSearch("country", v.label)}></CountrySelect>
-                        <div className="bg-dark-teal border-radius-med text-center" style={{ padding: 0, marginRight: 15 }}>
+                        <div className="bg-dark-teal border-radius-med text-center" style={{ padding: 0, marginRight: 5 }}>
                             <IconButton
                                 aria-label="search"
                                 onClick={filterCountries}
