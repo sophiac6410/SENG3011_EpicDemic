@@ -146,28 +146,30 @@ const GlobalUpdate = () => {
           }
         </Col>
         <Col className="flex-end pb-4 ms-5">
-          <MapContainer
-            className="leaflet-container1"
-            center={[35, 25]} 
-            zoom={2}
-            zoomControl={false}
-            minZoom={2}
-            maxBounds={bounds}
-            maxBoundsViscosity={0.7}
-          >
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-              url='https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png'
-              subdomains='abcd'
-            />
-              {cases.map((elem) => 
-                <Marker
-                  id={elem.id}
-                  position={[elem.latitude, elem.longitude]}
-                  icon={getMarkerIcon(elem.cases)}
-                />
-              )}
-          </MapContainer>
+          <Row>
+            <MapContainer
+              className="leaflet-container1"
+              center={[35, 25]} 
+              zoom={2}
+              zoomControl={false}
+              minZoom={2}
+              maxBounds={bounds}
+              maxBoundsViscosity={0.7}
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                url='https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png'
+                subdomains='abcd'
+              />
+                {cases.map((elem) => 
+                  <Marker
+                    id={elem.id}
+                    position={[elem.latitude, elem.longitude]}
+                    icon={getMarkerIcon(elem.cases)}
+                  />
+                )}
+            </MapContainer>
+          </Row>
         </Col>
       </Row>
     </Col>
