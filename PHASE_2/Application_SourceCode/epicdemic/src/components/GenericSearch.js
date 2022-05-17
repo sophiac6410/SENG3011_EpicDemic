@@ -29,9 +29,6 @@ const GenericSearch = ({ fieldLabel, options, handleInput }) => {
     return (
         <div style={{backgroundColor: "white", borderRadius: "15px", border: "1px solid #0F83A0"}}>
             <div className="search-row" style={{ display: "flex", alignItems: "center", flexDirection: "row"}}>
-                <div className="me-3">
-                    <SearchIcon fontSize='medium'></SearchIcon>
-                </div>
                 <Autocomplete
                     sx={{ width: 200 }}
                     classes={classes}

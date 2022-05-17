@@ -51,9 +51,6 @@ const DestinationFinder = () => {
         var newSearch = {...searchFilter}
         newSearch[k] = v;
 
-        console.log("=====NEW SEARCH=====")
-        console.log(newSearch);
-
         setSearchFilter(newSearch);
     }
 
@@ -107,14 +104,15 @@ const DestinationFinder = () => {
                 <div className="border-radius-large searchfield-container ps-5 pe-5">
                     <div style={{ display: "flex", backgroundColor: "white", padding: "3px 15px", borderRadius: "30px" }}>
                         <CountrySearch handleInput={(e, v) => updateSearch("country", v)}></CountrySearch>
-                        <div className="bg-dark-teal border-radius-med text-center" style={{ padding: 0, marginRight: 5 }}>
+                        {/* <div className="bg-dark-teal border-radius-med text-center"> */}
                             <IconButton
                                 aria-label="search"
+                                sx={{ borderRadius: "25px", backgroundColor: "#1B4965" }}
                                 onClick={filterCountries}
                             >
-                                <SearchIcon sx={{ color: "white", padding: 0, fontSize: 20, m: 1.5}}/>
+                                <SearchIcon sx={{ color: "white", padding: 0, fontSize: 20, m: 1}}/>
                             </IconButton>
-                        </div>
+                        {/* </div> */}
                     </div>
                 </div>
 
