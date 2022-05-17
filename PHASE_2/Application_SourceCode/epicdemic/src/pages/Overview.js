@@ -20,6 +20,8 @@ import CircleIcon from '@mui/icons-material/Circle';
 import WarningIcon from '@mui/icons-material/Warning';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import { adviceLevel, adviceLevelColor, travelStatus, travelStatusColor, safetyScore, safteyScoreColor, diseaseRisk, diseaseRiskColor, safteyScore } from "../styles/Theme"
+import { TailSpin } from "react-loader-spinner"
+
 
 const intro = "Philippines, island country of Southeast Asia in the western Pacific Ocean. It is an archipelago consisting of more than 7,000 islands and islets lying about 500 miles (800 km) off the coast of Vietnam. Manila is the capital, but nearby Quezon City is the country’s most-populous city."
 const safetySource = "The safety and security ratings determined by GeoSure GeoSafeScores which analyzes crime, health and economic data, official travel alerts, local reporting and a variety of other sources.  Scores go from 1 (not likely) to 100 (very likely)."
@@ -57,12 +59,13 @@ function Overview() {
   const [dest, setDest] = useState(null);
   const [safetyData, setSafetyData] = useState(null);
   const { code } = useParams();
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (code === null) return;
     
     async function fetchData() {
-      
+      setLoading(true)
       const covid = await fetch(`https://disease.sh/v3/covid-19/countries/${code}?strict=true`).then(res => res.json())
       var newData = {
         code: code,
@@ -99,7 +102,12 @@ function Overview() {
 
       setData(newData);
 
-      const locationData = await fetch(`http://localhost:8000/v1/locations/${code}`).then(res => res.json())
+      const locationData = await fetch(`http://localhost:8000/v1/locations/${code}`).then(
+        res => {
+          setLoading(false)
+          return res.json()
+        }
+      )
       
       console.log(locationData);
       setDest({
@@ -113,7 +121,6 @@ function Overview() {
         diseaseRisk: parseInt(locationData.data.disease_risk)
       })
     }
-
     fetchData();
   }, [code])
   
@@ -125,150 +132,152 @@ function Overview() {
 
   if (data == null || dest == null || safetyData == null) {
     return (
-      <div/>
+      <div style={{display: "flex", marginBottom: "500px", marginTop: "200px"}} className="flex-row justify-content-center align-items-center">
+        <TailSpin color='#70C4E8'></TailSpin>
+      </div>    
     )
   }
 
   return(
-    <>
-    <Container style={{margin: '0% 15%', width: 'auto'}}>
-      <Row>
-        <Col>
-          <MapContainer
-            className="leaflet-container3"
-            center={getCentre()} 
-            zoom={5}
-            zoomControl={false}
-            minZoom={5}
-            maxBounds={bounds}
-            maxBoundsViscosity={0.7}
-          >
-            <TileLayer
-              subdomains='abcd'
-              accessToken={jawgAccess}
-              attribution='<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url='https://{s}.tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token={accessToken}'
-            />
-          </MapContainer>
-        </Col>
-        <Col>
-          <div className="align-items-center border-radius-med shadow mt-4">
-            <div className="py-4 px-1 text-center border-radius-med" style={{borderRadius: '30px 0px 0px', backgroundColor: adviceLevelColor(dest.adviceLevel)}}>
-              <Typography variant="bodyImportant">OVERALL ADVICE: {adviceLevel(dest.adviceLevel).toUpperCase()}</Typography>
-            </div>
-            <div className="p-5 pt-4">
-              <Row className="align-items-center justify-content-start">
-                <Col md={4}>
-                  <Typography variant="bodyText" className="color-dark-teal ">TRAVEL STATUS</Typography>
-                </Col>
-                <Col md={1}>
-                  <CircleIcon style={{color: travelStatusColor(dest.travelStatus)}} sx={{fontSize: 18}}/>
-                </Col>
-                <Col className="pt-1">
-                <Typography variant="bodyImportant" className="color-dark-teal">{travelStatus(dest.travelStatus)}</Typography>
-                </Col>
-              </Row>
-              <Row className="align-items-center justify-content-start">
-                <Col md={4}>
-                <Typography variant="bodyText" className="color-dark-teal">SAFETY</Typography>
-                </Col>
-                <Col md={1}>
-                    <WarningIcon style={{color: safteyScoreColor(dest.safetyScore)}} sx={{fontSize: 20}}/>
-                </Col>
-                <Col className="pt-1 text-start">
-                  <Typography variant="bodyImportant" className="color-dark-teal">{safteyScore(dest.safetyScore)} levels of threat</Typography>
-                </Col>
-              </Row>
-              <Row className="align-items-center justify-content-start">
-                <Col md={4}>
-                <Typography variant="bodyText" className="color-dark-teal">DISEASE RISK</Typography>
-                </Col>
-                <Col md={1}>
-                    <LocalHospitalIcon style={{color: diseaseRiskColor(dest.diseaseRisk)}} sx={{fontSize: 20}}/>
-                </Col>
-                <Col className="pt-1">
-                  <Typography variant="bodyImportant" className="color-dark-teal">{diseaseRisk(dest.diseaseRisk)}</Typography>
-                </Col>
-              </Row>
-            </div>
-          </div>
-        </Col>
-      </Row>
-      <div className="shadow border-radius-med mt-5 mb-5">
-        <Row style={{"justify-content": "space-between", backgroundColor: safteyScoreColor(dest.safetyScore)}} className=" pt-1 pb-2 justify-content-center align-items-center">
-          <Col className="mx-5">
-            <Typography variant="heading2" className="py-1" style={{lineHeight: 1.6}}>SAFETY</Typography>
-            <div style={{flexDirection: "row", display: "flex"}}>
-                <WarningIcon></WarningIcon>
-                <Typography variant="bodyImportant" className="ms-3">{safteyScore(dest.safetyScore)} levels of threat</Typography>
-            </div>
-          </Col>
-          <Col md={3} className="text-center pt-3 pb-3 border-radius-med" style={{backgroundColor: safteyScoreColor(dest.safetyScore)}}>
-            <Row><Typography variant="title" sx={{p: 1}}>{dest.safetyScore}</Typography></Row>
-            <Row><Typography variant="bodyText" sx={{textAlign: 'center'}}>OVERALL SAFETY RATING</Typography></Row>
-          </Col>
-        </Row>
-        <ul>{SafetyBoard(safetyData)}</ul>
-        <Typography sx={{px: 10}}variant="caption" className="mt-5 mb-5">{safetySource}</Typography>
-      </div>
-      <div className="shadow border-radius-med mt-5 mb-5">
-        <div className="px-5 py-4 bg-light-blue mb-4">
-          <Typography variant="heading2" className="py-2">COVID-19 STATISTICS</Typography>
-        </div>
-        <Row className="mb-5 px-5 justify-content-start">
-          <Col md={5} className="pt-5 me-5">
-            <Typography variant="title" className="color-medium-teal mt-5">DECLINING</Typography>
-            <Typography variant="bodyHeading" className="color-medium-teal">CONDITION</Typography>
-            <div className="end">
-              <CircularProgressbarWithChildren
-                value={Math.round(data.vaccinationPercentage)}
-                styles={buildStyles({            
-                  strokeLinecap: 'butt',    
-                  pathColor: '#0F83A0',
-                  width: '20px'
-                })}
-                >
-                <div 
-                  className="medium-teal"
-                  style={{ textAlign: "center"}}
-                >
-                  <Typography variant="title">{data.vaccinationPercentage.toFixed(1)}%</Typography>
-                  <Typography variant="heading3">vaccinated</Typography>
-                </div>
-              </CircularProgressbarWithChildren>            
-            </div>
-            <Typography variant="title" className="medium-teal">{data.todayCases}</Typography>
-            <Typography variant="bodyHeading" className="medium-teal mb-5">CASES TODAY</Typography>
-          </Col>
-          <Col md={6} style={{alignItems: 'center', display: 'flex'}}>
+      <>
+      <Container style={{margin: '0% 15%', width: 'auto'}}>
+        <Row>
+          <Col>
             <MapContainer
-              className="leaflet-container2"
+              className="leaflet-container3"
               center={getCentre()} 
-              zoom={7}
+              zoom={5}
               zoomControl={false}
               minZoom={5}
               maxBounds={bounds}
               maxBoundsViscosity={0.7}
             >
               <TileLayer
-                attribution='Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ'
-                url='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'
-              />
-              <Marker 
-                id={1}
-                position={getCentre()}
-                icon={hugeMarkerIcon}
+                subdomains='abcd'
+                accessToken={jawgAccess}
+                attribution='<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url='https://{s}.tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token={accessToken}'
               />
             </MapContainer>
           </Col>
+          <Col>
+            <div className="align-items-center border-radius-med shadow mt-4">
+              <div className="py-4 px-1 text-center border-radius-med" style={{borderRadius: '30px 0px 0px', backgroundColor: adviceLevelColor(dest.adviceLevel)}}>
+                <Typography variant="bodyImportant">OVERALL ADVICE: {adviceLevel(dest.adviceLevel).toUpperCase()}</Typography>
+              </div>
+              <div className="p-5 pt-4">
+                <Row className="align-items-center justify-content-start">
+                  <Col md={4}>
+                    <Typography variant="bodyText" className="color-dark-teal ">TRAVEL STATUS</Typography>
+                  </Col>
+                  <Col md={1}>
+                    <CircleIcon style={{color: travelStatusColor(dest.travelStatus)}} sx={{fontSize: 18}}/>
+                  </Col>
+                  <Col className="pt-1">
+                  <Typography variant="bodyImportant" className="color-dark-teal">{travelStatus(dest.travelStatus)}</Typography>
+                  </Col>
+                </Row>
+                <Row className="align-items-center justify-content-start">
+                  <Col md={4}>
+                  <Typography variant="bodyText" className="color-dark-teal">SAFETY</Typography>
+                  </Col>
+                  <Col md={1}>
+                      <WarningIcon style={{color: safteyScoreColor(dest.safetyScore)}} sx={{fontSize: 20}}/>
+                  </Col>
+                  <Col className="pt-1 text-start">
+                    <Typography variant="bodyImportant" className="color-dark-teal">{safteyScore(dest.safetyScore)} levels of threat</Typography>
+                  </Col>
+                </Row>
+                <Row className="align-items-center justify-content-start">
+                  <Col md={4}>
+                  <Typography variant="bodyText" className="color-dark-teal">DISEASE RISK</Typography>
+                  </Col>
+                  <Col md={1}>
+                      <LocalHospitalIcon style={{color: diseaseRiskColor(dest.diseaseRisk)}} sx={{fontSize: 20}}/>
+                  </Col>
+                  <Col className="pt-1">
+                    <Typography variant="bodyImportant" className="color-dark-teal">{diseaseRisk(dest.diseaseRisk)}</Typography>
+                  </Col>
+                </Row>
+              </div>
+            </div>
+          </Col>
         </Row>
-        <Typography variant="caption" className="mb-5 px-5">{covidSource}</Typography>
-      </div>
-    </Container>
-    <Container style={{margin: '0% 10% 3%', width: 'auto'}}>
-      <NewsBar></NewsBar>
-    </Container>
-    </>
+        <div className="shadow border-radius-med mt-5 mb-5">
+          <Row style={{"justifyContent": "space-between", backgroundColor: safteyScoreColor(dest.safetyScore)}} className=" pt-1 pb-2 justify-content-center align-items-center">
+            <Col className="mx-5">
+              <Typography variant="heading2" className="py-1" style={{lineHeight: 1.6}}>SAFETY</Typography>
+              <div style={{flexDirection: "row", display: "flex"}}>
+                  <WarningIcon></WarningIcon>
+                  <Typography variant="bodyImportant" className="ms-3">{safteyScore(dest.safetyScore)} levels of threat</Typography>
+              </div>
+            </Col>
+            <Col md={3} className="text-center pt-3 pb-3 border-radius-med" style={{backgroundColor: safteyScoreColor(dest.safetyScore)}}>
+              <Row><Typography variant="title" sx={{p: 1}}>{dest.safetyScore}</Typography></Row>
+              <Row><Typography variant="bodyText" sx={{textAlign: 'center'}}>OVERALL SAFETY RATING</Typography></Row>
+            </Col>
+          </Row>
+          <ul>{SafetyBoard(safetyData)}</ul>
+          <Typography sx={{px: 10}}variant="caption" className="mt-5 mb-5">{safetySource}</Typography>
+        </div>
+        <div className="shadow border-radius-med mt-5 mb-5">
+          <div className="px-5 py-4 bg-light-blue mb-4">
+            <Typography variant="heading2" className="py-2">COVID-19 STATISTICS</Typography>
+          </div>
+          <Row className="mb-5 px-5 justify-content-start">
+            <Col md={5} className="pt-5 me-5">
+              <Typography variant="title" className="color-medium-teal mt-5">DECLINING</Typography>
+              <Typography variant="bodyHeading" className="color-medium-teal">CONDITION</Typography>
+              <div className="end">
+                <CircularProgressbarWithChildren
+                  value={Math.round(data.vaccinationPercentage)}
+                  styles={buildStyles({            
+                    strokeLinecap: 'butt',    
+                    pathColor: '#0F83A0',
+                    width: '20px'
+                  })}
+                  >
+                  <div 
+                    className="medium-teal"
+                    style={{ textAlign: "center"}}
+                  >
+                    <Typography variant="title">{data.vaccinationPercentage.toFixed(1)}%</Typography>
+                    <Typography variant="heading3">vaccinated</Typography>
+                  </div>
+                </CircularProgressbarWithChildren>            
+              </div>
+              <Typography variant="title" className="medium-teal">{data.todayCases}</Typography>
+              <Typography variant="bodyHeading" className="medium-teal mb-5">CASES TODAY</Typography>
+            </Col>
+            <Col md={6} style={{alignItems: 'center', display: 'flex'}}>
+              <MapContainer
+                className="leaflet-container2"
+                center={getCentre()} 
+                zoom={7}
+                zoomControl={false}
+                minZoom={5}
+                maxBounds={bounds}
+                maxBoundsViscosity={0.7}
+              >
+                <TileLayer
+                  attribution='Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ'
+                  url='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'
+                />
+                <Marker 
+                  id={1}
+                  position={getCentre()}
+                  icon={hugeMarkerIcon}
+                />
+              </MapContainer>
+            </Col>
+          </Row>
+          <Typography variant="caption" className="mb-5 px-5">{covidSource}</Typography>
+        </div>
+      </Container>
+      <Container style={{margin: '0% 10% 3%', width: 'auto'}}>
+        <NewsBar></NewsBar>
+      </Container>
+      </>
   )
 }
 

@@ -46,14 +46,20 @@ function Book() {
   // setSearch({destinationCode: dest})
 
   const [loading, setLoading] = React.useState(false)
+  const [pageloading, setPageloading] = useState(true)
+
 
   useEffect(() => {
     if(code == null) return
 
     async function getSearchData() {
+      setPageloading(true)
       const data = await getDestination(code);
-      const destination = await getIATA(data.latitude, data.longitude);
-
+      const destination = await getIATA(data.latitude, data.longitude)
+      .then(res => {
+        setPageloading(false)
+        return res
+      });
       setSearch({
         originCode: "SYD",
         destinationCode: destination, 
@@ -129,8 +135,13 @@ function Book() {
   })
 
   if(search == null) {
-    return <div/>
+    return (
+      <div style={{display: "flex", marginBottom: "500px", marginTop: "200px"}} className="flex-row justify-content-center align-items-center">
+        <TailSpin color='#70C4E8'></TailSpin>
+      </div>
+    )
   }
+
   return(
     <div className="mt-5" style={{margin: '0% 15%', width: 'auto'}}>
       <Typography variant="heading2">Book</Typography>

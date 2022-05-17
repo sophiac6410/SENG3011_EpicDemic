@@ -50,7 +50,7 @@ function Destination() {
 
   if (dest === null) {
     return (
-      <Footer/>
+      <div></div>
     )
   }
 

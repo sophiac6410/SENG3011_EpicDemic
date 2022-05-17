@@ -19,6 +19,7 @@ import StepContent from '@mui/material/StepContent';
 import StepButton from '@mui/material/StepButton';
 import { ThreeCircles } from "react-loader-spinner";
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
+import { TailSpin } from "react-loader-spinner"
 
 const validCheck = <p>
   Before you book your travel, check if you meet Australia’s definition of fully vaccinated for international travel purposes. To meet Australia’s vaccination requirements and be considered a ‘fully vaccinated’ traveller for the purpose of Australia’s border arrangements, you need to provide evidence that you either: 
@@ -74,6 +75,7 @@ function Travel(travelStat) {
   const { code } = useParams();
   const steps = ['BEFORE YOU TRAVEL', 'ENTERING THE REGION', "WHILE YOU'RE THERE",];
   const [activeStep, setActiveStep] = React.useState(0);
+  const [loading, setLoading] = useState(true)
 
   const defaultEnterChecks = [
     {title: "QUARANTINE RULES", date: "Last updated 23/02/22", text: "International travellers are not required to quarantine upon arrival. However, the CDC recommends that travellers stay home and self-quarantine for 7 days after arrival. Travellers should take a test again 3-5 days after arrival; if a test is not available or results are delayed, travellers are recommended to stay home and self-quarantine for a total of 10 days after travelling"},
@@ -86,12 +88,17 @@ function Travel(travelStat) {
     if(code == null) return;
 
     async function fetchData() {
-      const response = await fetch(`http://localhost:8000/v1/locations/${code}/travel`).then(res => res.json())
+      setLoading(true)
+      const response = await fetch(`http://localhost:8000/v1/locations/${code}/travel`)
+      .then(res => {
+        setLoading(false)
+        return res.json()
+      })
+
       const data = response.data
       console.log(data);
       var enterChecks = []
-      const country = await getDestination(code);
-
+      const country = await getDestination(code)
       if(data.quarantine == undefined){
         enterChecks[0] = defaultEnterChecks[0]
       }else{
@@ -255,13 +262,16 @@ function Travel(travelStat) {
       console.log(newData)
       // From the code, look up the relevant travel status details
       setData(newData)
+      // setLoading(false)
     }
     fetchData();
   }, [code])
 
   if(data == null) {
     return(
-      <div/>
+      <div style={{display: "flex", marginBottom: "500px", marginTop: "200px"}} className="flex-row justify-content-center align-items-center">
+        <TailSpin color='#70C4E8'></TailSpin>
+      </div>
     )
   }
 
@@ -322,7 +332,7 @@ function Travel(travelStat) {
     }
   }
   return(
-    <Container style={{margin: '0% 15%', width: 'auto'}}>
+    <div style={{margin: '0% 15%', width: 'auto'}} className="bg-off-white">
       <Col>
         <div className="d-flex">
           <Typography variant="bodyHeading" className="color-dark-teal me-4">TRAVEL STATUS</Typography>
@@ -344,29 +354,8 @@ function Travel(travelStat) {
             ))}
           </Stepper>
         </div>
-        {/* <div class="square border-start border-3 mt-3 mb-5" id="tealBorder">
-          <Typography variant="heading2" className="color-dark-teal mb-3">BEFORE YOU TRAVEL</Typography>
-          <Typography variant="heading3" className="color-dark-teal mb-1">Check if you are considered a vaccinated traveller</Typography>
-          <Typography variant="bodyText" className="color-dark-teal mb-1">{validCheck}</Typography>
-          <Typography variant="heading3" className="color-dark-teal mb-1">Ensure you can provide proof</Typography>
-          <Typography variant="bodyText" className="color-dark-teal mb-5">{proofCheck}</Typography>
-          <Typography variant="heading2" className="color-dark-teal mb-3">ENTERING THE REGION</Typography>
-          <Row className="mt-4 mb-5">
-            {data.enterCheck.map((check) => 
-              <Col md={6}>
-                <BlueCard check={check}></BlueCard>
-              </Col>
-            )}
-          </Row>
-          <Typography variant="heading2" className="color-dark-teal mb-3">WHILE YOU'RE THERE</Typography>
-          <div>{
-            data.ArrivalCheck.map((check) => 
-              <BlueCard check={check}></BlueCard>
-            )}
-          </div>
-        </div> */}
       </Col>
-    </Container>
+    </div>
   )
 }
 

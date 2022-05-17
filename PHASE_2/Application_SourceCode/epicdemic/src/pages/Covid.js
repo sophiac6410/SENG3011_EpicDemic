@@ -16,16 +16,19 @@ import DiseaseReportBar from "../components/Diseases/DiseaseReportBar";
 import NavbarComp from "../components/NavBar";
 import { diseaseRiskColor, diseaseRisk } from "../styles/Theme";
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import { TailSpin } from "react-loader-spinner"
 
 function Covid() {
   const [disease, setDisease] = useState('Covid-19');
   const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true)
   const { code } = useParams();
 
   useEffect(() => {
     if (code == null) return;
     
     async function fetchData() {
+      setLoading(true)
       const trend = await fetch(`https://disease.sh/v3/covid-19/historical/${code}?lastdays=all`).then(res => res.json())
       const country = await getDestination(code);
   
@@ -57,6 +60,7 @@ function Covid() {
         casesChartData: casesChartData,
         diseaseRisk: country.disease_risk
       });
+      setLoading(false)
     }
 
     fetchData();
@@ -69,7 +73,9 @@ function Covid() {
 
   if (data === null) {
     return (
-      <div/>
+      <div style={{display: "flex", marginBottom: "500px", marginTop: "200px"}} className="flex-row justify-content-center align-items-center">
+        <TailSpin color='#70C4E8'></TailSpin>
+      </div>
     )
   }
 
