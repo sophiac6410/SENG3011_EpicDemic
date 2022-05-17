@@ -210,6 +210,7 @@ function ChecklistModal({city, tripId}) {
   }
   const handleOpen = () => {
     setOpen(true);
+    getCityChecklist();
   };
   const handleClose = () => {
     setOpen(false);
@@ -245,7 +246,7 @@ function ChecklistModal({city, tripId}) {
     setChecklist(checklistTemp);
     addNewItem(city.id, newItem, groups, description);
     handleCloseAddItemModal();
-    getCityChecklist();
+    // getCityChecklist();
   }
   const handleOpenNewGroupModal = () => {
     setOpenNewGroupModal(true);

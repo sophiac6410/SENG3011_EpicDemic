@@ -41,14 +41,16 @@ const SavedLocations = () => {
     let navigate = useNavigate();
 
     return (
-        <Container fluid style={{"overflowX": "hidden", "paddingLeft": 0, "paddingRight": 0, "marginLeft": 0, "marginRight": 0, "backgroundColor": "#EEF5FF"}}>
-            <NavbarComp bg={true}></NavbarComp>
-            <div style={{backgroundImage: `url(${HappyFamily2})`, backgroundSize: 'cover', height: '400px'}}>
-                <div className="bg-dark-teal d-flex justify-content-center align-items-center" style={{opacity: 0.8, height: '100%'}}>
-                <div className="color-white py-5">
-                    <Typography variant="title">SAVED LOCATIONS AND UPDATES</Typography>
-                    <Typography variant="heading3">Manage and view your saved locations as well as see all notifications</Typography>
-                </div>
+        <Container fluid style={{"overflowX": "hidden", "paddingLeft": 0, "paddingRight": 0, "marginLeft": 0, "marginRight": 0, "backgroundColor": "#EEF5FF"}}>  
+            <div style={{backgroundImage: `url(${HappyFamily2})`, backgroundSize: 'cover', height: '400px'}}> 
+                <div className="bg-dark-teal justify-content-center align-items-center" style={{opacity: 0.8, height: '100%'}}>
+                    <NavbarComp bg={false}></NavbarComp>
+                    <div className="color-white mt-5 pt-5 d-flex justify-content-center">
+                        <div className="mt-4">
+                        <Typography variant="title">SAVED LOCATIONS AND UPDATES</Typography>
+                        <Typography variant="heading3">Manage and view your saved locations as well as see all notifications</Typography>
+                        </div>
+                    </div>
                 </div>
             </div>
             <Row style={{"marginTop": "10vh", "marginLeft": "8vw", "marginRight": "8vw"}}>
