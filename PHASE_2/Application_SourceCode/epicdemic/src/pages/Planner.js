@@ -7,13 +7,16 @@ import { Container, Row } from "react-bootstrap"
 import {StepOne, StepTwo} from '../components/Planner/PlannerModal'
 import SavedCard from '../components/Planner/SavedCard'
 import { getSavedTrips, deleteTrip } from '../components/Planner/tripApiCalls'
+import { TailSpin } from "react-loader-spinner"
 
 function Planner() {
   const [stepOneOpen, setStepOneOpen] = React.useState(false);
   const [stepTwo, setStepTwo] = React.useState(false);
-  const [trips, setTrips] = React.useState([])
+  const [trips, setTrips] = React.useState(null)
   const openStepOne = () => setStepOneOpen(true)
   const closeStepOne = () => setStepOneOpen(false)
+  const [loading, setLoading] = React.useState(true);
+  
   const openStepTwo = () => {
     setStepOneOpen(false);
     setStepTwo(true)
@@ -21,7 +24,7 @@ function Planner() {
   const closeStepTwo = () => setStepTwo(false)
   const saveTrip = () => {console.log("hii")}
   
-  useEffect(() => {
+  useEffect(async () => {
     getTrips()
     return () => {
       setTrips([]);
@@ -63,7 +66,13 @@ function Planner() {
         <Typography variant="caption" className='color-dark-teal'>Click the 'Plan a new trip' button above to create a new trip. You may edit or remove trips at any time. If you enjoyed your trip, click the heart icon, this will be used in combination with your trip preferences to help us recommend appropriate cities for you.</Typography>
         <div className='justify-content-center' style={{display: "flex", flexDirection: "column"}}>
           {trips == [] || trips == null ? (
-            <div></div>
+            trips == [] ? (
+              <div></div>
+            ):(
+              <div className="flex-row justify-content-center align-items-center loader">
+                <TailSpin color='#70C4E8'></TailSpin>
+              </div>
+            )
           ) : (
             Object.keys(trips).map((key, i) => 
               (<SavedCard 

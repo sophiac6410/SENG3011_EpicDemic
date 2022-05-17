@@ -269,7 +269,7 @@ function Travel(travelStat) {
 
   if(data == null) {
     return(
-      <div style={{display: "flex", marginBottom: "500px", marginTop: "200px"}} className="flex-row justify-content-center align-items-center">
+      <div className="flex-row justify-content-center align-items-center loader">
         <TailSpin color='#70C4E8'></TailSpin>
       </div>
     )
