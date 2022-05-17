@@ -29,7 +29,7 @@ function Search() {
     navigate('/finder');
   }
     return(
-      <div className="border-radius-med bg-white mt-3 mb-5" style={{opacity: 0.85, paddingTop: '1%', paddingBottom: '1%'}}>
+      <div className="border-radius-med bg-white mt-3 mb-5 shadow" style={{ paddingTop: '1%', paddingBottom: '1%'}}>
         <div className="search-row">
           <div className="search-col ps-4" style={{ marginLeft: 25 }}>
             <Typography variant="bodyImportant" className="color-dark-grey ps-3">FROM</Typography>

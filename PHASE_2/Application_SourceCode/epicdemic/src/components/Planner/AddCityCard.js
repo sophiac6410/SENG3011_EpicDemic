@@ -252,12 +252,12 @@ function AddCityCard({isOpen, onClose, name, start, end, travellers, defaultTrip
     <Modal
       open={isOpen}
     >
-      <Box sx={styleTwo}>
-        <div className= "border-radius-med">
+      <Box className="shadow" sx={styleTwo}>
+        <div className="border-radius-med">
         { stepThree
           ? <>
             <div style={{backgroundImage: getPhoto(), backgroundSize: 'cover', backgroundRepeat: 'no-repeat', width: '100%', marginBottom: '10px'}}>
-              <div style={{display: "flex", flexDirection: "row", padding: "20px", height: '80px'}}>
+              <div style={{display: "flex", flexDirection: "row", padding: "10px", height: '80px'}}>
                 {/* <IconButton onClick={handleBack} sx={{alignItems: 'top'}}>
                   <ArrowBackIosIcon sx={{color: 'white'}} fontSize="small"></ArrowBackIosIcon>
                 </IconButton>
@@ -295,7 +295,7 @@ function AddCityCard({isOpen, onClose, name, start, end, travellers, defaultTrip
           </>
         }
         </div>
-        <Box autoComplete='off' sx={formStyle}>
+        <Box autoComplete='off' className="shadow" sx={formStyle}>
           <PublicIcon  sx={{marginTop: "10px", marginRight: "5px"}} color="teal"></PublicIcon>
           <FormControl color='teal' variant="standard" sx={{ width: '10'}}>
             {/* <Input color='teal' placeholder='Europe' value="Europe"/> */}
@@ -376,14 +376,13 @@ const style = {
   width: "70vw",
   bgcolor: 'background.paper',
   borderRadius: "30px",
-  boxShadow: 24,
   p: 4,
   textAlign: "center",
   backgroundColor: "#EEF0F2",
   display: "flex",
   flexDirection: "column",
-  paddingTop: "80px",
-  paddingBottom: "80px",
+  paddingTop: "50px",
+  paddingBottom: "50px",
 };
 
 const styleTwo = {
@@ -394,12 +393,11 @@ const styleTwo = {
   width: "70vw",
   bgcolor: 'background.paper',
   borderRadius: "30px",
-  boxShadow: 24,
   pb: 4,
   backgroundColor: "#EEF0F2",
   display: "flex",
   flexDirection: "column",
-  paddingBottom: "80px",
+  paddingBottom: "20px",
 };
 
 const formStyle = {
@@ -417,7 +415,6 @@ const formStyle = {
   borderRadius: "30px",
   textAlign: "center",
   backgroundColor: "white",
-  boxShadow: "1px 3px #888888",
   border: (theme) => `1px solid ${theme.palette.divider}`,
   '& hr': {
     mx: 2,

@@ -18,7 +18,6 @@ const cardStyle = {
   borderRadius: "10px",
   textAlign: "center",
   backgroundColor: "white",
-  boxShadow: "1px 3px #888888",
   border: (theme) => `1px solid ${theme.palette.divider}`,
   '& hr': {
     mx: 2,
@@ -30,7 +29,7 @@ const cardStyle = {
 
 function CityCard() {
   return(
-    <Box style={cardStyle} sx={{width: "90%"}}>
+    <Box style={cardStyle} className="shadow" sx={{width: "90%"}}>
       <Row className='align-items-center'>
         <Col md={4}>
           <Typography variant="bodyImportant" className='color-medium-teal me-5'>Tiana’s Europe Adventures</Typography>

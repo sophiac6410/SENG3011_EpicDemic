@@ -25,9 +25,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     paddingRight: "Opx",
   },
-  endAdornment: {
-    top: "calc(12% - 14px)"
-  }
 }));
 
 export default function CountrySelect({region, handleInput, value }) {

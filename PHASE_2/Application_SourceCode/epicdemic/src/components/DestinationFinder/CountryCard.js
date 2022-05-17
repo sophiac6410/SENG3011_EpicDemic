@@ -46,14 +46,14 @@ const CountryCard = ({code, country, status, saved}) => {
     }, [])
 
     return (
-        <Card style={{ "width": "18vw", "height": "18vw", "borderRadius": "20px", cursor: 'pointer'}}>
+        <Card className="shadow" style={{ "width": "18vw", "height": "18vw", "borderRadius": "20px", cursor: 'pointer'}}>
             <img src={require('../../static/countryCardPics/' + country + '.png')}
                 style={{ "width": "18vw", "height": "12vw", "objectFit": "cover", "borderTopLeftRadius": "20px", "borderTopRightRadius": "20px" }}
                 onClick={routeChange}
             />
-            <Card.Footer style={{"height": "6vw", position: "relative"}}>
+            <Card.Footer style={{"height": "6vw", position: "relative", backgroundColor: 'transparent'}}>
                 <b style={{fontSize: "18px"}}  onClick={routeChange}>{country}</b>
-                <div style={{ position: "absolute", top: 0, right: 0, paddingTop: "1.5%", paddingRight: "1.5%"}}>
+                <div style={{ position: "absolute", top: 0, right: 0, paddingTop: "1.5%", paddingRight: "1.5%", backgroundColor: 'white'}}>
                     <Checkbox checked={isSaved} icon={<FavoriteBorder className="color-medium-teal"/>} checkedIcon={<Favorite className="color-medium-teal" />} onClick={handleClickSave} />
                 </div>
                 {/* {saved ? <FavoriteIcon fontSize="large" sx={{color: "#62B6CB"}} style={{ position: "absolute", top: 0, right: 0, paddingTop: "1.5%", paddingRight: "1.5%"}}/> : <FavoriteBorderOutlinedIcon fontSize="large" sx={{color: "#62B6CB"}} style={{ position: "absolute", top: 0, right: 0, paddingTop: "1.5%", paddingRight: "1.5%"}}/>} */}

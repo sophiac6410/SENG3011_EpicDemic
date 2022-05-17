@@ -165,7 +165,7 @@ function ChecklistGroup({group}) {
     }
   }
   return (
-    <div className="border-radius-med px-5 py-4 bg-white mb-4">
+    <div className="border-radius-med px-5 py-4 bg-white mb-4 shadow" >
       <div className="d-flex justify-content-between" onClick={() => {setOpen(!open)}} style={{cursor: 'pointer'}}>
         <div>
           <Typography variant="heading3" className="color-dark-teal">{group.name}</Typography>
@@ -289,7 +289,7 @@ function ChecklistModal({city, tripId}) {
         <div style={{justifyContent: "center", flexDirection: "row", alignItems: "center"}}>
           <Typography variant="heading2" className="color-dark-teal" sx={{textAlign: 'center', lineHeight: 4}}>{city.city_name}, {city.country_name}</Typography>
         </div>
-        <div className="border-radius-med mb-4" style={{overflow: 'auto', height: '100%'}}>
+        <div className="border-radius-med mb-4" style={{overflow: 'auto', height: '100%', paddingLeft: '15px', paddingRight: '15px'}}>
           {checklist.map((group, i) => {
             return <ChecklistGroup key={i} group={group}/>
           })}

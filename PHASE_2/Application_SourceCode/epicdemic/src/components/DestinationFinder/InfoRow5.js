@@ -20,7 +20,6 @@ const popUpStyle = {
     maxHeight: "80vh",
     bgcolor: 'background.paper',
     borderRadius: "30px",
-    boxShadow: 24,
     px: 5,
     pt: 3,
     pb: 5,
@@ -39,10 +38,10 @@ const InfoRow5 = ({country, desc, dateTime, code, updateType}) => {
         setOpen(false);
     }
     return (
-        <Row className="info-row bg-white" style={{margin: '2% 0%', cursor: 'pointer'}}>
+        <Row className="info-row bg-white shadow" style={{margin: '2% 0%', cursor: 'pointer'}}>
             <Col xs={10} onClick={() => {navigate(`/destination/${code}`)}}>
                 <Row>
-                    <Col xs={2} className="d-flex">
+                    <Col xs={3} className="d-flex">
                         <img
                         loading="lazy"
                         width="50"
@@ -53,7 +52,7 @@ const InfoRow5 = ({country, desc, dateTime, code, updateType}) => {
                         />
                         <Typography variant="bodyHeading">{country}</Typography>
                     </Col>
-                    <Col xs={7}>
+                    <Col xs={6} style={{textAlignLast: 'start'}}>
                         <Typography variant="bodyImportant">New {updateType === "Others" ? 'conditions and' : updateType} rules</Typography>
                     </Col>
                     <Col xs={2} style={{textAlignLast: 'end'}}>

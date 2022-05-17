@@ -33,7 +33,6 @@ const cardStyle = {
   borderRadius: "10px",
   textAlign: "center",
   backgroundColor: "white",
-  boxShadow: "1px 3px #888888",
   border: (theme) => `1px solid ${theme.palette.divider}`,
   '& hr': {
     mx: 2,
@@ -146,7 +145,7 @@ function TripCard({name, tripId, latitude, longitude, city, country, cityId, upd
 
 
   return(
-    <Box style={cardStyle} sx={{width: "90%"}}>
+    <Box className="shadow" style={cardStyle} sx={{width: "90%"}}>
       <div className="d-flex flex-row justify-content-between">
         <div className="d-flex flex-row align-items-center">
           <LocationCityIcon color="teal"></LocationCityIcon>

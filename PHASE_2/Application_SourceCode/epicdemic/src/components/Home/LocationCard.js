@@ -86,7 +86,7 @@ function LocationCard({id}) {
   }, []);
 
   return (
-    <Card className="my-2 border-radius-small" style={{width: 'auto', boxShadow: '3px 3px 3px 3px #cccccc', cursor: 'pointer', marginRight: '15px'}}>
+    <Card className="my-2 border-radius-small shadow" style={{width: 'auto', cursor: 'pointer', marginRight: '15px', }}>
       <Card.Body style={{padding: '20px 30px'}}>
         <Card.Title className="d-flex">
           <Typography variant="heading3" sx={{flex: 1}} onClick={ routeChange }>{country}</Typography>

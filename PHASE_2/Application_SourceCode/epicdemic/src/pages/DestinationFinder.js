@@ -93,7 +93,7 @@ const DestinationFinder = () => {
     }
 
     return (
-        <div className="bg-off-white">
+        <div className="bg-off-white" style={{ paddingBottom: '20px' }}>
             <div className="bg-plane"/>
             <NavbarComp bg={false}/>
             <div style={{height: "40vh", position: "relative"}}>
@@ -102,7 +102,7 @@ const DestinationFinder = () => {
                 </div>
                 
                 <div className="border-radius-large searchfield-container ps-5 pe-5">
-                    <div style={{ display: "flex", backgroundColor: "white", padding: "3px 15px", borderRadius: "30px" }}>
+                    <div style={{ display: "flex", backgroundColor: "white", padding: "3px 15px", paddingLeft: "20px", borderRadius: "30px" }}>
                         <CountrySearch handleInput={(e, v) => updateSearch("country", v)}></CountrySearch>
                         {/* <div className="bg-dark-teal border-radius-med text-center"> */}
                             <IconButton
@@ -120,7 +120,7 @@ const DestinationFinder = () => {
                     <Typography variant="title" className="color-white mt-5">OR FIND A DESTINATION BY...</Typography>
                 </div>
 
-                <div style={{backgroundColor: "white", padding: "15px 30px", position: "absolute", bottom: "-5vh", margin: "auto", left: 0, right: 0, marginLeft: "5%", marginRight: "5%", borderRadius: "20px", boxShadow: "0px 0px 12px 0px black" }}>
+                <div className="shadow" style={{backgroundColor: "white", padding: "20px 30px", position: "absolute", bottom: "-5vh", margin: "auto", left: 0, right: 0, marginLeft: "5%", marginRight: "5%", borderRadius: "20px" }}>
                     <Row className="justify-content-center">
                         <Col className="pe-5 ps-5">
                             <GenericSearch fieldLabel={"Region"} options={regionOptions} handleInput={(e, v) => updateSearch("region", v)}/>

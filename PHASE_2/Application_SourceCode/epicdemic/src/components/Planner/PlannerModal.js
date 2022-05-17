@@ -91,7 +91,6 @@ const formStyle = {
   borderRadius: "30px",
   textAlign: "center",
   backgroundColor: "white",
-  boxShadow: "1px 3px #888888",
   border: (theme) => `1px solid ${theme.palette.divider}`,
   '& hr': {
     mx: 2,
@@ -119,7 +118,7 @@ function StepOne({isOpen, onClose, onNext}) {
         <Typography variant="heading2" className='color-dark-teal'>
           Enter your trip details
         </Typography>
-        <Box autoComplete='off' sx={formStyle}>
+        <Box autoComplete='off' className="shadow" sx={formStyle}>
           <BorderColorIcon  sx={{marginTop: "10px", marginRight: "5px"}} color="teal"></BorderColorIcon>
           <FormControl color='teal' variant="standard" sx={{ width: '20ch'}}>
             <Input color='teal' type='text' placeholder='Name your trip' value={name} onChange={(event) => {setName(event.target.value)}}/>

@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router'
 import { DarkButton } from "../../styles/Button";
 import { Context, useContext } from '../../context';
 import PropTypes from 'prop-types';
+import { styled } from '@mui/material/styles';
 
 const responsive = {
     superLargeDesktop: {
@@ -29,6 +30,12 @@ const responsive = {
       items: 1
     }
   };
+
+  const StyledCarousel= styled(Carousel)(({ theme }) => ({
+    // alignItems: 'flex-start',
+    padding: 10,
+  }));
+  
 
 function getBar (loggedIn, locations) {
   let navigate = useNavigate();
@@ -53,14 +60,15 @@ function getBar (loggedIn, locations) {
     } else {
       return (
         <>
-        <div className="location-carousel">
-          <Carousel 
+        <div className="location-carousel" style={{padding: '10px'}}>
+          <StyledCarousel 
             responsive={responsive} 
             // containerClass="location-carousel"
             autoPlay={false}
             arrows={true}
             shouldResetAutoplay={false}
             itemClass="location-card"
+            sx={{padding: '10px'}}
             centerMode={true}
           >
             {locations !== undefined
@@ -69,7 +77,7 @@ function getBar (loggedIn, locations) {
                 })
               : <></>
             }
-          </Carousel>
+          </StyledCarousel>
         </div>
         <Row md={5} className="justify-content-center mt-5 mb-3">
           <DarkButton className="align-self-center"

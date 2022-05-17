@@ -40,7 +40,6 @@ const activityModalStyle = {
   hight: "1000px",
   bgcolor: 'background.paper',
   borderRadius: "30px",
-  boxShadow: 24,
   p: 4,
   backgroundColor: "#EEF0F2",
   display: "flex",
@@ -120,7 +119,7 @@ function ActivityModal({fromTrip, activities, tripId, city, updateActivity, coun
       <Modal
         open={isOpen}
       >
-        <Box sx={activityModalStyle}>
+        <Box className="shadow" sx={activityModalStyle}>
           <div style={{display: "flex", justifyContent: "end", flexDirection: "row", alignItems: "center", paddingBottom: "20px"}}>
             <IconButton onClick={handleBack}>
               <CloseIcon color='teal' sx={{marginTop: "10px", marginRight: "5px"}} fontSize="small"></CloseIcon>

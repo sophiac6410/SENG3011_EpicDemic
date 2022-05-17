@@ -8,7 +8,7 @@ import { LightButton } from '../../styles/Button';
 
 function FlightDeal({data, depart, dest}) {
   return (
-    <div class="border-radius-small bg-white d-flex flex-row justify-content-start align-items-center mt-3 mb-3 pt-2 pb-2" style={{boxShadow: '3px 3px 3px 3px #cccccc'}}>
+    <div class="border-radius-small bg-white d-flex flex-row justify-content-start align-items-center mt-3 mb-3 pt-2 pb-2 shadow" >
       <div className='col-1'>
         <Image src={qantas} width='40px' height='50px' style={{margin: '10px'}}></Image>
       </div>

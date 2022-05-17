@@ -24,7 +24,6 @@ const cardStyle = {
   borderRadius: "10px",
   textAlign: "center",
   backgroundColor: "white",
-  boxShadow: "1px 3px #888888",
   border: (theme) => `1px solid ${theme.palette.divider}`,
   '& hr': {
     mx: 2,
@@ -59,7 +58,7 @@ function SavedCard({name, start, end, travellers, tripId, update}) {
   }
 
   return(
-    <Box style={cardStyle} sx={{width: "100%"}}>
+    <Box className="shadow" style={cardStyle} sx={{width: "100%"}}>
       <Row className='align-items-center'>
         <Col md={4} onClick={goToTrip}>
           <Typography variant="bodyImportant" className='color-medium-teal me-5'>{name}</Typography>

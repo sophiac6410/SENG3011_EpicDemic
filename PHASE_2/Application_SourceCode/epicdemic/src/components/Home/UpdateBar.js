@@ -17,7 +17,7 @@ function RestrictBox(props){
 
 	let navigate = useNavigate(); 
 	return (
-		<Row className="mt-2 mb-3 py-3 px-4 border-radius-small" style={{backgroundColor: props.bgColor, boxShadow: '0px 1px 5px #CCCCCC'}}>
+		<Row className="mt-2 mb-3 py-3 px-4 border-radius-small shadow" style={{backgroundColor: props.bgColor}}>
 			<div className='d-flex'>
 			<div className="pe-3 pt-1"> 
 				<img
