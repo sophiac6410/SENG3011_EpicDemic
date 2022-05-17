@@ -14,6 +14,10 @@ import Favorite from '@mui/icons-material/Favorite';
 import Checkbox from '@mui/material/Checkbox';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
   
 function LocationCard({id}) {
   let navigate = useNavigate(); 
@@ -27,6 +31,35 @@ function LocationCard({id}) {
   const [travelColor, setTravelColor] = React.useState('');
   const [adviceColor, setAdviceColor] = React.useState('');
   const [isSaved, setSaved] = React.useState(true);
+  const [isNotif, setIsNotif] = React.useState(false);
+  const [openSnack, setOpenSnack] = React.useState(false);
+  const [notifMessage, setNotifMessage] = React.useState('');
+
+  const handleClickNotif = (event) => {
+    setIsNotif(event.target.checked); 
+    if (event.target.checked) {
+      setNotifMessage(`You will receive email notifications for ${country}`)
+    } else {
+      setNotifMessage(`You will no longer receive email notifications for ${country}`)
+    }
+    setOpenSnack(true);
+  };
+
+  const handleCloseSnack = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnack(false);
+  };
+
+  const action = (<IconButton
+    size="small"
+    aria-label="close"
+    color="inherit"
+    onClick={handleCloseSnack}
+  >
+    <CloseIcon fontSize="small" />
+  </IconButton>)
 
   const handleClickSave = (event) => {
       let method;
@@ -63,8 +96,16 @@ function LocationCard({id}) {
               <Typography variant="bodySmall" sx={{lineHeight: 0, textAlign: 'center'}}>Save</Typography>
             </div>
             <div>
-              <Checkbox defaultChecked={false} icon={<NotificationsNoneIcon className="color-medium-teal"/>} checkedIcon={<NotificationsActiveIcon className="color-medium-teal"/> } />
+              <Checkbox defaultChecked={isNotif} icon={<NotificationsNoneIcon className="color-medium-teal"/>} checkedIcon={<NotificationsActiveIcon className="color-medium-teal"/> } onClick={handleClickNotif}/>
               <Typography variant="bodySmall" sx={{lineHeight: 0, textAlign: 'center'}}>Notify</Typography>
+              <Snackbar
+                open={openSnack}
+                autoHideDuration={6000}
+                onClose={handleCloseSnack}
+                action={action}
+                message={notifMessage}
+                anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+              />
             </div>
             <div>
               <Checkbox icon={<AddCircleOutlineOutlinedIcon className="color-medium-teal"/>} checkedIcon={<AddCircleOutlinedIcon className="color-medium-teal"/>} />
