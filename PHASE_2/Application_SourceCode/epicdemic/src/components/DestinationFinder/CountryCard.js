@@ -3,11 +3,26 @@ import { Card, Image, Badge } from "react-bootstrap";
 import { travelStatus, travelStatusColor} from "../../styles/Theme.js";
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
+import Checkbox from '@mui/material/Checkbox';
 import "../../styles/CountryCard.css";
+import { getDestination, saveDestination } from "../../apiCalls";
+import { Typography } from "@mui/material";
 
 const CountryCard = ({code, country, status, saved}) => {
     const [travel, setTravel] = useState({});
-
+    const [isSaved, setSaved] = React.useState(saved);
+    const handleClickSave = (event) => {
+        let method;
+        if (isSaved) {
+            method = 'DELETE';
+        } else {
+            method = 'PUT';
+        }
+        saveDestination(method, code);
+        setSaved(event.target.checked); 
+    }
     useEffect(() => {
         console.log("status is " + status);
         var tStatusColor = travelStatusColor(status);
@@ -32,15 +47,20 @@ const CountryCard = ({code, country, status, saved}) => {
             />
             <Card.Footer style={{"height": "6vw", position: "relative"}}>
                 <b style={{fontSize: "18px"}}>{country}</b>
-                {saved ? <FavoriteIcon fontSize="large" sx={{color: "#62B6CB"}} style={{ position: "absolute", top: 0, right: 0, paddingTop: "1.5%", paddingRight: "1.5%"}}/> : <FavoriteBorderOutlinedIcon fontSize="large" sx={{color: "#62B6CB"}} style={{ position: "absolute", top: 0, right: 0, paddingTop: "1.5%", paddingRight: "1.5%"}}/>}
+                <div style={{ position: "absolute", top: 0, right: 0, paddingTop: "1.5%", paddingRight: "1.5%"}}>
+                    <Checkbox checked={isSaved} icon={<FavoriteBorder className="color-medium-teal"/>} checkedIcon={<Favorite className="color-medium-teal" />} onClick={handleClickSave} />
+                </div>
+                {/* {saved ? <FavoriteIcon fontSize="large" sx={{color: "#62B6CB"}} style={{ position: "absolute", top: 0, right: 0, paddingTop: "1.5%", paddingRight: "1.5%"}}/> : <FavoriteBorderOutlinedIcon fontSize="large" sx={{color: "#62B6CB"}} style={{ position: "absolute", top: 0, right: 0, paddingTop: "1.5%", paddingRight: "1.5%"}}/>} */}
                 <br/>
                 <Badge className={travel.tStatusColor} pill>
                     {travel.tStatus}
                 </Badge>
                 <br/>
-                <text style={{ fontSize: "12px", fontWeight: "lighter", position: "absolute", bottom: 0, right: 0, paddingBottom: "1.5%", paddingRight: "1.5%"}}>
+                <div style={{ position: "absolute", bottom: 0, right: 0, marginTop: '1%', paddingBottom: "1.5%", paddingRight: "1.5%"}}>
+                <Typography variant="caption">
                     Last updated {new Date().toLocaleString('en-us', {day: 'numeric', month: 'short', year: 'numeric'})}
-                </text>
+                </Typography>
+                </div>
             </Card.Footer>
         </Card>
     )
