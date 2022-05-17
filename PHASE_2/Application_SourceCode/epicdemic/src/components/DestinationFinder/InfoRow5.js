@@ -8,6 +8,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import CloseIcon from '@mui/icons-material/Close';
+import { TealBotton } from '../../styles/Button';
 
 const popUpStyle = {
     position: 'absolute',
@@ -62,9 +63,9 @@ const InfoRow5 = ({country, desc, dateTime, code, updateType}) => {
                 </Row>
             </Col>
             <Col xs={1} className="justify-content-center d-flex">
-                <IconButton onClick={handleOpen}>
-                    <MoreHorizIcon className="color-dark-teal"/>
-                </IconButton>
+                <TealBotton onClick={handleOpen}>
+                    Details
+                </TealBotton>
                 <Modal
                     open={open}
                     onClose={handleClose}
