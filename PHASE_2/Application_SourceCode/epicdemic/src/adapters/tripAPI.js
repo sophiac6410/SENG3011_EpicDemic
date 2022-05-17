@@ -268,7 +268,8 @@ export const getDestinationPhotos = async (destination, small) => {
     method: 'GET',
     headers: {
       'Content-type': 'application/json',
-      Authorization: 'Basic NzBjMjZkZGRjYzNmNThlYjMyNzM4NjQ4MGUxNDk3N2E6ZmY2ZjQyYWZjNWFiOTFkMjk1NTEzNmM1YzFlMjg5ODQ='
+      Authorization: 'Basic NWFhZDUzNTg1MDU5MjYwOTY4MzVhYjY3MmZlYjcyZGU6OWNhYWEzY2FlZDg1MjZjMjg2NTE2ZDk4YzVjOTViMWY='
+  
     }
   })
 
@@ -284,7 +285,7 @@ export const getDestinationPhotos = async (destination, small) => {
         method: 'GET',
         headers: {
           'Content-type': 'application/json',
-          Authorization: 'Basic NzBjMjZkZGRjYzNmNThlYjMyNzM4NjQ4MGUxNDk3N2E6ZmY2ZjQyYWZjNWFiOTFkMjk1NTEzNmM1YzFlMjg5ODQ='
+          Authorization: 'Basic NWFhZDUzNTg1MDU5MjYwOTY4MzVhYjY3MmZlYjcyZGU6OWNhYWEzY2FlZDg1MjZjMjg2NTE2ZDk4YzVjOTViMWY='
         }
       })
       const dataDestination = await respDestination.json()

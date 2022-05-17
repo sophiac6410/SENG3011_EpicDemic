@@ -332,7 +332,7 @@ function Travel(travelStat) {
     }
   }
   return(
-    <div style={{margin: '0% 15%', width: 'auto'}} className="bg-off-white">
+    <div style={{margin: '0% 15%', width: 'auto'}} className="bg-white">
       <Col>
         <div className="d-flex">
           <Typography variant="bodyHeading" className="color-dark-teal me-4">TRAVEL STATUS</Typography>

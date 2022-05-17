@@ -90,12 +90,12 @@ function ActivityModal({fromTrip, activities, tripId, city, updateActivity, coun
   //   setSave(city.activities)
   // }
   
-  // useEffect(() => {
-  //   // getSavedActivities()
-  //   return ()=>{
-  //     setSave([])
-  //   }
-  // }, [])
+  useEffect(() => {
+    return ()=>{
+      // setSave([])
+      setCityId(0)
+    }
+  }, [city])
 
   return(
     <React.Fragment>

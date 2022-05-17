@@ -16,16 +16,18 @@ function ActivityCard({activity, tripId, city, country, isSave, updateCityId, ci
   useEffect(()=>{
     async function saveActivity(){
       if(isActivitySaved){
-        if(city.id) {
-            const response = await addActivityToCity(activity.id, city.id, tripId, activity.name)
-            console.log("add activity" + activity.id + "to" + city.id)
-          }else if(cityId){
-            const response = await addActivityToCity(activity.id, cityId, tripId, activity.name)
+        // if(city.id) {
+        //   const response = await addActivityToCity(Number(activity.id), city.id, Number(tripId), activity.name)
+        //   console.log("add activity" + activity.id + "to" + city.id)
+        // }else 
+        if(cityId){
+            const response = await addActivityToCity(Number(activity.id), cityId, Number(tripId), activity.name)
             console.log("add activity" + activity.id + "to" + cityId)
           }else{
             const data = await addCityToTrip(tripId, city.name, city.latitude, city.longitude, country.code, country.name);
             updateCityId(data.id)
-            const response = await addActivityToCity(activity.id, data.id, tripId, activity.name)
+            console.log(data.id)
+            const response = await addActivityToCity(Number(activity.id), data.id, Number(tripId), activity.name)
             console.log("add activity" + activity.id + "to" + data.id)
           }
       }else{
