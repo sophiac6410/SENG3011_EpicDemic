@@ -16,6 +16,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import { LightButton } from '../../styles/Button';
+import { getCovidArticles } from "../../adapters/diseaseAPI";
 
 function padTo2Digits(num) {
   return num.toString().padStart(2, '0');
@@ -59,28 +60,26 @@ export default function DiseaseReportBar() {
     method: "GET",
     headers: {
       'Content-Type': 'application/json',
-      'authorization': 'Bearer GbHl378d8f4L1y1MdQB0HoCpGj8mzBCwjMbSnshBFWFymm7LNClDzQ0e69ZUzioyb95U4W5RdYbY'
     },
   };
 
   useEffect(() => {
-    if (diseaseData === []) return;
 
-    async function fetchData() {
-      console.log('fetching diseases data');
-      const data = await fetch(`https://prod.greatescape.co/api/travel/countries/AU/corona`, options).then(res => res.json())
-      // console.log('printing data', data2)
-        setDiseaseData(data.news.slice(0, (data.news.length / 2)))
-        setDiseaseData2(data.news.slice((data.news.length / 2), data.news.length))
+    async function fetchData2() {
+      const data = await getCovidArticles();
+      console.log('return', data)
+      setDiseaseData(data.slice(0, (data.length / 2)))
+      setDiseaseData2(data.slice((data.length / 2), data.length))
     }
-    fetchData()
+    fetchData2();
+
   }, [])
 
   return(
     <div style={{ padding: '3% 10% 10%', backgroundColor: '#E9F0FB' }}>
       <Row className="mt-2" style={{ backgroundColor: '#E9F0FB' }}>
         <div className="text-center">
-          <Typography variant="heading1" className="color-dark-teal">RECENT COVID-19 REPORTS</Typography>
+          <Typography variant="heading1" className="color-dark-teal">RECENT DISEASE REPORTS</Typography>
         </div>
 
         <div className="news-carousel" style={{ backgroundColor: '#E9F0FB' }}>
@@ -91,53 +90,52 @@ export default function DiseaseReportBar() {
           >
             
               {diseaseData2.map((data, idx) => {
-
-                  return (
-                    <div className="news-container-col">
-                      <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
-                      <CardContent>
-                        <Typography variant="caption" color="text.secondary">
-                          {(new Date(data.date)).toDateString()}
+                return (
+                  <div className="news-container-col">
+                    <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
+                    <CardContent>
+                      <Typography variant="caption" color="text.secondary">
+                        { (new Date(data.date_of_publication)).toDateString() }
+                      </Typography>
+                      <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
+                          { (data.headline) }
+                      </Typography>
+                      <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { window.open(data.url) }}>
+                        <Typography variant='bodyImportant'>
+                          Read more
                         </Typography>
-                        <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
-                            { data.title }
-                        </Typography>
-                        <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { window.open(data.link) }}>
-                          <Typography variant='bodyImportant'>
-                            Read more
-                          </Typography>
-                        </LightButton>
-                        <Typography variant="caption" color="text.secondary" sx={{display: 'block'}} gutterBottom>
-                          Source: { data.pub }
-                        </Typography>
-                      </CardContent>
-                      </Card>
+                      </LightButton>
+                      <Typography variant="caption" color="text.secondary" sx={{display: 'block'}} gutterBottom>
+                        Source: { 'Promed' }
+                      </Typography>
+                    </CardContent>
+                    </Card>
 
-                      {
-                        diseaseData.length < 3 
-                        ? <></>
-                        : <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
-                            <CardContent>
-                              <Typography variant="caption" color="text.secondary">
-                                {(new Date(diseaseData[idx].date)).toDateString()}
+                    {
+                      diseaseData.length < 3 
+                      ? <></>
+                      : <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
+                          <CardContent>
+                            <Typography variant="caption" color="text.secondary">
+                              { (new Date(diseaseData[idx].date_of_publication)).toDateString() }
+                            </Typography>
+                            <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
+                                { diseaseData[idx].headline }
+                            </Typography>
+                            <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { window.open(data.url) }}>
+                              <Typography variant='bodyImportant'>
+                                Read more
                               </Typography>
-                              <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
-                                  { diseaseData[idx].title }
-                              </Typography>
-                              <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { window.open(diseaseData[idx].link) }}>
-                                <Typography variant='bodyImportant'>
-                                  Read more
-                                </Typography>
-                              </LightButton>
-                              <Typography variant="caption" color="text.secondary" sx={{display: 'block'}} gutterBottom>
-                                Source: { diseaseData[idx].pub }
-                              </Typography>
-                            </CardContent>
-                            </Card>
-                      }
+                            </LightButton>
+                            <Typography variant="caption" color="text.secondary" sx={{display: 'block'}} gutterBottom>
+                              Source: { 'Promed' }
+                            </Typography>
+                          </CardContent>
+                          </Card>
+                    }
 
-                      </div>
-                  )
+                    </div>
+                )
                 })}
             
           </Carousel>

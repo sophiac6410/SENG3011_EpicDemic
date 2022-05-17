@@ -75,32 +75,20 @@ export default function DiseaseReportBar({code}) {
     if (diseaseData === []) return;
 
     console.log('the disease is', disease)
+    async function fetchData2() {
+      const data = await getDiseaseArticles(code, disease);
+      console.log('return', data)
+      if (data.length > 2) {
+        setDiseaseData(data.slice(0, (data.length / 2)))
+        setDiseaseData2(data.slice((data.length / 2), data.length))
+      }
+      else {
+        setDiseaseData([])
+        setDiseaseData2(data)
+      }
+    }
+    fetchData2();
 
-    if (disease == 'Covid-19') {
-      async function fetchData() {
-        const data = await fetch(`https://prod.greatescape.co/api/travel/countries/${code}/corona`, options).then(res => res.json())
-        // const data = await fetch(`https://newsdata.io/api/1/news?apikey=${API_KEY}&country=${code}&language=en&q=${disease}`, options).then(res => res.json())
-        console.log('printing data', data)
-        setDiseaseData(data.news.slice(0, (data.news.length / 2)))
-        setDiseaseData2(data.news.slice((data.news.length / 2), data.news.length))
-      }
-      fetchData()
-    }
-    else {
-      async function fetchData2() {
-        const data = await getDiseaseArticles(code, disease);
-        console.log('return', data)
-        if (data.length > 2) {
-          setDiseaseData(data.slice(0, (data.length / 2)))
-          setDiseaseData2(data.slice((data.length / 2), data.length))
-        }
-        else {
-          setDiseaseData([])
-          setDiseaseData2(data)
-        }
-      }
-      fetchData2();
-    }
   }, [disease])
 
   const handleChange = (event) => {
@@ -147,18 +135,18 @@ export default function DiseaseReportBar({code}) {
                       <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
                       <CardContent>
                         <Typography variant="caption" color="text.secondary">
-                          { disease != 'Covid-19' ? (new Date(data.date_of_publication)).toDateString() : (new Date(data.date)).toDateString()}
+                          { (new Date(data.date_of_publication)).toDateString() }
                         </Typography>
                         <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
-                            { disease != 'Covid-19' ? (data.headline) : data.title }
+                            { (data.headline) }
                         </Typography>
-                        <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { disease != 'Covid-19' ? window.open(data.url) : window.open(data.link) }}>
+                        <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { window.open(data.url) }}>
                           <Typography variant='bodyImportant'>
                             Read more
                           </Typography>
                         </LightButton>
                         <Typography variant="caption" color="text.secondary" sx={{display: 'block'}} gutterBottom>
-                          Source: { disease != 'Covid-19' ? 'PROMED' : data.pub }
+                          Source: { 'Promed' }
                         </Typography>
                       </CardContent>
                       </Card>
@@ -169,18 +157,18 @@ export default function DiseaseReportBar({code}) {
                         : <Card className="m-2" sx={{ borderRadius: '10px', padding: '4%', paddingBottom: '0.5%', height: '240px' }} >
                             <CardContent>
                               <Typography variant="caption" color="text.secondary">
-                                { disease != 'Covid-19' ? (new Date(diseaseData[idx].date_of_publication)).toDateString() : (new Date(diseaseData[idx].date)).toDateString()}
+                                { (new Date(diseaseData[idx].date_of_publication)).toDateString() }
                               </Typography>
                               <Typography variant="bodyHeading" component="div" align="left" sx={{ mb: 1 }}>
-                                  { disease != 'Covid-19' ? (diseaseData[idx].headline) : diseaseData[idx].title }
+                                  { diseaseData[idx].headline }
                               </Typography>
-                              <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { disease != 'Covid-19' ? window.open(data.url) : window.open(diseaseData[idx].link) }}>
+                              <LightButton size="small" align="left" sx={{ padding: '2% 4%', my: 2 }} onClick={() => { window.open(data.url) }}>
                                 <Typography variant='bodyImportant'>
                                   Read more
                                 </Typography>
                               </LightButton>
                               <Typography variant="caption" color="text.secondary" sx={{display: 'block'}} gutterBottom>
-                                Source: { disease != 'Covid-19' ? 'PROMED' : diseaseData[idx].pub }
+                                Source: { 'Promed' }
                               </Typography>
                             </CardContent>
                             </Card>

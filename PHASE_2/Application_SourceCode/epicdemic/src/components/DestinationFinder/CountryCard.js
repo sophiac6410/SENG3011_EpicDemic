@@ -9,6 +9,7 @@ import Checkbox from '@mui/material/Checkbox';
 import "../../styles/CountryCard.css";
 import { getDestination, saveDestination } from "../../apiCalls";
 import { Typography } from "@mui/material";
+import { useNavigate, } from 'react-router-dom';
 
 const CountryCard = ({code, country, status, saved}) => {
     const [travel, setTravel] = useState({});
@@ -22,6 +23,10 @@ const CountryCard = ({code, country, status, saved}) => {
         }
         saveDestination(method, code);
         setSaved(event.target.checked); 
+    }
+    let navigate = useNavigate(); 
+    const routeChange = () =>{  
+      navigate(`/destination/${code}`);
     }
     useEffect(() => {
         console.log("status is " + status);
@@ -44,9 +49,10 @@ const CountryCard = ({code, country, status, saved}) => {
         <Card style={{ "width": "18vw", "height": "18vw", "borderRadius": "20px", cursor: 'pointer'}}>
             <img src={require('../../static/countryCardPics/' + country + '.png')}
                 style={{ "width": "18vw", "height": "12vw", "objectFit": "cover", "borderTopLeftRadius": "20px", "borderTopRightRadius": "20px" }}
+                onClick={routeChange}
             />
             <Card.Footer style={{"height": "6vw", position: "relative"}}>
-                <b style={{fontSize: "18px"}}>{country}</b>
+                <b style={{fontSize: "18px"}}  onClick={routeChange}>{country}</b>
                 <div style={{ position: "absolute", top: 0, right: 0, paddingTop: "1.5%", paddingRight: "1.5%"}}>
                     <Checkbox checked={isSaved} icon={<FavoriteBorder className="color-medium-teal"/>} checkedIcon={<Favorite className="color-medium-teal" />} onClick={handleClickSave} />
                 </div>
