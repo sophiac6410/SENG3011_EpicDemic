@@ -19,7 +19,7 @@ amadeus = Client(
 
 res_list={}
 # res_list=[]
-sample_list = ['KR', 'JP', 'PH']
+sample_list = ['CN', 'EG', 'ET', 'MG', 'NG']
 
 try:
     cluster = MongoClient(
@@ -48,7 +48,7 @@ try:
         res_list[country]= response.data
     '''
 
-    cities=['Seoul', 'Tokyo', 'Manila']
+    cities=['Beijing', 'Cairo', 'Addis Ababa', 'Antananarivo', 'Abuja']
     index = 0
     for city in cities:
         country=sample_list[index]
@@ -58,6 +58,7 @@ try:
         response = amadeus.safety.safety_rated_locations.get(latitude=coord[0], longitude=coord[1])
         res_list[country]=(response.data[0]["safetyScores"])
         index += 1
+    # '''
 
 except ResponseError as error:
     print(error)

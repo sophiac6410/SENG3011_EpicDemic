@@ -60,7 +60,7 @@ def covid_controls_itineraries(country_id):
 
 c = {}
 # sample_list = ['AT','BE','BG','CY','CZ','DE','DK','EE','ES','FI','FR','GR','HR','HU','IE','IT','LT','LU','LV','MT','NL','PT','RO','SE','SI','SK']
-sample_list = ['KR', 'JP', 'PH']
+sample_list = ['CN', 'EG', 'ET', 'MG', 'NG']
 for country in sample_list:
     c[country] = (covid_controls_itineraries(country))
 

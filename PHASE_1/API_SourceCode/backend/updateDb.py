@@ -16,7 +16,7 @@ def regex(str):
 
 
 def remove_tags():
-  for doc in list(travel_col.find({'_id': 'KR'})):
+  for doc in list(travel_col.find()):
     id=doc['_id']
     data=doc
     print(f'-- updating {id} --')
@@ -52,6 +52,17 @@ def remove_tags():
     #   }
     db.Travel.update_one( { "_id": id } , { "$set" : data })
 
+def remove_entry_tags():
+  for doc in list(loc_col.find()):
+    id=doc['_id']
+    data=doc
+    print(f'-- updating {id} --')
+    if doc['entry_description']:
+      data['entry_description'] = regex(doc['entry_description'])
+
+
+    db.Locations.update_one( { "_id": id } , { "$set" : data })
+
 def safety_avg():
   for doc in list(safety_col.find()):
     id=doc['location_id']
@@ -72,8 +83,10 @@ if __name__ == "__main__":
 
       db = cluster['parser_test_db']
       travel_col = db['Travel']
+      loc_col = db['Locations']
       safety_col = db['Safety']
-      remove_tags()
+      remove_entry_tags()
+      # remove_tags()
       # safety_avg()
 
     except Exception as e:
