@@ -91,6 +91,7 @@
 .bg-forest{
     background-image: url(./../static/forest.png);
     background-size: 100%;
+    background-repeat: no-repeat;
 }
 .search-col {
     display: flex;
