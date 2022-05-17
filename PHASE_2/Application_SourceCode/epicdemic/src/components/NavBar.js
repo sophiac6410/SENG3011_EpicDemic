@@ -25,7 +25,7 @@ function Notification (props) {
             float: 'left',
             fontSize: 20,
             zIndex: 2, 
-            left: '45%',
+            left: '58%',
           }}
         />
         <Typography
@@ -35,7 +35,7 @@ function Notification (props) {
             zIndex: 3,
             position: 'relative',
             float: 'left',
-            left: '24%',
+            left: '45%',
             bottom: '3px'
           }}
         >
@@ -43,16 +43,7 @@ function Notification (props) {
         </Typography>
       </>
     }
-    <NotificationsIcon
-      sx={{
-        color: "white",
-        fontSize: 30,
-        display:'block',
-        mx: 'auto',
-        position: 'relative',
-        right: '30%'
-      }}
-    />
+    <FavoriteIcon sx={{ color: "white", fontSize: 30, display:'block', mx: 'auto', position: 'relative', right: '10%'}} />
     </div>
   )
 }
@@ -104,12 +95,9 @@ function NavbarComp(props) {
               <Nav>
                 <Nav.Link href="/saved" name="updates" className="mx-1">
                   <Notification updateNum={ props.updateNum }/>
-                  <Typography variant="caption" sx={{color: "white"}}>Updates</Typography>
-                </Nav.Link>
-                <Nav.Link href="/saved" name="saved-locations" className="mx-1">
-                  <FavoriteIcon sx={{ color: "white", fontSize: 30, display:'block', mx: 'auto'}} />
                   <Typography variant="caption" sx={{color: "white"}}>Saved Locations</Typography>
                 </Nav.Link>
+       
                 <Nav.Link href="/planner" name="saved-trips" className="mx-1">
                   <FlightIcon sx={{ color: "white", fontSize: 30, display:'block', mx: 'auto'}} />
                   <Typography variant="caption" sx={{color: "white"}}>Saved Trips</Typography>
