@@ -39,6 +39,7 @@ export default function CountrySelect({isFrom, handleInput}) {
         options={ isFrom ? aus : countries }
         value={ isFrom ? aus[0] : null}
         autoHighlight
+        clearOnBlur={false}
         // underlineShow={false}
         onChange={handleInput}
         getOptionLabel={(option) => option.label}

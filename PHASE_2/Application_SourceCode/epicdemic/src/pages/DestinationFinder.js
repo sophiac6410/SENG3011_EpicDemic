@@ -4,15 +4,6 @@ import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import WorldMap from "../static/hexworldmap.svg";
 import "../styles/DestinationFinder.css";
 import GenericSearch from "../components/GenericSearch";
-import InfoRow from "../components/DestinationFinder/InfoRow";
-import InfoRow2 from "../components/DestinationFinder/InfoRow2";
-import HeaderInfoRow from "../components/DestinationFinder/HeaderInfoRow";
-import HeaderInfoRow2 from "../components/DestinationFinder/HeaderInfoRow2";
-import HexTeal from "../static/hexteal.svg";
-import HexMedTeal from "../static/hexmedteal.svg";
-import HexWhite from "../static/hexwhite.svg";
-import BalloonBackground from "../static/balloontravel.jpg"
-import { DarkButton, WhiteButton } from "../styles/Button";
 import NavbarComp from "../components/NavBar";
 import Typography from '@mui/material/Typography';
 import { getAllLocations, getUserSaved } from "../apiCalls";
@@ -20,8 +11,10 @@ import { travelStatus, adviceLevel } from "../styles/Theme";
 import CountryCard from "../components/DestinationFinder/CountryCard.js"
 import Search from "../components/Home/Search";
 import CountrySelect from "../components/Home/CountrySearchBox";
+import CountrySearch from "../components/DestinationFinder/CountrySearch"
 import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
+
 
 const allCountries = [];
 
@@ -95,7 +88,7 @@ const DestinationFinder = () => {
 
         if (searchFilter.country !== null) {
             filtered = filtered.filter((country) => {
-                return country.country === searchFilter.country
+                return country.country === searchFilter.country.label
             })
         }
 
@@ -112,8 +105,8 @@ const DestinationFinder = () => {
                 </div>
                 
                 <div className="border-radius-large searchfield-container ps-5 pe-5">
-                    <div style={{ display: "flex", backgroundColor: "white", padding: "3px 20px", borderRadius: "30px" }}>
-                        <CountrySelect isFrom={false} handleInput={(e, v) => updateSearch("country", v.label)}></CountrySelect>
+                    <div style={{ display: "flex", backgroundColor: "white", padding: "3px 15px", borderRadius: "30px" }}>
+                        <CountrySearch handleInput={(e, v) => updateSearch("country", v)}></CountrySearch>
                         <div className="bg-dark-teal border-radius-med text-center" style={{ padding: 0, marginRight: 5 }}>
                             <IconButton
                                 aria-label="search"
