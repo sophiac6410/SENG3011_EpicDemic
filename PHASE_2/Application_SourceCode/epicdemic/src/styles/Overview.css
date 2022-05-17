@@ -1,4 +1,13 @@
 .leaflet-container2 {
+    border-radius: 25px;
     /* filter: sepia(80%) hue-rotate(160deg) saturate(400%); */
     /* filter: invert(20%) sepia(20%) saturate(300%) hue-rotate(210deg) brightness(97%) contrast(92%) !important; */
+    height: 450px;
+    width: 450px;
+}
+
+.leaflet-container3 {
+    border-radius: 20px;
+    width: 350px;
+    height: 350px;
 }

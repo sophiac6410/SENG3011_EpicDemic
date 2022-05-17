@@ -135,7 +135,7 @@ function Overview() {
       <Row>
         <Col>
           <MapContainer
-            style={{ width: 350, height: 350}}
+            className="leaflet-container3"
             center={getCentre()} 
             zoom={5}
             zoomControl={false}
@@ -243,7 +243,6 @@ function Overview() {
           <Col md={6} style={{alignItems: 'center', display: 'flex'}}>
             <MapContainer
               className="leaflet-container2"
-              style={{ width: 450, height: 450}}
               center={getCentre()} 
               zoom={7}
               zoomControl={false}
