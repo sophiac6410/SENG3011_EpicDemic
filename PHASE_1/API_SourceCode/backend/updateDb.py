@@ -16,19 +16,41 @@ def regex(str):
 
 
 def remove_tags():
-  for doc in list(updates_col.find()):
+  for doc in list(travel_col.find({'_id': 'KR'})):
     id=doc['_id']
+    data=doc
     print(f'-- updating {id} --')
-    if not doc['date']:
-      f = {
-        'text': regex(doc['text']),
-        'date': datetime.now()
-      }
-    else: 
-      f = {
-        'text': regex(doc['text'])
-      }
-    db.Updates.update_one( { "_id": id } , { "$set" : f })
+    if doc['declaration']['text']:
+      data['declaration']['text'] = regex(doc['declaration']['text'])
+
+    if doc['testing']['text']:
+      data['testing']['text'] = regex(doc['testing']['text'])
+
+    if doc['quarantine']['text']:
+      data['quarantine']['text'] = regex(doc['quarantine']['text'])
+
+    if doc['mask']['text']:
+      data['mask']['text'] = regex(doc['mask']['text'])
+
+    if doc['tracing']['text']:
+      data['tracing']['text'] = regex(doc['tracing']['text'])
+
+    if doc['area_policy']['text']:
+      data['area_policy']['text'] = regex(doc['area_policy']['text'])
+
+    for city in doc['area_restrction']:
+      city['text'] = regex(city['text'])
+
+    # if not doc['date']:
+    #   f = {
+    #     'text': regex(doc['text']),
+    #     'date': datetime.now()
+    #   }
+    # else: 
+    #   f = {
+    #     'text': regex(doc['text'])
+    #   }
+    db.Travel.update_one( { "_id": id } , { "$set" : data })
 
 def safety_avg():
   for doc in list(safety_col.find()):
@@ -49,10 +71,10 @@ if __name__ == "__main__":
       myclient = MongoClient('localhost', 27017)
 
       db = cluster['parser_test_db']
-      updates_col = db['Updates']
+      travel_col = db['Travel']
       safety_col = db['Safety']
-      # remove_tags()
-      safety_avg()
+      remove_tags()
+      # safety_avg()
 
     except Exception as e:
         raise e

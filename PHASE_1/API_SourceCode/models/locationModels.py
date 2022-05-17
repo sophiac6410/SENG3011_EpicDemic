@@ -136,8 +136,7 @@ class LocationAreaPolicy(BaseModel):
                     example="Opening")
 	text: str = Field(..., description="The description of the declaration", 
                     example="Test has to be PCR")
-	referenceLink: str = Field(..., description="The link to the official website containing all specific rules", 
-                    example="https://www.gouvernement.fr/en/coronavirus-covid-19")
+	referenceLink: str or None = None
 	date: str = Field(..., description="The date the rule was created", 
                     example="2022-04-07")
 	startDate: str = Field(..., description="The date the rule began", 

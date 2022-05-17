@@ -61,7 +61,12 @@ export default function DiseaseReportBar({code}) {
 
     async function fetchList () {
       const data = await getDiseaseList(code);
-      setDiseaseList(data);
+      if (data.length > 0) {
+        setDiseaseList(data);
+      }
+      else {
+        setDiseaseList([ 'Covid-19' ])
+      }
     }
     fetchList();
   }, []);

@@ -1,0 +1,80 @@
+{
+  "KR":{
+     "vaccine_info":{
+        "entry_status":"Partially Allowed",
+        "info":"If you have been fully vaccinated against COVID-19, you can apply for a ‘quarantine exemption’ which allows you to bypass quarantine when entering South Korea. The process of applying for a quarantine exemption varies depending on where you were vaccinated and the purpose of your travel. \n\nAllowed vaccines:\n\nPfizer, AstraZeneca, Janssen, Moderna, Covishield, Sinopharm/Sinovac",
+        "source":"https://www.gov.uk/foreign-travel-advice/south-korea/entry-requirements",
+        "last_updated":"2022-05-13"
+     },
+     "entry_info":{
+        "entry_status":"Partially Allowed",
+        "info":"Allowed under restriction",
+        "last_updated":"2022-05-13"
+     },
+     "event_info":{
+        "entry_status":"Fully Open",
+        "last_updated":"2022-05-13"
+     },
+     "shopping_info":{
+        "entry_status":"Open",
+        "last_updated":"2022-05-13"
+     },
+     "attractions_info":{
+        "entry_status":"Open",
+        "last_updated":"2022-05-13"
+     },
+     "tourist_entry":"Partially Allowed"
+  },
+  "JP":{
+     "vaccine_info":{
+        "entry_status":"Partially Allowed",
+        "info":"Please refer to the following link for the information regarding the countries/regions whose COVID-19 vaccination certificates are recognized as valid by the Government of Japan.\nList of countries and regions whose COVID-19 vaccination certificates are recognized as valid for entry into Japan (PDF) Open a New Window\nCOVID-19 vaccination certificates are recognized as valid only if all of the following conditions (1.-5.) are fulfilled.\nA copy of the original COVID-19 vaccination certificate must be submitted to the quarantine station.\n\nThe following items must be listed either in Japanese or English.\n(1) Name\n(2) Date of birth\n(3) Product name / Manufacturer of the Vaccines\n(4) Date of vaccination\n(5) The number of COVID-19 vaccine doses\nThe COVID-19 vaccination certificate must be issued by an official body such as government of any of the countries/ regions listed in the link above.\n\n(Note) For a COVID-19 vaccination certificate issued in Japan, the following certificates or records are valid.\nVaccination Certificate of COVID-19 issued by either the Government of Japan or a local public authority/municipality in Japan (The Vaccination Certificate of COVID-19 for overseas travel)\nCertificate of Vaccination for COVID-19 issued by a local public authority/ municipality in Japan\nRecord of vaccination for COVID-19 issued by medical institutions in Japan\n\nOther documents equivalent to the certificates and record listed above\nThe name/manufacturer of the vaccines must be one of the following.\nCOMIRNATY/Pfizer\nVaxzevria/AstraZeneca\nCOVID-19 Vaccine Moderna/Moderna\n(Note) The Name/Manufacturer of the Vaccines above are those approved in Japan.\n\n(Note）From 0:00 am (JST) on October 12 2021 Covishield vaccine licensed by AstraZeneca and manufactured by Serum Institute of India is treated as identical to Vaxzevria vaccine, Intramuscular injection manufactured by AstraZeneca and is accepted as a valid vaccination certificate if other conditions are met.\n\nYou must be inoculated at least 2 doses of the vaccines listed in 3.\n(Note) If you are administered 2 different types of vaccines, both vaccines must be listed in 3. above.\nIt will be approved if at least 14 days have passed after the date of second dose.\n\n(Note) The day of the second vaccination does not count as one of the 14 days.\nFor more details, please refer to the following link.\nShortening or exempting quarantine period for arriving travelers who have a valid vaccination certificate (PDF) ",
+        "source":"https://www.mofa.go.jp/ca/fna/page24e_000317.html",
+        "last_updated":"2022-05-10"
+     },
+     "entry_info":{
+        "entry_status":"Partially Allowed",
+        "info":"Events are allowed under restrictions.",
+        "last_updated":"2022-05-10"
+     },
+     "event_info":{
+        "entry_status":"Open with restrictions",
+        "last_updated":"2022-05-10"
+     },
+     "shopping_info":{
+        "entry_status":"Open",
+        "last_updated":"2022-05-10"
+     },
+     "attractions_info":{
+        "entry_status":"Open",
+        "last_updated":"2022-05-10"
+     },
+     "tourist_entry":"Partially Allowed"
+  },
+  "PH":{
+     "vaccine_info":{
+        "entry_status":"Partially Allowed",
+        "info":"Fully-vaccinated international travellers from areas classified as “green” or low-risk will no longer be required to undergo facility-based quarantine, if they provide a negative Covid-19 test result taken within 72 hours from their departure.\n\nFully vaccinated individuals from yellow countries need to undergo facility-based quarantine until the release of their negative RT-PCR testing taken on the 5th day. After which, they shall be required to undergo home quarantine until their 10th day, with the day of arrival being the first day. Foreign nationals shall be required to secure their own pre-booked accommodation of at least 6 days.\n\nClick here for full details https://philippines.travel/safetrip#inboundadvisory \n\nTo track vaccines approved for use in the Philippines: https://covid19.trackvaccines.org/country/philippines/\n\nVaccines Approved for Use in Philippines:\nPfizer/BioNTech, Moderna, Gamaleya, Sputnik Light, Gamaleya Sputnik V, Janssen (Johnson & Johnson), Oxford/AstraZeneca, Bharat Biotech\nCovaxin, Sinopharm (Beijing), Sinopharm (Wuhan), Sinovac",
+        "source":"https://philippines.travel/safetrip#inboundadvisory",
+        "last_updated":"2022-05-10"
+     },
+     "entry_info":{
+        "entry_status":"Partially Allowed",
+        "info":"Full capacity is allowed.\n\nFor alert level 2: Max of 50% indoor venue capacity* and 70% outdoor venue capacity",
+        "last_updated":"2022-05-10"
+     },
+     "event_info":{
+        "entry_status":"Open with restrictions",
+        "last_updated":"2022-05-10"
+     },
+     "shopping_info":{
+        "entry_status":"Open",
+        "last_updated":"2022-05-10"
+     },
+     "attractions_info":{
+        "entry_status":"Open",
+        "last_updated":"2022-05-10"
+     },
+     "tourist_entry":"Partially Allowed"
+  }
+}

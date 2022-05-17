@@ -44,10 +44,13 @@ if __name__ == "__main__":
 
         f = open(AMADEUS)
         amadeus_data = json.load(f)
-        index = 0
+        index =  location_collection.count_documents({}) + 1,
+        index=index[0]
+        print(index)
 
         for country in amadeus_data:
             data=parse(country, index)
+            # print(data)
             location_collection.insert_one( data )
             index += 1
 

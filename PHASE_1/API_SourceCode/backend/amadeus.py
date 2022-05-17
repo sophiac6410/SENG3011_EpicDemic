@@ -1,11 +1,9 @@
 from amadeus import Client, ResponseError
-from pymongo import MongoClient
-
+from database import locations_col, safety_col
 import requests
 import geocoder
 
 amadeus = Client(
-    hostname='production',
     client_id='LwLbO6Ao6Gq2AdfFXsGAGlNuLoy9l1Fb',
     client_secret='TRQA07tq1ZtPAZEg'
 )
@@ -17,16 +15,10 @@ amadeus = Client(
 #   hostname: 'production'
 # });
 
-res_list={}
-# res_list=[]
-sample_list = ['KR', 'JP', 'PH']
+res_list=[]
+sample_list = ['US', 'CA']
 
 try:
-    cluster = MongoClient(
-        "mongodb+srv://EpicDemic:EpicDemic123!@epicdemic.ul8sw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-    myclient = MongoClient('localhost', 27017)
-    db = cluster['parser_test_db']
-    locations_col = db["Locations"]
     # response = amadeus.safety.safety_rated_locations.get(latitude=52.541755, longitude=13.354201)
     
     # response = amadeus.shopping.flight_offers_search.get(
@@ -37,29 +29,25 @@ try:
 
     #before travel
 
+    # to get lat and long
+
+
     #quarantine
     #vaccination
     #testing
     #documentation
+    print('connected to amadeus')
+    for id in sample_list:
 
-    '''
-    for country in sample_list:
-        response = amadeus.duty_of_care.diseases.covid19_area_report.get(countryCode=country)
-        res_list[country]= response.data
-    '''
-
-    cities=['Seoul', 'Tokyo', 'Manila']
-    index = 0
-    for city in cities:
-        country=sample_list[index]
-        geo_data = geocoder.geonames(city, key='epicdemic')
+        data = list(locations_col.find({'_id': id}))[0]
+        geo_data = geocoder.geonames(data['capital'], key='epicdemic')
         coord = geo_data.latlng
         if coord: print(f'- geocode api: collected -- {coord}')
         response = amadeus.safety.safety_rated_locations.get(latitude=coord[0], longitude=coord[1])
-        res_list[country]=(response.data[0]["safetyScores"])
-        index += 1
-
+        # response = amadeus.duty_of_care.diseases.covid19_area_report.get(countryCode=country)
+        res_list.append(response.data)
 except ResponseError as error:
     print(error)
 
 print(res_list)
+['AT','BE','BG','CY','CZ','DE','DK','EE','ES','FI','FR','GR','HR','HU','IE','IT','LT','LU','LV','MT','NL','PO','PT','RO','SE','SI','SK']
