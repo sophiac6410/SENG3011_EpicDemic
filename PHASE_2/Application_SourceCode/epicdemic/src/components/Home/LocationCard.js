@@ -53,7 +53,7 @@ function LocationCard({id}) {
   }, []);
 
   return (
-    <Card className="my-2 border-radius-small" style={{width: 'auto', boxShadow: '3px 3px 3px 3px #cccccc', cursor: 'pointer'}}>
+    <Card className="my-2 border-radius-small" style={{width: 'auto', boxShadow: '3px 3px 3px 3px #cccccc', cursor: 'pointer', marginRight: '15px'}}>
       <Card.Body style={{padding: '20px 30px'}}>
         <Card.Title className="d-flex">
           <Typography variant="heading3" sx={{flex: 1}} onClick={ routeChange }>{country}</Typography>
@@ -76,7 +76,7 @@ function LocationCard({id}) {
         <Card.Subtitle className="pt-3 text-muted">
           <Typography variant="bodyText">Overall Advice</Typography>
         </Card.Subtitle>
-        <Row className="align-items-center pt-1 justify-content-start" style={{marginBottom: '10px'}}>
+        <Row className="align-items-center pt-1 justify-content-start" style={{marginBottom: '10px', height: '50px'}}>
           <Col className="d-flex align-items-center">
             <SimCardAlertIcon sx={{ fontSize: 30, mx: 1, mt: 1, color: adviceColor, display: 'flex' }}></SimCardAlertIcon>
             <Typography variant="bodyImportant" sx={{display: 'flex'}}>{adviceLevelText}</Typography>
