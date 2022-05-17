@@ -4065,3 +4065,517 @@
     Process Time: 0.025482177734375
     ----------------------------------------
     
+    Timestamp: 1652768902.736211
+    Accessed Time: 2022-05-17 16:28:22.736211
+    Client: 127.0.0.1:36920
+    
+    Request: GET /v1/articles/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			key_terms=Corona
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=4
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.3593299388885498
+    ----------------------------------------
+    
+    Timestamp: 1652768903.095173
+    Accessed Time: 2022-05-17 16:28:23.095173
+    Client: 127.0.0.1:36924
+    
+    Request: GET /v1/updates/
+    Request Query Param: 
+			location=
+			category=document,testing,quarantine
+			start=1
+			end=5
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.01720404624938965
+    ----------------------------------------
+    
+    Timestamp: 1652768903.09531
+    Accessed Time: 2022-05-17 16:28:23.095310
+    Client: 127.0.0.1:36928
+    
+    Request: OPTIONS /v1/users/saved
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0178070068359375
+    ----------------------------------------
+    
+    Timestamp: 1652768903.095394
+    Accessed Time: 2022-05-17 16:28:23.095394
+    Client: 127.0.0.1:36926
+    
+    Request: GET /v1/updates/
+    Request Query Param: 
+			location=
+			category=mask,Others,tracing,policies
+			start=1
+			end=5
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.01810002326965332
+    ----------------------------------------
+    
+    Timestamp: 1652768903.117399
+    Accessed Time: 2022-05-17 16:28:23.117399
+    Client: 127.0.0.1:36928
+    
+    Request: GET /v1/cases
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 307
+    Process Time: 0.008462905883789062
+    ----------------------------------------
+    
+    Timestamp: 1652768903.117902
+    Accessed Time: 2022-05-17 16:28:23.117902
+    Client: 127.0.0.1:36924
+    
+    Request: GET /v1/users/saved
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.00878596305847168
+    ----------------------------------------
+    
+    Timestamp: 1652768903.179482
+    Accessed Time: 2022-05-17 16:28:23.179482
+    Client: 127.0.0.1:36924
+    
+    Request: GET /v1/cases/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.21783113479614258
+    ----------------------------------------
+    
+    Timestamp: 1652768906.630325
+    Accessed Time: 2022-05-17 16:28:26.630325
+    Client: 127.0.0.1:36924
+    
+    Request: GET /v1/locations/ES
+    Request Query Param: None
+    Request Path Param: 
+			id=ES
+   
+    Response Code: 200
+    Process Time: 0.01611781120300293
+    ----------------------------------------
+    
+    Timestamp: 1652768906.685891
+    Accessed Time: 2022-05-17 16:28:26.685891
+    Client: 127.0.0.1:36924
+    
+    Request: GET /v1/users/saved
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.0072481632232666016
+    ----------------------------------------
+    
+    Timestamp: 1652768908.668111
+    Accessed Time: 2022-05-17 16:28:28.668111
+    Client: 127.0.0.1:36938
+    
+    Request: GET /v1/locations/ES/safety
+    Request Query Param: None
+    Request Path Param: 
+			id=ES
+   
+    Response Code: 200
+    Process Time: 0.007287025451660156
+    ----------------------------------------
+    
+    Timestamp: 1652768908.681674
+    Accessed Time: 2022-05-17 16:28:28.681674
+    Client: 127.0.0.1:36924
+    
+    Request: GET /v1/locations/ES
+    Request Query Param: None
+    Request Path Param: 
+			id=ES
+   
+    Response Code: 200
+    Process Time: 0.021718978881835938
+    ----------------------------------------
+    
+    Timestamp: 1652768912.156735
+    Accessed Time: 2022-05-17 16:28:32.156735
+    Client: 127.0.0.1:36924
+    
+    Request: GET /v1/locations/ES/travel
+    Request Query Param: None
+    Request Path Param: 
+			id=ES
+   
+    Response Code: 200
+    Process Time: 0.010347127914428711
+    ----------------------------------------
+    
+    Timestamp: 1652768912.172485
+    Accessed Time: 2022-05-17 16:28:32.172485
+    Client: 127.0.0.1:36924
+    
+    Request: GET /v1/locations/ES
+    Request Query Param: None
+    Request Path Param: 
+			id=ES
+   
+    Response Code: 200
+    Process Time: 0.013966798782348633
+    ----------------------------------------
+    
+    Timestamp: 1652768917.785632
+    Accessed Time: 2022-05-17 16:28:37.785632
+    Client: 127.0.0.1:36932
+    
+    Request: GET /v1/locations/ES
+    Request Query Param: None
+    Request Path Param: 
+			id=ES
+   
+    Response Code: 200
+    Process Time: 0.013437986373901367
+    ----------------------------------------
+    
+    Timestamp: 1652768917.928476
+    Accessed Time: 2022-05-17 16:28:37.928476
+    Client: 127.0.0.1:36932
+    
+    Request: OPTIONS /v1/locations/ES/diseases
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.000682830810546875
+    ----------------------------------------
+    
+    Timestamp: 1652768917.931582
+    Accessed Time: 2022-05-17 16:28:37.931582
+    Client: 127.0.0.1:36932
+    
+    Request: GET /v1/locations/ES/diseases
+    Request Query Param: None
+    Request Path Param: 
+			id=ES
+   
+    Response Code: 200
+    Process Time: 0.06272506713867188
+    ----------------------------------------
+    
+    Timestamp: 1652768917.986839
+    Accessed Time: 2022-05-17 16:28:37.986839
+    Client: 127.0.0.1:36940
+    
+    Request: GET /v1/locations/ES/travel
+    Request Query Param: None
+    Request Path Param: 
+			id=ES
+   
+    Response Code: 200
+    Process Time: 0.008291959762573242
+    ----------------------------------------
+    
+    Timestamp: 1652768921.413075
+    Accessed Time: 2022-05-17 16:28:41.413075
+    Client: 127.0.0.1:36932
+    
+    Request: GET /v1/locations/ES
+    Request Query Param: None
+    Request Path Param: 
+			id=ES
+   
+    Response Code: 200
+    Process Time: 0.01417994499206543
+    ----------------------------------------
+    
+    Timestamp: 1652768925.032101
+    Accessed Time: 2022-05-17 16:28:45.032101
+    Client: 127.0.0.1:36932
+    
+    Request: GET /v1/locations/ES/travel
+    Request Query Param: None
+    Request Path Param: 
+			id=ES
+   
+    Response Code: 200
+    Process Time: 0.01014399528503418
+    ----------------------------------------
+    
+    Timestamp: 1652768925.047255
+    Accessed Time: 2022-05-17 16:28:45.047255
+    Client: 127.0.0.1:36932
+    
+    Request: GET /v1/locations/ES
+    Request Query Param: None
+    Request Path Param: 
+			id=ES
+   
+    Response Code: 200
+    Process Time: 0.013900041580200195
+    ----------------------------------------
+    
+    Timestamp: 1652768998.873151
+    Accessed Time: 2022-05-17 16:29:58.873151
+    Client: 127.0.0.1:36954
+    
+    Request: GET /v1/articles/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			key_terms=Corona
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=4
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.1583240032196045
+    ----------------------------------------
+    
+    Timestamp: 1652768999.189649
+    Accessed Time: 2022-05-17 16:29:59.189649
+    Client: 127.0.0.1:36956
+    
+    Request: GET /v1/updates/
+    Request Query Param: 
+			location=
+			category=document,testing,quarantine
+			start=1
+			end=5
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.027540922164916992
+    ----------------------------------------
+    
+    Timestamp: 1652768999.200877
+    Accessed Time: 2022-05-17 16:29:59.200877
+    Client: 127.0.0.1:36958
+    
+    Request: GET /v1/updates/
+    Request Query Param: 
+			location=
+			category=mask,Others,tracing,policies
+			start=1
+			end=5
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.017401933670043945
+    ----------------------------------------
+    
+    Timestamp: 1652768999.201034
+    Accessed Time: 2022-05-17 16:29:59.201034
+    Client: 127.0.0.1:36960
+    
+    Request: GET /v1/users/saved
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.01769089698791504
+    ----------------------------------------
+    
+    Timestamp: 1652768999.220728
+    Accessed Time: 2022-05-17 16:29:59.220728
+    Client: 127.0.0.1:36956
+    
+    Request: GET /v1/cases
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 307
+    Process Time: 0.0008490085601806641
+    ----------------------------------------
+    
+    Timestamp: 1652768999.238331
+    Accessed Time: 2022-05-17 16:29:59.238331
+    Client: 127.0.0.1:36956
+    
+    Request: GET /v1/cases/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.19685792922973633
+    ----------------------------------------
+    
+    Timestamp: 1652769002.664217
+    Accessed Time: 2022-05-17 16:30:02.664217
+    Client: 127.0.0.1:36956
+    
+    Request: GET /v1/locations/FR
+    Request Query Param: None
+    Request Path Param: 
+			id=FR
+   
+    Response Code: 200
+    Process Time: 0.025758981704711914
+    ----------------------------------------
+    
+    Timestamp: 1652769002.721042
+    Accessed Time: 2022-05-17 16:30:02.721042
+    Client: 127.0.0.1:36956
+    
+    Request: GET /v1/users/saved
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.007461071014404297
+    ----------------------------------------
+    
+    Timestamp: 1652769004.804748
+    Accessed Time: 2022-05-17 16:30:04.804748
+    Client: 127.0.0.1:36970
+    
+    Request: GET /v1/locations/FR/safety
+    Request Query Param: None
+    Request Path Param: 
+			id=FR
+   
+    Response Code: 200
+    Process Time: 0.006561994552612305
+    ----------------------------------------
+    
+    Timestamp: 1652769004.817721
+    Accessed Time: 2022-05-17 16:30:04.817721
+    Client: 127.0.0.1:36956
+    
+    Request: GET /v1/locations/FR
+    Request Query Param: None
+    Request Path Param: 
+			id=FR
+   
+    Response Code: 200
+    Process Time: 0.019085168838500977
+    ----------------------------------------
+    
+    Timestamp: 1652769008.228594
+    Accessed Time: 2022-05-17 16:30:08.228594
+    Client: 127.0.0.1:36956
+    
+    Request: GET /v1/locations/FR/travel
+    Request Query Param: None
+    Request Path Param: 
+			id=FR
+   
+    Response Code: 200
+    Process Time: 0.014403820037841797
+    ----------------------------------------
+    
+    Timestamp: 1652769008.248316
+    Accessed Time: 2022-05-17 16:30:08.248316
+    Client: 127.0.0.1:36956
+    
+    Request: GET /v1/locations/FR
+    Request Query Param: None
+    Request Path Param: 
+			id=FR
+   
+    Response Code: 200
+    Process Time: 0.014567852020263672
+    ----------------------------------------
+    
+    Timestamp: 1652769175.137754
+    Accessed Time: 2022-05-17 16:32:55.137754
+    Client: 127.0.0.1:36986
+    
+    Request: GET /v1/articles/
+    Request Query Param: 
+			start_date=2021-01-01T10:10:10
+			end_date=2023-01-01T10:10:10
+			key_terms=Corona
+			timezone=Australia/Sydney
+			start_range=1
+			end_range=4
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.1799919605255127
+    ----------------------------------------
+    
+    Timestamp: 1652769175.443478
+    Accessed Time: 2022-05-17 16:32:55.443478
+    Client: 127.0.0.1:36988
+    
+    Request: GET /v1/updates/
+    Request Query Param: 
+			location=
+			category=document,testing,quarantine
+			start=1
+			end=5
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.023822784423828125
+    ----------------------------------------
+    
+    Timestamp: 1652769175.443549
+    Accessed Time: 2022-05-17 16:32:55.443549
+    Client: 127.0.0.1:36992
+    
+    Request: GET /v1/users/saved
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.024084091186523438
+    ----------------------------------------
+    
+    Timestamp: 1652769175.459732
+    Accessed Time: 2022-05-17 16:32:55.459732
+    Client: 127.0.0.1:36990
+    
+    Request: GET /v1/updates/
+    Request Query Param: 
+			location=
+			category=mask,Others,tracing,policies
+			start=1
+			end=5
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.008487939834594727
+    ----------------------------------------
+    
+    Timestamp: 1652769175.4707
+    Accessed Time: 2022-05-17 16:32:55.470700
+    Client: 127.0.0.1:36988
+    
+    Request: GET /v1/cases
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 307
+    Process Time: 0.0005319118499755859
+    ----------------------------------------
+    
+    Timestamp: 1652769175.488073
+    Accessed Time: 2022-05-17 16:32:55.488073
+    Client: 127.0.0.1:36988
+    
+    Request: GET /v1/cases/
+    Request Query Param: None
+    Request Path Param: None
+   
+    Response Code: 200
+    Process Time: 0.1989917755126953
+    ----------------------------------------
+    
