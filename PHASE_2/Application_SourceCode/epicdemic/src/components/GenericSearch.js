@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: 500,
       fontSize: "0.9em",
       marginBottom: "6px",
-    //   width: "90%"
     }
   }));
 
