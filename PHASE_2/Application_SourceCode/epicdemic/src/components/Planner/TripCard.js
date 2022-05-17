@@ -164,7 +164,7 @@ function TripCard({name, tripId, latitude, longitude, city, country, cityId, upd
           <AddCircleIcon color="teal"></AddCircleIcon>
         </IconButton>
         <Typography variant='caption' className='color-medium-teal me-3'>Add dates</Typography>
-        <ActivityModal fromTrip={true} activities={activity} tripId={tripId} city={city} updateActivity={updateActivity} savedActivity={savedId}></ActivityModal>
+        <ActivityModal fromTrip={true} activities={activity} tripId={tripId} city={city} updateActivity={updateActivity} savedActivity={savedId} cId={city.id}></ActivityModal>
         <IconButton sx={{paddingRight: "5px"}}>
           <FlightIcon sx={{marginRight: "5px"}} color='teal'></FlightIcon>
         </IconButton>

@@ -48,7 +48,7 @@ const activityModalStyle = {
   paddingBottom: "80px",
 };
 
-function ActivityModal({fromTrip, activities, tripId, city, updateActivity, country, savedActivity}) {
+function ActivityModal({fromTrip, activities, tripId, city, updateActivity, country, savedActivity, cId}) {
   const [isOpen, setOpen] = React.useState(false);
   //for planner modal
   const [cityId, setCityId] = React.useState(0);
@@ -91,6 +91,9 @@ function ActivityModal({fromTrip, activities, tripId, city, updateActivity, coun
   // }
   
   useEffect(() => {
+    if(cId) {
+      setCityId(cId)
+    }
     return ()=>{
       // setSave([])
       setCityId(0)
