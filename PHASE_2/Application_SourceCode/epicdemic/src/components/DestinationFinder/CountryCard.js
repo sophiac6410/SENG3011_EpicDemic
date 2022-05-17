@@ -41,7 +41,7 @@ const CountryCard = ({code, country, status, saved}) => {
     }, [])
 
     return (
-        <Card style={{ "width": "18vw", "height": "18vw", "borderRadius": "20px"}}>
+        <Card style={{ "width": "18vw", "height": "18vw", "borderRadius": "20px", cursor: 'pointer'}}>
             <img src={require('../../static/countryCardPics/' + country + '.png')}
                 style={{ "width": "18vw", "height": "12vw", "objectFit": "cover", "borderTopLeftRadius": "20px", "borderTopRightRadius": "20px" }}
             />
