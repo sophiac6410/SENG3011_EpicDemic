@@ -156,7 +156,7 @@ const countries = [
   //   label: 'Congo, Republic of the',
   //   phone: '242',
   // },
-  { code: 'CH', label: 'China', phone: '41' },
+  // { code: 'CH', label: 'China', phone: '41' },
   // { code: 'CI', label: "Cote d'Ivoire", phone: '225' },
   // { code: 'CK', label: 'Cook Islands', phone: '682' },
   // { code: 'CL', label: 'Chile', phone: '56' },

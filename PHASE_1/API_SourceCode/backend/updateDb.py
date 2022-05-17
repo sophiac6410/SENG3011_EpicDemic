@@ -18,6 +18,9 @@ def regex(str):
 def remove_tags():
   for doc in list(travel_col.find()):
     id=doc['_id']
+    no_list = ['HU', 'BG', 'IE', 'NL']
+    if id in no_list:
+      continue
     data=doc
     print(f'-- updating {id} --')
     if doc['declaration']['text']:
@@ -85,8 +88,8 @@ if __name__ == "__main__":
       travel_col = db['Travel']
       loc_col = db['Locations']
       safety_col = db['Safety']
-      remove_entry_tags()
-      # remove_tags()
+      # remove_entry_tags()
+      remove_tags()
       # safety_avg()
 
     except Exception as e:
