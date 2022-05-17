@@ -18,12 +18,8 @@ const useStyles = makeStyles((theme) => ({
     "&.MuiInput-underline:after": {
       borderBottom: "2px solid #0F83A0"
     },
-    "&.MuiAutocomplete-inputRoot": {
-      paddingRight: "0px"
-    },
     color: "black",
     backgroundColor: "white",
-    paddingRight: "Opx",
   },
 }));
 
@@ -67,7 +63,7 @@ export default function CountrySelect({region, handleInput, value }) {
             inputProps={{
               ...params.inputProps,
               autoComplete: 'new-password', // disable autocomplete and autofill
-              // disableUnderline: true,
+              disableUnderline: true,
             }}
           />
         )}

@@ -288,10 +288,10 @@ function AddCityCard({isOpen, onClose, name, start, end, travellers, defaultTrip
                 </IconButton>
                 <Typography variant='body' className='color-medium-teal mt-2'>Back</Typography> */}
               </div>
-              <Typography variant="heading2" className='color-dark-teal text-center'>
+              <Typography variant="heading2" className='color-dark-teal text-center' style={{padding: '10px'}}>
                 Add cities to your trip
               </Typography>
-              <Typography variant='body2' className='color-dark-teal mt-2 text-center'>Optionally enter a region and/or country and click 'Recommend me a city' and we will recommended you a destination.</Typography>
+              <Typography variant='body2' className='color-dark-teal mt-2 text-center' style={{padding: '10px'}}>Optionally enter a region and/or country and click 'Recommend me a city' and we will recommended you a destination.</Typography>
           </>
         }
         </div>
@@ -376,13 +376,14 @@ const style = {
   width: "70vw",
   bgcolor: 'background.paper',
   borderRadius: "30px",
+  boxShadow: 24,
   p: 4,
   textAlign: "center",
   backgroundColor: "#EEF0F2",
   display: "flex",
   flexDirection: "column",
-  paddingTop: "50px",
-  paddingBottom: "50px",
+  paddingTop: "80px",
+  paddingBottom: "30px",
 };
 
 const styleTwo = {
@@ -393,11 +394,12 @@ const styleTwo = {
   width: "70vw",
   bgcolor: 'background.paper',
   borderRadius: "30px",
+  boxShadow: 24,
   pb: 4,
   backgroundColor: "#EEF0F2",
   display: "flex",
   flexDirection: "column",
-  paddingBottom: "20px",
+  paddingBottom: "30px",
 };
 
 const formStyle = {
@@ -415,6 +417,7 @@ const formStyle = {
   borderRadius: "30px",
   textAlign: "center",
   backgroundColor: "white",
+  boxShadow: "1px 3px #888888",
   border: (theme) => `1px solid ${theme.palette.divider}`,
   '& hr': {
     mx: 2,
@@ -423,5 +426,6 @@ const formStyle = {
     m: 1.5,
   },
 };
+
 
 export default AddCityCard

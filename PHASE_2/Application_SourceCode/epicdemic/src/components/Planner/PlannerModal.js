@@ -42,6 +42,8 @@ import AddCityCard from "./AddCityCard";
 
 const { allCountries } = require('./CountryField');
 
+
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -57,7 +59,7 @@ const style = {
   display: "flex",
   flexDirection: "column",
   paddingTop: "80px",
-  paddingBottom: "80px",
+  paddingBottom: "30px",
 };
 
 const styleTwo = {
@@ -73,7 +75,7 @@ const styleTwo = {
   backgroundColor: "#EEF0F2",
   display: "flex",
   flexDirection: "column",
-  paddingBottom: "80px",
+  paddingBottom: "30px",
 };
 
 const formStyle = {
@@ -99,7 +101,6 @@ const formStyle = {
     m: 1.5,
   },
 };
-
 
 function StepOne({isOpen, onClose, onNext}) {
   const [startDate, setStartDate] = React.useState(null);

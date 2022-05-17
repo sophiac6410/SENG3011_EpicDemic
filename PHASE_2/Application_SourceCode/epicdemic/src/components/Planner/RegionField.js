@@ -19,9 +19,6 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
     backgroundColor: "white",
   },
-  endAdornment: {
-    top: "calc(12% - 14px)"
-  }
 }));
 
 const GenericSearch = ({ options, value, placeholder, handleInput, width }) => {
