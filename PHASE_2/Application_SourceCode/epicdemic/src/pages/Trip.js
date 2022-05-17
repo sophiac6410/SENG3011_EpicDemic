@@ -16,6 +16,7 @@ import React, { useEffect } from 'react';
 import { setDate } from "date-fns";
 import AddMemberCard from "../components/Planner/AddMemberCard";
 import AddCityCard from "../components/Planner/AddCityCard";
+import { TailSpin } from "react-loader-spinner"
 
 function Trip() {
   const { tripId } = useParams()
@@ -96,7 +97,13 @@ function Trip() {
   //   getBucket
   // }, [data])
 
-
+  if(data == [] || name == "") {
+    return(
+      <div className="flex-row justify-content-center align-items-center loader">
+        <TailSpin color='#70C4E8'></TailSpin>
+      </div>
+    )
+  }
   return(
     <div className="bg-off-white" style={{paddingBottom: "200px"}}>
       <NavbarComp bg={true}></NavbarComp>
