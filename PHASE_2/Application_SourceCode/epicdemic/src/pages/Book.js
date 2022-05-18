@@ -39,7 +39,7 @@ function Book() {
 
   const [searchRe, setSearchRe] = useState({
     destinationCode: "SYD", 
-    dateOfDeparture: "2022-05-20",
+    dateOfDeparture: "2022-05-21",
     adults: 1
   });
 
@@ -62,9 +62,9 @@ function Book() {
       });
       setSearch({
         originCode: "SYD",
-        destinationCode: destination, 
+        destinationCode: "BEG", 
         dateOfDeparture: "2022-05-18",
-        dateOfReturn: "2022-05-20",
+        dateOfReturn: "2022-05-21",
         adults: 1
       })
     }
